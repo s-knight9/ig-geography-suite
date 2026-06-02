@@ -839,11 +839,13 @@ export default function App({
         setClassRoster([...updatedRoster]);
         
         try {
-            const extractedText = await extractTextFromFile(student.file);
-            const response = await fetch("/api/analyze-ia-text", {
+            const formData = new FormData();
+            formData.append("iaFile", student.file);
+            formData.append("subject", subject);
+
+            const response = await fetch("/api/moderate-ia", {
                 method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ text: extractedText, subject }),
+                body: formData,
             });
 
             if (!response.ok) {
@@ -852,7 +854,7 @@ export default function App({
             const data = await response.json();
             
             updatedRoster[i].status = 'done';
-            updatedRoster[i].result = { ...data, fileName: student.file!.name, rawText: extractedText };
+            updatedRoster[i].result = { ...data, fileName: student.file!.name };
         } catch (err: any) {
             console.error(err);
             // Revert back so they can try again, or mark error
@@ -918,12 +920,13 @@ export default function App({
   };
 
   const handleBulkFinalProcessItem = async (candidate: CandidateRecord, file: File): Promise<AnalysisResult> => {
-    const text = await extractTextFromFile(file);
-    
-    const response = await fetch("/api/analyze-ia-text", {
+    const formData = new FormData();
+    formData.append("iaFile", file);
+    formData.append("subject", subject);
+
+    const response = await fetch("/api/moderate-ia", {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ text, subject }),
+      body: formData,
     });
 
     if (!response.ok) {
@@ -934,8 +937,7 @@ export default function App({
     return {
       ...data,
       isComparison: false,
-      fileName: file.name,
-      rawText: text
+      fileName: file.name
     };
   };
 
@@ -958,14 +960,13 @@ export default function App({
     setError(null);
 
     try {
-      const extractedText = await extractTextFromFile(file);
+      const formData = new FormData();
+      formData.append("iaFile", file);
+      formData.append("subject", subject);
 
-      const response = await fetch("/api/analyze-ia-text", {
+      const response = await fetch("/api/moderate-ia", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({ text: extractedText, subject }),
+        body: formData,
       });
 
       if (!response.ok) {
@@ -981,7 +982,6 @@ export default function App({
       data.id = crypto.randomUUID();
       data.fileName = file.name;
       data.timestamp = Date.now();
-      data.rawText = extractedText;
       setResult(data);
       setViewMode('result');
     } catch (err: any) {

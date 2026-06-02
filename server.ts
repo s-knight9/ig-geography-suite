@@ -182,19 +182,13 @@ async function startServer() {
   // IA QUALITY ASSURANCE ENDPOINTS
   // ==========================================
 
-  // IA Moderation Endpoint (Text payload instead of file)
-  app.post("/api/analyze-ia-text", async (req, res) => {
-    try {
-      const { text, subject = 'Geography' } = req.body;
-      if (!text) {
-        return res.status(400).json({ error: "No text provided" });
-      }
+  // Helper to run IA Analysis on text via Gemini API
+  async function performIaAnalysis(text: string, subject: string): Promise<any> {
+    const ai = getGenAI();
 
-      const ai = getGenAI();
-
-      let prompt = "";
-      if (subject === 'ESS') {
-        prompt = `You are an Expert IBDP Environmental Systems and Societies (ESS) Moderator. Evaluate the following Internal Assessment (IA) text against the 30-mark scale.
+    let prompt = "";
+    if (subject === 'ESS') {
+      prompt = `You are an Expert IBDP Environmental Systems and Societies (ESS) Moderator. Evaluate the following Internal Assessment (IA) text against the 30-mark scale.
       
 Strict Marking Framework (ESS):
 - Criterion A: Research question & inquiry (Max 4) - Focus on Environmental issue context (local/global), EVS links, and RQ focus.
@@ -218,8 +212,8 @@ Feedback Format:
 - Every assigned score must cite specific student text or identify exact omissions.
 ${text.substring(0, 50000)}
 `;
-      } else {
-        prompt = `You are an Expert IBDP Geography Moderator. Evaluate the following Internal Assessment (IA) text against the 25-mark scale.
+    } else {
+      prompt = `You are an Expert IBDP Geography Moderator. Evaluate the following Internal Assessment (IA) text against the 25-mark scale.
       
 Strict Marking Framework (Geography):
 - Criterion A: Fieldwork Question & Context (Max 3)
@@ -241,54 +235,89 @@ Feedback Format:
 - **Meticulous Technical Check**: Scour every figure and map for required IB conventions (North arrows, scales, clear legends, legible labels). Be extremely rigorous: if a scale is technically present but too small to be functional for an examiner, flag it as a weakness in the EBI. Do not miss clearly visible North arrows, which are often located in the corners or specialized convention boxes within figure frames. Critically evaluate their placement and accuracy.
 ${text.substring(0, 50000)}
 `;
-      }
+    }
 
-      const response = await generateContentWithRetry(ai, "gemini-3.1-pro-preview", prompt, {
-        responseMimeType: "application/json",
-        responseSchema: {
-          type: Type.OBJECT,
-          properties: {
-            criteria: {
-              type: Type.ARRAY,
-              items: {
-                type: Type.OBJECT,
-                properties: {
-                  id: { type: Type.STRING, description: "Criterion letter (A-F)" },
-                  name: { type: Type.STRING },
-                  score: { type: Type.INTEGER },
-                  maxScore: { type: Type.INTEGER },
-                  www: { type: Type.ARRAY, items: { type: Type.STRING }, description: "What went well: List of specific quotes and strengths. Write each point as a separate string." },
-                  ebi: { type: Type.ARRAY, items: { type: Type.STRING }, description: "Even better if: List of specific quotes, weaknesses, and actionable improvements. Write each point as a separate string." }
-                },
-                required: ["id", "name", "score", "maxScore", "www", "ebi"]
-              }
-            },
-            totalScore: { type: Type.INTEGER },
-            wordCount: {
+    const response = await generateContentWithRetry(ai, "gemini-3.1-pro-preview", prompt, {
+      responseMimeType: "application/json",
+      responseSchema: {
+        type: Type.OBJECT,
+        properties: {
+          criteria: {
+            type: Type.ARRAY,
+            items: {
               type: Type.OBJECT,
               properties: {
-                included: { type: Type.INTEGER },
-                excluded: { type: Type.INTEGER },
-                total: { type: Type.INTEGER },
-                status: { type: Type.STRING, description: "Compliance status" }
+                id: { type: Type.STRING, description: "Criterion letter (A-F)" },
+                name: { type: Type.STRING },
+                score: { type: Type.INTEGER },
+                maxScore: { type: Type.INTEGER },
+                www: { type: Type.ARRAY, items: { type: Type.STRING }, description: "What went well: List of specific quotes and strengths. Write each point as a separate string." },
+                ebi: { type: Type.ARRAY, items: { type: Type.STRING }, description: "Even better if: List of specific quotes, weaknesses, and actionable improvements. Write each point as a separate string." }
               },
-              required: ["included", "excluded", "total", "status"]
-            },
-            overallSummary: { type: Type.STRING }
+              required: ["id", "name", "score", "maxScore", "www", "ebi"]
+            }
           },
-          required: ["criteria", "totalScore", "wordCount", "overallSummary"]
-        }
-      });
-
-      const textResponse = response.text;
-      if (!textResponse) {
-        throw new Error("Empty response from AI");
+          totalScore: { type: Type.INTEGER },
+          wordCount: {
+            type: Type.OBJECT,
+            properties: {
+              included: { type: Type.INTEGER },
+              excluded: { type: Type.INTEGER },
+              total: { type: Type.INTEGER },
+              status: { type: Type.STRING, description: "Compliance status" }
+            },
+            required: ["included", "excluded", "total", "status"]
+          },
+          overallSummary: { type: Type.STRING }
+        },
+        required: ["criteria", "totalScore", "wordCount", "overallSummary"]
       }
-      const result = JSON.parse(textResponse);
-      result.subject = subject;
+    });
+
+    const textResponse = response.text;
+    if (!textResponse) {
+      throw new Error("Empty response from AI");
+    }
+    const result = JSON.parse(textResponse);
+    result.subject = subject;
+    return result;
+  }
+
+  // IA Moderation Endpoint (Text payload instead of file)
+  app.post("/api/analyze-ia-text", async (req, res) => {
+    try {
+      const { text, subject = 'Geography' } = req.body;
+      if (!text) {
+        return res.status(400).json({ error: "No text provided" });
+      }
+      const result = await performIaAnalysis(text, subject);
       res.json(result);
     } catch (error: any) {
       console.error("Analysis error:", error);
+      res.status(500).json({ error: "Failed to analyze IA: " + error.message });
+    }
+  });
+
+  // IA Moderation Endpoint (Multipart upload proxy to backend)
+  app.post("/api/moderate-ia", upload.single("iaFile"), async (req, res) => {
+    try {
+      const subject = (req.body.subject as string) || 'Geography';
+      if (!req.file) {
+        return res.status(400).json({ error: "No file uploaded" });
+      }
+
+      // Extract text from buffer on backend
+      const data = await pdf(req.file.buffer);
+      const text = data.text;
+      if (!text || !text.trim()) {
+        return res.status(400).json({ error: "Could not extract any text from the document. It might be scanned or empty." });
+      }
+
+      const result = await performIaAnalysis(text, subject);
+      result.rawText = text;
+      res.json(result);
+    } catch (error: any) {
+      console.error("Moderation error:", error);
       res.status(500).json({ error: "Failed to analyze IA: " + error.message });
     }
   });
