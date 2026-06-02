@@ -26,7 +26,7 @@ const upload = multer({ storage: multer.memoryStorage() });
 let genAI: GoogleGenAI | null = null;
 function getGenAI() {
   if (!genAI) {
-    const apiKey = process.env.GEMINI_API_KEY;
+    const apiKey = process.env.GEMINI_API_KEY || process.env.VITE_GEMINI_API_KEY || process.env.API_KEY || process.env.GEOG_APP_KEY_V1;
     if (!apiKey) {
       throw new Error("GEMINI_API_KEY is not set in environment variables.");
     }
@@ -78,6 +78,9 @@ async function generateContentWithRetry(
           if (modelName === "gemini-3.5-flash") {
             console.warn("[Gemini API] Falling back from gemini-3.5-flash to stable gemini-2.5-flash due to rate limits or high demand.");
             modelName = "gemini-2.5-flash";
+          } else if (modelName === "gemini-2.5-flash") {
+            console.warn("[Gemini API] Falling back from gemini-2.5-flash to stable gemini-1.5-flash due to rate limits or high demand.");
+            modelName = "gemini-1.5-flash";
           } else if (modelName === "gemini-3.1-pro-preview") {
             console.warn("[Gemini API] Falling back from gemini-3.1-pro-preview to stable gemini-1.5-pro due to rate limits or high demand.");
             modelName = "gemini-1.5-pro";
@@ -761,7 +764,7 @@ Constraints:
 
   app.get("/api/config", (req, res) => {
     res.json({
-      apiKeyDetected: !!(process.env.GEMINI_API_KEY || process.env.API_KEY)
+      apiKeyDetected: !!(process.env.GEMINI_API_KEY || process.env.VITE_GEMINI_API_KEY || process.env.API_KEY || process.env.GEOG_APP_KEY_V1)
     });
   });
 
@@ -805,6 +808,27 @@ Constraints:
 
   app.post("/api/extract", newsroomProcessHandler);
   app.post("/api/process", newsroomProcessHandler);
+
+  app.post("/api/newsroom/generate", async (req, res) => {
+    try {
+      const { prompt, model = "gemini-2.5-flash" } = req.body;
+      if (!prompt) {
+        return res.status(400).json({ error: "Prompt is required" });
+      }
+
+      const ai = getGenAI();
+      const response = await generateContentWithRetry(ai, model, prompt);
+      
+      const responseText = response.text;
+      if (!responseText) {
+        throw new Error('No assessment material was generated. The content might have been filtered.');
+      }
+      res.json({ text: responseText });
+    } catch (error: any) {
+      console.error("Newsroom AI Generation Error:", error);
+      res.status(500).json({ error: error.message || "An error occurred during server-side processing" });
+    }
+  });
 
   // ==========================================
   // DP EXAM ENGINE BATCH INGESTION ENDPOINTS

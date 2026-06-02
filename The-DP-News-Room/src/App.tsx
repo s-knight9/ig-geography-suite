@@ -16,7 +16,6 @@ import { saveAs } from 'file-saver';
 import * as pdfjs from 'pdfjs-dist';
 import mammoth from 'mammoth';
 
-import { GoogleGenAI } from '@google/genai';
 
 // Configure PDF.js worker
 pdfjs.GlobalWorkerOptions.workerSrc = `https://unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.mjs`;
@@ -102,15 +101,8 @@ export default function App({
         throw new Error('No content was extracted from the source.');
       }
 
-      // 2. AI Phase (Client-side)
-      console.log("Initializing Gemini AI on client...");
-      
-      const apiKey = process.env.GEMINI_API_KEY || process.env.API_KEY;
-      if (!apiKey) {
-        throw new Error('API Key missing. Please go to Project Settings > Secrets and add GEMINI_API_KEY.');
-      }
-
-      const ai = new GoogleGenAI({ apiKey });
+      // 2. AI Phase (Server-side)
+      console.log("Generating analysis on server...");
       
       const prompt = `
 You are the "IBDP Geography Curriculum Architect." Your role is to ingest raw newspaper articles or publications and transform them into syllabus-aligned case studies and assessment materials for the IBDP Geography (2025 onwards) curriculum.
@@ -153,49 +145,22 @@ ARTICLE TEXT:
 ${articleText}
       `;
 
-      let modelName = "gemini-2.5-flash";
-      let response;
-      let retries = 3;
-      let delay = 1500;
+      const aiResponse = await fetch("/api/newsroom/generate", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ prompt, model: "gemini-2.5-flash" }),
+      });
 
-      while (retries >= 0) {
+      if (!aiResponse.ok) {
+        let msg = "Failed to generate analysis";
         try {
-          console.log(`Generating analysis with ${modelName}... (Attempts left: ${retries})`);
-          response = await ai.models.generateContent({
-            model: modelName,
-            contents: [{ role: 'user', parts: [{ text: prompt }] }],
-          });
-          break;
-        } catch (err: any) {
-          const isRetryable = err?.status === 500 || err?.status === 503 || err?.status === 429 ||
-                             err?.message?.includes('500') || err?.message?.includes('503') || err?.message?.includes('429') ||
-                             err?.message?.includes('INTERNAL') || err?.message?.includes('UNAVAILABLE') ||
-                             err?.message?.includes('Resource has been exhausted') || err?.message?.includes('high demand') ||
-                             err?.message?.includes('temporary');
-          
-          if (isRetryable && retries > 0) {
-            console.warn(`Gemini API error during Newsroom generation: (${err?.message || err?.status}). Retrying in ${delay}ms... (Attempts left: ${retries})`);
-            
-            // Fall back to stable gemini-1.5-flash if gemini-2.5-flash fails
-            if (modelName === "gemini-2.5-flash" && retries <= 2) {
-              console.warn("Switching Newsroom model to gemini-1.5-flash due to rate limits or high demand.");
-              modelName = "gemini-1.5-flash";
-            }
-
-            await new Promise(resolve => setTimeout(resolve, delay));
-            retries--;
-            delay *= 2;
-          } else {
-            throw err;
-          }
-        }
+          const errorData = await aiResponse.json();
+          msg = errorData.error || msg;
+        } catch { /* ignore */ }
+        throw new Error(msg);
       }
 
-      if (!response) {
-        throw new Error('No response from AI engine after retrying');
-      }
-
-      const responseText = response.text;
+      const { text: responseText } = await aiResponse.json();
       
       if (!responseText) {
         throw new Error('No assessment material was generated. The content might have been filtered.');
@@ -210,7 +175,7 @@ ${articleText}
       console.error("Processing Error:", error);
       const isApiKeyError = error.message.includes('API key') || error.message.includes('400') || error.message.includes('INVALID_ARGUMENT') || error.message.includes('placeholder') || error.message.includes('missing');
       if (isApiKeyError) {
-        setResult(`**Critical Error:** ${error.message}\n\n---\n**💡 Troubleshooting Tips:**\n1. Go to **Settings > Secrets** in the top-right menu.\n2. Ensure \`GEMINI_API_KEY\` is set correctly.\n3. Make sure there are no accidental spaces or line breaks in the secret value.\n4. You can generate a new one at [aistudio.google.com/app/apikey](https://aistudio.google.com/app/apikey).`);
+        setResult(`**Critical Error:** ${error.message}\n\n---\n**💡 Troubleshooting Tips:**\n1. Ensure \`GEMINI_API_KEY\` is set correctly in your Render dashboard environment variables.\n2. Redeploy the service on Render to apply environment changes.\n3. Make sure there are no accidental spaces in the secret value.`);
       } else {
         setResult(`**Critical Error:** ${error.message}`);
       }
