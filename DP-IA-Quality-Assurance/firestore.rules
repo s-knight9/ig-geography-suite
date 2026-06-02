@@ -1,0 +1,101 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Default deny
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    match /users/{userId} {
+      allow get: if request.auth != null;
+      allow list: if request.auth != null && (
+        request.auth.token.email == "y2knighty@gmail.com" ||
+        request.auth.token.email == "y2knighty@hotmail.com" ||
+        (get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == "teacher" &&
+         get(/databases/$(database)/documents/users/$(request.auth.uid)).data.status == "approved")
+      );
+      allow create: if request.auth != null && request.auth.uid == userId;
+      allow update: if request.auth != null && (
+        // Super Admin override (by email in token)
+        request.auth.token.email == "y2knighty@gmail.com" ||
+        request.auth.token.email == "y2knighty@hotmail.com" ||
+        
+        // Users updating their own profile without elevating role or status
+        (request.auth.uid == userId && 
+         request.resource.data.role == resource.data.role && 
+         request.resource.data.status == resource.data.status
+        ) ||
+        
+        // Approved teachers approving/declining student registrations
+        (get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == "teacher" &&
+         get(/databases/$(database)/documents/users/$(request.auth.uid)).data.status == "approved" &&
+         resource.data.role == "student" &&
+         request.resource.data.role == "student")
+      );
+    }
+
+    match /config/{configId} {
+      allow read: if request.auth != null;
+      allow write: if request.auth != null;
+    }
+
+    // Common helpers
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function isValidId(id) {
+      return id is string && id.size() <= 128 && id.matches('^[a-zA-Z0-9_\\-]+$');
+    }
+
+    function incoming() {
+      return request.resource.data;
+    }
+
+    function existing() {
+      return resource.data;
+    }
+
+    // Entities
+    function isValidClass(data) {
+      return data.id is string && data.id.size() <= 64 &&
+             data.name is string && data.name.size() <= 100;
+    }
+
+    function isValidAssignment(data) {
+      return data.id is string && data.id.size() <= 64 &&
+             data.name is string && data.name.size() <= 100;
+    }
+
+    function isValidCandidate(data) {
+      return data.id is string && data.id.size() <= 64 &&
+             data.studentName is string && data.studentName.size() <= 100 &&
+             data.date is string &&
+             data.score is number &&
+             data.report is map;
+    }
+
+    match /classes/{classId} {
+      allow get, list: if true;
+      allow create: if isValidClass(incoming()) && incoming().id == classId;
+      allow update: if isValidClass(incoming()) && 
+                    incoming().diff(existing()).affectedKeys().hasOnly(['name']);
+      allow delete: if true;
+
+      match /assignments/{assignmentId} {
+        allow get, list: if true;
+        allow create: if isValidAssignment(incoming()) && incoming().id == assignmentId;
+        allow update: if isValidAssignment(incoming()) && 
+                      incoming().diff(existing()).affectedKeys().hasOnly(['name']);
+        allow delete: if true;
+
+        match /candidates/{candidateId} {
+          allow get, list: if true;
+          allow create: if isValidCandidate(incoming()) && incoming().id == candidateId;
+          allow update: if isValidCandidate(incoming());
+          allow delete: if true;
+        }
+      }
+    }
+  }
+}
