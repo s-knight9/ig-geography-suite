@@ -68,13 +68,18 @@ async function generateContentWithRetry(
     } catch (err: any) {
       lastError = err;
       const isRetryable = err?.status === 500 || err?.status === 503 || err?.status === 429 ||
+                         err?.error?.status === 'UNAVAILABLE' || err?.error?.code === 503 || err?.error?.code === 429 ||
                          err?.message?.includes('500') || err?.message?.includes('503') || err?.message?.includes('429') ||
+                         err?.error?.message?.includes('500') || err?.error?.message?.includes('503') || err?.error?.message?.includes('429') ||
                          err?.message?.includes('INTERNAL') || err?.message?.includes('UNAVAILABLE') ||
+                         err?.error?.status?.includes('UNAVAILABLE') ||
                          err?.message?.includes('Resource has been exhausted') || err?.message?.includes('high demand') ||
-                         err?.message?.includes('temporary');
+                         err?.message?.includes('temporary') || err?.error?.message?.includes('high demand') ||
+                         err?.error?.message?.includes('temporary');
       
       if (isRetryable && retries > 0) {
-        console.warn(`[Gemini API] Error for model ${modelName} (${err?.message || err?.status}). Retrying in ${delay}ms... (Attempts left: ${retries})`);
+        const errDetails = err?.message || err?.status || err?.error?.message || err?.error?.status || 'Unknown API Error';
+        console.warn(`[Gemini API] Error for model ${modelName} (${errDetails}). Retrying in ${delay}ms... (Attempts left: ${retries})`);
         
         // Dynamic fallback logic
         if (retries <= 2) {
