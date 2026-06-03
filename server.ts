@@ -1029,6 +1029,25 @@ Constraints:
       return {};
     }
 
+    const VALID_TAGS = new Set(['SL1', 'SL2', 'SL3', 'HL4', 'HL5', 'HL6', 'OPA', 'OPD', 'OPE']);
+    const normalizeTags = (tags: string[]): string[] => {
+      if (!Array.isArray(tags)) return [];
+      const normalized: string[] = [];
+      tags.forEach(t => {
+        if (typeof t !== 'string') return;
+        const cleanTag = t.trim().toUpperCase();
+        if (VALID_TAGS.has(cleanTag)) {
+          normalized.push(cleanTag);
+          return;
+        }
+        const match = cleanTag.match(/^(SL1|SL2|SL3|HL4|HL5|HL6|OPA|OPD|OPE)\b/);
+        if (match) {
+          normalized.push(match[1]);
+        }
+      });
+      return Array.from(new Set(normalized));
+    };
+
     let attempts = 0;
     const maxAttempts = 2;
 
@@ -1083,7 +1102,7 @@ Constraints:
         if (Array.isArray(results)) {
           results.forEach((item: any) => {
             if (item.headline && Array.isArray(item.tags)) {
-              tagsMapResult[item.headline] = item.tags;
+              tagsMapResult[item.headline] = normalizeTags(item.tags);
             }
           });
         }
@@ -1300,8 +1319,15 @@ Constraints:
         : {};
 
       const tagsMap: Record<string, string[]> = {};
+      const normalizedOriginalsMap = new Map<string, string[]>();
+      
+      headlineToOriginal.forEach((originals, stripped) => {
+        normalizedOriginalsMap.set(stripped.toLowerCase().trim(), originals);
+      });
+
       Object.entries(tagsMapStripped).forEach(([stripped, tags]) => {
-        const originals = headlineToOriginal.get(stripped) || [];
+        const normalizedKey = stripped.toLowerCase().trim();
+        const originals = normalizedOriginalsMap.get(normalizedKey) || [];
         originals.forEach(original => {
           tagsMap[original] = tags;
         });
