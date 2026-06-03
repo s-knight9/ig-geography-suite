@@ -34,6 +34,7 @@ import EssayGradingApp from "../DP-Essay-Grading-&-Moderation/src/App";
 import InfographicGeneratorApp from "../Infographic-Generator/src/App";
 import NewsroomApp from "../The-DP-News-Room/src/App";
 import GeoStrategyApp from "../GeoStrategy/src/App";
+import CorrespondentApp from "../Fresh-off-the-Press/src/App";
 
 interface LocalUser {
   email: string;
@@ -76,7 +77,7 @@ export default function App() {
   const [pendingUsers, setPendingUsers] = useState<any[]>([]);
   const [isSessionUpdating, setIsSessionUpdating] = useState<boolean>(false);
   const [isInitializing, setIsInitializing] = useState<boolean>(true);
-  const [activeWorkspace, setActiveWorkspace] = useState<"portal" | "ia-qa" | "essay-grading" | "infographic-generator" | "newsroom" | "geostrategy">("portal");
+  const [activeWorkspace, setActiveWorkspace] = useState<"portal" | "ia-qa" | "essay-grading" | "infographic-generator" | "newsroom" | "geostrategy" | "correspondent">("portal");
 
   // Auth Form State
   const [email, setEmail] = useState<string>("");
@@ -93,22 +94,7 @@ export default function App() {
   });
 
   useEffect(() => {
-    // Restore session from localStorage
-    const storedSession = localStorage.getItem("dp_geo_suite_session");
-    if (storedSession) {
-      try {
-        const parsed = JSON.parse(storedSession);
-        if (parsed.user) {
-          setUser(parsed.user);
-          setRole(parsed.role || "student");
-          setTeacherCode(parsed.teacherCode || "");
-          setStatus(parsed.status || "approved");
-        }
-      } catch (e) {
-        console.error("Failed to parse stored session:", e);
-        localStorage.removeItem("dp_geo_suite_session");
-      }
-    }
+    // Prompt login on every load: do not auto-restore session from localStorage
     setIsInitializing(false);
   }, []);
 
@@ -400,6 +386,18 @@ export default function App() {
     );
   }
 
+  if (activeWorkspace === "correspondent") {
+    return (
+      <CorrespondentApp 
+        onBackToPortal={() => setActiveWorkspace("portal")}
+        activeUserEmail={user.email || ""}
+        activeTeacherCode={teacherCode}
+        isDark={isDark}
+        toggleDark={toggleDark}
+      />
+    );
+  }
+
   // Render Portal Dashboard View
   return (
     <div className="min-h-screen bg-[#F8FAFC] dark:bg-slate-950 font-sans transition-colors duration-300">
@@ -468,13 +466,13 @@ export default function App() {
           </h2>
           <p className="text-sm font-medium text-slate-500 dark:text-slate-400 leading-relaxed">
             {role === "student" 
-              ? "Access your authorized study resources: DP Newsroom conceptual architects and GeoStrategy essay structural planners."
+              ? "Access your authorized study resources: DP Newsroom conceptual architects, GeoStrategy essay structural planners, and Correspondent global news & daily polls."
               : "Welcome to the master geography hub. Access specific tools configured to IBDP criteria marking, handwriting transcriptions, and moderation analysis."}
           </p>
         </div>
 
         {/* Workspace Cards Grid */}
-        <div className={role === "student" ? "grid md:grid-cols-2 max-w-4xl mx-auto gap-8" : "grid xl:grid-cols-5 lg:grid-cols-3 md:grid-cols-2 gap-5"}>
+        <div className={role === "student" ? "grid md:grid-cols-3 max-w-6xl mx-auto gap-6" : "grid xl:grid-cols-3 lg:grid-cols-3 md:grid-cols-2 gap-6"}>
           
           {(role === "teacher" || role === "super_admin") && (
             <>
@@ -681,6 +679,49 @@ export default function App() {
                 <li className="flex items-center gap-2 text-xs font-bold text-slate-600 dark:text-slate-300">
                   <CheckCircle2 size={13} className="text-emerald-500" />
                   Calibrated Word Plan Exports
+                </li>
+              </ul>
+            </div>
+
+            <div className="flex items-center justify-between border-t border-slate-200/50 dark:border-slate-800/50 pt-6">
+              <span className="text-xs font-bold text-emerald-500 uppercase tracking-wider">
+                Launch Workspace
+              </span>
+              <div className="w-8 h-8 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-slate-400 dark:text-slate-500 group-hover:bg-emerald-500 group-hover:text-white transition-colors">
+                <ChevronRight size={16} />
+              </div>
+            </div>
+          </motion.div>
+
+          {/* Card 6: Correspondent */}
+          <motion.div
+            whileHover={{ y: -6 }}
+            className="glass-panel rounded-2xl p-6 border border-slate-200 dark:border-slate-800 flex flex-col justify-between group cursor-pointer shadow-lg hover:shadow-emerald-500/5 transition-all"
+            onClick={() => setActiveWorkspace("correspondent")}
+          >
+            <div>
+              <div className="w-14 h-14 rounded-2xl bg-emerald-500/10 dark:bg-emerald-500/5 flex items-center justify-center text-emerald-500 group-hover:scale-110 transition-transform mb-6">
+                <Globe size={28} />
+              </div>
+              <h3 className="text-2xl font-black text-slate-800 dark:text-white tracking-tight mb-3">
+                Correspondent
+              </h3>
+              <p className="text-sm text-slate-500 dark:text-slate-400 leading-relaxed mb-6 font-medium">
+                Breaking global news RSS aggregator and syllabus-tagging unit. Map international press stories directly to IBO course units and participate in active daily syllabus polls.
+              </p>
+              
+              <ul className="space-y-2 mb-8">
+                <li className="flex items-center gap-2 text-xs font-bold text-slate-600 dark:text-slate-300">
+                  <CheckCircle2 size={13} className="text-emerald-500" />
+                  Live Global RSS Feed Reader
+                </li>
+                <li className="flex items-center gap-2 text-xs font-bold text-slate-600 dark:text-slate-300">
+                  <CheckCircle2 size={13} className="text-emerald-500" />
+                  Gemini-Powered Syllabus Tagging
+                </li>
+                <li className="flex items-center gap-2 text-xs font-bold text-slate-600 dark:text-slate-300">
+                  <CheckCircle2 size={13} className="text-emerald-500" />
+                  Daily Syllabus-Calibrated Polls
                 </li>
               </ul>
             </div>
