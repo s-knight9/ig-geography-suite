@@ -1060,10 +1060,11 @@ Constraints:
         Headlines to analyze:
         ${JSON.stringify(headlines)}`;
 
-        const response = await ai.models.generateContent({
-          model: 'gemini-3.5-flash',
-          contents: [{ role: 'user', parts: [{ text: prompt }] }],
-          config: {
+        const response = await generateContentWithRetry(
+          ai,
+          'gemini-3.5-flash',
+          [{ role: 'user', parts: [{ text: prompt }] }],
+          {
             systemInstruction: `You are a strict IB Geography tagging agent for the "DP Anchorman" application. 
             Analyze the headlines and assign relevant unit tags ONLY from this list:
             - SL1: Changing Populations
@@ -1095,7 +1096,7 @@ Constraints:
               }
             }
           }
-        });
+        );
 
         const results = JSON.parse(response.text?.trim() || '[]');
         const tagsMapResult: Record<string, string[]> = {};
@@ -1166,10 +1167,11 @@ Constraints:
       
       Return a JSON array of 3 poll objects.`;
 
-      const response = await ai.models.generateContent({
-        model: 'gemini-3.5-flash',
-        contents: [{ role: 'user', parts: [{ text: prompt }] }],
-        config: {
+      const response = await generateContentWithRetry(
+        ai,
+        'gemini-3.5-flash',
+        [{ role: 'user', parts: [{ text: prompt }] }],
+        {
           systemInstruction: `You are a curriculum expert for IB Geography. Generate 3 engaging, syllabus-aligned daily polls based on current events.
           Output format: JSON array of objects:
           {
@@ -1199,7 +1201,7 @@ Constraints:
             }
           }
         }
-      });
+      );
 
       const parsed = JSON.parse(response.text?.trim() || '[]');
       return parsed.map((p: any) => ({ ...p, date: today }));
