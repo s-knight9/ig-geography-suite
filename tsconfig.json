@@ -22,5 +22,13 @@
     },
     "allowImportingTsExtensions": true,
     "noEmit": true
-  }
+  },
+  "exclude": [
+    "node_modules",
+    "dist",
+    "DP-Student-Scaffold/server.ts",
+    "The-DP-News-Room/server.ts",
+    "Fresh-off-the-Press/server.ts",
+    "DP-IA-Quality-Assurance/server.ts"
+  ]
 }

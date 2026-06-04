@@ -1655,6 +1655,168 @@ Constraints:
   });
 
   // ==========================================
+  // STUDENT SCAFFOLD ENDPOINTS
+  // ==========================================
+
+  app.post("/api/scaffold/generate", upload.single('attachment'), async (req: any, res) => {
+    const requestId = Math.random().toString(36).substring(7);
+    console.log(`[${requestId}] Scaffold generation started`);
+
+    try {
+      const ai = getGenAI();
+
+      const { 
+        paperType, 
+        targetMarks, 
+        framework, 
+        wordBankToggle, 
+        question, 
+        keywords,
+        mode = 'both'
+      } = req.body;
+
+      if (!question) {
+        console.warn(`[${requestId}] Aborting: No question`);
+        return res.status(400).json({ error: "Missing question prompt" });
+      }
+
+      console.log(`[${requestId}] Mode: ${mode} | Paper: ${paperType}, Marks: ${targetMarks}, Framework: ${framework}`);
+
+      const isWordBankOn = wordBankToggle === "true" || wordBankToggle === true;
+
+      // Extract text from attachment if provided
+      let attachmentContext = "";
+      if (req.file) {
+        try {
+          if (req.file.originalname.toLowerCase().endsWith(".pdf")) {
+            const parsedPdf = await pdf(req.file.buffer);
+            attachmentContext = parsedPdf.text;
+          } else {
+            attachmentContext = req.file.buffer.toString('utf-8');
+          }
+          console.log(`[${requestId}] Attachment read successfully (Length: ${attachmentContext.length})`);
+        } catch (e) {
+          console.error(`[${requestId}] Failed to read attachment:`, e);
+        }
+      }
+
+      const systemInstruction = `
+        # PERSONA & OBJECTIVE
+        You are the AI engine powering "DP Student Scaffold," an expert educational assistant designed exclusively for International Baccalaureate Diploma Programme (IB DP) students. 
+        Your role is to build structural blueprints and/or writing frames.
+
+        # OUTPUT FORMAT
+        You MUST return a JSON object matching this schema:
+        {
+          "scaffold": "string (Markdown format, present if requested)",
+          "writingFrame": "string (Markdown format, present if requested)"
+        }
+        
+        If mode is "scaffold": return {"scaffold": "..."}
+        If mode is "frame": return {"writingFrame": "..."}
+        If mode is "both": return {"scaffold": "...", "writingFrame": "..."}
+
+        # SCAFFOLD SPECIFICATIONS (Required if mode is "scaffold" or "both")
+        ## 1. COMMAND TERM DECODER
+        Extract core command term. Define AO requirement + **Time Target**.
+        ## 2. THE DYNAMIC WORD BANK (Include if Word Bank Toggle ON)
+        5–8 technical terms with 4-5 word definitions.
+        ## 3. THE SCAFFOLD BLUEPRINT
+        - Broken down by ${framework} / ${targetMarks}. Use headers like P (Point), E (Evidence), etc.
+        - **IMPORTANT: FOR 10, 12, OR 16 MARK QUESTIONS** (especially for PEEL/PEECAL), you MUST use the **HOPPED** structure for the **Introduction**:
+          - **H (Hook):** Relevant global stat, quote, or example.
+          - **O (Opinion):** Position/argument.
+          - **P (Perspectives):** Views or scales to explore.
+          - **P (Place):** Case study location.
+          - **E (Evidence):** Kinds of data used.
+          - **D (Definitions):** Clarifying key terms.
+        
+        ## 4. THE "GOLDEN THREAD" CHECKLIST
+        Term checklist for the student.
+
+        # WRITING FRAME SPECIFICATIONS (Required if mode is "frame" or "both")
+        - Heavy focus on sentence starters and transitions.
+        - Structure it by paragraph (Intro, Body 1, Body 2... Conclusion).
+        - **FOR 10, 12, OR 16 MARK QUESTIONS**, use **HOPPED** headers for the Intro section.
+        - Provide multiple alternatives for every starter separated by "/".
+        - Example: "One significant factor to consider is... / A primary element of this issue is... / Evidence suggests that..."
+
+        # GUARDRAILS
+        - DO NOT WRITE THE ANSWER.
+        - Professional academic tone.
+        - Use standard Markdown within the string values.
+      `;
+
+      let promptText = `Environment: Paper ${paperType}, ${targetMarks} marks, ${framework} framework.\n`;
+      promptText += `Student Question: "${question}"\n`;
+      promptText += `Keywords: "${keywords}"\n`;
+      if (attachmentContext) {
+        promptText += `Attachment Context Material:\n${attachmentContext}\n`;
+      }
+      
+      if (mode === 'scaffold') {
+        promptText += `TASK: Generate ONLY the detailed structural scaffold.`;
+      } else if (mode === 'frame') {
+        promptText += `TASK: Generate ONLY the writing frame with sentence starters.`;
+      } else {
+        promptText += `TASK: Generate BOTH the scaffold and the writing frame.`;
+      }
+
+      console.log(`[${requestId}] Requesting Gemini (gemini-3.5-flash)...`);
+      
+      const response = await generateContentWithRetry(
+        ai,
+        "gemini-3.5-flash",
+        promptText,
+        {
+          systemInstruction: systemInstruction,
+          responseMimeType: "application/json",
+          temperature: 0.7,
+        }
+      );
+
+      console.log(`[${requestId}] Gemini responded`);
+
+      let fullOutput = response.text || "";
+      if (!fullOutput) {
+        throw new Error("The AI returned an empty response.");
+      }
+
+      let scaffold = "";
+      let writingFrame = "";
+
+      try {
+        const parsedData = JSON.parse(fullOutput.replace(/^```json\n?|```$/g, "").trim());
+        scaffold = parsedData.scaffold || "";
+        writingFrame = parsedData.writingFrame || "";
+      } catch (parseError) {
+        console.error(`[${requestId}] JSON Parse Error:`, parseError);
+        const jsonMatch = fullOutput.match(/```json\s*([\s\S]*?)\s*```/) || fullOutput.match(/([\{\[][\s\S]*[\}\]])/);
+        if (jsonMatch) {
+          try {
+            const parsedData = JSON.parse(jsonMatch[1]);
+            scaffold = parsedData.scaffold || "";
+            writingFrame = parsedData.writingFrame || "";
+          } catch (e) {
+            throw new Error("Failed to parse extracted AI JSON.");
+          }
+        } else {
+          throw new Error("Failed to extract JSON from AI output.");
+        }
+      }
+      
+      res.json({ scaffold, writingFrame });
+      console.log(`[${requestId}] Successfully sent response`);
+    } catch (error: any) {
+      console.error(`[${requestId}] Generation Error:`, error);
+      res.status(500).json({ 
+        error: "Generation Failed",
+        details: error.message || "Failed to generate content"
+      });
+    }
+  });
+
+  // ==========================================
   // VITE & STATIC FILES SERVING MIDDLEWARE
   // ==========================================
 
