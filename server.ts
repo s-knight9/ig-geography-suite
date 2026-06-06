@@ -2007,19 +2007,23 @@ Constraints:
         throw new Error("Database connection not initialized.");
       }
       
+      const role = (req.query.role as string || "student").toLowerCase();
+      const includeLocked = role === "teacher" || role === "super_admin";
       const currentWeek = getWeeksNumber(new Date());
-      let matrix = await gtDb.getVideos();
+      let matrix = await gtDb.getVideos(includeLocked);
       
       const prefixes = ["SL1", "SL2", "SL3", "HL4", "HL5", "HL6", "OPA", "OPD", "OPE"];
-      let totalVideosCount = 0;
+      
+      // Auto-seed default videos if database is completely empty on startup
+      let checkMatrix = includeLocked ? matrix : await gtDb.getVideos(true);
+      let actualTotalCount = 0;
       prefixes.forEach(pref => {
-        if (Array.isArray(matrix[pref])) {
-          totalVideosCount += matrix[pref].length;
+        if (Array.isArray(checkMatrix[pref])) {
+          actualTotalCount += checkMatrix[pref].length;
         }
       });
       
-      // Auto-seed default videos if database is completely empty on startup
-      if (totalVideosCount === 0) {
+      if (actualTotalCount === 0) {
         console.log("[GlobeTube] Database is empty. Seeding default videos into database...");
         const initialGrouped: Record<string, any[]> = {};
         prefixes.forEach(pref => { initialGrouped[pref] = []; });
@@ -2028,7 +2032,7 @@ Constraints:
           if (vid.unit) {
             const pref = vid.unit.split(':')[0].trim();
             if (prefixes.includes(pref)) {
-              initialGrouped[pref].push(vid);
+              initialGrouped[pref].push({ ...vid, is_locked: false });
             }
           }
         });
@@ -2038,7 +2042,7 @@ Constraints:
         }
         
         // Fetch updated matrix after seeding
-        matrix = await gtDb.getVideos();
+        matrix = await gtDb.getVideos(includeLocked);
       }
       
       // Check weekly rotation via a stored metadata week field
@@ -2069,13 +2073,14 @@ Constraints:
                     description: genVid.description || defaultVid.description,
                     unit: defaultVid.unit,
                     duration: genVid.duration || defaultVid.duration,
-                    publishedAt: genVid.publishedAt || defaultVid.publishedAt
+                    publishedAt: genVid.publishedAt || defaultVid.publishedAt,
+                    is_locked: false
                   });
                 } else {
-                  verifiedVideos.push(defaultVid);
+                  verifiedVideos.push({ ...defaultVid, is_locked: false });
                 }
               } catch (err) {
-                verifiedVideos.push(defaultVid);
+                verifiedVideos.push({ ...defaultVid, is_locked: false });
               }
             }
             
@@ -2095,7 +2100,7 @@ Constraints:
               await gtDb.saveVideos(pref, rotatedGrouped[pref]);
             }
             await gtDb.saveVideos("week_meta", [{ week: currentWeek }]);
-            matrix = await gtDb.getVideos();
+            matrix = await gtDb.getVideos(includeLocked);
           } else {
             await gtDb.saveVideos("week_meta", [{ week: currentWeek }]);
           }
@@ -2163,7 +2168,7 @@ Constraints:
           return res.status(400).json({ error: `Invalid syllabus unit tag: ${syllabusTag}` });
         }
 
-        const currentMatrix = await gtDb.getVideos();
+        const currentMatrix = await gtDb.getVideos(true);
         const currentList = currentMatrix[syllabusTag] || [];
 
         if (currentList.some((v: any) => v.id === videoId)) {
@@ -2177,14 +2182,15 @@ Constraints:
           description: "Custom imported case study.",
           unit: unit,
           duration: "N/A",
-          publishedAt: "Just imported"
+          publishedAt: "Just imported",
+          is_locked: true // Default newly imported video to locked!
         };
 
         const updatedList = [newVideo, ...currentList];
         await gtDb.saveVideos(syllabusTag, updatedList);
 
         console.log(`[GlobeTube] Video ${videoId} imported into unit ${syllabusTag} successfully.`);
-        return res.status(200).json({ success: true, message: "Syllabus grid synchronized." });
+        return res.status(200).json({ success: true, message: "Video successfully sorted into syllabus row." });
       }
 
       // Case 2: Bulk array update (for Swaps and Deletes)
@@ -2210,7 +2216,7 @@ Constraints:
         console.log("[GlobeTube] Persistent database synchronized with updated videos array.");
         return res.status(200).json({ 
           success: true, 
-          message: "Syllabus grid synchronized.",
+          message: "Video successfully sorted into syllabus row.",
           videos: videos
         });
       }
@@ -2219,6 +2225,28 @@ Constraints:
     } catch (err: any) {
       console.error("[GlobeTube] POST /api/videos failed:", err);
       res.status(500).json({ error: err.message || "Failed to update persistent storage." });
+    }
+  });
+
+  app.patch("/api/globetube/videos/:id/toggle-lock", async (req, res) => {
+    try {
+      if (!gtDb) {
+        throw new Error("Database connection not initialized.");
+      }
+
+      const { id } = req.params;
+      const { teacherCode } = req.body;
+      const allowedTeacherCodes = ["SKN", "JTE", "SMK", "JBO", "SSH", "LLE", "CMA", "CHE"];
+
+      if (!teacherCode || !allowedTeacherCodes.includes(teacherCode.toUpperCase())) {
+        return res.status(403).json({ error: "Access Denied", details: "Unauthorized teacher credentials." });
+      }
+
+      const newStatus = await gtDb.toggleLock(id);
+      return res.status(200).json({ success: true, is_locked: newStatus });
+    } catch (err: any) {
+      console.error("[GlobeTube] PATCH /api/globetube/videos/:id/toggle-lock failed:", err);
+      res.status(500).json({ error: err.message || "Failed to toggle video lock status." });
     }
   });
 

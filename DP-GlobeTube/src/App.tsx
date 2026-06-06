@@ -35,6 +35,7 @@ interface VideoItem {
   unit: string;
   duration: string;
   publishedAt: string;
+  is_locked?: boolean;
 }
 
 const DEFAULT_VIDEOS: VideoItem[] = [
@@ -205,7 +206,7 @@ export default function App({
     setIsLoadingWeekly(true);
     setWeeklyStatus("Loading geography syllabus media feed...");
     try {
-      const res = await fetch("/api/globetube/videos");
+      const res = await fetch(`/api/globetube/videos?role=${activeRole}`);
       if (res.ok) {
         const data = await res.json();
         if (data && typeof data === 'object' && !Array.isArray(data)) {
@@ -235,10 +236,31 @@ export default function App({
     }
   };
 
-  // Load videos database from backend on mount
+  // Load videos database from backend when activeRole changes
   useEffect(() => {
     loadVideos();
-  }, []);
+  }, [activeRole]);
+
+  const toggleVideoLock = async (videoId: string) => {
+    try {
+      const res = await fetch(`/api/globetube/videos/${videoId}/toggle-lock`, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          teacherCode: activeTeacherCode || "SKN"
+        })
+      });
+      if (res.ok) {
+        await loadVideos();
+      } else {
+        const errData = await res.json();
+        alert(`Failed to toggle lock: ${errData.error || errData.details || "Unknown error"}`);
+      }
+    } catch (err) {
+      console.error("[GlobeTube] Toggle lock failed:", err);
+      alert("Network error while trying to toggle video lock.");
+    }
+  };
 
   const saveVideosToBackend = async (updatedVideos: VideoItem[]) => {
     try {
@@ -630,6 +652,25 @@ export default function App({
                                           </span>
                                           <span className="text-[10px] font-bold text-slate-400 dark:text-slate-500">{vid.publishedAt}</span>
                                         </div>
+
+                                        {activeRole !== 'student' && (
+                                          <div className="pt-2">
+                                            <button
+                                              onClick={(e) => {
+                                                e.stopPropagation();
+                                                toggleVideoLock(vid.id);
+                                              }}
+                                              className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-black uppercase tracking-wider transition-all duration-200 border cursor-pointer ${
+                                                vid.is_locked
+                                                  ? 'bg-red-50 dark:bg-red-950/20 text-red-650 dark:text-red-400 border-red-200 dark:border-red-900/50 hover:bg-red-100 dark:hover:bg-red-950/40'
+                                                  : 'bg-emerald-50 dark:bg-emerald-950/20 text-emerald-650 dark:text-emerald-400 border-emerald-200 dark:border-emerald-900/50 hover:bg-emerald-100 dark:hover:bg-emerald-950/40'
+                                              }`}
+                                            >
+                                              {vid.is_locked ? '🔒 Locked (Hidden)' : '🔓 Unlocked (Visible)'}
+                                            </button>
+                                          </div>
+                                        )}
+
                                         <h4 className="text-sm font-extrabold text-slate-800 dark:text-white leading-snug group-hover:text-[#00b875] transition-colors line-clamp-2 pt-2">
                                           {vid.title}
                                         </h4>
