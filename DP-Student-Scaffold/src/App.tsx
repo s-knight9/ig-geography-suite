@@ -82,6 +82,7 @@ export default function App({
     formData.append('question', question);
     formData.append('keywords', keywords);
     formData.append('mode', mode);
+    formData.append('teacherCode', activeTeacherCode || '');
     if (file) {
       formData.append('attachment', file);
     }

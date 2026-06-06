@@ -69,8 +69,15 @@ async function startServer() {
           wordBankToggle, 
           question, 
           keywords,
-          mode = 'both'
+          mode = 'both',
+          teacherCode
         } = req.body;
+
+        const allowedTeacherCodes = ["SKN", "JTE", "SMK", "JBO", "SSH", "LLE", "CMA", "CHE"];
+        if (!teacherCode || !allowedTeacherCodes.includes(teacherCode.toUpperCase())) {
+          console.warn(`[${requestId}] Aborting: Unauthorized teacherCode ${teacherCode}`);
+          return res.status(403).json({ error: "Access Denied", details: "Unauthorized access to Student Scaffold." });
+        }
 
         if (!question) {
           console.warn(`[${requestId}] Aborting: No question`);

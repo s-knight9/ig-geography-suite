@@ -61,11 +61,18 @@ export async function generateEssayPlan(input: EssayInput): Promise<{ plan: stri
     - Sources Provided: ${sourceIdentifiers.join(", ")}
     
     INSTRUCTIONS FOR THE PLAN:
-    1. STRUCTURE: Use the chosen framework (${input.structure}) for each body paragraph.
-    2. INCORPORATE PILLARS: Ensure the analysis explicitly uses the selected conceptual pillars (${input.conceptualPillars.join(", ")}). Explain HOW they should be applied in specific paragraphs.
-    3. MARK SCHEME: Balance the content for a ${input.marks}-mark response. (10 marks: depth/clarity; 12/16 marks: evaluation and synthesis).
-    4. CASE STUDIES: Extract specific evidence and data points from the provided source files or URLs to include in the "Evidence" sub-sections.
-    5. TERMINOLOGY: Use high-level IB Geography terminology throughout.
+    1. INTRODUCTION STRUCTURE (MANDATORY): The Introduction section of the plan MUST strictly follow the HOPPED formula:
+       - H (Hook): Start with a bold global fact, statistic, quote, or striking opinion to grab the examiner's attention.
+       - O (Opinion): State the thesis or argument in a nutshell. What position will the essay defend?
+       - P (Perspectives): Identify the different viewpoints to explore (e.g., government, public, business, environmentalists, varying income levels or scales).
+       - P (Place): Name specific locations or official case studies relevant to the prompt.
+       - E (Evidence/Examples): Introduce the key data sets or regional examples to unpack.
+       - D (Definitions): Clearly and accurately define any essential geographical terms present in the essay question (specifically defining: ${input.keyTerms}).
+    2. STRUCTURE: Use the chosen framework (${input.structure}) for each body paragraph.
+    3. INCORPORATE PILLARS: Ensure the analysis explicitly uses the selected conceptual pillars (${input.conceptualPillars.join(", ")}). Explain HOW they should be applied in specific paragraphs.
+    4. MARK SCHEME: Balance the content for a ${input.marks}-mark response. (10 marks: depth/clarity; 12/16 marks: evaluation and synthesis).
+    5. CASE STUDIES: Extract specific evidence and data points from the provided source files or URLs to include in the "Evidence" sub-sections.
+    6. TERMINOLOGY: Use high-level IB Geography terminology throughout.
 
     INSTRUCTIONS FOR SYNOPSES (MANDATORY):
     You MUST provide a brief, professional synopsis (no longer than 3 sentences) for EVERY source listed above (${sourceIdentifiers.join(", ")}).

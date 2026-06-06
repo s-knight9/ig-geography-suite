@@ -5,17 +5,21 @@ import Parser from 'rss-parser';
 import { GoogleGenAI, Type } from '@google/genai';
 import dotenv from 'dotenv';
 import crypto from 'crypto';
-import { getTodayPolls, castVote, hasPollsForToday, savePolls } from './src/server/db.ts';
+import { getTodayPolls, castVote, hasPollsForToday, savePolls, getPollDateKST } from './src/server/db.ts';
 
 dotenv.config();
 
 const app = express();
 app.use(express.json());
 
-// Simple middleware to generate a unique-ish hash for anonymous users based on IP
 const userTracker = (req: any, res: any, next: any) => {
-  const ip = req.headers['x-forwarded-for'] || req.socket.remoteAddress;
-  req.userHash = crypto.createHash('md5').update(ip as string).digest('hex');
+  const email = req.query.email || req.body.email || '';
+  if (email) {
+    req.userHash = crypto.createHash('md5').update(email.trim().toLowerCase()).digest('hex');
+  } else {
+    const ip = req.headers['x-forwarded-for'] || req.socket.remoteAddress;
+    req.userHash = crypto.createHash('md5').update(ip as string).digest('hex');
+  }
   next();
 };
 
@@ -279,7 +283,7 @@ async function generateDailyPolls(headlines: any[]): Promise<any[]> {
   if (!headlines.length || !process.env.GEMINI_API_KEY) return [];
 
   try {
-    const today = new Date().toISOString().split('T')[0];
+    const today = getPollDateKST();
     const prompt = `Based on these recent news items, generate exactly 3 IB Geography themed daily polls for today (${today}).
     
     News Items:

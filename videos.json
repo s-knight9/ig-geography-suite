@@ -1,0 +1,86 @@
+{
+  "week": "2026-W23",
+  "videos": [
+    {
+      "id": "kVaBlat06Sw",
+      "title": "Why 94% of China Lives East of This Line",
+      "channel": "RealLifeLore",
+      "description": "An investigation into China's demographic distribution, the Heihe-Tengchong line, geographic barriers, agricultural viability, and population pressure shifts.",
+      "unit": "SL1: Changing Populations",
+      "duration": "21:40",
+      "publishedAt": "3 weeks ago"
+    },
+    {
+      "id": "ztWHqUFJRTs",
+      "title": "Climate change: Earth's giant game of Tetris",
+      "channel": "TED-Ed",
+      "description": "A spatial analysis of climate vulnerability, rising sea levels, changing biome distributions, climate migration corridors, and international adaptation strategies.",
+      "unit": "SL2: Global Climate",
+      "duration": "02:48",
+      "publishedAt": "1 month ago"
+    },
+    {
+      "id": "Hvc1P5edKTc",
+      "title": "Population & Food: Crash Course Geography #16",
+      "channel": "CrashCourse Geography",
+      "description": "An overview of ecological footprints, global resource distribution, Malthusian vs. Boserupian models of population growth, and resource security challenges.",
+      "unit": "SL3: Global Resource",
+      "duration": "11:58",
+      "publishedAt": "2 weeks ago"
+    },
+    {
+      "id": "FN3VFgG922A",
+      "title": "Meet the enormous boats that carry your stuff",
+      "channel": "Vox",
+      "description": "Exploring the spatial interactions, logistics networks, global shipping lanes, key maritime chokepoints (Suez, Panama, Malacca), and structural supply chain vulnerabilities.",
+      "unit": "HL4: Power, Places & Networks",
+      "duration": "10:35",
+      "publishedAt": "5 days ago"
+    },
+    {
+      "id": "cuPfIFg2ZDI",
+      "title": "200 Years, 200 Countries, 4 Minutes",
+      "channel": "Hans Rosling / Gapminder",
+      "description": "Analyzing global development indices, GNI per capita, human development metrics, multidimensional poverty, and institutional structural aid in low-income nations.",
+      "unit": "HL5: Human Dev & Diversity",
+      "duration": "04:47",
+      "publishedAt": "2 months ago"
+    },
+    {
+      "id": "LxgMdjyw8uw",
+      "title": "We WILL Fix Climate Change!",
+      "channel": "Kurzgesagt – In a Nutshell",
+      "description": "An in-depth case study of environmental degradation, community resilience, risk management, and the forced relocation of indigenous populations due to coastal erosion.",
+      "unit": "HL6: Global Risk & Resilience",
+      "duration": "16:15",
+      "publishedAt": "3 weeks ago"
+    },
+    {
+      "id": "Pz6AQXQGupQ",
+      "title": "Where we get our fresh water",
+      "channel": "TED-Ed",
+      "description": "An exploration of Earth's water distribution, freshwater storage systems, and the hydrological systems that supply human civilization.",
+      "unit": "OPA: Freshwater",
+      "duration": "05:08",
+      "publishedAt": "1 week ago"
+    },
+    {
+      "id": "fXb02MQ78yQ",
+      "title": "What Happens if a Supervolcano Blows Up?",
+      "channel": "Kurzgesagt – In a Nutshell",
+      "description": "Examining volcanic hazard maps, seismic anomalies, gas emissions, deformation monitoring, and disaster mitigation strategies for active geophysical hazards.",
+      "unit": "OPD: Geophysical Hazards",
+      "duration": "10:04",
+      "publishedAt": "4 days ago"
+    },
+    {
+      "id": "7NBa5o--y3k",
+      "title": "The Cruise Industry's Arms Race",
+      "channel": "Wendover Productions",
+      "description": "Analyzing the globalization of leisure, tourism nodes, carrying capacity of small island tourist economies, and the environmental footprint of cruise terminals.",
+      "unit": "OPE: Leisure, Tourism & Sport",
+      "duration": "13:22",
+      "publishedAt": "2 weeks ago"
+    }
+  ]
+}

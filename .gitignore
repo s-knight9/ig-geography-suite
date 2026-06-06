@@ -40,3 +40,7 @@ lerna-debug.log*
 # Temp & Drive folders
 .tmp.driveupload/
 .tmp/
+
+# Databases
+globetube.db
+*.db-journal

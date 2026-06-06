@@ -50,8 +50,28 @@ if (!hasSelectedOption) {
   db.exec('ALTER TABLE user_votes_tracker ADD COLUMN selected_option TEXT');
 }
 
+export function getPollDateKST(): string {
+  const now = new Date();
+  const kstTime = new Date(now.getTime() + 9 * 60 * 60 * 1000);
+  const kstYear = kstTime.getUTCFullYear();
+  const kstMonth = kstTime.getUTCMonth();
+  const kstDay = kstTime.getUTCDate();
+  
+  const kstBoundary = new Date(Date.UTC(kstYear, kstMonth, kstDay, 7, 45, 0, 0));
+  
+  let pollDate = kstTime;
+  if (kstTime.getTime() < kstBoundary.getTime()) {
+    pollDate = new Date(kstTime.getTime() - 24 * 60 * 60 * 1000);
+  }
+  
+  const year = pollDate.getUTCFullYear();
+  const month = String(pollDate.getUTCMonth() + 1).padStart(2, '0');
+  const day = String(pollDate.getUTCDate()).padStart(2, '0');
+  return `${year}-${month}-${day}`;
+}
+
 export function getTodayPolls(userIdentifier: string) {
-  const today = new Date().toISOString().split('T')[0];
+  const today = getPollDateKST();
   
   // Seed default polls for today if none exist yet
   try {
@@ -192,7 +212,7 @@ function seedPollsIfEmpty(date: string) {
 }
 
 export function hasPollsForToday(): boolean {
-  const today = new Date().toISOString().split('T')[0];
+  const today = getPollDateKST();
   const count = db.prepare('SELECT COUNT(*) as count FROM polls WHERE date = ?').get(today) as { count: number };
   return count.count > 0;
 }

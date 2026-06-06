@@ -180,7 +180,7 @@ export default function App({
       {/* Hero / Daily Poll Section */}
       <div className="bg-slate-50 dark:bg-slate-950 border-b border-slate-300 dark:border-slate-800">
         <div className="p-4">
-          <DailyPolls />
+          <DailyPolls activeUserEmail={activeUserEmail} />
         </div>
       </div>
 

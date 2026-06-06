@@ -24,8 +24,8 @@ import {
   Users,
   Check,
   X,
-  Clock,
-  ShieldAlert
+  ShieldAlert,
+  Tv
 } from "lucide-react";
 
 // Import sub-apps dynamically
@@ -36,13 +36,25 @@ import NewsroomApp from "../The-DP-News-Room/src/App";
 import GeoStrategyApp from "../GeoStrategy/src/App";
 import CorrespondentApp from "../Fresh-off-the-Press/src/App";
 import StudentScaffoldApp from "../DP-Student-Scaffold/src/App";
+import GlobeTubeApp from "../DP-GlobeTube/src/App";
 
 interface LocalUser {
   email: string;
   uid: string;
 }
 
-const TEACHER_INITIALS = new Set(["SKN", "JBO", "SSH", "LLE", "CHE", "SMK", "JTE", "CMA", "MDJ"]);
+const TEACHER_EMAILS: Record<string, string> = {
+  SKN: "sknight@nlcsjeju.kr",
+  SMK: "smckeogh@nlcsjeju.kr",
+  JBO: "jbooth@nlcsjeju.kr",
+  LLE: "llee@nlcsjeju.kr",
+  SSH: "sshin@nlcsjeju.kr",
+  CMA: "cmay@nlcsjeju.kr",
+  MDJ: "mdyerjones@nlcsjeju.kr",
+  JTE: "jtorrance@nlcsjeju.kr",
+  CHE: "cheydinger@nlcsjeju.kr"
+};
+const TEACHER_INITIALS = new Set(Object.keys(TEACHER_EMAILS));
 const MASTER_ADMIN = "y2knighty@gmail.com";
 const TEACHER_PASSWORD = "strikeslip";
 
@@ -78,7 +90,7 @@ export default function App() {
   const [pendingUsers, setPendingUsers] = useState<any[]>([]);
   const [isSessionUpdating, setIsSessionUpdating] = useState<boolean>(false);
   const [isInitializing, setIsInitializing] = useState<boolean>(true);
-  const [activeWorkspace, setActiveWorkspace] = useState<"portal" | "ia-qa" | "essay-grading" | "infographic-generator" | "newsroom" | "geostrategy" | "correspondent" | "student-scaffold">("portal");
+  const [activeWorkspace, setActiveWorkspace] = useState<"portal" | "ia-qa" | "essay-grading" | "infographic-generator" | "newsroom" | "geostrategy" | "correspondent" | "student-scaffold" | "globetube">("portal");
 
   // Auth Form State
   const [email, setEmail] = useState<string>("");
@@ -134,15 +146,25 @@ export default function App() {
     if (signUpRole === "teacher") {
       const isMaster = inputEmail.toLowerCase() === MASTER_ADMIN.toLowerCase();
       const upperInitials = inputEmail.toUpperCase();
-      const isInitials = TEACHER_INITIALS.has(upperInitials);
+      
+      let matchedInitials = "";
+      for (const [init, emailStr] of Object.entries(TEACHER_EMAILS)) {
+        if (inputEmail.toLowerCase() === emailStr.toLowerCase() || upperInitials === init) {
+          matchedInitials = init;
+          break;
+        }
+      }
+
+      const isInitials = matchedInitials !== "";
 
       if ((isMaster || isInitials) && inputPassword === TEACHER_PASSWORD) {
+        const initials = isMaster ? "SKN" : matchedInitials;
         const finalUser: LocalUser = {
-          email: isMaster ? MASTER_ADMIN : `${upperInitials}@school.com`,
-          uid: isMaster ? "master_admin" : `teacher_${upperInitials}`
+          email: isMaster ? MASTER_ADMIN : TEACHER_EMAILS[initials],
+          uid: isMaster ? "master_admin" : `teacher_${initials}`
         };
         const finalRole = isMaster ? "super_admin" : "teacher";
-        const finalCode = isMaster ? "SKN" : upperInitials;
+        const finalCode = initials;
         
         setUser(finalUser);
         setRole(finalRole);
@@ -400,6 +422,12 @@ export default function App() {
   }
 
   if (activeWorkspace === "student-scaffold") {
+    const allowedTeacherCodes = ["SKN", "JTE", "SMK", "JBO", "SSH", "LLE", "CMA", "CHE"];
+    const isAuthorized = (role === "teacher" || role === "super_admin") && allowedTeacherCodes.includes(teacherCode);
+    if (!isAuthorized) {
+      setActiveWorkspace("portal");
+      return null;
+    }
     return (
       <StudentScaffoldApp 
         onBackToPortal={() => setActiveWorkspace("portal")}
@@ -407,6 +435,18 @@ export default function App() {
         activeTeacherCode={teacherCode}
         isDark={isDark}
         toggleDark={toggleDark}
+      />
+    );
+  }
+
+  if (activeWorkspace === "globetube") {
+    return (
+      <GlobeTubeApp 
+        onBackToPortal={() => setActiveWorkspace("portal")}
+        isDark={isDark}
+        toggleDark={toggleDark}
+        role={role}
+        activeTeacherCode={teacherCode}
       />
     );
   }
@@ -479,7 +519,7 @@ export default function App() {
           </h2>
           <p className="text-sm font-medium text-slate-500 dark:text-slate-400 leading-relaxed">
             {role === "student" 
-              ? "Access your authorized study resources: DP Newsroom case studies, GeoStrategy essay planners, Correspondent news feeds, and the Student response Scaffold assistant."
+              ? "Access your authorized study resources: DP Newsroom case studies, GeoStrategy essay planners, Correspondent news feeds, and GlobeTube video syllabus quizzes."
               : "Welcome to the master geography hub. Access marking moderation, exam generators, and response scaffolding tools configured to IBDP criteria."}
           </p>
         </div>
@@ -750,34 +790,79 @@ export default function App() {
           </motion.div>
 
           {/* Card 7: DP Student Scaffold */}
+          {((role === "teacher" || role === "super_admin") && ["SKN", "JTE", "SMK", "JBO", "SSH", "LLE", "CMA", "CHE"].includes(teacherCode)) && (
+            <motion.div
+              whileHover={{ y: -6 }}
+              className="glass-panel rounded-2xl p-6 border border-slate-200 dark:border-slate-800 flex flex-col justify-between group cursor-pointer shadow-lg hover:shadow-emerald-500/5 transition-all"
+              onClick={() => setActiveWorkspace("student-scaffold")}
+            >
+              <div>
+                <div className="w-14 h-14 rounded-2xl bg-emerald-500/10 dark:bg-emerald-500/5 flex items-center justify-center text-emerald-500 group-hover:scale-110 transition-transform mb-6">
+                  <BookOpen size={28} />
+                </div>
+                <h3 className="text-2xl font-black text-slate-800 dark:text-white tracking-tight mb-3">
+                  DP Student Scaffold
+                </h3>
+                <p className="text-sm text-slate-500 dark:text-slate-400 leading-relaxed mb-6 font-medium">
+                  IB Diploma response assistant. Automatically generate detailed paragraph blueprints, PEEL/PEECAL framework scaffolds, command term decoders, and sentence-starter writing frames.
+                </p>
+                
+                <ul className="space-y-2 mb-8">
+                  <li className="flex items-center gap-2 text-xs font-bold text-slate-600 dark:text-slate-300">
+                    <CheckCircle2 size={13} className="text-emerald-500" />
+                    PEE / PEEL / PEECAL Frameworks
+                  </li>
+                  <li className="flex items-center gap-2 text-xs font-bold text-slate-600 dark:text-slate-300">
+                    <CheckCircle2 size={13} className="text-emerald-500" />
+                    HOPPED Introduction Architecture
+                  </li>
+                  <li className="flex items-center gap-2 text-xs font-bold text-slate-600 dark:text-slate-300">
+                    <CheckCircle2 size={13} className="text-emerald-500" />
+                    PDF & DOCX Export Support
+                  </li>
+                </ul>
+              </div>
+
+              <div className="flex items-center justify-between border-t border-slate-200/50 dark:border-slate-800/50 pt-6">
+                <span className="text-xs font-bold text-emerald-500 uppercase tracking-wider">
+                  Launch Workspace
+                </span>
+                <div className="w-8 h-8 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-slate-400 dark:text-slate-500 group-hover:bg-emerald-500 group-hover:text-white transition-colors">
+                  <ChevronRight size={16} />
+                </div>
+              </div>
+            </motion.div>
+          )}
+
+          {/* Card 8: DP GlobeTube */}
           <motion.div
             whileHover={{ y: -6 }}
             className="glass-panel rounded-2xl p-6 border border-slate-200 dark:border-slate-800 flex flex-col justify-between group cursor-pointer shadow-lg hover:shadow-emerald-500/5 transition-all"
-            onClick={() => setActiveWorkspace("student-scaffold")}
+            onClick={() => setActiveWorkspace("globetube")}
           >
             <div>
               <div className="w-14 h-14 rounded-2xl bg-emerald-500/10 dark:bg-emerald-500/5 flex items-center justify-center text-emerald-500 group-hover:scale-110 transition-transform mb-6">
-                <BookOpen size={28} />
+                <Tv size={28} />
               </div>
               <h3 className="text-2xl font-black text-slate-800 dark:text-white tracking-tight mb-3">
-                DP Student Scaffold
+                DP GlobeTube
               </h3>
               <p className="text-sm text-slate-500 dark:text-slate-400 leading-relaxed mb-6 font-medium">
-                IB Diploma response assistant. Automatically generate detailed paragraph blueprints, PEEL/PEECAL framework scaffolds, command term decoders, and sentence-starter writing frames.
+                IB Geography video syllabus analyzer. Search or import any educational case study video, stream natively, and generate instant 5-question multiple-choice quizzes using Gemini.
               </p>
               
               <ul className="space-y-2 mb-8">
                 <li className="flex items-center gap-2 text-xs font-bold text-slate-600 dark:text-slate-300">
                   <CheckCircle2 size={13} className="text-emerald-500" />
-                  PEE / PEEL / PEECAL Frameworks
+                  YouTube Player API Integration
                 </li>
                 <li className="flex items-center gap-2 text-xs font-bold text-slate-600 dark:text-slate-300">
                   <CheckCircle2 size={13} className="text-emerald-500" />
-                  HOPPED Introduction Architecture
+                  Syllabus Classification Matrix
                 </li>
                 <li className="flex items-center gap-2 text-xs font-bold text-slate-600 dark:text-slate-300">
                   <CheckCircle2 size={13} className="text-emerald-500" />
-                  PDF & DOCX Export Support
+                  Interactive Client-Side Quiz Grading
                 </li>
               </ul>
             </div>

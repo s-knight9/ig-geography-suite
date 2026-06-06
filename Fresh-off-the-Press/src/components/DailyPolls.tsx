@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from 'motion/react';
 import { CheckCircle, BarChart2, Hash, ExternalLink } from 'lucide-react';
 import { Poll, TAG_COLORS } from '../types';
 
-export function DailyPolls() {
+export function DailyPolls({ activeUserEmail }: { activeUserEmail?: string }) {
   const [polls, setPolls] = useState<Poll[]>([]);
   const [loading, setLoading] = useState(true);
   const [voting, setVoting] = useState<number | null>(null);
@@ -11,7 +11,8 @@ export function DailyPolls() {
   const fetchPolls = async (silent = false) => {
     try {
       if (!silent) setLoading(true);
-      const response = await fetch('/api/polls/today');
+      const emailParam = activeUserEmail ? `?email=${encodeURIComponent(activeUserEmail)}` : '';
+      const response = await fetch(`/api/polls/today${emailParam}`);
       if (response.ok) {
         const data = await response.json();
         setPolls(data);
@@ -29,7 +30,7 @@ export function DailyPolls() {
     // Short polling: fetch every 30 seconds to keep results live
     const interval = setInterval(() => fetchPolls(true), 30000);
     return () => clearInterval(interval);
-  }, []);
+  }, [activeUserEmail]);
 
   const handleVote = async (pollId: number, option: string) => {
     if (voting !== null) return;
@@ -39,7 +40,7 @@ export function DailyPolls() {
       const response = await fetch('/api/polls/vote', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ pollId, option })
+        body: JSON.stringify({ pollId, option, email: activeUserEmail })
       });
 
       if (response.ok) {
@@ -169,7 +170,10 @@ function PollCard({ poll, onVote, isVoting }: PollCardProps) {
             <CheckCircle className="w-3 h-3" />
             VOTE RECORDED
           </div>
-          <div>{totalVotes.toLocaleString()} TOTAL VOTES</div>
+          <div className="flex items-center gap-1 text-slate-500">
+            <Hash className="w-3.5 h-3.5 text-slate-400" />
+            <span>{totalVotes.toLocaleString()} PARTICIPANTS</span>
+          </div>
         </div>
       )}
     </motion.div>

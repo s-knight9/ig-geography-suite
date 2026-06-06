@@ -20,7 +20,8 @@ import { Readability } from "@mozilla/readability";
 import { JSDOM } from "jsdom";
 import Parser from "rss-parser";
 import crypto from "crypto";
-import { getTodayPolls, castVote, hasPollsForToday, savePolls } from "./Fresh-off-the-Press/src/server/db.ts";
+import { getTodayPolls, castVote, hasPollsForToday, savePolls, getPollDateKST } from "./Fresh-off-the-Press/src/server/db.ts";
+import { getGlobeTubeDB } from "./globetubeDb";
 
 dotenv.config();
 
@@ -183,6 +184,15 @@ Your response MUST follow this exact structure:
 async function startServer() {
   const app = express();
   const PORT = 3000;
+
+  // Initialize GlobeTube Database Connection
+  let gtDb: any = null;
+  try {
+    gtDb = await getGlobeTubeDB();
+    console.log("[GlobeTube] Cloud database adapter initialized successfully.");
+  } catch (dbErr) {
+    console.error("[GlobeTube] Failed to initialize database adapter:", dbErr);
+  }
 
   app.use(express.json({ limit: "50mb" }));
 
@@ -872,8 +882,13 @@ Constraints:
   // ==========================================
 
   const userTracker = (req: any, res: any, next: any) => {
-    const ip = req.headers['x-forwarded-for'] || req.socket.remoteAddress;
-    req.userHash = crypto.createHash('md5').update(ip as string).digest('hex');
+    const email = req.query.email || req.body.email || '';
+    if (email) {
+      req.userHash = crypto.createHash('md5').update(email.trim().toLowerCase()).digest('hex');
+    } else {
+      const ip = req.headers['x-forwarded-for'] || req.socket.remoteAddress;
+      req.userHash = crypto.createHash('md5').update(ip as string).digest('hex');
+    }
     next();
   };
 
@@ -1147,7 +1162,7 @@ Constraints:
 
     try {
       const ai = getGenAI();
-      const today = new Date().toISOString().split('T')[0];
+      const today = getPollDateKST();
       const prompt = `Based on these recent news items, generate exactly 3 IB Geography themed daily polls for today (${today}).
       
       News Items:
@@ -1672,8 +1687,15 @@ Constraints:
         wordBankToggle, 
         question, 
         keywords,
-        mode = 'both'
+        mode = 'both',
+        teacherCode
       } = req.body;
+
+      const allowedTeacherCodes = ["SKN", "JTE", "SMK", "JBO", "SSH", "LLE", "CMA", "CHE"];
+      if (!teacherCode || !allowedTeacherCodes.includes(teacherCode.toUpperCase())) {
+        console.warn(`[${requestId}] Aborting: Unauthorized teacherCode ${teacherCode}`);
+        return res.status(403).json({ error: "Access Denied", details: "Unauthorized access to Student Scaffold." });
+      }
 
       if (!question) {
         console.warn(`[${requestId}] Aborting: No question`);
@@ -1813,6 +1835,390 @@ Constraints:
         error: "Generation Failed",
         details: error.message || "Failed to generate content"
       });
+    }
+  });
+
+  // ==========================================
+  // GLOBETUBE ENDPOINTS
+  // ==========================================
+
+  const GLOBETUBE_DEFAULT_VIDEOS = [
+    {
+      id: "kVaBlat06Sw",
+      title: "Why 94% of China Lives East of This Line",
+      channel: "RealLifeLore",
+      description: "An investigation into China's demographic distribution, the Heihe-Tengchong line, geographic barriers, agricultural viability, and population pressure shifts.",
+      unit: "SL1: Changing Populations",
+      duration: "21:40",
+      publishedAt: "3 weeks ago"
+    },
+    {
+      id: "ztWHqUFJRTs",
+      title: "Climate change: Earth's giant game of Tetris",
+      channel: "TED-Ed",
+      description: "A spatial analysis of climate vulnerability, rising sea levels, changing biome distributions, climate migration corridors, and international adaptation strategies.",
+      unit: "SL2: Global Climate",
+      duration: "02:48",
+      publishedAt: "1 month ago"
+    },
+    {
+      id: "Hvc1P5edKTc",
+      title: "Population & Food: Crash Course Geography #16",
+      channel: "CrashCourse Geography",
+      description: "An overview of ecological footprints, global resource distribution, Malthusian vs. Boserupian models of population growth, and resource security challenges.",
+      unit: "SL3: Global Resource",
+      duration: "11:58",
+      publishedAt: "2 weeks ago"
+    },
+    {
+      id: "FN3VFgG922A",
+      title: "Meet the enormous boats that carry your stuff",
+      channel: "Vox",
+      description: "Exploring the spatial interactions, logistics networks, global shipping lanes, key maritime chokepoints (Suez, Panama, Malacca), and structural supply chain vulnerabilities.",
+      unit: "HL4: Power, Places & Networks",
+      duration: "10:35",
+      publishedAt: "5 days ago"
+    },
+    {
+      id: "cuPfIFg2ZDI",
+      title: "200 Years, 200 Countries, 4 Minutes",
+      channel: "Hans Rosling / Gapminder",
+      description: "Analyzing global development indices, GNI per capita, human development metrics, multidimensional poverty, and institutional structural aid in low-income nations.",
+      unit: "HL5: Human Dev & Diversity",
+      duration: "04:47",
+      publishedAt: "2 months ago"
+    },
+    {
+      id: "LxgMdjyw8uw",
+      title: "We WILL Fix Climate Change!",
+      channel: "Kurzgesagt – In a Nutshell",
+      description: "An in-depth case study of environmental degradation, community resilience, risk management, and the forced relocation of indigenous populations due to coastal erosion.",
+      unit: "HL6: Global Risk & Resilience",
+      duration: "16:15",
+      publishedAt: "3 weeks ago"
+    },
+    {
+      id: "Pz6AQXQGupQ",
+      title: "Where we get our fresh water",
+      channel: "TED-Ed",
+      description: "An exploration of Earth's water distribution, freshwater storage systems, and the hydrological systems that supply human civilization.",
+      unit: "OPA: Freshwater",
+      duration: "05:08",
+      publishedAt: "1 week ago"
+    },
+    {
+      id: "fXb02MQ78yQ",
+      title: "What Happens if a Supervolcano Blows Up?",
+      channel: "Kurzgesagt – In a Nutshell",
+      description: "Examining volcanic hazard maps, seismic anomalies, gas emissions, deformation monitoring, and disaster mitigation strategies for active geophysical hazards.",
+      unit: "OPD: Geophysical Hazards",
+      duration: "10:04",
+      publishedAt: "4 days ago"
+    },
+    {
+      id: "7NBa5o--y3k",
+      title: "The Cruise Industry's Arms Race",
+      channel: "Wendover Productions",
+      description: "Analyzing the globalization of leisure, tourism nodes, carrying capacity of small island tourist economies, and the environmental footprint of cruise terminals.",
+      unit: "OPE: Leisure, Tourism & Sport",
+      duration: "13:22",
+      publishedAt: "2 weeks ago"
+    }
+  ];
+
+  function getWeeksNumber(d: Date): string {
+    const date = new Date(Date.UTC(d.getFullYear(), d.getMonth(), d.getDate()));
+    date.setUTCDate(date.getUTCDate() + 4 - (date.getUTCDay() || 7));
+    const yearStart = new Date(Date.UTC(date.getUTCFullYear(), 0, 1));
+    const weekNo = Math.ceil((((date.getTime() - yearStart.getTime()) / 86400000) + 1) / 7);
+    return `${date.getUTCFullYear()}-W${weekNo}`;
+  }
+
+  async function generateWeeklyVideosServer(): Promise<any> {
+    const ai = getGenAI();
+    const WEEKLY_VIDEOS_SYSTEM_INSTRUCTION = `
+    You are the Curator Engine for DP GlobeTube. Your job is to select exactly 9 high-quality, real, educational YouTube videos (one for each of the 9 syllabus units listed below).
+    For each video, you MUST provide a valid, real, case-sensitive 11-character YouTube video ID, title, channel name, description, duration (MM:SS), and published date.
+    
+    # CURRICULUM UNITS:
+    - SL1: Changing Populations
+    - SL2: Global Climate
+    - SL3: Global Resource
+    - HL4: Power, Places & Networks
+    - HL5: Human Dev & Diversity
+    - HL6: Global Risk & Resilience
+    - OPA: Freshwater
+    - OPD: Geophysical Hazards
+    - OPE: Leisure, Tourism & Sport
+    
+    # TRUSTED CHANNELS TO RECOMMEND:
+    Prioritize extremely popular and educational channels that always allow external embedding on websites:
+    - TED-Ed
+    - Kurzgesagt – In a Nutshell
+    - CrashCourse
+    - Vox
+    - Wendover Productions
+    - RealLifeLore
+    - Geography Now
+    - Atlas Pro
+    - Practical Engineering
+    
+    # OUTPUT FORMAT (STRICT JSON ONLY):
+    You must return ONLY a raw JSON object matching this schema. Do not wrap the JSON in markdown code blocks. Do not include any other text.
+    {
+      "videos": [
+        {
+          "unit": "SL1: Changing Populations",
+          "id": "11_CHAR_ID",
+          "title": "Exact or accurate Video Title",
+          "channel": "Channel Name",
+          "description": "A brief description (1-2 sentences) of how this video connects to the unit's themes.",
+          "duration": "MM:SS",
+          "publishedAt": "e.g., 2 weeks ago"
+        },
+        ... (exactly 9 items, one for each unit in the exact order of the units listed above)
+      ]
+    }
+    `;
+    const prompt = `
+      Select 9 high-yield educational geography/geopolitics videos for this week (one for each of the 9 units).
+      Make sure to provide real YouTube video IDs from trusted creators (Kurzgesagt, TED-Ed, Crash Course, Vox, Wendover Productions, RealLifeLore, Geography Now).
+      Vary the selections from standard templates, ensuring they are engaging.
+    `;
+    
+    const response = await ai.models.generateContent({
+      model: "gemini-3.5-flash",
+      contents: prompt,
+      config: {
+        systemInstruction: WEEKLY_VIDEOS_SYSTEM_INSTRUCTION,
+        responseMimeType: "application/json",
+        temperature: 0.7
+      }
+    });
+    
+    const outputText = response.text || "";
+    const cleanJsonText = outputText.replace(/^```json\n?|```$/g, "").trim();
+    return JSON.parse(cleanJsonText);
+  }
+
+  app.get(["/api/globetube/videos", "/api/videos"], async (req, res) => {
+    try {
+      if (!gtDb) {
+        throw new Error("Database connection not initialized.");
+      }
+      
+      const currentWeek = getWeeksNumber(new Date());
+      let matrix = await gtDb.getVideos();
+      
+      const prefixes = ["SL1", "SL2", "SL3", "HL4", "HL5", "HL6", "OPA", "OPD", "OPE"];
+      let totalVideosCount = 0;
+      prefixes.forEach(pref => {
+        if (Array.isArray(matrix[pref])) {
+          totalVideosCount += matrix[pref].length;
+        }
+      });
+      
+      // Auto-seed default videos if database is completely empty on startup
+      if (totalVideosCount === 0) {
+        console.log("[GlobeTube] Database is empty. Seeding default videos into database...");
+        const initialGrouped: Record<string, any[]> = {};
+        prefixes.forEach(pref => { initialGrouped[pref] = []; });
+        
+        GLOBETUBE_DEFAULT_VIDEOS.forEach((vid: any) => {
+          if (vid.unit) {
+            const pref = vid.unit.split(':')[0].trim();
+            if (prefixes.includes(pref)) {
+              initialGrouped[pref].push(vid);
+            }
+          }
+        });
+        
+        for (const pref of prefixes) {
+          await gtDb.saveVideos(pref, initialGrouped[pref]);
+        }
+        
+        // Fetch updated matrix after seeding
+        matrix = await gtDb.getVideos();
+      }
+      
+      // Check weekly rotation via a stored metadata week field
+      let storedWeek = currentWeek;
+      if (matrix["week_meta"] && matrix["week_meta"].length > 0) {
+        storedWeek = matrix["week_meta"][0].week;
+      } else {
+        await gtDb.saveVideos("week_meta", [{ week: currentWeek }]);
+      }
+      
+      if (storedWeek !== currentWeek) {
+        console.log(`[GlobeTube] Rotating weekly videos from ${storedWeek} to ${currentWeek}`);
+        try {
+          const response = await generateWeeklyVideosServer();
+          if (response && response.videos && response.videos.length === 9) {
+            const verifiedVideos: any[] = [];
+            for (let i = 0; i < response.videos.length; i++) {
+              const genVid = response.videos[i];
+              const defaultVid = GLOBETUBE_DEFAULT_VIDEOS[i];
+              try {
+                const checkRes = await fetch(`https://noembed.com/embed?url=https://www.youtube.com/watch?v=${genVid.id}`);
+                const checkData: any = await checkRes.json();
+                if (checkRes.ok && !checkData.error && checkData.title) {
+                  verifiedVideos.push({
+                    id: genVid.id,
+                    title: genVid.title || checkData.title,
+                    channel: genVid.channel || checkData.author_name || defaultVid.channel,
+                    description: genVid.description || defaultVid.description,
+                    unit: defaultVid.unit,
+                    duration: genVid.duration || defaultVid.duration,
+                    publishedAt: genVid.publishedAt || defaultVid.publishedAt
+                  });
+                } else {
+                  verifiedVideos.push(defaultVid);
+                }
+              } catch (err) {
+                verifiedVideos.push(defaultVid);
+              }
+            }
+            
+            // Group and save rotated weekly list
+            const rotatedGrouped: Record<string, any[]> = {};
+            prefixes.forEach(pref => { rotatedGrouped[pref] = []; });
+            verifiedVideos.forEach((vid: any) => {
+              if (vid.unit) {
+                const pref = vid.unit.split(':')[0].trim();
+                if (prefixes.includes(pref)) {
+                  rotatedGrouped[pref].push(vid);
+                }
+              }
+            });
+            
+            for (const pref of prefixes) {
+              await gtDb.saveVideos(pref, rotatedGrouped[pref]);
+            }
+            await gtDb.saveVideos("week_meta", [{ week: currentWeek }]);
+            matrix = await gtDb.getVideos();
+          } else {
+            await gtDb.saveVideos("week_meta", [{ week: currentWeek }]);
+          }
+        } catch (err) {
+          console.error("[GlobeTube] Weekly rotation failed:", err);
+          await gtDb.saveVideos("week_meta", [{ week: currentWeek }]);
+        }
+      }
+      
+      // Clean returned payload from metadata week_meta
+      const cleanMatrix: Record<string, any[]> = {};
+      prefixes.forEach(pref => {
+        cleanMatrix[pref] = matrix[pref] || [];
+      });
+      
+      res.json(cleanMatrix);
+    } catch (err: any) {
+      console.error("[GlobeTube] GET /api/videos failed:", err);
+      // Fallback: return default matrix
+      const fallbackMatrix: Record<string, any[]> = {};
+      const prefixes = ["SL1", "SL2", "SL3", "HL4", "HL5", "HL6", "OPA", "OPD", "OPE"];
+      prefixes.forEach(pref => { fallbackMatrix[pref] = []; });
+      GLOBETUBE_DEFAULT_VIDEOS.forEach((vid: any) => {
+        if (vid.unit) {
+          const pref = vid.unit.split(':')[0].trim();
+          if (prefixes.includes(pref)) {
+            fallbackMatrix[pref].push(vid);
+          }
+        }
+      });
+      res.json(fallbackMatrix);
+    }
+  });
+
+  app.post(["/api/globetube/videos", "/api/videos"], async (req, res) => {
+    try {
+      if (!gtDb) {
+        throw new Error("Database connection not initialized.");
+      }
+      
+      const { url, title, unit, channel, videos, teacherCode } = req.body;
+      const allowedTeacherCodes = ["SKN", "JTE", "SMK", "JBO", "SSH", "LLE", "CMA", "CHE"];
+
+      if (!teacherCode || !allowedTeacherCodes.includes(teacherCode.toUpperCase())) {
+        return res.status(403).json({ error: "Access Denied", details: "Unauthorized teacher credentials." });
+      }
+
+      const prefixes = ["SL1", "SL2", "SL3", "HL4", "HL5", "HL6", "OPA", "OPD", "OPE"];
+
+      // Case 1: Single video import (url, title, unit, channel)
+      if (url && unit) {
+        let videoId = url.trim();
+        if (videoId.length !== 11) {
+          const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=|shorts\/)([^#\&\?]*).*/;
+          const match = videoId.match(regExp);
+          if (match && match[2].length === 11) {
+            videoId = match[2];
+          } else {
+            return res.status(400).json({ error: "Invalid YouTube URL or Video ID." });
+          }
+        }
+
+        const syllabusTag = unit.split(':')[0].trim();
+        if (!prefixes.includes(syllabusTag)) {
+          return res.status(400).json({ error: `Invalid syllabus unit tag: ${syllabusTag}` });
+        }
+
+        const currentMatrix = await gtDb.getVideos();
+        const currentList = currentMatrix[syllabusTag] || [];
+
+        if (currentList.some((v: any) => v.id === videoId)) {
+          return res.status(400).json({ error: "This video is already in your syllabus grid." });
+        }
+
+        const newVideo = {
+          id: videoId,
+          title: title || "Imported Video",
+          channel: channel || "YouTube Creator",
+          description: "Custom imported case study.",
+          unit: unit,
+          duration: "N/A",
+          publishedAt: "Just imported"
+        };
+
+        const updatedList = [newVideo, ...currentList];
+        await gtDb.saveVideos(syllabusTag, updatedList);
+
+        console.log(`[GlobeTube] Video ${videoId} imported into unit ${syllabusTag} successfully.`);
+        return res.status(200).json({ success: true, message: "Syllabus grid synchronized." });
+      }
+
+      // Case 2: Bulk array update (for Swaps and Deletes)
+      if (videos && Array.isArray(videos)) {
+        const grouped: Record<string, any[]> = {};
+        prefixes.forEach(pref => {
+          grouped[pref] = [];
+        });
+
+        videos.forEach((vid: any) => {
+          if (vid.unit) {
+            const pref = vid.unit.split(':')[0].trim();
+            if (prefixes.includes(pref)) {
+              grouped[pref].push(vid);
+            }
+          }
+        });
+
+        for (const pref of prefixes) {
+          await gtDb.saveVideos(pref, grouped[pref]);
+        }
+
+        console.log("[GlobeTube] Persistent database synchronized with updated videos array.");
+        return res.status(200).json({ 
+          success: true, 
+          message: "Syllabus grid synchronized.",
+          videos: videos
+        });
+      }
+
+      return res.status(400).json({ error: "Invalid request payload." });
+    } catch (err: any) {
+      console.error("[GlobeTube] POST /api/videos failed:", err);
+      res.status(500).json({ error: err.message || "Failed to update persistent storage." });
     }
   });
 
