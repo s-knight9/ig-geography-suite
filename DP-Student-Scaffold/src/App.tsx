@@ -12,7 +12,8 @@ import {
   FileText,
   CheckCircle,
   Sun,
-  Moon
+  Moon,
+  Frame
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { useEffect } from 'react';
@@ -137,7 +138,9 @@ export default function App({
       {/* Top Navigation Bar */}
       <header className="h-20 bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between px-8 shrink-0 relative z-20 transition-colors">
         <div className="flex items-center gap-5">
-          <div className="w-12 h-12 bg-[#00b894] rounded-xl flex items-center justify-center text-white font-black text-2xl shadow-lg shadow-emerald-200 dark:shadow-emerald-900/20 cursor-default select-none">DP</div>
+          <div className="w-12 h-12 bg-[#00b894] rounded-xl flex items-center justify-center text-white shadow-lg shadow-emerald-200 dark:shadow-emerald-900/20 cursor-default select-none">
+            <Frame className="w-6 h-6" />
+          </div>
           <div>
             <div className="flex items-center gap-2.5 leading-none">
               <h1 className="text-2xl font-black tracking-tight text-slate-800 dark:text-slate-100">Scaffold & Writing Frames</h1>

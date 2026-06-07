@@ -25,7 +25,8 @@ import {
   Check,
   X,
   ShieldAlert,
-  Tv
+  Tv,
+  Frame
 } from "lucide-react";
 
 // Import sub-apps dynamically
@@ -798,7 +799,7 @@ export default function App() {
             >
               <div>
                 <div className="w-14 h-14 rounded-2xl bg-emerald-500/10 dark:bg-emerald-500/5 flex items-center justify-center text-emerald-500 group-hover:scale-110 transition-transform mb-6">
-                  <BookOpen size={28} />
+                  <Frame size={28} />
                 </div>
                 <h3 className="text-2xl font-black text-slate-800 dark:text-white tracking-tight mb-3">
                   DP Student Scaffold
