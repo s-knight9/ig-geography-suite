@@ -118,10 +118,12 @@ html, body {
 .badge-label { @apply text-[10px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-widest mb-1; }
 .metric-card { @apply bg-white dark:bg-slate-800 p-3 rounded border border-slate-200 dark:border-slate-700 shadow-sm transition-all hover:border-brand-200 dark:hover:border-brand-600 text-slate-800 dark:text-slate-200; }
 
-.no-scrollbar::-webkit-scrollbar {
+.no-scrollbar::-webkit-scrollbar,
+.scrollbar-hide::-webkit-scrollbar {
   display: none;
 }
-.no-scrollbar {
+.no-scrollbar,
+.scrollbar-hide {
   -ms-overflow-style: none;
   scrollbar-width: none;
 }

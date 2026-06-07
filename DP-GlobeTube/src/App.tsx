@@ -18,7 +18,9 @@ import {
   RefreshCw,
   FileDown,
   UserCheck,
-  Users
+  Users,
+  ChevronLeft,
+  ChevronRight
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { generateQuizForVideo, type QuizResponse, type QuizQuestion } from './lib/gemini';
@@ -602,117 +604,16 @@ export default function App({
                       const rowVideos = videos.filter(v => v.unit && v.unit.toUpperCase().startsWith(row.prefix.toUpperCase()));
                       
                       return (
-                        <div key={row.key} className="space-y-4">
-                          <div className="flex items-center justify-between border-b border-slate-200 dark:border-slate-850 pb-2">
-                            <h3 className="text-base font-black text-slate-800 dark:text-slate-250 tracking-tight uppercase">{row.label}</h3>
-                            <span className="text-[10px] bg-slate-100 dark:bg-slate-900 text-[#00b875] font-black px-2 py-0.5 rounded-lg border border-slate-200 dark:border-slate-800">
-                              {rowVideos.length} {rowVideos.length === 1 ? 'Video' : 'Videos'}
-                            </span>
-                          </div>
-                          
-                          {rowVideos.length === 0 ? (
-                            <div className="p-8 text-center border border-dashed border-slate-200 dark:border-slate-850 rounded-2xl bg-white/40 dark:bg-slate-900/10 backdrop-blur-sm">
-                              <p className="text-xs font-bold text-slate-400 dark:text-slate-600 uppercase tracking-widest">No case study videos in this unit</p>
-                              {activeRole !== 'student' && (
-                                <p className="text-[9px] text-slate-500 font-bold uppercase tracking-wider mt-1">Use the import bar above to assign a video to this unit.</p>
-                              )}
-                            </div>
-                          ) : (
-                            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                              {rowVideos.map((vid) => (
-                                <div key={vid.id} className="relative group">
-                                  <motion.div
-                                    whileHover={{ y: -4 }}
-                                    className="bg-white dark:bg-slate-900/40 border border-slate-200 dark:border-slate-900 hover:border-emerald-500/30 dark:hover:border-emerald-500/20 rounded-2xl overflow-hidden cursor-pointer flex flex-col group transition-all duration-300 shadow-md hover:shadow-emerald-500/5 h-full"
-                                    onClick={() => setSelectedVideo(vid)}
-                                  >
-                                    {/* Video Thumbnail Wrapper */}
-                                    <div className="relative aspect-video bg-slate-950 overflow-hidden">
-                                      <img 
-                                        src={`https://img.youtube.com/vi/${vid.id}/mqdefault.jpg`}
-                                        alt={vid.title}
-                                        className="w-full h-full object-cover group-hover:scale-102 transition-transform duration-500 opacity-90 group-hover:opacity-100"
-                                      />
-                                      <div className="absolute inset-0 bg-slate-950/40 group-hover:bg-slate-950/20 transition-colors flex items-center justify-center">
-                                        <div className="w-12 h-12 rounded-full bg-slate-900/80 group-hover:bg-[#00b875] text-white flex items-center justify-center shadow-lg group-hover:scale-110 transition-all duration-300">
-                                          <Play className="w-5 h-5 fill-white text-white translate-x-0.5" />
-                                        </div>
-                                      </div>
-                                      <span className="absolute bottom-3 right-3 px-2 py-0.5 bg-slate-950/80 rounded-md text-[10px] font-bold text-slate-300 font-mono">
-                                        {vid.duration}
-                                      </span>
-                                    </div>
-
-                                    {/* Video Info */}
-                                    <div className="p-5 flex flex-col flex-1 justify-between space-y-4">
-                                      <div className="space-y-1">
-                                        <div className="flex justify-between items-start gap-2">
-                                          <span className={`px-2 py-0.5 text-[9px] font-black tracking-wider border rounded-full uppercase cursor-default ${getUnitColor(vid.unit)}`}>
-                                            {vid.unit.split(':')[0]}
-                                          </span>
-                                          <span className="text-[10px] font-bold text-slate-400 dark:text-slate-500">{vid.publishedAt}</span>
-                                        </div>
-
-                                        {activeRole !== 'student' && (
-                                          <div className="pt-2">
-                                            <button
-                                              onClick={(e) => {
-                                                e.stopPropagation();
-                                                toggleVideoLock(vid.id);
-                                              }}
-                                              className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-black uppercase tracking-wider transition-all duration-200 border cursor-pointer ${
-                                                vid.is_locked
-                                                  ? 'bg-red-50 dark:bg-red-950/20 text-red-650 dark:text-red-400 border-red-200 dark:border-red-900/50 hover:bg-red-100 dark:hover:bg-red-950/40'
-                                                  : 'bg-emerald-50 dark:bg-emerald-950/20 text-emerald-650 dark:text-emerald-400 border-emerald-200 dark:border-emerald-900/50 hover:bg-emerald-100 dark:hover:bg-emerald-950/40'
-                                              }`}
-                                            >
-                                              {vid.is_locked ? '🔒 Locked (Hidden)' : '🔓 Unlocked (Visible)'}
-                                            </button>
-                                          </div>
-                                        )}
-
-                                        <h4 className="text-sm font-extrabold text-slate-800 dark:text-white leading-snug group-hover:text-[#00b875] transition-colors line-clamp-2 pt-2">
-                                          {vid.title}
-                                        </h4>
-                                        <p className="text-[11px] font-bold text-[#00b875] tracking-wide uppercase">{vid.channel}</p>
-                                      </div>
-
-                                      <p className="text-xs text-slate-650 dark:text-slate-500 font-medium line-clamp-2 leading-relaxed">
-                                        {vid.description}
-                                      </p>
-                                    </div>
-                                  </motion.div>
-
-                                  {/* Teacher controls overlays */}
-                                  {activeRole !== 'student' && (
-                                    <div className="absolute top-3 right-3 flex items-center gap-1.5 opacity-0 group-hover:opacity-100 transition-opacity z-20">
-                                      <button
-                                        title="Swap Video"
-                                        onClick={(e) => {
-                                          e.stopPropagation();
-                                          handleSwapVideo(vid.id);
-                                        }}
-                                        className="p-1.5 rounded-lg bg-slate-900/80 hover:bg-emerald-600 text-white transition-colors cursor-pointer shadow-lg"
-                                      >
-                                        <RefreshCw className="w-3.5 h-3.5" />
-                                      </button>
-                                      <button
-                                        title="Delete Video"
-                                        onClick={(e) => {
-                                          e.stopPropagation();
-                                          handleDeleteVideo(vid.id);
-                                        }}
-                                        className="p-1.5 rounded-lg bg-slate-900/80 hover:bg-red-650 text-white transition-colors cursor-pointer shadow-lg"
-                                      >
-                                        <Trash2 className="w-3.5 h-3.5" />
-                                      </button>
-                                    </div>
-                                  )}
-                                </div>
-                              ))}
-                            </div>
-                          )}
-                        </div>
+                        <SyllabusRowCarousel
+                          key={row.key}
+                          row={row}
+                          rowVideos={rowVideos}
+                          activeRole={activeRole}
+                          setSelectedVideo={setSelectedVideo}
+                          toggleVideoLock={toggleVideoLock}
+                          handleSwapVideo={handleSwapVideo}
+                          handleDeleteVideo={handleDeleteVideo}
+                        />
                       );
                     })}
                   </div>
@@ -738,6 +639,209 @@ export default function App({
           )}
         </AnimatePresence>
       </main>
+    </div>
+  );
+}
+
+interface SyllabusRowCarouselProps {
+  row: typeof SYLLABUS_ROWS[0];
+  rowVideos: VideoItem[];
+  activeRole: 'student' | 'teacher' | 'super_admin';
+  setSelectedVideo: (vid: VideoItem) => void;
+  toggleVideoLock: (videoId: string) => void;
+  handleSwapVideo: (oldVideoId: string) => void;
+  handleDeleteVideo: (videoId: string) => void;
+}
+
+function SyllabusRowCarousel({
+  row,
+  rowVideos,
+  activeRole,
+  setSelectedVideo,
+  toggleVideoLock,
+  handleSwapVideo,
+  handleDeleteVideo
+}: SyllabusRowCarouselProps) {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [showLeftArrow, setShowLeftArrow] = useState(false);
+
+  const checkScroll = () => {
+    if (containerRef.current) {
+      const { scrollLeft } = containerRef.current;
+      setShowLeftArrow(scrollLeft > 1);
+    }
+  };
+
+  useEffect(() => {
+    const container = containerRef.current;
+    if (container) {
+      container.addEventListener('scroll', checkScroll);
+      checkScroll();
+      
+      // Handle window resizing
+      window.addEventListener('resize', checkScroll);
+    }
+    return () => {
+      if (container) {
+        container.removeEventListener('scroll', checkScroll);
+      }
+      window.removeEventListener('resize', checkScroll);
+    };
+  }, [rowVideos]);
+
+  const handleScroll = (direction: 'left' | 'right') => {
+    if (containerRef.current) {
+      const container = containerRef.current;
+      const scrollAmount = container.clientWidth;
+      container.scrollBy({
+        left: direction === 'left' ? -scrollAmount : scrollAmount,
+        behavior: 'smooth'
+      });
+      // A small timeout ensures we check scroll state after the smooth scroll finishes or updates
+      setTimeout(checkScroll, 100);
+      setTimeout(checkScroll, 300);
+      setTimeout(checkScroll, 600);
+    }
+  };
+
+  return (
+    <div className="space-y-4">
+      <div className="flex items-center justify-between border-b border-slate-200 dark:border-slate-850 pb-2">
+        <h3 className="text-base font-black text-slate-800 dark:text-slate-250 tracking-tight uppercase">{row.label}</h3>
+        <span className="text-[10px] bg-slate-100 dark:bg-slate-900 text-[#00b875] font-black px-2 py-0.5 rounded-lg border border-slate-200 dark:border-slate-800">
+          {rowVideos.length} {rowVideos.length === 1 ? 'Video' : 'Videos'}
+        </span>
+      </div>
+      
+      {rowVideos.length === 0 ? (
+        <div className="p-8 text-center border border-dashed border-slate-200 dark:border-slate-850 rounded-2xl bg-white/40 dark:bg-slate-900/10 backdrop-blur-sm">
+          <p className="text-xs font-bold text-slate-400 dark:text-slate-600 uppercase tracking-widest">No case study videos in this unit</p>
+          {activeRole !== 'student' && (
+            <p className="text-[9px] text-slate-500 font-bold uppercase tracking-wider mt-1">Use the import bar above to assign a video to this unit.</p>
+          )}
+        </div>
+      ) : (
+        <div className="relative group">
+          {/* Left Arrow Button */}
+          {showLeftArrow && (
+            <button
+              onClick={() => handleScroll('left')}
+              className="absolute left-2 top-1/2 -translate-y-1/2 bg-neutral-800/80 hover:bg-neutral-700 text-white p-3 rounded-full shadow-lg opacity-0 group-hover:opacity-100 transition-opacity z-10 cursor-pointer flex items-center justify-center border-none"
+              aria-label="Scroll left"
+            >
+              <ChevronLeft className="w-5 h-5" />
+            </button>
+          )}
+
+          {/* Right Arrow Button */}
+          <button
+            onClick={() => handleScroll('right')}
+            className="absolute right-2 top-1/2 -translate-y-1/2 bg-neutral-800/80 hover:bg-neutral-700 text-white p-3 rounded-full shadow-lg opacity-0 group-hover:opacity-100 transition-opacity z-10 cursor-pointer flex items-center justify-center border-none"
+            aria-label="Scroll right"
+          >
+            <ChevronRight className="w-5 h-5" />
+          </button>
+
+          {/* Slider Container */}
+          <div
+            ref={containerRef}
+            onScroll={checkScroll}
+            className="flex flex-row overflow-x-auto scrollbar-hide snap-x snap-mandatory gap-6 pb-4"
+          >
+            {rowVideos.map((vid) => (
+              <div key={vid.id} className="w-full sm:w-[calc(33.333%-16px)] shrink-0 snap-start relative">
+                <motion.div
+                  whileHover={{ y: -4 }}
+                  className="bg-white dark:bg-slate-900/40 border border-slate-200 dark:border-slate-900 hover:border-emerald-500/30 dark:hover:border-emerald-500/20 rounded-2xl overflow-hidden cursor-pointer flex flex-col group/card transition-all duration-300 shadow-md hover:shadow-emerald-500/5 h-full"
+                  onClick={() => setSelectedVideo(vid)}
+                >
+                  {/* Video Thumbnail Wrapper */}
+                  <div className="relative aspect-video bg-slate-950 overflow-hidden">
+                    <img 
+                      src={`https://img.youtube.com/vi/${vid.id}/mqdefault.jpg`}
+                      alt={vid.title}
+                      className="w-full h-full object-cover group-hover/card:scale-102 transition-transform duration-500 opacity-90 group-hover/card:opacity-100"
+                    />
+                    <div className="absolute inset-0 bg-slate-950/40 group-hover/card:bg-slate-950/20 transition-colors flex items-center justify-center">
+                      <div className="w-12 h-12 rounded-full bg-slate-900/80 group-hover/card:bg-[#00b875] text-white flex items-center justify-center shadow-lg group-hover/card:scale-110 transition-all duration-300">
+                        <Play className="w-5 h-5 fill-white text-white translate-x-0.5" />
+                      </div>
+                    </div>
+                    <span className="absolute bottom-3 right-3 px-2 py-0.5 bg-slate-950/80 rounded-md text-[10px] font-bold text-slate-300 font-mono">
+                      {vid.duration}
+                    </span>
+                  </div>
+
+                  {/* Video Info */}
+                  <div className="p-5 flex flex-col flex-1 justify-between space-y-4">
+                    <div className="space-y-1">
+                      <div className="flex justify-between items-start gap-2">
+                        <span className={`px-2 py-0.5 text-[9px] font-black tracking-wider border rounded-full uppercase cursor-default ${getUnitColor(vid.unit)}`}>
+                          {vid.unit.split(':')[0]}
+                        </span>
+                        <span className="text-[10px] font-bold text-slate-400 dark:text-slate-500">{vid.publishedAt}</span>
+                      </div>
+
+                      {activeRole !== 'student' && (
+                        <div className="pt-2">
+                          <button
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              toggleVideoLock(vid.id);
+                            }}
+                            className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-black uppercase tracking-wider transition-all duration-200 border cursor-pointer ${
+                              vid.is_locked
+                                ? 'bg-red-50 dark:bg-red-950/20 text-red-650 dark:text-red-400 border-red-200 dark:border-red-900/50 hover:bg-red-100 dark:hover:bg-red-950/40'
+                                : 'bg-emerald-50 dark:bg-emerald-950/20 text-emerald-650 dark:text-emerald-400 border-emerald-200 dark:border-emerald-900/50 hover:bg-emerald-100 dark:hover:bg-emerald-950/40'
+                            }`}
+                          >
+                            {vid.is_locked ? '🔒 Locked (Hidden)' : '🔓 Unlocked (Visible)'}
+                          </button>
+                        </div>
+                      )}
+
+                      <h4 className="text-sm font-extrabold text-slate-800 dark:text-white leading-snug group-hover/card:text-[#00b875] transition-colors line-clamp-2 pt-2">
+                        {vid.title}
+                      </h4>
+                      <p className="text-[11px] font-bold text-[#00b875] tracking-wide uppercase">{vid.channel}</p>
+                    </div>
+
+                    <p className="text-xs text-slate-650 dark:text-slate-500 font-medium line-clamp-2 leading-relaxed">
+                      {vid.description}
+                    </p>
+                  </div>
+                </motion.div>
+
+                {/* Teacher controls overlays */}
+                {activeRole !== 'student' && (
+                  <div className="absolute top-3 right-3 flex items-center gap-1.5 opacity-0 group-hover:opacity-100 transition-opacity z-20">
+                    <button
+                      title="Swap Video"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        handleSwapVideo(vid.id);
+                      }}
+                      className="p-1.5 rounded-lg bg-slate-900/80 hover:bg-emerald-600 text-white transition-colors cursor-pointer shadow-lg border-none"
+                    >
+                      <RefreshCw className="w-3.5 h-3.5" />
+                    </button>
+                    <button
+                      title="Delete Video"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        handleDeleteVideo(vid.id);
+                      }}
+                      className="p-1.5 rounded-lg bg-slate-900/80 hover:bg-red-650 text-white transition-colors cursor-pointer shadow-lg border-none"
+                    >
+                      <Trash2 className="w-3.5 h-3.5" />
+                    </button>
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
     </div>
   );
 }
