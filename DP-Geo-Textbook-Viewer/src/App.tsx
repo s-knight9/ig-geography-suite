@@ -556,16 +556,6 @@ export default function App({
 
         {/* User Portal Action & Theme Toggles */}
         <div className="flex items-center space-x-4">
-          {pdfUrl && (
-            <button
-              onClick={() => setUseNativeViewer(!useNativeViewer)}
-              className="px-3.5 py-2 bg-[#00b894]/10 hover:bg-[#00b894]/20 border border-[#00b894]/30 text-[#00b894] text-[10px] font-black uppercase rounded-xl tracking-wider transition-all cursor-pointer flex items-center gap-1.5 shadow-sm"
-              title="Toggle between Interactive Studio and Native Browser PDF Viewer"
-            >
-              <Sparkles className="w-3.5 h-3.5" />
-              <span>{useNativeViewer ? "Use Studio Mode" : "Use Native Mode"}</span>
-            </button>
-          )}
 
           <button
             onClick={() => fileInputRef.current?.click()}
@@ -656,86 +646,93 @@ export default function App({
           onScroll={handleLeftPanelScroll}
           className="flex-1 overflow-x-auto overflow-y-hidden p-6 md:p-12 bg-slate-150 dark:bg-slate-900/40 custom-scrollbar flex flex-row items-center gap-12 snap-x snap-mandatory mt-9 md:mt-0"
         >
-          {useNativeViewer && pdfUrl ? (
-            <div className="w-full max-w-[760px] h-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl overflow-hidden shadow-xl shrink-0 snap-center">
-              <iframe
-                src={pdfUrl}
-                className="w-full h-full border-none"
-                title="PDF Native Viewer"
-              />
-            </div>
-          ) : pdfDoc ? (
-            Array.from({ length: totalPages }, (_, i) => i + 1).map((pageNum) => {
-              const pageBookmarks = bookmarks.filter(b => b.page === pageNum);
-
-              return (
-                <div 
-                  key={pageNum} 
-                  id={`textbook-page-${pageNum}`}
-                  className="w-full max-w-[760px] bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl shadow-xl hover:shadow-2xl relative transition-all duration-300 flex flex-col justify-between selection:bg-[#00b894]/25 select-none overflow-hidden shrink-0 snap-center"
-                  onClick={(e) => handlePageClick(e, pageNum)}
-                  style={{ cursor: addPostitMode ? 'cell' : 'default' }}
-                >
-                  {/* PDF Page Header */}
-                  <div className="flex justify-between items-center border-b border-slate-100 dark:border-slate-800 p-6 bg-slate-50/50 dark:bg-slate-950/20">
-                    <span className="text-[9px] font-black text-[#00b894] uppercase tracking-widest leading-none truncate max-w-[500px]">
-                      {selectedDoc}
-                    </span>
-                    <div className="flex items-center gap-1 bg-slate-50 dark:bg-slate-950 px-2 py-0.5 rounded border border-slate-100 dark:border-slate-800">
-                      <span className="text-[9px] font-black text-slate-400 uppercase">PAGE</span>
-                      <span className="text-[9px] font-black text-slate-700 dark:text-slate-200">{pageNum}</span>
-                    </div>
-                  </div>
-
-                  {/* Render Canvas */}
-                  <div className="flex-1 w-full bg-slate-100 dark:bg-slate-950 flex items-center justify-center">
-                    <PDFPageRenderer pdfDoc={pdfDoc} pageNum={pageNum} />
-                  </div>
-
-                  {/* Absolute overlay layer for Bookmarks / Post-its */}
-                  <div className="absolute inset-0 pointer-events-none rounded-3xl overflow-hidden">
-                    {pageBookmarks.map((b) => {
-                      const isHighlighted = highlightedNoteId === b.id;
-
-                      return (
-                        <div
-                          key={b.id}
-                          className="absolute pointer-events-auto group/pin cursor-pointer font-sans"
-                          style={{ left: `${b.x}%`, top: `${b.y}%`, transform: 'translate(-50%, -50%)' }}
-                          onClick={(e) => {
-                            e.stopPropagation(); // prevent adding new post-it on top
-                            handleOpenEdit(b);
-                          }}
-                        >
-                          {/* Post-it Badge Icon */}
-                          <div 
-                            className={`w-9 h-9 rounded-xl flex items-center justify-center transition-all duration-300 shadow-lg ${
-                              isHighlighted 
-                                ? 'bg-yellow-400 text-slate-950 scale-125 animate-bounce ring-4 ring-[#00b894]' 
-                                : 'bg-yellow-300 dark:bg-yellow-400/90 text-slate-800 hover:bg-yellow-400 hover:scale-115'
-                            }`}
-                          >
-                            <Bookmark className="w-4.5 h-4.5 fill-current" />
-                          </div>
-
-                          {/* Hover Tooltip Popup */}
-                          <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-48 bg-slate-950/95 dark:bg-slate-900 border border-slate-800 text-white rounded-xl p-3 shadow-2xl opacity-0 group-hover/pin:opacity-100 transition-opacity pointer-events-none z-30 transition-all">
-                            <div className="flex justify-between items-center border-b border-slate-800 pb-1.5 mb-1.5">
-                              <span className="text-[8px] font-black text-yellow-400 uppercase tracking-wider">Post-it Note</span>
-                              <span className="text-[8px] font-black text-slate-500 uppercase font-mono">{b.createdAt}</span>
-                            </div>
-                            <p className="text-[10px] font-bold leading-normal text-slate-200 normal-case">
-                              {b.note.length > 80 ? b.note.substring(0, 77) + '...' : b.note}
-                            </p>
-                            <p className="text-[7px] font-black text-slate-400 uppercase tracking-wider text-right mt-1.5">Click to edit</p>
-                          </div>
-                        </div>
-                      );
-                    })}
-                  </div>
+          {pdfUrl ? (
+            <div 
+              id={`textbook-page-${activePage}`}
+              className="w-full max-w-[760px] aspect-[1/1.4] bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl shadow-xl hover:shadow-2xl relative transition-all duration-300 flex flex-col justify-between selection:bg-[#00b894]/25 select-none overflow-hidden shrink-0 snap-center"
+              style={{ cursor: addPostitMode ? 'cell' : 'default' }}
+            >
+              {/* PDF Page Header */}
+              <div className="flex justify-between items-center border-b border-slate-100 dark:border-slate-800 p-6 bg-slate-50/50 dark:bg-slate-950/20">
+                <span className="text-[9px] font-black text-[#00b894] uppercase tracking-widest leading-none truncate max-w-[500px]">
+                  {selectedDoc}
+                </span>
+                <div className="flex items-center gap-1 bg-slate-50 dark:bg-slate-950 px-2 py-0.5 rounded border border-slate-100 dark:border-slate-800">
+                  <span className="text-[9px] font-black text-slate-400 uppercase">PAGE</span>
+                  <span className="text-[9px] font-black text-slate-700 dark:text-slate-200">{activePage}</span>
                 </div>
-              );
-            })
+              </div>
+
+              {/* Render Native Embed Object */}
+              <div className="flex-1 w-full bg-slate-100 dark:bg-slate-950 relative overflow-hidden">
+                <object
+                  data={`${pdfUrl}#page=${activePage}&zoom=100&navpanes=0&toolbar=0`}
+                  type="application/pdf"
+                  width="100%"
+                  height="100%"
+                  className="w-full h-full rounded-b-3xl"
+                >
+                  <iframe
+                    src={`${pdfUrl}#page=${activePage}&zoom=100&navpanes=0&toolbar=0`}
+                    className="w-full h-full border-none rounded-b-3xl"
+                    title="PDF Fallback Viewer"
+                  />
+                </object>
+
+                {/* Click-capture transparent overlay when Add Post-it Mode is active */}
+                <div 
+                  className="absolute inset-0 z-10"
+                  style={{ pointerEvents: addPostitMode ? 'auto' : 'none' }}
+                  onClick={(e) => {
+                    if (addPostitMode) {
+                      handlePageClick(e, activePage);
+                    }
+                  }}
+                />
+              </div>
+
+              {/* Absolute overlay layer for Bookmarks / Post-its */}
+              <div className="absolute inset-0 pointer-events-none rounded-3xl overflow-hidden z-20">
+                {bookmarks.filter(b => b.page === activePage).map((b) => {
+                  const isHighlighted = highlightedNoteId === b.id;
+
+                  return (
+                    <div
+                      key={b.id}
+                      className="absolute pointer-events-auto group/pin cursor-pointer font-sans"
+                      style={{ left: `${b.x}%`, top: `${b.y}%`, transform: 'translate(-50%, -50%)' }}
+                      onClick={(e) => {
+                        e.stopPropagation(); // prevent adding new post-it on top
+                        handleOpenEdit(b);
+                      }}
+                    >
+                      {/* Post-it Badge Icon */}
+                      <div 
+                        className={`w-9 h-9 rounded-xl flex items-center justify-center transition-all duration-300 shadow-lg ${
+                          isHighlighted 
+                            ? 'bg-yellow-400 text-slate-950 scale-125 animate-bounce ring-4 ring-[#00b894]' 
+                            : 'bg-yellow-300 dark:bg-yellow-400/90 text-slate-800 hover:bg-yellow-400 hover:scale-115'
+                        }`}
+                      >
+                        <Bookmark className="w-4.5 h-4.5 fill-current" />
+                      </div>
+
+                      {/* Hover Tooltip Popup */}
+                      <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-48 bg-slate-950/95 dark:bg-slate-900 border border-slate-800 text-white rounded-xl p-3 shadow-2xl opacity-0 group-hover/pin:opacity-100 transition-opacity pointer-events-none z-30 transition-all">
+                        <div className="flex justify-between items-center border-b border-slate-800 pb-1.5 mb-1.5">
+                          <span className="text-[8px] font-black text-yellow-400 uppercase tracking-wider">Post-it Note</span>
+                          <span className="text-[8px] font-black text-slate-500 uppercase font-mono">{b.createdAt}</span>
+                        </div>
+                        <p className="text-[10px] font-bold leading-normal text-slate-200 normal-case">
+                          {b.note.length > 80 ? b.note.substring(0, 77) + '...' : b.note}
+                        </p>
+                        <p className="text-[7px] font-black text-slate-400 uppercase tracking-wider text-right mt-1.5">Click to edit</p>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
           ) : (
             MOCK_PAGES_DATA.map((page) => {
               const pageBookmarks = bookmarks.filter(b => b.page === page.num);
