@@ -3,6 +3,7 @@ import path from "path";
 import fs from "fs";
 import multer from "multer";
 import { PDFParse } from "pdf-parse";
+import Database from "better-sqlite3";
 
 // Maintain compatibility with the old pdf-parse function signature using v2.4.5 class-based interface
 async function pdf(buffer: Buffer): Promise<{ text: string }> {
@@ -184,6 +185,29 @@ Your response MUST follow this exact structure:
 async function startServer() {
   const app = express();
   const PORT = 3000;
+
+  // Initialize Textbook Viewer Database & Folders
+  const textbookDb = new Database(path.join(process.cwd(), "textbooks.db"));
+  textbookDb.exec(`
+    CREATE TABLE IF NOT EXISTS textbook_bookmarks (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      userId TEXT NOT NULL,
+      docName TEXT NOT NULL,
+      page INTEGER NOT NULL,
+      x INTEGER NOT NULL,
+      y INTEGER NOT NULL,
+      note TEXT NOT NULL,
+      createdAt TEXT NOT NULL
+    );
+  `);
+
+  const textbooksDir = path.join(process.cwd(), "public", "textbooks");
+  if (!fs.existsSync(textbooksDir)) {
+    fs.mkdirSync(textbooksDir, { recursive: true });
+  }
+
+  // Serve textbooks statically
+  app.use("/textbooks", express.static(textbooksDir));
 
   // Initialize GlobeTube Database Connection
   let gtDb: any = null;
@@ -2247,6 +2271,178 @@ Constraints:
     } catch (err: any) {
       console.error("[GlobeTube] PATCH /api/globetube/videos/:id/toggle-lock failed:", err);
       res.status(500).json({ error: err.message || "Failed to toggle video lock status." });
+    }
+  });
+
+  // ==========================================
+  // GEOGRAPHY TEXTBOOK VIEWER ENDPOINTS
+  // ==========================================
+
+  // Get list of uploaded textbooks
+  app.get("/api/textbooks", (req, res) => {
+    try {
+      const files = fs.readdirSync(textbooksDir);
+      const pdfFiles = files.filter(f => f.toLowerCase().endsWith(".pdf"));
+      const list = pdfFiles.map(name => ({
+        name,
+        url: `/textbooks/${encodeURIComponent(name)}`
+      }));
+      res.json(list);
+    } catch (err: any) {
+      console.error("[Textbook] GET /api/textbooks failed:", err);
+      res.status(500).json({ error: err.message || "Failed to list textbooks." });
+    }
+  });
+
+  // Upload a textbook PDF
+  app.post("/api/textbooks", upload.single("textbookFile"), (req, res) => {
+    try {
+      if (!req.file) {
+        return res.status(400).json({ error: "No file uploaded" });
+      }
+      
+      const fileName = req.file.originalname;
+      const targetPath = path.join(textbooksDir, fileName);
+      
+      fs.writeFileSync(targetPath, req.file.buffer);
+      console.log(`[Textbook] Saved uploaded textbook: ${fileName}`);
+      
+      res.json({
+        name: fileName,
+        url: `/textbooks/${encodeURIComponent(fileName)}`
+      });
+    } catch (err: any) {
+      console.error("[Textbook] POST /api/textbooks failed:", err);
+      res.status(500).json({ error: err.message || "Failed to upload textbook." });
+    }
+  });
+
+  // Delete a textbook PDF
+  app.delete("/api/textbooks/:name", (req, res) => {
+    try {
+      const { name } = req.params;
+      const targetPath = path.join(textbooksDir, name);
+      
+      if (fs.existsSync(targetPath)) {
+        fs.unlinkSync(targetPath);
+        console.log(`[Textbook] Deleted textbook file: ${name}`);
+      }
+
+      // Also clean up all bookmarks for this textbook
+      const stmt = textbookDb.prepare("DELETE FROM textbook_bookmarks WHERE docName = ?");
+      stmt.run(name);
+      console.log(`[Textbook] Purged bookmarks for textbook: ${name}`);
+
+      res.json({ success: true });
+    } catch (err: any) {
+      console.error("[Textbook] DELETE /api/textbooks failed:", err);
+      res.status(500).json({ error: err.message || "Failed to delete textbook." });
+    }
+  });
+
+  // Get user-scoped bookmarks
+  app.get("/api/textbooks/bookmarks", (req, res) => {
+    try {
+      const { userId } = req.query;
+      if (!userId) {
+        return res.status(400).json({ error: "userId query parameter is required" });
+      }
+
+      const stmt = textbookDb.prepare("SELECT * FROM textbook_bookmarks WHERE userId = ?");
+      const rows = stmt.all(userId);
+      res.json(rows);
+    } catch (err: any) {
+      console.error("[Textbook Bookmarks] GET failed:", err);
+      res.status(500).json({ error: err.message || "Failed to fetch bookmarks." });
+    }
+  });
+
+  // Create user-scoped bookmark
+  app.post("/api/textbooks/bookmarks", (req, res) => {
+    try {
+      const { userId, docName, page, x, y, note } = req.body;
+      if (!userId || !docName || page === undefined || x === undefined || y === undefined || !note) {
+        return res.status(400).json({ error: "Missing required bookmark fields." });
+      }
+
+      const createdAt = new Date().toLocaleTimeString();
+      const stmt = textbookDb.prepare(`
+        INSERT INTO textbook_bookmarks (userId, docName, page, x, y, note, createdAt)
+        VALUES (?, ?, ?, ?, ?, ?, ?)
+      `);
+      const result = stmt.run(userId, docName, page, x, y, note, createdAt);
+      
+      res.status(201).json({
+        id: result.lastInsertRowid,
+        userId,
+        docName,
+        page,
+        x,
+        y,
+        note,
+        createdAt
+      });
+    } catch (err: any) {
+      console.error("[Textbook Bookmarks] POST failed:", err);
+      res.status(500).json({ error: err.message || "Failed to create bookmark." });
+    }
+  });
+
+  // Update user-scoped bookmark note
+  app.put("/api/textbooks/bookmarks/:id", (req, res) => {
+    try {
+      const { id } = req.params;
+      const { userId, note } = req.body;
+      if (!userId || !note) {
+        return res.status(400).json({ error: "userId and note are required." });
+      }
+
+      // Ensure the bookmark belongs to the user
+      const checkStmt = textbookDb.prepare("SELECT userId FROM textbook_bookmarks WHERE id = ?");
+      const row = checkStmt.get(id) as { userId: string } | undefined;
+      if (!row) {
+        return res.status(404).json({ error: "Bookmark not found." });
+      }
+      if (row.userId !== userId) {
+        return res.status(403).json({ error: "Unauthorized: You do not own this bookmark." });
+      }
+
+      const updateStmt = textbookDb.prepare("UPDATE textbook_bookmarks SET note = ? WHERE id = ?");
+      updateStmt.run(note, id);
+      
+      res.json({ success: true });
+    } catch (err: any) {
+      console.error("[Textbook Bookmarks] PUT failed:", err);
+      res.status(500).json({ error: err.message || "Failed to update bookmark." });
+    }
+  });
+
+  // Delete user-scoped bookmark
+  app.delete("/api/textbooks/bookmarks/:id", (req, res) => {
+    try {
+      const { id } = req.params;
+      const { userId } = req.query;
+      if (!userId) {
+        return res.status(400).json({ error: "userId query parameter is required." });
+      }
+
+      // Ensure the bookmark belongs to the user
+      const checkStmt = textbookDb.prepare("SELECT userId FROM textbook_bookmarks WHERE id = ?");
+      const row = checkStmt.get(id) as { userId: string } | undefined;
+      if (!row) {
+        return res.status(404).json({ error: "Bookmark not found." });
+      }
+      if (row.userId !== userId) {
+        return res.status(403).json({ error: "Unauthorized: You do not own this bookmark." });
+      }
+
+      const deleteStmt = textbookDb.prepare("DELETE FROM textbook_bookmarks WHERE id = ?");
+      deleteStmt.run(id);
+
+      res.json({ success: true });
+    } catch (err: any) {
+      console.error("[Textbook Bookmarks] DELETE failed:", err);
+      res.status(500).json({ error: err.message || "Failed to delete bookmark." });
     }
   });
 

@@ -459,6 +459,8 @@ export default function App() {
         onBackToPortal={() => setActiveWorkspace("portal")}
         isDark={isDark}
         toggleDark={toggleDark}
+        user={user}
+        role={role}
       />
     );
   }
