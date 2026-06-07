@@ -38,6 +38,7 @@ import GeoStrategyApp from "../GeoStrategy/src/App";
 import CorrespondentApp from "../Fresh-off-the-Press/src/App";
 import StudentScaffoldApp from "../DP-Student-Scaffold/src/App";
 import GlobeTubeApp from "../DP-GlobeTube/src/App";
+import GeoTextbookViewerApp from "../DP-Geo-Textbook-Viewer/src/App";
 
 interface LocalUser {
   email: string;
@@ -91,7 +92,7 @@ export default function App() {
   const [pendingUsers, setPendingUsers] = useState<any[]>([]);
   const [isSessionUpdating, setIsSessionUpdating] = useState<boolean>(false);
   const [isInitializing, setIsInitializing] = useState<boolean>(true);
-  const [activeWorkspace, setActiveWorkspace] = useState<"portal" | "ia-qa" | "essay-grading" | "infographic-generator" | "newsroom" | "geostrategy" | "correspondent" | "student-scaffold" | "globetube">("portal");
+  const [activeWorkspace, setActiveWorkspace] = useState<"portal" | "ia-qa" | "essay-grading" | "infographic-generator" | "newsroom" | "geostrategy" | "correspondent" | "student-scaffold" | "globetube" | "textbook-viewer">("portal");
 
   // Auth Form State
   const [email, setEmail] = useState<string>("");
@@ -448,6 +449,16 @@ export default function App() {
         toggleDark={toggleDark}
         role={role}
         activeTeacherCode={teacherCode}
+      />
+    );
+  }
+
+  if (activeWorkspace === "textbook-viewer") {
+    return (
+      <GeoTextbookViewerApp
+        onBackToPortal={() => setActiveWorkspace("portal")}
+        isDark={isDark}
+        toggleDark={toggleDark}
       />
     );
   }
@@ -864,6 +875,49 @@ export default function App() {
                 <li className="flex items-center gap-2 text-xs font-bold text-slate-600 dark:text-slate-300">
                   <CheckCircle2 size={13} className="text-emerald-500" />
                   Interactive Client-Side Quiz Grading
+                </li>
+              </ul>
+            </div>
+
+            <div className="flex items-center justify-between border-t border-slate-200/50 dark:border-slate-800/50 pt-6">
+              <span className="text-xs font-bold text-emerald-500 uppercase tracking-wider">
+                Launch Workspace
+              </span>
+              <div className="w-8 h-8 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-slate-400 dark:text-slate-500 group-hover:bg-emerald-500 group-hover:text-white transition-colors">
+                <ChevronRight size={16} />
+              </div>
+            </div>
+          </motion.div>
+
+          {/* Card 9: DP Geo Textbook Viewer */}
+          <motion.div
+            whileHover={{ y: -6 }}
+            className="glass-panel rounded-2xl p-6 border border-slate-200 dark:border-slate-800 flex flex-col justify-between group cursor-pointer shadow-lg hover:shadow-emerald-500/5 transition-all"
+            onClick={() => setActiveWorkspace("textbook-viewer")}
+          >
+            <div>
+              <div className="w-14 h-14 rounded-2xl bg-emerald-500/10 dark:bg-emerald-500/5 flex items-center justify-center text-emerald-500 group-hover:scale-110 transition-transform mb-6">
+                <BookOpen size={28} />
+              </div>
+              <h3 className="text-2xl font-black text-slate-800 dark:text-white tracking-tight mb-3">
+                DP Geo Textbook Viewer
+              </h3>
+              <p className="text-sm text-slate-500 dark:text-slate-400 leading-relaxed mb-6 font-medium">
+                Interactive split-screen textbook reader and annotation studio. Pin digital post-it comments onto textbook pages, jump to bookmarks, and filter study notes.
+              </p>
+              
+              <ul className="space-y-2 mb-8">
+                <li className="flex items-center gap-2 text-xs font-bold text-slate-600 dark:text-slate-300">
+                  <CheckCircle2 size={13} className="text-emerald-500" />
+                  Multi-Page Document Canvas Viewer
+                </li>
+                <li className="flex items-center gap-2 text-xs font-bold text-slate-600 dark:text-slate-300">
+                  <CheckCircle2 size={13} className="text-emerald-500" />
+                  Coordinate-Based Post-it Pinning
+                </li>
+                <li className="flex items-center gap-2 text-xs font-bold text-slate-600 dark:text-slate-300">
+                  <CheckCircle2 size={13} className="text-emerald-500" />
+                  Interactive Study Studio Sidebar
                 </li>
               </ul>
             </div>
