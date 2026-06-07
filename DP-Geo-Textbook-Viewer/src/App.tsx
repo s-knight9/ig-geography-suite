@@ -133,7 +133,9 @@ interface PDFPageRendererProps {
 
 function PDFPageRenderer({ pdfDoc, pageNum }: PDFPageRendererProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const textLayerRef = useRef<HTMLDivElement>(null);
   const renderTaskRef = useRef<any>(null);
+  const textLayerInstanceRef = useRef<any>(null);
 
   useEffect(() => {
     let active = true;
@@ -149,7 +151,8 @@ function PDFPageRenderer({ pdfDoc, pageNum }: PDFPageRendererProps) {
         const viewport = page.getViewport({ scale });
 
         const canvas = canvasRef.current;
-        if (!canvas) return;
+        const textLayerDiv = textLayerRef.current;
+        if (!canvas || !textLayerDiv) return;
 
         const context = canvas.getContext('2d');
         if (!context) return;
@@ -157,9 +160,18 @@ function PDFPageRenderer({ pdfDoc, pageNum }: PDFPageRendererProps) {
         canvas.width = viewport.width;
         canvas.height = viewport.height;
 
+        // Sync text layer container height and width
+        textLayerDiv.style.width = `${viewport.width}px`;
+        textLayerDiv.style.height = `${viewport.height}px`;
+
         if (renderTaskRef.current) {
           try {
             renderTaskRef.current.cancel();
+          } catch (e) {}
+        }
+        if (textLayerInstanceRef.current) {
+          try {
+            textLayerInstanceRef.current.cancel();
           } catch (e) {}
         }
 
@@ -172,6 +184,21 @@ function PDFPageRenderer({ pdfDoc, pageNum }: PDFPageRendererProps) {
         renderTaskRef.current = renderTask;
 
         await renderTask.promise;
+
+        if (!active) return;
+
+        // Render PDF text layer on top of the canvas
+        const textContent = await page.getTextContent();
+        textLayerDiv.innerHTML = '';
+
+        const textLayerInstance = new pdfjsLib.TextLayer({
+          textContentSource: textContent,
+          container: textLayerDiv,
+          viewport: viewport,
+        });
+        textLayerInstanceRef.current = textLayerInstance;
+
+        await textLayerInstance.render();
       } catch (err: any) {
         if (err.name !== 'RenderingCancelledException') {
           console.error('PDF page render error:', err);
@@ -188,10 +215,52 @@ function PDFPageRenderer({ pdfDoc, pageNum }: PDFPageRendererProps) {
           renderTaskRef.current.cancel();
         } catch (e) {}
       }
+      if (textLayerInstanceRef.current) {
+        try {
+          textLayerInstanceRef.current.cancel();
+        } catch (e) {}
+      }
     };
   }, [pdfDoc, pageNum]);
 
-  return <canvas ref={canvasRef} className="w-full h-auto object-contain rounded-b-3xl" />;
+  return (
+    <div className="relative w-full h-auto flex flex-col items-center overflow-hidden rounded-b-3xl">
+      <canvas ref={canvasRef} className="w-full h-auto object-contain" />
+      <div 
+        ref={textLayerRef} 
+        className="textLayer absolute inset-0 pointer-events-auto select-text overflow-hidden" 
+        style={{
+          lineHeight: 1.0,
+          opacity: 1,
+        }}
+      />
+      <style>{`
+        .textLayer {
+          position: absolute;
+          left: 0;
+          top: 0;
+          right: 0;
+          bottom: 0;
+          overflow: hidden;
+          line-height: 1.0;
+          text-size-adjust: none;
+          forced-color-adjust: none;
+          transform-origin: 0 0;
+          z-index: 2;
+        }
+        .textLayer span {
+          color: transparent !important;
+          position: absolute;
+          white-space: pre;
+          cursor: text;
+          transform-origin: 0% 0%;
+        }
+        .textLayer span::selection {
+          background: rgba(0, 184, 148, 0.3) !important;
+        }
+      `}</style>
+    </div>
+  );
 }
 
 export default function App({
@@ -224,6 +293,8 @@ export default function App({
   const [pdfDoc, setPdfDoc] = useState<any>(null);
   const [totalPages, setTotalPages] = useState(0);
   const [loadingPdf, setLoadingPdf] = useState(false);
+  const [pdfUrl, setPdfUrl] = useState<string | null>(null);
+  const [useNativeViewer, setUseNativeViewer] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const handlePdfUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -239,10 +310,30 @@ export default function App({
     setSelectedDoc(file.name);
 
     try {
+      // Clean up previous Object URL to prevent memory leaks
+      if (pdfUrl) {
+        URL.revokeObjectURL(pdfUrl);
+      }
+
+      const newUrl = URL.createObjectURL(file);
+      setPdfUrl(newUrl);
+
       const arrayBuffer = await file.arrayBuffer();
       const pdf = await pdfjsLib.getDocument({ data: arrayBuffer }).promise;
       setPdfDoc(pdf);
       setTotalPages(pdf.numPages);
+
+      // Auto-fallback: check if the first page contains text layer items
+      try {
+        const page = await pdf.getPage(1);
+        const textContent = await page.getTextContent();
+        const hasText = textContent.items && textContent.items.length > 0;
+        setUseNativeViewer(!hasText);
+      } catch (err) {
+        console.error("Failed to extract text content, falling back to native iframe:", err);
+        setUseNativeViewer(true);
+      }
+
       setActivePage(1);
       setBookmarks([]);
     } catch (err: any) {
@@ -254,24 +345,7 @@ export default function App({
     }
   };
 
-  const [bookmarks, setBookmarks] = useState<BookmarkItem[]>([
-    { 
-      id: 1, 
-      page: 4, 
-      x: 35, 
-      y: 65, 
-      note: "Crucial case study data on migration streams.", 
-      createdAt: new Date().toLocaleTimeString() 
-    },
-    { 
-      id: 2, 
-      page: 12, 
-      x: 75, 
-      y: 35, 
-      note: "Global core-periphery model breakdown.", 
-      createdAt: new Date().toLocaleTimeString() 
-    }
-  ]);
+  const [bookmarks, setBookmarks] = useState<BookmarkItem[]>([]);
 
   // Modals
   const [showCreateModal, setShowCreateModal] = useState(false);
@@ -288,7 +362,7 @@ export default function App({
   const handleJumpToPage = (pageNum: number) => {
     const pageElement = document.getElementById(`textbook-page-${pageNum}`);
     if (pageElement) {
-      pageElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      pageElement.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
       setActivePage(pageNum);
     }
   };
@@ -298,8 +372,8 @@ export default function App({
   // Left panel scroll listener to update active page input automatically
   const handleLeftPanelScroll = (e: React.UIEvent<HTMLDivElement>) => {
     const container = e.currentTarget;
-    const scrollPosition = container.scrollTop;
-    const containerHeight = container.clientHeight;
+    const scrollPosition = container.scrollLeft;
+    const containerWidth = container.clientWidth;
     
     // Find which page is closest to the middle of the viewport
     let closestPage = 1;
@@ -308,8 +382,8 @@ export default function App({
     for (let i = 1; i <= totalPageCount; i++) {
       const pageEl = document.getElementById(`textbook-page-${i}`);
       if (pageEl) {
-        const offsetTop = pageEl.offsetTop - container.offsetTop;
-        const distance = Math.abs(offsetTop - scrollPosition - containerHeight / 4);
+        const offsetLeft = pageEl.offsetLeft - container.offsetLeft;
+        const distance = Math.abs(offsetLeft - scrollPosition);
         if (distance < minDistance) {
           minDistance = distance;
           closestPage = i;
@@ -482,6 +556,17 @@ export default function App({
 
         {/* User Portal Action & Theme Toggles */}
         <div className="flex items-center space-x-4">
+          {pdfUrl && (
+            <button
+              onClick={() => setUseNativeViewer(!useNativeViewer)}
+              className="px-3.5 py-2 bg-[#00b894]/10 hover:bg-[#00b894]/20 border border-[#00b894]/30 text-[#00b894] text-[10px] font-black uppercase rounded-xl tracking-wider transition-all cursor-pointer flex items-center gap-1.5 shadow-sm"
+              title="Toggle between Interactive Studio and Native Browser PDF Viewer"
+            >
+              <Sparkles className="w-3.5 h-3.5" />
+              <span>{useNativeViewer ? "Use Studio Mode" : "Use Native Mode"}</span>
+            </button>
+          )}
+
           <button
             onClick={() => fileInputRef.current?.click()}
             disabled={loadingPdf}
@@ -569,9 +654,17 @@ export default function App({
         {/* LEFT PANEL: Canvas/Viewer */}
         <div 
           onScroll={handleLeftPanelScroll}
-          className="flex-1 overflow-y-auto p-6 md:p-12 space-y-12 bg-slate-150 dark:bg-slate-900/40 custom-scrollbar flex flex-col items-center mt-9 md:mt-0"
+          className="flex-1 overflow-x-auto overflow-y-hidden p-6 md:p-12 bg-slate-150 dark:bg-slate-900/40 custom-scrollbar flex flex-row items-center gap-12 snap-x snap-mandatory mt-9 md:mt-0"
         >
-          {pdfDoc ? (
+          {useNativeViewer && pdfUrl ? (
+            <div className="w-full max-w-[760px] h-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl overflow-hidden shadow-xl shrink-0 snap-center">
+              <iframe
+                src={pdfUrl}
+                className="w-full h-full border-none"
+                title="PDF Native Viewer"
+              />
+            </div>
+          ) : pdfDoc ? (
             Array.from({ length: totalPages }, (_, i) => i + 1).map((pageNum) => {
               const pageBookmarks = bookmarks.filter(b => b.page === pageNum);
 
@@ -579,7 +672,7 @@ export default function App({
                 <div 
                   key={pageNum} 
                   id={`textbook-page-${pageNum}`}
-                  className="w-full max-w-[760px] bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl shadow-xl hover:shadow-2xl relative transition-all duration-300 flex flex-col justify-between selection:bg-[#00b894]/25 select-none overflow-hidden"
+                  className="w-full max-w-[760px] bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl shadow-xl hover:shadow-2xl relative transition-all duration-300 flex flex-col justify-between selection:bg-[#00b894]/25 select-none overflow-hidden shrink-0 snap-center"
                   onClick={(e) => handlePageClick(e, pageNum)}
                   style={{ cursor: addPostitMode ? 'cell' : 'default' }}
                 >
@@ -651,7 +744,7 @@ export default function App({
                 <div 
                   key={page.num} 
                   id={`textbook-page-${page.num}`}
-                  className="w-full max-w-[760px] aspect-[1/1.4] bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-8 md:p-12 shadow-xl hover:shadow-2xl relative transition-all duration-300 flex flex-col justify-between selection:bg-[#00b894]/25 select-none"
+                  className="w-full max-w-[760px] aspect-[1/1.4] bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-8 md:p-12 shadow-xl hover:shadow-2xl relative transition-all duration-300 flex flex-col justify-between selection:bg-[#00b894]/25 select-none shrink-0 snap-center"
                   onClick={(e) => handlePageClick(e, page.num)}
                   style={{ cursor: addPostitMode ? 'cell' : 'default' }}
                 >
