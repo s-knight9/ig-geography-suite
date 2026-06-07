@@ -26,105 +26,13 @@ pdfjsLib.GlobalWorkerOptions.workerSrc = workerUrl;
 
 interface BookmarkItem {
   id: number;
+  docName: string;
   page: number;
   x: number; // percentage width
   y: number; // percentage height
   note: string;
   createdAt: string;
 }
-
-const MOCK_PAGES_DATA = [
-  {
-    num: 1,
-    title: "Unit 4: Global Interactions & Climate Change",
-    subtitle: "4.1 Overview of Global Networks and Flows",
-    content: "Global interactions represent the complex ways in which countries, businesses, and individuals connect across borders. In the 21st century, these networks are accelerated by rapid technological innovations, transport containerization, and the relaxation of trade tariffs. Geography studies these spatial patterns to assess their socioeconomic impacts on core and periphery regions."
-  },
-  {
-    num: 2,
-    title: "4.1.2 Transport Systems and Shrinking Space",
-    subtitle: "The Role of Containerization in Global Trade",
-    content: "The concept of 'shrinking space' refers to the relative reduction in travel time between places due to transport innovations. Modern container ships transport thousands of TEUs (Twenty-foot Equivalent Units) daily, dramatically lowering shipping costs. This has enabled transnational corporations (TNCs) to distribute supply chains across multiple low-income countries."
-  },
-  {
-    num: 3,
-    title: "4.2 Global Migration and Spatial Shifts",
-    subtitle: "Push and Pull Factors in Rural-Urban Migration",
-    content: "Migration streams are driven by complex disparities in regional wealth, security, and climate resilience. Rural areas face growing stress from agricultural degradation and drought, prompting urban-ward migration. Conversely, global core cities act as migration magnets, offering diverse jobs, tertiary education, and hub transport access."
-  },
-  {
-    num: 4,
-    title: "4.2.2 Case Study: Southern European Migration Streams",
-    subtitle: "Analysis of Transnational Labor Movements",
-    content: "Recent migration patterns across Mediterranean routes highlight the geopolitical challenges of regional integration. Data shows a 14% increase in transit movements driven by sub-Saharan environmental displacement. These flows require cooperative border frameworks, yet spark debates regarding humanitarian resource distribution and national sovereignty."
-  },
-  {
-    num: 5,
-    title: "4.3 Core and Periphery Spatial Dynamics",
-    subtitle: "Friedmann's Regional Development Theory",
-    content: "John Friedmann's core-periphery model divides space into an urban industrial core, which dominates economic power, and a resource-supplying periphery. The core thrives on high-value processing, intellectual property, and political decision-making, while drawing labor, raw minerals, and primary foods from the dependent peripheral zones."
-  },
-  {
-    num: 6,
-    title: "4.3.2 Backwash Effects and Spread Dynamics",
-    subtitle: "Cumulative Causation in Spatial Networks",
-    content: "Myrdal's cumulative causation theory explains how initial regional advantages trigger positive feedback loops, attracting capital and talent away from less developed areas (backwash effect). Over time, spread effects may distribute development outwards as core regions experience rising labor costs, land congestion, and high local tax rates."
-  },
-  {
-    num: 7,
-    title: "4.4 Environmental Impacts of Global Trade",
-    subtitle: "Carbon Footprints and Supply Chain Offshoring",
-    content: "The expansion of global trade increases global greenhouse gas emissions through international shipping and aviation. Furthermore, carbon offshoring allows high-income countries to decrease domestic emissions by moving carbon-intensive manufacturing to developing nations, masking the true environmental cost of core consumption."
-  },
-  {
-    num: 8,
-    title: "4.4.2 Case Study: Greenhouse Gas Trends",
-    subtitle: "Emissions Calibrated across Global Ports",
-    content: "A study of carbon emissions at major shipping terminals (Shanghai, Rotterdam, LA) shows that container terminal operations account for over 5% of regional carbon output. Port electrification and alternative clean fuels (like green ammonia) represent critical mitigation strategies for sustainable maritime transport."
-  },
-  {
-    num: 9,
-    title: "4.5 Transnational Corporations (TNCs) and Globalization",
-    subtitle: "Spatial Division of Labor and Global Production Networks",
-    content: "TNCs play a pivotal role in organizing global space. By establishing headquarters in global core cities (New York, Tokyo, London) and offshoring manufacturing to special economic zones (SEZs), they maximize efficiency. This spatial division of labor reshapes local labor markets, often creating hyper-specialized manufacturing hubs."
-  },
-  {
-    num: 10,
-    title: "4.5.2 Glocalization Strategies",
-    subtitle: "Adapting Global Commodities for Local Markets",
-    content: "Glocalization is the process where global corporations adapt products to suit local cultural and legal requirements. This strategy enables TNCs to maximize market penetration. Examples include customized fast food menus, language-localized streaming libraries, and vehicle specifications tailored to local regulatory standards."
-  },
-  {
-    num: 11,
-    title: "4.6 Global Core-Periphery Shift",
-    subtitle: "The Rise of Semi-Peripheral Powerhouses",
-    content: "In recent decades, regions historically categorized as periphery have shifted to the semi-periphery. Nations like China, India, and Brazil now host global manufacturing hubs, research clusters, and sovereign wealth networks. This shift challenges traditional Western hegemony and introduces multipolar political dimensions."
-  },
-  {
-    num: 12,
-    title: "4.6.2 Conceptualizing Core-Periphery Shifts",
-    subtitle: "Diagrammatic Breakdown of Global Capital Flows",
-    content: "The global core-periphery model is dynamic rather than static. Capital flows loop back from core corporations to peripheral factories as investments, while raw resource revenues flow back to core sovereign networks. Understanding these loops is essential for students assessing international aid efficacy and debt dependencies."
-  },
-  {
-    num: 13,
-    title: "4.7 Civil Society Responses to Globalization",
-    subtitle: "Anti-Globalization Movements and Localism",
-    content: "Civil society groups frequently organize to contest the socioeconomic disruptions caused by global interactions. Localist movements advocate for regional agricultural production, ethical fair-trade certification, and community land trusts. These efforts aim to protect local cultural heritage and reduce reliance on vulnerable global networks."
-  },
-  {
-    num: 14,
-    title: "4.7.2 Fair-Trade Networks as Alternative Flows",
-    subtitle: "Redistributing Power within Agricultural Supply Chains",
-    content: "Fair-trade networks establish direct ties between small-scale agricultural cooperatives in peripheral nations and ethical retailers in core markets. By guaranteeing minimum prices and social premiums, fair-trade mitigates the price volatility of global commodity markets, supporting sustainable regional development."
-  },
-  {
-    num: 15,
-    title: "4.8 Synthesis and Summary review",
-    subtitle: "Key Core and Periphery takeaways",
-    content: "Syllabus synthesis requires students to evaluate how global networks link to localized changes. Success in Paper 2 and Paper 3 essays relies on drawing clean theoretical maps connecting TNC strategies, migration streams, transport costs, and local civil society environmental pushback."
-  }
-];
 
 interface PDFPageRendererProps {
   pdfDoc: any;
@@ -282,20 +190,31 @@ export default function App({
     }
   };
 
+  interface UploadedDocument {
+    name: string;
+    url: string;
+    totalPages: number;
+    pdfDoc: any;
+  }
+
   // State
-  const [selectedDoc, setSelectedDoc] = useState("Global Interactions & Climate Change Report");
+  const [uploadedDocs, setUploadedDocs] = useState<UploadedDocument[]>([]);
+  const [activeDocIndex, setActiveDocIndex] = useState<number | null>(null);
   const [activePage, setActivePage] = useState(1);
   const [addPostitMode, setAddPostitMode] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const [highlightedNoteId, setHighlightedNoteId] = useState<number | null>(null);
 
   // PDF Loading State
-  const [pdfDoc, setPdfDoc] = useState<any>(null);
-  const [totalPages, setTotalPages] = useState(0);
   const [loadingPdf, setLoadingPdf] = useState(false);
-  const [pdfUrl, setPdfUrl] = useState<string | null>(null);
-  const [useNativeViewer, setUseNativeViewer] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
+
+  // Helper variables derived from active document
+  const currentDoc = activeDocIndex !== null ? uploadedDocs[activeDocIndex] : null;
+  const pdfDoc = currentDoc ? currentDoc.pdfDoc : null;
+  const pdfUrl = currentDoc ? currentDoc.url : null;
+  const totalPages = currentDoc ? currentDoc.totalPages : 0;
+  const selectedDoc = currentDoc ? currentDoc.name : "";
 
   const handlePdfUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -307,35 +226,26 @@ export default function App({
     }
 
     setLoadingPdf(true);
-    setSelectedDoc(file.name);
 
     try {
-      // Clean up previous Object URL to prevent memory leaks
-      if (pdfUrl) {
-        URL.revokeObjectURL(pdfUrl);
-      }
-
-      const newUrl = URL.createObjectURL(file);
-      setPdfUrl(newUrl);
-
       const arrayBuffer = await file.arrayBuffer();
       const pdf = await pdfjsLib.getDocument({ data: arrayBuffer }).promise;
-      setPdfDoc(pdf);
-      setTotalPages(pdf.numPages);
 
-      // Auto-fallback: check if the first page contains text layer items
-      try {
-        const page = await pdf.getPage(1);
-        const textContent = await page.getTextContent();
-        const hasText = textContent.items && textContent.items.length > 0;
-        setUseNativeViewer(!hasText);
-      } catch (err) {
-        console.error("Failed to extract text content, falling back to native iframe:", err);
-        setUseNativeViewer(true);
-      }
+      const newUrl = URL.createObjectURL(file);
+      const newDoc: UploadedDocument = {
+        name: file.name,
+        url: newUrl,
+        totalPages: pdf.numPages,
+        pdfDoc: pdf,
+      };
+
+      setUploadedDocs(prev => {
+        const nextDocs = [...prev, newDoc];
+        setActiveDocIndex(nextDocs.length - 1);
+        return nextDocs;
+      });
 
       setActivePage(1);
-      setBookmarks([]);
     } catch (err: any) {
       console.error("Failed to parse PDF:", err);
       alert("Failed to parse PDF: " + err.message);
@@ -367,7 +277,7 @@ export default function App({
     }
   };
 
-  const totalPageCount = pdfDoc ? totalPages : 15;
+  const totalPageCount = pdfDoc ? totalPages : 0;
 
   // Left panel scroll listener to update active page input automatically
   const handleLeftPanelScroll = (e: React.UIEvent<HTMLDivElement>) => {
@@ -417,6 +327,7 @@ export default function App({
 
     const newBookmark: BookmarkItem = {
       id: Date.now(),
+      docName: selectedDoc,
       page: tempCoords.page,
       x: tempCoords.x,
       y: tempCoords.y,
@@ -460,6 +371,7 @@ export default function App({
 
   // Filter bookmarks
   const filteredBookmarks = bookmarks.filter(b => {
+    if (b.docName !== selectedDoc) return false;
     const searchLower = searchQuery.toLowerCase();
     return b.note.toLowerCase().includes(searchLower) || b.page.toString().includes(searchLower);
   }).sort((a, b) => a.page - b.page);
@@ -497,23 +409,35 @@ export default function App({
           {/* Document Dropdown */}
           <div className="flex items-center gap-2 border-r border-slate-200 dark:border-slate-800 pr-4">
             <FileText className="w-4 h-4 text-emerald-500" />
-            <select
-              value={selectedDoc}
-              onChange={(e) => setSelectedDoc(e.target.value)}
-              className="bg-transparent text-xs font-bold text-slate-700 dark:text-slate-200 focus:outline-none cursor-pointer uppercase max-w-[200px] truncate"
-            >
-              <option value="Global Interactions & Climate Change Report">Global Interactions & Climate Change</option>
-              <option value="Syllabus Core Concepts Review">Syllabus Core Concepts Review</option>
-              <option value="Mediterranean Migration Dossier">Mediterranean Migration Dossier</option>
-              {pdfDoc && <option value={selectedDoc}>{selectedDoc}</option>}
-            </select>
+            {uploadedDocs.length === 0 ? (
+              <select
+                disabled
+                className="bg-transparent text-xs font-bold text-slate-400 dark:text-slate-650 focus:outline-none cursor-not-allowed uppercase"
+              >
+                <option value="">No Textbooks Loaded</option>
+              </select>
+            ) : (
+              <select
+                value={activeDocIndex !== null ? activeDocIndex : ""}
+                onChange={(e) => {
+                  const idx = parseInt(e.target.value);
+                  setActiveDocIndex(idx);
+                  setActivePage(1);
+                }}
+                className="bg-transparent text-xs font-bold text-slate-700 dark:text-slate-205 focus:outline-none cursor-pointer uppercase max-w-[200px] truncate"
+              >
+                {uploadedDocs.map((doc, idx) => (
+                  <option key={idx} value={idx}>{doc.name}</option>
+                ))}
+              </select>
+            )}
           </div>
 
           {/* Page Selector Inputs */}
           <div className="flex items-center gap-3 border-r border-slate-200 dark:border-slate-800 pr-4">
             <button 
               onClick={() => handleJumpToPage(Math.max(1, activePage - 1))}
-              disabled={activePage === 1}
+              disabled={uploadedDocs.length === 0 || activePage === 1}
               className="p-1 rounded-lg hover:bg-slate-200 dark:hover:bg-slate-800 text-slate-500 disabled:opacity-40 transition-colors"
             >
               <ChevronLeft className="w-4 h-4" />
@@ -524,18 +448,19 @@ export default function App({
                 type="number"
                 min={1}
                 max={totalPageCount}
-                value={activePage}
+                value={uploadedDocs.length === 0 ? "" : activePage}
+                disabled={uploadedDocs.length === 0}
                 onChange={(e) => {
                   const val = parseInt(e.target.value);
                   if (val >= 1 && val <= totalPageCount) handleJumpToPage(val);
                 }}
-                className="w-10 text-center py-0.5 text-xs font-black bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-md focus:border-[#00b894] outline-none"
+                className="w-10 text-center py-0.5 text-xs font-black bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-md focus:border-[#00b894] outline-none disabled:opacity-40"
               />
               <span className="text-[10px] font-black text-slate-400">OF {totalPageCount}</span>
             </div>
             <button 
               onClick={() => handleJumpToPage(Math.min(totalPageCount, activePage + 1))}
-              disabled={activePage === totalPageCount}
+              disabled={uploadedDocs.length === 0 || activePage === totalPageCount || totalPageCount === 0}
               className="p-1 rounded-lg hover:bg-slate-200 dark:hover:bg-slate-800 text-slate-500 disabled:opacity-40 transition-colors"
             >
               <ChevronRight className="w-4 h-4" />
@@ -547,7 +472,8 @@ export default function App({
             <span className="text-[9px] font-black text-slate-400 uppercase tracking-wider">Add Post-it Mode</span>
             <button 
               onClick={() => setAddPostitMode(!addPostitMode)}
-              className={`w-10 h-5.5 rounded-full relative transition-all duration-300 ${addPostitMode ? 'bg-[#00b894]' : 'bg-slate-350 dark:bg-slate-750'}`}
+              disabled={uploadedDocs.length === 0}
+              className={`w-10 h-5.5 rounded-full relative transition-all duration-300 ${uploadedDocs.length === 0 ? 'opacity-40 cursor-not-allowed bg-slate-350 dark:bg-slate-750' : addPostitMode ? 'bg-[#00b894]' : 'bg-slate-350 dark:bg-slate-750'}`}
             >
               <div className={`absolute top-0.5 w-4.5 h-4.5 bg-white rounded-full transition-all duration-300 shadow-md ${addPostitMode ? 'right-0.5' : 'left-0.5'}`} />
             </button>
@@ -602,21 +528,35 @@ export default function App({
 
         {/* MOBILE CONTROLS STRIP (Only visible on small devices) */}
         <div className="absolute top-0 inset-x-0 bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 px-4 py-2 flex md:hidden items-center justify-between z-30 transition-colors">
-          <select
-            value={selectedDoc}
-            onChange={(e) => setSelectedDoc(e.target.value)}
-            className="bg-transparent text-[10px] font-bold text-slate-700 dark:text-slate-200 focus:outline-none max-w-[140px] truncate uppercase"
-          >
-            <option value="Global Interactions & Climate Change Report">Global Interactions & Climate Change</option>
-            <option value="Syllabus Core Concepts Review">Syllabus Core Concepts Review</option>
-            <option value="Mediterranean Migration Dossier">Mediterranean Migration Dossier</option>
-          </select>
+          {uploadedDocs.length === 0 ? (
+            <select
+              disabled
+              className="bg-transparent text-[10px] font-bold text-slate-400 dark:text-slate-650 focus:outline-none cursor-not-allowed uppercase"
+            >
+              <option value="">No Textbooks Loaded</option>
+            </select>
+          ) : (
+            <select
+              value={activeDocIndex !== null ? activeDocIndex : ""}
+              onChange={(e) => {
+                const idx = parseInt(e.target.value);
+                setActiveDocIndex(idx);
+                setActivePage(1);
+              }}
+              className="bg-transparent text-[10px] font-bold text-slate-700 dark:text-slate-200 focus:outline-none max-w-[140px] truncate uppercase cursor-pointer"
+            >
+              {uploadedDocs.map((doc, idx) => (
+                <option key={idx} value={idx}>{doc.name}</option>
+              ))}
+            </select>
+          )}
 
           <div className="flex items-center gap-2">
             <span className="text-[8px] font-black text-slate-400 uppercase">ADD NOTE</span>
             <button 
               onClick={() => setAddPostitMode(!addPostitMode)}
-              className={`w-8 h-5 rounded-full relative transition-all duration-300 ${addPostitMode ? 'bg-[#00b894]' : 'bg-slate-350 dark:bg-slate-750'}`}
+              disabled={uploadedDocs.length === 0}
+              className={`w-8 h-5 rounded-full relative transition-all duration-300 ${uploadedDocs.length === 0 ? 'opacity-40 cursor-not-allowed bg-slate-350 dark:bg-slate-750' : addPostitMode ? 'bg-[#00b894]' : 'bg-slate-350 dark:bg-slate-750'}`}
             >
               <div className={`absolute top-0.5 w-4 h-4 bg-white rounded-full transition-all duration-300 shadow-md ${addPostitMode ? 'right-0.5' : 'left-0.5'}`} />
             </button>
@@ -625,7 +565,7 @@ export default function App({
           <div className="flex items-center gap-1">
             <button 
               onClick={() => handleJumpToPage(Math.max(1, activePage - 1))}
-              disabled={activePage === 1}
+              disabled={uploadedDocs.length === 0 || activePage === 1}
               className="p-1 rounded bg-slate-100 dark:bg-slate-800 disabled:opacity-40"
             >
               <ChevronLeft className="w-3.5 h-3.5" />
@@ -633,7 +573,7 @@ export default function App({
             <span className="text-[10px] font-black w-12 text-center text-slate-700 dark:text-slate-200 font-sans">p. {activePage}/{totalPageCount}</span>
             <button 
               onClick={() => handleJumpToPage(Math.min(totalPageCount, activePage + 1))}
-              disabled={activePage === totalPageCount}
+              disabled={uploadedDocs.length === 0 || activePage === totalPageCount || totalPageCount === 0}
               className="p-1 rounded bg-slate-100 dark:bg-slate-800 disabled:opacity-40"
             >
               <ChevronRight className="w-3.5 h-3.5" />
@@ -644,7 +584,7 @@ export default function App({
         {/* LEFT PANEL: Canvas/Viewer */}
         <div 
           onScroll={handleLeftPanelScroll}
-          className="flex-1 overflow-x-auto overflow-y-hidden p-6 md:p-12 bg-slate-150 dark:bg-slate-900/40 custom-scrollbar flex flex-row items-center gap-12 snap-x snap-mandatory mt-9 md:mt-0"
+          className="flex-1 overflow-x-auto overflow-y-hidden p-6 md:p-12 bg-slate-150 dark:bg-slate-900/40 custom-scrollbar flex flex-row items-center gap-12 snap-x snap-mandatory mt-9 md:mt-0 justify-center"
         >
           {pdfUrl ? (
             <div 
@@ -693,7 +633,7 @@ export default function App({
 
               {/* Absolute overlay layer for Bookmarks / Post-its */}
               <div className="absolute inset-0 pointer-events-none rounded-3xl overflow-hidden z-20">
-                {bookmarks.filter(b => b.page === activePage).map((b) => {
+                {bookmarks.filter(b => b.docName === selectedDoc && b.page === activePage).map((b) => {
                   const isHighlighted = highlightedNoteId === b.id;
 
                   return (
@@ -734,108 +674,21 @@ export default function App({
               </div>
             </div>
           ) : (
-            MOCK_PAGES_DATA.map((page) => {
-              const pageBookmarks = bookmarks.filter(b => b.page === page.num);
-
-              return (
-                <div 
-                  key={page.num} 
-                  id={`textbook-page-${page.num}`}
-                  className="w-full max-w-[760px] aspect-[1/1.4] bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-8 md:p-12 shadow-xl hover:shadow-2xl relative transition-all duration-300 flex flex-col justify-between selection:bg-[#00b894]/25 select-none shrink-0 snap-center"
-                  onClick={(e) => handlePageClick(e, page.num)}
-                  style={{ cursor: addPostitMode ? 'cell' : 'default' }}
-                >
-                  
-                  {/* PDF Page Header */}
-                  <div className="flex justify-between items-center border-b border-slate-100 dark:border-slate-800 pb-4">
-                    <span className="text-[9px] font-black text-[#00b894] uppercase tracking-widest leading-none">
-                      {selectedDoc}
-                    </span>
-                    <div className="flex items-center gap-1 bg-slate-50 dark:bg-slate-950 px-2 py-0.5 rounded border border-slate-100 dark:border-slate-800">
-                      <span className="text-[9px] font-black text-slate-400 uppercase">PAGE</span>
-                      <span className="text-[9px] font-black text-slate-700 dark:text-slate-200">{page.num}</span>
-                    </div>
-                  </div>
-
-                  {/* Page Content */}
-                  <div className="flex-1 py-10 flex flex-col justify-center space-y-6">
-                    <h2 className="text-xl md:text-2xl font-black text-slate-900 dark:text-white leading-tight">
-                      {page.title}
-                    </h2>
-                    {page.subtitle && (
-                      <h3 className="text-xs font-bold text-slate-550 dark:text-[#00b894] tracking-wide leading-none uppercase">
-                        {page.subtitle}
-                      </h3>
-                    )}
-                    <p className="text-sm font-medium text-slate-650 dark:text-slate-350 leading-relaxed text-justify">
-                      {page.content}
-                    </p>
-
-                    {/* Simulated Graphics Box */}
-                    <div className="bg-slate-50 dark:bg-slate-950/30 border border-slate-200/60 dark:border-slate-800/80 rounded-2xl p-5 mt-4 flex items-center gap-4 transition-colors">
-                      <div className="w-10 h-10 bg-[#00b894]/10 rounded-xl flex items-center justify-center shrink-0">
-                        <Info className="w-5 h-5 text-[#00b894]" />
-                      </div>
-                      <div>
-                        <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wide">IB Examiner Concept Connection</p>
-                        <p className="text-xs font-bold text-slate-600 dark:text-slate-400 mt-0.5 leading-snug">
-                          Assess processes across spatial networks. Link local impacts to core-periphery dependencies.
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* PDF Page Footer */}
-                  <div className="flex justify-between items-center border-t border-slate-100 dark:border-slate-800 pt-4 text-[9px] font-black text-slate-400 uppercase tracking-widest">
-                    <span>IBDP Geography Course Companion</span>
-                    <span>© Oxford Publishing</span>
-                  </div>
-
-                  {/* Absolute overlay layer for Bookmarks / Post-its */}
-                  <div className="absolute inset-0 pointer-events-none rounded-3xl overflow-hidden">
-                    {pageBookmarks.map((b) => {
-                      const isHighlighted = highlightedNoteId === b.id;
-
-                      return (
-                        <div
-                          key={b.id}
-                          className="absolute pointer-events-auto group/pin cursor-pointer font-sans"
-                          style={{ left: `${b.x}%`, top: `${b.y}%`, transform: 'translate(-50%, -50%)' }}
-                          onClick={(e) => {
-                            e.stopPropagation(); // prevent adding new post-it on top
-                            handleOpenEdit(b);
-                          }}
-                        >
-                          {/* Post-it Badge Icon */}
-                          <div 
-                            className={`w-9 h-9 rounded-xl flex items-center justify-center transition-all duration-350 shadow-lg ${
-                              isHighlighted 
-                                ? 'bg-yellow-400 text-slate-950 scale-125 animate-bounce ring-4 ring-[#00b894]' 
-                                : 'bg-yellow-300 dark:bg-yellow-400/90 text-slate-800 hover:bg-yellow-400 hover:scale-115'
-                            }`}
-                          >
-                            <Bookmark className="w-4.5 h-4.5 fill-current" />
-                          </div>
-
-                          {/* Hover Tooltip Popup */}
-                          <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-48 bg-slate-950/95 dark:bg-slate-900 border border-slate-800 text-white rounded-xl p-3 shadow-2xl opacity-0 group-hover/pin:opacity-100 transition-opacity pointer-events-none z-30 transition-all">
-                            <div className="flex justify-between items-center border-b border-slate-800 pb-1.5 mb-1.5">
-                              <span className="text-[8px] font-black text-yellow-400 uppercase tracking-wider">Post-it Note</span>
-                              <span className="text-[8px] font-black text-slate-500 uppercase font-mono">{b.createdAt}</span>
-                            </div>
-                            <p className="text-[10px] font-bold leading-normal text-slate-200 normal-case">
-                              {b.note.length > 80 ? b.note.substring(0, 77) + '...' : b.note}
-                            </p>
-                            <p className="text-[7px] font-black text-slate-400 uppercase tracking-wider text-right mt-1.5">Click to edit</p>
-                          </div>
-                        </div>
-                      );
-                    })}
-                  </div>
-
-                </div>
-              );
-            })
+            <div className="flex-1 max-w-[760px] h-[calc(100vh-160px)] flex flex-col items-center justify-center border-2 border-dashed border-slate-350 dark:border-slate-850 rounded-3xl bg-white dark:bg-slate-900 p-8 shadow-xl text-center shrink-0 snap-center transition-all duration-300">
+              <div className="w-16 h-16 bg-[#00b894]/10 rounded-2xl flex items-center justify-center mb-6 shadow-md shadow-emerald-500/5">
+                <Upload className="w-8 h-8 text-[#00b894]" />
+              </div>
+              <h3 className="text-lg font-black text-slate-800 dark:text-white uppercase tracking-wider mb-2">No Textbook Loaded</h3>
+              <p className="text-xs font-semibold text-slate-500 dark:text-slate-400 max-w-sm leading-relaxed mb-6">
+                Please upload a DP Geography PDF textbook to begin reading and pinning study notes.
+              </p>
+              <button
+                onClick={() => fileInputRef.current?.click()}
+                className="px-6 py-2.5 bg-[#00b894] hover:bg-[#009e80] text-white text-xs font-black uppercase rounded-xl tracking-wider transition-all shadow-lg shadow-emerald-500/20 cursor-pointer flex items-center gap-2"
+              >
+                <Upload className="w-4 h-4" /> Upload PDF Textbook
+              </button>
+            </div>
           )}
         </div>
 
