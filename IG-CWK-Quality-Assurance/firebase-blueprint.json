@@ -1,0 +1,52 @@
+{
+  "entities": {
+    "Structure": {
+      "title": "Directory Structure",
+      "description": "Stores the classes and assignments mapping.",
+      "type": "object",
+      "properties": {
+        "classes": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "List of class names"
+        },
+        "assignments": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "array",
+            "items": { "type": "string" }
+          },
+          "description": "Map of class name to list of assignment names"
+        }
+      },
+      "required": ["classes", "assignments"]
+    },
+    "StudentSubmission": {
+      "title": "Student Submission",
+      "description": "Stores a single student's IA submission and evaluation.",
+      "type": "object",
+      "properties": {
+        "candidateName": { "type": "string" },
+        "className": { "type": "string" },
+        "assignmentName": { "type": "string" },
+        "draftEvaluation": { "type": "object" },
+        "draftTeacherScores": { "type": "object" },
+        "finalEvaluation": { "type": "object" },
+        "finalTeacherScores": { "type": "object" },
+        "status": { "type": "string", "enum": ["Draft", "Final"] },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["candidateName", "className", "assignmentName", "status"]
+    }
+  },
+  "firestore": {
+    "/config/structure": {
+      "schema": "Structure",
+      "description": "The global directory structure."
+    },
+    "/submissions/{submissionId}": {
+      "schema": "StudentSubmission",
+      "description": "Individual student submissions."
+    }
+  }
+}

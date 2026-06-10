@@ -99,7 +99,7 @@ export class PostgresGlobeTubeDB implements GlobeTubeDB {
     
     const res = await this.client.query(query);
     const matrix: Record<string, any[]> = {};
-    const prefixes = ["SL1", "SL2", "SL3", "HL4", "HL5", "HL6", "OPA", "OPD", "OPE"];
+    const prefixes = ["PH1", "PH2", "PH3", "PH4", "PH5", "HU6", "HU7", "HU8", "HU9", "HU10"];
     
     prefixes.forEach((pref) => {
       matrix[pref] = [];
@@ -143,7 +143,7 @@ export class PostgresGlobeTubeDB implements GlobeTubeDB {
       return;
     }
 
-    const prefixes = ["SL1", "SL2", "SL3", "HL4", "HL5", "HL6", "OPA", "OPD", "OPE"];
+    const prefixes = ["PH1", "PH2", "PH3", "PH4", "PH5", "HU6", "HU7", "HU8", "HU9", "HU10"];
     if (!prefixes.includes(unitTag)) {
       return;
     }
@@ -275,7 +275,7 @@ export class MongoGlobeTubeDB implements GlobeTubeDB {
     const docs = await db.collection("globetube_videos").find(query).toArray();
     
     const matrix: Record<string, any[]> = {};
-    const prefixes = ["SL1", "SL2", "SL3", "HL4", "HL5", "HL6", "OPA", "OPD", "OPE"];
+    const prefixes = ["PH1", "PH2", "PH3", "PH4", "PH5", "HU6", "HU7", "HU8", "HU9", "HU10"];
     
     prefixes.forEach((pref) => {
       matrix[pref] = [];
@@ -321,7 +321,7 @@ export class MongoGlobeTubeDB implements GlobeTubeDB {
       return;
     }
 
-    const prefixes = ["SL1", "SL2", "SL3", "HL4", "HL5", "HL6", "OPA", "OPD", "OPE"];
+    const prefixes = ["PH1", "PH2", "PH3", "PH4", "PH5", "HU6", "HU7", "HU8", "HU9", "HU10"];
     if (!prefixes.includes(unitTag)) {
       return;
     }
@@ -392,7 +392,8 @@ export class SqliteGlobeTubeDB implements GlobeTubeDB {
   private db: Database.Database;
 
   constructor() {
-    const dbPath = path.join(process.cwd(), "globetube.db");
+    const dataDir = process.env.DATA_DIR || process.cwd();
+    const dbPath = path.join(dataDir, "globetube.db");
     this.db = new Database(dbPath);
   }
 
@@ -466,7 +467,7 @@ export class SqliteGlobeTubeDB implements GlobeTubeDB {
     
     const rows = this.db.prepare(query).all() as any[];
     const matrix: Record<string, any[]> = {};
-    const prefixes = ["SL1", "SL2", "SL3", "HL4", "HL5", "HL6", "OPA", "OPD", "OPE"];
+    const prefixes = ["PH1", "PH2", "PH3", "PH4", "PH5", "HU6", "HU7", "HU8", "HU9", "HU10"];
     
     prefixes.forEach((pref) => {
       matrix[pref] = [];
@@ -510,7 +511,7 @@ export class SqliteGlobeTubeDB implements GlobeTubeDB {
       return;
     }
 
-    const prefixes = ["SL1", "SL2", "SL3", "HL4", "HL5", "HL6", "OPA", "OPD", "OPE"];
+    const prefixes = ["PH1", "PH2", "PH3", "PH4", "PH5", "HU6", "HU7", "HU8", "HU9", "HU10"];
     if (!prefixes.includes(unitTag)) {
       return;
     }

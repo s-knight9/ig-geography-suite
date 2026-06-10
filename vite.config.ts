@@ -21,6 +21,12 @@ export default defineConfig(({mode}) => {
       watch: process.env.DISABLE_HMR === 'true' ? null : {
         ignored: [/(^|[\/\\])\../, '**/node_modules/**']
       },
+      fs: {
+        allow: [
+          path.resolve(__dirname),
+          path.resolve(__dirname, '..')
+        ]
+      }
     },
   };
 });

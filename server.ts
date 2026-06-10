@@ -4,6 +4,7 @@ import fs from "fs";
 import multer from "multer";
 import { PDFParse } from "pdf-parse";
 import Database from "better-sqlite3";
+import mammoth from "mammoth";
 
 // Maintain compatibility with the old pdf-parse function signature using v2.4.5 class-based interface
 async function pdf(buffer: Buffer): Promise<{ text: string }> {
@@ -21,7 +22,7 @@ import { Readability } from "@mozilla/readability";
 import { JSDOM } from "jsdom";
 import Parser from "rss-parser";
 import crypto from "crypto";
-import { getTodayPolls, castVote, hasPollsForToday, savePolls, getPollDateKST } from "./Fresh-off-the-Press/src/server/db.ts";
+import { getTodayPolls, castVote, hasPollsForToday, savePolls, getPollDateKST } from "./IG Correspondent/src/server/db.ts";
 import { getGlobeTubeDB } from "./globetubeDb";
 
 dotenv.config();
@@ -70,19 +71,19 @@ async function generateContentWithRetry(
     } catch (err: any) {
       lastError = err;
       const isRetryable = err?.status === 500 || err?.status === 503 || err?.status === 429 ||
-                         err?.error?.status === 'UNAVAILABLE' || err?.error?.code === 503 || err?.error?.code === 429 ||
-                         err?.message?.includes('500') || err?.message?.includes('503') || err?.message?.includes('429') ||
-                         err?.error?.message?.includes('500') || err?.error?.message?.includes('503') || err?.error?.message?.includes('429') ||
-                         err?.message?.includes('INTERNAL') || err?.message?.includes('UNAVAILABLE') ||
-                         err?.error?.status?.includes('UNAVAILABLE') ||
-                         err?.message?.includes('Resource has been exhausted') || err?.message?.includes('high demand') ||
-                         err?.message?.includes('temporary') || err?.error?.message?.includes('high demand') ||
-                         err?.error?.message?.includes('temporary');
-      
+        err?.error?.status === 'UNAVAILABLE' || err?.error?.code === 503 || err?.error?.code === 429 ||
+        err?.message?.includes('500') || err?.message?.includes('503') || err?.message?.includes('429') ||
+        err?.error?.message?.includes('500') || err?.error?.message?.includes('503') || err?.error?.message?.includes('429') ||
+        err?.message?.includes('INTERNAL') || err?.message?.includes('UNAVAILABLE') ||
+        err?.error?.status?.includes('UNAVAILABLE') ||
+        err?.message?.includes('Resource has been exhausted') || err?.message?.includes('high demand') ||
+        err?.message?.includes('temporary') || err?.error?.message?.includes('high demand') ||
+        err?.error?.message?.includes('temporary');
+
       if (isRetryable && retries > 0) {
         const errDetails = err?.message || err?.status || err?.error?.message || err?.error?.status || 'Unknown API Error';
         console.warn(`[Gemini API] Error for model ${modelName} (${errDetails}). Retrying in ${delay}ms... (Attempts left: ${retries})`);
-        
+
         // Dynamic fallback logic
         if (retries <= 2) {
           if (modelName === "gemini-3.5-flash") {
@@ -123,71 +124,49 @@ Your task is to transcribe student work from images (scanned PDFs or photos of h
 -   Student work is for geography essays, so expect geographical terminology.
 `;
 
-const ESSAY_SYSTEM_INSTRUCTION = `
-You are an expert IB Geography examiner and feedback coach. Your task is to assess student geography essays using the IB Geography generic markbands and provide precise, paragraph-by-paragraph feedback.
+export const IGCSE_UNIT_TAGS = {
+  "PH1": "Changing River Environments",
+  "PH2": "Changing Coastal Environments",
+  "PH3": "Changing Ecosystems",
+  "PH4": "Tectonic Hazards",
+  "PH5": "Climate Change",
+  "HU6": "Changing Populations",
+  "HU7": "Changing Towns and Cities",
+  "HU8": "Development",
+  "HU9": "Changing Economies",
+  "HU10": "Resource Provision"
+};
 
-### PAPER SPECIFIC CHARACTERISTICS
-- Paper 1 (Options): 10-mark essays only. Require balanced argument, AO3 evaluation, use of examples/case studies, awareness of scale/place/process/perspectives. Not simply descriptive.
-- Paper 2 (Core): 10-mark essays. AO3 judgement expected. Broad synoptic understanding. Balanced discussion.
-- Paper 3 (HL Extension):
-    - 12-mark essays (Part A): AO2 focused. Analysis, application, explanation. Examples integrated. Evaluation is NOT the main feature.
-    - 16-mark essays (Part B): AO3 focused. Evaluation, synthesis, judgement. Multiple perspectives/scales. Balanced conclusion. Full evaluative essay.
+export const ESSAY_SYSTEM_INSTRUCTION = `You are an expert IGCSE Geography AI assistant. Your brain is calibrated strictly to the official IGCSE Geography syllabus.
 
-### MARKING PRINCIPLES
-- AO1: Knowledge & Understanding (correct facts, terminology).
-- AO2: Application & Analysis (explaining relationships, breaking down processes).
-- AO3: Synthesis & Evaluation (making judgments, weighing evidence, connecting ideas across scales/time).
-- AO4: Organization, structure, use of examples.
-- Use "Best-fit" approach.
-- Reward explicit links to question and accurate terminology.
-- Reward analytical chains (A leading to B leading to C).
+CRITICAL ARCHITECTURE RULES:
+1. CURRICULUM STRUCTURE: Focus entirely on the two-paper architecture: Paper 1 (Physical Geography) and Paper 2 (Human Geography). Completely ignore and discard any older three-theme architectures or IB DP core/optional frameworks.
+2. OFFICIAL EXAM GRADING SCALE: Evaluate, score, and provide feedback on student work strictly using the official IGCSE grading scale from A* to G (where A* is the highest tier, G is the lowest passing mark, and U is ungraded). Absolutely NEVER use alphanumeric IB points, DP 1-7 marks, or generic 1-5 numerical levels.
+3. CORE UTILITY APPLICATIONS:
+   - For GeoStrategy: Focus heavily on drilling down into the specific structural demands of 7-mark case study questions to secure full marks using place-specific detail.
+   - For Precision Engine: Actively force students to turn vague descriptions into highly accurate, data-driven geographical statements using technical syllabus terminology and quantitative facts.
+   - For IG Student Scaffold & Newsroom: Ensure all contextual readings and writing prompts match the conceptual complexity and command words appropriate for IGCSE candidates.
+4. CORE CONCEPTUAL PILLARS:
+   When evaluating student answers, providing feedback, or scaffolding responses, you must judge their work against the core pillars of the IGCSE framework:
+   - Interrelationships: Check if the student links human activities to physical environments (e.g., how management techniques like hard engineering disrupt natural river or coastal loops).
+   - Scale: Ensure the student recognizes how localized events ripple out into regional or global impacts.
+   - Spatial Awareness: Look for clear descriptions of patterns, densities, and spatial distributions (e.g., resource allocations, population clusters, or urban zoning).
+   - Change and Process: Verify that physical geomorphological sequences (erosion, transport, deposition) and human shifts (urbanization, industrial evolution) are explained dynamically over time.
 
-### OUTPUT STRUCTURE (MANDATORY)
-Your response MUST follow this exact structure:
-
-# Essay Assessment
-**Essay type**: [Paper number], [Mark value] — [Brief description of expectations]
-
-## Overall judgement before marking
-[2-4 sentences explaining how well it addressed the question, matches demands, key strength, and biggest limitation.]
-
-## Paragraph-by-paragraph feedback
-### Paragraph 1
-- **What it does well**: [Specific strengths]
-- **What needs improving**: [Specific weaknesses]
-- **Examiner comment**: [How it affects the mark]
-
-[Repeat for every paragraph found in the essay]
-
-## Whole-essay feedback
-### Strengths
-- [Identify strongest ideas/examples/analytical moves]
-
-### Main areas for improvement
-- [Identify what prevents a higher mark: thin argument, weak evidence, fading relevance, missing evaluation/analysis]
-
-### Marking rationale
-- **Best-fit markband**: [Explain which markband fits best and why]
-- **Why it is not in the markband above**: [Briefly explain what is missing for the next level]
-
-**Final mark: X / [Total Marks]**
-
-## Student-friendly assessment summary
-[3-5 sentences directly to the student: clear, encouraging, honest, next steps.]
-
-### ADDITIONAL NOTES FROM MARKBANDS
-- 9-10 (for 10-mark): In-depth, question-specific, balanced, complex terminology, well-developed evaluation.
-- 10-12 (for 12-mark): Addresses all aspects, integrated evidence, structured, explains both sides (if appropriate).
-- 13-16 (for 16-mark): Well-structured, critical analysis of evidence certainty, other perspectives discussed, justified conclusion.
-- Avoid "descriptive" responses for high marks; look for "analytical" or "evaluative" depth.
-`;
+5. THE 7-MARK CASE STUDY DIAGNOSTIC (GEOSTRATEGY SPECIALIZATION):
+   For high-tariff 7-mark case study evaluations, you must strictly assess the response using the standard IGCSE diagnostic framework:
+   - Causes: Are the physical or human triggers clearly identified?
+   - Impacts: Are the consequences sharply categorized into Social, Economic, and Environmental factors (evaluating both positive and negative dimensions)?
+   - Management: Are the specific strategies, policies, or engineering solutions actively critiqued?
+   - Data Precision: A 7-mark response cannot score full marks without place-specific detail. Flag any lack of quantitative data, named locations, or precise case study facts.`;
 
 async function startServer() {
   const app = express();
-  const PORT = 3000;
+  const PORT = 3001;
 
   // Initialize Textbook Viewer Database & Folders
-  const textbookDb = new Database(path.join(process.cwd(), "textbooks.db"));
+  const dataDir = process.env.DATA_DIR || process.cwd();
+  const textbookDb = new Database(path.join(dataDir, "textbooks.db"));
   textbookDb.exec(`
     CREATE TABLE IF NOT EXISTS textbook_bookmarks (
       id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -374,11 +353,11 @@ ${text.substring(0, 50000)}
 
       const ai = getGenAI();
 
-      const promptContext = mode === 'progress' 
+      const promptContext = mode === 'progress'
         ? `You are comparing a student's ${subject} IA Draft against their Final submission. Act as a Progress Auditor. Your primary goal is to identify and quantify improvements. Analyze Criterion scores side-by-side. Highlight specific sections where technical analysis, data presentation, or evaluation depth has increased. Provide a 'Progress Summary' explaining the value-added between versions.`
         : `You are an Expert IBDP ${subject} Moderator. Analyze these two ${subject} IAs. Identify differences in marking criteria attainment, quality of data presentation, and depth of analysis. Use the moderator note to reconcile the scores and explain the justification for the difference.`;
 
-      const framework = subject === 'ESS' 
+      const framework = subject === 'ESS'
         ? `- Criterion A: Research question & inquiry (Max 4)
 - Criterion B: Strategy (Max 4)
 - Criterion C: Method (Max 4)
@@ -495,15 +474,15 @@ ${JSON.stringify(lowestCriteriaMap, null, 2)}
           type: Type.OBJECT,
           properties: {
             executiveSummary: { type: Type.STRING, description: "A high-level overview of class performance." },
-            classWWW: { 
-              type: Type.ARRAY, 
+            classWWW: {
+              type: Type.ARRAY,
               description: "3 most common strengths, including anonymized specific examples.",
-              items: { type: Type.STRING } 
+              items: { type: Type.STRING }
             },
-            classEBI: { 
-              type: Type.ARRAY, 
+            classEBI: {
+              type: Type.ARRAY,
               description: "3 most common areas for improvement, including specific links to geographical theory (e.g. drainage basin inputs/outputs/stores/flows or relevant concepts).",
-              items: { type: Type.STRING } 
+              items: { type: Type.STRING }
             },
             deepDives: {
               type: Type.OBJECT,
@@ -535,18 +514,18 @@ ${JSON.stringify(lowestCriteriaMap, null, 2)}
       if (!imageUrl) {
         return res.status(400).json({ error: "Missing url parameter" });
       }
-      
+
       const imageRes = await fetch(imageUrl);
       if (!imageRes.ok) {
         return res.status(imageRes.status).json({ error: "Failed to fetch image" });
       }
-      
+
       const buffer = await imageRes.arrayBuffer();
       const contentType = imageRes.headers.get("content-type") || "image/png";
-      
+
       const base64 = Buffer.from(buffer).toString('base64');
       const dataUri = `${contentType};base64,${base64}`;
-      
+
       res.json({ dataUri });
     } catch (error: any) {
       console.error("Proxy image error:", error);
@@ -678,12 +657,12 @@ ${text.substring(0, 30000)}
       }
 
       const ai = getGenAI();
-      
+
       const parts: any[] = images.map(imgBase64 => {
         const indexOfBase64 = imgBase64.indexOf(',') + 1;
         const base64Data = imgBase64.substring(indexOfBase64);
         const mimeType = imgBase64.match(/data:([^;]+);/)?.[1] || "image/png";
-        
+
         return {
           inlineData: {
             data: base64Data,
@@ -748,12 +727,12 @@ ${essay}
 
       const ai = getGenAI();
 
-      const prompt = `You are an expert IB Diploma Programme (IBDP) Geography Examiner. Your task is to generate realistic, exam-quality IBDP Geography Paper 2 data-response questions based on the uploaded infographic, alongside a separate, independent markscheme.
+      const prompt = `You are an expert Cambridge IGCSE Geography Examiner. Your task is to generate realistic, exam-quality IGCSE Geography data-response questions based on the uploaded infographic, alongside a separate, independent markscheme.
 
 Constraints:
 1. Core Objectives:
    - Analyze the uploaded infographic for geographical data, trends, anomalies, and spatial patterns.
-   - Draft questions mimicking the style, tone, and difficulty of the IBDP Geography Paper 2.
+   - Draft questions mimicking the style, tone, and difficulty of IGCSE Geography exams.
    - Create an official-style markscheme reflecting strict assessment criteria.
 2. Structure of Questions:
    You MUST generate exactly 3 main questions based on the provided examples. Totaling exactly 10 marks:
@@ -761,7 +740,7 @@ Constraints:
    - Part (b) [2 Marks]: Reasoning/Application. A 2-mark question (e.g., Suggest/Outline one reason/advantage/disadvantage).
    - Part (c) [6 Marks]: Evaluation. A 6-mark question using exactly the phrasing "To what extent does the evidence in the infographic support the view that...".
 3. Markscheme Specifics:
-   - Provide a detailed point-by-point breakdown exactly like official IB markschemes.
+   - Provide a detailed point-by-point breakdown exactly like official IGCSE markschemes.
    - For parts (a) and (b), demonstrate exactly how marks are awarded (e.g., "Award [1] for valid suggestion and [1] for further development").
    - For the 6-mark Part (c) question, you MUST include a "Supportive" and "Counter/Non-supportive" section, and state: "Award [1] for each valid point supported by evidence taken from the infographic, up to a maximum of [5]. Award a maximum of [4] if only one side of the argument is given. Award the final [1] for an overall appraisal, which weighs up the infographic as a whole."
 4. Output Architecture (Strict JSON):
@@ -807,12 +786,12 @@ Constraints:
 
       let generatedText = response.text;
       if (!generatedText) {
-          throw new Error("No text generated from the model.");
+        throw new Error("No text generated from the model.");
       }
-      
+
       // Strip markdown formatting if present
       generatedText = generatedText.replace(/^```json\n?|```$/g, "").trim();
-      
+
       const parsedData = JSON.parse(generatedText);
       res.json(parsedData);
     } catch (error: any) {
@@ -826,9 +805,9 @@ Constraints:
   // ==========================================
 
   app.get("/api/health", (req, res) => {
-    res.json({ 
-      status: "ok", 
-      engine: "DP News Room v11.2",
+    res.json({
+      status: "ok",
+      engine: "IGCSE Geography Suite v11.2",
       environment: process.env.NODE_ENV
     });
   });
@@ -889,7 +868,7 @@ Constraints:
 
       const ai = getGenAI();
       const response = await generateContentWithRetry(ai, model, prompt);
-      
+
       const responseText = response.text;
       if (!responseText) {
         throw new Error('No assessment material was generated. The content might have been filtered.');
@@ -898,6 +877,560 @@ Constraints:
     } catch (error: any) {
       console.error("Newsroom AI Generation Error:", error);
       res.status(500).json({ error: error.message || "An error occurred during server-side processing" });
+    }
+  });
+
+  // ==========================================
+  // IG CWK QUALITY ASSURANCE ENDPOINTS
+  // ==========================================
+
+  app.post("/api/evaluate", async (req, res) => {
+    res.setHeader("Content-Type", "application/json");
+    res.status(200);
+    
+    const keepAliveInterval = setInterval(() => {
+      res.write(" ");
+    }, 10000);
+
+    try {
+      let text = req.body.text;
+
+      const systemPrompt = `You are an expert Cambridge IGCSE Geography (0460) Coursework Moderator.
+First, carefully read the text or document to identify the main focus/topic (e.g., Tourism Sustainability, Sand Dunes/Psammosere, Microclimate, etc.) of the coursework. Ensure that your evaluation and comments are strictly relevant to the identified topic, rather than incorrectly assuming it is about a different topic (like rivers or coasts if it's about tourism).
+Evaluate the following student coursework draft based on the "Route to Geographical Enquiry" framework. 
+Provide analysis across the five assessment criteria (A01, AO2, AO2, AO2, AO3), each out of 12 (Total 60).
+
+- Criterion 1 (A01): Knowledge and understanding. (Terminology, aims, secondary sources)
+- Criterion 2 (AO2): Observation and collection of data. (Primary logic, sampling strategies)
+- Criterion 3 (AO2): Organisation and presentation of data. (Two complex techniques, tables)
+- Criterion 4 (AO2): Analysis and interpretation. (Trends, anomalies, explanation based on theory)
+- Criterion 5 (AO3): Conclusion and Evaluation. (Link to hypotheses, evidence, critique/improvements)
+
+Provide specific "What Went Well" (WWW) and "Even Better If" (EBI) bullet points for each.
+
+Respond in the following JSON format ONLY:
+{
+  "scores": {
+    "ao1_knowledge": { "score": number, "www": ["string"], "ebi": ["string"] },
+    "ao2_observation": { "score": number, "www": ["string"], "ebi": ["string"] },
+    "ao2_organisation": { "score": number, "www": ["string"], "ebi": ["string"] },
+    "ao2_analysis": { "score": number, "www": ["string"], "ebi": ["string"] },
+    "ao3_conclusion": { "score": number, "www": ["string"], "ebi": ["string"] }
+  },
+  "total_score": number,
+  "word_counts": {
+    "evaluated_payload": number,
+    "excluded_ancillaries": number,
+    "raw_file_extract": number
+  },
+  "moderator_executive_summary": "string"
+}`;
+
+      let contentsPayload: any[] = [];
+      if (text && text.startsWith("data:")) {
+        const matches = text.match(/^data:(.+?);base64,(.+)$/);
+        if (matches) {
+          const mimeType = matches[1];
+          const base64Data = matches[2];
+          contentsPayload = [
+            {
+              inlineData: {
+                data: base64Data,
+                mimeType: mimeType
+              }
+            },
+            systemPrompt
+          ];
+        } else {
+          contentsPayload = [text, systemPrompt];
+        }
+      } else {
+        if (text && text.length > 500000) {
+          text = text.substring(0, 500000);
+        }
+        contentsPayload = [text, systemPrompt];
+      }
+
+      const ai = getGenAI();
+      const response = await generateContentWithRetry(ai, "gemini-3.1-pro-preview", contentsPayload, {
+        responseMimeType: "application/json",
+        maxOutputTokens: 8192
+      });
+      
+      if (!response.text) throw new Error("No text in response");
+      
+      let rawText = response.text.trim();
+      if (rawText.startsWith('```json')) {
+        rawText = rawText.replace(/^```json\n/, '').replace(/\n```$/, '');
+      } else if (rawText.startsWith('```')) {
+        rawText = rawText.replace(/^```\n/, '').replace(/\n```$/, '');
+      }
+      
+      let result = JSON.parse(rawText);
+      
+      clearInterval(keepAliveInterval);
+      res.write(JSON.stringify(result));
+      res.end();
+      
+    } catch (error: any) {
+      console.error("Evaluation caught error:", error);
+      clearInterval(keepAliveInterval);
+      if (!res.headersSent) {
+        res.status(500).json({ error: error.message || "Failed to evaluate coursework." });
+      } else {
+        res.write(JSON.stringify({ error: error.message || "Failed to evaluate coursework." }));
+        res.end();
+      }
+    }
+  });
+
+  app.post("/api/evaluate-compare", async (req, res) => {
+    res.setHeader("Content-Type", "application/json");
+    res.status(200);
+    const keepAliveInterval = setInterval(() => {
+      res.write(" ");
+    }, 10000);
+
+    try {
+      const { cwk1, cwk2 } = req.body;
+      
+      const systemPrompt = `You are an expert Cambridge IGCSE Geography (0460) Coursework Moderator.
+You are tasked with comparing TWO pieces of student coursework (CWK 1 and CWK 2).
+You have been provided with either the raw extracted text or their existing evaluation JSONs.
+
+Generate a comparative evaluation across the five assessment criteria (A01, AO2, AO2, AO2, AO3), each out of 12.
+Focus heavily on identifying which coursework did what better. Use the WWW (What Went Well) and EBI (Even Better If) bullet points to highlight structural, conceptual, and validity differences between the two.
+
+You must output in this EXACT JSON format:
+{
+  "cwk1_total_score": number,
+  "cwk2_total_score": number,
+  "moderator_executive_summary": "string",
+  "academic_integrity_report": "string",
+  "criteria": {
+    "ao1_knowledge": {
+      "cwk1_score": number, "cwk1_www": ["string"], "cwk1_ebi": ["string"],
+      "cwk2_score": number, "cwk2_www": ["string"], "cwk2_ebi": ["string"],
+      "comparative_feedback": "string"
+    },
+    "ao2_observation": {
+      "cwk1_score": number, "cwk1_www": ["string"], "cwk1_ebi": ["string"],
+      "cwk2_score": number, "cwk2_www": ["string"], "cwk2_ebi": ["string"],
+      "comparative_feedback": "string"
+    },
+    "ao2_organisation": {
+      "cwk1_score": number, "cwk1_www": ["string"], "cwk1_ebi": ["string"],
+      "cwk2_score": number, "cwk2_www": ["string"], "cwk2_ebi": ["string"],
+      "comparative_feedback": "string"
+    },
+    "ao2_analysis": {
+      "cwk1_score": number, "cwk1_www": ["string"], "cwk1_ebi": ["string"],
+      "cwk2_score": number, "cwk2_www": ["string"], "cwk2_ebi": ["string"],
+      "comparative_feedback": "string"
+    },
+    "ao3_conclusion": {
+      "cwk1_score": number, "cwk1_www": ["string"], "cwk1_ebi": ["string"],
+      "cwk2_score": number, "cwk2_www": ["string"], "cwk2_ebi": ["string"],
+      "comparative_feedback": "string"
+    }
+  }
+}`;
+
+      let contentsPayload: any[] = [
+        `CWK 1 Data: ${JSON.stringify(cwk1)}\n\nCWK 2 Data: ${JSON.stringify(cwk2)}`,
+        systemPrompt
+      ];
+
+      const ai = getGenAI();
+      const response = await generateContentWithRetry(ai, "gemini-3.1-pro-preview", contentsPayload, {
+        responseMimeType: "application/json",
+        maxOutputTokens: 8192
+      });
+      
+      if (!response.text) throw new Error("No text in response");
+      
+      let rawText = response.text.trim();
+      if (rawText.startsWith('```json')) {
+        rawText = rawText.replace(/^```json\n/, '').replace(/\n```$/, '');
+      } else if (rawText.startsWith('```')) {
+        rawText = rawText.replace(/^```\n/, '').replace(/\n```$/, '');
+      }
+      
+      let result = JSON.parse(rawText);
+      
+      clearInterval(keepAliveInterval);
+      res.write(JSON.stringify(result));
+      res.end();
+      
+    } catch (error: any) {
+      console.error("Compare Evaluation caught error:", error);
+      clearInterval(keepAliveInterval);
+      if (!res.headersSent) {
+        res.status(500).json({ error: error.message || "Failed to compare courseworks." });
+      } else {
+        res.write(JSON.stringify({ error: error.message || "Failed to compare courseworks." }));
+        res.end();
+      }
+    }
+  });
+
+  app.post("/api/generate-class-feedback-content", async (req, res) => {
+    res.setHeader("Content-Type", "application/json");
+    res.status(200);
+    const keepAliveInterval = setInterval(() => {
+      res.write(" ");
+    }, 10000);
+
+    try {
+      const { evaluations } = req.body;
+      
+      const systemPrompt = `You are an expert Cambridge IGCSE Geography (0460) Coursework Moderator.
+You are tasked with generating content for a comprehensive whole-class feedback presentation based on a batch of student coursework evaluations.
+
+The focus should be on:
+1. The validity of data.
+2. How students reference their data in relation to the three tiers of sustainability, the tourism lifecycle (Butler model), and sustainable initiatives.
+3. CONTEXT: Jeju Island is a World Heritage site, and Songaksan is a recognized World Geopark (assessed on a 4-year cycle). Explicit reference to this status MUST feature heavily in the feedback. This status stimulates tourism, which brings visitor pressure at peak times, necessitating sustainable initiatives.
+4. Extract anonymous examples of "good practice" (What Went Well) and "bad practice" / areas for improvement (Even Better If) from the provided student data to make the feedback specific and detailed.
+
+You will receive a JSON string containing the evaluations (scores, WWWs, EBIs, and summaries) of the class.
+
+Respond ONLY with valid JSON having the following structure:
+{
+  "slides": [
+    {
+      "title": "String (Slide Title)",
+      "bullets": ["String (Bullet point 1)", "String (Bullet point 2)"],
+      "speaker_notes": "String (Optional speaker notes)"
+    }
+  ]
+}
+
+Include slides covering:
+- Overall Class Performance
+- Validity of Data Collection
+- Application of Conceptual Theory (Butler Model/Sustainability)
+- Songaksan Context (World Geopark & 4-year assessment cycle)
+- Visitor Pressure & Sustainable Initiatives
+- Specific Anonymous Good Practices
+- Specific Areas for Improvement (EBIs)
+`;
+
+      const ai = getGenAI();
+      const response = await generateContentWithRetry(ai, "gemini-3.1-pro-preview", [
+        JSON.stringify(evaluations),
+        systemPrompt
+      ], {
+        responseMimeType: "application/json",
+        maxOutputTokens: 8192
+      });
+      
+      if (!response.text) throw new Error("No text in response");
+      
+      let rawText = response.text.trim();
+      if (rawText.startsWith('```json')) {
+        rawText = rawText.replace(/^```json\n/, '').replace(/\n```$/, '');
+      } else if (rawText.startsWith('```')) {
+        rawText = rawText.replace(/^```\n/, '').replace(/\n```$/, '');
+      }
+      
+      let result = JSON.parse(rawText);
+      
+      clearInterval(keepAliveInterval);
+      res.write(JSON.stringify(result));
+      res.end();
+      
+    } catch (error: any) {
+      console.error("Feedback generation caught error:", error);
+      clearInterval(keepAliveInterval);
+      if (!res.headersSent) {
+        res.status(500).json({ error: error.message || "Failed to generate class feedback." });
+      } else {
+        res.write(JSON.stringify({ error: error.message || "Failed to generate class feedback." }));
+        res.end();
+      }
+    }
+  });
+
+  // ==========================================
+  // IG HIGH FIVE ENDPOINTS
+  // ==========================================
+
+  app.post("/api/highfive/generate", async (req, res) => {
+    try {
+      const { paper, topic, commandWord, customFocus } = req.body;
+
+      if (!paper || !topic || !commandWord) {
+        return res.status(400).json({ error: "Missing required parameters." });
+      }
+
+      const systemInstruction = `You are an architect tasked to develop a specialized engine for the Cambridge IGCSE Geography (0460) 2027-2029 syllabus named: IGCSE 0460 HIGH 5. You generate exam-standard questions and resources based on the specific Paper, Topic, and Command Word.
+      
+Content Constraints Terminology:
+- Strictly use HIC, MIC, and LIC. Never use "MEDC" or "LEDC".
+- Instead of posing generic phrases like 'An MIC' or 'An LIC' in questions, you MUST name a specific, real-world country (e.g., Vietnam, Kenya).
+${customFocus ? `- FORCED FOCUS: The user requested to focus on: "${customFocus}". You MUST center the question and specific example around this country/location if possible.` : `- IF the question requires the student to choose a type of economy or country classification, enable the student to choose between two specific named countries representing those classifications (e.g., choice between a specific LIC or a specific HIC).`}
+- Examples: All questions must allow for or provide "Detailed Specific Examples". do NOT mention 'post 2000' or dates in the question wording. When a specific example or country is already required or specified (DSE/FORCED FOCUS), do NOT include the clause "referring to detailed specific examples where appropriate" or similar repetitive boilerplate.
+- Sustainability: Every resource must integrate an element of Sustainability, as mandated by the 2027-2029 syllabus.
+
+Required Output Format For every generation, you must output three distinct components:
+1. The 5-Mark Question: A scenario-based question tailored to the selected Topic and Command Word. Must require the student to refer to a "Detailed Specific Example". 
+   - NOTE: If the Command Word is "Justify", you MUST follow this structure: "[Set the Scene/Scenario]. Justify a plan from the ones specified below."
+   - Keep the question text direct and succinct. The explanations for these plans MUST be extremely short (MAXIMUM 20 WORDS each, 1 simple sentence).
+2. The 1–5 Mark Scheme: 
+   - 5 Marks: Comprehensive response with clear, balanced reasoning and specific terminology.
+   - 3–4 Marks: Developed response with appropriate terminology and logical links.
+   - 1–2 Marks: Basic statements or simple descriptive points.
+3. Tailored Scaffolding (Sentence Starters): Provide 3–5 Sentence Starters specifically tailored to the generated question. These must prompt the student to provide "Place-Specific Detail" and "Sustainability" evaluation.`;
+
+      const prompt = `Generate the required output for:
+Paper: ${paper}
+Topic: ${topic}
+Command Word: ${commandWord}
+
+Return the response in JSON format matching the schema exactly.`;
+
+      const ai = getGenAI();
+      const response = await generateContentWithRetry(ai, "gemini-3.5-flash", prompt, {
+        systemInstruction,
+        responseMimeType: "application/json",
+        responseSchema: {
+          type: Type.OBJECT,
+          properties: {
+            question: {
+              type: Type.STRING,
+              description: "The 5-Mark Question string",
+            },
+            justifyOptions: {
+              type: Type.ARRAY,
+              items: {
+                type: Type.OBJECT,
+                properties: {
+                  title: { type: Type.STRING, description: "Short title (e.g., Plan A)" },
+                  description: { type: Type.STRING, description: "MAXIMUM 20 WORDS. Only 1 short sentence." }
+                },
+                required: ["title", "description"]
+              },
+              description: "Only if Command Word is 'Justify': provide 3-4 specific options or plans for the student to choose from.",
+            },
+            markScheme: {
+              type: Type.STRING,
+              description: "The 1-5 Mark Scheme formatted in Markdown",
+            },
+            starters: {
+              type: Type.ARRAY,
+              items: { type: Type.STRING },
+              description: "3-5 Sentence Starters as an array of strings",
+            },
+          },
+          required: ["question", "markScheme", "starters"],
+        },
+      });
+
+      const textOutput = response.text || "{}";
+      const jsonStr = textOutput.trim().replace(/^```(?:json)?\s*/i, "").replace(/\s*```$/i, "");
+      const result = JSON.parse(jsonStr);
+
+      res.json(result);
+    } catch (error: any) {
+      console.error("Gemini API Error in High Five:", error);
+      res.status(500).json({ error: error.message || "An error occurred during generation." });
+    }
+  });
+
+  // ==========================================
+  // IG DSE DESIGNER ENDPOINTS
+  // ==========================================
+
+  app.post('/api/dse/generate', upload.array('files'), async (req, res) => {
+    try {
+      const prompt = req.body.prompt;
+      
+      let urls: string[] = [];
+      if (req.body.urls) {
+        if (Array.isArray(req.body.urls)) {
+            urls = req.body.urls;
+        } else if (typeof req.body.urls === 'string') {
+            urls = JSON.parse(req.body.urls);
+        }
+      }
+      
+      const syllabusCode = req.body.syllabusCode;
+      const files = req.files as Express.Multer.File[];
+
+      if (!prompt && (!files || files.length === 0) && urls.filter(u => u.trim() !== '').length === 0) {
+        return res.status(400).json({ error: 'Please provide at least one input (suggestion prompt, document, or URL).' });
+      }
+      
+      let documentTexts = '';
+      if (files && files.length > 0) {
+          for (const file of files) {
+              if (file.mimetype === 'application/pdf') {
+                  const data = await pdf(file.buffer);
+                  documentTexts += `\n--- Document: ${file.originalname} ---\n${data.text}\n`;
+              } else if (file.mimetype === 'application/vnd.openxmlformats-officedocument.wordprocessingml.document' || file.mimetype === 'application/msword') {
+                  const result = await mammoth.extractRawText({ buffer: file.buffer });
+                  documentTexts += `\n--- Document: ${file.originalname} ---\n${result.value}\n`;
+              } else {
+                  documentTexts += `\n--- Document: ${file.originalname} ---\n${file.buffer.toString('utf8')}\n`;
+              }
+          }
+      }
+
+      const systemInstruction = `You are 'DSE Designer', the core AI engine for an IGCSE Geography Suite application. Your sole purpose is to synthesize user inputs into highly detailed, exam-ready "Detailed Specific Examples" (DSEs).
+
+### Critical Validation & Synthesis Context
+1. SAVVY VALIDATION: First, evaluate if the provided context (URLs, Documents, Prompt) factually and topically matches the requested Syllabus Code. If the topics do not match or are only tangentially related, explicitly state this mismatch prominently at the top of your response (e.g. "⚠️ Topic Mismatch: The provided materials do not strongly align with syllabus code...") and then attempt the best synthesis possible or explain why it cannot form a valid DSE for that code.
+2. TEMPORAL & RESOURCE SYNTHESIS: If multiple materials (URLs, files) are provided and there is a link between them (e.g. an ongoing case study over a period of time, or different aspects of the same event), explicitly seek these links out and make that synthesis obvious to the student. Demonstrate the extent and temporal scale purveyed over these multiple sources.
+
+### Core Objectives
+1. EXAM READINESS: Structure every DSE to provide the exact level of depth, names, statistics, and locations required for candidates to maximize sub-marks on Paper 1 and Paper 2.
+2. TIMELINE CONSTRAINT: Strictly prioritize contemporary data and events from CE 2000 to the present day, as recommended by the syllabus.
+3. SYLLABUS ALIGNMENT: Map the output precisely to the specific syllabus code below.
+
+### DSE Reference Schema
+Align output to these exact structural requirements for the relevant syllabus code:
+
+[PH1: Changing River Environments]
+- 1.3.8 (River Flood): Named river, specific causes, precise impacts, management strategies/techniques (including sustainable).
+- 1.3.9 (River Pollution): Named river, causes, impacts, management strategies/techniques (including sustainable).
+
+[PH2: Changing Coastal Environments]
+- 2.3.7 (Coastal Erosion): Named country/coastal area, causes, impacts, protective strategies against tropical storms, erosion management (including sustainable).
+- 2.3.8 (Coral Reefs): Named country/coastal area, why the reef is important, threats to the reef, management strategies/techniques.
+
+[PH3: Changing Ecosystems]
+- 3.4.4 (Tropical Rainforest): Named country/rainforest area, threats, impacts of destruction/deforestation, management strategies/techniques (including sustainable).
+
+[PH4: Tectonic Hazards]
+- 4.4.3 (Earthquake): Named country/area, causes, impacts, immediate/long-term responses, management strategies/techniques.
+- 4.4.4 (Volcanic Eruption): Named volcano, causes, impacts, immediate/long-term responses, management strategies/techniques.
+
+[PH5: Climate Change]
+- 5.3.3 (Climate Change): Named country/region, impacts, responses, management strategies/techniques (including sustainable).
+
+[HU6: Changing Population]
+- 6.2.3 (Population Policy): Named country, specific reasons for population growth or decline, precise impacts of a pro- or anti-natalist policy.
+- 6.3.5 (International Migration): Named country of origin AND destination country, specific push/pull factors, impacts on migrants, origin, and destination, migration management (including sustainable).
+
+[HU7: Changing Towns & Cities]
+- 7.3.2 (Urban Growth): Named urban area, causes of growth, challenges and opportunities, management strategies/techniques (including sustainable).
+
+[HU8: Development]
+- 8.3.4 (Development Gap): Named MIC or LIC country, reasons for current development level, strategies/techniques used to raise economic development, quality of life, and standard of living.
+
+[HU9: Changing Economies]
+- 9.2.6 (Globalisation & TNCs): Named country/area, impacts of globalisation, specific impacts of a named TNC operating there.
+- 9.3.5 (Tourism): Named country/area, reasons for tourism growth, benefits, problems, sustainable management strategies/techniques.
+
+[HU10: Resource Provision]
+- 10.3.6 (Food Supply): Named country/area, factors affecting supply, causes of food insecurity, problems caused by food insecurity, strategies to increase food supply.
+- 10.6.4 (Energy Mix): Named country, detailed energy mix breakdown, impacts of different energy types used, management strategies/techniques (including sustainable).
+
+Every DSE profile you generate must strictly follow this Markdown structure:
+
+# DSE Profile: [Specific Location/Name]
+**Syllabus Code & Topic:** [e.g., PH1: Changing River Environments - 1.3.8 River Flood]
+**Temporal Range:** [e.g., August 2010 – Present Day]
+
+---
+
+## 📌 Executive Summary
+A concise 3-4 sentence overview of the DSE establishing its scale, geography, and textbook relevance.
+
+## 📊 Core Statistics & Place-Specific Detail
+(Provide a bulleted list of critical, high-scoring facts: dates, death tolls, economic costs in $, volumes, percentages, and named local places/tributaries/organizations).
+
+## 🌍 Locational Specifics (CLOCCS)
+Describe locational specifics using CLOCCS:
+- C - Continents: Identify the continent or major global region.
+- L - Latitude: Describe the location in terms of global lines of latitude.
+- O - Oceans and Seas: Name the specific oceans or major bodies of water that border or surround the location.
+- C - Countries: List the countries that neighbor the location or the specific country the site resides in.
+- C - Compass Points: Give the direction of the place relative to another known landmark or region.
+- S - Scale: Distance to a neighbouring place (a coast or a city/town) as in a 'proximity marker'.
+
+## 🗺️ Geographical Context Map
+Produce a JSON block detailing coordinates for a custom interactive map. IMPORTANT: You MUST output a valid JSON string inside a code block labeled \`json-map\` (i.e. \`\`\`json-map). This JSON must include:
+- "title": A string title for the map.
+- "center": A [latitude, longitude] array of numbers.
+- "zoom": An integer describing the zoom level (e.g. 4 to 10).
+- "markers": An array of objects, where each object has a "position" (array of two numbers) and a "popup" (string description of the pin).
+Example:
+\`\`\`json-map
+{
+  "title": "Map of the 2010 Indus River Floods",
+  "center": [28.0, 68.0],
+  "zoom": 5,
+  "markers": [
+    { "position": [28.0, 68.0], "popup": "Sindh Province - severely affected region" }
+  ]
+}
+\`\`\`
+
+## 🔍 Syllabus Requirement Breakdown
+(Create sub-sections matching the exact bullet points of the target syllabus requirement. Ensure explicit "Sustainable" management labels are present.)
+
+## 📝 Exam Application Notes
+- **Paper 1 (Core/Extended Questions):** Brief tips on how a student should deploy this case study for a 7-mark or 9-mark leveled response.
+- **Key Vocabulary:** 4-5 high-tier geographical terms specific to this DSE.
+
+---
+
+<br/>
+<br/>
+
+## Student DSE Input Report: [Syllabus Code & Topic]
+### 1) USER SUGGESTION PROMPTS:
+[Output exactly what the student prompted in the suggestion prompt. Output "None provided" if none.]
+
+### 2) FILE CONTEXT UPLOAD:
+[Name of the file(s) the student uploaded]
+[A detailed synopsis and description of the contents of the files uploaded. Output "None provided" if none.]
+
+### 3) TARGET URL PARSE:
+[List the URLs]
+[A synopsis of the URLs and a short analysis of the credibility or bias of the news and media outlets the student used to compile the DSE. Output "None provided" if none.]`;
+
+      let combinedInput = `Syllabus Code Needed: ${syllabusCode}\n\n`;
+      if (prompt) combinedInput += `User Suggestion Prompt: ${prompt}\n\n`;
+      if (documentTexts) combinedInput += `Document Text: ${documentTexts}\n\n`;
+      if (urls && urls.length > 0) {
+        combinedInput += `Provided Web URLs (to synthesize with context):\n` + urls.map(u => `- ${u}`).join('\n') + `\n\n`;
+      }
+
+      const ai = getGenAI();
+      const response = await generateContentWithRetry(ai, "gemini-2.5-pro", combinedInput, {
+        systemInstruction,
+        temperature: 0.2,
+      });
+
+      res.json({ result: response.text });
+    } catch (error: any) {
+      console.error("Gemini API Error in DSE Designer:", error);
+      res.status(500).json({ error: error.message || "Failed to generate DSE." });
+    }
+  });
+
+  app.post('/api/dse/export-docx', async (req, res) => {
+    try {
+      const { html } = req.body;
+      if (!html) {
+        return res.status(400).json({ error: 'HTML content required.' });
+      }
+      const htmlToDocx = await import('html-to-docx');
+      const fileBuffer = await htmlToDocx.default(html, null, {
+          table: { row: { cantSplit: true } },
+          footer: true,
+          pageNumber: true,
+      });
+      
+      res.setHeader('Content-Type', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document');
+      res.setHeader('Content-Disposition', 'attachment; filename="DSE-Profile.docx"');
+      res.send(fileBuffer);
+    } catch (error: any) {
+      console.error("Docx Export Error:", error);
+      res.status(500).json({ error: error.message || 'Failed to export to DOCX.' });
     }
   });
 
@@ -1065,7 +1598,7 @@ Constraints:
 
   async function tagHeadlines(headlines: string[]): Promise<Record<string, string[]>> {
     if (!headlines.length) return {};
-    
+
     // Gracefully bypass if Gemini API key is not configured
     const apiKey = process.env.GEMINI_API_KEY || process.env.VITE_GEMINI_API_KEY || process.env.API_KEY || process.env.GEOG_APP_KEY_V1;
     if (!apiKey) {
@@ -1073,7 +1606,7 @@ Constraints:
       return {};
     }
 
-    const VALID_TAGS = new Set(['SL1', 'SL2', 'SL3', 'HL4', 'HL5', 'HL6', 'OPA', 'OPD', 'OPE']);
+    const VALID_TAGS = new Set(['PH1', 'PH2', 'PH3', 'PH4', 'PH5', 'HU6', 'HU7', 'HU8', 'HU9', 'HU10']);
     const normalizeTags = (tags: string[]): string[] => {
       if (!Array.isArray(tags)) return [];
       const normalized: string[] = [];
@@ -1084,7 +1617,7 @@ Constraints:
           normalized.push(cleanTag);
           return;
         }
-        const match = cleanTag.match(/^(SL1|SL2|SL3|HL4|HL5|HL6|OPA|OPD|OPE)\b/);
+        const match = cleanTag.match(/^(PH1|PH2|PH3|PH4|PH5|HU6|HU7|HU8|HU9|HU10)\b/);
         if (match) {
           normalized.push(match[1]);
         }
@@ -1098,7 +1631,7 @@ Constraints:
     while (attempts < maxAttempts) {
       try {
         const ai = getGenAI();
-        const prompt = `Analyze these news headlines and assign relevant International Baccalaureate (IB) Geography unit tags.
+        const prompt = `Analyze these news headlines and assign relevant IGCSE Geography unit tags.
         IMPORTANT: You MUST return the EXACT 'headline' string as provided in the input list for the mapping to work.
         
         Headlines to analyze:
@@ -1109,23 +1642,24 @@ Constraints:
           'gemini-3.5-flash',
           [{ role: 'user', parts: [{ text: prompt }] }],
           {
-            systemInstruction: `You are a strict IB Geography tagging agent for the "DP Anchorman" application. 
+            systemInstruction: `You are a strict IGCSE Geography tagging agent for the "IG Correspondent" application. 
             Analyze the headlines and assign relevant unit tags ONLY from this list:
-            - SL1: Changing Populations
-            - SL2: Global Climate, Vulnerability & Resilience
-            - SL3: Global Resource Consumption & Security
-            - HL4: Power, Places & Networks
-            - HL5: Human Development & Diversity
-            - HL6: Global Risk & Resilience
-            - OPA: Freshwater
-            - OPD: Geophysical Hazards
-            - OPE: Leisure, Tourism & Sport
+            - PH1: Changing River Environments
+            - PH2: Changing Coastal Environments
+            - PH3: Changing Ecosystems
+            - PH4: Tectonic Hazards
+            - PH5: Climate Change
+            - HU6: Changing Populations
+            - HU7: Changing Towns and Cities
+            - HU8: Development
+            - HU9: Changing Economies
+            - HU10: Resource Provision
             
             Rules:
             - Return a JSON array of objects: { "headline": "EXACT_ORIGINAL_STRING", "tags": ["TAG1", "TAG2"] }.
-            - Tags MUST be uppercase codes from the list above (e.g., "SL2").
+            - Tags MUST be uppercase codes from the list above (e.g., "PH1").
             - Max 3 tags per headline.
-            - If a headline doesn't match any IB Geography context, return an empty tags array.
+            - If a headline doesn't match any IGCSE Geography context, return an empty tags array.
             - DO NOT change or normalize the headline text in your response.`,
             responseMimeType: 'application/json',
             responseSchema: {
@@ -1134,7 +1668,11 @@ Constraints:
                 type: Type.OBJECT,
                 properties: {
                   headline: { type: Type.STRING },
-                  tags: { type: Type.ARRAY, items: { type: Type.STRING } }
+                  tags: {
+                    type: Type.ARRAY,
+                    items: { type: Type.STRING },
+                    description: "IGCSE unit tags strictly from: PH1, PH2, PH3, PH4, PH5, HU6, HU7, HU8, HU9, HU10. Never use IB/DP tags."
+                  }
                 },
                 required: ['headline', 'tags']
               }
@@ -1154,11 +1692,11 @@ Constraints:
         return tagsMapResult;
       } catch (error: any) {
         attempts++;
-        const isUnavailable = error?.status === 'UNAVAILABLE' || 
-                             error?.code === 503 || 
-                             error?.message?.includes('503') ||
-                             error?.message?.includes('UNAVAILABLE') ||
-                             error?.response?.status === 503;
+        const isUnavailable = error?.status === 'UNAVAILABLE' ||
+          error?.code === 503 ||
+          error?.message?.includes('503') ||
+          error?.message?.includes('UNAVAILABLE') ||
+          error?.response?.status === 503;
 
         if (isUnavailable) {
           console.warn(`Gemini 503 (High Demand). Attempt ${attempts}/${maxAttempts}.`);
@@ -1187,26 +1725,24 @@ Constraints:
     try {
       const ai = getGenAI();
       const today = getPollDateKST();
-      const prompt = `Based on these recent news items, generate exactly 3 IB Geography themed daily polls for today (${today}).
+      const prompt = `Based on these recent news items, generate exactly 3 IGCSE Geography themed daily polls for today (${today}).
       
       News Items:
       ${JSON.stringify(headlines.slice(0, 20))}
       
       Guidelines:
       - Questions must be directly related to one of the provided news articles.
-      - Structure questions around the IB Geography core concepts:
-        * 4P's: Place, Process, Power, Possibility
-        * 2S's: Scale, Spatial Interaction
+      - Structure questions around the IGCSE Geography syllabus structure and command words (Describe, Explain, Discuss, Evaluate). Focus on place-specific details and data-driven geography.
       - Example Question Styles: 
         * "The recent [Event] is likely to [Outcome]... A: Yes, B: No, C: Maybe"
         * "How might [Region] look to reduce [Issue] among the public? A: [Option], B: [Option], C: [Option]"
       - Make them engaging and opinion-based where appropriate to stimulate debate.
       - Provide the exact 'source_url' from the news items for each question.
       - IMPORTANT: You MUST generate exactly one poll for each of these three categories:
-        1. Core: Choose one unit from (SL1, SL2, SL3)
-        2. Extension: Choose one unit from (HL4, HL5, HL6)
-        3. Options: Choose one unit from (OPA, OPD, OPE)
-      - The 'dp_tag' for each poll must be the exact unit string chosen (e.g. SL2, HL5, OPD).
+        1. Physical Geography: Choose one unit from (PH1, PH2, PH3, PH4, PH5)
+        2. Human Geography: Choose one unit from (HU6, HU7, HU8, HU9, HU10)
+        3. Case Study / Application: Choose any unit from PH1-HU10
+      - The 'dp_tag' for each poll must be the exact unit string chosen (e.g. PH1, HU6, HU8).
       - Provide 3 or 4 distinct options (A, B, C, D). If only 3 are needed, use A, B, C.
       
       Return a JSON array of 3 poll objects.`;
@@ -1216,12 +1752,12 @@ Constraints:
         'gemini-3.5-flash',
         [{ role: 'user', parts: [{ text: prompt }] }],
         {
-          systemInstruction: `You are a curriculum expert for IB Geography. Generate 3 engaging, syllabus-aligned daily polls based on current events.
+          systemInstruction: `You are a curriculum expert for IGCSE Geography. Generate 3 engaging, syllabus-aligned daily polls based on current events.
           Output format: JSON array of objects:
           {
             "question": "string",
             "source_url": "string",
-            "dp_tag": "string (e.g. SL2)",
+            "dp_tag": "string (e.g. PH1)",
             "option_a": "string",
             "option_b": "string",
             "option_c": "string",
@@ -1235,7 +1771,10 @@ Constraints:
               properties: {
                 question: { type: Type.STRING },
                 source_url: { type: Type.STRING },
-                dp_tag: { type: Type.STRING },
+                dp_tag: {
+                  type: Type.STRING,
+                  description: "IGCSE unit tag strictly from: PH1, PH2, PH3, PH4, PH5, HU6, HU7, HU8, HU9, HU10. Never use IB/DP tags."
+                },
                 option_a: { type: Type.STRING },
                 option_b: { type: Type.STRING },
                 option_c: { type: Type.STRING },
@@ -1316,7 +1855,7 @@ Constraints:
           }
         });
         const uniqueItems = Array.from(uniqueMap.values());
-        
+
         let filteredItems = outlet.filter ? uniqueItems.filter(outlet.filter) : uniqueItems;
         const limitedItems = filteredItems.slice(0, 20);
 
@@ -1333,7 +1872,7 @@ Constraints:
 
       const uncachedOutlets = rawOutletsData.filter(o => !o.fromCache);
       const headlineToOriginal = new Map<string, string[]>();
-      
+
       uncachedOutlets.forEach((outlet: any) => {
         outlet.items.forEach((item: any) => {
           const strippedTitle = item.title
@@ -1351,7 +1890,7 @@ Constraints:
             .replace(/\s+-\s+Euronews$/i, '')
             .replace(/\s+\|\s+Euronews$/i, '')
             .trim();
-            
+
           if (!headlineToOriginal.has(strippedTitle)) {
             headlineToOriginal.set(strippedTitle, []);
           }
@@ -1360,13 +1899,13 @@ Constraints:
       });
 
       const uniqueHeadlinesToTag = Array.from(headlineToOriginal.keys());
-      const tagsMapStripped = uniqueHeadlinesToTag.length > 0 
-        ? await tagHeadlines(uniqueHeadlinesToTag) 
+      const tagsMapStripped = uniqueHeadlinesToTag.length > 0
+        ? await tagHeadlines(uniqueHeadlinesToTag)
         : {};
 
       const tagsMap: Record<string, string[]> = {};
       const normalizedOriginalsMap = new Map<string, string[]>();
-      
+
       headlineToOriginal.forEach((originals, stripped) => {
         normalizedOriginalsMap.set(stripped.toLowerCase().trim(), originals);
       });
@@ -1415,13 +1954,13 @@ Constraints:
   app.get('/api/polls/today', userTracker, async (req: any, res: any) => {
     try {
       console.log('[API] GET /api/polls/today requested');
-      
+
       if (!hasPollsForToday()) {
         console.log('[API] No polls for today. Attempting to generate from news...');
         let headlines: any[] = [];
         const firstOutlet = OUTLETS[0];
         const cached = correspondentCache[firstOutlet.id];
-        
+
         if (cached) {
           headlines = cached.data.items.map((i: any) => ({ title: i.title, link: i.link }));
         }
@@ -1534,10 +2073,10 @@ Constraints:
       if (!req.file) {
         return res.status(400).json({ error: "No file uploaded" });
       }
-      
+
       const data = await pdf(req.file.buffer);
       const fullText = data.text;
-      
+
       let inferredType: "1" | "2" | "3" = "3";
       const upperText = fullText.toUpperCase();
       if (upperText.includes("PAPER 1") || upperText.includes("OPTIONS")) {
@@ -1605,7 +2144,7 @@ Constraints:
 
       for (const filePath of pdfFiles) {
         const fileName = path.basename(filePath);
-        
+
         if (existingPaths.has(filePath) || existingNames.has(fileName)) {
           details.push({ file: fileName, status: "skipped", reason: "Already ingested" });
           continue;
@@ -1667,11 +2206,11 @@ Constraints:
     try {
       const { id } = req.params;
       const teacherCode = (req.query.teacherCode as string) || "SKN";
-      
+
       let papers = readIngestedPapers(teacherCode);
       const initialLength = papers.length;
       papers = papers.filter(p => p.id !== id);
-      
+
       if (papers.length !== initialLength) {
         writeIngestedPapers(teacherCode, papers);
         res.json({ success: true, message: "Paper deleted successfully" });
@@ -1704,12 +2243,12 @@ Constraints:
     try {
       const ai = getGenAI();
 
-      const { 
-        paperType, 
-        targetMarks, 
-        framework, 
-        wordBankToggle, 
-        question, 
+      const {
+        paperType,
+        targetMarks,
+        framework,
+        wordBankToggle,
+        question,
         keywords,
         mode = 'both',
         teacherCode
@@ -1748,7 +2287,7 @@ Constraints:
 
       const systemInstruction = `
         # PERSONA & OBJECTIVE
-        You are the AI engine powering "DP Student Scaffold," an expert educational assistant designed exclusively for International Baccalaureate Diploma Programme (IB DP) students. 
+        You are the AI engine powering "IGCSE Student Scaffold," an expert educational assistant designed exclusively for Cambridge IGCSE Geography students. 
         Your role is to build structural blueprints and/or writing frames.
 
         # OUTPUT FORMAT
@@ -1799,7 +2338,7 @@ Constraints:
       if (attachmentContext) {
         promptText += `Attachment Context Material:\n${attachmentContext}\n`;
       }
-      
+
       if (mode === 'scaffold') {
         promptText += `TASK: Generate ONLY the detailed structural scaffold.`;
       } else if (mode === 'frame') {
@@ -1809,7 +2348,7 @@ Constraints:
       }
 
       console.log(`[${requestId}] Requesting Gemini (gemini-3.5-flash)...`);
-      
+
       const response = await generateContentWithRetry(
         ai,
         "gemini-3.5-flash",
@@ -1850,12 +2389,12 @@ Constraints:
           throw new Error("Failed to extract JSON from AI output.");
         }
       }
-      
+
       res.json({ scaffold, writingFrame });
       console.log(`[${requestId}] Successfully sent response`);
     } catch (error: any) {
       console.error(`[${requestId}] Generation Error:`, error);
-      res.status(500).json({ 
+      res.status(500).json({
         error: "Generation Failed",
         details: error.message || "Failed to generate content"
       });
@@ -1868,84 +2407,93 @@ Constraints:
 
   const GLOBETUBE_DEFAULT_VIDEOS = [
     {
-      id: "kVaBlat06Sw",
-      title: "Why 94% of China Lives East of This Line",
-      channel: "RealLifeLore",
-      description: "An investigation into China's demographic distribution, the Heihe-Tengchong line, geographic barriers, agricultural viability, and population pressure shifts.",
-      unit: "SL1: Changing Populations",
-      duration: "21:40",
-      publishedAt: "3 weeks ago"
-    },
-    {
-      id: "ztWHqUFJRTs",
-      title: "Climate change: Earth's giant game of Tetris",
+      id: "Pz6AQXQGupQ",
+      title: "Where we get our fresh water",
       channel: "TED-Ed",
-      description: "A spatial analysis of climate vulnerability, rising sea levels, changing biome distributions, climate migration corridors, and international adaptation strategies.",
-      unit: "SL2: Global Climate",
-      duration: "02:48",
-      publishedAt: "1 month ago"
-    },
-    {
-      id: "Hvc1P5edKTc",
-      title: "Population & Food: Crash Course Geography #16",
-      channel: "CrashCourse Geography",
-      description: "An overview of ecological footprints, global resource distribution, Malthusian vs. Boserupian models of population growth, and resource security challenges.",
-      unit: "SL3: Global Resource",
-      duration: "11:58",
-      publishedAt: "2 weeks ago"
-    },
-    {
-      id: "FN3VFgG922A",
-      title: "Meet the enormous boats that carry your stuff",
-      channel: "Vox",
-      description: "Exploring the spatial interactions, logistics networks, global shipping lanes, key maritime chokepoints (Suez, Panama, Malacca), and structural supply chain vulnerabilities.",
-      unit: "HL4: Power, Places & Networks",
-      duration: "10:35",
-      publishedAt: "5 days ago"
-    },
-    {
-      id: "cuPfIFg2ZDI",
-      title: "200 Years, 200 Countries, 4 Minutes",
-      channel: "Hans Rosling / Gapminder",
-      description: "Analyzing global development indices, GNI per capita, human development metrics, multidimensional poverty, and institutional structural aid in low-income nations.",
-      unit: "HL5: Human Dev & Diversity",
-      duration: "04:47",
-      publishedAt: "2 months ago"
+      description: "An exploration of Earth's water distribution, freshwater storage systems, and the hydrological systems that supply human civilization.",
+      unit: "PH1: Changing River Environments",
+      duration: "05:08",
+      publishedAt: "1 week ago"
     },
     {
       id: "LxgMdjyw8uw",
       title: "We WILL Fix Climate Change!",
       channel: "Kurzgesagt – In a Nutshell",
-      description: "An in-depth case study of environmental degradation, community resilience, risk management, and the forced relocation of indigenous populations due to coastal erosion.",
-      unit: "HL6: Global Risk & Resilience",
+      description: "An in-depth study of coastal erosion, rising sea levels, community resilience, and risk management in low-lying coastal areas.",
+      unit: "PH2: Changing Coastal Environments",
       duration: "16:15",
       publishedAt: "3 weeks ago"
     },
     {
-      id: "Pz6AQXQGupQ",
-      title: "Where we get our fresh water",
-      channel: "TED-Ed",
-      description: "An exploration of Earth's water distribution, freshwater storage systems, and the hydrological systems that supply human civilization.",
-      unit: "OPA: Freshwater",
-      duration: "05:08",
-      publishedAt: "1 week ago"
+      id: "ys8aM6qHpaY",
+      title: "How Wolves Change Rivers",
+      channel: "Sustainable Human",
+      description: "A classic case study of trophic cascades showing how reintroducing wolves to Yellowstone National Park changed ecosystem structures and geomorphology.",
+      unit: "PH3: Changing Ecosystems",
+      duration: "04:33",
+      publishedAt: "4 years ago"
     },
     {
       id: "fXb02MQ78yQ",
       title: "What Happens if a Supervolcano Blows Up?",
       channel: "Kurzgesagt – In a Nutshell",
       description: "Examining volcanic hazard maps, seismic anomalies, gas emissions, deformation monitoring, and disaster mitigation strategies for active geophysical hazards.",
-      unit: "OPD: Geophysical Hazards",
+      unit: "PH4: Tectonic Hazards",
       duration: "10:04",
       publishedAt: "4 days ago"
+    },
+    {
+      id: "ztWHqUFJRTs",
+      title: "Climate change: Earth's giant game of Tetris",
+      channel: "TED-Ed",
+      description: "A spatial analysis of climate vulnerability, rising sea levels, changing biome distributions, climate migration corridors, and international adaptation strategies.",
+      unit: "PH5: Climate Change",
+      duration: "02:48",
+      publishedAt: "1 month ago"
+    },
+    {
+      id: "kVaBlat06Sw",
+      title: "Why 94% of China Lives East of This Line",
+      channel: "RealLifeLore",
+      description: "An investigation into China's demographic distribution, the Heihe-Tengchong line, geographic barriers, agricultural viability, and population pressure shifts.",
+      unit: "HU6: Changing Populations",
+      duration: "21:40",
+      publishedAt: "3 weeks ago"
     },
     {
       id: "7NBa5o--y3k",
       title: "The Cruise Industry's Arms Race",
       channel: "Wendover Productions",
       description: "Analyzing the globalization of leisure, tourism nodes, carrying capacity of small island tourist economies, and the environmental footprint of cruise terminals.",
-      unit: "OPE: Leisure, Tourism & Sport",
+      unit: "HU7: Changing Towns and Cities",
       duration: "13:22",
+      publishedAt: "2 weeks ago"
+    },
+    {
+      id: "cuPfIFg2ZDI",
+      title: "200 Years, 200 Countries, 4 Minutes",
+      channel: "Hans Rosling / Gapminder",
+      description: "Analyzing global development indices, GNI per capita, human development metrics, multidimensional poverty, and institutional structural aid in low-income nations.",
+      unit: "HU8: Development",
+      duration: "04:47",
+      publishedAt: "2 months ago"
+    },
+    {
+      id: "FN3VFgG922A",
+      title: "Meet the enormous boats that carry your stuff",
+      channel: "Vox",
+      description: "Exploring the spatial interactions, logistics networks, global shipping lanes, key maritime chokepoints (Suez, Panama, Malacca), and structural supply chain vulnerabilities.",
+      unit: "HU9: Changing Economies",
+      duration: "10:35",
+      publishedAt: "5 days ago"
+    },
+    {
+      id: "Hvc1P5edKTc",
+      title: "Population & Food: Crash Course Geography #16",
+      channel: "CrashCourse Geography",
+      description: "An overview of ecological footprints, global resource distribution, Malthusian vs. Boserupian models of population growth, and resource security challenges.",
+      unit: "HU10: Resource Provision",
+      duration: "11:58",
       publishedAt: "2 weeks ago"
     }
   ];
@@ -1961,19 +2509,20 @@ Constraints:
   async function generateWeeklyVideosServer(): Promise<any> {
     const ai = getGenAI();
     const WEEKLY_VIDEOS_SYSTEM_INSTRUCTION = `
-    You are the Curator Engine for DP GlobeTube. Your job is to select exactly 9 high-quality, real, educational YouTube videos (one for each of the 9 syllabus units listed below).
+    You are the Curator Engine for IG GlobeTube. Your job is to select exactly 10 high-quality, real, educational YouTube videos (one for each of the 10 syllabus units listed below).
     For each video, you MUST provide a valid, real, case-sensitive 11-character YouTube video ID, title, channel name, description, duration (MM:SS), and published date.
     
     # CURRICULUM UNITS:
-    - SL1: Changing Populations
-    - SL2: Global Climate
-    - SL3: Global Resource
-    - HL4: Power, Places & Networks
-    - HL5: Human Dev & Diversity
-    - HL6: Global Risk & Resilience
-    - OPA: Freshwater
-    - OPD: Geophysical Hazards
-    - OPE: Leisure, Tourism & Sport
+    - PH1: Changing River Environments
+    - PH2: Changing Coastal Environments
+    - PH3: Changing Ecosystems
+    - PH4: Tectonic Hazards
+    - PH5: Climate Change
+    - HU6: Changing Populations
+    - HU7: Changing Towns and Cities
+    - HU8: Development
+    - HU9: Changing Economies
+    - HU10: Resource Provision
     
     # TRUSTED CHANNELS TO RECOMMEND:
     Prioritize extremely popular and educational channels that always allow external embedding on websites:
@@ -1992,7 +2541,7 @@ Constraints:
     {
       "videos": [
         {
-          "unit": "SL1: Changing Populations",
+          "unit": "PH1: Changing River Environments",
           "id": "11_CHAR_ID",
           "title": "Exact or accurate Video Title",
           "channel": "Channel Name",
@@ -2000,16 +2549,16 @@ Constraints:
           "duration": "MM:SS",
           "publishedAt": "e.g., 2 weeks ago"
         },
-        ... (exactly 9 items, one for each unit in the exact order of the units listed above)
+        ... (exactly 10 items, one for each unit in the exact order of the units listed above)
       ]
     }
     `;
     const prompt = `
-      Select 9 high-yield educational geography/geopolitics videos for this week (one for each of the 9 units).
+      Select 10 high-yield educational geography/geopolitics videos for this week (one for each of the 10 units).
       Make sure to provide real YouTube video IDs from trusted creators (Kurzgesagt, TED-Ed, Crash Course, Vox, Wendover Productions, RealLifeLore, Geography Now).
       Vary the selections from standard templates, ensuring they are engaging.
     `;
-    
+
     const response = await ai.models.generateContent({
       model: "gemini-3.5-flash",
       contents: prompt,
@@ -2019,7 +2568,7 @@ Constraints:
         temperature: 0.7
       }
     });
-    
+
     const outputText = response.text || "";
     const cleanJsonText = outputText.replace(/^```json\n?|```$/g, "").trim();
     return JSON.parse(cleanJsonText);
@@ -2030,14 +2579,14 @@ Constraints:
       if (!gtDb) {
         throw new Error("Database connection not initialized.");
       }
-      
+
       const role = (req.query.role as string || "student").toLowerCase();
       const includeLocked = role === "teacher" || role === "super_admin";
       const currentWeek = getWeeksNumber(new Date());
       let matrix = await gtDb.getVideos(includeLocked);
-      
-      const prefixes = ["SL1", "SL2", "SL3", "HL4", "HL5", "HL6", "OPA", "OPD", "OPE"];
-      
+
+      const prefixes = ["PH1", "PH2", "PH3", "PH4", "PH5", "HU6", "HU7", "HU8", "HU9", "HU10"];
+
       // Auto-seed default videos if database is completely empty on startup
       let checkMatrix = includeLocked ? matrix : await gtDb.getVideos(true);
       let actualTotalCount = 0;
@@ -2046,12 +2595,12 @@ Constraints:
           actualTotalCount += checkMatrix[pref].length;
         }
       });
-      
+
       if (actualTotalCount === 0) {
         console.log("[GlobeTube] Database is empty. Seeding default videos into database...");
         const initialGrouped: Record<string, any[]> = {};
         prefixes.forEach(pref => { initialGrouped[pref] = []; });
-        
+
         GLOBETUBE_DEFAULT_VIDEOS.forEach((vid: any) => {
           if (vid.unit) {
             const pref = vid.unit.split(':')[0].trim();
@@ -2060,15 +2609,15 @@ Constraints:
             }
           }
         });
-        
+
         for (const pref of prefixes) {
           await gtDb.saveVideos(pref, initialGrouped[pref]);
         }
-        
+
         // Fetch updated matrix after seeding
         matrix = await gtDb.getVideos(includeLocked);
       }
-      
+
       // Check weekly rotation via a stored metadata week field
       let storedWeek = currentWeek;
       if (matrix["week_meta"] && matrix["week_meta"].length > 0) {
@@ -2076,12 +2625,12 @@ Constraints:
       } else {
         await gtDb.saveVideos("week_meta", [{ week: currentWeek }]);
       }
-      
+
       if (storedWeek !== currentWeek) {
         console.log(`[GlobeTube] Rotating weekly videos from ${storedWeek} to ${currentWeek}`);
         try {
           const response = await generateWeeklyVideosServer();
-          if (response && response.videos && response.videos.length === 9) {
+          if (response && response.videos && response.videos.length === 10) {
             const verifiedVideos: any[] = [];
             for (let i = 0; i < response.videos.length; i++) {
               const genVid = response.videos[i];
@@ -2107,7 +2656,7 @@ Constraints:
                 verifiedVideos.push({ ...defaultVid, is_locked: false });
               }
             }
-            
+
             // Group and save rotated weekly list
             const rotatedGrouped: Record<string, any[]> = {};
             prefixes.forEach(pref => { rotatedGrouped[pref] = []; });
@@ -2119,7 +2668,7 @@ Constraints:
                 }
               }
             });
-            
+
             for (const pref of prefixes) {
               await gtDb.saveVideos(pref, rotatedGrouped[pref]);
             }
@@ -2133,19 +2682,19 @@ Constraints:
           await gtDb.saveVideos("week_meta", [{ week: currentWeek }]);
         }
       }
-      
+
       // Clean returned payload from metadata week_meta
       const cleanMatrix: Record<string, any[]> = {};
       prefixes.forEach(pref => {
         cleanMatrix[pref] = matrix[pref] || [];
       });
-      
+
       res.json(cleanMatrix);
     } catch (err: any) {
       console.error("[GlobeTube] GET /api/videos failed:", err);
       // Fallback: return default matrix
       const fallbackMatrix: Record<string, any[]> = {};
-      const prefixes = ["SL1", "SL2", "SL3", "HL4", "HL5", "HL6", "OPA", "OPD", "OPE"];
+      const prefixes = ["PH1", "PH2", "PH3", "PH4", "PH5", "HU6", "HU7", "HU8", "HU9", "HU10"];
       prefixes.forEach(pref => { fallbackMatrix[pref] = []; });
       GLOBETUBE_DEFAULT_VIDEOS.forEach((vid: any) => {
         if (vid.unit) {
@@ -2164,7 +2713,7 @@ Constraints:
       if (!gtDb) {
         throw new Error("Database connection not initialized.");
       }
-      
+
       const { url, title, unit, channel, videos, teacherCode } = req.body;
       const allowedTeacherCodes = ["SKN", "JTE", "SMK", "JBO", "SSH", "LLE", "CMA", "CHE"];
 
@@ -2172,7 +2721,7 @@ Constraints:
         return res.status(403).json({ error: "Access Denied", details: "Unauthorized teacher credentials." });
       }
 
-      const prefixes = ["SL1", "SL2", "SL3", "HL4", "HL5", "HL6", "OPA", "OPD", "OPE"];
+      const prefixes = ["PH1", "PH2", "PH3", "PH4", "PH5", "HU6", "HU7", "HU8", "HU9", "HU10"];
 
       // Case 1: Single video import (url, title, unit, channel)
       if (url && unit) {
@@ -2238,8 +2787,8 @@ Constraints:
         }
 
         console.log("[GlobeTube] Persistent database synchronized with updated videos array.");
-        return res.status(200).json({ 
-          success: true, 
+        return res.status(200).json({
+          success: true,
           message: "Video successfully sorted into syllabus row.",
           videos: videos
         });
@@ -2300,13 +2849,13 @@ Constraints:
       if (!req.file) {
         return res.status(400).json({ error: "No file uploaded" });
       }
-      
+
       const fileName = req.file.originalname;
       const targetPath = path.join(textbooksDir, fileName);
-      
+
       fs.writeFileSync(targetPath, req.file.buffer);
       console.log(`[Textbook] Saved uploaded textbook: ${fileName}`);
-      
+
       res.json({
         name: fileName,
         url: `/textbooks/${encodeURIComponent(fileName)}`
@@ -2322,7 +2871,7 @@ Constraints:
     try {
       const { name } = req.params;
       const targetPath = path.join(textbooksDir, name);
-      
+
       if (fs.existsSync(targetPath)) {
         fs.unlinkSync(targetPath);
         console.log(`[Textbook] Deleted textbook file: ${name}`);
@@ -2371,7 +2920,7 @@ Constraints:
         VALUES (?, ?, ?, ?, ?, ?, ?)
       `);
       const result = stmt.run(userId, docName, page, x, y, note, createdAt);
-      
+
       res.status(201).json({
         id: result.lastInsertRowid,
         userId,
@@ -2409,7 +2958,7 @@ Constraints:
 
       const updateStmt = textbookDb.prepare("UPDATE textbook_bookmarks SET note = ? WHERE id = ?");
       updateStmt.run(note, id);
-      
+
       res.json({ success: true });
     } catch (err: any) {
       console.error("[Textbook Bookmarks] PUT failed:", err);

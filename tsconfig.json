@@ -26,9 +26,9 @@
   "exclude": [
     "node_modules",
     "dist",
-    "DP-Student-Scaffold/server.ts",
-    "The-DP-News-Room/server.ts",
-    "Fresh-off-the-Press/server.ts",
+    "IG-Student-Scaffold/server.ts",
+    "The-IG-News-Room/server.ts",
+    "IG Correspondent/server.ts",
     "DP-IA-Quality-Assurance/server.ts"
   ]
 }

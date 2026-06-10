@@ -1,6 +1,0 @@
-{
-  "name": "DP GlobeTube",
-  "description": "An interactive real-time video quiz and syllabus analyzer for IBDP Geography. Instantly classify curated videos into the syllabus guide and take empirical retrieval quizzes.",
-  "requestFramePermissions": [],
-  "majorCapabilities": []
-}

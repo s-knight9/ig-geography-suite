@@ -1,0 +1,17 @@
+services:
+  - type: web
+    name: ig-geography-suite
+    env: node
+    buildCommand: npm install --legacy-peer-deps && npm run build
+    startCommand: npm start
+    envVars:
+      - key: DATA_DIR
+        value: /data
+      - key: NODE_ENV
+        value: production
+      - key: GEMINI_API_KEY
+        sync: false
+    disk:
+      name: ig-geography-data
+      mountPath: /data
+      sizeGB: 1
