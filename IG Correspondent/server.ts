@@ -5,7 +5,7 @@ import Parser from 'rss-parser';
 import { GoogleGenAI, Type } from '@google/genai';
 import dotenv from 'dotenv';
 import crypto from 'crypto';
-import { getTodayPolls, castVote, hasPollsForToday, savePolls, getPollDateKST, tagText } from './src/server/db.ts';
+import { getTodayPolls, castVote, hasPollsForToday, savePolls, getPollDateKST, tagText, getManualHeadlineTags, saveManualHeadlineTags, learnKeywordsFromHeadline } from './src/server/db.ts';
 
 dotenv.config();
 
@@ -397,36 +397,50 @@ app.get('/api/news', async (req, res) => {
     const finalResults: Record<string, any> = {};
 
     rawOutletsData.forEach((outlet: any) => {
-      if (outlet.fromCache) {
-        finalResults[outlet.id] = outlet.data;
-      } else {
-        const itemsWithTags = outlet.items.map((item: any) => {
-          let tags = tagsMap[item.title] || tagText(item.title) || [];
-          const hashtags = tags.map((t: string) => `#${t}`).join(' ');
-          
-          // Clean any existing hashtags first to avoid duplicating them
-          const cleanTitle = item.title.replace(/#\w+:\s*[^#]+/g, '').trim();
-          const finalTitle = hashtags ? `${cleanTitle} ${hashtags}` : cleanTitle;
+      const itemsWithTags = outlet.fromCache
+        ? outlet.data.items.map((item: any) => {
+            const cleanTitle = item.title.replace(/#\w+:\s*[^#]+/g, '').trim();
+            const manualTags = getManualHeadlineTags(cleanTitle) || getManualHeadlineTags(item.title);
+            if (manualTags !== null) {
+              const hashtags = manualTags.map((t: string) => `#${t}`).join(' ');
+              const finalTitle = hashtags ? `${cleanTitle} ${hashtags}` : cleanTitle;
+              return {
+                ...item,
+                title: finalTitle,
+                tags: manualTags
+              };
+            }
+            return item;
+          })
+        : outlet.items.map((item: any) => {
+            const cleanTitle = item.title.replace(/#\w+:\s*[^#]+/g, '').trim();
+            let tags = getManualHeadlineTags(cleanTitle) || getManualHeadlineTags(item.title);
+            if (tags === null) {
+              tags = tagsMap[item.title] || tagText(item.title) || [];
+            }
+            const hashtags = tags.map((t: string) => `#${t}`).join(' ');
+            const finalTitle = hashtags ? `${cleanTitle} ${hashtags}` : cleanTitle;
 
-          return {
-            title: finalTitle,
-            link: item.link,
-            pubDate: item.pubDate,
-            tags: tags
-          };
-        });
+            return {
+              title: finalTitle,
+              link: item.link,
+              pubDate: item.pubDate,
+              tags: tags
+            };
+          });
 
-        const outletData = {
-          name: outlet.name,
-          color: outlet.color,
-          textColor: outlet.textColor,
-          logo: outlet.logo,
-          items: itemsWithTags
-        };
+      const outletData = {
+        name: outlet.name,
+        color: outlet.color,
+        textColor: outlet.textColor,
+        logo: outlet.logo,
+        items: itemsWithTags
+      };
 
+      if (!outlet.fromCache) {
         cache[outlet.id] = { timestamp: Date.now(), data: outletData };
-        finalResults[outlet.id] = outletData;
       }
+      finalResults[outlet.id] = outletData;
     });
 
     res.json(finalResults);
@@ -484,6 +498,31 @@ app.post('/api/polls/vote', (req: any, res: any) => {
     res.json({ success: true, results });
   } catch (error: any) {
     res.status(400).json({ error: error.message });
+  }
+});
+
+app.post('/api/news/tag', (req: any, res: any) => {
+  const { headline, tags, teacherCode } = req.body;
+  if (!teacherCode) {
+    return res.status(401).json({ error: 'Unauthorized: Only teachers can tag headlines.' });
+  }
+  if (!headline || !tags) {
+    return res.status(400).json({ error: 'Missing headline or tags.' });
+  }
+
+  try {
+    const cleanTitle = headline.replace(/#\w+:\s*[^#]+/g, '').trim();
+    saveManualHeadlineTags(cleanTitle, tags);
+    learnKeywordsFromHeadline(cleanTitle, tags);
+    
+    // Clear cache so that the news feed is immediately updated on refresh
+    Object.keys(cache).forEach(key => {
+      delete cache[key];
+    });
+
+    res.json({ success: true });
+  } catch (error: any) {
+    res.status(500).json({ error: error.message });
   }
 });
 

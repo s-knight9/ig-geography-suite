@@ -147,6 +147,29 @@ export function tagText(text: string): string[] {
     }
   ];
 
+  // Load learned keywords from database and merge them into primaryTaxonomy keywords lists
+  try {
+    const learned = db.prepare('SELECT keyword, tag FROM learned_keywords').all() as { keyword: string, tag: string }[];
+    const learnedMap: Record<string, string[]> = {};
+    learned.forEach(row => {
+      const tag = row.tag;
+      const keyword = row.keyword.toLowerCase().trim();
+      if (!learnedMap[tag]) {
+        learnedMap[tag] = [];
+      }
+      learnedMap[tag].push(keyword);
+    });
+    
+    for (const item of primaryTaxonomy) {
+      const learnedKeywords = learnedMap[item.tag];
+      if (learnedKeywords) {
+        item.keywords = [...item.keywords, ...learnedKeywords];
+      }
+    }
+  } catch (err) {
+    console.error("Error loading learned keywords:", err);
+  }
+
   for (const { tag, keywords } of primaryTaxonomy) {
     const hasKeyword = keywords.some(keyword => {
       if (keyword.includes(" ")) {
@@ -193,6 +216,17 @@ db.exec(`
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
     UNIQUE(poll_id, user_identifier),
     FOREIGN KEY (poll_id) REFERENCES polls(id)
+  );
+
+  CREATE TABLE IF NOT EXISTS manual_headline_tags (
+    headline TEXT PRIMARY KEY,
+    tags TEXT NOT NULL
+  );
+
+  CREATE TABLE IF NOT EXISTS learned_keywords (
+    keyword TEXT NOT NULL,
+    tag TEXT NOT NULL,
+    PRIMARY KEY (keyword, tag)
   );
 
   -- Migration: Add selected_option if it doesn't exist (handle already existing table)
@@ -411,6 +445,61 @@ export function savePolls(polls: any[]) {
   });
 
   transaction(polls);
+}
+
+const STOP_WORDS = new Set([
+  "the", "a", "an", "and", "or", "but", "in", "on", "at", "to", "for", "of", "with", "by", "from", "up", "about", 
+  "into", "over", "after", "is", "are", "was", "were", "be", "been", "being", "have", "has", "had", "do", "does", 
+  "did", "will", "would", "shall", "should", "can", "could", "may", "might", "must", "us", "we", "he", "she", "it", 
+  "they", "i", "you", "me", "him", "her", "them", "my", "your", "his", "their", "its", "as", "that", "this", "these", 
+  "those", "than", "then", "so", "not", "no", "yes"
+]);
+
+export function getManualHeadlineTags(headline: string): string[] | null {
+  try {
+    const row = db.prepare('SELECT tags FROM manual_headline_tags WHERE headline = ?').get(headline) as { tags: string } | undefined;
+    if (row) {
+      return JSON.parse(row.tags);
+    }
+  } catch (err) {
+    console.error("Error fetching manual headline tags:", err);
+  }
+  return null;
+}
+
+export function saveManualHeadlineTags(headline: string, tags: string[]): void {
+  try {
+    db.prepare('INSERT OR REPLACE INTO manual_headline_tags (headline, tags) VALUES (?, ?)').run(headline, JSON.stringify(tags));
+  } catch (err) {
+    console.error("Error saving manual headline tags:", err);
+  }
+}
+
+export function learnKeywordsFromHeadline(headline: string, tags: string[]): void {
+  if (!headline || !tags || tags.length === 0) return;
+  
+  // Normalize and extract words
+  const normalized = headline.toLowerCase().replace(/[^a-z0-9\s]/g, " ");
+  const words = normalized.split(/\s+/).filter(Boolean);
+  
+  const insert = db.prepare('INSERT OR IGNORE INTO learned_keywords (keyword, tag) VALUES (?, ?)');
+  
+  const transaction = db.transaction((wordsToLearn, tagsToAssociate) => {
+    for (const word of wordsToLearn) {
+      if (word.length >= 3 && !STOP_WORDS.has(word)) {
+        for (const tag of tagsToAssociate) {
+          insert.run(word, tag);
+        }
+      }
+    }
+  });
+
+  try {
+    transaction(words, tags);
+    console.log(`[ML] Learned keywords from headline "${headline}" for tags: ${tags.join(", ")}`);
+  } catch (err) {
+    console.error("Error learning keywords from headline:", err);
+  }
 }
 
 export default db;
