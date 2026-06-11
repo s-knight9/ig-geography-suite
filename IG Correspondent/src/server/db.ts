@@ -21,7 +21,7 @@ export const TAG_MAPPING: Record<string, string> = {
 };
 
 export function tagText(text: string): string[] {
-  if (!text) return ["HU8: Dev"]; // Strict No-Drop default
+  if (!text) return [];
   
   // Normalize string: lowercase and strip special characters
   const normalized = text.toLowerCase().replace(/[^a-z0-9\s]/g, " ");
@@ -156,37 +156,6 @@ export function tagText(text: string): string[] {
     if (hasKeyword) {
       matched.push(tag);
     }
-  }
-
-  // If primary taxonomy yields matches, return them immediately
-  if (matched.length > 0) {
-    return matched;
-  }
-
-  // 2. FALLBACK PASS: Broader associated semantic terms (satisfying the No-Drop Mandate without false positive over-tagging)
-  const fallbackTaxonomy = [
-    { tag: "PH1: Rivers", keywords: ["water", "rain", "rainfall", "precipitation", "lake", "lakes"] },
-    { tag: "PH2: Coasts", keywords: ["sea", "ocean", "oceans", "tide", "tides"] },
-    { tag: "PH3: Ecosystems", keywords: ["forest", "forests", "tree", "trees", "wildlife", "nature", "species", "plant", "plants"] },
-    { tag: "PH4: Tectonics", keywords: ["plate", "plates", "shake", "shaking", "disaster"] },
-    { tag: "PH5: Climate Change", keywords: ["climate", "carbon", "emissions", "emission"] },
-    { tag: "HU6: Pop", keywords: ["population", "people", "births", "deaths"] },
-    { tag: "HU7: Towns & Cities", keywords: ["housing", "house", "houses", "suburban", "infrastructure"] },
-    { tag: "HU8: Dev", keywords: ["poor", "rich", "poverty", "money", "aid", "global"] },
-    { tag: "HU9: Economies", keywords: ["company", "companies", "factory", "jobs", "business", "market", "trade"] },
-    { tag: "HU10: Resources", keywords: ["food", "energy", "power", "oil", "gas", "coal", "crop", "crops", "farming"] }
-  ];
-
-  for (const { tag, keywords } of fallbackTaxonomy) {
-    const hasKeyword = keywords.some(keyword => words.includes(keyword));
-    if (hasKeyword) {
-      matched.push(tag);
-    }
-  }
-
-  // 3. ULTIMATE DEFAULT: Route to Development if absolutely no terms overlap
-  if (matched.length === 0) {
-    matched.push("HU8: Dev");
   }
 
   return matched;
