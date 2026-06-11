@@ -7,6 +7,160 @@ console.log(`[Database] Using database at: ${dbPath}`);
 
 const db = new Database(dbPath);
 
+export const TAG_MAPPING: Record<string, string> = {
+  "PH1": "PH1: Rivers",
+  "PH2": "PH2: Coasts",
+  "PH3": "PH3: Ecosystems",
+  "PH4": "PH4: Tectonics",
+  "PH5": "PH5: Climate Change",
+  "HU6": "HU6: Pop",
+  "HU7": "HU7: Towns & Cities",
+  "HU8": "HU8: Dev",
+  "HU9": "HU9: Economies",
+  "HU10": "HU10: Resources"
+};
+
+export function tagText(text: string): string[] {
+  if (!text) return ["PH5: Climate Change"];
+  
+  // Normalize string: lowercase and strip special characters
+  const normalized = text.toLowerCase().replace(/[^a-z0-9\s]/g, " ");
+  const words = normalized.split(/\s+/).filter(Boolean);
+  
+  const matched: string[] = [];
+  const taxonomy = [
+    {
+      tag: "PH1: Rivers",
+      keywords: [
+        "flooding", "flood", "floods", "flooded",
+        "catchment", "catchments",
+        "drainage basin", "drainage basins",
+        "delta", "deltas",
+        "channel", "channels",
+        "levee", "levees",
+        "river", "rivers"
+      ]
+    },
+    {
+      tag: "PH2: Coasts",
+      keywords: [
+        "spit", "spits",
+        "erosion", "eroded", "eroding",
+        "longshore drift",
+        "coral reef", "coral reefs", "reef", "reefs",
+        "cliff", "cliffs",
+        "beach", "beaches",
+        "marine",
+        "coastal", "coast", "coasts"
+      ]
+    },
+    {
+      tag: "PH3: Ecosystems",
+      keywords: [
+        "rainforest", "rainforests",
+        "desert", "deserts",
+        "biodiversity",
+        "canopy", "canopies",
+        "savanna", "savannas", "savannah", "savannahs",
+        "biome", "biomes"
+      ]
+    },
+    {
+      tag: "PH4: Tectonics",
+      keywords: [
+        "earthquake", "earthquakes",
+        "volcano", "volcanoes", "volcanic",
+        "seismic",
+        "magma",
+        "plate boundary", "plate boundaries",
+        "tsunami", "tsunamis"
+      ]
+    },
+    {
+      tag: "PH5: Climate Change",
+      keywords: [
+        "global warming",
+        "carbon emissions", "carbon emission",
+        "greenhouse",
+        "meteorological",
+        "extreme weather"
+      ]
+    },
+    {
+      tag: "HU6: Pop",
+      keywords: [
+        "migration", "migrations", "migrant", "migrants", "migrate", "migrated",
+        "birth rate", "birth rates",
+        "dtm",
+        "ageing", "aging", "aged", "elderly",
+        "fertility",
+        "overpopulation", "overpopulated",
+        "demographic", "demographics"
+      ]
+    },
+    {
+      tag: "HU7: Towns & Cities",
+      keywords: [
+        "urban", "urbanisation", "urbanization",
+        "megacity", "megacities",
+        "sprawl", "sprawls", "sprawling",
+        "settlement hierarchy", "settlement hierarchies", "settlement", "settlements",
+        "favela", "favelas", "slum", "slums",
+        "regeneration", "regenerate", "regenerated",
+        "city", "cities"
+      ]
+    },
+    {
+      tag: "HU8: Dev",
+      keywords: [
+        "hdi",
+        "gni",
+        "wealth gap", "wealth gaps",
+        "foreign aid",
+        "trade bloc", "trade blocs",
+        "inequality", "inequalities",
+        "development", "develop", "developing", "developed"
+      ]
+    },
+    {
+      tag: "HU9: Economies",
+      keywords: [
+        "tnc", "tncs",
+        "globalisation", "globalization",
+        "industrial sector", "industrial sectors", "industry", "industries", "industrial",
+        "employment", "employ",
+        "manufacturing", "manufacture", "manufactured",
+        "financial", "finance"
+      ]
+    },
+    {
+      tag: "HU10: Resources",
+      keywords: [
+        "energy security",
+        "food supply", "food supplies",
+        "renewable", "renewables",
+        "water scarcity", "water scarce", "drought", "droughts",
+        "crop yield", "crop yields", "agriculture", "agricultural",
+        "minerals", "mineral", "mining"
+      ]
+    }
+  ];
+
+  for (const { tag, keywords } of taxonomy) {
+    const hasKeyword = keywords.some(keyword => {
+      if (keyword.includes(" ")) {
+        return normalized.includes(keyword);
+      }
+      return words.includes(keyword);
+    });
+    if (hasKeyword) {
+      matched.push(tag);
+    }
+  }
+
+  return matched;
+}
+
 // Initialize schema
 db.exec(`
   CREATE TABLE IF NOT EXISTS polls (
@@ -87,6 +241,34 @@ export function getTodayPolls(userIdentifier: string) {
   console.log(`[Polls] Found ${polls.length} polls in database.`);
 
   return polls.map(poll => {
+    // Dynamic tagging
+    let tags = tagText(poll.question);
+    
+    // If no keyword matched, try matching the poll's existing dp_tag
+    if (tags.length === 0) {
+      if (poll.dp_tag) {
+        const cleanDbTag = poll.dp_tag.trim();
+        const mapped = TAG_MAPPING[cleanDbTag] || Object.values(TAG_MAPPING).find(val => 
+          val.toLowerCase() === cleanDbTag.toLowerCase() || 
+          val.toLowerCase().startsWith(cleanDbTag.toLowerCase() + ":")
+        );
+        if (mapped) {
+          tags = [mapped];
+        }
+      }
+    }
+    
+    // Final fallback to ensure it is never untagged
+    if (tags.length === 0) {
+      tags = ["PH5: Climate Change"];
+    }
+
+    const hashtags = tags.map(t => `#${t}`).join(' ');
+    
+    // Clean any existing hashtags first to avoid duplicating them
+    const cleanQuestion = poll.question.replace(/#\w+:\s*[^#]+/g, '').trim();
+    const finalQuestion = `${cleanQuestion} ${hashtags}`;
+
     const votes = db.prepare(`
       SELECT selected_option, COUNT(*) as count 
       FROM poll_votes 
@@ -113,6 +295,8 @@ export function getTodayPolls(userIdentifier: string) {
 
     return {
       ...poll,
+      question: finalQuestion,
+      dp_tag: tags[0],
       hasVoted: !!userVote,
       userSelection: userVote?.selected_option,
       results
@@ -173,7 +357,7 @@ function seedPollsIfEmpty(date: string) {
         date,
         question: "Which of the following is the primary driver of the 'Urban Heat Island' effect in mega-cities?",
         source_url: "https://www.theguardian.com/environment",
-        dp_tag: "HU7",
+        dp_tag: "HU7: Towns & Cities",
         option_a: "Albedo reduction due to concrete/asphalt",
         option_b: "Increased agricultural runoff",
         option_c: "Geophysical hazard vulnerability",
@@ -183,7 +367,7 @@ function seedPollsIfEmpty(date: string) {
         date,
         question: "How has global fertility shifted in middle-income countries according to recent demographic reports?",
         source_url: "https://www.economist.com/international",
-        dp_tag: "HU6",
+        dp_tag: "HU6: Pop",
         option_a: "Rapid increase above replacement level",
         option_b: "Consistent decline toward aging population structures",
         option_c: "No change over the last 30 years",
@@ -193,7 +377,7 @@ function seedPollsIfEmpty(date: string) {
         date,
         question: "What is the main concern regarding 'Rare Earth Elements' in global supply chain security?",
         source_url: "https://www.ft.com/global-economy",
-        dp_tag: "HU10",
+        dp_tag: "HU10: Resources",
         option_a: "Oversupply leading to price crashes",
         option_b: "Geopolitical concentration of extraction/processing",
         option_c: "Lack of use in renewable energy hardware",

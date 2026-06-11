@@ -22,7 +22,7 @@ import { Readability } from "@mozilla/readability";
 import { JSDOM } from "jsdom";
 import Parser from "rss-parser";
 import crypto from "crypto";
-import { getTodayPolls, castVote, hasPollsForToday, savePolls, getPollDateKST } from "./IG Correspondent/src/server/db.ts";
+import { getTodayPolls, castVote, hasPollsForToday, savePolls, getPollDateKST, tagText } from "./IG Correspondent/src/server/db.ts";
 import { getGlobeTubeDB } from "./globetubeDb";
 
 dotenv.config();
@@ -1597,120 +1597,13 @@ Example:
     }
   ];
 
+
   async function tagHeadlines(headlines: string[]): Promise<Record<string, string[]>> {
-    if (!headlines.length) return {};
-
-    // Gracefully bypass if Gemini API key is not configured
-    const apiKey = process.env.GEMINI_API_KEY || process.env.VITE_GEMINI_API_KEY || process.env.API_KEY || process.env.GEOG_APP_KEY_V1;
-    if (!apiKey) {
-      console.warn('[Newsroom API] GEMINI_API_KEY is not configured. Skipping news tagging.');
-      return {};
-    }
-
-    const VALID_TAGS = new Set(['PH1', 'PH2', 'PH3', 'PH4', 'PH5', 'HU6', 'HU7', 'HU8', 'HU9', 'HU10']);
-    const normalizeTags = (tags: string[]): string[] => {
-      if (!Array.isArray(tags)) return [];
-      const normalized: string[] = [];
-      tags.forEach(t => {
-        if (typeof t !== 'string') return;
-        const cleanTag = t.trim().toUpperCase();
-        if (VALID_TAGS.has(cleanTag)) {
-          normalized.push(cleanTag);
-          return;
-        }
-        const match = cleanTag.match(/^(PH1|PH2|PH3|PH4|PH5|HU6|HU7|HU8|HU9|HU10)\b/);
-        if (match) {
-          normalized.push(match[1]);
-        }
-      });
-      return Array.from(new Set(normalized));
-    };
-
-    let attempts = 0;
-    const maxAttempts = 2;
-
-    while (attempts < maxAttempts) {
-      try {
-        const ai = getGenAI();
-        const prompt = `Analyze these news headlines and assign relevant IGCSE Geography unit tags.
-        IMPORTANT: You MUST return the EXACT 'headline' string as provided in the input list for the mapping to work.
-        
-        Headlines to analyze:
-        ${JSON.stringify(headlines)}`;
-
-        const response = await generateContentWithRetry(
-          ai,
-          'gemini-3.5-flash',
-          [{ role: 'user', parts: [{ text: prompt }] }],
-          {
-            systemInstruction: `You are a strict IGCSE Geography tagging agent for the "IG Correspondent" application. 
-            Analyze the headlines and assign relevant unit tags ONLY from this list:
-            - PH1: Changing River Environments
-            - PH2: Changing Coastal Environments
-            - PH3: Changing Ecosystems
-            - PH4: Tectonic Hazards
-            - PH5: Climate Change
-            - HU6: Changing Populations
-            - HU7: Changing Towns and Cities
-            - HU8: Development
-            - HU9: Changing Economies
-            - HU10: Resource Provision
-            
-            Rules:
-            - Return a JSON array of objects: { "headline": "EXACT_ORIGINAL_STRING", "tags": ["TAG1", "TAG2"] }.
-            - Tags MUST be uppercase codes from the list above (e.g., "PH1").
-            - Max 3 tags per headline.
-            - If a headline doesn't match any IGCSE Geography context, return an empty tags array.
-            - DO NOT change or normalize the headline text in your response.`,
-            responseMimeType: 'application/json',
-            responseSchema: {
-              type: Type.ARRAY,
-              items: {
-                type: Type.OBJECT,
-                properties: {
-                  headline: { type: Type.STRING },
-                  tags: {
-                    type: Type.ARRAY,
-                    items: { type: Type.STRING },
-                    description: "IGCSE unit tags strictly from: PH1, PH2, PH3, PH4, PH5, HU6, HU7, HU8, HU9, HU10. Never use IB/DP tags."
-                  }
-                },
-                required: ['headline', 'tags']
-              }
-            }
-          }
-        );
-
-        const results = JSON.parse(response.text?.trim() || '[]');
-        const tagsMapResult: Record<string, string[]> = {};
-        if (Array.isArray(results)) {
-          results.forEach((item: any) => {
-            if (item.headline && Array.isArray(item.tags)) {
-              tagsMapResult[item.headline] = normalizeTags(item.tags);
-            }
-          });
-        }
-        return tagsMapResult;
-      } catch (error: any) {
-        attempts++;
-        const isUnavailable = error?.status === 'UNAVAILABLE' ||
-          error?.code === 503 ||
-          error?.message?.includes('503') ||
-          error?.message?.includes('UNAVAILABLE') ||
-          error?.response?.status === 503;
-
-        if (isUnavailable) {
-          console.warn(`Gemini 503 (High Demand). Attempt ${attempts}/${maxAttempts}.`);
-          if (attempts < maxAttempts) {
-            await new Promise(resolve => setTimeout(resolve, 3000 * attempts));
-            continue;
-          }
-        }
-        console.error('Error in AI tagging:', error.message || error);
-        return {};
-      }
-    }
-    return {};
+    const tagsMapResult: Record<string, string[]> = {};
+    headlines.forEach(headline => {
+      tagsMapResult[headline] = tagText(headline);
+    });
+    return tagsMapResult;
   }
 
   async function generateDailyPolls(headlines: any[]): Promise<any[]> {
@@ -1925,12 +1818,24 @@ Example:
         if (outlet.fromCache) {
           finalResults[outlet.id] = outlet.data;
         } else {
-          const itemsWithTags = outlet.items.map((item: any) => ({
-            title: item.title,
-            link: item.link,
-            pubDate: item.pubDate,
-            tags: tagsMap[item.title] || []
-          }));
+          const itemsWithTags = outlet.items.map((item: any) => {
+            let tags = tagsMap[item.title] || tagText(item.title) || [];
+            if (tags.length === 0) {
+              tags = ["PH5: Climate Change"];
+            }
+            const hashtags = tags.map((t: string) => `#${t}`).join(' ');
+            
+            // Clean any existing hashtags first to avoid duplicating them
+            const cleanTitle = item.title.replace(/#\w+:\s*[^#]+/g, '').trim();
+            const finalTitle = hashtags ? `${cleanTitle} ${hashtags}` : cleanTitle;
+
+            return {
+              title: finalTitle,
+              link: item.link,
+              pubDate: item.pubDate,
+              tags: tags
+            };
+          });
 
           const outletData = {
             name: outlet.name,
