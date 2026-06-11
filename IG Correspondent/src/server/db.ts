@@ -98,8 +98,9 @@ export function tagText(text: string): string[] {
         "demographic", "demographics", "demographic transition model", "dtm", "birth rate", "birth rates", "cbr", "death rate", "death rates", "cdr",
         "fertility rate", "fertility rates", "tfr", "infant mortality", "imr", "life expectancy", "natural increase", "natural decrease", "dependency ratio",
         "population pyramid", "ageing population", "aging population", "youth bulge", "overpopulation", "optimum population", "carrying capacity",
-        "migration", "migrations", "migrant", "migrants", "migrate", "migrated", "refugee", "refugees", "idp", "rural-to-urban", "remittances",
-        "brain drain", "brain gain", "pro-natalist", "anti-natalist", "family planning", "immigration",
+        "migration", "migrations", "migrating", "migrant", "migrants", "migrate", "migrated", "refugee", "refugees", "idp", "rural-to-urban", "remittances",
+        "brain drain", "brain gain", "pro-natalist", "anti-natalist", "family planning", "immigration", "immigrant", "immigrants", "immigrate", "immigrated",
+        "emigration", "emigrant", "emigrants", "emigrate", "emigrated", "asylum seeker", "asylum seekers", "asylum",
         "border crisis", "migrant caravan", "asylum cap", "asylum caps", "deportation", "deportations", "graying population", "pension crisis"
       ]
     },
