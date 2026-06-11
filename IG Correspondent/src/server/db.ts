@@ -21,154 +21,132 @@ export const TAG_MAPPING: Record<string, string> = {
 };
 
 export function tagText(text: string): string[] {
-  if (!text) return [];
+  if (!text) return ["HU8: Dev"]; // Strict No-Drop default
   
   // Normalize string: lowercase and strip special characters
   const normalized = text.toLowerCase().replace(/[^a-z0-9\s]/g, " ");
   const words = normalized.split(/\s+/).filter(Boolean);
   
   const matched: string[] = [];
-  const taxonomy = [
+
+  // 1. PRIMARY PASS: Hyper-dense curriculum-aligned synonym matrix
+  const primaryTaxonomy = [
     {
       tag: "PH1: Rivers",
       keywords: [
-        "flooding", "flood", "floods", "flooded",
-        "catchment", "catchments",
-        "drainage basin", "drainage basins",
-        "delta", "deltas",
-        "channel", "channels",
-        "levee", "levees",
-        "river", "rivers",
-        "stream", "streams",
-        "tributary", "tributaries",
-        "fluvial", "hydrological"
+        "fluvial", "hydrology", "hydrograph", "lag time", "peak discharge", "baseflow", "confluence", 
+        "tributary", "tributaries", "drainage density", "abstraction", "watershed", "catchment area", "catchment", "catchments",
+        "meander", "oxbow lake", "waterfall", "gorge", "canyon", "floodplain", "levee", "levees", "delta", "deltas", 
+        "estuary", "v-shaped valley", "interlocking spurs", "riverbank", "braided channel",
+        "inundation", "deluge", "flash flood", "flooding", "flood", "floods", "flooded",
+        "hard engineering", "soft engineering", "channelization", "dams", "reservoirs", "flood walls", 
+        "wing dykes", "suds", "afforestation", "floodplain zoning", "river", "rivers", "stream", "streams",
+        "dam failure", "spillway overflow", "upstream runoff", "siltation"
       ]
     },
     {
       tag: "PH2: Coasts",
       keywords: [
-        "spit", "spits",
-        "erosion", "eroded", "eroding",
-        "longshore drift",
-        "coral reef", "coral reefs", "reef", "reefs",
-        "cliff", "cliffs",
-        "beach", "beaches",
-        "marine",
-        "coastal", "coast", "coasts",
-        "shoreline", "shorelines",
-        "wave", "waves"
+        "longshore drift", "littoral drift", "marine erosion", "hydraulic action", "abrasion", "attrition", "solution", "corrosion",
+        "destructive waves", "constructive waves", "swash", "backwash", "longshore currents", "mass movement", "slumping", "rockfall", "fetch",
+        "spit", "spits", "bar", "tombolo", "salt marsh", "sand dune", "cliff profile", "wave-cut platform", "sea cave", "arch", "stack", "stump",
+        "headland", "bay", "beach profile", "mangrove swamp", "coral reef", "coral reefs", "reef", "reefs", "atoll", "lagoon",
+        "managed retreat", "shoreline management plan", "smp", "sea wall", "sea walls", "groynes", "rip-rap", "rock armour", "gabions",
+        "beach nourishment", "dune stabilization", "cliff regrading", "marine protected areas", "mpas",
+        "mangrove restoration", "reef bleaching", "rising tides", "storm surge", "coastal", "coast", "coasts", "shoreline", "shorelines", "beach", "beaches"
       ]
     },
     {
       tag: "PH3: Ecosystems",
       keywords: [
-        "rainforest", "rainforests",
-        "desert", "deserts",
-        "biodiversity",
-        "canopy", "canopies",
-        "savanna", "savannas", "savannah", "savannahs",
-        "biome", "biomes",
-        "deforestation", "ecosystem", "ecosystems",
-        "nutrient cycle", "nutrient cycles"
+        "biome", "biomes", "biomass", "biodiversity", "gersmehl", "nutrient cycling", "nutrient cycle", "leaching", "latosol", "capillary action",
+        "xerophytic", "ephemeral", "buttress roots", "drip-tips", "canopy", "canopies", "understorey", "emergent", "stratification", "trophic levels", "endemic species",
+        "deforestation", "habitat fragmentation", "slash-and-burn", "monoculture", "logging", "cattle ranching", "desertification", "overgrazing", "soil degradation",
+        "salinization", "bushmeat", "wildlife trafficking",
+        "ecotourism", "sustainable forestry", "selective logging", "carbon offset", "carbon offsets", "biosphere reserve", "rewilding", "corridor creation", "wildlife corridor",
+        "rainforest", "rainforests", "desert", "deserts", "savanna", "savannas", "savannah", "savannahs", "bush fires", "wild fires",
+        "green wall", "habitat destruction", "ecosystem", "ecosystems"
       ]
     },
     {
       tag: "PH4: Tectonics",
       keywords: [
-        "earthquake", "earthquakes",
-        "volcano", "volcanoes", "volcanic",
-        "seismic",
-        "magma",
-        "plate boundary", "plate boundaries",
-        "tsunami", "tsunamis",
-        "fault line", "tectonic"
+        "plate tectonics", "tectonic", "lithosphere", "asthenosphere", "convection currents", "mantle plume", "slab pull", "ridge push", "subduction zone", "benioff zone",
+        "crustal rifting", "seafloor spreading",
+        "destructive boundary", "constructive boundary", "conservative boundary", "collision zone", "fold mountains", "deep-sea trench", "ocean ridge", "rift valley",
+        "shield volcano", "stratovolcano", "composite volcano", "caldera", "pyroclastic flow", "lahar", "ash cloud", "magma chamber",
+        "epicenter", "focus", "richter scale", "mercalli scale", "moment magnitude", "seismometer",
+        "seismic", "tremor", "aftershock", "tsunami", "tsunamis", "liquefaction",
+        "hazard mapping", "land-use zoning", "retrofitting", "base isolation", "seismic dampers", "early-warning system", "early-warning systems", "evacuation protocol", "evacuation protocols",
+        "earthquake", "earthquakes", "volcano", "volcanoes", "volcanic", "magma", "fault line", "fault lines"
       ]
     },
     {
       tag: "PH5: Climate Change",
       keywords: [
-        "climate change", "climate changes",
-        "global warming",
-        "greenhouse effect", "greenhouse gas", "greenhouse gases",
-        "carbon budget", "carbon budgets",
-        "climate treaty", "climate treaties",
-        "paris agreement", "kyoto protocol",
-        "cop27", "cop28", "cop29", "cop30",
-        "climate shift", "climate shifts",
-        "climate attribution", "attribution study", "attribution studies",
-        "decarbonization", "net zero"
+        "climate change", "climate changes", "global warming", "greenhouse effect", "greenhouse gas", "greenhouse gases",
+        "carbon dioxide", "co2", "methane", "ch4", "nitrous oxide", "carbon footprint", "carbon sequestration", "carbon sink", "carbon sinks",
+        "solar radiation", "albedo effect", "thermal expansion", "glacial retreat", "ice core", "milankovitch cycles",
+        "climate-resilient", "climate-ready", "adaptation strategies", "adaptation strategy", "climate adaptation", "climate mitigation",
+        "carbon taxation", "carbon tax", "cap-and-trade", "cop summit", "cop summits", "cop27", "cop28", "cop29", "cop30", "ipcc",
+        "climate refugees", "climate refugee", "ocean acidification", "net-zero", "net zero", "carbon credit", "carbon credits", "climate pact", "decarbonization"
       ]
     },
     {
       tag: "HU6: Pop",
       keywords: [
-        "migration", "migrations", "migrant", "migrants", "migrate", "migrated",
-        "refugee", "refugees",
-        "birth rate", "birth rates",
-        "death rate", "death rates",
-        "dtm",
-        "ageing", "aging", "aged", "elderly",
-        "fertility",
-        "overpopulation", "overpopulated",
-        "demographic", "demographics",
-        "natalist", "population growth"
+        "demographic", "demographics", "demographic transition model", "dtm", "birth rate", "birth rates", "cbr", "death rate", "death rates", "cdr",
+        "fertility rate", "fertility rates", "tfr", "infant mortality", "imr", "life expectancy", "natural increase", "natural decrease", "dependency ratio",
+        "population pyramid", "ageing population", "aging population", "youth bulge", "overpopulation", "optimum population", "carrying capacity",
+        "migration", "migrations", "migrant", "migrants", "migrate", "migrated", "refugee", "refugees", "idp", "rural-to-urban", "remittances",
+        "brain drain", "brain gain", "pro-natalist", "anti-natalist", "family planning", "immigration",
+        "border crisis", "migrant caravan", "asylum cap", "asylum caps", "deportation", "deportations", "graying population", "pension crisis"
       ]
     },
     {
       tag: "HU7: Towns & Cities",
       keywords: [
-        "urban", "urbanisation", "urbanization",
-        "megacity", "megacities",
-        "sprawl", "sprawls", "sprawling",
-        "settlement hierarchy", "settlement", "settlements",
-        "favela", "favelas", "slum", "slums",
-        "regeneration", "regenerate", "regenerated",
-        "city", "cities",
-        "suburb", "suburbs", "suburbanization",
-        "gentrification", "shantytown", "shantytowns"
+        "urbanisation", "urbanization", "suburbanisation", "suburbanization", "counter-urbanisation", "counter-urbanization", "urban sprawl",
+        "megacity", "megacities", "conurbation", "re-urbanisation", "re-urbanization", "gentrification", "urban regeneration", "brownfield", "greenfield",
+        "central business district", "cbd", "inner city", "suburb", "suburbs", "transition zone", "settlement hierarchy", "sphere of influence",
+        "urban heat island", "uhi", "urban microclimate",
+        "shantytown", "shantytowns", "slum", "slums", "favela", "favelas", "informal settlement", "informal settlements", "squatter housing", "tenure insecurity",
+        "traffic congestion", "urban smog", "waste management", "mass transit", "smart cities", "smart city", "congestion charging", "city", "cities", "urban"
       ]
     },
     {
       tag: "HU8: Dev",
       keywords: [
-        "hdi",
-        "gni",
-        "wealth gap", "wealth gaps",
-        "foreign aid",
-        "trade bloc", "trade blocs",
-        "inequality", "inequalities",
-        "development", "develop", "developing", "developed",
-        "underdeveloped", "poverty", "aid agency"
+        "gross national income", "gni", "human development index", "hdi", "gross domestic product", "gdp", "purchasing power parity", "ppp",
+        "literacy rate", "gini coefficient", "core-periphery", "brandt line", "global north", "global south", "ldcs", "nics",
+        "bilateral aid", "multilateral aid", "ngo", "ngos", "microfinance", "microcredit", "foreign direct investment", "fdi",
+        "fair trade", "free trade", "trade barriers", "tariffs", "quota", "quotas", "structural adjustment", "debt relief", "poverty",
+        "wealth inequality", "humanitarian assistance", "standard of living"
       ]
     },
     {
       tag: "HU9: Economies",
       keywords: [
-        "tnc", "tncs",
-        "globalisation", "globalization",
-        "industrial sector", "industrial sectors", "industry", "industries", "industrial",
-        "employment", "employ", "employment",
-        "manufacturing", "manufacture", "manufactured",
-        "financial", "finance",
-        "supply chain", "multinational"
+        "primary sector", "secondary sector", "teriary sector", "tertiary sector", "quaternary sector", "employment structure", "industrial sector",
+        "globalisation", "globalization", "deindustrialisation", "deindustrialization", "outsourcing", "offshoring", "global shift",
+        "transnational corporation", "tnc", "tncs", "multinational corporation", "mnc", "mncs", "special economic zone", "sezs", "export processing zone", "epzs",
+        "supply chain", "just-in-time", "logistics hub", "logistics hubs", "containerisation", "containerization", "automation", "labor exploitation",
+        "sweatshop", "sweatshops", "trade bloc", "trade blocs",
+        "factory relocation", "job outsourcing", "manufacturing powerhouse", "logistics bottlenecks", "manufacturing", "manufacture"
       ]
     },
     {
       tag: "HU10: Resources",
       keywords: [
-        "energy security", "energy mix",
-        "food security", "food supply", "food supplies",
-        "renewable", "renewables",
-        "water scarcity", "water scarce", "drought", "droughts",
-        "crop yield", "crop yields", "agriculture", "agricultural",
-        "minerals", "mineral", "mining",
-        "resource depletion", "depleted resources",
-        "oil supply", "coal supply", "gas supply", "water supply"
+        "energy security", "energy mix", "food security", "food supply", "food supplies", "renewable", "renewables",
+        "water scarcity", "water scarce", "drought", "droughts", "crop yield", "crop yields", "agriculture", "agricultural",
+        "minerals", "mineral", "mining", "resource depletion", "depleted resources",
+        "oil supply", "coal supply", "gas supply", "water supply", "power grid", "water rationing", "wheat shortages"
       ]
     }
   ];
 
-  for (const { tag, keywords } of taxonomy) {
+  for (const { tag, keywords } of primaryTaxonomy) {
     const hasKeyword = keywords.some(keyword => {
       if (keyword.includes(" ")) {
         return normalized.includes(keyword);
@@ -178,6 +156,37 @@ export function tagText(text: string): string[] {
     if (hasKeyword) {
       matched.push(tag);
     }
+  }
+
+  // If primary taxonomy yields matches, return them immediately
+  if (matched.length > 0) {
+    return matched;
+  }
+
+  // 2. FALLBACK PASS: Broader associated semantic terms (satisfying the No-Drop Mandate without false positive over-tagging)
+  const fallbackTaxonomy = [
+    { tag: "PH1: Rivers", keywords: ["water", "rain", "rainfall", "precipitation", "lake", "lakes"] },
+    { tag: "PH2: Coasts", keywords: ["sea", "ocean", "oceans", "tide", "tides"] },
+    { tag: "PH3: Ecosystems", keywords: ["forest", "forests", "tree", "trees", "wildlife", "nature", "species", "plant", "plants"] },
+    { tag: "PH4: Tectonics", keywords: ["plate", "plates", "shake", "shaking", "disaster"] },
+    { tag: "PH5: Climate Change", keywords: ["climate", "carbon", "emissions", "emission"] },
+    { tag: "HU6: Pop", keywords: ["population", "people", "births", "deaths"] },
+    { tag: "HU7: Towns & Cities", keywords: ["housing", "house", "houses", "suburban", "infrastructure"] },
+    { tag: "HU8: Dev", keywords: ["poor", "rich", "poverty", "money", "aid", "global"] },
+    { tag: "HU9: Economies", keywords: ["company", "companies", "factory", "jobs", "business", "market", "trade"] },
+    { tag: "HU10: Resources", keywords: ["food", "energy", "power", "oil", "gas", "coal", "crop", "crops", "farming"] }
+  ];
+
+  for (const { tag, keywords } of fallbackTaxonomy) {
+    const hasKeyword = keywords.some(keyword => words.includes(keyword));
+    if (hasKeyword) {
+      matched.push(tag);
+    }
+  }
+
+  // 3. ULTIMATE DEFAULT: Route to Development if absolutely no terms overlap
+  if (matched.length === 0) {
+    matched.push("HU8: Dev");
   }
 
   return matched;
