@@ -229,6 +229,11 @@ db.exec(`
     PRIMARY KEY (keyword, tag)
   );
 
+  CREATE TABLE IF NOT EXISTS manual_poll_tags (
+    poll_id INTEGER PRIMARY KEY,
+    tags TEXT NOT NULL
+  );
+
   -- Migration: Add selected_option if it doesn't exist (handle already existing table)
   PRAGMA table_info(user_votes_tracker);
 `);
@@ -276,19 +281,23 @@ export function getTodayPolls(userIdentifier: string) {
   console.log(`[Polls] Found ${polls.length} polls in database.`);
 
   return polls.map(poll => {
-    // Dynamic tagging
-    let tags = tagText(poll.question);
-    
-    // If no keyword matched, try matching the poll's existing dp_tag
-    if (tags.length === 0) {
-      if (poll.dp_tag) {
-        const cleanDbTag = poll.dp_tag.trim();
-        const mapped = TAG_MAPPING[cleanDbTag] || Object.values(TAG_MAPPING).find(val => 
-          val.toLowerCase() === cleanDbTag.toLowerCase() || 
-          val.toLowerCase().startsWith(cleanDbTag.toLowerCase() + ":")
-        );
-        if (mapped) {
-          tags = [mapped];
+    // Check manual poll tags first
+    let tags = getManualPollTags(poll.id);
+    if (tags === null) {
+      // Dynamic tagging
+      tags = tagText(poll.question);
+      
+      // If no keyword matched, try matching the poll's existing dp_tag
+      if (tags.length === 0) {
+        if (poll.dp_tag) {
+          const cleanDbTag = poll.dp_tag.trim();
+          const mapped = TAG_MAPPING[cleanDbTag] || Object.values(TAG_MAPPING).find(val => 
+            val.toLowerCase() === cleanDbTag.toLowerCase() || 
+            val.toLowerCase().startsWith(cleanDbTag.toLowerCase() + ":")
+          );
+          if (mapped) {
+            tags = [mapped];
+          }
         }
       }
     }
@@ -326,6 +335,7 @@ export function getTodayPolls(userIdentifier: string) {
     return {
       ...poll,
       question: finalQuestion,
+      tags: tags,
       dp_tag: tags[0],
       hasVoted: !!userVote,
       userSelection: userVote?.selected_option,
@@ -500,6 +510,38 @@ export function learnKeywordsFromHeadline(headline: string, tags: string[]): voi
   } catch (err) {
     console.error("Error learning keywords from headline:", err);
   }
+}
+
+export function getManualPollTags(pollId: number): string[] | null {
+  try {
+    const row = db.prepare('SELECT tags FROM manual_poll_tags WHERE poll_id = ?').get(pollId) as { tags: string } | undefined;
+    if (row) {
+      return JSON.parse(row.tags);
+    }
+  } catch (err) {
+    console.error("Error fetching manual poll tags:", err);
+  }
+  return null;
+}
+
+export function saveManualPollTags(pollId: number, tags: string[]): void {
+  try {
+    db.prepare('INSERT OR REPLACE INTO manual_poll_tags (poll_id, tags) VALUES (?, ?)').run(pollId, JSON.stringify(tags));
+  } catch (err) {
+    console.error("Error saving manual poll tags:", err);
+  }
+}
+
+export function getPollQuestion(pollId: number): string | null {
+  try {
+    const row = db.prepare('SELECT question FROM polls WHERE id = ?').get(pollId) as { question: string } | undefined;
+    if (row) {
+      return row.question;
+    }
+  } catch (err) {
+    console.error("Error fetching poll question:", err);
+  }
+  return null;
 }
 
 export default db;

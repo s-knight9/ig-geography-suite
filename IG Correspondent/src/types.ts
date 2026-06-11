@@ -11,6 +11,7 @@ export interface Poll {
   hasVoted?: boolean;
   userSelection?: string;
   results?: PollResults;
+  tags?: string[];
 }
 
 export interface PollResults {

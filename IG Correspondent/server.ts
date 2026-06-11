@@ -5,7 +5,7 @@ import Parser from 'rss-parser';
 import { GoogleGenAI, Type } from '@google/genai';
 import dotenv from 'dotenv';
 import crypto from 'crypto';
-import { getTodayPolls, castVote, hasPollsForToday, savePolls, getPollDateKST, tagText, getManualHeadlineTags, saveManualHeadlineTags, learnKeywordsFromHeadline } from './src/server/db.ts';
+import { getTodayPolls, castVote, hasPollsForToday, savePolls, getPollDateKST, tagText, getManualHeadlineTags, saveManualHeadlineTags, learnKeywordsFromHeadline, getManualPollTags, saveManualPollTags, getPollQuestion } from './src/server/db.ts';
 
 dotenv.config();
 
@@ -516,6 +516,36 @@ app.post('/api/news/tag', (req: any, res: any) => {
     learnKeywordsFromHeadline(cleanTitle, tags);
     
     // Clear cache so that the news feed is immediately updated on refresh
+    Object.keys(cache).forEach(key => {
+      delete cache[key];
+    });
+
+    res.json({ success: true });
+  } catch (error: any) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+app.post('/api/polls/tag', (req: any, res: any) => {
+  const { pollId, tags, teacherCode } = req.body;
+  if (!teacherCode) {
+    return res.status(401).json({ error: 'Unauthorized: Only teachers can tag polls.' });
+  }
+  if (!pollId || !tags) {
+    return res.status(400).json({ error: 'Missing pollId or tags.' });
+  }
+
+  try {
+    saveManualPollTags(pollId, tags);
+    
+    // Learn keywords from the poll question
+    const question = getPollQuestion(pollId);
+    if (question) {
+      const cleanQuestion = question.replace(/#\w+:\s*[^#]+/g, '').trim();
+      learnKeywordsFromHeadline(cleanQuestion, tags);
+    }
+
+    // Clear cache so news feed is also updated with learned keywords
     Object.keys(cache).forEach(key => {
       delete cache[key];
     });

@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { ChevronDown, ChevronUp, RefreshCw, Moon, Sun, LogOut, User, Globe, Tag, X } from 'lucide-react';
-import { OutletData, TAG_COLORS, TAG_LABELS } from './types.ts';
+import { OutletData, TAG_COLORS, TAG_LABELS, Poll } from './types.ts';
 import { DailyPolls } from './components/DailyPolls.tsx';
 
 export default function App({
@@ -25,6 +25,8 @@ export default function App({
   const [selectedNewsItem, setSelectedNewsItem] = useState<{ title: string; tags: string[] } | null>(null);
   const [tempTags, setTempTags] = useState<string[]>([]);
   const [isSavingTags, setIsSavingTags] = useState(false);
+  const [selectedPollItem, setSelectedPollItem] = useState<Poll | null>(null);
+  const [pollsRefreshTrigger, setPollsRefreshTrigger] = useState(0);
   const [localIsDark, setLocalIsDark] = useState(() => {
     if (typeof window !== 'undefined') {
       return localStorage.getItem('darkMode') === 'true' ||
@@ -75,24 +77,47 @@ export default function App({
   const handleSaveTags = async (headline: string, tags: string[]) => {
     setIsSavingTags(true);
     try {
-      const response = await fetch('/api/news/tag', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          headline,
-          tags,
-          teacherCode: activeTeacherCode,
-        }),
-      });
+      if (selectedPollItem) {
+        // Tagging a poll
+        const response = await fetch('/api/polls/tag', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            pollId: selectedPollItem.id,
+            tags,
+            teacherCode: activeTeacherCode,
+          }),
+        });
 
-      if (!response.ok) {
-        throw new Error('Failed to save tags');
+        if (!response.ok) {
+          throw new Error('Failed to save poll tags');
+        }
+
+        setPollsRefreshTrigger(prev => prev + 1);
+      } else {
+        // Tagging a news headline
+        const response = await fetch('/api/news/tag', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            headline,
+            tags,
+            teacherCode: activeTeacherCode,
+          }),
+        });
+
+        if (!response.ok) {
+          throw new Error('Failed to save tags');
+        }
       }
 
       await fetchData();
       setSelectedNewsItem(null);
+      setSelectedPollItem(null);
     } catch (err: any) {
       console.error('Error saving tags:', err);
       alert(err.message || 'An error occurred while saving tags.');
@@ -218,7 +243,17 @@ export default function App({
       {/* Hero / Daily Poll Section */}
       <div className="bg-slate-50 dark:bg-slate-950 border-b border-slate-300 dark:border-slate-800">
         <div className="p-4">
-          <DailyPolls activeUserEmail={activeUserEmail} />
+          <DailyPolls
+            activeUserEmail={activeUserEmail}
+            activeTeacherCode={activeTeacherCode}
+            onOpenTagModal={(poll) => {
+              setSelectedPollItem(poll);
+              const cleanQuestion = poll.question.replace(/#\w+:\s*[^#]+/g, '').trim();
+              setSelectedNewsItem({ title: cleanQuestion, tags: poll.tags || [] });
+              setTempTags(poll.tags || []);
+            }}
+            refreshTrigger={pollsRefreshTrigger}
+          />
         </div>
       </div>
 
@@ -358,7 +393,7 @@ export default function App({
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              onClick={() => setSelectedNewsItem(null)}
+              onClick={() => { setSelectedNewsItem(null); setSelectedPollItem(null); }}
               className="absolute inset-0 bg-slate-900/60 dark:bg-slate-950/80 backdrop-blur-sm"
             />
             
@@ -375,14 +410,14 @@ export default function App({
                 <div>
                   <h3 className="text-lg font-black uppercase tracking-tight text-[#2563eb] dark:text-[#60a5fa] flex items-center gap-2">
                     <Tag className="w-5 h-5 animate-pulse" />
-                    Tag News Headline
+                    {selectedPollItem ? 'Tag Poll Story' : 'Tag News Headline'}
                   </h3>
                   <p className="text-[11px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-widest mt-1">
                     Map this story to IGCSE syllabus units
                   </p>
                 </div>
                 <button
-                  onClick={() => setSelectedNewsItem(null)}
+                  onClick={() => { setSelectedNewsItem(null); setSelectedPollItem(null); }}
                   className="p-1 rounded-full border border-slate-200 dark:border-slate-800 text-slate-400 hover:text-slate-700 dark:hover:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-900 transition-colors cursor-pointer"
                 >
                   <X className="w-4 h-4" />
@@ -392,7 +427,7 @@ export default function App({
               {/* Headline Block */}
               <div className="bg-slate-50 dark:bg-slate-900/50 border border-slate-200 dark:border-slate-800/80 rounded-xl p-4">
                 <span className="text-[9px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-widest block mb-1">
-                  News Headline
+                  {selectedPollItem ? 'Poll Question' : 'News Headline'}
                 </span>
                 <p className="font-bold text-[13px] leading-snug dark:text-slate-200">
                   {selectedNewsItem.title}
@@ -441,14 +476,14 @@ export default function App({
 
               {/* Explanatory Note */}
               <div className="text-[10px] text-slate-400 dark:text-slate-500 italic bg-blue-50/50 dark:bg-blue-950/10 border border-blue-100/30 dark:border-blue-900/20 rounded-lg p-2.5">
-                💡 <strong>Keyword learning active:</strong> Saving manual tags will extract keywords from this headline to automatically map future matching headlines to these units.
+                💡 <strong>Keyword learning active:</strong> Saving manual tags will extract keywords from this {selectedPollItem ? 'question' : 'headline'} to automatically map future matching headlines to these units.
               </div>
 
               {/* Actions */}
               <div className="flex items-center gap-3 mt-2">
                 <button
                   type="button"
-                  onClick={() => setSelectedNewsItem(null)}
+                  onClick={() => { setSelectedNewsItem(null); setSelectedPollItem(null); }}
                   className="flex-1 py-2.5 border border-slate-200 dark:border-slate-850 hover:bg-slate-50 dark:hover:bg-slate-900 text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200 font-bold uppercase text-[11px] tracking-widest rounded-xl transition-all cursor-pointer"
                 >
                   Cancel

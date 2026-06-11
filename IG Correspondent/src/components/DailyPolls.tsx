@@ -1,9 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { CheckCircle, BarChart2, Hash, ExternalLink } from 'lucide-react';
+import { CheckCircle, BarChart2, Hash, ExternalLink, Tag } from 'lucide-react';
 import { Poll, TAG_COLORS } from '../types';
 
-export function DailyPolls({ activeUserEmail }: { activeUserEmail?: string }) {
+export function DailyPolls({
+  activeUserEmail,
+  activeTeacherCode,
+  onOpenTagModal,
+  refreshTrigger
+}: {
+  activeUserEmail?: string;
+  activeTeacherCode?: string;
+  onOpenTagModal?: (poll: Poll) => void;
+  refreshTrigger?: number;
+}) {
   const [polls, setPolls] = useState<Poll[]>([]);
   const [loading, setLoading] = useState(true);
   const [voting, setVoting] = useState<number | null>(null);
@@ -30,7 +40,7 @@ export function DailyPolls({ activeUserEmail }: { activeUserEmail?: string }) {
     // Short polling: fetch every 30 seconds to keep results live
     const interval = setInterval(() => fetchPolls(true), 30000);
     return () => clearInterval(interval);
-  }, [activeUserEmail]);
+  }, [activeUserEmail, refreshTrigger]);
 
   const handleVote = async (pollId: number, option: string) => {
     if (voting !== null) return;
@@ -79,6 +89,8 @@ export function DailyPolls({ activeUserEmail }: { activeUserEmail?: string }) {
             poll={poll} 
             onVote={handleVote} 
             isVoting={voting === poll.id}
+            activeTeacherCode={activeTeacherCode}
+            onOpenTagModal={onOpenTagModal}
           />
         ))}
       </div>
@@ -91,9 +103,11 @@ interface PollCardProps {
   poll: Poll;
   onVote: (id: number, opt: string) => void | Promise<void>;
   isVoting: boolean;
+  activeTeacherCode?: string;
+  onOpenTagModal?: (poll: Poll) => void;
 }
 
-function PollCard({ poll, onVote, isVoting }: PollCardProps) {
+function PollCard({ poll, onVote, isVoting, activeTeacherCode, onOpenTagModal }: PollCardProps) {
   const options = [
     { key: 'A', label: poll.option_a },
     { key: 'B', label: poll.option_b },
@@ -109,12 +123,39 @@ function PollCard({ poll, onVote, isVoting }: PollCardProps) {
       animate={{ opacity: 1, y: 0 }}
       className="bg-white rounded-xl border border-slate-200 shadow-sm p-5 flex flex-col h-full"
     >
-      <div className="flex justify-between items-start mb-3">
-        <span className={`px-2 py-0.5 text-[10.5px] font-black tracking-wider border shadow-sm rounded-full cursor-default ${TAG_COLORS[poll.dp_tag || ''] || 'bg-neutral-100 text-neutral-600 border-neutral-200'}`}>
-          {poll.dp_tag || 'GEO'}
-        </span>
+      <div className="flex justify-between items-start mb-3 w-full">
+        <div className="flex flex-wrap items-center gap-1.5 max-w-[85%]">
+          {poll.tags && poll.tags.length > 0 ? (
+            poll.tags.map(tag => (
+              <span
+                key={tag}
+                className={`px-2 py-0.5 text-[10.5px] font-black tracking-wider border shadow-sm rounded-full cursor-default ${TAG_COLORS[tag] || 'bg-neutral-100 text-neutral-600 border-neutral-200'}`}
+              >
+                {tag}
+              </span>
+            ))
+          ) : (
+            <span className={`px-2 py-0.5 text-[10.5px] font-black tracking-wider border shadow-sm rounded-full cursor-default ${TAG_COLORS[poll.dp_tag || ''] || 'bg-neutral-100 text-neutral-600 border-neutral-200'}`}>
+              {poll.dp_tag || 'GEO'}
+            </span>
+          )}
+
+          {activeTeacherCode && onOpenTagModal && (
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                onOpenTagModal(poll);
+              }}
+              className="px-2 py-0.5 rounded-md border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900 text-slate-500 hover:text-[#2563eb] dark:hover:text-[#60a5fa] hover:bg-slate-100 dark:hover:bg-slate-800 transition-all cursor-pointer inline-flex items-center gap-1 text-[9.5px] font-black uppercase tracking-wider shadow-sm"
+              title="Edit Poll Tags"
+            >
+              <Tag className="w-2.5 h-2.5" />
+              Tag
+            </button>
+          )}
+        </div>
         {poll.source_url && (
-          <a href={poll.source_url} target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-slate-600">
+          <a href={poll.source_url} target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-slate-600 mt-0.5">
             <ExternalLink className="w-3.5 h-3.5" />
           </a>
         )}
