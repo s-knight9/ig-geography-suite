@@ -1820,9 +1820,6 @@ Example:
         } else {
           const itemsWithTags = outlet.items.map((item: any) => {
             let tags = tagsMap[item.title] || tagText(item.title) || [];
-            if (tags.length === 0) {
-              tags = ["PH5: Climate Change"];
-            }
             const hashtags = tags.map((t: string) => `#${t}`).join(' ');
             
             // Clean any existing hashtags first to avoid duplicating them

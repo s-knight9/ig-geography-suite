@@ -21,7 +21,7 @@ export const TAG_MAPPING: Record<string, string> = {
 };
 
 export function tagText(text: string): string[] {
-  if (!text) return ["PH5: Climate Change"];
+  if (!text) return [];
   
   // Normalize string: lowercase and strip special characters
   const normalized = text.toLowerCase().replace(/[^a-z0-9\s]/g, " ");
@@ -38,7 +38,10 @@ export function tagText(text: string): string[] {
         "delta", "deltas",
         "channel", "channels",
         "levee", "levees",
-        "river", "rivers"
+        "river", "rivers",
+        "stream", "streams",
+        "tributary", "tributaries",
+        "fluvial", "hydrological"
       ]
     },
     {
@@ -51,7 +54,9 @@ export function tagText(text: string): string[] {
         "cliff", "cliffs",
         "beach", "beaches",
         "marine",
-        "coastal", "coast", "coasts"
+        "coastal", "coast", "coasts",
+        "shoreline", "shorelines",
+        "wave", "waves"
       ]
     },
     {
@@ -62,7 +67,9 @@ export function tagText(text: string): string[] {
         "biodiversity",
         "canopy", "canopies",
         "savanna", "savannas", "savannah", "savannahs",
-        "biome", "biomes"
+        "biome", "biomes",
+        "deforestation", "ecosystem", "ecosystems",
+        "nutrient cycle", "nutrient cycles"
       ]
     },
     {
@@ -73,29 +80,38 @@ export function tagText(text: string): string[] {
         "seismic",
         "magma",
         "plate boundary", "plate boundaries",
-        "tsunami", "tsunamis"
+        "tsunami", "tsunamis",
+        "fault line", "tectonic"
       ]
     },
     {
       tag: "PH5: Climate Change",
       keywords: [
+        "climate change", "climate changes",
         "global warming",
-        "carbon emissions", "carbon emission",
-        "greenhouse",
-        "meteorological",
-        "extreme weather"
+        "greenhouse effect", "greenhouse gas", "greenhouse gases",
+        "carbon budget", "carbon budgets",
+        "climate treaty", "climate treaties",
+        "paris agreement", "kyoto protocol",
+        "cop27", "cop28", "cop29", "cop30",
+        "climate shift", "climate shifts",
+        "climate attribution", "attribution study", "attribution studies",
+        "decarbonization", "net zero"
       ]
     },
     {
       tag: "HU6: Pop",
       keywords: [
         "migration", "migrations", "migrant", "migrants", "migrate", "migrated",
+        "refugee", "refugees",
         "birth rate", "birth rates",
+        "death rate", "death rates",
         "dtm",
         "ageing", "aging", "aged", "elderly",
         "fertility",
         "overpopulation", "overpopulated",
-        "demographic", "demographics"
+        "demographic", "demographics",
+        "natalist", "population growth"
       ]
     },
     {
@@ -104,10 +120,12 @@ export function tagText(text: string): string[] {
         "urban", "urbanisation", "urbanization",
         "megacity", "megacities",
         "sprawl", "sprawls", "sprawling",
-        "settlement hierarchy", "settlement hierarchies", "settlement", "settlements",
+        "settlement hierarchy", "settlement", "settlements",
         "favela", "favelas", "slum", "slums",
         "regeneration", "regenerate", "regenerated",
-        "city", "cities"
+        "city", "cities",
+        "suburb", "suburbs", "suburbanization",
+        "gentrification", "shantytown", "shantytowns"
       ]
     },
     {
@@ -119,7 +137,8 @@ export function tagText(text: string): string[] {
         "foreign aid",
         "trade bloc", "trade blocs",
         "inequality", "inequalities",
-        "development", "develop", "developing", "developed"
+        "development", "develop", "developing", "developed",
+        "underdeveloped", "poverty", "aid agency"
       ]
     },
     {
@@ -128,20 +147,23 @@ export function tagText(text: string): string[] {
         "tnc", "tncs",
         "globalisation", "globalization",
         "industrial sector", "industrial sectors", "industry", "industries", "industrial",
-        "employment", "employ",
+        "employment", "employ", "employment",
         "manufacturing", "manufacture", "manufactured",
-        "financial", "finance"
+        "financial", "finance",
+        "supply chain", "multinational"
       ]
     },
     {
       tag: "HU10: Resources",
       keywords: [
-        "energy security",
-        "food supply", "food supplies",
+        "energy security", "energy mix",
+        "food security", "food supply", "food supplies",
         "renewable", "renewables",
         "water scarcity", "water scarce", "drought", "droughts",
         "crop yield", "crop yields", "agriculture", "agricultural",
-        "minerals", "mineral", "mining"
+        "minerals", "mineral", "mining",
+        "resource depletion", "depleted resources",
+        "oil supply", "coal supply", "gas supply", "water supply"
       ]
     }
   ];
@@ -258,16 +280,11 @@ export function getTodayPolls(userIdentifier: string) {
       }
     }
     
-    // Final fallback to ensure it is never untagged
-    if (tags.length === 0) {
-      tags = ["PH5: Climate Change"];
-    }
-
     const hashtags = tags.map(t => `#${t}`).join(' ');
     
     // Clean any existing hashtags first to avoid duplicating them
     const cleanQuestion = poll.question.replace(/#\w+:\s*[^#]+/g, '').trim();
-    const finalQuestion = `${cleanQuestion} ${hashtags}`;
+    const finalQuestion = hashtags ? `${cleanQuestion} ${hashtags}` : cleanQuestion;
 
     const votes = db.prepare(`
       SELECT selected_option, COUNT(*) as count 
