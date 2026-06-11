@@ -80,7 +80,8 @@ export default function MarkdownOutput({ content, isGenerating }: MarkdownOutput
     if (!content) return;
     setIsExporting(true);
     try {
-      const html2pdf = (await import('html2pdf.js')).default;
+      const html2pdfModule = (await import('html2pdf.js')) as any;
+      const html2pdf = html2pdfModule.default || html2pdfModule;
       let parsedHtml = await marked.parse(content);
       
       const mapImages = await captureMapImages();
@@ -145,7 +146,30 @@ export default function MarkdownOutput({ content, isGenerating }: MarkdownOutput
         margin:       [15, 15, 15, 15] as [number, number, number, number],
         filename:     'DSE-Profile.pdf',
         image:        { type: 'jpeg' as const, quality: 0.98 },
-        html2canvas:  { scale: 2, useCORS: true },
+        html2canvas:  { 
+          scale: 2, 
+          useCORS: true,
+          onclone: (clonedDoc: Document) => {
+            // SCRUB OKLCH: html2canvas kills the process if it sees oklch in ANY stylesheet
+            const styles = clonedDoc.getElementsByTagName('style');
+            for (let i = 0; i < styles.length; i++) {
+              try {
+                if (styles[i].innerHTML.includes('oklch')) {
+                  styles[i].innerHTML = styles[i].innerHTML.replace(/oklch\([^)]+\)/g, '#4b5563');
+                }
+              } catch (e) {
+                console.warn('Failed to scrub a style block', e);
+              }
+            }
+            // Remove external links which might load oklch-heavy CSS (like Tailwind 4)
+            const links = clonedDoc.getElementsByTagName('link');
+            for (let i = links.length - 1; i >= 0; i--) {
+              if (links[i].rel === 'stylesheet') {
+                links[i].remove();
+              }
+            }
+          }
+        },
         jsPDF:        { unit: 'mm' as const, format: 'a4' as const, orientation: 'portrait' as const },
         pagebreak:    { mode: ['css', 'legacy'] }
       };
