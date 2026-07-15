@@ -82,8 +82,8 @@ export function DailyPolls({
         <h2 className="text-xl font-bold tracking-tight text-slate-900 uppercase">Daily Geography Polls</h2>
       </div>
       
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
-        {polls.map((poll) => (
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+        {polls.slice(0, 3).map((poll) => (
           <PollCard 
             key={poll.id} 
             poll={poll} 

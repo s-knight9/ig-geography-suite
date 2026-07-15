@@ -51,14 +51,14 @@ export const TAG_COLORS: Record<string, string> = {
 };
 
 export const TAG_LABELS: Record<string, string> = {
-  'PH1: Rivers': 'Changing River Environments',
-  'PH2: Coasts': 'Changing Coastal Environments',
-  'PH3: Ecosystems': 'Changing Ecosystems',
-  'PH4: Tectonics': 'Tectonic Hazards',
-  'PH5: Climate Change': 'Climate Change',
-  'HU6: Pop': 'Changing Populations',
-  'HU7: Towns & Cities': 'Changing Towns and Cities',
-  'HU8: Dev': 'Development',
-  'HU9: Economies': 'Changing Economies',
-  'HU10: Resources': 'Resource Provision',
+  'PH1: Rivers': 'RIVERS',
+  'PH2: Coasts': 'COASTS',
+  'PH3: Ecosystems': 'ECOSYSTEMS',
+  'PH4: Tectonics': 'TECTONICS',
+  'PH5: Climate Change': 'CLIMATE CHANGE',
+  'HU6: Pop': 'POPULATION',
+  'HU7: Towns & Cities': 'TOWNS & CITIES',
+  'HU8: Dev': 'DEVELOPMENT',
+  'HU9: Economies': 'ECONOMIES',
+  'HU10: Resources': 'RESOURCES',
 };

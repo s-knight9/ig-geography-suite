@@ -1,0 +1,507 @@
+[
+  {
+    "date_str": "General Assembly",
+    "title": "General Assembly",
+    "url": "http://www.un.org/en/ga/"
+  },
+  {
+    "date_str": "Security Council",
+    "title": "Security Council",
+    "url": "https://www.un.org/securitycouncil/"
+  },
+  {
+    "date_str": "Economic and Social Council",
+    "title": "Economic and Social Council",
+    "url": "http://www.un.org/en/ecosoc/"
+  },
+  {
+    "date_str": "Trusteeship Council",
+    "title": "Trusteeship Council",
+    "url": "https://www.un.org/en/about-us/trusteeship-council"
+  },
+  {
+    "date_str": "International Court of Justice",
+    "title": "International Court of Justice",
+    "url": "http://www.icj-cij.org/en"
+  },
+  {
+    "date_str": "Secretariat",
+    "title": "Secretariat",
+    "url": "https://www.un.org/en/about-us/secretariat"
+  },
+  {
+    "date_str": "New York",
+    "title": "New York",
+    "url": "https://www.un.org/en/about-us/secretariat"
+  },
+  {
+    "date_str": "Geneva",
+    "title": "Geneva",
+    "url": "http://www.unog.ch/"
+  },
+  {
+    "date_str": "Nairobi",
+    "title": "Nairobi",
+    "url": "http://www.unon.org/"
+  },
+  {
+    "date_str": "Vienna",
+    "title": "Vienna",
+    "url": "http://www.unvienna.org/"
+  },
+  {
+    "date_str": "UN System Directory",
+    "title": "UN System Directory",
+    "url": "http://www.unsceb.org/directory/"
+  },
+  {
+    "date_str": "UN System Chart",
+    "title": "UN System Chart",
+    "url": "https://www.un.org/sites/un2.un.org/files/un_system_chart.pdf"
+  },
+  {
+    "date_str": "Global Leadership",
+    "title": "Global Leadership",
+    "url": "https://www.un.org/sg/en/global-leadership/home"
+  },
+  {
+    "date_str": "UN Information Centres",
+    "title": "UN Information Centres",
+    "url": "https://www.un.org/en/department-of-global-communications/worldwide/united-nations-information-centres"
+  },
+  {
+    "date_str": "Emergency information",
+    "title": "Emergency information",
+    "url": "http://emergency.un.org/"
+  },
+  {
+    "date_str": "Reporting Wrongdoing",
+    "title": "Reporting Wrongdoing",
+    "url": "https://oios.un.org/report-wrongdoing"
+  },
+  {
+    "date_str": "UN Journal",
+    "title": "UN Journal",
+    "url": "https://journal.un.org/"
+  },
+  {
+    "date_str": "Documents",
+    "title": "Documents",
+    "url": "https://www.un.org/en/our-work/documents"
+  },
+  {
+    "date_str": "Guidelines for gender-inclusive language",
+    "title": "Guidelines for gender-inclusive language",
+    "url": "http://www.un.org/en/gender-inclusive-language/"
+  },
+  {
+    "date_str": "Databases",
+    "title": "Databases",
+    "url": "https://www.un.org/en/library/page/databases"
+  },
+  {
+    "date_str": "Library",
+    "title": "Library",
+    "url": "https://www.un.org/library"
+  },
+  {
+    "date_str": "UN iLibrary",
+    "title": "UN iLibrary",
+    "url": "http://www.un-ilibrary.org/"
+  },
+  {
+    "date_str": "UN Chronicle",
+    "title": "UN Chronicle",
+    "url": "https://www.un.org/en/chronicle"
+  },
+  {
+    "date_str": "UN Yearbook",
+    "title": "UN Yearbook",
+    "url": "https://www.un.org/en/yearbook"
+  },
+  {
+    "date_str": "Publications for sale",
+    "title": "Publications for sale",
+    "url": "https://shop.un.org/"
+  },
+  {
+    "date_str": "Maps",
+    "title": "Maps",
+    "url": "https://www.un.org/geospatial/"
+  },
+  {
+    "date_str": "Media Accreditation",
+    "title": "Media Accreditation",
+    "url": "http://www.un.org/en/media/accreditation/"
+  },
+  {
+    "date_str": "NGO accreditation at ECOSOC",
+    "title": "NGO accreditation at ECOSOC",
+    "url": "https://ecosoc.un.org/en/ngo/consultative-status"
+  },
+  {
+    "date_str": "NGO accreditation at DGC",
+    "title": "NGO accreditation at DGC",
+    "url": "https://www.un.org/en/civil-society/page/application"
+  },
+  {
+    "date_str": "Visitors\u2019 services",
+    "title": "Visitors\u2019 services",
+    "url": "http://visit.un.org/"
+  },
+  {
+    "date_str": "Exhibits",
+    "title": "Exhibits",
+    "url": "https://www.un.org/exhibits"
+  },
+  {
+    "date_str": "Procurement",
+    "title": "Procurement",
+    "url": "http://www.un.org/Depts/ptd/welcome-united-nations-procurement-division-unpd"
+  },
+  {
+    "date_str": "Employment",
+    "title": "Employment",
+    "url": "https://careers.un.org/lbw/Home.aspx"
+  },
+  {
+    "date_str": "Internships",
+    "title": "Internships",
+    "url": "https://careers.un.org/lbw/home.aspx?viewtype=IP"
+  },
+  {
+    "date_str": "Model UN",
+    "title": "Model UN",
+    "url": "https://www.un.org/en/mun"
+  },
+  {
+    "date_str": "Academic Impact",
+    "title": "Academic Impact",
+    "url": "https://www.un.org/en/academicimpact"
+  },
+  {
+    "date_str": "UN Archives",
+    "title": "UN Archives",
+    "url": "https://archives.un.org/"
+  },
+  {
+    "date_str": "UN Audiovisual Library",
+    "title": "UN Audiovisual Library",
+    "url": "https://media.un.org/avlibrary/en"
+  },
+  {
+    "date_str": "How to donate to the UN System",
+    "title": "How to donate to the UN System",
+    "url": "https://www.un.org/en/about-us/how-to-donate-to-the-un-system"
+  },
+  {
+    "date_str": "Information on COVID-19 (Coronavirus)",
+    "title": "Information on COVID-19 (Coronavirus)",
+    "url": "https://www.un.org/en/coronavirus"
+  },
+  {
+    "date_str": "Africa Renewal",
+    "title": "Africa Renewal",
+    "url": "https://www.un.org/africarenewal/"
+  },
+  {
+    "date_str": "Ten ways the UN makes a difference",
+    "title": "Ten ways the UN makes a difference",
+    "url": "https://www.un.org/sites/un2.un.org/files/un_card_2026_e.pdf"
+  },
+  {
+    "date_str": "GA High-level Week 2025",
+    "title": "GA High-level Week 2025",
+    "url": "https://www.un.org/en/high-level-week-2025"
+  },
+  {
+    "date_str": "UN Charter",
+    "title": "UN Charter",
+    "url": "https://www.un.org/en/about-us/un-charter"
+  },
+  {
+    "date_str": "Universal Declaration of Human Rights",
+    "title": "Universal Declaration of Human Rights",
+    "url": "https://www.un.org/en/about-us/universal-declaration-of-human-rights"
+  },
+  {
+    "date_str": "Convention on the Rights of the Child",
+    "title": "Convention on the Rights of the Child",
+    "url": "http://www.unicef.org/crc/"
+  },
+  {
+    "date_str": "Statute of the International Court of Justice",
+    "title": "Statute of the International Court of Justice",
+    "url": "https://www.un.org/en/about-us/un-charter/statute-of-the-international-court-of-justice"
+  },
+  {
+    "date_str": "Annual Report of the Secretary-General on the Work of the Organization",
+    "title": "Annual Report of the Secretary-General on the Work of the Organization",
+    "url": "https://www.un.org/en/annualreport"
+  },
+  {
+    "date_str": "News",
+    "title": "News",
+    "url": "https://news.un.org/en/"
+  },
+  {
+    "date_str": "Press Releases",
+    "title": "Press Releases",
+    "url": "http://www.un.org/press/en/"
+  },
+  {
+    "date_str": "Briefings",
+    "title": "Briefings",
+    "url": "http://www.un.org/press/en/content/noon-briefings"
+  },
+  {
+    "date_str": "Spokesperson",
+    "title": "Spokesperson",
+    "url": "http://www.un.org/sg/spokesperson/"
+  },
+  {
+    "date_str": "Photos",
+    "title": "Photos",
+    "url": "https://dam.media.un.org/"
+  },
+  {
+    "date_str": "UNIfeed",
+    "title": "UNIfeed",
+    "url": "https://media.un.org/unifeed/en"
+  },
+  {
+    "date_str": "UN Web TV",
+    "title": "UN Web TV",
+    "url": "https://webtv.un.org/en"
+  },
+  {
+    "date_str": "UN Video",
+    "title": "UN Video",
+    "url": "https://www.un.org/en/video"
+  },
+  {
+    "date_str": "Social Media",
+    "title": "Social Media",
+    "url": "https://www.un.org/en/get-involved/social-media"
+  },
+  {
+    "date_str": "The Essential UN",
+    "title": "The Essential UN",
+    "url": "http://www.un.org/en/essential-un/"
+  },
+  {
+    "date_str": "Awake at Night podcast",
+    "title": "Awake at Night podcast",
+    "url": "https://www.un.org/en/awake-at-night"
+  },
+  {
+    "date_str": "The United Nations Pulse",
+    "title": "The United Nations Pulse",
+    "url": "https://www.un.org/en/live/daily-pulse"
+  },
+  {
+    "date_str": "Global Issues",
+    "title": "Global Issues",
+    "url": "https://www.un.org/en/global-issues/"
+  },
+  {
+    "date_str": "Observances",
+    "title": "Observances",
+    "url": "https://www.un.org/en/observances"
+  },
+  {
+    "date_str": "Sustainable Development Goals",
+    "title": "Sustainable Development Goals",
+    "url": "http://www.un.org/sustainabledevelopment/"
+  },
+  {
+    "date_str": "Our Common Agenda",
+    "title": "Our Common Agenda",
+    "url": "https://www.un.org/en/common-agenda"
+  },
+  {
+    "date_str": "The Summit of the Future",
+    "title": "The Summit of the Future",
+    "url": "https://www.un.org/en/summit-of-the-future"
+  },
+  {
+    "date_str": "Pact for the Future",
+    "title": "Pact for the Future",
+    "url": "https://www.un.org/pact-for-the-future/en"
+  },
+  {
+    "date_str": "Climate Action",
+    "title": "Climate Action",
+    "url": "http://www.un.org/en/climatechange/"
+  },
+  {
+    "date_str": "Peace and Security",
+    "title": "Peace and Security",
+    "url": "https://www.un.org/en/peaceandsecurity"
+  },
+  {
+    "date_str": "Action for Peacekeeping (A4P)",
+    "title": "Action for Peacekeeping (A4P)",
+    "url": "https://www.un.org/en/A4P/"
+  },
+  {
+    "date_str": "Global Crisis Response Group",
+    "title": "Global Crisis Response Group",
+    "url": "https://news.un.org/pages/global-crisis-response-group/"
+  },
+  {
+    "date_str": "Call to Action for Human Rights",
+    "title": "Call to Action for Human Rights",
+    "url": "https://www.un.org/en/content/action-for-human-rights/index.shtml"
+  },
+  {
+    "date_str": "Global Alliance for Human Rights",
+    "title": "Global Alliance for Human Rights",
+    "url": "https://globalalliance.un.org/"
+  },
+  {
+    "date_str": "Disability Inclusion Strategy",
+    "title": "Disability Inclusion Strategy",
+    "url": "https://www.un.org/en/content/disabilitystrategy/"
+  },
+  {
+    "date_str": "Fight Racism",
+    "title": "Fight Racism",
+    "url": "https://www.un.org/en/fight-racism"
+  },
+  {
+    "date_str": "Hate Speech",
+    "title": "Hate Speech",
+    "url": "https://www.un.org/en/hate-speech"
+  },
+  {
+    "date_str": "LGBTIQ+ People",
+    "title": "LGBTIQ+ People",
+    "url": "https://www.un.org/lgbtiq-people"
+  },
+  {
+    "date_str": "Safety of Journalists",
+    "title": "Safety of Journalists",
+    "url": "https://www.un.org/en/safety-journalists"
+  },
+  {
+    "date_str": "Rule of Law",
+    "title": "Rule of Law",
+    "url": "https://www.un.org/ruleoflaw/"
+  },
+  {
+    "date_str": "Action to Counter Terrorism",
+    "title": "Action to Counter Terrorism",
+    "url": "http://www.un.org/en/counterterrorism/"
+  },
+  {
+    "date_str": "Victims of Terrorism",
+    "title": "Victims of Terrorism",
+    "url": "http://www.un.org/victimsofterrorism/en"
+  },
+  {
+    "date_str": "Children and Armed Conflict",
+    "title": "Children and Armed Conflict",
+    "url": "https://childrenandarmedconflict.un.org/"
+  },
+  {
+    "date_str": "Violence Against Children (SRSG)",
+    "title": "Violence Against Children (SRSG)",
+    "url": "https://violenceagainstchildren.un.org/"
+  },
+  {
+    "date_str": "Sexual Violence in Conflict",
+    "title": "Sexual Violence in Conflict",
+    "url": "https://www.un.org/sexualviolenceinconflict/"
+  },
+  {
+    "date_str": "Refugees and Migrants",
+    "title": "Refugees and Migrants",
+    "url": "http://refugeesmigrants.un.org/"
+  },
+  {
+    "date_str": "Action Agenda on Internal Displacement",
+    "title": "Action Agenda on Internal Displacement",
+    "url": "https://www.un.org/en/content/action-agenda-on-internal-displacement/"
+  },
+  {
+    "date_str": "Spotlight Initiative",
+    "title": "Spotlight Initiative",
+    "url": "http://www.un.org/en/spotlight-initiative/index.shtml"
+  },
+  {
+    "date_str": "Preventing Sexual Exploitation and Abuse",
+    "title": "Preventing Sexual Exploitation and Abuse",
+    "url": "https://www.un.org/preventing-sexual-exploitation-and-abuse/"
+  },
+  {
+    "date_str": "Prevention of Genocide and the Responsibility to Protect",
+    "title": "Prevention of Genocide and the Responsibility to Protect",
+    "url": "http://www.un.org/en/genocide-prevention/"
+  },
+  {
+    "date_str": "1994 Genocide against the Tutsi in Rwanda",
+    "title": "1994 Genocide against the Tutsi in Rwanda",
+    "url": "http://www.un.org/en/preventgenocide/rwanda/"
+  },
+  {
+    "date_str": "The Holocaust",
+    "title": "The Holocaust",
+    "url": "http://www.un.org/en/holocaustremembrance/"
+  },
+  {
+    "date_str": "The Question of Palestine",
+    "title": "The Question of Palestine",
+    "url": "https://www.un.org/unispal/"
+  },
+  {
+    "date_str": "The Transatlantic Slave Trade",
+    "title": "The Transatlantic Slave Trade",
+    "url": "https://www.un.org/en/rememberslavery"
+  },
+  {
+    "date_str": "Decolonization",
+    "title": "Decolonization",
+    "url": "https://www.un.org/dppa/decolonization/en"
+  },
+  {
+    "date_str": "Messengers of Peace",
+    "title": "Messengers of Peace",
+    "url": "https://www.un.org/en/mop"
+  },
+  {
+    "date_str": "Roadmap for Digital Cooperation",
+    "title": "Roadmap for Digital Cooperation",
+    "url": "https://www.un.org/en/content/digital-cooperation-roadmap/"
+  },
+  {
+    "date_str": "Digital Financing Task Force",
+    "title": "Digital Financing Task Force",
+    "url": "https://www.un.org/en/digital-financing-taskforce"
+  },
+  {
+    "date_str": "Data Strategy",
+    "title": "Data Strategy",
+    "url": "https://www.un.org/datastrategy"
+  },
+  {
+    "date_str": "Information Integrity",
+    "title": "Information Integrity",
+    "url": "https://www.un.org/en/information-integrity"
+  },
+  {
+    "date_str": "Countering Disinformation",
+    "title": "Countering Disinformation",
+    "url": "https://www.un.org/en/countering-disinformation"
+  },
+  {
+    "date_str": "UN80 Initiative",
+    "title": "UN80 Initiative",
+    "url": "https://www.un.org/un80-initiative/en"
+  },
+  {
+    "date_str": "Spotlight series",
+    "title": "Spotlight series",
+    "url": "https://www.un.org/en/spotlight"
+  }
+]

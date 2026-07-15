@@ -1693,7 +1693,7 @@ Example:
       const rawOutletsData = await Promise.all(OUTLETS.map(async (outlet) => {
         const cached = correspondentCache[outlet.id];
         if (cached && Date.now() - cached.timestamp < CACHE_DURATION) {
-          return { id: outlet.id, data: cached.data, fromCache: true };
+          return { id: outlet.id, name: outlet.name, color: outlet.color, textColor: outlet.textColor || '#ffffff', logo: outlet.logo, data: cached.data, fromCache: true };
         }
 
         let allItems: any[] = [];
@@ -1815,49 +1815,39 @@ Example:
       const finalResults: Record<string, any> = {};
 
       rawOutletsData.forEach((outlet: any) => {
-        const itemsWithTags = outlet.fromCache
-          ? outlet.data.items.map((item: any) => {
-              const cleanTitle = item.title.replace(/#\w+:\s*[^#]+/g, '').trim();
-              const manualTags = getManualHeadlineTags(cleanTitle) || getManualHeadlineTags(item.title);
-              if (manualTags !== null) {
-                const hashtags = manualTags.map((t: string) => `#${t}`).join(' ');
-                const finalTitle = hashtags ? `${cleanTitle} ${hashtags}` : cleanTitle;
-                return {
-                  ...item,
-                  title: finalTitle,
-                  tags: manualTags
-                };
-              }
-              return item;
-            })
-          : outlet.items.map((item: any) => {
-              const cleanTitle = item.title.replace(/#\w+:\s*[^#]+/g, '').trim();
-              let tags = getManualHeadlineTags(cleanTitle) || getManualHeadlineTags(item.title);
-              if (tags === null) {
-                tags = tagsMap[item.title] || tagText(item.title) || [];
-              }
-              const hashtags = tags.map((t: string) => `#${t}`).join(' ');
-              const finalTitle = hashtags ? `${cleanTitle} ${hashtags}` : cleanTitle;
+        // ── Cached outlet: stored data is already the complete outletData object ──
+        if (outlet.fromCache) {
+          finalResults[outlet.id] = outlet.data;
+          return;
+        }
 
-              return {
-                title: finalTitle,
-                link: item.link,
-                pubDate: item.pubDate,
-                tags: tags
-              };
-            });
+        // ── Fresh outlet: assemble, cache, then store ────────────────────────────
+        const itemsWithTags = outlet.items.map((item: any) => {
+          const cleanTitle = item.title.replace(/#\w+:\s*[^#]+/g, '').trim();
+          let tags = getManualHeadlineTags(cleanTitle) || getManualHeadlineTags(item.title);
+          if (tags === null) {
+            tags = tagsMap[item.title] || tagText(item.title) || [];
+          }
+          const hashtags = tags.map((t: string) => `#${t}`).join(' ');
+          const finalTitle = hashtags ? `${cleanTitle} ${hashtags}` : cleanTitle;
+
+          return {
+            title: finalTitle,
+            link: item.link,
+            pubDate: item.pubDate,
+            tags: tags
+          };
+        });
 
         const outletData = {
           name: outlet.name,
           color: outlet.color,
-          textColor: outlet.textColor,
+          textColor: outlet.textColor || '#ffffff',
           logo: outlet.logo,
           items: itemsWithTags
         };
 
-        if (!outlet.fromCache) {
-          correspondentCache[outlet.id] = { timestamp: Date.now(), data: outletData };
-        }
+        correspondentCache[outlet.id] = { timestamp: Date.now(), data: outletData };
         finalResults[outlet.id] = outletData;
       });
 
@@ -1910,6 +1900,32 @@ Example:
       res.json({ success: true, results });
     } catch (error: any) {
       res.status(400).json({ error: error.message });
+    }
+  });
+
+  // ── Ticker headlines for portal banner ────────────────────────────────────
+  app.get('/api/ticker', (_req, res) => {
+    try {
+      const headlines: string[] = [];
+      for (const outlet of OUTLETS) {
+        const cached = correspondentCache[outlet.id];
+        if (cached && cached.data && cached.data.items) {
+          cached.data.items.slice(0, 8).forEach((item: any) => {
+            if (item.title) {
+              const clean = item.title.replace(/#\w+:\s*[^#]+/g, '').trim();
+              if (clean.length > 10) headlines.push(`${clean.toUpperCase()} (${outlet.name.toUpperCase()})`);
+            }
+          });
+        }
+      }
+      // Shuffle and cap at 40
+      for (let i = headlines.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [headlines[i], headlines[j]] = [headlines[j], headlines[i]];
+      }
+      res.json({ headlines: headlines.slice(0, 40) });
+    } catch (e: any) {
+      res.status(500).json({ headlines: [] });
     }
   });
 

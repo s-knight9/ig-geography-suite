@@ -62,7 +62,7 @@ const OUTLETS = [
     id: 'guardian',
     name: 'The Guardian',
     color: '#052962',
-    logo: 'https://www.google.com/s2/favicons?domain=theguardian.com&sz=128',
+    logo: 'https://assets.guim.co.uk/images/favicons/451963d1144664f582a6673b16b5f171/64x64.png',
     feeds: [
       'https://www.theguardian.com/world/rss',
       'https://www.theguardian.com/environment/rss',
@@ -75,7 +75,7 @@ const OUTLETS = [
     id: 'economist',
     name: 'The Economist',
     color: '#e3120b',
-    logo: 'https://www.google.com/s2/favicons?domain=economist.com&sz=128',
+    logo: 'https://www.economist.com/engassets/google-search-logo.f1ea908894.png',
     feeds: [
       'https://www.economist.com/climate-change/rss.xml',
       'https://www.economist.com/international/rss.xml',
@@ -88,7 +88,7 @@ const OUTLETS = [
     name: 'Financial Times',
     color: '#fff1e5',
     textColor: '#000000',
-    logo: 'https://www.google.com/s2/favicons?domain=ft.com&sz=128',
+    logo: 'https://im.ft-static.com/m/icons/favicon-32x32.ico',
     feeds: [
       'https://www.ft.com/world?format=rss',
       'https://www.ft.com/global-economy?format=rss'
@@ -98,7 +98,7 @@ const OUTLETS = [
     id: 'ap',
     name: 'Associated Press',
     color: '#ff322e',
-    logo: 'https://www.google.com/s2/favicons?domain=apnews.com&sz=128',
+    logo: 'https://assets.apnews.com/fa/favicon/favicon-32x32.png',
     feeds: [
       'https://news.google.com/rss/search?q=site:apnews.com&hl=en-US&gl=US&ceid=US:en',
       'https://news.google.com/rss/search?q=site:apnews.com+world&hl=en-US&gl=US&ceid=US:en',
@@ -110,7 +110,7 @@ const OUTLETS = [
     id: 'aljazeera',
     name: 'Al Jazeera',
     color: '#fa9600',
-    logo: 'https://www.google.com/s2/favicons?domain=aljazeera.com&sz=128',
+    logo: 'https://www.aljazeera.com/favicon_aje.ico',
     feeds: [
       'https://www.aljazeera.com/xml/rss/all.xml'
     ]
@@ -120,18 +120,22 @@ const OUTLETS = [
     name: 'SOUTH CHINA MORNING POST',
     color: '#f9dd16',
     textColor: '#000000',
-    logo: 'https://www.google.com/s2/favicons?domain=scmp.com&sz=128',
+    logo: 'https://assets-v2.scmp.com/static/common/favicon/favicon-32x32.png',
     feeds: [
-      'https://news.google.com/rss/search?q=when:24h+source:South_China_Morning_Post+China&hl=en-US&gl=US&ceid=US:en',
-      'https://news.google.com/rss/search?q=when:24h+source:South_China_Morning_Post+Asia&hl=en-US&gl=US&ceid=US:en',
-      'https://news.google.com/rss/search?q=when:24h+source:South_China_Morning_Post+Economy&hl=en-US&gl=US&ceid=US:en'
+      'https://news.google.com/rss/search?q=source:South_China_Morning_Post+climate+change&hl=en-US&gl=US&ceid=US:en',
+      'https://news.google.com/rss/search?q=source:South_China_Morning_Post+population+migration&hl=en-US&gl=US&ceid=US:en',
+      'https://news.google.com/rss/search?q=source:South_China_Morning_Post+urbanisation+cities&hl=en-US&gl=US&ceid=US:en',
+      'https://news.google.com/rss/search?q=source:South_China_Morning_Post+development+poverty&hl=en-US&gl=US&ceid=US:en',
+      'https://news.google.com/rss/search?q=source:South_China_Morning_Post+energy+resources+food&hl=en-US&gl=US&ceid=US:en',
+      'https://news.google.com/rss/search?q=source:South_China_Morning_Post+earthquake+volcano+flood&hl=en-US&gl=US&ceid=US:en',
+      'https://news.google.com/rss/search?q=source:South_China_Morning_Post+environment+ecosystem+deforestation&hl=en-US&gl=US&ceid=US:en'
     ]
   },
   {
     id: 'nyt',
     name: 'NY Times',
     color: '#000000',
-    logo: 'https://www.google.com/s2/favicons?domain=nytimes.com&sz=128',
+    logo: 'https://www.nytimes.com/vi-assets/static-assets/favicon-4bf96cb6a1ef3da5703cec68cf4a61ca.ico',
     feeds: [
       'https://rss.nytimes.com/services/xml/rss/nyt/World.xml',
       'https://rss.nytimes.com/services/xml/rss/nyt/Environment.xml',
@@ -142,14 +146,14 @@ const OUTLETS = [
     id: 'mongabay',
     name: 'Mongabay',
     color: '#2e7d32',
-    logo: 'https://www.google.com/s2/favicons?domain=mongabay.com&sz=128',
+    logo: 'https://mongabay-images.s3.amazonaws.com/news/mongabay-logo-200x200.jpg',
     feeds: ['https://news.mongabay.com/feed/']
   },
   {
     id: 'bbc',
     name: 'BBC News',
     color: '#bb1919',
-    logo: 'https://www.google.com/s2/favicons?domain=bbc.com&sz=128',
+    logo: 'https://static.bbci.co.uk/wwhp/1.180.0/responsive/img/apple-touch/apple-touch-180.jpg',
     feeds: [
       'https://feeds.bbci.co.uk/news/world/rss.xml',
       'https://feeds.bbci.co.uk/news/business/rss.xml',
@@ -160,7 +164,7 @@ const OUTLETS = [
     id: 'reuters',
     name: 'Reuters',
     color: '#ff8000',
-    logo: 'https://www.google.com/s2/favicons?domain=reuters.com&sz=128',
+    logo: 'https://www.reuters.com/pf/resources/images/reuters/logo-vertical-default.png?d=116',
     feeds: [
       'https://news.google.com/rss/search?q=when:24h+source:Reuters&hl=en-US&gl=US&ceid=US:en'
     ]
@@ -180,7 +184,7 @@ const OUTLETS = [
     id: 'euronews',
     name: 'Euronews',
     color: '#003399',
-    logo: 'https://www.google.com/s2/favicons?domain=euronews.com&sz=128',
+    logo: 'https://static.euronews.com/articles/stories/07/49/01/44/1200x675_cmsv2_7df04fd5-1d2e-5b9e-80fa-e24b3a30dc31-7490144.jpg',
     feeds: [
       'https://www.euronews.com/rss?level=vertical&name=earth',
       'https://www.euronews.com/rss?level=vertical&name=travel',
@@ -276,7 +280,8 @@ app.get('/api/news', async (req, res) => {
     const rawOutletsData = await Promise.all(OUTLETS.map(async (outlet) => {
       const cached = cache[outlet.id];
       if (cached && Date.now() - cached.timestamp < CACHE_DURATION) {
-        return { id: outlet.id, data: cached.data, fromCache: true };
+        // Return cached data WITH outlet metadata so name/color/logo are never lost
+        return { id: outlet.id, name: outlet.name, color: outlet.color, textColor: outlet.textColor || '#ffffff', logo: outlet.logo, data: cached.data, fromCache: true };
       }
 
       let allItems: any[] = [];
@@ -336,8 +341,9 @@ app.get('/api/news', async (req, res) => {
       });
       const uniqueItems = Array.from(uniqueMap.values());
       
+      const STORIES_PER_OUTLET = 8;
       let filteredItems = outlet.filter ? uniqueItems.filter(outlet.filter) : uniqueItems;
-      const limitedItems = filteredItems.slice(0, 20);
+      const limitedItems = filteredItems.slice(0, STORIES_PER_OUTLET);
 
       return {
         id: outlet.id,
@@ -397,49 +403,38 @@ app.get('/api/news', async (req, res) => {
     const finalResults: Record<string, any> = {};
 
     rawOutletsData.forEach((outlet: any) => {
-      const itemsWithTags = outlet.fromCache
-        ? outlet.data.items.map((item: any) => {
-            const cleanTitle = item.title.replace(/#\w+:\s*[^#]+/g, '').trim();
-            const manualTags = getManualHeadlineTags(cleanTitle) || getManualHeadlineTags(item.title);
-            if (manualTags !== null) {
-              const hashtags = manualTags.map((t: string) => `#${t}`).join(' ');
-              const finalTitle = hashtags ? `${cleanTitle} ${hashtags}` : cleanTitle;
-              return {
-                ...item,
-                title: finalTitle,
-                tags: manualTags
-              };
-            }
-            return item;
-          })
-        : outlet.items.map((item: any) => {
-            const cleanTitle = item.title.replace(/#\w+:\s*[^#]+/g, '').trim();
-            let tags = getManualHeadlineTags(cleanTitle) || getManualHeadlineTags(item.title);
-            if (tags === null) {
-              tags = tagsMap[item.title] || tagText(item.title) || [];
-            }
-            const hashtags = tags.map((t: string) => `#${t}`).join(' ');
-            const finalTitle = hashtags ? `${cleanTitle} ${hashtags}` : cleanTitle;
+      // ── Cached outlet: the stored data is the complete outletData object ──────
+      if (outlet.fromCache) {
+        finalResults[outlet.id] = outlet.data;
+        return;
+      }
 
-            return {
-              title: finalTitle,
-              link: item.link,
-              pubDate: item.pubDate,
-              tags: tags
-            };
-          });
+      // ── Fresh outlet: assemble, cache, then store ─────────────────────────────
+      const itemsWithTags = outlet.items.map((item: any) => {
+        const cleanTitle = item.title.replace(/#\w+:\s*[^#]+/g, '').trim();
+        let tags = getManualHeadlineTags(cleanTitle) || getManualHeadlineTags(item.title);
+        if (tags === null) {
+          tags = tagsMap[item.title] || tagText(item.title) || [];
+        }
+        const hashtags = tags.map((t: string) => `#${t}`).join(' ');
+        const finalTitle = hashtags ? `${cleanTitle} ${hashtags}` : cleanTitle;
+        return {
+          title: finalTitle,
+          link: item.link,
+          pubDate: item.pubDate,
+          tags: tags
+        };
+      });
 
       const outletData = {
         name: outlet.name,
         color: outlet.color,
-        textColor: outlet.textColor,
+        textColor: outlet.textColor || '#ffffff',
         logo: outlet.logo,
         items: itemsWithTags
       };
 
-      if (!outlet.fromCache) {
-        cache[outlet.id] = { timestamp: Date.now(), data: outletData };
-      }
+      cache[outlet.id] = { timestamp: Date.now(), data: outletData };
       finalResults[outlet.id] = outletData;
     });
 

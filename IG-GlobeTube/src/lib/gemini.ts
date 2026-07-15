@@ -233,3 +233,59 @@ export async function generateWeeklyVideos(): Promise<WeeklyVideosResponse> {
   }
 }
 
+// ── Student Synopsis ─────────────────────────────────────────────────────────
+
+export interface SynopsisUnit {
+  unit_tag: string;
+  connection_reason: string;
+}
+
+export interface SynopsisResponse {
+  summary: string;
+  key_concepts: string[];
+  linked_units: SynopsisUnit[];
+}
+
+const SYNOPSIS_SYSTEM_INSTRUCTION = `
+# ROLE
+You are the Student Learning Guide for IG GlobeTube. Given a video title, channel, and description, produce:
+1. A clear, engaging 3-4 sentence synopsis in plain IGCSE-level geographical language.
+2. 3-5 key geographical concepts or terms explicitly featured in the video.
+3. 1-3 IGCSE Geography units the video EXPLICITLY links with, each with a 2-3 sentence explanation of the connection.
+
+# IGCSE UNIT LIST (EXACT labels only):
+PH1: Changing River Environments | PH2: Changing Coastal Environments | PH3: Changing Ecosystems
+PH4: Tectonic Hazards | PH5: Climate Change | HU6: Changing Populations
+HU7: Changing Towns and Cities | HU8: Development | HU9: Changing Economies | HU10: Resource Provision
+
+# OUTPUT FORMAT (STRICT JSON - no markdown fences):
+{"summary":"...","key_concepts":["..."],"linked_units":[{"unit_tag":"EXACT LABEL","connection_reason":"..."}]}
+`;
+
+export async function generateVideoSynopsis(title: string, channel: string, description: string): Promise<SynopsisResponse> {
+  const apiKey = process.env.GEMINI_API_KEY || "";
+  if (!apiKey || apiKey.trim() === "") throw new Error("API_KEY_MISSING");
+
+  const ai = new GoogleGenAI({ apiKey });
+  const prompt = `Video Title: ${title}\nChannel: ${channel}\nDescription: ${description}`;
+
+  try {
+    const response = await ai.models.generateContent({
+      model: "gemini-3.5-flash",
+      contents: prompt,
+      config: {
+        systemInstruction: SYNOPSIS_SYSTEM_INSTRUCTION,
+        responseMimeType: "application/json",
+        temperature: 0.4
+      }
+    });
+    const outputText = response.text || "";
+    if (!outputText) throw new Error("No response from Gemini.");
+    const clean = outputText.replace(/^```json\n?|```$/g, "").trim();
+    return JSON.parse(clean) as SynopsisResponse;
+  } catch (error: any) {
+    console.error("Synopsis generation failed:", error);
+    throw error;
+  }
+}
+

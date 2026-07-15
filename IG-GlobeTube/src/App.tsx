@@ -23,7 +23,7 @@ import {
   ChevronRight
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
-import { generateQuizForVideo, type QuizResponse, type QuizQuestion } from './lib/gemini';
+import { generateQuizForVideo, generateVideoSynopsis, type QuizResponse, type QuizQuestion, type SynopsisResponse, type SynopsisUnit } from './lib/gemini';
 import { jsPDF } from 'jspdf';
 import { Document, Packer, Paragraph, TextRun, HeadingLevel, AlignmentType } from 'docx';
 import { saveAs } from 'file-saver';
@@ -891,6 +891,24 @@ function VideoDetailView({
   const [quizSubmitted, setQuizSubmitted] = useState(false);
   const [score, setScore] = useState(0);
 
+  // Synopsis states (students only)
+  const [loadingSynopsis, setLoadingSynopsis] = useState(false);
+  const [synopsisData, setSynopsisData] = useState<SynopsisResponse | null>(null);
+  const [synopsisError, setSynopsisError] = useState<string | null>(null);
+
+  // Auto-fetch synopsis for students on video open
+  useEffect(() => {
+    if (activeRole === 'student') {
+      setLoadingSynopsis(true);
+      setSynopsisError(null);
+      setSynopsisData(null);
+      generateVideoSynopsis(video.title, video.channel, video.description)
+        .then(data => setSynopsisData(data))
+        .catch(err => setSynopsisError(err.message || 'Failed to generate synopsis.'))
+        .finally(() => setLoadingSynopsis(false));
+    }
+  }, [video.id, activeRole]);
+
   // Inject YouTube IFrame API script safely
   useEffect(() => {
     if (!(window as any).YT) {
@@ -1412,8 +1430,92 @@ function VideoDetailView({
           </div>
         </div>
 
-        {/* Right Panel: Quiz & Syllabus classification Engine */}
+        {/* Right Panel: role-conditional */}
         <div className="lg:col-span-5">
+
+          {/* ── STUDENT VIEW: Video Synopsis ────────────────────────────── */}
+          {activeRole === 'student' && (
+            <div className="bg-white dark:bg-slate-900/40 border border-slate-200 dark:border-slate-900 rounded-3xl p-6 md:p-8 space-y-6 backdrop-blur-sm min-h-[400px] flex flex-col transition-colors duration-300">
+              {/* Panel header */}
+              <div className="flex items-center gap-3">
+                <div className="w-8 h-8 rounded-lg bg-blue-500/10 text-[#2563eb] flex items-center justify-center">
+                  <Sparkles className="w-4 h-4" />
+                </div>
+                <div>
+                  <h3 className="text-sm font-black uppercase tracking-widest text-slate-800 dark:text-white">Video Synopsis</h3>
+                  <p className="text-[9px] font-bold text-slate-500 uppercase tracking-widest mt-0.5">Syllabus connections & key concepts</p>
+                </div>
+              </div>
+
+              {/* Loading */}
+              {loadingSynopsis && (
+                <div className="flex-1 flex flex-col items-center justify-center py-16 space-y-4">
+                  <Loader2 className="w-8 h-8 text-[#2563eb] animate-spin" />
+                  <p className="text-xs font-bold text-[#2563eb] uppercase tracking-widest animate-pulse">Analysing syllabus connections...</p>
+                </div>
+              )}
+
+              {/* Error */}
+              {synopsisError && !loadingSynopsis && (
+                <div className="flex-1 flex flex-col items-center justify-center py-10 text-center space-y-3">
+                  <XCircle className="w-10 h-10 text-red-500" />
+                  <p className="text-xs font-black text-red-500 uppercase tracking-wider">Synopsis unavailable</p>
+                  <p className="text-[11px] text-slate-500 leading-relaxed">{synopsisError}</p>
+                </div>
+              )}
+
+              {/* Synopsis content */}
+              {synopsisData && !loadingSynopsis && (
+                <div className="flex-1 flex flex-col space-y-6 animate-in fade-in zoom-in-95 duration-200">
+
+                  {/* Summary */}
+                  <div className="bg-slate-50 dark:bg-slate-950/60 border border-slate-200 dark:border-slate-900 rounded-2xl p-5 space-y-2">
+                    <h5 className="text-[9px] font-black uppercase tracking-widest text-[#2563eb]">Summary</h5>
+                    <p className="text-xs font-medium text-slate-700 dark:text-slate-300 leading-relaxed">{synopsisData.summary}</p>
+                  </div>
+
+                  {/* Key concepts */}
+                  <div className="space-y-2">
+                    <h5 className="text-[9px] font-black uppercase tracking-widest text-slate-450 dark:text-slate-500">Key Geographical Concepts</h5>
+                    <div className="flex flex-wrap gap-2">
+                      {synopsisData.key_concepts.map((concept, i) => (
+                        <span key={i} className="px-2.5 py-1 text-[10px] font-bold bg-blue-500/8 dark:bg-blue-500/10 text-[#2563eb] border border-blue-500/20 rounded-full uppercase tracking-wide">
+                          {concept}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Linked units */}
+                  <div className="space-y-3">
+                    <h5 className="text-[9px] font-black uppercase tracking-widest text-slate-450 dark:text-slate-500">Syllabus Unit Connections</h5>
+                    {synopsisData.linked_units.map((unit, i) => {
+                      const prefix = unit.unit_tag.split(':')[0].trim();
+                      const colorClass = UNIT_COLORS[prefix] || 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 border-slate-200 dark:border-slate-700';
+                      return (
+                        <div key={i} className="border border-slate-200 dark:border-slate-800 rounded-2xl overflow-hidden">
+                          <div className={`px-4 py-2.5 flex items-center gap-2 border-b border-slate-100 dark:border-slate-800`}>
+                            <span className={`px-2 py-0.5 text-[9px] font-black tracking-wider border rounded-full uppercase ${colorClass}`}>
+                              {prefix}
+                            </span>
+                            <span className="text-[10px] font-black text-slate-700 dark:text-slate-300 uppercase tracking-wide">
+                              {unit.unit_tag.split(':').slice(1).join(':').trim()}
+                            </span>
+                          </div>
+                          <div className="px-4 py-3">
+                            <p className="text-[11px] font-medium text-slate-600 dark:text-slate-400 leading-relaxed">{unit.connection_reason}</p>
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+              )}
+            </div>
+          )}
+
+          {/* ── STAFF VIEW: Syllabus Quiz Engine ─────────────────────────── */}
+          {activeRole !== 'student' && (
           <div className="bg-white dark:bg-slate-900/40 border border-slate-200 dark:border-slate-900 rounded-3xl p-6 md:p-8 space-y-8 backdrop-blur-sm relative min-h-[400px] flex flex-col transition-colors duration-300">
             
             {/* Header of Quiz panel */}
@@ -1429,7 +1531,7 @@ function VideoDetailView({
               </div>
               
               {/* Teacher Export Utilities */}
-              {activeRole !== 'student' && quizData && (
+              {quizData && (
                 <div className="flex items-center gap-1.5">
                   <button
                     onClick={handleDownloadPDF}
@@ -1635,6 +1737,8 @@ function VideoDetailView({
               </div>
             )}
           </div>
+          )}
+
         </div>
       </div>
     </motion.div>

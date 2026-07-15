@@ -145,7 +145,9 @@ Then, follow with the 4 steps, starting each with a specific heading: "## STEP 1
 
 STEP 1: CURRICULUM ALIGNMENT
 - **Article Overview:** Provide a 3-4 sentence analytical synopsis of the article's core geographic problem.
-- **Primary Syllabus Link:** Identify the IGCSE Paper (Paper 1: Physical Geography or Paper 2: Human Geography) and specific IGCSE Unit (e.g. PH1: Changing River Environments).
+- **Primary Syllabus Link:** Identify the IGCSE Paper and specific IGCSE Unit. YOU MUST ONLY CHOOSE FROM THE FOLLOWING EXACT UNITS. DO NOT INVENT UNITS:
+  - Paper 1 (Physical): PH1: Changing River Environments, PH2: Changing Coastal Environments, PH3: Hazardous Environments, PH4: Changing Ecosystems, PH5: Climate Change
+  - Paper 2 (Human): HU6: Changing Population, HU7: Changing Towns & Cities, HU8: Development, HU9: Changing Economies, HU10: Resource Provision
 - **Case Study Utility:** Grade (1-10) for exam readiness. Explain WHY (e.g. "High AO1 value due to specific 2024 flood statistics").
 
 STEP 2: CONCEPTUAL BREAKDOWN (AO2)

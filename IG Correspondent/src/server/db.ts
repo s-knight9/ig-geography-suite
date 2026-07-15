@@ -147,42 +147,25 @@ export function tagText(text: string): string[] {
     }
   ];
 
-  // Load learned keywords from database and merge them into primaryTaxonomy keywords lists
-  try {
-    const learned = db.prepare('SELECT keyword, tag FROM learned_keywords').all() as { keyword: string, tag: string }[];
-    const learnedMap: Record<string, string[]> = {};
-    learned.forEach(row => {
-      const tag = row.tag;
-      const keyword = row.keyword.toLowerCase().trim();
-      if (!learnedMap[tag]) {
-        learnedMap[tag] = [];
-      }
-      learnedMap[tag].push(keyword);
-    });
-    
-    for (const item of primaryTaxonomy) {
-      const learnedKeywords = learnedMap[item.tag];
-      if (learnedKeywords) {
-        item.keywords = [...item.keywords, ...learnedKeywords];
-      }
-    }
-  } catch (err) {
-    console.error("Error loading learned keywords:", err);
-  }
+  // Score each tag by number of keyword matches (more matches = more relevant)
+  const scoredMatches: { tag: string; score: number }[] = [];
 
   for (const { tag, keywords } of primaryTaxonomy) {
-    const hasKeyword = keywords.some(keyword => {
-      if (keyword.includes(" ")) {
-        return normalized.includes(keyword);
-      }
-      return words.includes(keyword);
-    });
-    if (hasKeyword) {
-      matched.push(tag);
+    let score = 0;
+    for (const keyword of keywords) {
+      const found = keyword.includes(" ")
+        ? normalized.includes(keyword)
+        : words.includes(keyword);
+      if (found) score++;
+    }
+    if (score > 0) {
+      scoredMatches.push({ tag, score });
     }
   }
 
-  return matched;
+  // Sort by score descending and return at most 2 tags
+  scoredMatches.sort((a, b) => b.score - a.score);
+  return scoredMatches.slice(0, 2).map(m => m.tag);
 }
 
 // Initialize schema
@@ -243,6 +226,15 @@ const columns = db.prepare('PRAGMA table_info(user_votes_tracker)').all() as any
 const hasSelectedOption = columns.some(c => c.name === 'selected_option');
 if (!hasSelectedOption) {
   db.exec('ALTER TABLE user_votes_tracker ADD COLUMN selected_option TEXT');
+}
+
+// Purge any previously-learned keywords — they caused cross-story tag contamination.
+// Keyword learning is now disabled; manual tags are stored per-headline (exact match).
+try {
+  db.exec('DELETE FROM learned_keywords');
+  console.log('[Database] Cleared learned_keywords table (contamination prevention).');
+} catch (err) {
+  console.error('[Database] Could not clear learned_keywords:', err);
 }
 
 export function getPollDateKST(): string {
@@ -485,31 +477,11 @@ export function saveManualHeadlineTags(headline: string, tags: string[]): void {
   }
 }
 
-export function learnKeywordsFromHeadline(headline: string, tags: string[]): void {
-  if (!headline || !tags || tags.length === 0) return;
-  
-  // Normalize and extract words
-  const normalized = headline.toLowerCase().replace(/[^a-z0-9\s]/g, " ");
-  const words = normalized.split(/\s+/).filter(Boolean);
-  
-  const insert = db.prepare('INSERT OR IGNORE INTO learned_keywords (keyword, tag) VALUES (?, ?)');
-  
-  const transaction = db.transaction((wordsToLearn, tagsToAssociate) => {
-    for (const word of wordsToLearn) {
-      if (word.length >= 3 && !STOP_WORDS.has(word)) {
-        for (const tag of tagsToAssociate) {
-          insert.run(word, tag);
-        }
-      }
-    }
-  });
-
-  try {
-    transaction(words, tags);
-    console.log(`[ML] Learned keywords from headline "${headline}" for tags: ${tags.join(", ")}`);
-  } catch (err) {
-    console.error("Error learning keywords from headline:", err);
-  }
+export function learnKeywordsFromHeadline(_headline: string, _tags: string[]): void {
+  // Keyword learning is intentionally disabled.
+  // Manual tags are stored per-headline in manual_headline_tags (exact match).
+  // Mass-learning individual words caused cross-story tag contamination: tagging
+  // one story spread its tags to every other story sharing common words.
 }
 
 export function getManualPollTags(pollId: number): string[] | null {

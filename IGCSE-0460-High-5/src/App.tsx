@@ -16,6 +16,7 @@ import {
   FileDown,
   FileText,
   Edit3,
+  Hand,
 } from "lucide-react";
 import { jsPDF } from "jspdf";
 
@@ -386,9 +387,7 @@ export default function App({
       <header className="h-20 bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between px-4 sm:px-8 shrink-0 relative z-10 transition-colors">
         <div className="flex items-center gap-3 sm:gap-4 flex-1">
           <div className="w-12 h-12 sm:w-14 sm:h-14 bg-[#1d5cf9] rounded-xl sm:rounded-2xl flex items-center justify-center shadow-md">
-            <span className="text-white font-bold text-[24px] tracking-tight">
-              IG
-            </span>
+            <Hand className="text-white w-6 h-6 sm:w-8 sm:h-8" />
           </div>
           <div className="flex flex-col justify-center mt-1">
             <h1 className="text-[24px] font-black text-[#1d5cf9] uppercase tracking-tight leading-none">
