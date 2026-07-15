@@ -13,6 +13,25 @@ export interface QuizResponse {
   quiz: QuizQuestion[];
 }
 
+async function generateWithFallback(ai: any, contents: string, config: any) {
+  const models = ["gemini-3.5-flash", "gemini-flash-latest", "gemini-3.1-flash-lite", "gemini-2.5-flash"];
+  let lastError = null;
+  for (const model of models) {
+    try {
+      const response = await ai.models.generateContent({
+        model,
+        contents,
+        config
+      });
+      return response;
+    } catch (error: any) {
+      console.warn(`Model ${model} failed (likely high demand), falling back...`, error?.message || error);
+      lastError = error;
+    }
+  }
+  throw lastError;
+}
+
 const SYSTEM_INSTRUCTION = `
 # ROLE
 You are the real-time Quiz & Syllabus Engine for IG GlobeTube. Your job is to take the title, channel name, and description of a recently published news/science video from a curated feed and instantly classify it into the IGCSE Geography curriculum and generate a high-precision retrieval quiz.
@@ -110,14 +129,10 @@ export async function generateQuizForVideo(title: string, channel: string, descr
   `;
 
   try {
-    const response = await ai.models.generateContent({
-      model: "gemini-3.5-flash",
-      contents: prompt,
-      config: {
-        systemInstruction: SYSTEM_INSTRUCTION,
-        responseMimeType: "application/json",
-        temperature: 0.3
-      }
+    const response = await generateWithFallback(ai, prompt, {
+      systemInstruction: SYSTEM_INSTRUCTION,
+      responseMimeType: "application/json",
+      temperature: 0.3
     });
 
     const outputText = response.text || "";
@@ -127,7 +142,13 @@ export async function generateQuizForVideo(title: string, channel: string, descr
 
     // Ensure we parse clean JSON
     const cleanJsonText = outputText.replace(/^```json\n?|```$/g, "").trim();
-    return JSON.parse(cleanJsonText) as QuizResponse;
+    const parsed = JSON.parse(cleanJsonText);
+    
+    if (!parsed || !Array.isArray(parsed.quiz) || parsed.quiz.length === 0) {
+      throw new Error("The AI model returned an invalid quiz format. Please try again.");
+    }
+    
+    return parsed as QuizResponse;
   } catch (error: any) {
     console.error("Failed to generate quiz via Gemini API:", error);
     throw error;
@@ -210,14 +231,10 @@ export async function generateWeeklyVideos(): Promise<WeeklyVideosResponse> {
   `;
 
   try {
-    const response = await ai.models.generateContent({
-      model: "gemini-3.5-flash",
-      contents: prompt,
-      config: {
-        systemInstruction: WEEKLY_VIDEOS_SYSTEM_INSTRUCTION,
-        responseMimeType: "application/json",
-        temperature: 0.7
-      }
+    const response = await generateWithFallback(ai, prompt, {
+      systemInstruction: WEEKLY_VIDEOS_SYSTEM_INSTRUCTION,
+      responseMimeType: "application/json",
+      temperature: 0.7
     });
 
     const outputText = response.text || "";
@@ -270,14 +287,10 @@ export async function generateVideoSynopsis(title: string, channel: string, desc
   const prompt = `Video Title: ${title}\nChannel: ${channel}\nDescription: ${description}`;
 
   try {
-    const response = await ai.models.generateContent({
-      model: "gemini-3.5-flash",
-      contents: prompt,
-      config: {
-        systemInstruction: SYNOPSIS_SYSTEM_INSTRUCTION,
-        responseMimeType: "application/json",
-        temperature: 0.4
-      }
+    const response = await generateWithFallback(ai, prompt, {
+      systemInstruction: SYNOPSIS_SYSTEM_INSTRUCTION,
+      responseMimeType: "application/json",
+      temperature: 0.4
     });
     const outputText = response.text || "";
     if (!outputText) throw new Error("No response from Gemini.");

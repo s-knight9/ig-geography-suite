@@ -27,6 +27,8 @@ import { generateQuizForVideo, generateVideoSynopsis, type QuizResponse, type Qu
 import { jsPDF } from 'jspdf';
 import { Document, Packer, Paragraph, TextRun, HeadingLevel, AlignmentType } from 'docx';
 import { saveAs } from 'file-saver';
+import { db } from './lib/firebase';
+import { ref, onValue, set } from 'firebase/database';
 
 // Curated default high-yield videos matching the 9 syllabus units
 interface VideoItem {
@@ -211,9 +213,102 @@ export default function App({
   const [isLoadingWeekly, setIsLoadingWeekly] = useState(false);
   const [weeklyStatus, setWeeklyStatus] = useState<string | null>(null);
 
+  // Live Quiz Socket States
+  const [joinQuizCode, setJoinQuizCode] = useState("");
+  const [liveQuizLobby, setLiveQuizLobby] = useState<string | null>(null);
+  const [isLiveQuizActive, setIsLiveQuizActive] = useState(false);
+  const [penaltyMode, setPenaltyMode] = useState(false);
+  const [teacherQuizCode, setTeacherQuizCode] = useState<string | null>(null);
+
   useEffect(() => {
     setActiveRole(role);
   }, [role]);
+
+  // Anti-Cheat: The Alt+Tab Trap
+  useEffect(() => {
+    if (!isLiveQuizActive || penaltyMode) return;
+    
+    const handleCheat = () => {
+      setPenaltyMode(true);
+      setIsLiveQuizActive(false);
+      if (document.fullscreenElement) {
+        document.exitFullscreen().catch(e => console.error(e));
+      }
+      
+      const uid = "student_" + Math.random().toString(36).substr(2, 9);
+      if (liveQuizLobby) {
+        set(ref(db, `quizzes/${liveQuizLobby}/students/${uid}`), {
+          score: 0,
+          status: "Disqualified / Tab Switched",
+          timestamp: new Date().toISOString()
+        }).catch(e => console.error("Failed to sync penalty", e));
+      }
+    };
+
+    document.addEventListener("visibilitychange", handleCheat);
+    window.addEventListener("blur", handleCheat);
+    
+    return () => {
+      document.removeEventListener("visibilitychange", handleCheat);
+      window.removeEventListener("blur", handleCheat);
+    };
+  }, [isLiveQuizActive, penaltyMode, liveQuizLobby]);
+
+  // Listen to Firebase Lobby State
+  useEffect(() => {
+    if (!liveQuizLobby) return;
+    const lobbyRef = ref(db, `quizzes/${liveQuizLobby}/status`);
+    const unsubscribe = onValue(lobbyRef, (snapshot) => {
+      const val = snapshot.val();
+      if (val === 'started') {
+        setIsLiveQuizActive(true);
+        document.documentElement.requestFullscreen().catch(e => console.error("Fullscreen blocked", e));
+      } else if (val === 'ended') {
+        setIsLiveQuizActive(false);
+        setLiveQuizLobby(null);
+        if (document.fullscreenElement) document.exitFullscreen().catch(e => {});
+      }
+    });
+    return () => unsubscribe();
+  }, [liveQuizLobby]);
+
+  const handleJoinLobby = () => {
+    if (joinQuizCode.trim().length > 0) {
+      setLiveQuizLobby(joinQuizCode.trim().toUpperCase());
+    }
+  };
+
+  const handleTeacherCreateQuiz = () => {
+    const code = Math.random().toString(36).substring(2, 8).toUpperCase();
+    setTeacherQuizCode(code);
+    set(ref(db, `quizzes/${code}/status`), 'waiting');
+  };
+
+  const handleTeacherPushQuiz = () => {
+    if (teacherQuizCode) {
+      set(ref(db, `quizzes/${teacherQuizCode}/status`), 'started');
+    }
+  };
+
+  if (penaltyMode) {
+    return (
+      <div className="fixed inset-0 z-[9999] bg-slate-950 flex flex-col items-center justify-center p-8 text-center animate-in fade-in">
+        <XCircle className="w-24 h-24 text-red-500 mb-6" />
+        <h1 className="text-4xl font-black text-white mb-4">Quiz Exited</h1>
+        <p className="text-xl text-red-200">Tab switching detected. Assessment locked and recorded as a 0 score.</p>
+      </div>
+    );
+  }
+
+  if (liveQuizLobby && !isLiveQuizActive) {
+    return (
+      <div className="fixed inset-0 z-[9999] bg-slate-950 flex flex-col items-center justify-center p-8 text-center animate-in fade-in">
+        <Loader2 className="w-16 h-16 text-[#2563eb] animate-spin mb-6" />
+        <h1 className="text-2xl font-black text-white mb-2">Waiting for teacher to start quiz...</h1>
+        <p className="text-slate-400 font-medium">Please do not switch tabs or leave this screen.</p>
+      </div>
+    );
+  }
 
   const loadVideos = async () => {
     setIsLoadingWeekly(true);
@@ -486,6 +581,25 @@ export default function App({
           </div>
         </div>
 
+        {activeRole === 'student' && !liveQuizLobby && (
+          <div className="flex items-center gap-2 bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-1 shadow-sm">
+            <input 
+              type="text" 
+              placeholder="ENTER QUIZ CODE" 
+              value={joinQuizCode}
+              onChange={(e) => setJoinQuizCode(e.target.value)}
+              className="bg-transparent border-none outline-none text-xs font-black uppercase text-center w-36 text-slate-800 dark:text-white placeholder:text-slate-400"
+            />
+            <button 
+              onClick={handleJoinLobby}
+              disabled={joinQuizCode.length === 0}
+              className="px-3 py-1.5 bg-[#2563eb] hover:bg-[#1d4ed8] text-white text-[10px] font-black uppercase rounded-lg disabled:opacity-50"
+            >
+              Join
+            </button>
+          </div>
+        )}
+
         <div className="flex items-center space-x-4">
           {/* Teacher preview override check */}
           {(role === 'teacher' || role === 'super_admin') && (
@@ -647,6 +761,9 @@ export default function App({
               }}
               parseYouTubeId={parseYouTubeId}
               activeRole={activeRole}
+              teacherQuizCode={teacherQuizCode}
+              handleTeacherCreateQuiz={handleTeacherCreateQuiz}
+              handleTeacherPushQuiz={handleTeacherPushQuiz}
             />
           )}
         </AnimatePresence>
@@ -866,6 +983,9 @@ interface VideoDetailViewProps {
   onVideoUpdate: (video: VideoItem) => void;
   parseYouTubeId: (url: string) => string | null;
   activeRole: 'student' | 'teacher' | 'super_admin';
+  teacherQuizCode: string | null;
+  handleTeacherCreateQuiz: () => void;
+  handleTeacherPushQuiz: () => void;
 }
 
 function VideoDetailView({
@@ -873,7 +993,10 @@ function VideoDetailView({
   onBack,
   onVideoUpdate,
   parseYouTubeId,
-  activeRole
+  activeRole,
+  teacherQuizCode,
+  handleTeacherCreateQuiz,
+  handleTeacherPushQuiz
 }: VideoDetailViewProps) {
   const [player, setPlayer] = useState<any>(null);
   const playerRef = useRef<HTMLIFrameElement>(null);
@@ -1034,7 +1157,7 @@ function VideoDetailView({
   const handleSubmitQuiz = () => {
     if (!quizData) return;
     let correctCount = 0;
-    quizData.quiz.forEach(q => {
+    quizData?.quiz?.forEach(q => {
       if (userAnswers[q.question_number] === q.correct_answer) {
         correctCount++;
       }
@@ -1187,8 +1310,8 @@ function VideoDetailView({
     
     // Print Answer Key Content
     let answerText = "";
-    quizData.quiz.forEach((q) => {
-      const idx = q.options.indexOf(q.correct_answer);
+    quizData?.quiz?.forEach((q) => {
+      const idx = q.options?.indexOf(q.correct_answer);
       const label = idx >= 0 ? String.fromCharCode(65 + idx) : "?";
       answerText += `Q${q.question_number}: ${label} (${q.correct_answer})     `;
     });
@@ -1226,7 +1349,7 @@ function VideoDetailView({
         })
       );
       
-      quizData.quiz.forEach((q) => {
+      quizData?.quiz?.forEach((q) => {
         sections.push(
           new Paragraph({
             children: [
@@ -1236,7 +1359,7 @@ function VideoDetailView({
           })
         );
         
-        q.options.forEach((opt, idx) => {
+        q.options?.forEach((opt, idx) => {
           const optionLabel = String.fromCharCode(65 + idx);
           sections.push(
             new Paragraph({
@@ -1261,8 +1384,8 @@ function VideoDetailView({
       );
       
       const answerChildren: TextRun[] = [];
-      quizData.quiz.forEach((q) => {
-        const correctIdx = q.options.indexOf(q.correct_answer);
+      quizData?.quiz?.forEach((q) => {
+        const correctIdx = q.options?.indexOf(q.correct_answer);
         const optionLabel = correctIdx >= 0 ? String.fromCharCode(65 + correctIdx) : "?";
         answerChildren.push(
           new TextRun({ text: `Q${q.question_number}: `, bold: true }),
@@ -1532,7 +1655,28 @@ function VideoDetailView({
               
               {/* Teacher Export Utilities */}
               {quizData && (
-                <div className="flex items-center gap-1.5">
+                <div className="flex items-center gap-2">
+                  {!teacherQuizCode ? (
+                    <button
+                      onClick={handleTeacherCreateQuiz}
+                      className="px-3 py-1.5 bg-blue-500/10 hover:bg-[#2563eb] text-[#2563eb] hover:text-white border border-[#2563eb]/20 text-[10px] font-black uppercase rounded-lg transition-all flex items-center gap-1.5"
+                    >
+                      <Users className="w-3.5 h-3.5" /> Create Live Quiz
+                    </button>
+                  ) : (
+                    <div className="flex items-center gap-2">
+                      <span className="text-xs font-mono font-black text-slate-700 dark:text-slate-300 bg-slate-100 dark:bg-slate-800 px-3 py-1.5 rounded-lg border border-slate-200 dark:border-slate-700 tracking-widest">
+                        CODE: {teacherQuizCode}
+                      </span>
+                      <button
+                        onClick={handleTeacherPushQuiz}
+                        className="px-3 py-1.5 bg-red-500 hover:bg-red-600 text-white border border-red-500/20 text-[10px] font-black uppercase rounded-lg transition-all flex items-center gap-1.5 shadow-sm shadow-red-500/20"
+                      >
+                        <Play className="w-3.5 h-3.5" /> Push Quiz
+                      </button>
+                    </div>
+                  )}
+
                   <button
                     onClick={handleDownloadPDF}
                     className="px-2.5 py-1.5 bg-slate-100 hover:bg-[#2563eb] hover:text-white dark:bg-slate-900 border border-slate-200 dark:border-slate-850 text-slate-650 dark:text-slate-400 text-[10px] font-black uppercase rounded-lg tracking-wider transition-all cursor-pointer flex items-center gap-1"
@@ -1623,7 +1767,7 @@ function VideoDetailView({
 
                 {/* Questions List */}
                 <div className="space-y-8">
-                  {quizData.quiz.map((q) => {
+                  {quizData?.quiz?.map((q) => {
                     const isCorrect = userAnswers[q.question_number] === q.correct_answer;
                     const isAnswered = !!userAnswers[q.question_number];
 
@@ -1635,7 +1779,7 @@ function VideoDetailView({
                         </h4>
 
                         <div className="grid grid-cols-1 gap-2">
-                          {q.options.map((opt) => {
+                          {q.options?.map((opt) => {
                             const isSelected = userAnswers[q.question_number] === opt;
                             const isThisCorrect = opt === q.correct_answer;
 
