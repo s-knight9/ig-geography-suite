@@ -389,13 +389,9 @@ export default function App({
           <div className="w-12 h-12 sm:w-14 sm:h-14 bg-[#1d5cf9] rounded-xl sm:rounded-2xl flex items-center justify-center shadow-md">
             <Hand className="text-white w-6 h-6 sm:w-8 sm:h-8" />
           </div>
-          <div className="flex flex-col justify-center mt-1">
-            <h1 className="text-[24px] font-black text-[#1d5cf9] uppercase tracking-tight leading-none">
-              0460 HIGH 5
-            </h1>
-            <p className="text-[10px] sm:text-xs font-bold text-slate-400 uppercase tracking-widest mt-1 sm:mt-1.5 leading-none">
-              EXAM GENERATOR ENGINE
-            </p>
+          <div>
+            <h1 className="text-xl font-black text-slate-800 dark:text-white tracking-tight">0460 High 5</h1>
+            <span className="text-[9px] font-bold text-slate-400 uppercase tracking-widest mt-0.5 block">EXAM GENERATOR ENGINE</span>
           </div>
         </div>
 

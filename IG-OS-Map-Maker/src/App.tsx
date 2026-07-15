@@ -1,3 +1,4 @@
+﻿import { Map } from 'lucide-react';
 import React, { useState } from 'react';
 import { AppProvider, useAppContext } from './store';
 import { Sidebar } from './components/Sidebar';
@@ -25,11 +26,11 @@ function Header({ onBackToPortal }: { onBackToPortal?: () => void }) {
     <header className="h-[72px] bg-white border-b border-gray-200 flex items-center justify-between px-6 z-20 shrink-0">
       <div className="flex items-center gap-4">
         <div className="w-[44px] h-[44px] bg-[#0866FF] rounded-[12px] flex items-center justify-center shadow-sm">
-          <span className="text-[20px] font-black text-white tracking-tight">IG</span>
+          <Map className="text-white w-6 h-6" />
         </div>
-        <div className="flex flex-col justify-center">
-          <h1 className="text-[20px] font-black text-[#0866FF] uppercase tracking-wide leading-tight">OS MAP MAKER</h1>
-          <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mt-0.5">Crafting OS Maps To Scale</span>
+        <div>
+          <h1 className="text-xl font-black text-slate-800 dark:text-white tracking-tight">OS Map Maker</h1>
+          <span className="text-[9px] font-bold text-slate-400 uppercase tracking-widest mt-0.5 block">Crafting OS Maps To Scale</span>
         </div>
       </div>
       <div className="flex items-center gap-4">
@@ -86,3 +87,4 @@ export default function App({
     </AppProvider>
   );
 }
+

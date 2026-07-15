@@ -699,10 +699,10 @@ return (
         </div>
         <div>
           <div className="flex items-center gap-2">
-            <h1 className="text-xl font-black tracking-tight text-slate-800 dark:text-white leading-none">Geo Textbook Viewer</h1>
+            <h1 className="text-xl font-black text-slate-800 dark:text-white tracking-tight">Geo Textbook Viewer</h1>
             <span className="text-[9px] bg-blue-500/10 dark:bg-[#2563eb]/10 text-[#2563eb] border border-[#2563eb]/25 px-2 py-0.5 rounded-full font-bold uppercase">STUDIO</span>
           </div>
-          <p className="text-[10px] font-bold tracking-[0.2em] text-slate-500 uppercase mt-1">IGCSE Geography Annotation Engine</p>
+          <span className="text-[9px] font-bold text-slate-400 uppercase tracking-widest mt-0.5 block">IGCSE Geography Annotation Engine</span>
         </div>
       </div>
 

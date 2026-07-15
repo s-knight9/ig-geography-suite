@@ -7,7 +7,7 @@ import React, { useState, useMemo, useRef, useEffect } from 'react';
 import Markdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import { marked } from 'marked';
-import { Loader2, Globe, Cpu, Database, FileText, ChevronRight, Download, FileCode, Sun, Moon, Upload, FileUp, Terminal, Activity, ShieldCheck, AlertCircle } from 'lucide-react';
+import { Loader2, Globe, Cpu, Database, FileText, ChevronRight, Download, FileCode, Sun, Moon, Upload, FileUp, Terminal, Activity, ShieldCheck, AlertCircle, LogOut } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { jsPDF } from 'jspdf';
 import html2canvas from 'html2canvas';
@@ -56,6 +56,7 @@ export default function App({
   onBackToPortal?: () => void;
   activeUserEmail?: string;
   activeTeacherCode?: string;
+  activeRole?: string;
   isDark?: boolean;
   toggleDark?: () => void;
 }) {
@@ -108,6 +109,16 @@ export default function App({
   }, []);
 
   const handleProcess = async () => {
+    if (activeRole === 'student') {
+      const today = new Date().toISOString().split('T')[0];
+      const dataStr = localStorage.getItem('ig_ai_generation_usage');
+      const data = dataStr ? JSON.parse(dataStr) : {};
+      if (data.date === today && data.count >= 3) {
+        alert('You have reached your daily limit of 3 AI generations. Please take time to read the source materials carefully!');
+        return;
+      }
+    }
+
     if (!inputText.trim()) return;
 
     setIsLoading(true);
@@ -202,11 +213,23 @@ ${articleText}
       // Extract title from the response
       const titleMatch = responseText.match(/## ARTICLE TITLE:\s*(.*)/i);
       setArticleTitle(titleMatch?.[1]?.trim() || 'IGCSE Geography Case Study');
+
+      if (activeRole === 'student') {
+        const today = new Date().toISOString().split('T')[0];
+        const dataStr = localStorage.getItem('ig_ai_generation_usage');
+        const data = dataStr ? JSON.parse(dataStr) : {};
+        if (data.date !== today) {
+          localStorage.setItem('ig_ai_generation_usage', JSON.stringify({ date: today, count: 1 }));
+        } else {
+          localStorage.setItem('ig_ai_generation_usage', JSON.stringify({ date: today, count: data.count + 1 }));
+        }
+      }
+
     } catch (error: any) {
       console.error("Processing Error:", error);
       const isApiKeyError = error.message.includes('API key') || error.message.includes('400') || error.message.includes('INVALID_ARGUMENT') || error.message.includes('placeholder') || error.message.includes('missing');
       if (isApiKeyError) {
-        setResult(`**Critical Error:** ${error.message}\n\n---\n**💡 Troubleshooting Tips:**\n1. Ensure \`GEMINI_API_KEY\` is set correctly in your Render dashboard environment variables.\n2. Redeploy the service on Render to apply environment changes.\n3. Make sure there are no accidental spaces in the secret value.`);
+        setResult(`**Critical Error:** ${error.message}\n\n---\n**ðŸ’¡ Troubleshooting Tips:**\n1. Ensure \`GEMINI_API_KEY\` is set correctly in your Render dashboard environment variables.\n2. Redeploy the service on Render to apply environment changes.\n3. Make sure there are no accidental spaces in the secret value.`);
       } else {
         setResult(`**Critical Error:** ${error.message}`);
       }
@@ -486,36 +509,64 @@ ${articleText}
   };
 
   return (
-    <div className={`h-screen w-full flex overflow-hidden font-sans transition-colors duration-500 ${
+    <div className={`h-screen w-full flex flex-col overflow-hidden font-sans transition-colors duration-500 ${
       theme === 'dark' ? 'text-slate-200 bg-slate-950' : 'text-slate-700 bg-slate-50'
     }`}>
       <div className={`mesh-bg ${theme === 'light' ? 'opacity-30' : ''}`}></div>
-      <div className="flex h-full w-full p-6 gap-6 relative z-10">
+
+      {/* Header */}
+      <header className={`h-20 flex items-center justify-between px-6 border-b flex-shrink-0 relative z-20 transition-colors duration-500 ${
+        theme === 'dark' ? 'bg-slate-950/80 border-white/10' : 'bg-white/80 border-slate-200 shadow-sm'
+      }`}>
+        <div className="flex items-center space-x-4">
+          <motion.div 
+            initial={{ rotate: -10, scale: 0.9 }}
+            animate={{ rotate: 0, scale: 1 }}
+            className="w-12 h-12 rounded-xl bg-[#2563eb] flex items-center justify-center shadow-lg shadow-[#2563eb]/20"
+          >
+            <Globe className="text-white w-6 h-6" />
+          </motion.div>
+          <div>
+            <h1 className="text-xl font-black text-slate-800 dark:text-white tracking-tight">IG News Room</h1>
+            <span className="text-[9px] font-bold text-slate-400 uppercase tracking-widest mt-0.5 block">'A' Grade Fuel</span>
+          </div>
+        </div>
+
+        <div className="flex items-center space-x-4">
+          <button 
+            onClick={() => {
+              if (propToggleDark) propToggleDark();
+              else setLocalTheme(theme === 'dark' ? 'light' : 'dark');
+            }}
+            className={`w-10 h-10 rounded-full border flex items-center justify-center transition-colors shadow-sm ${
+              theme === 'dark' ? 'border-slate-800 text-slate-400 hover:bg-slate-800' : 'border-slate-200 text-slate-500 hover:bg-slate-50'
+            }`}
+            title="Toggle Theme"
+          >
+            {theme === 'dark' ? <Sun size={16} /> : <Moon size={16} />}
+          </button>
+
+          {onBackToPortal && (
+            <button
+              onClick={onBackToPortal}
+              className={`p-2.5 rounded-xl border transition-colors shadow-sm flex items-center gap-2 ${
+                theme === 'dark' 
+                  ? 'border-slate-800 bg-slate-800 text-slate-300 hover:bg-red-900/50 hover:text-red-400' 
+                  : 'border-slate-200 bg-slate-100 text-slate-600 hover:bg-red-100 hover:text-red-600'
+              }`}
+              title="Exit to Portal"
+            >
+              <LogOut size={16} />
+              <span className="text-[10px] font-black uppercase tracking-wider">Exit</span>
+            </button>
+          )}
+        </div>
+      </header>
+
+      <div className="flex flex-1 w-full p-6 gap-6 relative z-10 overflow-hidden">
         <aside className={`w-72 flex flex-col p-6 overflow-hidden rounded-3xl border transition-all duration-500 ${
           theme === 'dark' ? 'bg-white/5 border-white/10' : 'bg-white border-slate-200 shadow-xl shadow-slate-200/50'
         }`}>
-          <div className="flex items-center gap-3 mb-10 shrink-0">
-            <motion.div 
-              initial={{ rotate: -10, scale: 0.9 }}
-              animate={{ rotate: 0, scale: 1 }}
-              className={`w-10 h-10 rounded-xl bg-blue-500 flex items-center justify-center text-white font-bold text-xl shadow-[0_0_15px_rgba(59,130,246,0.3)]`}
-            >
-              IG
-            </motion.div>
-            <div>
-              <h1 className={`font-black text-xl text-left font-sans tracking-tight leading-[1.2] m-0 p-0 ${
-                theme === 'dark' ? 'text-blue-400' : 'text-blue-600'
-              }`}>News Room</h1>
-              <div className="flex items-center gap-2 mt-0.5">
-                <span className={`text-[9px] uppercase tracking-widest font-black ${
-                  theme === 'dark' ? 'text-slate-500' : 'text-slate-400'
-                }`}>
-                  'A' Grade Fuel
-                </span>
-              </div>
-            </div>
-          </div>
-
           <nav className="flex-1 overflow-y-auto space-y-6 custom-scrollbar pr-1">
             <div className="space-y-2">
               <p className="text-[10px] font-bold text-slate-500 uppercase tracking-widest ml-2 mb-3">
@@ -556,39 +607,6 @@ ${articleText}
           </nav>
 
           <div className="mt-auto pt-6 shrink-0 space-y-4">
-              <button 
-                onClick={() => {
-                  if (propToggleDark) {
-                    propToggleDark();
-                  } else {
-                    setLocalTheme(theme === 'dark' ? 'light' : 'dark');
-                  }
-                }}
-                className={`w-full flex items-center justify-between gap-3 p-3 rounded-xl border transition-all duration-300 ${
-                  theme === 'dark' ? 'bg-white/5 border-white/10 text-slate-400 hover:bg-white/10 hover:text-white' : 'bg-slate-100 border-slate-200 text-slate-600 hover:bg-slate-200'
-                }`}
-              >
-                <div className="flex items-center gap-2">
-                  {theme === 'dark' ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
-                  <span className="text-[10px] font-black uppercase tracking-wider">{theme === 'dark' ? 'Light Mode' : 'Dark Mode'}</span>
-                </div>
-                <div className={`text-[10px] font-mono px-1.5 py-0.5 rounded ${theme === 'dark' ? 'bg-white/10' : 'bg-white shadow-sm'}`}>
-                  {theme === 'dark' ? 'DARK' : 'LGHT'}
-                </div>
-              </button>
-
-              {onBackToPortal && (
-                <button 
-                  onClick={onBackToPortal}
-                  className={`w-full flex items-center justify-center gap-2 p-3 rounded-xl border transition-all duration-300 active:scale-95 ${
-                    theme === 'dark' 
-                      ? 'bg-red-500/10 border-red-500/20 text-red-400 hover:bg-red-500/20' 
-                      : 'bg-red-50 border-red-200 text-red-600 hover:bg-red-100 shadow-sm'
-                  }`}
-                >
-                  <span className="text-[10px] font-black uppercase tracking-wider">Exit to Portal</span>
-                </button>
-              )}
 
               <div className={`p-4 rounded-2xl border transition-all duration-500 ${
                 isLoading ? 'bg-blue-600/10 border-blue-500/20' : 
@@ -849,3 +867,4 @@ ${articleText}
     </div>
   );
 }
+

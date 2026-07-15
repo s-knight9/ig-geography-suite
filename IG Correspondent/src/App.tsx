@@ -5,7 +5,7 @@ import { OutletData, TAG_COLORS, TAG_LABELS, Poll } from './types.ts';
 import { DailyPolls } from './components/DailyPolls.tsx';
 import { VAULT_FOLDERS, saveVaultReport } from '../../src/vaultTypes';
 
-// Static outlet metadata — bars always render from this, RSS items fill in asynchronously
+// Static outlet metadata â€” bars always render from this, RSS items fill in asynchronously
 const STATIC_OUTLETS: Array<{ id: string; name: string; color: string; textColor: string; logo: string }> = [
   { id: 'guardian',   name: 'The Guardian',           color: '#052962', textColor: '#ffffff', logo: 'https://www.google.com/s2/favicons?domain=theguardian.com&sz=128' },
   { id: 'economist',  name: 'The Economist',           color: '#e3120b', textColor: '#ffffff', logo: 'https://www.google.com/s2/favicons?domain=economist.com&sz=128' },
@@ -109,7 +109,7 @@ export default function App({
     } catch (err: any) {
       console.error('Failed to fetch news:', err);
       setError(err.message || 'An unexpected error occurred while fetching news.');
-      // Don't clear existing data on error — keep bars showing
+      // Don't clear existing data on error â€” keep bars showing
     } finally {
       setLoading(false);
     }
@@ -315,15 +315,11 @@ ${articleText}
       <header className="h-20 bg-white dark:bg-slate-950 flex items-center justify-between px-6 border-b border-slate-300 dark:border-slate-800 flex-shrink-0 sticky top-0 z-50">
         <div className="flex items-center space-x-4">
           <div className="bg-[#2563eb] w-12 h-12 rounded-xl flex items-center justify-center shadow-lg shadow-[#2563eb]/20">
-            <span className="text-white font-bold text-xl tracking-tighter">IG</span>
+            <Globe className="text-white w-6 h-6" />
           </div>
           <div>
-            <h1 className="text-2xl font-black text-slate-800 dark:text-slate-200 tracking-tighter leading-none">
-              Correspondent
-            </h1>
-            <p className="text-[11px] font-semibold text-slate-500 dark:text-slate-400 mt-1 tracking-tight">
-              Breaking global news, instantly mapped to your syllabus
-            </p>
+            <h1 className="text-xl font-black text-slate-800 dark:text-white tracking-tight">IG Correspondent</h1>
+            <span className="text-[9px] font-bold text-slate-400 uppercase tracking-widest mt-0.5 block">Breaking global news, instantly mapped to your syllabus</span>
           </div>
         </div>
 
@@ -403,7 +399,7 @@ ${articleText}
         </div>
       </div>
 
-      {/* Main Content Grid — always renders from STATIC_OUTLETS, items fill in from API */}
+      {/* Main Content Grid â€” always renders from STATIC_OUTLETS, items fill in from API */}
       <main className="flex-grow px-4 pb-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
         {STATIC_OUTLETS.map(({ id }) => {
           const outlet = data[id];
@@ -644,7 +640,7 @@ ${articleText}
 
               {/* Explanatory Note */}
               <div className="text-[10px] text-slate-400 dark:text-slate-500 italic bg-blue-50/50 dark:bg-blue-950/10 border border-blue-100/30 dark:border-blue-900/20 rounded-lg p-2.5">
-                💡 <strong>Keyword learning active:</strong> Saving manual tags will extract keywords from this {selectedPollItem ? 'question' : 'headline'} to automatically map future matching headlines to these units.
+                ðŸ’¡ <strong>Keyword learning active:</strong> Saving manual tags will extract keywords from this {selectedPollItem ? 'question' : 'headline'} to automatically map future matching headlines to these units.
               </div>
 
               {/* Actions */}
@@ -774,3 +770,4 @@ ${articleText}
     </div>
   );
 }
+

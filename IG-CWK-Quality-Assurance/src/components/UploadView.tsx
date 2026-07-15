@@ -170,12 +170,12 @@ export default function UploadView({ onUploadComplete, onCompareComplete, onClas
       {/* Top Header */}
       <header className="bg-white dark:bg-slate-800 border-b border-slate-200 dark:border-slate-700 h-20 px-8 flex items-center justify-between shrink-0 transition-colors">
         <div className="flex items-center gap-4">
-          <div className="w-12 h-12 bg-blue-600 rounded-xl flex items-center justify-center shadow-sm">
-            <span className="text-white text-2xl font-bold tracking-tight">IG</span>
+          <div className="w-12 h-12 bg-[#2563eb] rounded-xl flex items-center justify-center shadow-sm">
+            <FileText className="text-white w-6 h-6" />
           </div>
-          <div className="flex flex-col">
-            <h1 className="text-[22px] font-black text-blue-600 dark:text-blue-500 uppercase tracking-tight leading-tight">CWK QUALITY ASSURANCE</h1>
-            <p className="text-[10px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-widest">GRADING & MODERATION SUITE</p>
+          <div>
+            <h1 className="text-xl font-black text-slate-800 dark:text-white tracking-tight">IG CWK Quality Assurance</h1>
+            <span className="text-[9px] font-bold text-slate-400 uppercase tracking-widest mt-0.5 block">GRADING & MODERATION SUITE</span>
           </div>
         </div>
         
@@ -541,3 +541,4 @@ export default function UploadView({ onUploadComplete, onCompareComplete, onClas
     </div>
   );
 }
+

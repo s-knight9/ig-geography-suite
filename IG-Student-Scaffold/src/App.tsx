@@ -142,10 +142,8 @@ export default function App({
             <Frame className="w-6 h-6" />
           </div>
           <div>
-            <div className="flex items-center gap-2.5 leading-none">
-              <h1 className="text-2xl font-black tracking-tight text-slate-800 dark:text-slate-100">Scaffold & Writing Frames</h1>
-            </div>
-            <p className="text-[10px] font-black text-[#2563eb] uppercase tracking-[0.25em] mt-1.5 opacity-90">IGCSE Geography Response Assistant</p>
+            <h1 className="text-xl font-black text-slate-800 dark:text-white tracking-tight">Scaffold & Writing Frames</h1>
+            <span className="text-[9px] font-bold text-slate-400 uppercase tracking-widest mt-0.5 block">IGCSE Geography Response Assistant</span>
           </div>
         </div>
         

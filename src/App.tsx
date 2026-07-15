@@ -36,10 +36,12 @@ import {
   Archive,
   FolderOpen,
   Trash2,
-  FolderInput
+  FolderInput,
+  FileDown
 } from "lucide-react";
 import { UN_DAYS } from "./unDays";
 import { VAULT_FOLDERS, getVaultReports, VaultReport, deleteVaultReport, moveVaultReport } from "./vaultTypes";
+import { marked } from "marked";
 
 // Import sub-apps dynamically
 import NewsroomApp from "../The-IG-News-Room/src/App";
@@ -436,6 +438,71 @@ export default function App() {
   const [selectedReportId, setSelectedReportId] = useState<string | null>(null);
   const [vaultRefreshTrigger, setVaultRefreshTrigger] = useState(0);
   const [movingReportId, setMovingReportId] = useState<string | null>(null);
+  const [isExportingVault, setIsExportingVault] = useState(false);
+
+  const handleDownloadPdf = async (report: VaultReport) => {
+    setIsExportingVault(true);
+    try {
+      const html2pdfModule = (await import('html2pdf.js')) as any;
+      const html2pdf = html2pdfModule.default || html2pdfModule;
+      
+      const container = document.getElementById('vault-report-content');
+      if (!container) throw new Error('Report content not found');
+      
+      const originalMargin = container.style.margin;
+      container.style.margin = '20px';
+      
+      const opt = {
+        margin: [15, 15, 15, 15] as [number, number, number, number],
+        filename: `${report.title.replace(/[^a-z0-9]/gi, '_').toLowerCase()}.pdf`,
+        image: { type: 'jpeg' as const, quality: 0.98 },
+        html2canvas: { scale: 2, useCORS: true },
+        jsPDF: { unit: 'mm' as const, format: 'a4' as const, orientation: 'portrait' as const }
+      };
+
+      await html2pdf().set(opt).from(container).save();
+      container.style.margin = originalMargin;
+    } catch (err) {
+      console.error(err);
+      alert('Failed to generate PDF.');
+    } finally {
+      setIsExportingVault(false);
+    }
+  };
+
+  const handleDownloadDocx = async (report: VaultReport) => {
+    setIsExportingVault(true);
+    try {
+      const parsedHtml = await marked.parse(report.content);
+      
+      let headerHTML = `
+          <div style="font-family: Arial, sans-serif;">
+              <h2><span style="color: #2563eb;">IG Vault Report</span></h2>
+              <p><span style="color: #94a3b8;">${report.title}</span></p>
+              <hr style="color: #2563eb;"/>
+          </div>
+      `;
+      
+      const form = document.createElement('form');
+      form.method = 'POST';
+      form.action = '/api/dse/export-docx';
+
+      const input = document.createElement('input');
+      input.type = 'hidden';
+      input.name = 'html';
+      input.value = headerHTML + parsedHtml;
+      
+      form.appendChild(input);
+      document.body.appendChild(form);
+      form.submit();
+      document.body.removeChild(form);
+    } catch (err) {
+      console.error(err);
+      alert('Failed to generate DOCX.');
+    } finally {
+      setIsExportingVault(false);
+    }
+  };
 
   // Auth Form State
   const [email, setEmail] = useState<string>("");
@@ -688,6 +755,7 @@ export default function App() {
             onBackToPortal={() => setActiveWorkspace("portal")}
             activeUserEmail={user.email || ""}
             activeTeacherCode={teacherCode}
+            activeRole={role}
             isDark={isDark}
             toggleDark={toggleDark}
           />
@@ -773,6 +841,7 @@ export default function App() {
         return (
           <DseDesignerApp
             onBackToPortal={() => setActiveWorkspace("portal")}
+            activeRole={role}
           />
         );
       default:
@@ -881,17 +950,43 @@ export default function App() {
                           </div>
                         ) : selectedReportId ? (
                           <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-8 shadow-sm">
-                            <button 
-                              onClick={() => setSelectedReportId(null)}
-                              className="mb-6 flex items-center gap-2 text-sm font-bold text-blue-500 hover:text-blue-600 transition-colors"
-                            >
-                              <ChevronLeft size={16} /> Back to Folder
-                            </button>
+                            <div className="flex justify-between items-center mb-6">
+                              <button 
+                                onClick={() => setSelectedReportId(null)}
+                                className="flex items-center gap-2 text-sm font-bold text-blue-500 hover:text-blue-600 transition-colors"
+                              >
+                                <ChevronLeft size={16} /> Back to Folder
+                              </button>
+                              
+                              {(() => {
+                                const report = reports.find(r => r.id === selectedReportId);
+                                if (!report) return null;
+                                return (
+                                  <div className="flex gap-2">
+                                    <button 
+                                      onClick={() => handleDownloadPdf(report)}
+                                      disabled={isExportingVault}
+                                      className="flex items-center gap-1.5 px-3 py-1.5 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 rounded-lg text-xs font-bold transition-colors border border-slate-200 dark:border-slate-700 disabled:opacity-50"
+                                    >
+                                      <FileDown size={14} /> PDF
+                                    </button>
+                                    <button 
+                                      onClick={() => handleDownloadDocx(report)}
+                                      disabled={isExportingVault}
+                                      className="flex items-center gap-1.5 px-3 py-1.5 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 rounded-lg text-xs font-bold transition-colors border border-slate-200 dark:border-slate-700 disabled:opacity-50"
+                                    >
+                                      <FileText size={14} /> DOCX
+                                    </button>
+                                  </div>
+                                );
+                              })()}
+                            </div>
+                            
                             {(() => {
                               const report = reports.find(r => r.id === selectedReportId);
                               if (!report) return null;
                               return (
-                                <>
+                                <div id="vault-report-content" className="bg-white dark:bg-slate-900">
                                   <div className="flex justify-between items-start mb-6">
                                     <h1 className="text-3xl font-black text-slate-900 dark:text-white leading-tight">{report.title}</h1>
                                     <div className="text-sm font-black text-slate-500">{new Date(report.date).toLocaleDateString()}</div>
@@ -908,7 +1003,7 @@ export default function App() {
                                       {report.content}
                                     </Markdown>
                                   </div>
-                                </>
+                                </div>
                               );
                             })()}
                           </div>
@@ -1025,14 +1120,6 @@ export default function App() {
         </div>
 
         <div className="flex items-center gap-3">
-          {/* Vault Icon */}
-          <button
-            onClick={() => setIsVaultOpen(true)}
-            className="w-10 h-10 flex items-center justify-center rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-blue-100 hover:text-blue-600 dark:hover:bg-blue-900/50 dark:hover:text-blue-400 transition-colors shadow-sm"
-            title="IG Vault"
-          >
-            <Archive size={18} />
-          </button>
 
           {/* User badge */}
           <div className="flex items-center gap-2.5 px-3 py-1.5 rounded-lg border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900/50">
@@ -1076,6 +1163,15 @@ export default function App() {
               </button>
             </div>
           )}
+
+          {/* Vault Icon */}
+          <button
+            onClick={() => setIsVaultOpen(true)}
+            className="w-10 h-10 flex items-center justify-center rounded-full border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 text-slate-500 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors shadow-sm"
+            title="IG Vault"
+          >
+            <Archive size={16} />
+          </button>
 
           <button
             onClick={toggleDark}
@@ -1122,7 +1218,6 @@ export default function App() {
                 <span className="text-[11px] font-black uppercase tracking-wider">Teacher Administration &amp; Tools</span>
               </div>
               <div className="flex-1 h-px bg-slate-200 dark:bg-slate-800" />
-              <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Staff-only · Hidden in Student Mode</span>
             </div>
 
             <div className="grid xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 gap-6">
