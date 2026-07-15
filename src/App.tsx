@@ -383,10 +383,15 @@ function PostItReminders() {
 
 // ─── Ticker Tape ───────────────────────────────────────────────────────────────
 const TICKER_ITEMS = [
-  "🌍 GEOGRAPHY IN THE NEWS","El Niño intensifies Pacific drought conditions","Urbanisation rate in Sub-Saharan Africa hits 42%",
-  "Himalayan glaciers recede fastest on record","Lagos megacity population surpasses 25 million",
-  "Coral bleaching event declared across Great Barrier Reef","Amazon deforestation rate drops 45% YoY",
-  "Bangladesh flood defences upgraded ahead of monsoon season","Tech corridor drives migration to South Korea's Sejong City",
+  "🌍 GEOGRAPHY IN THE NEWS",
+  "El Niño intensifies Pacific drought conditions (The Guardian)",
+  "Urbanisation rate in Sub-Saharan Africa hits 42% (The Economist)",
+  "Himalayan glaciers recede fastest on record (BBC News)",
+  "Lagos megacity population surpasses 25 million (Al Jazeera)",
+  "Coral bleaching event declared across Great Barrier Reef (Associated Press)",
+  "Amazon deforestation rate drops 45% YoY (Financial Times)",
+  "Bangladesh flood defences upgraded ahead of monsoon season (Reuters)",
+  "Tech corridor drives migration to South Korea's Sejong City (Bloomberg)",
 ];
 
 function TickerTape() {
