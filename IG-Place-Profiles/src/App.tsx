@@ -467,7 +467,7 @@ export default function App({
       <header className="bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 shadow-sm flex-none transition-colors duration-300">
         <div className="max-w-full mx-auto px-6 py-4 flex items-center justify-between sticky top-0 z-50 transition-colors duration-300">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 bg-[#00b875] rounded-xl flex items-center justify-center shadow-sm text-white shrink-0 select-none">
+            <div className="w-10 h-10 bg-[#2563eb] rounded-xl flex items-center justify-center shadow-sm text-white shrink-0 select-none">
               <Flag size={20} className="fill-white stroke-[2.5]" />
             </div>
             <div>
