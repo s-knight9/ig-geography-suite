@@ -30,7 +30,8 @@ export default function App({
   activeUserEmail, 
   activeTeacherCode,
   isDark: propIsDark,
-  toggleDark: propToggleDark
+  toggleDark: propToggleDark,
+  onOpenVault
 }: { 
   onBackToPortal?: () => void;
   activeUserEmail?: string;

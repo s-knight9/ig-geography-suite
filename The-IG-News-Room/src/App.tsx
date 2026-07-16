@@ -50,6 +50,7 @@ export default function App({
   onBackToPortal, 
   activeUserEmail, 
   activeTeacherCode,
+  activeRole,
   isDark: propIsDark,
   toggleDark: propToggleDark
 }: { 

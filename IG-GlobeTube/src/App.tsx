@@ -224,6 +224,7 @@ export default function App({
   const [penaltyMode, setPenaltyMode] = useState(false);
   const [teacherQuizCode, setTeacherQuizCode] = useState<string | null>(null);
   const [joinedStudents, setJoinedStudents] = useState<any[]>([]);
+  const [studentQuizData, setStudentQuizData] = useState<any>(null);
 
   useEffect(() => {
     setActiveRole(role);
@@ -270,13 +271,13 @@ export default function App({
       if (val.status === 'started') {
         setIsLiveQuizActive(true);
         if (val.video) setSelectedVideo(val.video);
-        if (val.quiz_data) setQuizData(val.quiz_data);
+        if (val.quiz_data) setStudentQuizData(val.quiz_data);
         document.documentElement.requestFullscreen().catch(e => console.error("Fullscreen blocked", e));
       } else if (val.status === 'ended') {
         setIsLiveQuizActive(false);
         setLiveQuizLobby(null);
         setSelectedVideo(null);
-        setQuizData(null);
+        setStudentQuizData(null);
         if (document.fullscreenElement) document.exitFullscreen().catch(e => {});
       }
     });
@@ -811,6 +812,8 @@ export default function App({
               teacherQuizCode={teacherQuizCode}
               handleTeacherCreateQuiz={handleTeacherCreateQuiz}
               handleTeacherPushQuiz={handleTeacherPushQuiz}
+              studentQuizData={studentQuizData}
+              joinedStudents={joinedStudents}
             />
           )}
         </AnimatePresence>
@@ -1033,6 +1036,8 @@ interface VideoDetailViewProps {
   teacherQuizCode: string | null;
   handleTeacherCreateQuiz: () => void;
   handleTeacherPushQuiz: (quizData: any) => void;
+  studentQuizData?: any;
+  joinedStudents: any[];
 }
 
 function VideoDetailView({
@@ -1043,7 +1048,9 @@ function VideoDetailView({
   activeRole,
   teacherQuizCode,
   handleTeacherCreateQuiz,
-  handleTeacherPushQuiz
+  handleTeacherPushQuiz,
+  studentQuizData,
+  joinedStudents
 }: VideoDetailViewProps) {
   const [player, setPlayer] = useState<any>(null);
   const playerRef = useRef<HTMLIFrameElement>(null);
