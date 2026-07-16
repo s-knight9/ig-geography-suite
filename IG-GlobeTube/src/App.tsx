@@ -171,7 +171,9 @@ export default function App({
   isDark: propIsDark,
   toggleDark: propToggleDark,
   role = 'student',
-  activeTeacherCode = ''
+  activeTeacherCode = '',
+  activeUserEmail = '',
+  user = null
 }: {
   onBackToPortal?: () => void;
   isDark?: boolean;
