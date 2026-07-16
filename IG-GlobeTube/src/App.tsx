@@ -290,26 +290,6 @@ export default function App({
     }
   };
 
-  if (penaltyMode) {
-    return (
-      <div className="fixed inset-0 z-[9999] bg-slate-950 flex flex-col items-center justify-center p-8 text-center animate-in fade-in">
-        <XCircle className="w-24 h-24 text-red-500 mb-6" />
-        <h1 className="text-4xl font-black text-white mb-4">Quiz Exited</h1>
-        <p className="text-xl text-red-200">Tab switching detected. Assessment locked and recorded as a 0 score.</p>
-      </div>
-    );
-  }
-
-  if (liveQuizLobby && !isLiveQuizActive) {
-    return (
-      <div className="fixed inset-0 z-[9999] bg-slate-950 flex flex-col items-center justify-center p-8 text-center animate-in fade-in">
-        <Loader2 className="w-16 h-16 text-[#2563eb] animate-spin mb-6" />
-        <h1 className="text-2xl font-black text-white mb-2">Waiting for teacher to start quiz...</h1>
-        <p className="text-slate-400 font-medium">Please do not switch tabs or leave this screen.</p>
-      </div>
-    );
-  }
-
   const loadVideos = async () => {
     setIsLoadingWeekly(true);
     setWeeklyStatus("Loading geography syllabus media feed...");
@@ -348,6 +328,29 @@ export default function App({
   useEffect(() => {
     loadVideos();
   }, [activeRole]);
+
+
+  if (penaltyMode) {
+    return (
+      <div className="fixed inset-0 z-[9999] bg-slate-950 flex flex-col items-center justify-center p-8 text-center animate-in fade-in">
+        <XCircle className="w-24 h-24 text-red-500 mb-6" />
+        <h1 className="text-4xl font-black text-white mb-4">Quiz Exited</h1>
+        <p className="text-xl text-red-200">Tab switching detected. Assessment locked and recorded as a 0 score.</p>
+      </div>
+    );
+  }
+
+  if (liveQuizLobby && !isLiveQuizActive) {
+    return (
+      <div className="fixed inset-0 z-[9999] bg-slate-950 flex flex-col items-center justify-center p-8 text-center animate-in fade-in">
+        <Loader2 className="w-16 h-16 text-[#2563eb] animate-spin mb-6" />
+        <h1 className="text-2xl font-black text-white mb-2">Waiting for teacher to start quiz...</h1>
+        <p className="text-slate-400 font-medium">Please do not switch tabs or leave this screen.</p>
+      </div>
+    );
+  }
+
+
 
   const toggleVideoLock = async (videoId: string) => {
     try {
