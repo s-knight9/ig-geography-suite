@@ -57,6 +57,8 @@ import DseDesignerApp from "../DSE-Designer/src/App";
 interface LocalUser {
   email: string;
   uid: string;
+  name?: string;
+  surname?: string;
 }
 
 const TEACHER_EMAILS: Record<string, string> = {
@@ -74,7 +76,9 @@ const TEACHER_INITIALS = new Set(Object.keys(TEACHER_EMAILS));
 const MASTER_ADMIN = "y2knighty@gmail.com";
 const TEACHER_PASSWORD = "strikeslip";
 
-const STUDENT_CREDENTIALS: Record<string, string> = {};
+const STUDENT_CREDENTIALS: Record<string, { id: string, surname: string, preferredName: string }> = {
+  "ynkim30@pupils.nlcsjeju.kr": {"id": "210500", "surname": "Kim", "preferredName": "Yuna"}, "yskim30@pupils.nlcsjeju.kr": {"id": "160200", "surname": "Kim", "preferredName": "Yoonso"}, "ychung30@pupils.nlcsjeju.kr": {"id": "190259", "surname": "Chung", "preferredName": "Anthony"}, "atowner30@pupils.nlcsjeju.kr": {"id": "160846", "surname": "Towner", "preferredName": "Alex"}, "mnkim30@pupils.nlcsjeju.kr": {"id": "213502", "surname": "Kim", "preferredName": "Mina"}, "fji30@pupils.nlcsjeju.kr": {"id": "160156", "surname": "Ji", "preferredName": "Fancy"}, "yxhe30@pupils.nlcsjeju.kr": {"id": "213776", "surname": "He", "preferredName": "Alisa"}, "azhu30@pupils.nlcsjeju.kr": {"id": "160158", "surname": "Zhu", "preferredName": "Annie"}, "sysung30@pupils.nlcsjeju.kr": {"id": "210392", "surname": "Sung", "preferredName": "Yoon"}, "cwkim30@pupils.nlcsjeju.kr": {"id": "213448", "surname": "Kim", "preferredName": "Aiden"}, "mcho30@pupils.nlcsjeju.kr": {"id": "190324", "surname": "Cho", "preferredName": "Minjoon"}, "swkim30@pupils.nlcsjeju.kr": {"id": "211802", "surname": "Kim", "preferredName": "Ian"}, "yohuh30@pupils.nlcsjeju.kr": {"id": "212774", "surname": "Huh", "preferredName": "Yoo"}, "hkang30@pupils.nlcsjeju.kr": {"id": "190295", "surname": "Kang", "preferredName": "Daniel"}, "yjson30@pupils.nlcsjeju.kr": {"id": "211417", "surname": "Son", "preferredName": "Yujin"}, "hyko30@pupils.nlcsjeju.kr": {"id": "200119", "surname": "Ko", "preferredName": "Alvin"}, "jltanna30@pupils.nlcsjeju.kr": {"id": "213114", "surname": "Tanna", "preferredName": "Jaelan"}, "sepaik30@pupils.nlcsjeju.kr": {"id": "210859", "surname": "Paik", "preferredName": "Sieun"}, "tjna30@pupils.nlcsjeju.kr": {"id": "212869", "surname": "Na", "preferredName": "Ryan"}, "ewkim30@pupils.nlcsjeju.kr": {"id": "213819", "surname": "Kim", "preferredName": "Eunwoo"}, "jmxia30@pupils.nlcsjeju.kr": {"id": "212511", "surname": "Xia", "preferredName": "Bella"}, "omckeogh30@pupils.nlcsjeju.kr": {"id": "200427", "surname": "McKeogh", "preferredName": "Oscar"}, "jakim30@pupils.nlcsjeju.kr": {"id": "211920", "surname": "Kim", "preferredName": "Amber"}, "ijchung30@pupils.nlcsjeju.kr": {"id": "210513", "surname": "Chung", "preferredName": "Iju"}, "mj2kim30@pupils.nlcsjeju.kr": {"id": "212836", "surname": "Kim", "preferredName": "Clara"}, "dhryu30@pupils.nlcsjeju.kr": {"id": "200091", "surname": "Ryu", "preferredName": "Anna"}, "jyoon30@pupils.nlcsjeju.kr": {"id": "190299", "surname": "Yoon", "preferredName": "Lucy"}, "sclim30@pupils.nlcsjeju.kr": {"id": "200537", "surname": "Lim", "preferredName": "Seungchan"}, "thpark30@pupils.nlcsjeju.kr": {"id": "150837", "surname": "Park", "preferredName": "Andy"}, "yn2kim30@pupils.nlcsjeju.kr": {"id": "213284", "surname": "Kim", "preferredName": "Yena"}, "jhhwang30@pupils.nlcsjeju.kr": {"id": "214082", "surname": "Hwang", "preferredName": "Bathilda"}, "zxchou30@pupils.nlcsjeju.kr": {"id": "211632", "surname": "Chou", "preferredName": "Xuan"}, "jhkim30@pupils.nlcsjeju.kr": {"id": "202014", "surname": "Kim", "preferredName": "Barry"}, "gokim30@pupils.nlcsjeju.kr": {"id": "211852", "surname": "Kim", "preferredName": "Evan"}, "dwahn30@pupils.nlcsjeju.kr": {"id": "212518", "surname": "Ahn", "preferredName": "Damon"}, "shkang30@pupils.nlcsjeju.kr": {"id": "213087", "surname": "Kang", "preferredName": "Sehee"}, "jlee30@pupils.nlcsjeju.kr": {"id": "200043", "surname": "Lee", "preferredName": "JungWon"}, "sypark30@pupils.nlcsjeju.kr": {"id": "213805", "surname": "Park", "preferredName": "Seoyeong"}, "japark30@pupils.nlcsjeju.kr": {"id": "213636", "surname": "Park", "preferredName": "Jia"}, "salee30@pupils.nlcsjeju.kr": {"id": "213891", "surname": "Lee", "preferredName": "Sarah"}, "kwkim30@pupils.nlcsjeju.kr": {"id": "213528", "surname": "Kim", "preferredName": "Kiwook"}, "yn3kim30@pupils.nlcsjeju.kr": {"id": "212434", "surname": "Kim", "preferredName": "Yuna"}, "hkim30@pupils.nlcsjeju.kr": {"id": "214100", "surname": "Kim", "preferredName": "Henry"}, "jwchoi30@pupils.nlcsjeju.kr": {"id": "213489", "surname": "Choi", "preferredName": "Jayne"}, "lmachin30@pupils.nlcsjeju.kr": {"id": "160825", "surname": "Machin", "preferredName": "Di"}, "shjey30@pupils.nlcsjeju.kr": {"id": "213179", "surname": "Jey", "preferredName": "Yelena"}, "jwshin30@pupils.nlcsjeju.kr": {"id": "180470", "surname": "Shin", "preferredName": "Austin"}, "shcho30@pupils.nlcsjeju.kr": {"id": "212483", "surname": "Cho", "preferredName": "Luke"}, "sylee30@pupils.nlcsjeju.kr": {"id": "200452", "surname": "Lee", "preferredName": "Lucas"}, "hejeong30@pupils.nlcsjeju.kr": {"id": "213519", "surname": "Jeong", "preferredName": "Haeun"}, "nylee30@pupils.nlcsjeju.kr": {"id": "213765", "surname": "Lee", "preferredName": "Nayoon"}, "jslee30@pupils.nlcsjeju.kr": {"id": "180495", "surname": "Lee", "preferredName": "Joseph"}, "mjkim30@pupils.nlcsjeju.kr": {"id": "180403", "surname": "Kim", "preferredName": "Jun"}, "jylee30@pupils.nlcsjeju.kr": {"id": "212761", "surname": "Lee", "preferredName": "Joshua"}, "orbaek30@pupils.nlcsjeju.kr": {"id": "212766", "surname": "Baek", "preferredName": "Ohreum"}, "jkim30@pupils.nlcsjeju.kr": {"id": "180369", "surname": "Kim", "preferredName": "Eric"}, "rsyashiro30@pupils.nlcsjeju.kr": {"id": "213826", "surname": "Yashiro", "preferredName": "Ryosei"}, "lyzhang30@pupils.nlcsjeju.kr": {"id": "213257", "surname": "Zhang", "preferredName": "Pablo"}, "mjcho30@pupils.nlcsjeju.kr": {"id": "170485", "surname": "Cho", "preferredName": "William"}, "than29@pupils.nlcsjeju.kr": {"id": "213720", "surname": "An", "preferredName": "Patrick"}, "sjbang29@pupils.nlcsjeju.kr": {"id": "210563", "surname": "Bang", "preferredName": "Sojune"}, "kcho29@pupils.nlcsjeju.kr": {"id": "190247", "surname": "Cho", "preferredName": "Kunhee"}, "sychoi29@pupils.nlcsjeju.kr": {"id": "200360", "surname": "Choi", "preferredName": "Ellie"}, "yschoi29@pupils.nlcsjeju.kr": {"id": "150058", "surname": "Choi", "preferredName": "Ashley"}, "jychun29@pupils.nlcsjeju.kr": {"id": "213748", "surname": "Chun", "preferredName": "Lysander"}, "dyeom29@pupils.nlcsjeju.kr": {"id": "170453", "surname": "Eom", "preferredName": "Daniel"}, "hhong29@pupils.nlcsjeju.kr": {"id": "190549", "surname": "Hong", "preferredName": "Ariel"}, "jthong29@pupils.nlcsjeju.kr": {"id": "200198", "surname": "Hong", "preferredName": "Justin"}, "sjhong29@pupils.nlcsjeju.kr": {"id": "213190", "surname": "Hong", "preferredName": "Seojun"}, "hyjang29@pupils.nlcsjeju.kr": {"id": "212077", "surname": "Jang", "preferredName": "Hayoon"}, "jjang29@pupils.nlcsjeju.kr": {"id": "200737", "surname": "Jang", "preferredName": "Olivia"}, "kwjeong29@pupils.nlcsjeju.kr": {"id": "213679", "surname": "Jeong", "preferredName": "Arnold"}, "jhju29@pupils.nlcsjeju.kr": {"id": "213399", "surname": "Ju", "preferredName": "Jiho"}, "atkang29@pupils.nlcsjeju.kr": {"id": "211430", "surname": "Kang", "preferredName": "Anthony"}, "dwkang29@pupils.nlcsjeju.kr": {"id": "213396", "surname": "Kang", "preferredName": "Dino"}, "chkim29@pupils.nlcsjeju.kr": {"id": "213634", "surname": "Kim", "preferredName": "Tony"}, "dnkim29@pupils.nlcsjeju.kr": {"id": "213089", "surname": "Kim", "preferredName": "Dani"}, "hjkim29@pupils.nlcsjeju.kr": {"id": "212416", "surname": "Kim", "preferredName": "Sophia"}, "jw2kim29@pupils.nlcsjeju.kr": {"id": "213562", "surname": "Kim", "preferredName": "Jaewon"}, "jokim29@pupils.nlcsjeju.kr": {"id": "190476", "surname": "Kim", "preferredName": "Jinoh"}, "jkim29@pupils.nlcsjeju.kr": {"id": "200760", "surname": "Kim", "preferredName": "Jio"}, "jh2kim29@pupils.nlcsjeju.kr": {"id": "212344", "surname": "Kim", "preferredName": "Jayden"}, "lukim29@pupils.nlcsjeju.kr": {"id": "213431", "surname": "Kim", "preferredName": "Liou"}, "mjkim29@pupils.nlcsjeju.kr": {"id": "210991", "surname": "Kim", "preferredName": "Nick"}, "sjkim29@pupils.nlcsjeju.kr": {"id": "150688", "surname": "Kim", "preferredName": "Michael"}, "sakim29@pupils.nlcsjeju.kr": {"id": "213707", "surname": "Kim", "preferredName": "Elena"}, "sw2kim29@pupils.nlcsjeju.kr": {"id": "212914", "surname": "Kim", "preferredName": "Seowoo"}, "sy2kim29@pupils.nlcsjeju.kr": {"id": "210968", "surname": "Kim", "preferredName": "Jenna"}, "wnkim29@pupils.nlcsjeju.kr": {"id": "212181", "surname": "Kim", "preferredName": "Won"}, "wjkim29@pupils.nlcsjeju.kr": {"id": "213694", "surname": "Kim", "preferredName": "William"}, "yj2kim29@pupils.nlcsjeju.kr": {"id": "211194", "surname": "Kim", "preferredName": "June"}, "ys3kim29@pupils.nlcsjeju.kr": {"id": "213482", "surname": "Kim", "preferredName": "Lilly"}, "ywkwon29@pupils.nlcsjeju.kr": {"id": "210917", "surname": "Kwon", "preferredName": "Elena"}, "cslee29@pupils.nlcsjeju.kr": {"id": "200195", "surname": "Lee", "preferredName": "Alex"}, "hslee29@pupils.nlcsjeju.kr": {"id": "210835", "surname": "Lee", "preferredName": "Tyga"}, "jhlee29@pupils.nlcsjeju.kr": {"id": "170123", "surname": "Lee", "preferredName": "Julian"}, "ptlee29@pupils.nlcsjeju.kr": {"id": "211868", "surname": "Lee", "preferredName": "Payton"}, "salee29@pupils.nlcsjeju.kr": {"id": "212067", "surname": "Lee", "preferredName": "Sean"}, "dhlim29@pupils.nlcsjeju.kr": {"id": "213938", "surname": "Lim", "preferredName": "Dohyun"}, "zrma29@pupils.nlcsjeju.kr": {"id": "210443", "surname": "Ma", "preferredName": "Mia"}, "smckeogh29@pupils.nlcsjeju.kr": {"id": "200426", "surname": "McKeogh", "preferredName": "Sean"}, "symoon29@pupils.nlcsjeju.kr": {"id": "210143", "surname": "Moon", "preferredName": "Aileen"}, "ygmoon29@pupils.nlcsjeju.kr": {"id": "213872", "surname": "Moon", "preferredName": "YG"}, "dhpark29@pupils.nlcsjeju.kr": {"id": "211538", "surname": "Park", "preferredName": "Donnie"}, "gianpark29@pupils.nlcsjeju.kr": {"id": "160328", "surname": "Park", "preferredName": "Gian"}, "jspark29@pupils.nlcsjeju.kr": {"id": "212826", "surname": "Park", "preferredName": "Ryan"}, "sh2park29@pupils.nlcsjeju.kr": {"id": "212150", "surname": "Park", "preferredName": "Sunny"}, "shpark29@pupils.nlcsjeju.kr": {"id": "200350", "surname": "Park", "preferredName": "Lily"}, "sy4park29@pupils.nlcsjeju.kr": {"id": "213611", "surname": "Park", "preferredName": "Amy"}, "ypark29@pupils.nlcsjeju.kr": {"id": "190109", "surname": "Park", "preferredName": "Sophia"}, "sapyo29@pupils.nlcsjeju.kr": {"id": "211184", "surname": "Pyo", "preferredName": "Sophie"}, "hryoo29@pupils.nlcsjeju.kr": {"id": "200788", "surname": "Ryoo", "preferredName": "Hyeonjun"}, "useo29@pupils.nlcsjeju.kr": {"id": "190627", "surname": "Seo", "preferredName": "UChan"}, "uyshim29@pupils.nlcsjeju.kr": {"id": "210260", "surname": "Shim", "preferredName": "Ida"}, "syshin29@pupils.nlcsjeju.kr": {"id": "213497", "surname": "Shin", "preferredName": "Soyule"}, "ysso29@pupils.nlcsjeju.kr": {"id": "211895", "surname": "So", "preferredName": "Chloe"}, "jwsong29@pupils.nlcsjeju.kr": {"id": "211561", "surname": "Song", "preferredName": "Jay"}, "sosung29@pupils.nlcsjeju.kr": {"id": "210721", "surname": "Sung", "preferredName": "Sieon"}, "chtu29@pupils.nlcsjeju.kr": {"id": "213708", "surname": "Tu", "preferredName": "Jean"}, "sywang29@pupils.nlcsjeju.kr": {"id": "213632", "surname": "Wang", "preferredName": "Ruby"}, "eswi29@pupils.nlcsjeju.kr": {"id": "210974", "surname": "Wi", "preferredName": "May"}, "hwyang29@pupils.nlcsjeju.kr": {"id": "200406", "surname": "Yang", "preferredName": "HyunWoo"}, "gbyoon29@pupils.nlcsjeju.kr": {"id": "210293", "surname": "Yoon", "preferredName": "Ken"}, "syoon29@pupils.nlcsjeju.kr": {"id": "190530", "surname": "Yoon", "preferredName": "Irene"}, "ysyoon29@pupils.nlcsjeju.kr": {"id": "212879", "surname": "Yoon", "preferredName": "Elon"}
+};
 
 // ─── Calendar Widget ──────────────────────────────────────────────────────────
 interface CalendarEvent {
@@ -102,7 +106,20 @@ function StudentCalendar() {
   const today = new Date();
   const [viewYear,    setViewYear]    = useState(today.getFullYear());
   const [viewMonth,   setViewMonth]   = useState(today.getMonth());
-  const [events,      setEvents]      = useState<CalendarEvent[]>([]);
+  const [events,      setEvents]      = useState<CalendarEvent[]>(() => {
+    try {
+      const saved = localStorage.getItem("student_calendar_events");
+      if (saved) return JSON.parse(saved);
+    } catch (e) {
+      console.error("Failed to load events", e);
+    }
+    return [];
+  });
+
+  React.useEffect(() => {
+    localStorage.setItem("student_calendar_events", JSON.stringify(events));
+  }, [events]);
+
   const [addMode,     setAddMode]     = useState<"deadline" | "window" | null>(null);
   const [selDate,     setSelDate]     = useState<string | null>(null);
   const [labelInput,  setLabelInput]  = useState("");
@@ -601,11 +618,13 @@ export default function App() {
         setAuthLoading(false);
       }
     } else {
-      const matchedId = STUDENT_CREDENTIALS[inputEmail.toLowerCase()];
-      if (matchedId && inputPassword === matchedId) {
+      const matchedStudent = STUDENT_CREDENTIALS[inputEmail.toLowerCase()];
+      if (matchedStudent && inputPassword === matchedStudent.id) {
         const finalUser: LocalUser = {
           email: inputEmail,
-          uid: `student_${matchedId}`
+          uid: `student_${matchedStudent.id}`,
+          name: matchedStudent.preferredName,
+          surname: matchedStudent.surname
         };
         const finalRole = "student";
 
@@ -790,6 +809,7 @@ export default function App() {
             activeTeacherCode={teacherCode}
             isDark={isDark}
             toggleDark={toggleDark}
+            onOpenVault={() => setIsVaultOpen(true)}
           />
         );
       case "globetube":
@@ -1129,12 +1149,16 @@ export default function App() {
           {/* User badge */}
           <div className="flex items-center gap-2.5 px-3 py-1.5 rounded-lg border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900/50">
             <div className="w-6 h-6 rounded-full bg-blue-100 dark:bg-blue-500/10 flex items-center justify-center">
-              <UserIcon size={12} className="text-blue-600 dark:text-blue-400" />
+              {role === "student" ? (
+                <GraduationCap size={12} className="text-blue-600 dark:text-blue-400" />
+              ) : (
+                <UserIcon size={12} className="text-blue-600 dark:text-blue-400" />
+              )}
             </div>
             <div className="flex flex-col text-left">
               <span className="text-[10px] font-bold text-slate-700 dark:text-slate-200 leading-none">{user.email}</span>
               <span className="text-[8px] font-black text-blue-600 dark:text-blue-400 uppercase tracking-wider mt-0.5">
-                {role === "super_admin" ? "Super Admin" : role === "teacher" ? `Teacher · ${teacherCode}` : "Student"}
+                {role === "super_admin" ? "Super Admin" : role === "teacher" ? `Teacher · ${teacherCode}` : `${user.name} ${user.surname}`}
               </span>
             </div>
           </div>

@@ -3,16 +3,13 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-export type PaperType = 'Paper 1' | 'Paper 2' | 'Paper 3';
+export type PaperType = 'Paper 1' | 'Paper 2';
 
 export type TargetMarks = 
-  | '2+2 marks' 
+  | '3 marks' 
   | '4 marks' 
-  | '3+3 marks' 
-  | '6 marks' 
-  | '10 marks' 
-  | '12 marks' 
-  | '16 marks';
+  | '5 marks' 
+  | '7 marks';
 
 export type ParagraphFramework = 'PEE' | 'PEEL' | 'PEECAL';
 

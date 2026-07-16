@@ -5,6 +5,7 @@ import { GoogleGenAI } from "@google/genai";
 import dotenv from "dotenv";
 import multer from "multer";
 import cors from "cors";
+import { initDb, getFolders, createFolder, deleteFolder, getScaffolds, saveScaffold, deleteScaffold } from "./src/server/db.ts";
 
 dotenv.config();
 
@@ -23,6 +24,14 @@ async function startServer() {
   app.get("/api/health", (req, res) => {
     res.json({ status: "ok", timestamp: new Date().toISOString() });
   });
+
+  // Initialize Vault DB
+  try {
+    initDb();
+    console.log("Vault Database initialized.");
+  } catch (error) {
+    console.error("Failed to initialize Vault Database:", error);
+  }
 
   // Initialize Gemini
   const apiKey = process.env.GEMINI_API_KEY;
@@ -230,6 +239,75 @@ async function startServer() {
     console.error("Express Unhandled Error:", err);
     if (!res.headersSent) {
       res.status(500).json({ error: "Server Error", details: err.message });
+    }
+  });
+
+  // ==========================================
+  // VAULT ENDPOINTS
+  // ==========================================
+  app.get("/api/vault/folders", (req, res) => {
+    try {
+      const { teacherCode } = req.query;
+      if (!teacherCode) return res.status(400).json({ error: "teacherCode required" });
+      const folders = getFolders(teacherCode as string);
+      res.json({ folders });
+    } catch (e: any) {
+      res.status(500).json({ error: e.message });
+    }
+  });
+
+  app.post("/api/vault/folders", (req, res) => {
+    try {
+      const { id, teacherCode, name, parentId } = req.body;
+      if (!teacherCode || !name || !id) return res.status(400).json({ error: "Missing required fields" });
+      const folder = createFolder(id, teacherCode, name, parentId || null);
+      res.json({ folder });
+    } catch (e: any) {
+      res.status(500).json({ error: e.message });
+    }
+  });
+
+  app.delete("/api/vault/folders/:id", (req, res) => {
+    try {
+      const { teacherCode } = req.query;
+      if (!teacherCode) return res.status(400).json({ error: "teacherCode required" });
+      const success = deleteFolder(req.params.id, teacherCode as string);
+      res.json({ success });
+    } catch (e: any) {
+      res.status(500).json({ error: e.message });
+    }
+  });
+
+  app.get("/api/vault/scaffolds", (req, res) => {
+    try {
+      const { teacherCode } = req.query;
+      if (!teacherCode) return res.status(400).json({ error: "teacherCode required" });
+      const scaffolds = getScaffolds(teacherCode as string);
+      res.json({ scaffolds });
+    } catch (e: any) {
+      res.status(500).json({ error: e.message });
+    }
+  });
+
+  app.post("/api/vault/scaffolds", (req, res) => {
+    try {
+      const { id, teacherCode, folder_id, title, paperType, targetMarks, framework, question, scaffold_text, frame_text, tags } = req.body;
+      if (!id || !teacherCode || !folder_id || !title) return res.status(400).json({ error: "Missing required fields" });
+      const scaffold = saveScaffold(id, teacherCode, folder_id, title, paperType || "", targetMarks || "", framework || "", question || "", scaffold_text || "", frame_text || "", tags || "");
+      res.json({ scaffold });
+    } catch (e: any) {
+      res.status(500).json({ error: e.message });
+    }
+  });
+
+  app.delete("/api/vault/scaffolds/:id", (req, res) => {
+    try {
+      const { teacherCode } = req.query;
+      if (!teacherCode) return res.status(400).json({ error: "teacherCode required" });
+      const success = deleteScaffold(req.params.id, teacherCode as string);
+      res.json({ success });
+    } catch (e: any) {
+      res.status(500).json({ error: e.message });
     }
   });
 

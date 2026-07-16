@@ -13,12 +13,17 @@ import {
   CheckCircle,
   Sun,
   Moon,
-  Frame
+  Frame,
+  Folder,
+  Archive
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { useEffect } from 'react';
 import { ScaffoldView } from './components/ScaffoldView';
 import { PaperType, TargetMarks, ParagraphFramework } from './types';
+import { VaultDashboard } from './components/VaultDashboard';
+import { SaveToVaultModal } from './components/SaveToVaultModal';
+import { VaultScaffold } from './lib/vaultApi';
 
 export default function App({ 
   onBackToPortal, 
@@ -32,6 +37,7 @@ export default function App({
   activeTeacherCode?: string;
   isDark?: boolean;
   toggleDark?: () => void;
+  onOpenVault?: () => void;
 }) {
   const [localTheme, setLocalTheme] = useState<'light' | 'dark'>('light');
   const theme = propIsDark !== undefined ? (propIsDark ? 'dark' : 'light') : localTheme;
@@ -44,7 +50,7 @@ export default function App({
   };
 
   const [paperType, setPaperType] = useState<PaperType>('Paper 1');
-  const [targetMarks, setTargetMarks] = useState<TargetMarks>('10 marks');
+  const [targetMarks, setTargetMarks] = useState<TargetMarks>('3 marks');
   const [framework, setFramework] = useState<ParagraphFramework>('PEEL');
   const [useWordBank, setUseWordBank] = useState(true);
   const [question, setQuestion] = useState('');
@@ -54,6 +60,9 @@ export default function App({
   const [scaffoldData, setScaffoldData] = useState<{ scaffold: string; writingFrame: string }>({ scaffold: '', writingFrame: '' });
   const [viewMode, setViewMode] = useState<'scaffold' | 'frame'>('scaffold');
   const [error, setError] = useState<string | null>(null);
+
+  const [showVault, setShowVault] = useState(false);
+  const [showSaveModal, setShowSaveModal] = useState(false);
 
   const fileInputRef = useRef<HTMLInputElement>(null);
 
@@ -125,13 +134,22 @@ export default function App({
   };
 
   const getWarning = () => {
-    if (framework === 'PEECAL' && (targetMarks === '2+2 marks' || targetMarks === '4 marks')) {
+    if (framework === 'PEECAL' && (targetMarks === '3 marks' || targetMarks === '4 marks')) {
       return "Pro-tip: For low-mark questions, a simpler PEE framework might save valuable exam time.";
     }
     return null;
   };
 
   const warning = getWarning();
+
+  const handleLoadScaffold = (loaded: VaultScaffold) => {
+    setPaperType(loaded.paperType as PaperType);
+    setTargetMarks(loaded.targetMarks as TargetMarks);
+    setFramework(loaded.framework as ParagraphFramework);
+    setQuestion(loaded.question);
+    setScaffoldData({ scaffold: loaded.scaffold_text, writingFrame: loaded.frame_text });
+    setViewMode(loaded.scaffold_text ? 'scaffold' : 'frame');
+  };
 
   return (
     <div className="flex flex-col h-screen w-full bg-slate-50 dark:bg-slate-950 font-sans text-slate-900 dark:text-slate-100 overflow-hidden transition-colors duration-300">
@@ -148,6 +166,22 @@ export default function App({
         </div>
         
         <div className="flex items-center gap-6">
+          <div className="flex items-center gap-2">
+            <button 
+              onClick={onOpenVault}
+              title="IG Vault"
+              className="flex items-center justify-center w-11 h-11 rounded-full bg-white dark:bg-slate-800 border-[1.5px] border-slate-200/60 dark:border-slate-700 shadow-[0_2px_8px_-2px_rgba(0,0,0,0.05)] hover:shadow-[0_4px_12px_-2px_rgba(0,0,0,0.1)] transition-all text-slate-500 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 group"
+            >
+              <Archive className="w-5 h-5 group-hover:scale-110 transition-transform" strokeWidth={2} />
+            </button>
+            <button 
+              onClick={() => setShowVault(true)}
+              className="flex items-center gap-2 p-2.5 rounded-xl bg-indigo-50 dark:bg-indigo-900/20 border border-indigo-200 dark:border-indigo-800 text-indigo-600 dark:text-indigo-400 hover:bg-indigo-100 dark:hover:bg-indigo-900/40 transition-all font-bold text-xs"
+            >
+              <Frame className="w-4 h-4" /> Saved Scaffolds
+            </button>
+          </div>
+          
           <button 
             onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}
             className="p-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-500 dark:text-slate-400 hover:text-[#2563eb] transition-all"
@@ -162,10 +196,7 @@ export default function App({
             </div>
           )}
           
-          <div className="bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl px-4 py-2 flex flex-col items-center justify-center min-w-[100px]">
-            <span className="text-[9px] font-black text-slate-400 dark:text-slate-500 uppercase leading-none mb-1">Standard</span>
-            <span className="text-[11px] font-black text-slate-800 dark:text-slate-200 uppercase leading-none">MAY 2026</span>
-          </div>
+
         </div>
       </header>
 
@@ -193,15 +224,15 @@ export default function App({
             <div className="space-y-6 flex-1">
               <div className="space-y-3">
                 <label className="text-[10px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-wider">Examination Paper</label>
-                <div className="grid grid-cols-3 gap-3">
-                  {(['Paper 1', 'Paper 2', 'Paper 3'] as PaperType[]).map((p) => (
+                <div className="grid grid-cols-2 gap-3">
+                  {(['Paper 1', 'Paper 2'] as PaperType[]).map((p) => (
                     <button
                       key={p}
                       type="button"
                       onClick={() => setPaperType(p)}
                       className={`py-2.5 text-xs font-black rounded-lg border transition-all ${paperType === p ? 'bg-[#2563eb] border-[#2563eb] text-white shadow-lg shadow-blue-100 dark:shadow-blue-900/20' : 'bg-white dark:bg-slate-800 border-slate-200 dark:border-slate-700 text-slate-400 dark:text-slate-500 hover:border-blue-200 dark:hover:border-blue-800'}`}
                     >
-                      {p.replace('Paper ', 'P')}
+                      {p === 'Paper 1' ? 'P1: Physical' : 'P2: Human'}
                     </button>
                   ))}
                 </div>
@@ -214,13 +245,10 @@ export default function App({
                   onChange={(e) => setTargetMarks(e.target.value as TargetMarks)}
                   className="w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg px-4 py-2.5 text-[10px] font-black text-slate-500 dark:text-slate-400 focus:ring-2 focus:ring-blue-500 outline-none transition-colors"
                 >
-                   <option>2+2 marks</option>
+                   <option>3 marks</option>
                    <option>4 marks</option>
-                   <option>3+3 marks</option>
-                   <option>6 marks</option>
-                   <option>10 marks</option>
-                   <option>12 marks</option>
-                   <option>16 marks</option>
+                   <option>5 marks</option>
+                   <option>7 marks</option>
                 </select>
               </div>
 
@@ -374,10 +402,41 @@ export default function App({
               <span>{loading && viewMode === 'frame' ? 'Building Frame...' : 'Generate Writing Frame'}</span>
               <Sparkles className="w-3.5 h-3.5 group-hover:rotate-12 transition-transform" />
             </button>
+            {(scaffoldData.scaffold || scaffoldData.writingFrame) && (
+              <button 
+                onClick={() => setShowSaveModal(true)}
+                className="w-full md:w-auto h-full min-h-[48px] px-6 bg-emerald-600 hover:bg-emerald-700 text-white font-black text-xs uppercase tracking-[0.15em] rounded-xl shadow-lg shadow-emerald-200 dark:shadow-emerald-900/40 transition-all active:scale-[0.99] flex items-center justify-center gap-2"
+              >
+                <span>Save to Vault</span>
+              </button>
+            )}
           </div>
         </div>
       </main>
 
+      {/* Modals */}
+      {showVault && (
+        <VaultDashboard 
+          teacherCode={activeTeacherCode || "SKN"}
+          onClose={() => setShowVault(false)}
+          onSelectScaffold={handleLoadScaffold}
+        />
+      )}
+      
+      {showSaveModal && (
+        <SaveToVaultModal 
+          teacherCode={activeTeacherCode || "SKN"}
+          onClose={() => setShowSaveModal(false)}
+          scaffoldData={{
+            paperType,
+            targetMarks,
+            framework,
+            question,
+            scaffold_text: scaffoldData.scaffold,
+            frame_text: scaffoldData.writingFrame
+          }}
+        />
+      )}
     </div>
   );
 }
