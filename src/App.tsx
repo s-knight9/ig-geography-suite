@@ -349,10 +349,11 @@ function ExamCountdowns() {
   const [now, setNow] = useState(new Date());
   useEffect(() => { const t = setInterval(() => setNow(new Date()), 60000); return () => clearInterval(t); }, []);
 
-  const renderList = (title: string, items: typeof DEADLINES_2029, bgColor: string) => (
+  const renderList = (yearLabel: string, title: string, items: typeof DEADLINES_2029, bgColor: string) => (
     <div style={{ flex: 1, display:"flex", flexDirection:"column", gap:8 }}>
-      <div style={{ background:bgColor, color:"#fff", padding:"6px", textAlign:"center", fontWeight:900, textTransform:"uppercase", letterSpacing:1, fontSize:12 }}>
-        {title}
+      <div style={{ background:bgColor, color:"#fff", padding:"6px", textAlign:"center", display: "flex", flexDirection: "column", gap: 2 }}>
+        <div style={{ fontWeight:900, fontSize:15, letterSpacing:1 }}>{yearLabel}</div>
+        <div style={{ fontWeight:800, textTransform:"uppercase", letterSpacing:1, fontSize:11, opacity: 0.9 }}>{title}</div>
       </div>
       {items.map(ex => {
         const target = new Date(ex.date);
@@ -379,8 +380,8 @@ function ExamCountdowns() {
     <div style={{ fontFamily:"sans-serif" }}>
       <div style={{ fontWeight:900, fontSize:13, textTransform:"uppercase", letterSpacing:2, marginBottom:10 }}>⏳ Upcoming Deadlines</div>
       <div style={{ display:"flex", gap:10 }}>
-        {renderList("CLASS OF 2030", DEADLINES_2030, "#2b25ff")}
-        {renderList("CLASS OF 2029", DEADLINES_2029, "#8b0000")}
+        {renderList("Y10", "CLASS OF 2030", DEADLINES_2030, "#2b25ff")}
+        {renderList("Y11", "CLASS OF 2029", DEADLINES_2029, "#8b0000")}
       </div>
     </div>
   );
