@@ -365,17 +365,17 @@ const DEADLINES_2029 = [
 ];
 
 const REPORTING_2030 = [
-  { label:"Y10 R1 Closes", date:"2026-09-10", color:"#2b25ff" },
-  { label:"Y10 R2 Closes", date:"2026-09-17", color:"#2b25ff" },
-  { label:"Y10 R3 Closes", date:"2026-09-24", color:"#2b25ff" },
-  { label:"Parents Eve (person)", date:"2026-10-01", color:"#2b25ff" }
+  { label:"Y10 R1 Closes", date:"2026-11-11", color:"#2b25ff" },
+  { label:"Y10 R2 Closes", date:"2027-03-10", color:"#2b25ff" },
+  { label:"Y10 R3 Closes", date:"2027-06-02", color:"#2b25ff" },
+  { label:"Parents Eve (person)", date:"2027-01-29", color:"#2b25ff" }
 ];
 
 const REPORTING_2029 = [
-  { label:"Y11 R1 Closes", date:"2026-09-11", color:"#8b0000" },
-  { label:"Y11 R2 Closes", date:"2026-09-18", color:"#8b0000" },
-  { label:"Y11 R3 (TG Only)", date:"2026-09-25", color:"#8b0000" },
-  { label:"Parents Eve (person)", date:"2026-10-02", color:"#8b0000" }
+  { label:"Y11 R1 Closes", date:"2026-11-11", color:"#8b0000" },
+  { label:"Y11 R2 Closes", date:"2027-04-07", color:"#8b0000" },
+  { label:"Y11 R3 (TG Only)", date:"2027-04-14", color:"#8b0000" },
+  { label:"Parents Eve (person)", date:"2027-02-19", color:"#8b0000" }
 ];
 
 function ExamCountdowns({ isTeacher }: { isTeacher?: boolean }) {
