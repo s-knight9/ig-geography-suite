@@ -41,7 +41,7 @@ import {
   FileDown
 } from "lucide-react";
 import { UN_DAYS } from "./unDays";
-import { VAULT_FOLDERS, getVaultReports, VaultReport, deleteVaultReport, moveVaultReport } from "./vaultTypes";
+import { VAULT_FOLDERS, getVaultReports, VaultReport, deleteVaultReport, moveVaultReport, updateVaultReportTitle } from "./vaultTypes";
 import { marked } from "marked";
 
 // Import sub-apps dynamically
@@ -1042,9 +1042,16 @@ export default function App() {
                               if (!report) return null;
                               return (
                                 <div id="vault-report-content" className="bg-white dark:bg-slate-900">
-                                  <div className="flex justify-between items-start mb-6">
-                                    <h1 className="text-3xl font-black text-slate-900 dark:text-white leading-tight">{report.title}</h1>
-                                    <div className="text-sm font-black text-slate-500">{new Date(report.date).toLocaleDateString()}</div>
+                                  <div className="flex justify-between items-start mb-6 group">
+                                    <input 
+                                      className="text-3xl font-black text-slate-900 dark:text-white leading-tight bg-transparent border-none outline-none focus:ring-2 focus:ring-blue-500 rounded px-2 -ml-2 w-full" 
+                                      value={report.title}
+                                      onChange={(e) => {
+                                        updateVaultReportTitle(selectedVaultFolder, report.id, e.target.value);
+                                        setVaultRefreshTrigger(prev => prev + 1);
+                                      }}
+                                    />
+                                    <div className="text-sm font-black text-slate-500 shrink-0 ml-4">{new Date(report.date).toLocaleDateString()}</div>
                                   </div>
                                   <div className="flex flex-wrap gap-2 mb-8">
                                     {report.tags.map(tag => (

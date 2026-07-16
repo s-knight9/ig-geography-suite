@@ -51,6 +51,18 @@ export const deleteVaultReport = (folderId: string, reportId: string) => {
   }
 };
 
+export const updateVaultReportTitle = (folderId: string, reportId: string, newTitle: string) => {
+  if (typeof window === 'undefined') return;
+  const reports = getVaultReports();
+  if (reports[folderId]) {
+    const report = reports[folderId].find(r => r.id === reportId);
+    if (report) {
+      report.title = newTitle;
+      localStorage.setItem('ig_vault_reports', JSON.stringify(reports));
+    }
+  }
+};
+
 export const moveVaultReport = (oldFolderId: string, newFolderId: string, reportId: string) => {
   if (typeof window === 'undefined') return;
   const reports = getVaultReports();
