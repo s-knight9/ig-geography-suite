@@ -364,8 +364,23 @@ const DEADLINES_2029 = [
   { label:"Paper 2 - Human", date:"2027-05-11", color:"#8b0000" }
 ];
 
-function ExamCountdowns() {
+const REPORTING_2030 = [
+  { label:"Y10 R1 Closes", date:"2026-09-10", color:"#2b25ff" },
+  { label:"Y10 R2 Closes", date:"2026-09-17", color:"#2b25ff" },
+  { label:"Y10 R3 Closes", date:"2026-09-24", color:"#2b25ff" },
+  { label:"Parents Eve (person)", date:"2026-10-01", color:"#2b25ff" }
+];
+
+const REPORTING_2029 = [
+  { label:"Y11 R1 Closes", date:"2026-09-11", color:"#8b0000" },
+  { label:"Y11 R2 Closes", date:"2026-09-18", color:"#8b0000" },
+  { label:"Y11 R3 (TG Only)", date:"2026-09-25", color:"#8b0000" },
+  { label:"Parents Eve (person)", date:"2026-10-02", color:"#8b0000" }
+];
+
+function ExamCountdowns({ isTeacher }: { isTeacher?: boolean }) {
   const [now, setNow] = useState(new Date());
+  const [isFlipped, setIsFlipped] = useState(false);
   useEffect(() => { const t = setInterval(() => setNow(new Date()), 60000); return () => clearInterval(t); }, []);
 
   const renderList = (yearLabel: string, title: string, items: typeof DEADLINES_2029, bgColor: string) => (
@@ -397,10 +412,18 @@ function ExamCountdowns() {
 
   return (
     <div style={{ fontFamily:"sans-serif" }}>
-      <div style={{ fontWeight:900, fontSize:13, textTransform:"uppercase", letterSpacing:2, marginBottom:10 }}>⏳ Upcoming Deadlines</div>
+      <div 
+        style={{ fontWeight:900, fontSize:13, textTransform:"uppercase", letterSpacing:2, marginBottom:10, cursor: isTeacher ? "pointer" : "default", display: "flex", justifyContent: "space-between", alignItems: "center" }}
+        onClick={() => { if (isTeacher) setIsFlipped(!isFlipped); }}
+      >
+        <span style={{ color: isFlipped ? "#0ea5e9" : "inherit" }}>
+          {isFlipped ? "📊 Reporting & Parents Eve" : "⏳ Upcoming Deadlines"}
+        </span>
+        {isTeacher && <span style={{ fontSize: 9, opacity: 0.8, background: "#e2e8f0", padding: "2px 6px", borderRadius: 4, color: "#475569" }}>Click to flip</span>}
+      </div>
       <div style={{ display:"flex", gap:10 }}>
-        {renderList("Y10", "CLASS OF 2030", DEADLINES_2030, "#2b25ff")}
-        {renderList("Y11", "CLASS OF 2029", DEADLINES_2029, "#8b0000")}
+        {renderList("Y10", "CLASS OF 2030", isFlipped ? REPORTING_2030 : DEADLINES_2030, "#2b25ff")}
+        {renderList("Y11", "CLASS OF 2029", isFlipped ? REPORTING_2029 : DEADLINES_2029, "#8b0000")}
       </div>
     </div>
   );
@@ -1285,7 +1308,7 @@ export default function App() {
             <StudentCalendar userEmail={user?.email} />
           </div>
           <div className="glass-panel rounded-2xl p-6 border border-slate-200 dark:border-slate-800 shadow-sm bg-white dark:bg-slate-900/50">
-            <ExamCountdowns />
+            <ExamCountdowns isTeacher={isTeacher} />
           </div>
           <div className="glass-panel rounded-2xl p-6 border border-slate-200 dark:border-slate-800 shadow-sm bg-white dark:bg-slate-900/50">
             <PostItReminders />
