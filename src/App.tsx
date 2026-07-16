@@ -380,7 +380,7 @@ const REPORTING_2029 = [
 
 function ExamCountdowns({ isTeacher }: { isTeacher?: boolean }) {
   const [now, setNow] = useState(new Date());
-  const [isFlipped, setIsFlipped] = useState(false);
+  const [isFlipped, setIsFlipped] = useState(!!isTeacher);
   useEffect(() => { const t = setInterval(() => setNow(new Date()), 60000); return () => clearInterval(t); }, []);
 
   const renderList = (yearLabel: string, title: string, items: typeof DEADLINES_2029, bgColor: string) => (
