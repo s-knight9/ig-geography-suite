@@ -86,6 +86,7 @@ const STUDENT_CREDENTIALS: Record<string, { id: string, surname: string, preferr
 interface CalendarEvent {
   id: string;
   date: string; // YYYY-MM-DD
+  endDate?: string; // YYYY-MM-DD
   label: string;
   type: "deadline" | "window" | "un_day";
   color: string;
@@ -136,6 +137,7 @@ function StudentCalendar({ userEmail }: { userEmail?: string }) {
 
   const [addMode,     setAddMode]     = useState<"deadline" | "window" | null>(null);
   const [selDate,     setSelDate]     = useState<string | null>(null);
+  const [selEndDate,  setSelEndDate]  = useState<string | null>(null);
   const [labelInput,  setLabelInput]  = useState("");
   const [pickedColor, setPickedColor] = useState(CAL_SWATCHES[0].hex);
   const [popupDate,   setPopupDate]   = useState<string | null>(null);
@@ -169,21 +171,32 @@ function StudentCalendar({ userEmail }: { userEmail?: string }) {
 
   const handleDayClick = (day: number) => {
     const ds = toDs(day);
-    if (addMode) { setSelDate(ds); return; }
-    const dayEvts = allEvents.filter(e => e.date === ds);
+    if (addMode === "deadline") { setSelDate(ds); return; }
+    if (addMode === "window") {
+      if (!selDate) { setSelDate(ds); return; }
+      if (!selEndDate) {
+        if (ds >= selDate) { setSelEndDate(ds); } else { setSelDate(ds); setSelEndDate(null); }
+        return;
+      }
+      setSelDate(ds); setSelEndDate(null);
+      return;
+    }
+    const dayEvts = allEvents.filter(e => e.endDate ? (ds >= e.date && ds <= e.endDate) : e.date === ds);
     if (dayEvts.length > 0) { setPopupDate(ds); setEditingId(null); }
   };
 
   const confirmAdd = () => {
     if (!selDate || !addMode) return;
+    if (addMode === "window" && !selEndDate) return;
     setEvents(prev => [...prev, {
       id: Math.random().toString(36).slice(2),
       date: selDate,
+      ...(addMode === "window" ? { endDate: selEndDate! } : {}),
       label: labelInput.trim() || (addMode === "deadline" ? "Deadline" : "Study Window"),
       type: addMode,
       color: pickedColor,
     }]);
-    setAddMode(null); setSelDate(null); setLabelInput(""); setPickedColor(CAL_SWATCHES[0].hex);
+    setAddMode(null); setSelDate(null); setSelEndDate(null); setLabelInput(""); setPickedColor(CAL_SWATCHES[0].hex);
   };
 
   const startEdit  = (ev: CalendarEvent) => { setEditingId(ev.id); setEditLabel(ev.label); };
@@ -195,7 +208,7 @@ function StudentCalendar({ userEmail }: { userEmail?: string }) {
     setEvents(prev => prev.filter(e => e.id !== id));
   };
 
-  const popupEvents = popupDate ? allEvents.filter(e => e.date === popupDate) : [];
+  const popupEvents = popupDate ? allEvents.filter(e => e.endDate ? (popupDate >= e.date && popupDate <= e.endDate) : e.date === popupDate) : [];
   const todayDs = `${today.getFullYear()}-${String(today.getMonth()+1).padStart(2,"0")}-${String(today.getDate()).padStart(2,"0")}`;
 
   return (
@@ -223,15 +236,19 @@ function StudentCalendar({ userEmail }: { userEmail?: string }) {
         {Array.from({ length: daysInMonth }).map((_,i) => {
           const day = i + 1;
           const ds  = toDs(day);
-          const evts = allEvents.filter(e => e.date === ds);
+          const evts = allEvents.filter(e => e.endDate ? (ds >= e.date && ds <= e.endDate) : e.date === ds);
           const isToday = ds === todayDs;
-          const isSel   = ds === selDate;
+          const isSelDate = ds === selDate;
+          const isSelEnd = ds === selEndDate;
+          const isBetween = addMode === "window" && selDate && selEndDate && ds > selDate && ds < selEndDate;
+          const isSel = isSelDate || isSelEnd || isBetween;
           return (
             <div key={day} onClick={() => handleDayClick(day)}
               style={{
                 minHeight:28, borderRadius:6, padding:"2px 3px",
                 background: isSel ? "#2563eb" : isToday ? "#eff6ff" : evts.length ? "#f0fdf4" : "#f8fafc",
-                border: isSel ? "2px solid #1d4ed8" : isToday ? "2px solid #93c5fd" : "1px solid #e2e8f0",
+                border: isSelDate || isSelEnd ? "2px solid #1d4ed8" : isToday ? "2px solid #93c5fd" : "1px solid #e2e8f0",
+                opacity: isBetween ? 0.8 : 1,
                 cursor: addMode || evts.length ? "pointer" : "default",
                 position:"relative"
               }}
@@ -263,7 +280,9 @@ function StudentCalendar({ userEmail }: { userEmail?: string }) {
       {addMode && (
         <div style={{ marginTop:8, background:"#f1f5f9", borderRadius:8, padding:8 }}>
           <div style={{ fontSize:10, fontWeight:800, color:"#475569", marginBottom:4, textTransform:"uppercase" }}>
-            {selDate ? `Adding to ${selDate}` : "Click a day to select date"}
+            {addMode === "window" 
+               ? (selDate && selEndDate ? `Window: ${selDate} to ${selEndDate}` : (selDate ? `Start: ${selDate} | Click end date` : "Click start date"))
+               : (selDate ? `Adding to ${selDate}` : "Click a day to select date")}
           </div>
           <input value={labelInput} onChange={e => setLabelInput(e.target.value)}
             placeholder="Label (optional)" style={{ width:"100%", fontSize:11, border:"1px solid #cbd5e1", borderRadius:5, padding:"4px 6px", marginBottom:5, boxSizing:"border-box" }} />
@@ -274,11 +293,11 @@ function StudentCalendar({ userEmail }: { userEmail?: string }) {
             ))}
           </div>
           <div style={{ display:"flex", gap:5 }}>
-            <button onClick={confirmAdd} disabled={!selDate}
-              style={{ flex:1, background:"#2563eb", color:"#fff", border:"none", borderRadius:5, padding:"4px 0", fontSize:10, fontWeight:800, cursor:selDate?"pointer":"not-allowed", opacity:selDate?1:0.5 }}>
+            <button onClick={confirmAdd} disabled={addMode === "window" ? !(selDate && selEndDate) : !selDate}
+              style={{ flex:1, background:"#2563eb", color:"#fff", border:"none", borderRadius:5, padding:"4px 0", fontSize:10, fontWeight:800, cursor: (addMode === "window" ? (selDate && selEndDate) : selDate) ? "pointer":"not-allowed", opacity: (addMode === "window" ? (selDate && selEndDate) : selDate) ? 1:0.5 }}>
               Save
             </button>
-            <button onClick={() => { setAddMode(null); setSelDate(null); setLabelInput(""); }}
+            <button onClick={() => { setAddMode(null); setSelDate(null); setSelEndDate(null); setLabelInput(""); }}
               style={{ flex:1, background:"#94a3b8", color:"#fff", border:"none", borderRadius:5, padding:"4px 0", fontSize:10, fontWeight:800, cursor:"pointer" }}>
               Cancel
             </button>
