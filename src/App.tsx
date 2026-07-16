@@ -152,6 +152,7 @@ function StudentCalendar({ userEmail }: { userEmail?: string }) {
 
   const prevMonth = () => { if (viewMonth === 0) { setViewMonth(11); setViewYear(y => y-1); } else setViewMonth(m => m-1); };
   const nextMonth = () => { if (viewMonth === 11) { setViewMonth(0);  setViewYear(y => y+1); } else setViewMonth(m => m+1); };
+  const goToToday = () => { setViewYear(today.getFullYear()); setViewMonth(today.getMonth()); };
 
   const allEvents = React.useMemo(() => {
     const unEvents: CalendarEvent[] = UN_DAYS.map(day => ({
@@ -220,6 +221,7 @@ function StudentCalendar({ userEmail }: { userEmail?: string }) {
           <div style={{ fontSize:11, color:"#64748b", fontWeight:600 }}>{MONTHS[viewMonth]} {viewYear}</div>
         </div>
         <div style={{ display:"flex", gap:4 }}>
+          <button onClick={goToToday} style={{ border:"1px solid #e2e8f0", background:"#f8fafc", borderRadius:6, padding:"2px 6px", cursor:"pointer", fontWeight:800, fontSize:9, textTransform:"uppercase", color:"#475569" }}>Today</button>
           <button onClick={prevMonth} style={{ border:"1px solid #e2e8f0", background:"#fff", borderRadius:6, padding:"2px 8px", cursor:"pointer", fontWeight:700 }}>‹</button>
           <button onClick={nextMonth} style={{ border:"1px solid #e2e8f0", background:"#fff", borderRadius:6, padding:"2px 8px", cursor:"pointer", fontWeight:700 }}>›</button>
         </div>
