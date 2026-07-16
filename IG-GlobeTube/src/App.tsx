@@ -625,7 +625,6 @@ export default function App({
           <div>
             <div className="flex items-center gap-2">
               <h1 className="text-xl font-black text-slate-800 dark:text-white tracking-tight">IG GlobeTube</h1>
-              <span className="text-[9px] bg-blue-500/10 text-[#2563eb] border border-blue-500/25 px-2 py-0.5 rounded-full font-bold uppercase">QUIZ ENGINE</span>
             </div>
             <span className="text-[9px] font-bold text-slate-400 uppercase tracking-widest mt-0.5 block">IGCSE Geography Media & Syllabus Analyzer</span>
           </div>
