@@ -1,5 +1,5 @@
-import { Layout, FolderOpen } from 'lucide-react';
-import React, { useState } from 'react';
+import { Layout, FolderOpen, Save, Check } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
 import Sidebar from './components/Sidebar';
 import InputPanel from './components/InputPanel';
 import MarkdownOutput from './components/MarkdownOutput';
@@ -16,6 +16,8 @@ export default function App({
   const [selectedCode, setSelectedCode] = useState<SyllabusCodeId | null>(null);
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   const [selectedFolder, setSelectedFolder] = useState(VAULT_FOLDERS[0].id);
+  const [dseTitle, setDseTitle] = useState('DSE: Custom Profile');
+  const [hasSaved, setHasSaved] = useState(false);
   
   const [prompt, setPrompt] = useState('');
   const [files, setFiles] = useState<File[]>([]);
@@ -24,6 +26,13 @@ export default function App({
   const [result, setResult] = useState('');
   const [isGenerating, setIsGenerating] = useState(false);
   const [error, setError] = useState('');
+
+  // Update default title when selected code changes
+  useEffect(() => {
+    if (selectedCode) {
+      setDseTitle(`DSE: ${selectedCode}`);
+    }
+  }, [selectedCode]);
 
   const handleGenerate = async () => {
     if (activeRole === 'student') {
@@ -38,10 +47,11 @@ export default function App({
 
     setIsGenerating(true);
     setError('');
+    setHasSaved(false); // Reset save state on new generation
     
     try {
       const formData = new FormData();
-      formData.append('syllabusCode', selectedCode);
+      formData.append('syllabusCode', selectedCode || '');
       if (prompt) formData.append('prompt', prompt);
       
       const filteredUrls = urls.filter(u => u.trim() !== '');
@@ -76,14 +86,6 @@ export default function App({
             localStorage.setItem('ig_ai_generation_usage', JSON.stringify({ date: today, count: data.count + 1 }));
           }
         }
-        
-        saveVaultReport(selectedFolder, {
-          id: crypto.randomUUID(),
-          title: `DSE: ${selectedCode || 'Custom Profile'}`,
-          tags: ['DSE', selectedCode || 'Custom'],
-          content: data.result,
-          date: new Date().toISOString()
-        });
       } else {
         const text = await response.text();
         console.error("Non-JSON response from server:", text.substring(0, 500));
@@ -94,6 +96,19 @@ export default function App({
     } finally {
       setIsGenerating(false);
     }
+  };
+
+  const handleSaveToVault = () => {
+    if (!result) return;
+    saveVaultReport(selectedFolder, {
+      id: crypto.randomUUID(),
+      title: dseTitle || `DSE: ${selectedCode || 'Custom Profile'}`,
+      tags: ['DSE', selectedCode || 'Custom'],
+      content: result,
+      date: new Date().toISOString()
+    });
+    setHasSaved(true);
+    setTimeout(() => setHasSaved(false), 3000);
   };
 
   return (
@@ -110,18 +125,6 @@ export default function App({
           </div>
         </div>
         <div className="flex items-center gap-4">
-          <div className="flex items-center bg-slate-50 border border-slate-200 rounded-lg px-3 py-2 h-[36px]">
-             <FolderOpen className="w-4 h-4 text-slate-400 mr-2" />
-             <select 
-               className="bg-transparent text-xs font-bold text-slate-700 outline-none w-32 truncate cursor-pointer"
-               value={selectedFolder}
-               onChange={(e) => setSelectedFolder(e.target.value)}
-             >
-               {VAULT_FOLDERS.map(f => (
-                 <option key={f.id} value={f.id}>{f.name}</option>
-               ))}
-             </select>
-          </div>
           <button 
             onClick={handleGenerate} 
             disabled={isGenerating} 
@@ -169,6 +172,47 @@ export default function App({
                 {error}
               </div>
             )}
+
+            {/* Save Bar (only visible when result is generated) */}
+            {result && !isGenerating && (
+              <div className="bg-slate-50 border-b border-slate-200 p-3 flex flex-wrap items-center gap-3 shrink-0">
+                <input 
+                  type="text" 
+                  value={dseTitle} 
+                  onChange={(e) => setDseTitle(e.target.value)} 
+                  placeholder="Enter DSE Heading..."
+                  className="flex-1 min-w-[200px] border border-slate-300 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 rounded px-3 py-1.5 text-sm font-bold text-slate-800 outline-none transition-all shadow-inner" 
+                />
+                <div className="flex items-center bg-white border border-slate-300 rounded px-2 py-1.5">
+                  <FolderOpen className="w-3.5 h-3.5 text-slate-400 mr-2" />
+                  <select 
+                    className="bg-transparent text-xs font-bold text-slate-700 outline-none w-32 truncate cursor-pointer"
+                    value={selectedFolder}
+                    onChange={(e) => setSelectedFolder(e.target.value)}
+                  >
+                    {VAULT_FOLDERS.map(f => (
+                      <option key={f.id} value={f.id}>{f.name}</option>
+                    ))}
+                  </select>
+                </div>
+                <button 
+                  onClick={handleSaveToVault} 
+                  disabled={hasSaved}
+                  className={`flex items-center gap-2 text-xs px-4 py-1.5 rounded transition-all font-bold shadow-sm ${
+                    hasSaved 
+                      ? 'bg-emerald-100 text-emerald-700 border border-emerald-200 cursor-default' 
+                      : 'bg-emerald-600 hover:bg-emerald-500 text-white cursor-pointer'
+                  }`}
+                >
+                  {hasSaved ? (
+                    <><Check className="w-3.5 h-3.5" /> Saved to Vault</>
+                  ) : (
+                    <><Save className="w-3.5 h-3.5" /> Save to Vault</>
+                  )}
+                </button>
+              </div>
+            )}
+
             <MarkdownOutput content={result} isGenerating={isGenerating} />
           </section>
         </main>
