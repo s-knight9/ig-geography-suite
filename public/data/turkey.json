@@ -1,0 +1,491 @@
+{
+  "country_metadata": {
+    "name": "Turkey",
+    "income_classification": "Upper-Middle Income",
+    "gni_per_capita_atlas": {
+      "value_usd": 11650,
+      "year": 2023
+    },
+    "hdi": {
+      "score": 0.855,
+      "rank": 45,
+      "year": 2022
+    },
+    "gni_per_capita_ppp": {
+      "value_usd": 37230,
+      "year": 2022
+    },
+    "gini_coefficient": {
+      "score": 41.9,
+      "year": 2019
+    }
+  },
+  "globalisation_tab": {
+    "kof_index": {
+      "economic": {
+        "de_facto": 62.5,
+        "de_jure": 68.4
+      },
+      "social": {
+        "interpersonal": {
+          "de_facto": 70.1,
+          "de_jure": 65.4
+        },
+        "informational": {
+          "de_facto": 76.5,
+          "de_jure": 74.1
+        },
+        "cultural": {
+          "de_facto": 68.3,
+          "de_jure": 70.1
+        }
+      },
+      "political": {
+        "de_facto": 88.4,
+        "de_jure": 90.5
+      }
+    },
+    "at_kearney_framework": {
+      "status": "Significantly Integrated",
+      "gci_score_or_tier": "Beta"
+    },
+    "ey_index_historical": {
+      "score": 3.3,
+      "analysis": "Serves as a pivotal bridge for physical and natural gas pipelines linking Central Asia and Russia to Southern Europe."
+    }
+  },
+  "economy_tab": {
+    "employment_structure": {
+      "primary": 16.5,
+      "secondary": 27.2,
+      "tertiary": 53,
+      "quaternary": 3.3
+    },
+    "trade_ledger": {
+      "main_exports": [
+        {
+          "commodity": "Cars",
+          "pct_gdp": 12.1
+        },
+        {
+          "commodity": "Gold",
+          "pct_gdp": 10.5
+        },
+        {
+          "commodity": "Delivery Trucks",
+          "pct_gdp": 6.8
+        },
+        {
+          "commodity": "Motor Vehicle Parts",
+          "pct_gdp": 5.4
+        },
+        {
+          "commodity": "Refined Petroleum",
+          "pct_gdp": 4.1
+        }
+      ],
+      "main_imports": [
+        {
+          "commodity": "Gold",
+          "pct_gdp": 14.5
+        },
+        {
+          "commodity": "Refined Petroleum",
+          "pct_gdp": 10.4
+        },
+        {
+          "commodity": "Scrap Iron",
+          "pct_gdp": 6.2
+        },
+        {
+          "commodity": "Cars",
+          "pct_gdp": 5.4
+        },
+        {
+          "commodity": "Coal Briquettes",
+          "pct_gdp": 3.8
+        }
+      ],
+      "top_partners_outgoing": [
+        {
+          "partner": "Germany",
+          "value_usd_billions": 21.4
+        },
+        {
+          "partner": "United States",
+          "value_usd_billions": 16.8
+        },
+        {
+          "partner": "United Kingdom",
+          "value_usd_billions": 14.2
+        },
+        {
+          "partner": "Italy",
+          "value_usd_billions": 12.5
+        },
+        {
+          "partner": "Iraq",
+          "value_usd_billions": 11.5
+        }
+      ],
+      "top_partners_incoming": [
+        {
+          "partner": "Russia",
+          "value_usd_billions": 38.5
+        },
+        {
+          "partner": "China",
+          "value_usd_billions": 34.2
+        },
+        {
+          "partner": "Germany",
+          "value_usd_billions": 25.1
+        },
+        {
+          "partner": "Switzerland",
+          "value_usd_billions": 15.2
+        },
+        {
+          "partner": "United States",
+          "value_usd_billions": 13.1
+        }
+      ]
+    }
+  },
+  "human_geography_tab": {
+    "spatial_hubs": {
+      "epz_sez_zones": [
+        {
+          "name": "Aegean Free Zone (ESBAS)",
+          "location_lat_long": "38.34, 27.13",
+          "primary_focus": "Major aerospace assembly, high-tech engineering, software, and automotive components."
+        },
+        {
+          "name": "Mersin Free Zone (MESBAS)",
+          "location_lat_long": "36.80, 34.64",
+          "primary_focus": "Mediterranean deep-port marine trade, textile hub, and agricultural cold-chains."
+        }
+      ],
+      "tourism_enclaves": [
+        {
+          "name": "Antalya Beachfront Resort Enclave",
+          "spatial_impact": "High-density all-inclusive charter tourism enclaves along the Mediterranean."
+        }
+      ],
+      "core_periphery_zones": {
+        "core": "Marmara industrial zone (Istanbul, Kocaeli, Bursa)",
+        "periphery": "Rugged mountains and agricultural borders of Eastern Anatolia"
+      }
+    },
+    "political_economy": {
+      "informal_economy_pct_gdp": 28.5,
+      "eiu_governance_type": "Hybrid Regime",
+      "freedom_house_status": "Not Free",
+      "corruption_perceptions_index": {
+        "score": 34,
+        "rank": 115
+      }
+    }
+  },
+  "prisoners_of_geography_map": {
+    "topographic_friction_points": [
+      {
+        "feature": "Anatolian Plateau & Taurus Ranges",
+        "geopolitical_constraint": "Rugged high plateau crisscrossed by active seismogenic faults, hindering high-speed east-west rail and transit."
+      }
+    ],
+    "hydrological_arteries": [
+      {
+        "feature": "Tigris & Euphrates Headwaters",
+        "strategic_advantage": "Massive mountain water towers powering Turkey's dam networks (GAP), but creating downriver hydropolitical friction with Syria and Iraq."
+      }
+    ],
+    "choke_points_vulnerabilities": [
+      {
+        "feature": "Turkish Straits (Bosporus & Dardanelles)",
+        "impact": "Highly vital shipping bottlenecks regulating passage between the Black Sea and Mediterranean, governed by the Montreux Convention."
+      }
+    ],
+    "buffer_zones": [
+      {
+        "region": "Anatolian Shield Intercontinental Bridge",
+        "significance": "A critical terrain junction linking Europe and Asia, secure behind mountain ramparts and sea boundaries."
+      }
+    ],
+    "map_center": {
+      "lat": 38.9637,
+      "lng": 35.2433,
+      "zoom": 6
+    }
+  },
+  "population_dynamics_time_series": [
+    {
+      "year": 1970,
+      "pyramid_structure": {
+        "cohorts": [
+          {
+            "age": "0-4",
+            "male_pct": 7.4,
+            "female_pct": 7.1
+          },
+          {
+            "age": "5-14",
+            "male_pct": 12.8,
+            "female_pct": 12.4
+          },
+          {
+            "age": "15-64",
+            "male_pct": 28.1,
+            "female_pct": 27.2
+          },
+          {
+            "age": "65-79",
+            "male_pct": 2.3,
+            "female_pct": 2.5
+          },
+          {
+            "age": "80+",
+            "male_pct": 0.2,
+            "female_pct": 0.1
+          }
+        ]
+      },
+      "sub_national_density_choropleth": [
+        {
+          "admin_1_region_name": "Istanbul",
+          "density_per_km2": 450
+        },
+        {
+          "admin_1_region_name": "Kars",
+          "density_per_km2": 15
+        }
+      ],
+      "synoptic_analysis": "Highly expansive stage 2 demographic profile, experiencing severe rural-urban migration towards Marmara industries."
+    },
+    {
+      "year": 2023,
+      "pyramid_structure": {
+        "cohorts": [
+          {
+            "age": "0-4",
+            "male_pct": 3.6,
+            "female_pct": 3.4
+          },
+          {
+            "age": "5-14",
+            "male_pct": 7.9,
+            "female_pct": 7.5
+          },
+          {
+            "age": "15-64",
+            "male_pct": 34.6,
+            "female_pct": 33.1
+          },
+          {
+            "age": "65-79",
+            "male_pct": 4.5,
+            "female_pct": 4.9
+          },
+          {
+            "age": "80+",
+            "male_pct": 0.8,
+            "female_pct": 1.1
+          }
+        ]
+      },
+      "sub_national_density_choropleth": [
+        {
+          "admin_1_region_name": "Istanbul",
+          "density_per_km2": 2900
+        },
+        {
+          "admin_1_region_name": "Kars",
+          "density_per_km2": 28
+        }
+      ],
+      "synoptic_analysis": "Declining replacement fertility showing distinct transition into stable Stage 3-4 characteristics."
+    },
+    {
+      "year": 2026,
+      "pyramid_structure": {
+        "cohorts": [
+          {
+            "age": "0-4",
+            "male_pct": 3.4,
+            "female_pct": 3.2
+          },
+          {
+            "age": "5-14",
+            "male_pct": 7.5,
+            "female_pct": 7.1
+          },
+          {
+            "age": "15-64",
+            "male_pct": 34.2,
+            "female_pct": 32.8
+          },
+          {
+            "age": "65-79",
+            "male_pct": 4.9,
+            "female_pct": 5.4
+          },
+          {
+            "age": "80+",
+            "male_pct": 0.9,
+            "female_pct": 1.3
+          }
+        ]
+      },
+      "sub_national_density_choropleth": [
+        {
+          "admin_1_region_name": "Istanbul",
+          "density_per_km2": 3050
+        },
+        {
+          "admin_1_region_name": "Kars",
+          "density_per_km2": 29
+        }
+      ],
+      "synoptic_analysis": "Active maturation of cohorts yielding balanced dependency indices and rising suburban industrialization."
+    },
+    {
+      "year": 2040,
+      "pyramid_structure": {
+        "cohorts": [
+          {
+            "age": "0-4",
+            "male_pct": 2.5,
+            "female_pct": 2.3
+          },
+          {
+            "age": "5-14",
+            "male_pct": 5.5,
+            "female_pct": 5.2
+          },
+          {
+            "age": "15-64",
+            "male_pct": 31.8,
+            "female_pct": 30.1
+          },
+          {
+            "age": "65-79",
+            "male_pct": 8,
+            "female_pct": 8.9
+          },
+          {
+            "age": "80+",
+            "male_pct": 2.5,
+            "female_pct": 3.2
+          }
+        ]
+      },
+      "sub_national_density_choropleth": [
+        {
+          "admin_1_region_name": "Istanbul",
+          "density_per_km2": 3500
+        },
+        {
+          "admin_1_region_name": "Kars",
+          "density_per_km2": 32
+        }
+      ],
+      "synoptic_analysis": "Moderate aging curve, similar to French patterns. Turkey retains a slight demographic youth advantage over other European nations."
+    }
+  ],
+  "culture_tab": {
+    "inglehart_welzel_coords": {
+      "x": 0.2,
+      "y": -0.5,
+      "cultural_zone": "Islamic"
+    },
+    "largest_diasporas": [
+      {
+        "destination": "Germany",
+        "population": "Over 3 million",
+        "cultural_reach_impact": "Profound influence on German society, especially in cuisine, small businesses, and a distinct Turkish-German cultural identity. Strong political and economic ties."
+      },
+      {
+        "destination": "France",
+        "population": "Approx. 800,000",
+        "cultural_reach_impact": "Contributes to the multicultural fabric, with presence in food, art, and community organizations, particularly in major cities like Paris and Lyon."
+      },
+      {
+        "destination": "Netherlands",
+        "population": "Approx. 400,000",
+        "cultural_reach_impact": "Visible cultural impact in urban centers through restaurants, cultural associations, and a significant voice in political and social discourse."
+      }
+    ],
+    "cultural_exports_and_landscape": {
+      "soft_power_exports": [
+        {
+          "medium": "Television Serials",
+          "examples": [
+            "Diriliş: Ertuğrul",
+            "Muhteşem Yüzyıl",
+            "Kara Para Aşk"
+          ],
+          "global_reach_score": 90
+        },
+        {
+          "medium": "Cuisine",
+          "examples": [
+            "Doner Kebab",
+            "Baklava",
+            "Turkish Coffee",
+            "Mezze"
+          ],
+          "global_reach_score": 85
+        },
+        {
+          "medium": "Music",
+          "examples": [
+            "Turkish Pop (Tarkan)",
+            "Folk (Neşet Ertaş)",
+            "Classical Ottoman Music"
+          ],
+          "global_reach_score": 60
+        }
+      ],
+      "spatial_landscape": {
+        "enclaves": [
+          "Kreuzberg (Berlin, Germany)",
+          "Dalston (London, UK)",
+          "Bos en Lommer (Amsterdam, Netherlands)"
+        ],
+        "architectural_footprint": "Numerous Ottoman-inspired mosques, cultural centers, and restaurants with distinct Turkish aesthetic elements found across Europe and beyond.",
+        "description": "Turkish cultural spaces abroad are vibrant and dynamic, often manifesting as bustling marketplaces, traditional tea houses, and a rich culinary scene that collectively form recognizable pockets of Turkish influence in global cities."
+      }
+    },
+    "hybridity_and_glocalization": [
+      {
+        "concept": "Turkish-German Hip-Hop",
+        "description": "A unique subgenre blending Turkish linguistic and cultural themes with German hip-hop styles, often exploring immigrant identity and social commentary.",
+        "glocalized_examples": [
+          "Kool Savas (German-Turkish rapper)",
+          "Eko Fresh (German-Turkish rapper)",
+          "Cartel (pioneering Turkish-German hip-hop group)"
+        ],
+        "spatial_location": "Primarily Germany (e.g., Berlin, Cologne, Stuttgart)"
+      },
+      {
+        "concept": "Glocalized Döner Kebab",
+        "description": "The transformation of the traditional Turkish Döner Kebab into a widely popular fast-food item globally, adapting to local tastes and presentation styles.",
+        "glocalized_examples": [
+          "German-style Döner (with specific sauces and bread)",
+          "Turkish pizza (Lahmacun) adapted for Western markets",
+          "Döner wraps and sandwiches in various countries"
+        ],
+        "spatial_location": "Global fast-food markets, especially in Europe"
+      },
+      {
+        "concept": "Turkish TV Drama Remakes",
+        "description": "The adaptation and localization of popular Turkish television series formats and storylines into local languages and contexts in other countries.",
+        "glocalized_examples": [
+          "Remakes in the Middle East and North Africa (e.g., 'Binbir Gece' adapted as 'Al Awwal Al Harem')",
+          "Adaptations in Balkan countries and Latin America"
+        ],
+        "spatial_location": "Middle East, North Africa, Balkan states, Latin America"
+      }
+    ]
+  }
+}

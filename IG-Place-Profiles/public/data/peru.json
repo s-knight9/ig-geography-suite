@@ -1,0 +1,521 @@
+{
+  "country_metadata": {
+    "name": "Peru",
+    "income_classification": "Upper-Middle Income",
+    "gni_per_capita_atlas": {
+      "value_usd": 7150,
+      "year": 2023
+    },
+    "hdi": {
+      "score": 0.762,
+      "rank": 87,
+      "year": 2022
+    },
+    "gni_per_capita_ppp": {
+      "value_usd": 12840,
+      "year": 2022
+    },
+    "gini_coefficient": {
+      "score": 40.2,
+      "year": 2021
+    }
+  },
+  "globalisation_tab": {
+    "kof_index": {
+      "economic": {
+        "de_facto": 58.1,
+        "de_jure": 64.2
+      },
+      "social": {
+        "interpersonal": {
+          "de_facto": 60.5,
+          "de_jure": 58
+        },
+        "informational": {
+          "de_facto": 65.2,
+          "de_jure": 62.1
+        },
+        "cultural": {
+          "de_facto": 45.4,
+          "de_jure": 48
+        }
+      },
+      "political": {
+        "de_facto": 72.8,
+        "de_jure": 75.3
+      }
+    },
+    "at_kearney_framework": {
+      "status": "Moderately Integrated",
+      "gci_score_or_tier": "Beta"
+    },
+    "ey_index_historical": {
+      "score": 3,
+      "analysis": "Steady expansion powered by regional trade corridors (Pacific Alliance) and global mineral exports to East Asian manufactures."
+    }
+  },
+  "economy_tab": {
+    "employment_structure": {
+      "primary": 26.3,
+      "secondary": 16.8,
+      "tertiary": 53.4,
+      "quaternary": 3.5
+    },
+    "trade_ledger": {
+      "main_exports": [
+        {
+          "commodity": "Copper Ore",
+          "pct_gdp": 28.5
+        },
+        {
+          "commodity": "Gold",
+          "pct_gdp": 15.2
+        },
+        {
+          "commodity": "Zinc Ore",
+          "pct_gdp": 5.1
+        },
+        {
+          "commodity": "Refined Petroleum",
+          "pct_gdp": 3.4
+        },
+        {
+          "commodity": "Grapes & Blueberries",
+          "pct_gdp": 3.1
+        }
+      ],
+      "main_imports": [
+        {
+          "commodity": "Refined Petroleum",
+          "pct_gdp": 14.2
+        },
+        {
+          "commodity": "Cars & Vehicles",
+          "pct_gdp": 7.4
+        },
+        {
+          "commodity": "Broadcasting Equipment",
+          "pct_gdp": 4.1
+        },
+        {
+          "commodity": "Delivery Trucks",
+          "pct_gdp": 3.2
+        },
+        {
+          "commodity": "Wheat",
+          "pct_gdp": 2.5
+        }
+      ],
+      "top_partners_outgoing": [
+        {
+          "partner": "China",
+          "value_usd_billions": 18.5
+        },
+        {
+          "partner": "United States",
+          "value_usd_billions": 8.4
+        },
+        {
+          "partner": "Canada",
+          "value_usd_billions": 2.8
+        },
+        {
+          "partner": "South Korea",
+          "value_usd_billions": 2.5
+        },
+        {
+          "partner": "Japan",
+          "value_usd_billions": 2.1
+        }
+      ],
+      "top_partners_incoming": [
+        {
+          "partner": "China",
+          "value_usd_billions": 14.2
+        },
+        {
+          "partner": "United States",
+          "value_usd_billions": 10.5
+        },
+        {
+          "partner": "Brazil",
+          "value_usd_billions": 3.1
+        },
+        {
+          "partner": "Argentina",
+          "value_usd_billions": 2.4
+        },
+        {
+          "partner": "Mexico",
+          "value_usd_billions": 2
+        }
+      ]
+    }
+  },
+  "human_geography_tab": {
+    "spatial_hubs": {
+      "epz_sez_zones": [
+        {
+          "name": "ZEDEPaita (Paita Special Development Zone)",
+          "location_lat_long": "-5.08, -81.11",
+          "primary_focus": "Coastal trade operations, fish meal logistics, and agro-industrial fruit processing."
+        },
+        {
+          "name": "Chancay Megaport Zone",
+          "location_lat_long": "-11.51, -77.27",
+          "primary_focus": "Enormous deep-water maritime gateway financed by COSCO, targeting direct China-South America shipping loops."
+        }
+      ],
+      "tourism_enclaves": [
+        {
+          "name": "Cusco & Machu Picchu",
+          "spatial_impact": "Highly concentrated historical enclave dominating tourist expenditure and flight routes."
+        }
+      ],
+      "core_periphery_zones": {
+        "core": "Coastal Metropolitan Lima & Callao",
+        "periphery": "High Andean indigenous mining towns and remote Amazonian Loreto settlements"
+      }
+    },
+    "political_economy": {
+      "informal_economy_pct_gdp": 71.2,
+      "eiu_governance_type": "Hybrid Regime",
+      "freedom_house_status": "Partly Free",
+      "corruption_perceptions_index": {
+        "score": 33,
+        "rank": 121
+      }
+    }
+  },
+  "prisoners_of_geography_map": {
+    "topographic_friction_points": [
+      {
+        "feature": "Andes Mountain Range",
+        "geopolitical_constraint": "Lofty Andean cordilleras splitting the desert coast from the Amazon basin, impeding land links and requiring high mountain highway passes."
+      },
+      {
+        "feature": "Amazon Rainforest Canopy",
+        "geopolitical_constraint": "Vast tropical wilderness in the east presenting impenetrable terrain for road building, relying wholly on inland river barges."
+      }
+    ],
+    "hydrological_arteries": [
+      {
+        "feature": "Amazon Headwaters & Marañón-Ucayali System",
+        "strategic_advantage": "Large river source systems driving eastward navigation, supporting remote forest communities but disconnected from western economic centers."
+      }
+    ],
+    "choke_points_vulnerabilities": [
+      {
+        "feature": "Port of Callao Bottleneck",
+        "impact": "Focal sea gate handling over 70% of Peru's maritime container trade, prone to seismic and overland traffic gridlock."
+      }
+    ],
+    "buffer_zones": [
+      {
+        "region": "Chala Coastal Desert Strip",
+        "significance": "A hyper-arid desert wall buffering the central coastal capital from extensive direct eastern overland land incursions."
+      }
+    ],
+    "map_center": {
+      "lat": -9.19,
+      "lng": -75.0152,
+      "zoom": 5
+    }
+  },
+  "population_dynamics_time_series": [
+    {
+      "year": 1970,
+      "pyramid_structure": {
+        "cohorts": [
+          {
+            "age": "0-4",
+            "male_pct": 8,
+            "female_pct": 7.8
+          },
+          {
+            "age": "5-14",
+            "male_pct": 13.5,
+            "female_pct": 13.1
+          },
+          {
+            "age": "15-64",
+            "male_pct": 27.2,
+            "female_pct": 26.5
+          },
+          {
+            "age": "65-79",
+            "male_pct": 1.7,
+            "female_pct": 1.8
+          },
+          {
+            "age": "80+",
+            "male_pct": 0.2,
+            "female_pct": 0.2
+          }
+        ]
+      },
+      "sub_national_density_choropleth": [
+        {
+          "admin_1_region_name": "Lima",
+          "density_per_km2": 95
+        },
+        {
+          "admin_1_region_name": "Loreto",
+          "density_per_km2": 0.8
+        }
+      ],
+      "synoptic_analysis": "Highly expansive stage 2 structure with massive rural-to-urban coastal migration just beginning to accelerate."
+    },
+    {
+      "year": 2023,
+      "pyramid_structure": {
+        "cohorts": [
+          {
+            "age": "0-4",
+            "male_pct": 4.1,
+            "female_pct": 3.9
+          },
+          {
+            "age": "5-14",
+            "male_pct": 8.1,
+            "female_pct": 7.7
+          },
+          {
+            "age": "15-64",
+            "male_pct": 34.2,
+            "female_pct": 32.8
+          },
+          {
+            "age": "65-79",
+            "male_pct": 4.2,
+            "female_pct": 4.6
+          },
+          {
+            "age": "80+",
+            "male_pct": 0.9,
+            "female_pct": 1.1
+          }
+        ]
+      },
+      "sub_national_density_choropleth": [
+        {
+          "admin_1_region_name": "Lima",
+          "density_per_km2": 285
+        },
+        {
+          "admin_1_region_name": "Loreto",
+          "density_per_km2": 2.1
+        }
+      ],
+      "synoptic_analysis": "Maturing population showing declining fertility rates and urban agglomeration around Lima Metropolitana."
+    },
+    {
+      "year": 2026,
+      "pyramid_structure": {
+        "cohorts": [
+          {
+            "age": "0-4",
+            "male_pct": 3.9,
+            "female_pct": 3.7
+          },
+          {
+            "age": "5-14",
+            "male_pct": 7.8,
+            "female_pct": 7.4
+          },
+          {
+            "age": "15-64",
+            "male_pct": 34.1,
+            "female_pct": 32.5
+          },
+          {
+            "age": "65-79",
+            "male_pct": 4.5,
+            "female_pct": 4.9
+          },
+          {
+            "age": "80+",
+            "male_pct": 1,
+            "female_pct": 1.2
+          }
+        ]
+      },
+      "sub_national_density_choropleth": [
+        {
+          "admin_1_region_name": "Lima",
+          "density_per_km2": 290
+        },
+        {
+          "admin_1_region_name": "Loreto",
+          "density_per_km2": 2.2
+        }
+      ],
+      "synoptic_analysis": "Transitioning cleanly into Stage 3-4, yielding a temporary economic demographic dividend."
+    },
+    {
+      "year": 2040,
+      "pyramid_structure": {
+        "cohorts": [
+          {
+            "age": "0-4",
+            "male_pct": 3.1,
+            "female_pct": 2.9
+          },
+          {
+            "age": "5-14",
+            "male_pct": 6.2,
+            "female_pct": 5.9
+          },
+          {
+            "age": "15-64",
+            "male_pct": 33.5,
+            "female_pct": 31.8
+          },
+          {
+            "age": "65-79",
+            "male_pct": 6.5,
+            "female_pct": 6.9
+          },
+          {
+            "age": "80+",
+            "male_pct": 2.1,
+            "female_pct": 2.5
+          }
+        ]
+      },
+      "sub_national_density_choropleth": [
+        {
+          "admin_1_region_name": "Lima",
+          "density_per_km2": 315
+        },
+        {
+          "admin_1_region_name": "Loreto",
+          "density_per_km2": 2.4
+        }
+      ],
+      "synoptic_analysis": "Noticeable demographic aging resembling European patterns, requiring structural health reforms in regional capitals."
+    }
+  ],
+  "culture_tab": {
+    "inglehart_welzel_coords": {
+      "x": -0.4,
+      "y": 0.6,
+      "cultural_zone": "Latin America"
+    },
+    "largest_diasporas": [
+      {
+        "destination": "United States",
+        "population": "Approx. 1 million",
+        "cultural_reach_impact": "Significant culinary influence, growing cultural festivals, and community organizations in major cities like Miami, New York, and Los Angeles."
+      },
+      {
+        "destination": "Spain",
+        "population": "Approx. 250,000",
+        "cultural_reach_impact": "Strong presence in gastronomy, music, and arts, particularly in Madrid and Barcelona, contributing to a vibrant Latin American cultural scene."
+      },
+      {
+        "destination": "Argentina",
+        "population": "Approx. 200,000",
+        "cultural_reach_impact": "Integration into local urban culture, notable contributions in food markets, street art, and community events, especially in Buenos Aires."
+      },
+      {
+        "destination": "Chile",
+        "population": "Approx. 180,000",
+        "cultural_reach_impact": "Cultural exchange in cuisine, music, and festivities, particularly in Santiago and northern regions, fostering bilateral cultural understanding."
+      }
+    ],
+    "cultural_exports_and_landscape": {
+      "soft_power_exports": [
+        {
+          "medium": "Cuisine",
+          "examples": [
+            "Ceviche",
+            "Lomo Saltado",
+            "Pisco Sour",
+            "Nikkei Cuisine"
+          ],
+          "global_reach_score": 90
+        },
+        {
+          "medium": "Music",
+          "examples": [
+            "Andean Folk Music (Huayno)",
+            "Afro-Peruvian Music (Festejo)",
+            "Cumbia Peruana"
+          ],
+          "global_reach_score": 65
+        },
+        {
+          "medium": "Textiles and Handicrafts",
+          "examples": [
+            "Alpaca wool products",
+            "Ayacucho retablos",
+            "Traditional ceramics"
+          ],
+          "global_reach_score": 70
+        },
+        {
+          "medium": "Archaeology and History",
+          "examples": [
+            "Machu Picchu",
+            "Nazca Lines",
+            "Inca heritage sites"
+          ],
+          "global_reach_score": 95
+        }
+      ],
+      "spatial_landscape": {
+        "enclaves": [
+          "Peruvian neighborhoods in Paterson (New Jersey, USA)",
+          "Peruvian restaurants and shops in Los Angeles (USA)",
+          "Peruvian markets in Buenos Aires (Argentina)",
+          "Barrio Peruano in Santiago (Chile)"
+        ],
+        "architectural_footprint": "Colonial architecture in Lima's historic center, ancient Inca and pre-Inca ruins (e.g., Machu Picchu, Chan Chan), modern urban structures, and Andean adobe constructions.",
+        "description": "Peru's spatial landscape is a rich tapestry reflecting its diverse history, from the monumental Inca citadels to the baroque grandeur of Spanish colonial cities. Public spaces are often vibrant with markets and plazas, while the Andes showcase traditional agricultural terraces and settlements. The coastline features fishing villages and modern metropolises, all contributing to a visually striking cultural environment."
+      }
+    },
+    "hybridity_and_glocalization": [
+      {
+        "concept": "Nikkei Cuisine",
+        "description": "A fusion of Peruvian and Japanese culinary traditions, born from the Japanese diaspora in Peru. It combines Japanese ingredients and techniques with Peruvian flavors and staples.",
+        "glocalized_examples": [
+          "Tiradito (Peruvian-style sashimi)",
+          "Causa Nikkei",
+          "Maki Acevichado"
+        ],
+        "spatial_location": "Prominently featured in high-end restaurants in Lima, and increasingly in international culinary hubs like New York, London, and Tokyo."
+      },
+      {
+        "concept": "Chicha Music (Cumbia Peruana)",
+        "description": "An electric fusion of traditional Andean music, Amazonian cumbia, rock, and psychedelic elements. It emerged in the 1960s-70s and became a popular urban genre.",
+        "glocalized_examples": [
+          "'El Aguajal' by Los Shapis",
+          "Psychedelic cumbia revival bands",
+          "Cumbia fusion artists"
+        ],
+        "spatial_location": "Originating in working-class neighborhoods of Lima and the Amazon, it has spread through street parties, radio, and now global music festivals, particularly in Latin America and among diaspora communities."
+      },
+      {
+        "concept": "Lord of Miracles (Señor de los Milagros)",
+        "description": "A massive Catholic procession originating in colonial Lima, celebrating a mural painted by an Angolan slave. It's a key religious and cultural event in Peru.",
+        "glocalized_examples": [
+          "Processions in Peruvian diaspora communities (e.g., Madrid, New York, Tokyo)",
+          "Traditional purple attire worn globally on October days",
+          "Replication of Peruvian altar aesthetics abroad"
+        ],
+        "spatial_location": "Primarily Lima, Peru, but its annual celebration is faithfully recreated by Peruvian communities in cities worldwide, signifying a globalized religious and cultural identity."
+      },
+      {
+        "concept": "Andean-Baroque Art",
+        "description": "An artistic style developed during the colonial period that blends European Baroque forms with indigenous Andean iconography, symbolism, and techniques.",
+        "glocalized_examples": [
+          "Paintings of the Cuzco School (Escuela Cuzqueña)",
+          "Carved altarpieces in colonial churches",
+          "Religious sculptures with indigenous features"
+        ],
+        "spatial_location": "Predominantly found in churches, museums, and colonial mansions in the Andean regions of Peru, particularly Cusco, Ayacucho, and Puno, influencing art beyond national borders through exhibitions and scholarly interest."
+      }
+    ]
+  }
+}

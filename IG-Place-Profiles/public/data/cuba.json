@@ -1,0 +1,512 @@
+{
+  "country_metadata": {
+    "name": "Cuba",
+    "income_classification": "Upper Middle Income",
+    "gni_per_capita_atlas": {
+      "value_usd": 9500,
+      "year": 2020
+    },
+    "hdi": {
+      "score": 0.764,
+      "rank": 85,
+      "year": 2022
+    },
+    "gni_per_capita_ppp": {
+      "value_usd": 13400,
+      "year": 2022
+    },
+    "gini_coefficient": {
+      "score": 38,
+      "year": 2020
+    }
+  },
+  "globalisation_tab": {
+    "kof_index": {
+      "economic": {
+        "de_facto": 28.5,
+        "de_jure": 25.4
+      },
+      "social": {
+        "interpersonal": {
+          "de_facto": 34.2,
+          "de_jure": 31
+        },
+        "informational": {
+          "de_facto": 44.5,
+          "de_jure": 41.2
+        },
+        "cultural": {
+          "de_facto": 39.1,
+          "de_jure": 42.5
+        }
+      },
+      "political": {
+        "de_facto": 58.2,
+        "de_jure": 62.4
+      }
+    },
+    "at_kearney_framework": {
+      "status": "Low Integration",
+      "gci_score_or_tier": "Gamma-"
+    },
+    "ey_index_historical": {
+      "score": 1.5,
+      "analysis": "Significantly restricted by the long-running US economic embargo, isolating the island's banking system and limiting trade integration paths."
+    }
+  },
+  "economy_tab": {
+    "employment_structure": {
+      "primary": 18.2,
+      "secondary": 17.5,
+      "tertiary": 64.3,
+      "quaternary": 0
+    },
+    "trade_ledger": {
+      "main_exports": [
+        {
+          "commodity": "Rolled Tobacco",
+          "pct_gdp": 22.5
+        },
+        {
+          "commodity": "Raw Nickel",
+          "pct_gdp": 18.1
+        },
+        {
+          "commodity": "Hard Liquor & Rum",
+          "pct_gdp": 11.2
+        },
+        {
+          "commodity": "Raw Sugar",
+          "pct_gdp": 8.5
+        },
+        {
+          "commodity": "Medical Services & Vaccines",
+          "pct_gdp": 5.2
+        }
+      ],
+      "main_imports": [
+        {
+          "commodity": "Poultry & Meat",
+          "pct_gdp": 12.4
+        },
+        {
+          "commodity": "Wheat & Grain",
+          "pct_gdp": 8.5
+        },
+        {
+          "commodity": "Refined Petroleum",
+          "pct_gdp": 6.2
+        },
+        {
+          "commodity": "Soybean Oil",
+          "pct_gdp": 4.8
+        },
+        {
+          "commodity": "Corn",
+          "pct_gdp": 3.5
+        }
+      ],
+      "top_partners_outgoing": [
+        {
+          "partner": "China",
+          "value_usd_billions": 0.412
+        },
+        {
+          "partner": "Spain",
+          "value_usd_billions": 0.18
+        },
+        {
+          "partner": "Germany",
+          "value_usd_billions": 0.095
+        },
+        {
+          "partner": "France",
+          "value_usd_billions": 0.082
+        },
+        {
+          "partner": "Cyprus",
+          "value_usd_billions": 0.055
+        }
+      ],
+      "top_partners_incoming": [
+        {
+          "partner": "Spain",
+          "value_usd_billions": 0.62
+        },
+        {
+          "partner": "China",
+          "value_usd_billions": 0.38
+        },
+        {
+          "partner": "Italy",
+          "value_usd_billions": 0.24
+        },
+        {
+          "partner": "Brazil",
+          "value_usd_billions": 0.18
+        },
+        {
+          "partner": "Canada",
+          "value_usd_billions": 0.15
+        }
+      ]
+    }
+  },
+  "human_geography_tab": {
+    "spatial_hubs": {
+      "epz_sez_zones": [
+        {
+          "name": "Mariel Special Development Zone (ZEDM)",
+          "location_lat_long": "22.99, -82.75",
+          "primary_focus": "A state-backed deep-water container terminal and industrial park aimed at pulling in foreign direct investments under tax-exempt rules."
+        }
+      ],
+      "tourism_enclaves": [
+        {
+          "name": "Varadero Resort Gated Peninsula",
+          "spatial_impact": "A strictly segregated beachfront strip engineered to partition luxury foreign currency spending from the local Cuban currency system."
+        }
+      ],
+      "core_periphery_zones": {
+        "core": "Havana Metropolitan Area (administrative base, tourism hub, manufacturing nodes)",
+        "periphery": "Oriente Southern Provinces (Santiago de Cuba, Guantanamo, rural agriculture plains)"
+      }
+    },
+    "political_economy": {
+      "informal_economy_pct_gdp": 45.8,
+      "eiu_governance_type": "Authoritarian Regime",
+      "freedom_house_status": "Not Free",
+      "corruption_perceptions_index": {
+        "score": 42,
+        "rank": 76
+      }
+    }
+  },
+  "prisoners_of_geography_map": {
+    "topographic_friction_points": [
+      {
+        "feature": "Sierra Maestra Mountain Range",
+        "geopolitical_constraint": "Dense, rugged southern ridge; historically served as a defensive sanctuary for revolutionary movements but limits road connectivity."
+      }
+    ],
+    "hydrological_arteries": [
+      {
+        "feature": "Cauto River Valley",
+        "strategic_advantage": "Cuba's longest river system, forming an agricultural belt vital for irrigating southern sugar and rice fields."
+      }
+    ],
+    "choke_points_vulnerabilities": [
+      {
+        "feature": "Windward Passage Channel",
+        "impact": "Crucial maritime shipping channel between Cuba's eastern coast and Haiti, heavily patrolled globally to curb drug flows."
+      }
+    ],
+    "buffer_zones": [
+      {
+        "region": "Florida Straits Corridor",
+        "significance": "A strategic ninety-mile marine channel separating Cuba from Florida, acting as the primary spatial highway for migrative flights."
+      }
+    ],
+    "map_center": {
+      "lat": 21.5218,
+      "lng": -77.7812,
+      "zoom": 6
+    }
+  },
+  "population_dynamics_time_series": [
+    {
+      "year": 1970,
+      "pyramid_structure": {
+        "cohorts": [
+          {
+            "age": "0-4",
+            "male_pct": 6.8,
+            "female_pct": 6.5
+          },
+          {
+            "age": "5-14",
+            "male_pct": 11.8,
+            "female_pct": 11.2
+          },
+          {
+            "age": "15-64",
+            "male_pct": 29.5,
+            "female_pct": 28.3
+          },
+          {
+            "age": "65-79",
+            "male_pct": 2.6,
+            "female_pct": 2.9
+          },
+          {
+            "age": "80+",
+            "male_pct": 0.2,
+            "female_pct": 0.2
+          }
+        ]
+      },
+      "sub_national_density_choropleth": [
+        {
+          "admin_1_region_name": "La Habana",
+          "density_per_km2": 2800
+        },
+        {
+          "admin_1_region_name": "Holguín",
+          "density_per_km2": 105
+        },
+        {
+          "admin_1_region_name": "Camagüey",
+          "density_per_km2": 52
+        }
+      ],
+      "synoptic_analysis": "Stage 3 transitional pyramid, demonstrating high fertility rates and state-expanded child nutrition campaigns."
+    },
+    {
+      "year": 2023,
+      "pyramid_structure": {
+        "cohorts": [
+          {
+            "age": "0-4",
+            "male_pct": 2.2,
+            "female_pct": 2
+          },
+          {
+            "age": "5-14",
+            "male_pct": 5.4,
+            "female_pct": 5.1
+          },
+          {
+            "age": "15-64",
+            "male_pct": 33.2,
+            "female_pct": 32.5
+          },
+          {
+            "age": "65-79",
+            "male_pct": 7.4,
+            "female_pct": 8
+          },
+          {
+            "age": "80+",
+            "male_pct": 1.9,
+            "female_pct": 2.3
+          }
+        ]
+      },
+      "sub_national_density_choropleth": [
+        {
+          "admin_1_region_name": "La Habana",
+          "density_per_km2": 3050
+        },
+        {
+          "admin_1_region_name": "Holguín",
+          "density_per_km2": 112
+        },
+        {
+          "admin_1_region_name": "Camagüey",
+          "density_per_km2": 50
+        }
+      ],
+      "synoptic_analysis": "Accelerated Stage 5 structure. Low fertility rates paired with dramatic outward youth migration leave Cuba with an aging demographic base."
+    },
+    {
+      "year": 2026,
+      "pyramid_structure": {
+        "cohorts": [
+          {
+            "age": "0-4",
+            "male_pct": 2.1,
+            "female_pct": 1.9
+          },
+          {
+            "age": "5-14",
+            "male_pct": 5.2,
+            "female_pct": 4.9
+          },
+          {
+            "age": "15-64",
+            "male_pct": 32.8,
+            "female_pct": 32.1
+          },
+          {
+            "age": "65-79",
+            "male_pct": 7.8,
+            "female_pct": 8.4
+          },
+          {
+            "age": "80+",
+            "male_pct": 2.1,
+            "female_pct": 2.7
+          }
+        ]
+      },
+      "sub_national_density_choropleth": [
+        {
+          "admin_1_region_name": "La Habana",
+          "density_per_km2": 3020
+        },
+        {
+          "admin_1_region_name": "Holguín",
+          "density_per_km2": 110
+        },
+        {
+          "admin_1_region_name": "Camagüey",
+          "density_per_km2": 48
+        }
+      ],
+      "synoptic_analysis": "Persistently low fertility indexes connected with systemic domestic commodity challenges and high out-migration profiles."
+    },
+    {
+      "year": 2040,
+      "pyramid_structure": {
+        "cohorts": [
+          {
+            "age": "0-4",
+            "male_pct": 1.7,
+            "female_pct": 1.5
+          },
+          {
+            "age": "5-14",
+            "male_pct": 4.2,
+            "female_pct": 3.9
+          },
+          {
+            "age": "15-64",
+            "male_pct": 30.2,
+            "female_pct": 29.5
+          },
+          {
+            "age": "65-79",
+            "male_pct": 9.2,
+            "female_pct": 10.4
+          },
+          {
+            "age": "80+",
+            "male_pct": 3.8,
+            "female_pct": 5.6
+          }
+        ]
+      },
+      "sub_national_density_choropleth": [
+        {
+          "admin_1_region_name": "La Habana",
+          "density_per_km2": 2900
+        },
+        {
+          "admin_1_region_name": "Holguín",
+          "density_per_km2": 105
+        },
+        {
+          "admin_1_region_name": "Camagüey",
+          "density_per_km2": 45
+        }
+      ],
+      "synoptic_analysis": "One of the oldest demographic regions in Latin America; severe workforce constraints will impact basic agrarian and social systems."
+    }
+  ],
+  "culture_tab": {
+    "inglehart_welzel_coords": {
+      "x": -0.5,
+      "y": -0.6,
+      "cultural_zone": "Latin America"
+    },
+    "largest_diasporas": [
+      {
+        "destination": "United States",
+        "population": "~2.3 million",
+        "cultural_reach_impact": "Profound influence on US politics, cuisine, music, and arts, particularly in Florida and New York. Strong enclave formation."
+      },
+      {
+        "destination": "Spain",
+        "population": "~150,000",
+        "cultural_reach_impact": "Significant cultural exchange, strong historical ties, contributing to Spanish-Caribbean cultural fusion, especially in Madrid and Canary Islands."
+      },
+      {
+        "destination": "Mexico",
+        "population": "~20,000",
+        "cultural_reach_impact": "Historical and artistic connections, influencing music, dance, and culinary scenes, particularly in Mexico City and Cancun."
+      }
+    ],
+    "cultural_exports_and_landscape": {
+      "soft_power_exports": [
+        {
+          "medium": "Music",
+          "examples": [
+            "Son Cubano",
+            "Salsa",
+            "Rumba",
+            "Buena Vista Social Club",
+            "Celia Cruz"
+          ],
+          "global_reach_score": 90
+        },
+        {
+          "medium": "Cuisine & Beverages",
+          "examples": [
+            "Mojito",
+            "Daiquiri",
+            "Cuban Sandwich",
+            "Ropa Vieja",
+            "Havana Club Rum"
+          ],
+          "global_reach_score": 75
+        },
+        {
+          "medium": "Cigars",
+          "examples": [
+            "Cohiba",
+            "Montecristo",
+            "Romeo y Julieta"
+          ],
+          "global_reach_score": 85
+        },
+        {
+          "medium": "Dance",
+          "examples": [
+            "Salsa",
+            "Cha-cha-cha",
+            "Rumba"
+          ],
+          "global_reach_score": 80
+        }
+      ],
+      "spatial_landscape": {
+        "enclaves": [
+          "Little Havana (Miami, USA)",
+          "Union City (New Jersey, USA)",
+          "Canary Islands (Spain)"
+        ],
+        "architectural_footprint": "Colonial Spanish Baroque and Neoclassical, Art Deco, Mid-Century Modernism, Soviet-influenced Brutalism.",
+        "description": "Cuba's architectural footprint is a vibrant blend reflecting its colonial past, revolutionary ideals, and mid-20th century prosperity. Havana Vieja showcases preserved colonial styles, while newer districts feature Art Deco and functionalist designs. The diaspora has established distinct cultural enclaves, particularly in the US, known for their lively atmosphere and Cuban businesses."
+      }
+    },
+    "hybridity_and_glocalization": [
+      {
+        "concept": "Santería",
+        "description": "An Afro-Cuban syncretic religion blending West African Yoruba spiritual practices with Roman Catholicism, born from the fusion of enslaved African traditions and Spanish colonial influences.",
+        "glocalized_examples": [
+          "Santería houses of worship and practice in Miami and New York, adapting to urban environments while maintaining core rituals and beliefs.",
+          "Influence of Santería symbolism and music in global art and music forms."
+        ],
+        "spatial_location": "Predominantly Cuba, but also widespread in Florida, New York, Venezuela, and parts of Brazil and Mexico."
+      },
+      {
+        "concept": "Cuban Jazz / Latin Jazz",
+        "description": "A musical genre combining traditional Afro-Cuban rhythms, instrumentation, and melodies with the improvisational structures and harmonies of American jazz, creating a vibrant and distinct sound.",
+        "glocalized_examples": [
+          "The global tours and collaborations of artists like Chucho Valdés and Arturo Sandoval, performing and recording Latin Jazz in major cities worldwide.",
+          "Cuban rhythms and instruments integrated into contemporary global popular music genres."
+        ],
+        "spatial_location": "Originated in Cuba and New York City, now a global phenomenon with practitioners and fans worldwide."
+      },
+      {
+        "concept": "Cuban Sandwich",
+        "description": "A pressed sandwich made with Cuban bread, roast pork, ham, Swiss cheese, pickles, and mustard, a culinary symbol of the Cuban diaspora.",
+        "glocalized_examples": [
+          "Variations of the Cuban sandwich appearing on menus in diners and cafes across the United States, often adapted with local ingredients or twists.",
+          "The Cuban sandwich becoming a recognized comfort food staple in American culinary culture, especially in Florida."
+        ],
+        "spatial_location": "Strongly associated with Florida (Miami, Tampa), but also found in other US cities with Cuban populations and increasingly popular internationally."
+      }
+    ]
+  }
+}

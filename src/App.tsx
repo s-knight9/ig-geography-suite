@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef, useCallback } from "react";
+import { ErrorBoundary } from "./ErrorBoundary";
 import { motion, AnimatePresence } from "motion/react";
 import Markdown from "react-markdown";
 import remarkGfm from "remark-gfm";
@@ -53,6 +54,7 @@ import CwkQaApp from "../IG-CWK-Quality-Assurance/src/App";
 import MapMakerApp from "../IG-OS-Map-Maker/src/App";
 import HighFiveApp from "../IGCSE-0460-High-5/src/App";
 import DseDesignerApp from "../DSE-Designer/src/App";
+import PlaceProfilesApp from "../IG-Place-Profiles/src/App";
 
 interface LocalUser {
   email: string;
@@ -465,7 +467,7 @@ export default function App() {
   const [pendingUsers, setPendingUsers] = useState<any[]>([]);
   const [isSessionUpdating, setIsSessionUpdating] = useState<boolean>(false);
   const [isInitializing, setIsInitializing] = useState<boolean>(true);
-  const [activeWorkspace, setActiveWorkspace] = useState<"portal" | "newsroom" | "correspondent" | "student-scaffold" | "globetube" | "textbook-viewer" | "cwk-qa" | "map-maker" | "high-five" | "dse-designer">("portal");
+  const [activeWorkspace, setActiveWorkspace] = useState<"portal" | "newsroom" | "correspondent" | "student-scaffold" | "globetube" | "textbook-viewer" | "cwk-qa" | "map-maker" | "high-five" | "dse-designer" | "place-profiles">("portal");
   const [demoMode, setDemoMode] = useState<"teacher" | "student">("teacher");
   const [isVaultOpen, setIsVaultOpen] = useState(false);
   const [selectedVaultFolder, setSelectedVaultFolder] = useState<string | null>(null);
@@ -882,6 +884,20 @@ export default function App() {
             onBackToPortal={() => setActiveWorkspace("portal")}
             activeRole={role}
           />
+        );
+      case "place-profiles":
+        return (
+          <ErrorBoundary>
+            <PlaceProfilesApp
+              onBackToPortal={() => setActiveWorkspace("portal")}
+              activeUserEmail={user.email || ""}
+              activeTeacherCode={teacherCode}
+              role={role}
+              isDark={isDark}
+              toggleDark={toggleDark}
+              onOpenVault={() => setIsVaultOpen(true)}
+            />
+          </ErrorBoundary>
         );
       default:
         return null;
@@ -1358,6 +1374,22 @@ export default function App() {
           </div>
 
           <div className="grid xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 gap-6">
+
+            {/* Place Profiles */}
+            <motion.div whileHover={{ y: -6 }} onClick={() => setActiveWorkspace("place-profiles")}
+              className="glass-panel rounded-2xl p-6 border border-slate-200 dark:border-slate-800 flex flex-col justify-between group cursor-pointer shadow-lg hover:shadow-blue-500/5 transition-all">
+              <div>
+                <div className="w-14 h-14 rounded-2xl bg-blue-500/10 dark:bg-blue-500/5 flex items-center justify-center text-blue-500 group-hover:scale-110 transition-transform mb-6"><Map size={28} /></div>
+                <h3 className="text-2xl font-black text-slate-800 dark:text-white tracking-tight mb-3">IG Place Profiles</h3>
+                <p className="text-sm text-slate-500 dark:text-slate-400 leading-relaxed mb-6 font-medium">Simplified country profiles for IGCSE. Explore demographic, economic, and physical geographic data.</p>
+                <ul className="space-y-2 mb-8">
+                  <li className="flex items-center gap-2 text-xs font-bold text-slate-600 dark:text-slate-300"><CheckCircle2 size={13} className="text-blue-500" />Pop Dynamics & Economy</li>
+                  <li className="flex items-center gap-2 text-xs font-bold text-slate-600 dark:text-slate-300"><CheckCircle2 size={13} className="text-blue-500" />Human & Physical Geo</li>
+                  <li className="flex items-center gap-2 text-xs font-bold text-slate-600 dark:text-slate-300"><CheckCircle2 size={13} className="text-blue-500" />Comparison Modules</li>
+                </ul>
+              </div>
+              <CardFooter />
+            </motion.div>
 
             {/* Correspondent */}
             <motion.div whileHover={{ y: -6 }} onClick={() => setActiveWorkspace("correspondent")}

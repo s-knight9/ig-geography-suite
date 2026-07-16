@@ -1,0 +1,990 @@
+{
+  "country_metadata": {
+    "name": "South Africa",
+    "income_classification": "Upper-Middle Income",
+    "gni_per_capita_atlas": {
+      "value_usd": 6760,
+      "year": 2022
+    },
+    "hdi": {
+      "score": 0.717,
+      "rank": 110,
+      "year": 2022
+    },
+    "gni_per_capita_ppp": {
+      "value_usd": 15410,
+      "year": 2022
+    },
+    "gini_coefficient": {
+      "score": 63,
+      "year": 2014
+    }
+  },
+  "globalisation_tab": {
+    "kof_index": {
+      "economic": {
+        "de_facto": 58.4,
+        "de_jure": 68.2
+      },
+      "social": {
+        "interpersonal": {
+          "de_facto": 52.1,
+          "de_jure": 55.4
+        },
+        "informational": {
+          "de_facto": 68.5,
+          "de_jure": 60.1
+        },
+        "cultural": {
+          "de_facto": 62.1,
+          "de_jure": 65.4
+        }
+      },
+      "political": {
+        "de_facto": 78.4,
+        "de_jure": 82.1
+      }
+    },
+    "at_kearney_framework": {
+      "status": "Beta+",
+      "gci_score_or_tier": "Beta+ (Johannesburg)"
+    },
+    "ey_index_historical": {
+      "score": "55.8",
+      "analysis": "Financial and mining capital of Africa, deep structural integration into global commodity flows."
+    }
+  },
+  "economy_tab": {
+    "employment_structure": {
+      "primary": 5.2,
+      "secondary": 22.1,
+      "tertiary": 62.4,
+      "quaternary": 10.3
+    },
+    "trade_ledger": {
+      "main_exports": [
+        {
+          "commodity": "Gold",
+          "pct_gdp": 4.1
+        },
+        {
+          "commodity": "Platinum",
+          "pct_gdp": 3.8
+        },
+        {
+          "commodity": "Coal Briquettes",
+          "pct_gdp": 2.5
+        },
+        {
+          "commodity": "Iron Ore",
+          "pct_gdp": 2.1
+        },
+        {
+          "commodity": "Diamonds",
+          "pct_gdp": 1.8
+        }
+      ],
+      "main_imports": [
+        {
+          "commodity": "Crude Petroleum",
+          "pct_gdp": 4.2
+        },
+        {
+          "commodity": "Refined Petroleum",
+          "pct_gdp": 3.8
+        },
+        {
+          "commodity": "Cars",
+          "pct_gdp": 2.1
+        },
+        {
+          "commodity": "Vehicle Parts",
+          "pct_gdp": 1.5
+        },
+        {
+          "commodity": "Broadcasting Equip",
+          "pct_gdp": 1.2
+        }
+      ],
+      "top_partners_outgoing": [
+        {
+          "partner": "China",
+          "value_usd_billions": 20.4
+        },
+        {
+          "partner": "United States",
+          "value_usd_billions": 14.2
+        },
+        {
+          "partner": "Germany",
+          "value_usd_billions": 10.8
+        },
+        {
+          "partner": "United Kingdom",
+          "value_usd_billions": 7.5
+        },
+        {
+          "partner": "Japan",
+          "value_usd_billions": 6.8
+        }
+      ],
+      "top_partners_incoming": [
+        {
+          "partner": "China",
+          "value_usd_billions": 22.5
+        },
+        {
+          "partner": "Germany",
+          "value_usd_billions": 10.2
+        },
+        {
+          "partner": "United States",
+          "value_usd_billions": 8.1
+        },
+        {
+          "partner": "India",
+          "value_usd_billions": 6.5
+        },
+        {
+          "partner": "Saudi Arabia",
+          "value_usd_billions": 4.5
+        }
+      ]
+    }
+  },
+  "human_geography_tab": {
+    "spatial_hubs": {
+      "epz_sez_zones": [
+        {
+          "name": "Coega SEZ (Gqeberha)",
+          "location_lat_long": "-33.78, 25.68",
+          "primary_focus": "Automotive exports & Logistics"
+        },
+        {
+          "name": "Dube TradePort (Durban)",
+          "location_lat_long": "-29.61, 31.11",
+          "primary_focus": "Aviation logistics & Agri-processing"
+        },
+        {
+          "name": "Richards Bay IDZ",
+          "location_lat_long": "-28.78, 32.03",
+          "primary_focus": "Heavy minerals, aluminum smelting & bulk port"
+        }
+      ],
+      "tourism_enclaves": [
+        {
+          "name": "Kruger National Park",
+          "spatial_impact": "Mass wildlife tourism conservation area"
+        },
+        {
+          "name": "Cape Town Winelands",
+          "spatial_impact": "Agri-tourism & highly commodified coastal luxury hub"
+        }
+      ],
+      "core_periphery_zones": {
+        "core": "Gauteng Province (Johannesburg and Pretoria Metropolitan Centers)",
+        "periphery": "Rural Eastern Cape and Limpopo Province borderlands"
+      }
+    },
+    "political_economy": {
+      "informal_economy_pct_gdp": 28.5,
+      "eiu_governance_type": "Flawed Democracy",
+      "freedom_house_status": "Free",
+      "corruption_perceptions_index": {
+        "score": 43,
+        "rank": 72
+      }
+    }
+  },
+  "prisoners_of_geography_map": {
+    "topographic_friction_points": [
+      {
+        "feature": "Great Escarpment",
+        "geopolitical_constraint": "Steep elevation separating interior plateau from coastal plains, historically delaying interior transport infrastructure."
+      }
+    ],
+    "hydrological_arteries": [
+      {
+        "feature": "Lack of Navigable Rivers",
+        "geopolitical_constraint": "No deep navigable inland rivers restricts cheap bulk transport; fully reliant on rail and truck network."
+      }
+    ],
+    "choke_points_vulnerabilities": [
+      {
+        "feature": "Cape of Good Hope",
+        "impact": "Vital alternative to Suez Canal for global shipping; strategic asset for naval dominance in Southern oceans."
+      }
+    ],
+    "buffer_zones": [
+      {
+        "region": "Kalahari / Namib Deserts",
+        "significance": "Harsh physical barrier on western flank limiting cross-border interaction with Namibia/Botswana."
+      }
+    ],
+    "map_center": {
+      "lat": -30.5595,
+      "lng": 22.9375,
+      "zoom": 5
+    }
+  },
+  "population_dynamics_time_series": [
+    {
+      "year": 1970,
+      "pyramid_structure": {
+        "cohorts": [
+          {
+            "age": "0-4",
+            "male_pct": -9.093492285439439,
+            "female_pct": 9.093492285439439
+          },
+          {
+            "age": "5-9",
+            "male_pct": -7.395343376929626,
+            "female_pct": 7.506983616645772
+          },
+          {
+            "age": "10-14",
+            "male_pct": -6.0652807375507,
+            "female_pct": 6.110008777679237
+          },
+          {
+            "age": "15-19",
+            "male_pct": -5.059942984768043,
+            "female_pct": 5.049645638226776
+          },
+          {
+            "age": "20-24",
+            "male_pct": -4.193107100851313,
+            "female_pct": 4.128932244153171
+          },
+          {
+            "age": "25-29",
+            "male_pct": -3.4715409867007927,
+            "female_pct": 3.3718633710139434
+          },
+          {
+            "age": "30-34",
+            "male_pct": -2.847397396036797,
+            "female_pct": 2.7771326506861196
+          },
+          {
+            "age": "35-39",
+            "male_pct": -2.3383519074016474,
+            "female_pct": 2.2663648750635086
+          },
+          {
+            "age": "40-44",
+            "male_pct": -1.932632928919697,
+            "female_pct": 1.8641660125697586
+          },
+          {
+            "age": "45-49",
+            "male_pct": -1.5548388050108075,
+            "female_pct": 1.5218735189849986
+          },
+          {
+            "age": "50-54",
+            "male_pct": -1.2686697053328904,
+            "female_pct": 1.2503629194943224
+          },
+          {
+            "age": "55-59",
+            "male_pct": -1.0506559983510695,
+            "female_pct": 1.0209126730169304
+          },
+          {
+            "age": "60-64",
+            "male_pct": -0.867207225743281,
+            "female_pct": 0.8300265815933278
+          },
+          {
+            "age": "65-69",
+            "male_pct": -0.6987828265837773,
+            "female_pct": 0.6794675930375708
+          },
+          {
+            "age": "70-74",
+            "male_pct": -0.5749306514262628,
+            "female_pct": 0.5516310549843976
+          },
+          {
+            "age": "75-79",
+            "male_pct": -0.47472260342680767,
+            "female_pct": 0.44868060084518707
+          },
+          {
+            "age": "80-84",
+            "male_pct": -0.39655455220538,
+            "female_pct": 0.365088225130351
+          },
+          {
+            "age": "85-89",
+            "male_pct": -0.31942017725396166,
+            "female_pct": 0.30004057930256
+          },
+          {
+            "age": "90-94",
+            "male_pct": -0.2612242708107694,
+            "female_pct": 0.24429350287950682
+          },
+          {
+            "age": "95-99",
+            "male_pct": -0.21257825111856019,
+            "female_pct": 0.2012863776710882
+          },
+          {
+            "age": "100+",
+            "male_pct": -0.17757424875455433,
+            "female_pct": 0.1634978809658604
+          }
+        ]
+      },
+      "sub_national_density_choropleth": [
+        {
+          "admin_1_region_name": "Core Financial Zone",
+          "density_per_km2": 1107
+        },
+        {
+          "admin_1_region_name": "Agricultural Heartland",
+          "density_per_km2": 111
+        },
+        {
+          "admin_1_region_name": "Resource Periphery",
+          "density_per_km2": 10
+        }
+      ],
+      "synoptic_analysis": "High fertility rates within the black majority population."
+    },
+    {
+      "year": 1990,
+      "pyramid_structure": {
+        "cohorts": [
+          {
+            "age": "0-4",
+            "male_pct": -5.2416298519471045,
+            "female_pct": 5.2416298519471045
+          },
+          {
+            "age": "5-9",
+            "male_pct": -4.803302403235967,
+            "female_pct": 4.852159857887107
+          },
+          {
+            "age": "10-14",
+            "male_pct": -4.428253328958226,
+            "female_pct": 4.53726098335658
+          },
+          {
+            "age": "15-19",
+            "male_pct": -4.0610692286600685,
+            "female_pct": 4.179787672296683
+          },
+          {
+            "age": "20-24",
+            "male_pct": -3.742358122387401,
+            "female_pct": 3.9156704545398195
+          },
+          {
+            "age": "25-29",
+            "male_pct": -3.42117135585804,
+            "female_pct": 3.652908261451366
+          },
+          {
+            "age": "30-34",
+            "male_pct": -3.1181599187030242,
+            "female_pct": 3.421396798197942
+          },
+          {
+            "age": "35-39",
+            "male_pct": -2.847167726222912,
+            "female_pct": 3.1663522751149635
+          },
+          {
+            "age": "40-44",
+            "male_pct": -2.6125040239387944,
+            "female_pct": 2.944066392143072
+          },
+          {
+            "age": "45-49",
+            "male_pct": -2.429147395057551,
+            "female_pct": 2.717579724395766
+          },
+          {
+            "age": "50-54",
+            "male_pct": -2.262003575303824,
+            "female_pct": 2.5519969375752267
+          },
+          {
+            "age": "55-59",
+            "male_pct": -2.0853474856384224,
+            "female_pct": 2.3542538189474502
+          },
+          {
+            "age": "60-64",
+            "male_pct": -1.635810945132856,
+            "female_pct": 1.8861324693924146
+          },
+          {
+            "age": "65-69",
+            "male_pct": -1.3290620687838097,
+            "female_pct": 1.514802433841468
+          },
+          {
+            "age": "70-74",
+            "male_pct": -1.0574767142936454,
+            "female_pct": 1.2061151771235283
+          },
+          {
+            "age": "75-79",
+            "male_pct": -0.8573900446458709,
+            "female_pct": 0.9686794418984707
+          },
+          {
+            "age": "80-84",
+            "male_pct": -0.6857985727754939,
+            "female_pct": 0.7791676746145282
+          },
+          {
+            "age": "85-89",
+            "male_pct": -0.5592361687568453,
+            "female_pct": 0.6241455948689152
+          },
+          {
+            "age": "90-94",
+            "male_pct": -0.4456655864257152,
+            "female_pct": 0.5016218547587457
+          },
+          {
+            "age": "95-99",
+            "male_pct": -0.3520827290685093,
+            "female_pct": 0.40439335026171414
+          },
+          {
+            "age": "100+",
+            "male_pct": -0.2792441822262146,
+            "female_pct": 0.32599754736679143
+          }
+        ]
+      },
+      "sub_national_density_choropleth": [
+        {
+          "admin_1_region_name": "Core Financial Zone",
+          "density_per_km2": 1078
+        },
+        {
+          "admin_1_region_name": "Agricultural Heartland",
+          "density_per_km2": 103
+        },
+        {
+          "admin_1_region_name": "Resource Periphery",
+          "density_per_km2": 12
+        }
+      ],
+      "synoptic_analysis": "End of Apartheid era; mixed demographic patterns across racial lines."
+    },
+    {
+      "year": 2010,
+      "pyramid_structure": {
+        "cohorts": [
+          {
+            "age": "0-4",
+            "male_pct": -5.1306552681150634,
+            "female_pct": 5.1306552681150634
+          },
+          {
+            "age": "5-9",
+            "male_pct": -4.831918436885018,
+            "female_pct": 4.748968458014359
+          },
+          {
+            "age": "10-14",
+            "male_pct": -4.502062237027623,
+            "female_pct": 4.375935874064649
+          },
+          {
+            "age": "15-19",
+            "male_pct": -4.165750379264204,
+            "female_pct": 4.042507104589416
+          },
+          {
+            "age": "20-24",
+            "male_pct": -3.87721956766729,
+            "female_pct": 3.7322740166839083
+          },
+          {
+            "age": "25-29",
+            "male_pct": -3.6606356279896874,
+            "female_pct": 3.4367010506576268
+          },
+          {
+            "age": "30-34",
+            "male_pct": -3.3367112710080304,
+            "female_pct": 3.1760715544725673
+          },
+          {
+            "age": "35-39",
+            "male_pct": -3.090451267844616,
+            "female_pct": 2.9692092355369004
+          },
+          {
+            "age": "40-44",
+            "male_pct": -2.8817066298382477,
+            "female_pct": 2.7483955830762348
+          },
+          {
+            "age": "45-49",
+            "male_pct": -2.6909676113205308,
+            "female_pct": 2.561072267926175
+          },
+          {
+            "age": "50-54",
+            "male_pct": -2.5101525828320588,
+            "female_pct": 2.382100065874809
+          },
+          {
+            "age": "55-59",
+            "male_pct": -2.313074082604465,
+            "female_pct": 2.220220343834598
+          },
+          {
+            "age": "60-64",
+            "male_pct": -1.8207711454475004,
+            "female_pct": 1.7601384071376793
+          },
+          {
+            "age": "65-69",
+            "male_pct": -1.457872228858437,
+            "female_pct": 1.3951687173206562
+          },
+          {
+            "age": "70-74",
+            "male_pct": -1.1712135142116544,
+            "female_pct": 1.1186735047266145
+          },
+          {
+            "age": "75-79",
+            "male_pct": -0.9547603813793427,
+            "female_pct": 0.8971216091054262
+          },
+          {
+            "age": "80-84",
+            "male_pct": -0.7603342672713247,
+            "female_pct": 0.7122819331499896
+          },
+          {
+            "age": "85-89",
+            "male_pct": -0.600611086754477,
+            "female_pct": 0.5694333494840578
+          },
+          {
+            "age": "90-94",
+            "male_pct": -0.4741589537100927,
+            "female_pct": 0.45732463491612374
+          },
+          {
+            "age": "95-99",
+            "male_pct": -0.37347848058684624,
+            "female_pct": 0.3693731522214804
+          },
+          {
+            "age": "100+",
+            "male_pct": -0.29875806237316327,
+            "female_pct": 0.2931107861019717
+          }
+        ]
+      },
+      "sub_national_density_choropleth": [
+        {
+          "admin_1_region_name": "Core Financial Zone",
+          "density_per_km2": 855
+        },
+        {
+          "admin_1_region_name": "Agricultural Heartland",
+          "density_per_km2": 113
+        },
+        {
+          "admin_1_region_name": "Resource Periphery",
+          "density_per_km2": 18
+        }
+      ],
+      "synoptic_analysis": "Devastating 'notch' from HIV/AIDS pandemic severely impacting working-age cohorts."
+    },
+    {
+      "year": 2026,
+      "pyramid_structure": {
+        "cohorts": [
+          {
+            "age": "0-4",
+            "male_pct": -5.093878731146946,
+            "female_pct": 5.093878731146946
+          },
+          {
+            "age": "5-9",
+            "male_pct": -4.723381794297574,
+            "female_pct": 4.7638083390123365
+          },
+          {
+            "age": "10-14",
+            "male_pct": -4.41716773682762,
+            "female_pct": 4.4243674387505
+          },
+          {
+            "age": "15-19",
+            "male_pct": -4.142672765228415,
+            "female_pct": 4.081032258892287
+          },
+          {
+            "age": "20-24",
+            "male_pct": -3.822626024646897,
+            "female_pct": 3.806348038315274
+          },
+          {
+            "age": "25-29",
+            "male_pct": -3.5505034467783245,
+            "female_pct": 3.5181369465007872
+          },
+          {
+            "age": "30-34",
+            "male_pct": -3.244115307103557,
+            "female_pct": 3.2758760487518384
+          },
+          {
+            "age": "35-39",
+            "male_pct": -3.020622920827509,
+            "female_pct": 3.06324510567694
+          },
+          {
+            "age": "40-44",
+            "male_pct": -2.792055791053493,
+            "female_pct": 2.8340171814383943
+          },
+          {
+            "age": "45-49",
+            "male_pct": -2.619460870576301,
+            "female_pct": 2.6240274831811434
+          },
+          {
+            "age": "50-54",
+            "male_pct": -2.423373600812409,
+            "female_pct": 2.4545644123838666
+          },
+          {
+            "age": "55-59",
+            "male_pct": -2.2108574313221556,
+            "female_pct": 2.3046039446096
+          },
+          {
+            "age": "60-64",
+            "male_pct": -1.7821755564666504,
+            "female_pct": 1.8577503866027651
+          },
+          {
+            "age": "65-69",
+            "male_pct": -1.4123027383681988,
+            "female_pct": 1.4719699970727826
+          },
+          {
+            "age": "70-74",
+            "male_pct": -1.1416023732560017,
+            "female_pct": 1.1816362611736835
+          },
+          {
+            "age": "75-79",
+            "male_pct": -0.9233072810339591,
+            "female_pct": 0.9359726098967791
+          },
+          {
+            "age": "80-84",
+            "male_pct": -0.7337653625651452,
+            "female_pct": 0.7500495040721862
+          },
+          {
+            "age": "85-89",
+            "male_pct": -0.5965052343088003,
+            "female_pct": 0.5958296710644176
+          },
+          {
+            "age": "90-94",
+            "male_pct": -0.47485969330775357,
+            "female_pct": 0.4721352779906396
+          },
+          {
+            "age": "95-99",
+            "male_pct": -0.38635516480603826,
+            "female_pct": 0.3759389503361959
+          },
+          {
+            "age": "100+",
+            "male_pct": -0.3045691976584862,
+            "female_pct": 0.29865239073840044
+          }
+        ]
+      },
+      "sub_national_density_choropleth": [
+        {
+          "admin_1_region_name": "Core Financial Zone",
+          "density_per_km2": 908
+        },
+        {
+          "admin_1_region_name": "Agricultural Heartland",
+          "density_per_km2": 125
+        },
+        {
+          "admin_1_region_name": "Resource Periphery",
+          "density_per_km2": 24
+        }
+      ],
+      "synoptic_analysis": "Rebuilding population momentum with improved antiretroviral access."
+    },
+    {
+      "year": 2040,
+      "pyramid_structure": {
+        "cohorts": [
+          {
+            "age": "0-4",
+            "male_pct": -3.082527367331519,
+            "female_pct": 3.082527367331519
+          },
+          {
+            "age": "5-9",
+            "male_pct": -3.009198157593458,
+            "female_pct": 3.0505134290364855
+          },
+          {
+            "age": "10-14",
+            "male_pct": -2.9635759535309836,
+            "female_pct": 3.009696765021516
+          },
+          {
+            "age": "15-19",
+            "male_pct": -2.9113917500276005,
+            "female_pct": 2.9420076133123763
+          },
+          {
+            "age": "20-24",
+            "male_pct": -2.866512792566501,
+            "female_pct": 2.8758846199377275
+          },
+          {
+            "age": "25-29",
+            "male_pct": -2.813010829298836,
+            "female_pct": 2.8074103465519493
+          },
+          {
+            "age": "30-34",
+            "male_pct": -2.7332461410400133,
+            "female_pct": 2.7494769691179486
+          },
+          {
+            "age": "35-39",
+            "male_pct": -2.728371179486523,
+            "female_pct": 2.7030029485635985
+          },
+          {
+            "age": "40-44",
+            "male_pct": -2.6518575628645364,
+            "female_pct": 2.6421895141579523
+          },
+          {
+            "age": "45-49",
+            "male_pct": -2.6156366309998154,
+            "female_pct": 2.597582452789936
+          },
+          {
+            "age": "50-54",
+            "male_pct": -2.5558694863467624,
+            "female_pct": 2.5598584890844367
+          },
+          {
+            "age": "55-59",
+            "male_pct": -2.4624925713679238,
+            "female_pct": 2.5210648139040783
+          },
+          {
+            "age": "60-64",
+            "male_pct": -2.391139650898676,
+            "female_pct": 2.4679664302911077
+          },
+          {
+            "age": "65-69",
+            "male_pct": -2.3657367918199865,
+            "female_pct": 2.4146703493417863
+          },
+          {
+            "age": "70-74",
+            "male_pct": -2.278341906841685,
+            "female_pct": 2.3617600271182853
+          },
+          {
+            "age": "75-79",
+            "male_pct": -2.2054716384412147,
+            "female_pct": 2.2974709366835775
+          },
+          {
+            "age": "80-84",
+            "male_pct": -1.8597883517342395,
+            "female_pct": 1.9464343266675554
+          },
+          {
+            "age": "85-89",
+            "male_pct": -1.6002966662417544,
+            "female_pct": 1.6623511348220998
+          },
+          {
+            "age": "90-94",
+            "male_pct": -1.3768421335323144,
+            "female_pct": 1.4118951255805434
+          },
+          {
+            "age": "95-99",
+            "male_pct": -1.1746364725394676,
+            "female_pct": 1.2104562142002
+          },
+          {
+            "age": "100+",
+            "male_pct": -1.0098293819156938,
+            "female_pct": 1.0300067100658443
+          }
+        ]
+      },
+      "sub_national_density_choropleth": [
+        {
+          "admin_1_region_name": "Core Financial Zone",
+          "density_per_km2": 1193
+        },
+        {
+          "admin_1_region_name": "Agricultural Heartland",
+          "density_per_km2": 122
+        },
+        {
+          "admin_1_region_name": "Resource Periphery",
+          "density_per_km2": 28
+        }
+      ],
+      "synoptic_analysis": "Slowing fertility, stabilizing into a mature column shape."
+    }
+  ],
+  "culture_tab": {
+    "inglehart_welzel_coords": {
+      "x": 0.25,
+      "y": -0.35,
+      "cultural_zone": "Sub-Saharan African (Diverse)"
+    },
+    "largest_diasporas": [
+      {
+        "destination": "United Kingdom",
+        "population": "Estimated hundreds of thousands",
+        "cultural_reach_impact": "Strong influence on culinary, linguistic, and social spheres, maintaining cultural ties through community organizations and events."
+      },
+      {
+        "destination": "Australia",
+        "population": "Estimated tens of thousands",
+        "cultural_reach_impact": "Contribution to sporting culture, culinary exchange, and professional networks, often integrating with broader Anglophone communities."
+      },
+      {
+        "destination": "United States",
+        "population": "Estimated tens of thousands",
+        "cultural_reach_impact": "Notable presence in arts, music, and academic circles, fostering professional and cultural exchange, particularly in major urban centers."
+      }
+    ],
+    "cultural_exports_and_landscape": {
+      "soft_power_exports": [
+        {
+          "medium": "Music",
+          "examples": [
+            "Amapiano",
+            "Kwaito",
+            "Jazz (Miriam Makeba, Hugh Masekela)",
+            "Gospel (Soweto Gospel Choir)",
+            "Jerusalema"
+          ],
+          "global_reach_score": 85
+        },
+        {
+          "medium": "Cuisine",
+          "examples": [
+            "Braai",
+            "Biltong",
+            "Bunny Chow",
+            "Potjiekos",
+            "Cape Malay Curry"
+          ],
+          "global_reach_score": 70
+        },
+        {
+          "medium": "Cinema/Television",
+          "examples": [
+            "Tsotsi",
+            "District 9",
+            "The River",
+            "Blood & Water",
+            "Netflix productions"
+          ],
+          "global_reach_score": 65
+        },
+        {
+          "medium": "Literature/Thought",
+          "examples": [
+            "J.M. Coetzee",
+            "Nadine Gordimer",
+            "Trevor Noah's 'Born a Crime'",
+            "Nelson Mandela's 'Long Walk to Freedom'"
+          ],
+          "global_reach_score": 80
+        }
+      ],
+      "spatial_landscape": {
+        "enclaves": [
+          "Bo-Kaap (Cape Malay Quarter in Cape Town)",
+          "Fordsburg (Indian/Pakistani cultural hub in Johannesburg)",
+          "Various Townships (e.g., Soweto, Khayelitsha)",
+          "District Six Museum (memorial space in Cape Town)"
+        ],
+        "architectural_footprint": "A diverse mix including Cape Dutch (Winelands), Victorian (historical city centers), Art Deco (Johannesburg CBD), modern skyscrapers, and distinct informal settlement architecture.",
+        "description": "South Africa's spatial landscape is a complex tapestry reflecting its colonial past, the segregationist policies of apartheid which created distinct racialized spaces like townships and 'coloured' areas, and post-apartheid efforts at reconciliation and integration. This results in a juxtaposition of grand European-style city centers with vibrant, often socio-economically challenged, informal settlements, and distinct cultural neighborhoods reflecting its multicultural heritage."
+      }
+    },
+    "hybridity_and_glocalization": [
+      {
+        "concept": "Rainbow Nation",
+        "description": "A metaphor coined by Archbishop Desmond Tutu to describe post-apartheid South Africa's multicultural diversity and unity, symbolizing the bringing together of various racial and ethnic groups.",
+        "glocalized_examples": [
+          "National sporting teams (Springboks, Proteas) as symbols of unity",
+          "Diverse national holidays celebrating various cultural traditions",
+          "Public commemorations that include multiple languages and rituals"
+        ],
+        "spatial_location": "National monuments, public parks, sporting stadiums across the country"
+      },
+      {
+        "concept": "Mzansi Slang and Lingua Franca",
+        "description": "A dynamic and evolving lexicon blending indigenous languages (especially isiZulu and isiXhosa), Afrikaans, and English, used widely across urban youth culture and beyond.",
+        "glocalized_examples": [
+          "Use of terms like 'yebo', 'lekker', 'braai', 'shisa nyama' in daily conversation across all demographics",
+          "Music lyrics that blend multiple languages",
+          "Media and advertising campaigns using Mzansi slang to resonate with diverse audiences"
+        ],
+        "spatial_location": "Urban centers, townships, universities, media platforms"
+      },
+      {
+        "concept": "Braai Culture",
+        "description": "The quintessential South African social tradition of barbecuing, deeply ingrained across all cultural and racial groups, serving as a focal point for family gatherings and celebrations.",
+        "glocalized_examples": [
+          "'National Braai Day' (Heritage Day) celebrated annually",
+          "Specific braai traditions such as 'potjiekos' (stew cooked in a three-legged pot) or 'boerewors' (farm sausage)",
+          "Various types of wood and charcoal used depending on regional preferences"
+        ],
+        "spatial_location": "Backyards, public parks, designated braai areas, rural landscapes"
+      },
+      {
+        "concept": "Bunny Chow",
+        "description": "A unique South African fast-food dish consisting of an Indian curry served in a hollowed-out loaf of white bread, originating from the Indian community in Durban.",
+        "glocalized_examples": [
+          "Variations in fillings (e.g., mutton, chicken, bean, vegetable) and spice levels to cater to diverse tastes",
+          "Its popularity extending beyond the Indian community to become a national street food",
+          "Served in various establishments from street stalls to restaurants across the country"
+        ],
+        "spatial_location": "Street food vendors, takeaways, restaurants, particularly prevalent in KwaZulu-Natal and other urban centers"
+      }
+    ]
+  }
+}

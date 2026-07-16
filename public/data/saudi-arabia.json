@@ -1,0 +1,500 @@
+{
+  "country_metadata": {
+    "name": "Saudi Arabia",
+    "income_classification": "High Income",
+    "gni_per_capita_atlas": {
+      "value_usd": 29000,
+      "year": 2023
+    },
+    "hdi": {
+      "score": 0.875,
+      "rank": 35,
+      "year": 2022
+    },
+    "gni_per_capita_ppp": {
+      "value_usd": 54100,
+      "year": 2022
+    },
+    "gini_coefficient": {
+      "score": 45,
+      "year": 2013
+    }
+  },
+  "globalisation_tab": {
+    "kof_index": {
+      "economic": {
+        "de_facto": 68.3,
+        "de_jure": 65.1
+      },
+      "social": {
+        "interpersonal": {
+          "de_facto": 72.1,
+          "de_jure": 68.5
+        },
+        "informational": {
+          "de_facto": 78.4,
+          "de_jure": 75.3
+        },
+        "cultural": {
+          "de_facto": 55.4,
+          "de_jure": 58.1
+        }
+      },
+      "political": {
+        "de_facto": 74.8,
+        "de_jure": 77.2
+      }
+    },
+    "at_kearney_framework": {
+      "status": "Significantly Integrated",
+      "gci_score_or_tier": "Alpha/Beta"
+    },
+    "ey_index_historical": {
+      "score": 3.2,
+      "analysis": "Active deployment of the 'Vision 2030' economic diversification framework, boosting incoming investment and aviation networks."
+    }
+  },
+  "economy_tab": {
+    "employment_structure": {
+      "primary": 4.1,
+      "secondary": 24.8,
+      "tertiary": 65.2,
+      "quaternary": 5.9
+    },
+    "trade_ledger": {
+      "main_exports": [
+        {
+          "commodity": "Crude Petroleum",
+          "pct_gdp": 68.5
+        },
+        {
+          "commodity": "Refined Petroleum",
+          "pct_gdp": 12.1
+        },
+        {
+          "commodity": "Acyclic Alcohols",
+          "pct_gdp": 4.2
+        },
+        {
+          "commodity": "Polymers of Ethylene",
+          "pct_gdp": 3.8
+        },
+        {
+          "commodity": "Gold",
+          "pct_gdp": 1.2
+        }
+      ],
+      "main_imports": [
+        {
+          "commodity": "Cars",
+          "pct_gdp": 10.4
+        },
+        {
+          "commodity": "Broadcasting Equipment",
+          "pct_gdp": 6.8
+        },
+        {
+          "commodity": "Refined Petroleum",
+          "pct_gdp": 4.2
+        },
+        {
+          "commodity": "Gold",
+          "pct_gdp": 3.1
+        },
+        {
+          "commodity": "Packaged Medicaments",
+          "pct_gdp": 2.5
+        }
+      ],
+      "top_partners_outgoing": [
+        {
+          "partner": "China",
+          "value_usd_billions": 42.1
+        },
+        {
+          "partner": "India",
+          "value_usd_billions": 30.5
+        },
+        {
+          "partner": "Japan",
+          "value_usd_billions": 28.5
+        },
+        {
+          "partner": "South Korea",
+          "value_usd_billions": 22.1
+        },
+        {
+          "partner": "United States",
+          "value_usd_billions": 15.2
+        }
+      ],
+      "top_partners_incoming": [
+        {
+          "partner": "China",
+          "value_usd_billions": 35.8
+        },
+        {
+          "partner": "United States",
+          "value_usd_billions": 18.2
+        },
+        {
+          "partner": "India",
+          "value_usd_billions": 12.5
+        },
+        {
+          "partner": "United Arab Emirates",
+          "value_usd_billions": 10.1
+        },
+        {
+          "partner": "Germany",
+          "value_usd_billions": 8.5
+        }
+      ]
+    }
+  },
+  "human_geography_tab": {
+    "spatial_hubs": {
+      "epz_sez_zones": [
+        {
+          "name": "King Abdullah Economic City (KAEC) Port Hub",
+          "location_lat_long": "22.42, 39.11",
+          "primary_focus": "Deep-water port and SEZ on the Red Sea route, concentrating transit automotive and pharm industries."
+        },
+        {
+          "name": "NEOM & The Line",
+          "location_lat_long": "28.32, 34.89",
+          "primary_focus": "Enormous experimental linear smart city focused on 100% renewable energy integration."
+        }
+      ],
+      "tourism_enclaves": [
+        {
+          "name": "Makkah (Mecca) Religious Corridor",
+          "spatial_impact": "Conserved religious hub hosting millions of Hajj pilgrims, with highly controlled transportation lanes."
+        }
+      ],
+      "core_periphery_zones": {
+        "core": "Ad-Dammam oil region, Riyadh metropolitan center, and Jeddah seaport strip",
+        "periphery": "Hyper-arid interior deserts (Rub' al Khali) and remote northern border scrublands"
+      }
+    },
+    "political_economy": {
+      "informal_economy_pct_gdp": 12.4,
+      "eiu_governance_type": "Authoritarian",
+      "freedom_house_status": "Not Free",
+      "corruption_perceptions_index": {
+        "score": 52,
+        "rank": 54
+      }
+    }
+  },
+  "prisoners_of_geography_map": {
+    "topographic_friction_points": [
+      {
+        "feature": "Arabian Desert & Sarawat Mountain Slopes",
+        "geopolitical_constraint": "Monumental hyper-arid plains and western mountain chains isolating the central Najd plateau from the Red Sea coast."
+      }
+    ],
+    "hydrological_arteries": [
+      {
+        "feature": "Ancient Aquifers & Desalination Pipe Systems",
+        "strategic_advantage": "No permanent rivers; relying on fossil aquifers and extensive Red Sea mega-desalination supply loops."
+      }
+    ],
+    "choke_points_vulnerabilities": [
+      {
+        "feature": "Bab el-Mandeb & Strait of Hormuz",
+        "impact": "Essential maritime routes enclosing the Red Sea and Gulf coasts, crucial to crude oil tanker streams."
+      }
+    ],
+    "buffer_zones": [
+      {
+        "region": "Al-Nafud and Rub' al Khali Deserts",
+        "significance": "Massive desert oceans isolating the kingdom's core from historical regional land-based incursions."
+      }
+    ],
+    "map_center": {
+      "lat": 23.8859,
+      "lng": 45.0792,
+      "zoom": 5
+    }
+  },
+  "population_dynamics_time_series": [
+    {
+      "year": 1970,
+      "pyramid_structure": {
+        "cohorts": [
+          {
+            "age": "0-4",
+            "male_pct": 7.8,
+            "female_pct": 7.4
+          },
+          {
+            "age": "5-14",
+            "male_pct": 12.5,
+            "female_pct": 12.1
+          },
+          {
+            "age": "15-64",
+            "male_pct": 28.5,
+            "female_pct": 27.2
+          },
+          {
+            "age": "65-79",
+            "male_pct": 2.1,
+            "female_pct": 2.2
+          },
+          {
+            "age": "80+",
+            "male_pct": 0.1,
+            "female_pct": 0.1
+          }
+        ]
+      },
+      "sub_national_density_choropleth": [
+        {
+          "admin_1_region_name": "Riyadh",
+          "density_per_km2": 4.5
+        },
+        {
+          "admin_1_region_name": "Eastern Province",
+          "density_per_km2": 0.8
+        }
+      ],
+      "synoptic_analysis": "Highly expansive post-independence stage 2 structure displaying high natural fertility limits."
+    },
+    {
+      "year": 2023,
+      "pyramid_structure": {
+        "cohorts": [
+          {
+            "age": "0-4",
+            "male_pct": 3.2,
+            "female_pct": 3
+          },
+          {
+            "age": "5-14",
+            "male_pct": 6.8,
+            "female_pct": 6.4
+          },
+          {
+            "age": "15-64",
+            "male_pct": 48.5,
+            "female_pct": 27.5
+          },
+          {
+            "age": "65-79",
+            "male_pct": 2.3,
+            "female_pct": 2.1
+          },
+          {
+            "age": "80+",
+            "male_pct": 0.1,
+            "female_pct": 0.1
+          }
+        ]
+      },
+      "sub_national_density_choropleth": [
+        {
+          "admin_1_region_name": "Riyadh",
+          "density_per_km2": 24
+        },
+        {
+          "admin_1_region_name": "Eastern Province",
+          "density_per_km2": 4.1
+        }
+      ],
+      "synoptic_analysis": "Significant adult skewing (predominantly in males) indicating intensive foreign labor pools in infrastructure sectors."
+    },
+    {
+      "year": 2026,
+      "pyramid_structure": {
+        "cohorts": [
+          {
+            "age": "0-4",
+            "male_pct": 3,
+            "female_pct": 2.8
+          },
+          {
+            "age": "5-14",
+            "male_pct": 6.3,
+            "female_pct": 6
+          },
+          {
+            "age": "15-64",
+            "male_pct": 47.1,
+            "female_pct": 28.1
+          },
+          {
+            "age": "65-79",
+            "male_pct": 2.9,
+            "female_pct": 2.7
+          },
+          {
+            "age": "80+",
+            "male_pct": 0.2,
+            "female_pct": 0.2
+          }
+        ]
+      },
+      "sub_national_density_choropleth": [
+        {
+          "admin_1_region_name": "Riyadh",
+          "density_per_km2": 25.1
+        },
+        {
+          "admin_1_region_name": "Eastern Province",
+          "density_per_km2": 4.3
+        }
+      ],
+      "synoptic_analysis": "Transitioning clean into Stage 3-4 among nationals, accompanied by significant service-sector investments."
+    },
+    {
+      "year": 2040,
+      "pyramid_structure": {
+        "cohorts": [
+          {
+            "age": "0-4",
+            "male_pct": 2.3,
+            "female_pct": 2.1
+          },
+          {
+            "age": "5-14",
+            "male_pct": 4.8,
+            "female_pct": 4.5
+          },
+          {
+            "age": "15-64",
+            "male_pct": 40.8,
+            "female_pct": 29.5
+          },
+          {
+            "age": "65-79",
+            "male_pct": 6.5,
+            "female_pct": 5.8
+          },
+          {
+            "age": "80+",
+            "male_pct": 1.1,
+            "female_pct": 1.2
+          }
+        ]
+      },
+      "sub_national_density_choropleth": [
+        {
+          "admin_1_region_name": "Riyadh",
+          "density_per_km2": 29
+        },
+        {
+          "admin_1_region_name": "Eastern Province",
+          "density_per_km2": 5
+        }
+      ],
+      "synoptic_analysis": "Stabilized national demographic footprint with reduced family sizes and increasing gray integration."
+    }
+  ],
+  "culture_tab": {
+    "inglehart_welzel_coords": {
+      "x": -1.5,
+      "y": -1,
+      "cultural_zone": "Islamic/Middle Eastern"
+    },
+    "largest_diasporas": [
+      {
+        "destination": "United Arab Emirates",
+        "population": "Over 50,000",
+        "cultural_reach_impact": "Strong economic ties, shared GCC cultural heritage, significant professional and educational exchange."
+      },
+      {
+        "destination": "United Kingdom",
+        "population": "Tens of thousands",
+        "cultural_reach_impact": "Prominent educational hubs, professional networks, cultural exchange through expatriate communities and student bodies."
+      },
+      {
+        "destination": "United States",
+        "population": "Tens of thousands",
+        "cultural_reach_impact": "Large student population, professional migration, fostering understanding and limited cultural influence through expatriate communities."
+      }
+    ],
+    "cultural_exports_and_landscape": {
+      "soft_power_exports": [
+        {
+          "medium": "Religious and Pilgrimage Tourism",
+          "examples": [
+            "Hajj to Mecca",
+            "Umrah pilgrimage",
+            "Visits to Medina"
+          ],
+          "global_reach_score": 95
+        },
+        {
+          "medium": "Cuisine",
+          "examples": [
+            "Kabsa",
+            "Matazeez",
+            "Jareesh"
+          ],
+          "global_reach_score": 45
+        },
+        {
+          "medium": "Traditional Arts & Crafts",
+          "examples": [
+            "Arabic calligraphy",
+            "Najdi architectural motifs",
+            "Bedouin weaving"
+          ],
+          "global_reach_score": 30
+        },
+        {
+          "medium": "Emerging Cinema & Music",
+          "examples": [
+            "Red Sea International Film Festival",
+            "Saudi film productions gaining regional recognition",
+            "Local music artists fusing traditional and modern sounds"
+          ],
+          "global_reach_score": 25
+        }
+      ],
+      "spatial_landscape": {
+        "enclaves": [
+          "Islamic cultural centers in Western cities",
+          "Halal food districts in global urban centers",
+          "Saudi student communities near international universities"
+        ],
+        "architectural_footprint": "Modern Islamic architecture, traditional Najdi style, grand mosques, futuristic mega-projects (e.g., NEOM, Kingdom Tower)",
+        "description": "Saudi Arabia's spatial landscape is defined by iconic religious sites like the Grand Mosque in Mecca, a blend of traditional Najdi architecture with contemporary high-rises in major cities, and ambitious futuristic urban projects reflecting Vision 2030."
+      }
+    },
+    "hybridity_and_glocalization": [
+      {
+        "concept": "Modern Saudi Cuisine Fusion",
+        "description": "The adaptation and fusion of traditional Saudi dishes with international culinary techniques and ingredients, creating unique local interpretations of global food trends while maintaining Halal standards.",
+        "glocalized_examples": [
+          "Gourmet Kabsa variations",
+          "Saudi-style burgers and wraps",
+          "Fusion cafes blending traditional coffee culture with modern barista techniques"
+        ],
+        "spatial_location": "High-end restaurants, cafes, and food festivals in Riyadh, Jeddah, and Al-Khobar."
+      },
+      {
+        "concept": "Digital & Social Media Culture",
+        "description": "Saudi youth actively participate in global digital trends, localizing content to reflect Saudi humor, values, and social commentary, thereby creating a distinct online identity that resonates locally and regionally.",
+        "glocalized_examples": [
+          "Popular Saudi YouTubers and TikTok creators producing content in Arabic with local context and humor",
+          "Online campaigns promoting Saudi culture and tourism",
+          "Video games incorporating Saudi elements and narratives"
+        ],
+        "spatial_location": "Online platforms (YouTube, TikTok, Twitter, Snapchat), youth gathering spots, cultural events."
+      },
+      {
+        "concept": "Contemporary Art and Fashion",
+        "description": "The emergence of Saudi artists and designers who draw inspiration from both Islamic heritage and global art movements, creating a unique contemporary Saudi aesthetic that is both traditional and modern.",
+        "glocalized_examples": [
+          "Street art incorporating Arabic calligraphy and modern motifs",
+          "Fashion designers blending traditional abayas with contemporary styles and global trends",
+          "Art exhibitions featuring Saudi and international artists in dialogue"
+        ],
+        "spatial_location": "Art galleries in Jeddah and Riyadh, fashion events, public art installations, cultural districts like Diriyah."
+      }
+    ]
+  }
+}

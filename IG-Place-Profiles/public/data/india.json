@@ -1,0 +1,1003 @@
+{
+  "country_metadata": {
+    "name": "India",
+    "income_classification": "Lower-Middle Income",
+    "gni_per_capita_atlas": {
+      "value_usd": 2380,
+      "year": 2022
+    },
+    "hdi": {
+      "score": 0.644,
+      "rank": 134,
+      "year": 2022
+    },
+    "gni_per_capita_ppp": {
+      "value_usd": 8290,
+      "year": 2022
+    },
+    "gini_coefficient": {
+      "score": 35.7,
+      "year": 2019
+    }
+  },
+  "globalisation_tab": {
+    "kof_index": {
+      "economic": {
+        "de_facto": 45.2,
+        "de_jure": 54.8
+      },
+      "social": {
+        "interpersonal": {
+          "de_facto": 30.1,
+          "de_jure": 45.2
+        },
+        "informational": {
+          "de_facto": 55.4,
+          "de_jure": 60.1
+        },
+        "cultural": {
+          "de_facto": 40.5,
+          "de_jure": 42.1
+        }
+      },
+      "political": {
+        "de_facto": 88.5,
+        "de_jure": 90.2
+      }
+    },
+    "at_kearney_framework": {
+      "status": "Alpha",
+      "gci_score_or_tier": "Alpha (Mumbai/New Delhi)"
+    },
+    "ey_index_historical": {
+      "score": "42.5",
+      "analysis": "Rapid integration driven by IT/BPO services, though trade protectionism remains in physical goods."
+    }
+  },
+  "economy_tab": {
+    "employment_structure": {
+      "primary": 42.6,
+      "secondary": 25.1,
+      "tertiary": 24.3,
+      "quaternary": 8
+    },
+    "trade_ledger": {
+      "main_exports": [
+        {
+          "commodity": "Refined Petroleum",
+          "pct_gdp": 5.2
+        },
+        {
+          "commodity": "Diamonds",
+          "pct_gdp": 2.1
+        },
+        {
+          "commodity": "Packaged Medicaments",
+          "pct_gdp": 1.8
+        },
+        {
+          "commodity": "Jewelry",
+          "pct_gdp": 1.1
+        },
+        {
+          "commodity": "Rice",
+          "pct_gdp": 0.9
+        }
+      ],
+      "main_imports": [
+        {
+          "commodity": "Crude Petroleum",
+          "pct_gdp": 6.8
+        },
+        {
+          "commodity": "Gold",
+          "pct_gdp": 3.2
+        },
+        {
+          "commodity": "Coal",
+          "pct_gdp": 2.1
+        },
+        {
+          "commodity": "Diamonds (raw)",
+          "pct_gdp": 1.8
+        },
+        {
+          "commodity": "Petroleum Gas",
+          "pct_gdp": 1.5
+        }
+      ],
+      "top_partners_outgoing": [
+        {
+          "partner": "United States",
+          "value_usd_billions": 80.2
+        },
+        {
+          "partner": "UAE",
+          "value_usd_billions": 31.4
+        },
+        {
+          "partner": "Netherlands",
+          "value_usd_billions": 18.5
+        },
+        {
+          "partner": "China",
+          "value_usd_billions": 15.1
+        },
+        {
+          "partner": "Bangladesh",
+          "value_usd_billions": 11.2
+        }
+      ],
+      "top_partners_incoming": [
+        {
+          "partner": "China",
+          "value_usd_billions": 102.5
+        },
+        {
+          "partner": "UAE",
+          "value_usd_billions": 53.2
+        },
+        {
+          "partner": "United States",
+          "value_usd_billions": 50.8
+        },
+        {
+          "partner": "Russia",
+          "value_usd_billions": 46.2
+        },
+        {
+          "partner": "Saudi Arabia",
+          "value_usd_billions": 42.1
+        }
+      ]
+    }
+  },
+  "human_geography_tab": {
+    "spatial_hubs": {
+      "epz_sez_zones": [
+        {
+          "name": "SEEPZ Mumbai",
+          "location_lat_long": "19.12, 72.87",
+          "primary_focus": "Electronics & Gems"
+        },
+        {
+          "name": "Noida SEZ",
+          "location_lat_long": "28.53, 77.39",
+          "primary_focus": "IT & Software Services"
+        },
+        {
+          "name": "Sri City (Andhra Pradesh)",
+          "location_lat_long": "13.55, 80.02",
+          "primary_focus": "Multifunctional heavy/light manufacturing & electronics"
+        }
+      ],
+      "tourism_enclaves": [
+        {
+          "name": "Golden Triangle",
+          "spatial_impact": "Concentrated heritage mass tourism ring"
+        },
+        {
+          "name": "Goa Coastal Strip",
+          "spatial_impact": "International charter & domestic beach enclave"
+        }
+      ],
+      "core_periphery_zones": {
+        "core": "Mumbai-Pune Corridor, Bengaluru, Chennai-Coimbatore Zone",
+        "periphery": "Rural Bihar, Uttar Pradesh hill tracts & the Northeast borderlands"
+      }
+    },
+    "political_economy": {
+      "informal_economy_pct_gdp": 43.1,
+      "eiu_governance_type": "Flawed Democracy",
+      "freedom_house_status": "Partly Free",
+      "corruption_perceptions_index": {
+        "score": 40,
+        "rank": 85
+      }
+    }
+  },
+  "prisoners_of_geography_map": {
+    "topographic_friction_points": [
+      {
+        "feature": "Himalayas",
+        "geopolitical_constraint": "Impenetrable physical barrier directing trade outwards by sea rather than north via land."
+      },
+      {
+        "feature": "Vindhya Range",
+        "geopolitical_constraint": "Historical internal friction dividing North and South India culturally and economically."
+      }
+    ],
+    "hydrological_arteries": [
+      {
+        "feature": "Ganges River",
+        "geopolitical_constraint": "Agricultural core supporting >400M people; geopolitical friction with Bangladesh downstream."
+      }
+    ],
+    "choke_points_vulnerabilities": [
+      {
+        "feature": "Siliguri Corridor (Chicken's Neck)",
+        "impact": "Narrow 22km strip connecting NE states; highly vulnerable to Chinese military severing."
+      }
+    ],
+    "buffer_zones": [
+      {
+        "region": "Nepal & Bhutan",
+        "significance": "Himalayan buffer states separating India's populous plains from Chinese Tibet."
+      }
+    ],
+    "map_center": {
+      "lat": 20.5937,
+      "lng": 78.9629,
+      "zoom": 5
+    }
+  },
+  "population_dynamics_time_series": [
+    {
+      "year": 1970,
+      "pyramid_structure": {
+        "cohorts": [
+          {
+            "age": "0-4",
+            "male_pct": -9.15030986549268,
+            "female_pct": 9.15030986549268
+          },
+          {
+            "age": "5-9",
+            "male_pct": -7.538311830348854,
+            "female_pct": 7.446134452290728
+          },
+          {
+            "age": "10-14",
+            "male_pct": -6.230809979689232,
+            "female_pct": 6.067215893804295
+          },
+          {
+            "age": "15-19",
+            "male_pct": -5.19377068333622,
+            "female_pct": 4.998091683362092
+          },
+          {
+            "age": "20-24",
+            "male_pct": -4.235514370052065,
+            "female_pct": 4.082775843376131
+          },
+          {
+            "age": "25-29",
+            "male_pct": -3.407158601122417,
+            "female_pct": 3.337833459099449
+          },
+          {
+            "age": "30-34",
+            "male_pct": -2.8106395449969845,
+            "female_pct": 2.728031476120107
+          },
+          {
+            "age": "35-39",
+            "male_pct": -2.3039560713744196,
+            "female_pct": 2.2164931035697175
+          },
+          {
+            "age": "40-44",
+            "male_pct": -1.8565261254763439,
+            "female_pct": 1.8137985145448001
+          },
+          {
+            "age": "45-49",
+            "male_pct": -1.5297190618561536,
+            "female_pct": 1.491962769430435
+          },
+          {
+            "age": "50-54",
+            "male_pct": -1.275491450198999,
+            "female_pct": 1.2344534258552557
+          },
+          {
+            "age": "55-59",
+            "male_pct": -1.0594118735142979,
+            "female_pct": 1.0055977424353995
+          },
+          {
+            "age": "60-64",
+            "male_pct": -0.862658405982319,
+            "female_pct": 0.8312293024818883
+          },
+          {
+            "age": "65-69",
+            "male_pct": -0.7101249255775228,
+            "female_pct": 0.6765505369942747
+          },
+          {
+            "age": "70-74",
+            "male_pct": -0.5802433835685108,
+            "female_pct": 0.5497660124396011
+          },
+          {
+            "age": "75-79",
+            "male_pct": -0.4810312086852561,
+            "female_pct": 0.45066244685109125
+          },
+          {
+            "age": "80-84",
+            "male_pct": -0.3892601014318553,
+            "female_pct": 0.3712461440108344
+          },
+          {
+            "age": "85-89",
+            "male_pct": -0.324295080960523,
+            "female_pct": 0.30613238453447345
+          },
+          {
+            "age": "90-94",
+            "male_pct": -0.2702442834927576,
+            "female_pct": 0.25009788772067076
+          },
+          {
+            "age": "95-99",
+            "male_pct": -0.22456920057347185,
+            "female_pct": 0.20596774503595472
+          },
+          {
+            "age": "100+",
+            "male_pct": -0.18400229422945882,
+            "female_pct": 0.16760096858976198
+          }
+        ]
+      },
+      "sub_national_density_choropleth": [
+        {
+          "admin_1_region_name": "Core Financial Zone",
+          "density_per_km2": 1158
+        },
+        {
+          "admin_1_region_name": "Agricultural Heartland",
+          "density_per_km2": 105
+        },
+        {
+          "admin_1_region_name": "Resource Periphery",
+          "density_per_km2": 14
+        }
+      ],
+      "synoptic_analysis": "High fertility, broad base."
+    },
+    {
+      "year": 1990,
+      "pyramid_structure": {
+        "cohorts": [
+          {
+            "age": "0-4",
+            "male_pct": -5.052627135230917,
+            "female_pct": 5.052627135230917
+          },
+          {
+            "age": "5-9",
+            "male_pct": -4.790921303208988,
+            "female_pct": 4.725692244174138
+          },
+          {
+            "age": "10-14",
+            "male_pct": -4.391689941688984,
+            "female_pct": 4.4057377677157525
+          },
+          {
+            "age": "15-19",
+            "male_pct": -4.1629833962420415,
+            "female_pct": 4.071667619729366
+          },
+          {
+            "age": "20-24",
+            "male_pct": -3.8246955314671554,
+            "female_pct": 3.765829473638649
+          },
+          {
+            "age": "25-29",
+            "male_pct": -3.58723840262571,
+            "female_pct": 3.4889076691868826
+          },
+          {
+            "age": "30-34",
+            "male_pct": -3.397415560418007,
+            "female_pct": 3.2151100184474593
+          },
+          {
+            "age": "35-39",
+            "male_pct": -3.198741142472394,
+            "female_pct": 3.019495562487427
+          },
+          {
+            "age": "40-44",
+            "male_pct": -2.925339126403926,
+            "female_pct": 2.8131909971101208
+          },
+          {
+            "age": "45-49",
+            "male_pct": -2.6732063012370375,
+            "female_pct": 2.6218678875282855
+          },
+          {
+            "age": "50-54",
+            "male_pct": -2.4675730105998044,
+            "female_pct": 2.424586878714581
+          },
+          {
+            "age": "55-59",
+            "male_pct": -2.2527294536965536,
+            "female_pct": 2.244072060122428
+          },
+          {
+            "age": "60-64",
+            "male_pct": -1.7739905806921359,
+            "female_pct": 1.8015006683155756
+          },
+          {
+            "age": "65-69",
+            "male_pct": -1.4161798920918964,
+            "female_pct": 1.4539995713423348
+          },
+          {
+            "age": "70-74",
+            "male_pct": -1.1314041721898738,
+            "female_pct": 1.1541388015955159
+          },
+          {
+            "age": "75-79",
+            "male_pct": -0.8914962604583421,
+            "female_pct": 0.9310055301657201
+          },
+          {
+            "age": "80-84",
+            "male_pct": -0.7097685157657977,
+            "female_pct": 0.7429356453788006
+          },
+          {
+            "age": "85-89",
+            "male_pct": -0.5620059520017519,
+            "female_pct": 0.5946083837875864
+          },
+          {
+            "age": "90-94",
+            "male_pct": -0.44963122618605494,
+            "female_pct": 0.4778473110668544
+          },
+          {
+            "age": "95-99",
+            "male_pct": -0.3598100986674305,
+            "female_pct": 0.3790587003814607
+          },
+          {
+            "age": "100+",
+            "male_pct": -0.29209082681868437,
+            "female_pct": 0.3045822437166887
+          }
+        ]
+      },
+      "sub_national_density_choropleth": [
+        {
+          "admin_1_region_name": "Core Financial Zone",
+          "density_per_km2": 854
+        },
+        {
+          "admin_1_region_name": "Agricultural Heartland",
+          "density_per_km2": 113
+        },
+        {
+          "admin_1_region_name": "Resource Periphery",
+          "density_per_km2": 21
+        }
+      ],
+      "synoptic_analysis": "Slowing birth rate, death rate plummets. Significant youth bulge forming."
+    },
+    {
+      "year": 2010,
+      "pyramid_structure": {
+        "cohorts": [
+          {
+            "age": "0-4",
+            "male_pct": -5.048275055613393,
+            "female_pct": 5.048275055613393
+          },
+          {
+            "age": "5-9",
+            "male_pct": -4.646847370476717,
+            "female_pct": 4.696376636650669
+          },
+          {
+            "age": "10-14",
+            "male_pct": -4.400677481265089,
+            "female_pct": 4.378353713467209
+          },
+          {
+            "age": "15-19",
+            "male_pct": -4.162082098603638,
+            "female_pct": 4.08760625389621
+          },
+          {
+            "age": "20-24",
+            "male_pct": -3.7942703267465823,
+            "female_pct": 3.766732809994778
+          },
+          {
+            "age": "25-29",
+            "male_pct": -3.5370075428047945,
+            "female_pct": 3.5268973617895116
+          },
+          {
+            "age": "30-34",
+            "male_pct": -3.301653164061677,
+            "female_pct": 3.302871358007299
+          },
+          {
+            "age": "35-39",
+            "male_pct": -3.0707671057439083,
+            "female_pct": 3.0862064609451965
+          },
+          {
+            "age": "40-44",
+            "male_pct": -2.811734476414334,
+            "female_pct": 2.8786146367096133
+          },
+          {
+            "age": "45-49",
+            "male_pct": -2.6464896024018367,
+            "female_pct": 2.67754639690057
+          },
+          {
+            "age": "50-54",
+            "male_pct": -2.4131059442231044,
+            "female_pct": 2.4924765074718844
+          },
+          {
+            "age": "55-59",
+            "male_pct": -2.2072119855641916,
+            "female_pct": 2.322129263525696
+          },
+          {
+            "age": "60-64",
+            "male_pct": -1.7589924792304212,
+            "female_pct": 1.8569574137945384
+          },
+          {
+            "age": "65-69",
+            "male_pct": -1.4171310971082278,
+            "female_pct": 1.4708424854407964
+          },
+          {
+            "age": "70-74",
+            "male_pct": -1.1480971098778965,
+            "female_pct": 1.1778343571932128
+          },
+          {
+            "age": "75-79",
+            "male_pct": -0.9259518722330933,
+            "female_pct": 0.9337528586393905
+          },
+          {
+            "age": "80-84",
+            "male_pct": -0.7443315580676423,
+            "female_pct": 0.7427254453508346
+          },
+          {
+            "age": "85-89",
+            "male_pct": -0.5930569325045277,
+            "female_pct": 0.5953237019298607
+          },
+          {
+            "age": "90-94",
+            "male_pct": -0.476295671244257,
+            "female_pct": 0.4767880175544622
+          },
+          {
+            "age": "95-99",
+            "male_pct": -0.38860460222474213,
+            "female_pct": 0.37917757890258685
+          },
+          {
+            "age": "100+",
+            "male_pct": -0.3080191297142222,
+            "female_pct": 0.30190908009801376
+          }
+        ]
+      },
+      "sub_national_density_choropleth": [
+        {
+          "admin_1_region_name": "Core Financial Zone",
+          "density_per_km2": 1187
+        },
+        {
+          "admin_1_region_name": "Agricultural Heartland",
+          "density_per_km2": 113
+        },
+        {
+          "admin_1_region_name": "Resource Periphery",
+          "density_per_km2": 29
+        }
+      ],
+      "synoptic_analysis": "Peak working-age cohort expansion, demographic dividend in full effect."
+    },
+    {
+      "year": 2026,
+      "pyramid_structure": {
+        "cohorts": [
+          {
+            "age": "0-4",
+            "male_pct": -3.095489535892827,
+            "female_pct": 3.095489535892827
+          },
+          {
+            "age": "5-9",
+            "male_pct": -2.9733100478931287,
+            "female_pct": 3.0363103078355373
+          },
+          {
+            "age": "10-14",
+            "male_pct": -2.8915970009613137,
+            "female_pct": 2.99286787118161
+          },
+          {
+            "age": "15-19",
+            "male_pct": -2.805969661588928,
+            "female_pct": 2.953266709394861
+          },
+          {
+            "age": "20-24",
+            "male_pct": -2.7699365829460083,
+            "female_pct": 2.904612802215711
+          },
+          {
+            "age": "25-29",
+            "male_pct": -2.756985342568919,
+            "female_pct": 2.8398906710660032
+          },
+          {
+            "age": "30-34",
+            "male_pct": -2.7299155358728786,
+            "female_pct": 2.804077961954308
+          },
+          {
+            "age": "35-39",
+            "male_pct": -2.64969829978413,
+            "female_pct": 2.750632087862252
+          },
+          {
+            "age": "40-44",
+            "male_pct": -2.6010338079544493,
+            "female_pct": 2.7107905370613476
+          },
+          {
+            "age": "45-49",
+            "male_pct": -2.5234448885496654,
+            "female_pct": 2.6404211977100593
+          },
+          {
+            "age": "50-54",
+            "male_pct": -2.514492207035441,
+            "female_pct": 2.5639705787496117
+          },
+          {
+            "age": "55-59",
+            "male_pct": -2.4505220575618036,
+            "female_pct": 2.502620343820408
+          },
+          {
+            "age": "60-64",
+            "male_pct": -2.4280541814374508,
+            "female_pct": 2.4582016519270637
+          },
+          {
+            "age": "65-69",
+            "male_pct": -2.4203441236347962,
+            "female_pct": 2.390679104285433
+          },
+          {
+            "age": "70-74",
+            "male_pct": -2.366293033629933,
+            "female_pct": 2.3337555143765156
+          },
+          {
+            "age": "75-79",
+            "male_pct": -2.28735790618037,
+            "female_pct": 2.3092759336274487
+          },
+          {
+            "age": "80-84",
+            "male_pct": -1.9128911095183756,
+            "female_pct": 1.9821042180947521
+          },
+          {
+            "age": "85-89",
+            "male_pct": -1.64015051353745,
+            "female_pct": 1.6680381936333242
+          },
+          {
+            "age": "90-94",
+            "male_pct": -1.4103163479259448,
+            "female_pct": 1.4277576341915355
+          },
+          {
+            "age": "95-99",
+            "male_pct": -1.1799327999694798,
+            "female_pct": 1.2075993141540506
+          },
+          {
+            "age": "100+",
+            "male_pct": -0.9860318980386297,
+            "female_pct": 1.0338709484834343
+          }
+        ]
+      },
+      "sub_national_density_choropleth": [
+        {
+          "admin_1_region_name": "Core Financial Zone",
+          "density_per_km2": 1188
+        },
+        {
+          "admin_1_region_name": "Agricultural Heartland",
+          "density_per_km2": 137
+        },
+        {
+          "admin_1_region_name": "Resource Periphery",
+          "density_per_km2": 25
+        }
+      ],
+      "synoptic_analysis": "Fertility rate drops below replacement rate in most states. Base narrowing."
+    },
+    {
+      "year": 2040,
+      "pyramid_structure": {
+        "cohorts": [
+          {
+            "age": "0-4",
+            "male_pct": -3.122113096373676,
+            "female_pct": 3.122113096373676
+          },
+          {
+            "age": "5-9",
+            "male_pct": -3.045387356241345,
+            "female_pct": 3.090180634964584
+          },
+          {
+            "age": "10-14",
+            "male_pct": -3.002237629854507,
+            "female_pct": 3.0160540534133244
+          },
+          {
+            "age": "15-19",
+            "male_pct": -2.9452185485553497,
+            "female_pct": 2.955668475923791
+          },
+          {
+            "age": "20-24",
+            "male_pct": -2.883666179869926,
+            "female_pct": 2.925024535572733
+          },
+          {
+            "age": "25-29",
+            "male_pct": -2.8261013470007654,
+            "female_pct": 2.8559796448456622
+          },
+          {
+            "age": "30-34",
+            "male_pct": -2.74059176995128,
+            "female_pct": 2.800637585616868
+          },
+          {
+            "age": "35-39",
+            "male_pct": -2.6599793769546407,
+            "female_pct": 2.751946053304252
+          },
+          {
+            "age": "40-44",
+            "male_pct": -2.575549597045379,
+            "female_pct": 2.7008040221250393
+          },
+          {
+            "age": "45-49",
+            "male_pct": -2.5683257646119118,
+            "female_pct": 2.632260201147929
+          },
+          {
+            "age": "50-54",
+            "male_pct": -2.477150138838724,
+            "female_pct": 2.600731089192466
+          },
+          {
+            "age": "55-59",
+            "male_pct": -2.381713973413672,
+            "female_pct": 2.5665138672605052
+          },
+          {
+            "age": "60-64",
+            "male_pct": -2.3242506110003633,
+            "female_pct": 2.5270890747468364
+          },
+          {
+            "age": "65-69",
+            "male_pct": -2.2512067015540684,
+            "female_pct": 2.463060882656988
+          },
+          {
+            "age": "70-74",
+            "male_pct": -2.1799197913020953,
+            "female_pct": 2.4311962066064527
+          },
+          {
+            "age": "75-79",
+            "male_pct": -2.1246966123716,
+            "female_pct": 2.3893850713632983
+          },
+          {
+            "age": "80-84",
+            "male_pct": -1.7887422080037032,
+            "female_pct": 2.0142396967256833
+          },
+          {
+            "age": "85-89",
+            "male_pct": -1.5251685989867736,
+            "female_pct": 1.726460832294274
+          },
+          {
+            "age": "90-94",
+            "male_pct": -1.2723236045779138,
+            "female_pct": 1.466368876287735
+          },
+          {
+            "age": "95-99",
+            "male_pct": -1.0683496686885758,
+            "female_pct": 1.2453694124442438
+          },
+          {
+            "age": "100+",
+            "male_pct": -0.9051333691327604,
+            "female_pct": 1.051090742804661
+          }
+        ]
+      },
+      "sub_national_density_choropleth": [
+        {
+          "admin_1_region_name": "Core Financial Zone",
+          "density_per_km2": 803
+        },
+        {
+          "admin_1_region_name": "Agricultural Heartland",
+          "density_per_km2": 122
+        },
+        {
+          "admin_1_region_name": "Resource Periphery",
+          "density_per_km2": 23
+        }
+      ],
+      "synoptic_analysis": "Rapidly aging society. The former youth bulge moves into retirement."
+    }
+  ],
+  "culture_tab": {
+    "inglehart_welzel_coords": {
+      "x": -0.65,
+      "y": -0.6,
+      "cultural_zone": "South Asian"
+    },
+    "largest_diasporas": [
+      {
+        "destination": "United States",
+        "population": "~4.9 million",
+        "cultural_reach_impact": "Significant influence in tech, medicine, and academia; growing political and culinary impact; spread of festivals like Diwali."
+      },
+      {
+        "destination": "United Arab Emirates",
+        "population": "~3.5 million",
+        "cultural_reach_impact": "Economic contribution to both nations; strong ties through expatriate workforce; maintaining cultural identity through community events."
+      },
+      {
+        "destination": "Malaysia",
+        "population": "~2 million",
+        "cultural_reach_impact": "Historical migration led to a distinct Indian-Malaysian culture; visible in cuisine, language, and religious practices."
+      },
+      {
+        "destination": "United Kingdom",
+        "population": "~1.8 million",
+        "cultural_reach_impact": "Deep historical and colonial ties; strong presence in business, politics, and culture; major contributor to UK's multicultural fabric."
+      }
+    ],
+    "cultural_exports_and_landscape": {
+      "soft_power_exports": [
+        {
+          "medium": "Cinema",
+          "examples": [
+            "Bollywood (e.g., DDLJ, Lagaan)",
+            "Regional Cinema (e.g., RRR, Baahubali)"
+          ],
+          "global_reach_score": 85
+        },
+        {
+          "medium": "Cuisine",
+          "examples": [
+            "Curries (e.g., Butter Chicken, Tikka Masala)",
+            "Street Food (e.g., Samosa, Chaat)",
+            "Biryani"
+          ],
+          "global_reach_score": 95
+        },
+        {
+          "medium": "Yoga and Spirituality",
+          "examples": [
+            "Yoga (various forms)",
+            "Ayurveda",
+            "Meditation techniques"
+          ],
+          "global_reach_score": 90
+        },
+        {
+          "medium": "Music",
+          "examples": [
+            "Bollywood Playback Music",
+            "Indian Classical (e.g., Carnatic, Hindustani)",
+            "Folk music"
+          ],
+          "global_reach_score": 70
+        },
+        {
+          "medium": "Textiles and Fashion",
+          "examples": [
+            "Sarees",
+            "Kurtas",
+            "Pashmina shawls",
+            "Block prints"
+          ],
+          "global_reach_score": 65
+        }
+      ],
+      "spatial_landscape": {
+        "enclaves": [
+          "Little India (Singapore, London, New York/Edison, Toronto)",
+          "Jackson Heights (NYC)",
+          "Articulated enclaves in Gulf cities"
+        ],
+        "architectural_footprint": "Mughal architecture (e.g., Taj Mahal), Dravidian temple architecture (e.g., Meenakshi Temple), Indo-Saracenic (colonial), and modern Indian vernacular styles.",
+        "description": "The spatial landscape reflects a deep history, with ancient temples and grand Mughal palaces standing alongside colonial-era structures and burgeoning modern metropolises. The vibrant cultural imprint is seen in bustling bazaars, intricate religious sites, and diaspora communities that replicate these patterns globally."
+      }
+    },
+    "hybridity_and_glocalization": [
+      {
+        "concept": "Bollywood Fusion Music",
+        "description": "The blending of traditional Indian musical elements (classical, folk, instruments like sitar/tabla) with Western pop, hip-hop, electronic, or rock genres.",
+        "glocalized_examples": [
+          "A.R. Rahman's international collaborations",
+          "Panjabi MC's 'Mundian To Bach Ke'",
+          "Various independent Indian fusion bands"
+        ],
+        "spatial_location": "Global music industry, Indian diaspora concerts, film scores, streaming platforms."
+      },
+      {
+        "concept": "Indian-Western Cuisine",
+        "description": "Adaptation of Indian dishes and flavors for international palates, or the incorporation of Indian ingredients/techniques into Western culinary forms.",
+        "glocalized_examples": [
+          "Chicken Tikka Masala (created in UK)",
+          "Naan pizza",
+          "Indian-spiced burgers",
+          "Fusion curries in gourmet restaurants"
+        ],
+        "spatial_location": "Restaurants worldwide (especially in UK, US, Canada), home kitchens, global food markets."
+      },
+      {
+        "concept": "Yoga and Wellness Adaptations",
+        "description": "The reinterpretation and marketing of traditional Indian yoga and wellness practices to suit modern, global fitness and health trends, often emphasizing physical postures over spiritual aspects.",
+        "glocalized_examples": [
+          "Hot Yoga",
+          "Power Yoga",
+          "Aerial Yoga",
+          "Ayurvedic spas and wellness retreats"
+        ],
+        "spatial_location": "Yoga studios and fitness centers globally, wellness resorts, online platforms."
+      },
+      {
+        "concept": "Indo-Western Fashion",
+        "description": "A blend of traditional Indian attire and Western clothing styles, reflecting a contemporary global aesthetic.",
+        "glocalized_examples": [
+          "Kurtis paired with jeans",
+          "Sarees adapted into gowns",
+          "Sherwanis with Western cuts",
+          "Fusion jewelry"
+        ],
+        "spatial_location": "Indian fashion industry, global fashion runways, diaspora communities, everyday wear in urban India."
+      }
+    ]
+  }
+}

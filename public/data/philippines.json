@@ -1,0 +1,988 @@
+{
+  "country_metadata": {
+    "name": "Philippines",
+    "income_classification": "Lower-Middle Income",
+    "gni_per_capita_atlas": {
+      "value_usd": 3950,
+      "year": 2022
+    },
+    "hdi": {
+      "score": 0.71,
+      "rank": 113,
+      "year": 2022
+    },
+    "gni_per_capita_ppp": {
+      "value_usd": 10560,
+      "year": 2022
+    },
+    "gini_coefficient": {
+      "score": 42.3,
+      "year": 2018
+    }
+  },
+  "globalisation_tab": {
+    "kof_index": {
+      "economic": {
+        "de_facto": 58.2,
+        "de_jure": 55.4
+      },
+      "social": {
+        "interpersonal": {
+          "de_facto": 68.4,
+          "de_jure": 60.1
+        },
+        "informational": {
+          "de_facto": 65.2,
+          "de_jure": 63.8
+        },
+        "cultural": {
+          "de_facto": 60.1,
+          "de_jure": 55.4
+        }
+      },
+      "political": {
+        "de_facto": 72.1,
+        "de_jure": 75.2
+      }
+    },
+    "at_kearney_framework": {
+      "status": "Gamma",
+      "gci_score_or_tier": "Gamma+ (Manila)"
+    },
+    "ey_index_historical": {
+      "score": "52.4",
+      "analysis": "High interpersonal integration due to massive global diaspora (OFWs) and leading BPO sector."
+    }
+  },
+  "economy_tab": {
+    "employment_structure": {
+      "primary": 24.5,
+      "secondary": 18.2,
+      "tertiary": 48.1,
+      "quaternary": 9.2
+    },
+    "trade_ledger": {
+      "main_exports": [
+        {
+          "commodity": "Integrated Circuits",
+          "pct_gdp": 7.1
+        },
+        {
+          "commodity": "Office Machine Parts",
+          "pct_gdp": 2.5
+        },
+        {
+          "commodity": "Insulated Wire",
+          "pct_gdp": 1.2
+        },
+        {
+          "commodity": "Computers",
+          "pct_gdp": 0.9
+        },
+        {
+          "commodity": "Bananas",
+          "pct_gdp": 0.6
+        }
+      ],
+      "main_imports": [
+        {
+          "commodity": "Integrated Circuits",
+          "pct_gdp": 4.5
+        },
+        {
+          "commodity": "Refined Petroleum",
+          "pct_gdp": 2.8
+        },
+        {
+          "commodity": "Crude Petroleum",
+          "pct_gdp": 1.4
+        },
+        {
+          "commodity": "Cars",
+          "pct_gdp": 1.1
+        },
+        {
+          "commodity": "Coal",
+          "pct_gdp": 0.8
+        }
+      ],
+      "top_partners_outgoing": [
+        {
+          "partner": "United States",
+          "value_usd_billions": 14.2
+        },
+        {
+          "partner": "China",
+          "value_usd_billions": 11.5
+        },
+        {
+          "partner": "Japan",
+          "value_usd_billions": 11.1
+        },
+        {
+          "partner": "Hong Kong",
+          "value_usd_billions": 9.8
+        },
+        {
+          "partner": "Singapore",
+          "value_usd_billions": 4.5
+        }
+      ],
+      "top_partners_incoming": [
+        {
+          "partner": "China",
+          "value_usd_billions": 30.5
+        },
+        {
+          "partner": "Japan",
+          "value_usd_billions": 10.2
+        },
+        {
+          "partner": "South Korea",
+          "value_usd_billions": 8.5
+        },
+        {
+          "partner": "United States",
+          "value_usd_billions": 8.1
+        },
+        {
+          "partner": "Indonesia",
+          "value_usd_billions": 7.4
+        }
+      ]
+    }
+  },
+  "human_geography_tab": {
+    "spatial_hubs": {
+      "epz_sez_zones": [
+        {
+          "name": "Batanes PEZA",
+          "location_lat_long": "14.53, 121.00",
+          "primary_focus": "IT/BPO Services"
+        },
+        {
+          "name": "Mactan EPZ (Cebu)",
+          "location_lat_long": "10.31, 123.97",
+          "primary_focus": "Electronic Assembly & Aerospace parts"
+        },
+        {
+          "name": "Clark Freeport Zone",
+          "location_lat_long": "15.18, 120.52",
+          "primary_focus": "Former US base turned industrial/aviation center"
+        }
+      ],
+      "tourism_enclaves": [
+        {
+          "name": "Boracay Island",
+          "spatial_impact": "Hyper-concentrated beach resort enclave (faced environmental closure)"
+        },
+        {
+          "name": "Palawan",
+          "spatial_impact": "Ecotourism string"
+        }
+      ],
+      "core_periphery_zones": {
+        "core": "Metro Manila & Calabarzon region",
+        "periphery": "Sulu Archipelago and remote parts of Mindanao"
+      }
+    },
+    "political_economy": {
+      "informal_economy_pct_gdp": 38.4,
+      "eiu_governance_type": "Flawed Democracy",
+      "freedom_house_status": "Partly Free",
+      "corruption_perceptions_index": {
+        "score": 33,
+        "rank": 116
+      }
+    }
+  },
+  "prisoners_of_geography_map": {
+    "topographic_friction_points": [
+      {
+        "feature": "Archipelagic Fragmentation",
+        "geopolitical_constraint": "7,000+ islands creates massive infrastructural friction and hinders national integration."
+      }
+    ],
+    "hydrological_arteries": [
+      {
+        "feature": "Pasig River",
+        "geopolitical_constraint": "Historical transport spine of Manila, now highly congested."
+      }
+    ],
+    "choke_points_vulnerabilities": [
+      {
+        "feature": "South China Sea (West Philippine Sea)",
+        "impact": "Aggressive external territorial claims threaten EEZ resources and energy exploration."
+      }
+    ],
+    "buffer_zones": [
+      {
+        "region": "First Island Chain",
+        "significance": "Key geostrategic node blocking unhindered naval projection from continental Asia."
+      }
+    ],
+    "map_center": {
+      "lat": 12.8797,
+      "lng": 121.774,
+      "zoom": 5
+    }
+  },
+  "population_dynamics_time_series": [
+    {
+      "year": 1970,
+      "pyramid_structure": {
+        "cohorts": [
+          {
+            "age": "0-4",
+            "male_pct": -9.165661664748388,
+            "female_pct": 9.165661664748388
+          },
+          {
+            "age": "5-9",
+            "male_pct": -7.464599551921352,
+            "female_pct": 7.512823771356711
+          },
+          {
+            "age": "10-14",
+            "male_pct": -6.030219790169376,
+            "female_pct": 6.132877685220398
+          },
+          {
+            "age": "15-19",
+            "male_pct": -4.996573945998837,
+            "female_pct": 4.994411054783674
+          },
+          {
+            "age": "20-24",
+            "male_pct": -4.154901296801247,
+            "female_pct": 4.066611427209198
+          },
+          {
+            "age": "25-29",
+            "male_pct": -3.454920864981733,
+            "female_pct": 3.358228215166178
+          },
+          {
+            "age": "30-34",
+            "male_pct": -2.8396895513603724,
+            "female_pct": 2.767586677715798
+          },
+          {
+            "age": "35-39",
+            "male_pct": -2.296353391997167,
+            "female_pct": 2.268109942242682
+          },
+          {
+            "age": "40-44",
+            "male_pct": -1.8651573510896076,
+            "female_pct": 1.8432127604769353
+          },
+          {
+            "age": "45-49",
+            "male_pct": -1.5473200269178191,
+            "female_pct": 1.514063215159199
+          },
+          {
+            "age": "50-54",
+            "male_pct": -1.2936188986061736,
+            "female_pct": 1.2480033380103144
+          },
+          {
+            "age": "55-59",
+            "male_pct": -1.0657277891182435,
+            "female_pct": 1.0151465114297484
+          },
+          {
+            "age": "60-64",
+            "male_pct": -0.8705740068003087,
+            "female_pct": 0.8357256850637771
+          },
+          {
+            "age": "65-69",
+            "male_pct": -0.7247379482606262,
+            "female_pct": 0.6838666800102734
+          },
+          {
+            "age": "70-74",
+            "male_pct": -0.5952893159495004,
+            "female_pct": 0.5599732864895727
+          },
+          {
+            "age": "75-79",
+            "male_pct": -0.49699927666221755,
+            "female_pct": 0.45623462163455086
+          },
+          {
+            "age": "80-84",
+            "male_pct": -0.4102830296256629,
+            "female_pct": 0.37202873810115195
+          },
+          {
+            "age": "85-89",
+            "male_pct": -0.33085374923201816,
+            "female_pct": 0.3038912251750257
+          },
+          {
+            "age": "90-94",
+            "male_pct": -0.26938928490861236,
+            "female_pct": 0.24998414339270936
+          },
+          {
+            "age": "95-99",
+            "male_pct": -0.22196349609375202,
+            "female_pct": 0.20522413515970972
+          },
+          {
+            "age": "100+",
+            "male_pct": -0.18189086571862598,
+            "female_pct": 0.16961012449239027
+          }
+        ]
+      },
+      "sub_national_density_choropleth": [
+        {
+          "admin_1_region_name": "Core Financial Zone",
+          "density_per_km2": 1174
+        },
+        {
+          "admin_1_region_name": "Agricultural Heartland",
+          "density_per_km2": 109
+        },
+        {
+          "admin_1_region_name": "Resource Periphery",
+          "density_per_km2": 11
+        }
+      ],
+      "synoptic_analysis": "High birth rates driven by cultural and religious norms."
+    },
+    {
+      "year": 1990,
+      "pyramid_structure": {
+        "cohorts": [
+          {
+            "age": "0-4",
+            "male_pct": -9.159684484032526,
+            "female_pct": 9.159684484032526
+          },
+          {
+            "age": "5-9",
+            "male_pct": -7.576498610443692,
+            "female_pct": 7.441955858244949
+          },
+          {
+            "age": "10-14",
+            "male_pct": -6.224847964213363,
+            "female_pct": 6.115149804897951
+          },
+          {
+            "age": "15-19",
+            "male_pct": -5.033790007910862,
+            "female_pct": 5.056328855736565
+          },
+          {
+            "age": "20-24",
+            "male_pct": -4.1149142496079785,
+            "female_pct": 4.15609406726313
+          },
+          {
+            "age": "25-29",
+            "male_pct": -3.436592385845167,
+            "female_pct": 3.390791656187715
+          },
+          {
+            "age": "30-34",
+            "male_pct": -2.7683223228208313,
+            "female_pct": 2.757187084284673
+          },
+          {
+            "age": "35-39",
+            "male_pct": -2.2784825636960098,
+            "female_pct": 2.2754787494963233
+          },
+          {
+            "age": "40-44",
+            "male_pct": -1.8791401341816685,
+            "female_pct": 1.8830875832528802
+          },
+          {
+            "age": "45-49",
+            "male_pct": -1.5260617488173276,
+            "female_pct": 1.5350891575200942
+          },
+          {
+            "age": "50-54",
+            "male_pct": -1.2507951409736562,
+            "female_pct": 1.2655068757705459
+          },
+          {
+            "age": "55-59",
+            "male_pct": -1.017536120852181,
+            "female_pct": 1.0361579327660995
+          },
+          {
+            "age": "60-64",
+            "male_pct": -0.8214382678331273,
+            "female_pct": 0.8485098013460779
+          },
+          {
+            "age": "65-69",
+            "male_pct": -0.6674315109369504,
+            "female_pct": 0.691647495532564
+          },
+          {
+            "age": "70-74",
+            "male_pct": -0.5534918818967518,
+            "female_pct": 0.5616026284306944
+          },
+          {
+            "age": "75-79",
+            "male_pct": -0.4541443269341714,
+            "female_pct": 0.45829501210655865
+          },
+          {
+            "age": "80-84",
+            "male_pct": -0.37022613319219233,
+            "female_pct": 0.3727764301313608
+          },
+          {
+            "age": "85-89",
+            "male_pct": -0.2998937902579888,
+            "female_pct": 0.30799443385738984
+          },
+          {
+            "age": "90-94",
+            "male_pct": -0.2497554698245435,
+            "female_pct": 0.2513576054708577
+          },
+          {
+            "age": "95-99",
+            "male_pct": -0.20708895252709236,
+            "female_pct": 0.20674489982667532
+          },
+          {
+            "age": "100+",
+            "male_pct": -0.1703041393608742,
+            "female_pct": 0.16811937768547172
+          }
+        ]
+      },
+      "sub_national_density_choropleth": [
+        {
+          "admin_1_region_name": "Core Financial Zone",
+          "density_per_km2": 1023
+        },
+        {
+          "admin_1_region_name": "Agricultural Heartland",
+          "density_per_km2": 106
+        },
+        {
+          "admin_1_region_name": "Resource Periphery",
+          "density_per_km2": 12
+        }
+      ],
+      "synoptic_analysis": "Slight narrowing but robust fertility keeps pyramid firmly triangular."
+    },
+    {
+      "year": 2010,
+      "pyramid_structure": {
+        "cohorts": [
+          {
+            "age": "0-4",
+            "male_pct": -5.109404574743693,
+            "female_pct": 5.109404574743693
+          },
+          {
+            "age": "5-9",
+            "male_pct": -4.7424068034155065,
+            "female_pct": 4.709505015797307
+          },
+          {
+            "age": "10-14",
+            "male_pct": -4.465943060230357,
+            "female_pct": 4.356193804432359
+          },
+          {
+            "age": "15-19",
+            "male_pct": -4.154598153603291,
+            "female_pct": 4.074284433740635
+          },
+          {
+            "age": "20-24",
+            "male_pct": -3.816807581874972,
+            "female_pct": 3.770744178587436
+          },
+          {
+            "age": "25-29",
+            "male_pct": -3.577482392357089,
+            "female_pct": 3.5014463933657787
+          },
+          {
+            "age": "30-34",
+            "male_pct": -3.3735054077550637,
+            "female_pct": 3.24659151459956
+          },
+          {
+            "age": "35-39",
+            "male_pct": -3.0846291318392614,
+            "female_pct": 2.998180668464447
+          },
+          {
+            "age": "40-44",
+            "male_pct": -2.815039097577406,
+            "female_pct": 2.769082622212099
+          },
+          {
+            "age": "45-49",
+            "male_pct": -2.5813111430494815,
+            "female_pct": 2.5901887377232766
+          },
+          {
+            "age": "50-54",
+            "male_pct": -2.44292111838388,
+            "female_pct": 2.4122612422309553
+          },
+          {
+            "age": "55-59",
+            "male_pct": -2.2981850767228336,
+            "female_pct": 2.235935163483588
+          },
+          {
+            "age": "60-64",
+            "male_pct": -1.8093660056909362,
+            "female_pct": 1.8044177667423267
+          },
+          {
+            "age": "65-69",
+            "male_pct": -1.468354131248523,
+            "female_pct": 1.4480342326339861
+          },
+          {
+            "age": "70-74",
+            "male_pct": -1.1899514380485254,
+            "female_pct": 1.1584756060993475
+          },
+          {
+            "age": "75-79",
+            "male_pct": -0.9698806480977309,
+            "female_pct": 0.9184393302676044
+          },
+          {
+            "age": "80-84",
+            "male_pct": -0.7835406055482388,
+            "female_pct": 0.7274356685961563
+          },
+          {
+            "age": "85-89",
+            "male_pct": -0.6155655992010876,
+            "female_pct": 0.57705809076624
+          },
+          {
+            "age": "90-94",
+            "male_pct": -0.4844877602937877,
+            "female_pct": 0.45757559499903266
+          },
+          {
+            "age": "95-99",
+            "male_pct": -0.3882605772372709,
+            "female_pct": 0.3645001265347302
+          },
+          {
+            "age": "100+",
+            "male_pct": -0.3095392858340088,
+            "female_pct": 0.28906564122654205
+          }
+        ]
+      },
+      "sub_national_density_choropleth": [
+        {
+          "admin_1_region_name": "Core Financial Zone",
+          "density_per_km2": 1151
+        },
+        {
+          "admin_1_region_name": "Agricultural Heartland",
+          "density_per_km2": 111
+        },
+        {
+          "admin_1_region_name": "Resource Periphery",
+          "density_per_km2": 15
+        }
+      ],
+      "synoptic_analysis": "Youngest demographic in Southeast Asia. Massive structural brain-drain potential."
+    },
+    {
+      "year": 2026,
+      "pyramid_structure": {
+        "cohorts": [
+          {
+            "age": "0-4",
+            "male_pct": -5.025346350006432,
+            "female_pct": 5.025346350006432
+          },
+          {
+            "age": "5-9",
+            "male_pct": -4.647037235813657,
+            "female_pct": 4.699751247427877
+          },
+          {
+            "age": "10-14",
+            "male_pct": -4.338872603478665,
+            "female_pct": 4.334203622475833
+          },
+          {
+            "age": "15-19",
+            "male_pct": -3.9694601791853694,
+            "female_pct": 4.066384564344983
+          },
+          {
+            "age": "20-24",
+            "male_pct": -3.698736130396565,
+            "female_pct": 3.8108338755550992
+          },
+          {
+            "age": "25-29",
+            "male_pct": -3.506233575083674,
+            "female_pct": 3.5755572875399655
+          },
+          {
+            "age": "30-34",
+            "male_pct": -3.300219066195384,
+            "female_pct": 3.325871315147633
+          },
+          {
+            "age": "35-39",
+            "male_pct": -3.0330409238707112,
+            "female_pct": 3.099669229995706
+          },
+          {
+            "age": "40-44",
+            "male_pct": -2.784191067727565,
+            "female_pct": 2.892600107113207
+          },
+          {
+            "age": "45-49",
+            "male_pct": -2.587551333824128,
+            "female_pct": 2.700232366899526
+          },
+          {
+            "age": "50-54",
+            "male_pct": -2.4416804069124187,
+            "female_pct": 2.502487990061627
+          },
+          {
+            "age": "55-59",
+            "male_pct": -2.258373766936507,
+            "female_pct": 2.328541194700455
+          },
+          {
+            "age": "60-64",
+            "male_pct": -1.8424802361622274,
+            "female_pct": 1.8668763022284127
+          },
+          {
+            "age": "65-69",
+            "male_pct": -1.4613346043503372,
+            "female_pct": 1.505568172618315
+          },
+          {
+            "age": "70-74",
+            "male_pct": -1.1551493533571033,
+            "female_pct": 1.199058417397886
+          },
+          {
+            "age": "75-79",
+            "male_pct": -0.9294769373423,
+            "female_pct": 0.968415112058171
+          },
+          {
+            "age": "80-84",
+            "male_pct": -0.7566495454698167,
+            "female_pct": 0.7791231219826288
+          },
+          {
+            "age": "85-89",
+            "male_pct": -0.5955298771066179,
+            "female_pct": 0.6193682389574066
+          },
+          {
+            "age": "90-94",
+            "male_pct": -0.47368887789174946,
+            "female_pct": 0.49221812005990023
+          },
+          {
+            "age": "95-99",
+            "male_pct": -0.3810033683089476,
+            "female_pct": 0.39447663983515546
+          },
+          {
+            "age": "100+",
+            "male_pct": -0.3107113670170339,
+            "female_pct": 0.31664991715654445
+          }
+        ]
+      },
+      "sub_national_density_choropleth": [
+        {
+          "admin_1_region_name": "Core Financial Zone",
+          "density_per_km2": 1011
+        },
+        {
+          "admin_1_region_name": "Agricultural Heartland",
+          "density_per_km2": 114
+        },
+        {
+          "admin_1_region_name": "Resource Periphery",
+          "density_per_km2": 29
+        }
+      ],
+      "synoptic_analysis": "Dividend phase solidifies. Still exporting labor globally."
+    },
+    {
+      "year": 2040,
+      "pyramid_structure": {
+        "cohorts": [
+          {
+            "age": "0-4",
+            "male_pct": -3.125880787943538,
+            "female_pct": 3.125880787943538
+          },
+          {
+            "age": "5-9",
+            "male_pct": -3.1057072263150944,
+            "female_pct": 3.0752610548778603
+          },
+          {
+            "age": "10-14",
+            "male_pct": -3.0555532735632065,
+            "female_pct": 3.0168607807176557
+          },
+          {
+            "age": "15-19",
+            "male_pct": -2.977843495719876,
+            "female_pct": 2.9623750364497026
+          },
+          {
+            "age": "20-24",
+            "male_pct": -2.877030065507253,
+            "female_pct": 2.8862831448216153
+          },
+          {
+            "age": "25-29",
+            "male_pct": -2.7930144125208987,
+            "female_pct": 2.8340842165917874
+          },
+          {
+            "age": "30-34",
+            "male_pct": -2.7645738409638807,
+            "female_pct": 2.7696165090254463
+          },
+          {
+            "age": "35-39",
+            "male_pct": -2.703073104507345,
+            "female_pct": 2.7335195807625623
+          },
+          {
+            "age": "40-44",
+            "male_pct": -2.6845482231056854,
+            "female_pct": 2.6545224988674985
+          },
+          {
+            "age": "45-49",
+            "male_pct": -2.625157778034671,
+            "female_pct": 2.5830780888299985
+          },
+          {
+            "age": "50-54",
+            "male_pct": -2.528578346494706,
+            "female_pct": 2.528780340596832
+          },
+          {
+            "age": "55-59",
+            "male_pct": -2.475327135329315,
+            "female_pct": 2.485871194429505
+          },
+          {
+            "age": "60-64",
+            "male_pct": -2.3967722521931423,
+            "female_pct": 2.4314863066814025
+          },
+          {
+            "age": "65-69",
+            "male_pct": -2.3064326497895062,
+            "female_pct": 2.3683553434999713
+          },
+          {
+            "age": "70-74",
+            "male_pct": -2.252864830350055,
+            "female_pct": 2.3191634776520247
+          },
+          {
+            "age": "75-79",
+            "male_pct": -2.1837829191218296,
+            "female_pct": 2.267158498616795
+          },
+          {
+            "age": "80-84",
+            "male_pct": -1.8428320493671242,
+            "female_pct": 1.9416899005226564
+          },
+          {
+            "age": "85-89",
+            "male_pct": -1.561306135256751,
+            "female_pct": 1.651357539530142
+          },
+          {
+            "age": "90-94",
+            "male_pct": -1.3421247815729556,
+            "female_pct": 1.4098340893821166
+          },
+          {
+            "age": "95-99",
+            "male_pct": -1.1464508931059387,
+            "female_pct": 1.2037794505291866
+          },
+          {
+            "age": "100+",
+            "male_pct": -0.9818336136574672,
+            "female_pct": 1.020354345251445
+          }
+        ]
+      },
+      "sub_national_density_choropleth": [
+        {
+          "admin_1_region_name": "Core Financial Zone",
+          "density_per_km2": 1129
+        },
+        {
+          "admin_1_region_name": "Agricultural Heartland",
+          "density_per_km2": 124
+        },
+        {
+          "admin_1_region_name": "Resource Periphery",
+          "density_per_km2": 19
+        }
+      ],
+      "synoptic_analysis": "Fertility finally drops near replacement; core working-age dominates."
+    }
+  ],
+  "culture_tab": {
+    "inglehart_welzel_coords": {
+      "x": -0.25,
+      "y": -0.38,
+      "cultural_zone": "Southeast Asian / Developing Catholic"
+    },
+    "largest_diasporas": [
+      {
+        "destination": "United States",
+        "population": "Approximately 4.2 million",
+        "cultural_reach_impact": "Significant influence on cuisine, community organizations, and some media presence. 'Little Manilas' in various cities."
+      },
+      {
+        "destination": "Saudi Arabia",
+        "population": "Approximately 1.5 million",
+        "cultural_reach_impact": "Primarily through overseas Filipino workers (OFWs) remittances, sustaining families and local communities, with limited direct cultural export beyond expatriate enclaves."
+      },
+      {
+        "destination": "Canada",
+        "population": "Approximately 960,000",
+        "cultural_reach_impact": "Growing influence in urban centers, contributing to multicultural fabric through food, festivals, and community groups."
+      },
+      {
+        "destination": "United Arab Emirates",
+        "population": "Approximately 700,000",
+        "cultural_reach_impact": "Similar to Saudi Arabia, a significant OFW presence, contributing to the service sector and creating vibrant expatriate communities."
+      },
+      {
+        "destination": "Japan",
+        "population": "Approximately 280,000",
+        "cultural_reach_impact": "Notable presence in specific sectors, influencing local food scenes in some areas and contributing to cultural exchange through marriage and entertainment."
+      }
+    ],
+    "cultural_exports_and_landscape": {
+      "soft_power_exports": [
+        {
+          "medium": "Cuisine",
+          "examples": [
+            "Adobo",
+            "Sinigang",
+            "Lechon",
+            "Pancit"
+          ],
+          "global_reach_score": 75
+        },
+        {
+          "medium": "Music",
+          "examples": [
+            "Original Pilipino Music (OPM)",
+            "Kundiman",
+            "Folk dances like Tinikling"
+          ],
+          "global_reach_score": 50
+        },
+        {
+          "medium": "Cinema/TV",
+          "examples": [
+            "Teleseryes (Filipino dramas)",
+            "Filipino independent films"
+          ],
+          "global_reach_score": 40
+        },
+        {
+          "medium": "Hospitality/Caregiving",
+          "examples": [
+            "Globally recognized Filipino nurses",
+            "Domestic workers",
+            "Customer service professionals"
+          ],
+          "global_reach_score": 85
+        }
+      ],
+      "spatial_landscape": {
+        "enclaves": [
+          "Little Manilas (e.g., Daly City, CA; Woodside, NY; Earl's Court, London)",
+          "Filipino Cultural Centers worldwide"
+        ],
+        "architectural_footprint": "Spanish colonial churches and ancestral homes, American art deco structures, modern high-rises, indigenous nipa huts",
+        "description": "A diverse architectural landscape reflecting centuries of indigenous, Spanish, and American influences, from baroque churches to vibrant modern urban centers. Public spaces often feature Catholic iconography and community gathering points."
+      }
+    },
+    "hybridity_and_glocalization": [
+      {
+        "concept": "Jeepney Culture",
+        "description": "The iconic Filipino public utility vehicle, a repurposed US military jeep from WWII, adorned with vibrant art and religious motifs, symbolizing Filipino resilience and ingenuity.",
+        "glocalized_examples": [
+          "Art and design motifs inspired by jeepney aesthetics in modern fashion and art installations",
+          "Jeepney-themed restaurants or cafes abroad"
+        ],
+        "spatial_location": "Philippines (mainland), various cultural festivals abroad"
+      },
+      {
+        "concept": "Taglish",
+        "description": "A pervasive linguistic phenomenon involving code-switching and lexical borrowing between Tagalog and English, reflecting the legacy of American colonialism and ongoing globalization.",
+        "glocalized_examples": [
+          "Modern Filipino literature and media often incorporate Taglish dialogues",
+          "Filipino social media interactions frequently blend both languages"
+        ],
+        "spatial_location": "Philippines, Filipino diaspora communities worldwide"
+      },
+      {
+        "concept": "Karinderya/Turo-Turo",
+        "description": "Local eateries offering affordable, home-style Filipino dishes, often served 'point-point' (turo-turo) style, a localized form of fast food blending communal eating with quick service.",
+        "glocalized_examples": [
+          "Filipino restaurants abroad adopting the turo-turo format for authenticity and efficiency",
+          "Fusion dishes found in modern Filipino-inspired restaurants globally"
+        ],
+        "spatial_location": "Philippines (ubiquitous), Filipino communities in major cities abroad"
+      },
+      {
+        "concept": "Paskong Pinoy (Filipino Christmas)",
+        "description": "A unique blend of indigenous traditions, Spanish Catholic rituals (Simbang Gabi), and American commercialism, resulting in the world's longest and most festive Christmas season.",
+        "glocalized_examples": [
+          "Parol (star lanterns) displayed in diaspora communities",
+          "Filipino Christmas carols sung in various languages abroad",
+          "Noche Buena celebrations in Filipino homes worldwide"
+        ],
+        "spatial_location": "Philippines, Filipino diaspora communities globally"
+      }
+    ]
+  }
+}

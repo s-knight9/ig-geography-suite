@@ -1,0 +1,983 @@
+{
+  "country_metadata": {
+    "name": "Poland",
+    "income_classification": "High Income",
+    "gni_per_capita_atlas": {
+      "value_usd": 18350,
+      "year": 2022
+    },
+    "hdi": {
+      "score": 0.881,
+      "rank": 36,
+      "year": 2022
+    },
+    "gni_per_capita_ppp": {
+      "value_usd": 37900,
+      "year": 2022
+    },
+    "gini_coefficient": {
+      "score": 30.2,
+      "year": 2018
+    }
+  },
+  "globalisation_tab": {
+    "kof_index": {
+      "economic": {
+        "de_facto": 74.5,
+        "de_jure": 82.1
+      },
+      "social": {
+        "interpersonal": {
+          "de_facto": 68.4,
+          "de_jure": 75.2
+        },
+        "informational": {
+          "de_facto": 83.1,
+          "de_jure": 88.5
+        },
+        "cultural": {
+          "de_facto": 71.4,
+          "de_jure": 73.2
+        }
+      },
+      "political": {
+        "de_facto": 91.2,
+        "de_jure": 94.5
+      }
+    },
+    "at_kearney_framework": {
+      "status": "Beta",
+      "gci_score_or_tier": "Beta (Warsaw)"
+    },
+    "ey_index_historical": {
+      "score": "75.4",
+      "analysis": "Deeply integrated into EU supply chains, especially standardizing as Germany's industrial backyard."
+    }
+  },
+  "economy_tab": {
+    "employment_structure": {
+      "primary": 8.1,
+      "secondary": 31.4,
+      "tertiary": 52.3,
+      "quaternary": 8.2
+    },
+    "trade_ledger": {
+      "main_exports": [
+        {
+          "commodity": "Vehicle Parts",
+          "pct_gdp": 3.2
+        },
+        {
+          "commodity": "Cars",
+          "pct_gdp": 2.8
+        },
+        {
+          "commodity": "Furniture",
+          "pct_gdp": 2.1
+        },
+        {
+          "commodity": "Electric Batteries",
+          "pct_gdp": 1.9
+        },
+        {
+          "commodity": "Video Displays",
+          "pct_gdp": 1.5
+        }
+      ],
+      "main_imports": [
+        {
+          "commodity": "Cars",
+          "pct_gdp": 2.5
+        },
+        {
+          "commodity": "Crude Petroleum",
+          "pct_gdp": 2.1
+        },
+        {
+          "commodity": "Vehicle Parts",
+          "pct_gdp": 1.8
+        },
+        {
+          "commodity": "Broadcasting Equip",
+          "pct_gdp": 1.4
+        },
+        {
+          "commodity": "Packaged Medicaments",
+          "pct_gdp": 1.2
+        }
+      ],
+      "top_partners_outgoing": [
+        {
+          "partner": "Germany",
+          "value_usd_billions": 94.5
+        },
+        {
+          "partner": "Czechia",
+          "value_usd_billions": 20.1
+        },
+        {
+          "partner": "France",
+          "value_usd_billions": 18.5
+        },
+        {
+          "partner": "United Kingdom",
+          "value_usd_billions": 16.4
+        },
+        {
+          "partner": "Italy",
+          "value_usd_billions": 15.2
+        }
+      ],
+      "top_partners_incoming": [
+        {
+          "partner": "Germany",
+          "value_usd_billions": 85.4
+        },
+        {
+          "partner": "China",
+          "value_usd_billions": 40.2
+        },
+        {
+          "partner": "Italy",
+          "value_usd_billions": 19.5
+        },
+        {
+          "partner": "Russia (historical)",
+          "value_usd_billions": 18.4
+        },
+        {
+          "partner": "Netherlands",
+          "value_usd_billions": 16.8
+        }
+      ]
+    }
+  },
+  "human_geography_tab": {
+    "spatial_hubs": {
+      "epz_sez_zones": [
+        {
+          "name": "Katowice SEZ",
+          "location_lat_long": "50.26, 19.02",
+          "primary_focus": "Automotive & Heavy Industry (Stellantis/GM legacy)"
+        },
+        {
+          "name": "Wałbrzych SEZ",
+          "location_lat_long": "50.77, 16.28",
+          "primary_focus": "Manufacturing & Electronics"
+        },
+        {
+          "name": "Gdańsk Pomeranian SEZ",
+          "location_lat_long": "54.35, 18.64",
+          "primary_focus": "Maritime industries & offshore wind"
+        }
+      ],
+      "tourism_enclaves": [
+        {
+          "name": "Krakow Historic Core",
+          "spatial_impact": "Intense heritage & nightlife mass tourism hub"
+        }
+      ],
+      "core_periphery_zones": {
+        "core": "Masovian Voivodeship (Warsaw) and Silesian Industrial Voivodeship",
+        "periphery": "Lublin, Podlaskie, and Podkarpackie eastern borderlands"
+      }
+    },
+    "political_economy": {
+      "informal_economy_pct_gdp": 21.5,
+      "eiu_governance_type": "Flawed Democracy",
+      "freedom_house_status": "Free",
+      "corruption_perceptions_index": {
+        "score": 55,
+        "rank": 45
+      }
+    }
+  },
+  "prisoners_of_geography_map": {
+    "topographic_friction_points": [
+      {
+        "feature": "Northern European Plain",
+        "geopolitical_constraint": "Total lack of natural defensive barriers on the E-W axis; historic corridor for invasions."
+      }
+    ],
+    "hydrological_arteries": [
+      {
+        "feature": "Vistula River",
+        "geopolitical_constraint": "Central hydrological spine organizing the nation's core cities."
+      }
+    ],
+    "choke_points_vulnerabilities": [
+      {
+        "feature": "Suwałki Gap",
+        "impact": "Critical 65km vulnerable border with Lithuania between Belarus and Kaliningrad."
+      }
+    ],
+    "buffer_zones": [
+      {
+        "region": "Belarus & Ukraine",
+        "significance": "Crucial geopolitical buffer against Russian core territory."
+      }
+    ],
+    "map_center": {
+      "lat": 51.9194,
+      "lng": 19.1451,
+      "zoom": 6
+    }
+  },
+  "population_dynamics_time_series": [
+    {
+      "year": 1970,
+      "pyramid_structure": {
+        "cohorts": [
+          {
+            "age": "0-4",
+            "male_pct": -5.127747329886811,
+            "female_pct": 5.127747329886811
+          },
+          {
+            "age": "5-9",
+            "male_pct": -4.789901538419817,
+            "female_pct": 4.763380239829936
+          },
+          {
+            "age": "10-14",
+            "male_pct": -4.405372576983962,
+            "female_pct": 4.471786495496116
+          },
+          {
+            "age": "15-19",
+            "male_pct": -4.063545714777679,
+            "female_pct": 4.131382796422779
+          },
+          {
+            "age": "20-24",
+            "male_pct": -3.7352145485730426,
+            "female_pct": 3.8075161203634926
+          },
+          {
+            "age": "25-29",
+            "male_pct": -3.4675042955584585,
+            "female_pct": 3.5436512569615473
+          },
+          {
+            "age": "30-34",
+            "male_pct": -3.274892228234441,
+            "female_pct": 3.268719523726719
+          },
+          {
+            "age": "35-39",
+            "male_pct": -3.062570148934012,
+            "female_pct": 3.0378835948487577
+          },
+          {
+            "age": "40-44",
+            "male_pct": -2.8114472542183138,
+            "female_pct": 2.802533070878703
+          },
+          {
+            "age": "45-49",
+            "male_pct": -2.6519282315581743,
+            "female_pct": 2.6106949636963326
+          },
+          {
+            "age": "50-54",
+            "male_pct": -2.4637511842454,
+            "female_pct": 2.432162888354419
+          },
+          {
+            "age": "55-59",
+            "male_pct": -2.288974803469675,
+            "female_pct": 2.2501754368224827
+          },
+          {
+            "age": "60-64",
+            "male_pct": -1.8453283793132396,
+            "female_pct": 1.8036707039617388
+          },
+          {
+            "age": "65-69",
+            "male_pct": -1.4520959596863812,
+            "female_pct": 1.4395293912608798
+          },
+          {
+            "age": "70-74",
+            "male_pct": -1.1574716925111181,
+            "female_pct": 1.1581658165940385
+          },
+          {
+            "age": "75-79",
+            "male_pct": -0.9122580333884369,
+            "female_pct": 0.9195747946520705
+          },
+          {
+            "age": "80-84",
+            "male_pct": -0.7351464727452661,
+            "female_pct": 0.7375733634161452
+          },
+          {
+            "age": "85-89",
+            "male_pct": -0.577794546020766,
+            "female_pct": 0.5871885628230135
+          },
+          {
+            "age": "90-94",
+            "male_pct": -0.4704975357539343,
+            "female_pct": 0.4667724891423398
+          },
+          {
+            "age": "95-99",
+            "male_pct": -0.37586883315221553,
+            "female_pct": 0.37689012779245823
+          },
+          {
+            "age": "100+",
+            "male_pct": -0.29489186233460596,
+            "female_pct": 0.29879786330346
+          }
+        ]
+      },
+      "sub_national_density_choropleth": [
+        {
+          "admin_1_region_name": "Core Financial Zone",
+          "density_per_km2": 890
+        },
+        {
+          "admin_1_region_name": "Agricultural Heartland",
+          "density_per_km2": 143
+        },
+        {
+          "admin_1_region_name": "Resource Periphery",
+          "density_per_km2": 15
+        }
+      ],
+      "synoptic_analysis": "Post-WWII recovery baby boom reaching adulthood."
+    },
+    {
+      "year": 1990,
+      "pyramid_structure": {
+        "cohorts": [
+          {
+            "age": "0-4",
+            "male_pct": -3.0600430991594747,
+            "female_pct": 3.0600430991594747
+          },
+          {
+            "age": "5-9",
+            "male_pct": -3.034259478084322,
+            "female_pct": 3.020940217304925
+          },
+          {
+            "age": "10-14",
+            "male_pct": -3.0077369451833134,
+            "female_pct": 2.9543611333480952
+          },
+          {
+            "age": "15-19",
+            "male_pct": -2.916059538521922,
+            "female_pct": 2.916739958212339
+          },
+          {
+            "age": "20-24",
+            "male_pct": -2.822847916491628,
+            "female_pct": 2.87055920197289
+          },
+          {
+            "age": "25-29",
+            "male_pct": -2.7437650477644544,
+            "female_pct": 2.8385227596018736
+          },
+          {
+            "age": "30-34",
+            "male_pct": -2.6942400727002185,
+            "female_pct": 2.8029597157765056
+          },
+          {
+            "age": "35-39",
+            "male_pct": -2.641667949277796,
+            "female_pct": 2.772674454338891
+          },
+          {
+            "age": "40-44",
+            "male_pct": -2.6357758643814613,
+            "female_pct": 2.705959666916455
+          },
+          {
+            "age": "45-49",
+            "male_pct": -2.5476554946842573,
+            "female_pct": 2.6427359388020673
+          },
+          {
+            "age": "50-54",
+            "male_pct": -2.512501208462154,
+            "female_pct": 2.592629064182737
+          },
+          {
+            "age": "55-59",
+            "male_pct": -2.4349736741170602,
+            "female_pct": 2.5347526187420963
+          },
+          {
+            "age": "60-64",
+            "male_pct": -2.4085872499688956,
+            "female_pct": 2.4795573044209784
+          },
+          {
+            "age": "65-69",
+            "male_pct": -2.3173890577623366,
+            "female_pct": 2.4448249076878326
+          },
+          {
+            "age": "70-74",
+            "male_pct": -2.2988294220752405,
+            "female_pct": 2.375273559405046
+          },
+          {
+            "age": "75-79",
+            "male_pct": -2.2196851436033977,
+            "female_pct": 2.3159901693290843
+          },
+          {
+            "age": "80-84",
+            "male_pct": -1.86569345847232,
+            "female_pct": 1.9876668013590006
+          },
+          {
+            "age": "85-89",
+            "male_pct": -1.5810812352018955,
+            "female_pct": 1.7003818676380025
+          },
+          {
+            "age": "90-94",
+            "male_pct": -1.3668516663514514,
+            "female_pct": 1.4488918946182696
+          },
+          {
+            "age": "95-99",
+            "male_pct": -1.1602529419580982,
+            "female_pct": 1.2352069793461093
+          },
+          {
+            "age": "100+",
+            "male_pct": -0.9881459814498188,
+            "female_pct": 1.0412862421658424
+          }
+        ]
+      },
+      "sub_national_density_choropleth": [
+        {
+          "admin_1_region_name": "Core Financial Zone",
+          "density_per_km2": 1071
+        },
+        {
+          "admin_1_region_name": "Agricultural Heartland",
+          "density_per_km2": 138
+        },
+        {
+          "admin_1_region_name": "Resource Periphery",
+          "density_per_km2": 14
+        }
+      ],
+      "synoptic_analysis": "Transition shock from fall of communism causes birth rate collapse."
+    },
+    {
+      "year": 2010,
+      "pyramid_structure": {
+        "cohorts": [
+          {
+            "age": "0-4",
+            "male_pct": -3.166968011983955,
+            "female_pct": 3.166968011983955
+          },
+          {
+            "age": "5-9",
+            "male_pct": -3.115247315942303,
+            "female_pct": 3.0932049815458487
+          },
+          {
+            "age": "10-14",
+            "male_pct": -3.0177317423420082,
+            "female_pct": 3.0255697851049748
+          },
+          {
+            "age": "15-19",
+            "male_pct": -2.940179117177923,
+            "female_pct": 2.9401804058516374
+          },
+          {
+            "age": "20-24",
+            "male_pct": -2.8834936909958087,
+            "female_pct": 2.9047787338959594
+          },
+          {
+            "age": "25-29",
+            "male_pct": -2.8238047742083348,
+            "female_pct": 2.8465451647530697
+          },
+          {
+            "age": "30-34",
+            "male_pct": -2.7718440664446335,
+            "female_pct": 2.779590246813176
+          },
+          {
+            "age": "35-39",
+            "male_pct": -2.67241007994996,
+            "female_pct": 2.705497341029185
+          },
+          {
+            "age": "40-44",
+            "male_pct": -2.567310541895465,
+            "female_pct": 2.6487621189854105
+          },
+          {
+            "age": "45-49",
+            "male_pct": -2.551097540325999,
+            "female_pct": 2.584051434056224
+          },
+          {
+            "age": "50-54",
+            "male_pct": -2.4776533590609255,
+            "female_pct": 2.5523001643457204
+          },
+          {
+            "age": "55-59",
+            "male_pct": -2.3835867561356934,
+            "female_pct": 2.5041650209376134
+          },
+          {
+            "age": "60-64",
+            "male_pct": -2.375659582342243,
+            "female_pct": 2.478272488457189
+          },
+          {
+            "age": "65-69",
+            "male_pct": -2.293545195931161,
+            "female_pct": 2.4325056647356984
+          },
+          {
+            "age": "70-74",
+            "male_pct": -2.2381747228224986,
+            "female_pct": 2.360019706648167
+          },
+          {
+            "age": "75-79",
+            "male_pct": -2.1526652707368155,
+            "female_pct": 2.313469752919932
+          },
+          {
+            "age": "80-84",
+            "male_pct": -1.8540057978861018,
+            "female_pct": 1.981660762427192
+          },
+          {
+            "age": "85-89",
+            "male_pct": -1.5888797613041037,
+            "female_pct": 1.6676654177210932
+          },
+          {
+            "age": "90-94",
+            "male_pct": -1.3425878250083785,
+            "female_pct": 1.423810638014978
+          },
+          {
+            "age": "95-99",
+            "male_pct": -1.1540101507649512,
+            "female_pct": 1.2001281339676562
+          },
+          {
+            "age": "100+",
+            "male_pct": -0.992277849940269,
+            "female_pct": 1.0277208726057554
+          }
+        ]
+      },
+      "sub_national_density_choropleth": [
+        {
+          "admin_1_region_name": "Core Financial Zone",
+          "density_per_km2": 1197
+        },
+        {
+          "admin_1_region_name": "Agricultural Heartland",
+          "density_per_km2": 118
+        },
+        {
+          "admin_1_region_name": "Resource Periphery",
+          "density_per_km2": 23
+        }
+      ],
+      "synoptic_analysis": "Youth emigration to EU hollowing out working-age cohorts."
+    },
+    {
+      "year": 2026,
+      "pyramid_structure": {
+        "cohorts": [
+          {
+            "age": "0-4",
+            "male_pct": -1.803807574751382,
+            "female_pct": 1.803807574751382
+          },
+          {
+            "age": "5-9",
+            "male_pct": -1.9233230815620466,
+            "female_pct": 1.8971013507274075
+          },
+          {
+            "age": "10-14",
+            "male_pct": -2.038555296990345,
+            "female_pct": 1.9992523845782024
+          },
+          {
+            "age": "15-19",
+            "male_pct": -2.171862471856039,
+            "female_pct": 2.1121277775394462
+          },
+          {
+            "age": "20-24",
+            "male_pct": -2.2843366843505764,
+            "female_pct": 2.2251277430461784
+          },
+          {
+            "age": "25-29",
+            "male_pct": -2.4351720040975895,
+            "female_pct": 2.3200474738536383
+          },
+          {
+            "age": "30-34",
+            "male_pct": -2.508119127361273,
+            "female_pct": 2.419072809851256
+          },
+          {
+            "age": "35-39",
+            "male_pct": -2.6724191410363747,
+            "female_pct": 2.5232146308020345
+          },
+          {
+            "age": "40-44",
+            "male_pct": -2.8472779121337646,
+            "female_pct": 2.6460116613193327
+          },
+          {
+            "age": "45-49",
+            "male_pct": -2.9625211493527894,
+            "female_pct": 2.7654544360505855
+          },
+          {
+            "age": "50-54",
+            "male_pct": -3.107723803026213,
+            "female_pct": 2.9017779960121852
+          },
+          {
+            "age": "55-59",
+            "male_pct": -3.3264185136717805,
+            "female_pct": 3.0537681672802424
+          },
+          {
+            "age": "60-64",
+            "male_pct": -3.479440096027567,
+            "female_pct": 3.219393135490237
+          },
+          {
+            "age": "65-69",
+            "male_pct": -3.670007690272563,
+            "female_pct": 3.3860395585111305
+          },
+          {
+            "age": "70-74",
+            "male_pct": -3.1429947588865326,
+            "female_pct": 2.901346689069078
+          },
+          {
+            "age": "75-79",
+            "male_pct": -2.698096004823233,
+            "female_pct": 2.4578625683073683
+          },
+          {
+            "age": "80-84",
+            "male_pct": -2.2987513849036434,
+            "female_pct": 2.0919592706345567
+          },
+          {
+            "age": "85-89",
+            "male_pct": -1.9228070781896776,
+            "female_pct": 1.7790009429441789
+          },
+          {
+            "age": "90-94",
+            "male_pct": -1.6614144362659409,
+            "female_pct": 1.5260059249117097
+          },
+          {
+            "age": "95-99",
+            "male_pct": -1.4172751272536344,
+            "female_pct": 1.3014454052813977
+          },
+          {
+            "age": "100+",
+            "male_pct": -1.1835298228129614,
+            "female_pct": 1.114329339412482
+          }
+        ]
+      },
+      "sub_national_density_choropleth": [
+        {
+          "admin_1_region_name": "Core Financial Zone",
+          "density_per_km2": 1056
+        },
+        {
+          "admin_1_region_name": "Agricultural Heartland",
+          "density_per_km2": 100
+        },
+        {
+          "admin_1_region_name": "Resource Periphery",
+          "density_per_km2": 18
+        }
+      ],
+      "synoptic_analysis": "Rapid aging, partly offset by an influx of regional migrants."
+    },
+    {
+      "year": 2040,
+      "pyramid_structure": {
+        "cohorts": [
+          {
+            "age": "0-4",
+            "male_pct": -1.8561065553469795,
+            "female_pct": 1.8561065553469795
+          },
+          {
+            "age": "5-9",
+            "male_pct": -1.986832213872501,
+            "female_pct": 1.9614228760560193
+          },
+          {
+            "age": "10-14",
+            "male_pct": -2.061519773845779,
+            "female_pct": 2.0395876190904283
+          },
+          {
+            "age": "15-19",
+            "male_pct": -2.1237552494225658,
+            "female_pct": 2.1541553294451
+          },
+          {
+            "age": "20-24",
+            "male_pct": -2.262293365738644,
+            "female_pct": 2.262869118316206
+          },
+          {
+            "age": "25-29",
+            "male_pct": -2.4042884055070406,
+            "female_pct": 2.397771871563888
+          },
+          {
+            "age": "30-34",
+            "male_pct": -2.52491146858498,
+            "female_pct": 2.4945299415860207
+          },
+          {
+            "age": "35-39",
+            "male_pct": -2.645559902873105,
+            "female_pct": 2.6169433735272865
+          },
+          {
+            "age": "40-44",
+            "male_pct": -2.739794558234639,
+            "female_pct": 2.7245659417183057
+          },
+          {
+            "age": "45-49",
+            "male_pct": -2.8660421525394684,
+            "female_pct": 2.873474208054263
+          },
+          {
+            "age": "50-54",
+            "male_pct": -2.9580701247649097,
+            "female_pct": 3.028316721561663
+          },
+          {
+            "age": "55-59",
+            "male_pct": -3.1273219729287454,
+            "female_pct": 3.191980976980038
+          },
+          {
+            "age": "60-64",
+            "male_pct": -3.260592676503805,
+            "female_pct": 3.3554964510052434
+          },
+          {
+            "age": "65-69",
+            "male_pct": -3.464135341273366,
+            "female_pct": 3.5011258628160182
+          },
+          {
+            "age": "70-74",
+            "male_pct": -2.960045750585627,
+            "female_pct": 2.9772077670913313
+          },
+          {
+            "age": "75-79",
+            "male_pct": -2.562331233789761,
+            "female_pct": 2.537640888131122
+          },
+          {
+            "age": "80-84",
+            "male_pct": -2.18364614160533,
+            "female_pct": 2.140142123376777
+          },
+          {
+            "age": "85-89",
+            "male_pct": -1.888871365879407,
+            "female_pct": 1.8371372532688588
+          },
+          {
+            "age": "90-94",
+            "male_pct": -1.5942771233059496,
+            "female_pct": 1.5694023263914767
+          },
+          {
+            "age": "95-99",
+            "male_pct": -1.3707458327511939,
+            "female_pct": 1.3422626713882166
+          },
+          {
+            "age": "100+",
+            "male_pct": -1.1620192832902942,
+            "female_pct": 1.1346996306406638
+          }
+        ]
+      },
+      "sub_national_density_choropleth": [
+        {
+          "admin_1_region_name": "Core Financial Zone",
+          "density_per_km2": 890
+        },
+        {
+          "admin_1_region_name": "Agricultural Heartland",
+          "density_per_km2": 104
+        },
+        {
+          "admin_1_region_name": "Resource Periphery",
+          "density_per_km2": 20
+        }
+      ],
+      "synoptic_analysis": "Severely inverted pyramid requiring automation and structural immigration."
+    }
+  ],
+  "culture_tab": {
+    "inglehart_welzel_coords": {
+      "x": -0.25,
+      "y": -0.15,
+      "cultural_zone": "Catholic Europe"
+    },
+    "largest_diasporas": [
+      {
+        "destination": "United States",
+        "population": "~9.6 million",
+        "cultural_reach_impact": "Strong influence on local culture, Polish-American community organizations, food traditions, and cultural festivals (e.g., Chicago's Polish Parade)."
+      },
+      {
+        "destination": "Germany",
+        "population": "~2 million (including those of Polish origin)",
+        "cultural_reach_impact": "Significant economic and social ties, Polish language maintenance, food shops, and community centers in major cities along the border and beyond."
+      },
+      {
+        "destination": "United Kingdom",
+        "population": "~1 million",
+        "cultural_reach_impact": "Emergence of Polish shops, churches, community groups, and cultural events, particularly after EU expansion, integrating into British society while maintaining distinct identity."
+      },
+      {
+        "destination": "Canada",
+        "population": "~1.1 million",
+        "cultural_reach_impact": "Established Polish-Canadian communities, contributing to multicultural landscape with language schools, folk dance groups, and religious institutions."
+      }
+    ],
+    "cultural_exports_and_landscape": {
+      "soft_power_exports": [
+        {
+          "medium": "Music",
+          "examples": [
+            "Frédéric Chopin's classical compositions",
+            "Jazz (e.g., Krzysztof Komeda)",
+            "Contemporary metal (e.g., Behemoth)"
+          ],
+          "global_reach_score": 85
+        },
+        {
+          "medium": "Cinema",
+          "examples": [
+            "Krzysztof Kieślowski's 'Dekalog'",
+            "Roman Polański's 'The Pianist'",
+            "Andrzej Wajda's 'Man of Iron'"
+          ],
+          "global_reach_score": 75
+        },
+        {
+          "medium": "Cuisine",
+          "examples": [
+            "Pierogi",
+            "Bigos",
+            "Żurek",
+            "Kielbasa"
+          ],
+          "global_reach_score": 60
+        },
+        {
+          "medium": "Literature",
+          "examples": [
+            "Henryk Sienkiewicz ('Quo Vadis')",
+            "Wisława Szymborska (Nobel Laureate)",
+            "Olga Tokarczuk (Nobel Laureate)"
+          ],
+          "global_reach_score": 70
+        },
+        {
+          "medium": "Video Games",
+          "examples": [
+            "The Witcher series (CD Projekt Red)",
+            "Cyberpunk 2077"
+          ],
+          "global_reach_score": 90
+        }
+      ],
+      "spatial_landscape": {
+        "enclaves": [
+          "Polish Village, Chicago (USA)",
+          "Greenpoint, Brooklyn, New York (USA)",
+          "Ealing, London (UK)",
+          "Wilmersdorf, Berlin (Germany)"
+        ],
+        "architectural_footprint": "Gothic cathedrals, Renaissance town halls, Baroque palaces, Communist-era brutalism (e.g., Palace of Culture and Science), and modern minimalist designs.",
+        "description": "A diverse architectural tapestry reflecting centuries of influences, from medieval fortifications to grand royal residences, deeply impacted by wartime destruction and subsequent Communist-era rebuilding efforts, now blending with contemporary design."
+      }
+    },
+    "hybridity_and_glocalization": [
+      {
+        "concept": "Polish-American Culinary Fusion",
+        "description": "Adaptation of traditional Polish dishes with American ingredients and tastes, often resulting in new variations or preparation methods.",
+        "glocalized_examples": [
+          "Sweetened pierogi desserts",
+          "Paczkis (Polish doughnuts) gaining wider popularity beyond Fat Thursday",
+          "Polish-American sausage blends"
+        ],
+        "spatial_location": "Polish-American communities in cities like Chicago, Detroit, and New York."
+      },
+      {
+        "concept": "Polka Music Revival",
+        "description": "The traditional Polish folk dance music evolving and finding new audiences, especially in North America, blending with local styles.",
+        "glocalized_examples": [
+          "Contemporary polka bands incorporating rock or pop elements",
+          "Polka festivals in the US and Canada",
+          "The 'Happy Wanderer' style of polka"
+        ],
+        "spatial_location": "Midwestern United States, Canadian prairies, and festival circuits."
+      },
+      {
+        "concept": "Modern Polish Design & Craftsmanship",
+        "description": "Contemporary Polish designers and artists reinterpreting traditional motifs and techniques in modern products, furniture, and fashion, gaining international recognition.",
+        "glocalized_examples": [
+          "Bolesławiec pottery with modern patterns",
+          "Hand-blown glass art inspired by folk designs",
+          "Fashion brands utilizing traditional embroidery or fabrics"
+        ],
+        "spatial_location": "Design studios in Warsaw, Krakow, and Poznań, as well as international design fairs."
+      }
+    ]
+  }
+}

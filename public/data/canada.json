@@ -1,0 +1,536 @@
+{
+  "country_metadata": {
+    "name": "Canada",
+    "income_classification": "High Income",
+    "gni_per_capita_atlas": {
+      "value_usd": 53400,
+      "year": 2023
+    },
+    "hdi": {
+      "score": 0.935,
+      "rank": 15,
+      "year": 2022
+    },
+    "gni_per_capita_ppp": {
+      "value_usd": 58200,
+      "year": 2022
+    },
+    "gini_coefficient": {
+      "score": 31.7,
+      "year": 2020
+    }
+  },
+  "globalisation_tab": {
+    "kof_index": {
+      "economic": {
+        "de_facto": 78.5,
+        "de_jure": 82.1
+      },
+      "social": {
+        "interpersonal": {
+          "de_facto": 82.4,
+          "de_jure": 85.0
+        },
+        "informational": {
+          "de_facto": 89.2,
+          "de_jure": 88.0
+        },
+        "cultural": {
+          "de_facto": 85.5,
+          "de_jure": 86.8
+        }
+      },
+      "political": {
+        "de_facto": 92.1,
+        "de_jure": 94.6
+      }
+    },
+    "at_kearney_framework": {
+      "status": "Vastly Integrated",
+      "gci_score_or_tier": "Toronto (Beta+), Vancouver (Beta), Montreal (Beta)"
+    },
+    "ey_index_historical": {
+      "score": 4.3,
+      "analysis": "Extremely high economic integration with North American markets and G7 policy coordination is offset by physical geography barriers in northern resource corridors."
+    }
+  },
+  "economy_tab": {
+    "employment_structure": {
+      "primary": 1.5,
+      "secondary": 19.0,
+      "tertiary": 74.5,
+      "quaternary": 5.0
+    },
+    "trade_ledger": {
+      "main_exports": [
+        {
+          "commodity": "Crude Petroleum",
+          "pct_gdp": 21.5
+        },
+        {
+          "commodity": "Cars",
+          "pct_gdp": 6.5
+        },
+        {
+          "commodity": "Gold",
+          "pct_gdp": 4.2
+        },
+        {
+          "commodity": "Coal Briquettes",
+          "pct_gdp": 3.5
+        },
+        {
+          "commodity": "Sawn Wood",
+          "pct_gdp": 2.8
+        }
+      ],
+      "main_imports": [
+        {
+          "commodity": "Cars",
+          "pct_gdp": 8.5
+        },
+        {
+          "commodity": "Car Parts",
+          "pct_gdp": 4.2
+        },
+        {
+          "commodity": "Delivery Trucks",
+          "pct_gdp": 3.8
+        },
+        {
+          "commodity": "Refined Petroleum",
+          "pct_gdp": 3.2
+        },
+        {
+          "commodity": "Gas Turbines",
+          "pct_gdp": 2.1
+        }
+      ],
+      "top_partners_outgoing": [
+        {
+          "partner": "United States",
+          "value_usd_billions": 390.0
+        },
+        {
+          "partner": "China",
+          "value_usd_billions": 22.0
+        },
+        {
+          "partner": "United Kingdom",
+          "value_usd_billions": 18.0
+        },
+        {
+          "partner": "Japan",
+          "value_usd_billions": 14.0
+        },
+        {
+          "partner": "South Korea",
+          "value_usd_billions": 8.0
+        }
+      ],
+      "top_partners_incoming": [
+        {
+          "partner": "United States",
+          "value_usd_billions": 250.0
+        },
+        {
+          "partner": "China",
+          "value_usd_billions": 65.0
+        },
+        {
+          "partner": "Germany",
+          "value_usd_billions": 18.0
+        },
+        {
+          "partner": "Mexico",
+          "value_usd_billions": 17.0
+        },
+        {
+          "partner": "Japan",
+          "value_usd_billions": 12.0
+        }
+      ]
+    }
+  },
+  "human_geography_tab": {
+    "spatial_hubs": {
+      "epz_sez_zones": [
+        {
+          "name": "Winnipeg CentrePort Foreign Trade Zone",
+          "location_lat_long": "49.90, -97.23",
+          "primary_focus": "Inland port logistics, manufacturing corridors, and duty-free import processing."
+        },
+        {
+          "name": "Windsor-Essex Foreign Trade Zone",
+          "location_lat_long": "42.31, -83.03",
+          "primary_focus": "Automotive cluster supply chain, industrial manufacturing, and Great Lakes transit."
+        }
+      ],
+      "tourism_enclaves": [
+        {
+          "name": "Banff & Jasper National Parks Corridor",
+          "spatial_impact": "Eco-tourism enclaves protecting alpine ecosystems, but facing high seasonal transit density."
+        },
+        {
+          "name": "Niagara Falls Resort Zone",
+          "spatial_impact": "High-density mass-tourism enclave bordering the US, driving local services infrastructure."
+        }
+      ],
+      "core_periphery_zones": {
+        "core": "Windsor-Quebec City Corridor (contains over 60% of national population and manufacturing)",
+        "periphery": "Northern Territories (Yukon, NWT, Nunavut) and remote rural Atlantic margins"
+      }
+    },
+    "political_economy": {
+      "informal_economy_pct_gdp": 9.8,
+      "eiu_governance_type": "Full Democracy",
+      "freedom_house_status": "Free",
+      "corruption_perceptions_index": {
+        "score": 76,
+        "rank": 14
+      }
+    }
+  },
+  "prisoners_of_geography_map": {
+    "topographic_friction_points": [
+      {
+        "feature": "Canadian Shield",
+        "geopolitical_constraint": "Covers over 50% of the landmass with rugged, rocky terrain, limiting agricultural expansion and forcing settlement into southern strips."
+      },
+      {
+        "feature": "Arctic Archipelago",
+        "geopolitical_constraint": "Ice-bound fragmentation complicates national transport and requires heavy icebreaker support for shipping."
+      }
+    ],
+    "hydrological_arteries": [
+      {
+        "feature": "St. Lawrence River",
+        "strategic_advantage": "Key inland marine gateway linking the Atlantic Ocean to the industrial Great Lakes heartland."
+      },
+      {
+        "feature": "Mackenzie River",
+        "strategic_advantage": "Canada's longest river system, vital for sub-arctic drainage, forestry transport, and local northern ecosystems."
+      }
+    ],
+    "choke_points_vulnerabilities": [
+      {
+        "feature": "Strait of Juan de Fuca",
+        "impact": "Crucial shared maritime entry corridor for Vancouver and Seattle container shipping."
+      },
+      {
+        "feature": "Northwest Passage",
+        "impact": "Seasonally clearing ice lanes trigger international sovereignty disputes over tolls and transit controls."
+      }
+    ],
+    "buffer_zones": [
+      {
+        "region": "Arctic Ocean Boundary",
+        "significance": "Contested oceanic shelf boundaries rich in untapped gas and minerals, bordering Russia and the US."
+      },
+      {
+        "region": "Alaska-Yukon Border Margin",
+        "significance": "Secure land boundary with the US, facilitating joint defense (NORAD) and resource corridors."
+      }
+    ],
+    "map_center": {
+      "lat": 56.1304,
+      "lng": -106.3468,
+      "zoom": 4
+    }
+  },
+  "population_dynamics_time_series": [
+    {
+      "year": 1970,
+      "pyramid_structure": {
+        "cohorts": [
+          {
+            "age": "0-4",
+            "male_pct": 4.1,
+            "female_pct": 3.9
+          },
+          {
+            "age": "5-14",
+            "male_pct": 9.2,
+            "female_pct": 8.8
+          },
+          {
+            "age": "15-64",
+            "male_pct": 31.8,
+            "female_pct": 31.4
+          },
+          {
+            "age": "65-79",
+            "male_pct": 4.3,
+            "female_pct": 5.2
+          },
+          {
+            "age": "80+",
+            "male_pct": 0.6,
+            "female_pct": 0.7
+          }
+        ]
+      },
+      "sub_national_density_choropleth": [
+        {
+          "admin_1_region_name": "Ontario Province",
+          "density_per_km2": 14.5
+        },
+        {
+          "admin_1_region_name": "Quebec Province",
+          "density_per_km2": 5.8
+        },
+        {
+          "admin_1_region_name": "Northwest Territories",
+          "density_per_km2": 0.03
+        }
+      ],
+      "synoptic_analysis": "Broad-based pyramid showing rapid post-war growth and expansion of the baby boomer generation, supporting rapid industrialization."
+    },
+    {
+      "year": 2023,
+      "pyramid_structure": {
+        "cohorts": [
+          {
+            "age": "0-4",
+            "male_pct": 2.3,
+            "female_pct": 2.2
+          },
+          {
+            "age": "5-14",
+            "male_pct": 5.4,
+            "female_pct": 5.2
+          },
+          {
+            "age": "15-64",
+            "male_pct": 33.5,
+            "female_pct": 33.1
+          },
+          {
+            "age": "65-79",
+            "male_pct": 7.4,
+            "female_pct": 8.0
+          },
+          {
+            "age": "80+",
+            "male_pct": 1.3,
+            "female_pct": 1.6
+          }
+        ]
+      },
+      "sub_national_density_choropleth": [
+        {
+          "admin_1_region_name": "Ontario Province",
+          "density_per_km2": 15.2
+        },
+        {
+          "admin_1_region_name": "Quebec Province",
+          "density_per_km2": 6.2
+        },
+        {
+          "admin_1_region_name": "Northwest Territories",
+          "density_per_km2": 0.04
+        }
+      ],
+      "synoptic_analysis": "Stationary DTM Stage 4 profile. Slow natural birth growth buffered by aggressive targeted economic migration streams."
+    },
+    {
+      "year": 2026,
+      "pyramid_structure": {
+        "cohorts": [
+          {
+            "age": "0-4",
+            "male_pct": 2.2,
+            "female_pct": 2.1
+          },
+          {
+            "age": "5-14",
+            "male_pct": 5.2,
+            "female_pct": 5.0
+          },
+          {
+            "age": "15-64",
+            "male_pct": 33.2,
+            "female_pct": 32.8
+          },
+          {
+            "age": "65-79",
+            "male_pct": 7.9,
+            "female_pct": 8.5
+          },
+          {
+            "age": "80+",
+            "male_pct": 1.4,
+            "female_pct": 1.7
+          }
+        ]
+      },
+      "sub_national_density_choropleth": [
+        {
+          "admin_1_region_name": "Ontario Province",
+          "density_per_km2": 15.4
+        },
+        {
+          "admin_1_region_name": "Quebec Province",
+          "density_per_km2": 6.3
+        },
+        {
+          "admin_1_region_name": "Northwest Territories",
+          "density_per_km2": 0.04
+        }
+      ],
+      "synoptic_analysis": "Post-industrial demographic aging. The working-age base shrinks relative to expanding retired cohorts, driving reliance on immigration."
+    },
+    {
+      "year": 2040,
+      "pyramid_structure": {
+        "cohorts": [
+          {
+            "age": "0-4",
+            "male_pct": 1.8,
+            "female_pct": 1.7
+          },
+          {
+            "age": "5-14",
+            "male_pct": 4.6,
+            "female_pct": 4.4
+          },
+          {
+            "age": "15-64",
+            "male_pct": 29.8,
+            "female_pct": 29.2
+          },
+          {
+            "age": "65-79",
+            "male_pct": 10.2,
+            "female_pct": 11.0
+          },
+          {
+            "age": "80+",
+            "male_pct": 3.2,
+            "female_pct": 4.1
+          }
+        ]
+      },
+      "sub_national_density_choropleth": [
+        {
+          "admin_1_region_name": "Ontario Province",
+          "density_per_km2": 16.0
+        },
+        {
+          "admin_1_region_name": "Quebec Province",
+          "density_per_km2": 6.6
+        },
+        {
+          "admin_1_region_name": "Northwest Territories",
+          "density_per_km2": 0.05
+        }
+      ],
+      "synoptic_analysis": "Advanced contraction profile. High elderly dependency ratios and demographic stagnation, stressing healthcare and pension frameworks."
+    }
+  ],
+  "culture_tab": {
+    "inglehart_welzel_coords": {
+      "x": 1.8,
+      "y": 0.9,
+      "cultural_zone": "English-Speaking"
+    },
+    "largest_diasporas": [
+      {
+        "destination": "United States",
+        "population": "Approx. 800,000 - 1 million",
+        "cultural_reach_impact": "Massive integration of Canadian actors, musicians, and comedians into Hollywood and the US entertainment industry; strong regional cross-border community ties."
+      },
+      {
+        "destination": "United Kingdom",
+        "population": "Approx. 100,000",
+        "cultural_reach_impact": "Fosters Commonwealth links, with substantial numbers of Canadian professionals, students, and academics integrating into British institutions."
+      },
+      {
+        "destination": "Hong Kong",
+        "population": "Approx. 300,000",
+        "cultural_reach_impact": "Vast reverse-diaspora of Canadian passport holders returning to Hong Kong, acting as key bridges for business, culture, and educational links."
+      },
+      {
+        "destination": "Australia",
+        "population": "Approx. 50,000",
+        "cultural_reach_impact": "Active expat networks in urban centers (Sydney, Melbourne) sharing Commonwealth values and seasonal recreational tourism ties."
+      }
+    ],
+    "cultural_exports_and_landscape": {
+      "soft_power_exports": [
+        {
+          "medium": "Music (Global Pop/R&B)",
+          "examples": [
+            "Drake",
+            "The Weeknd",
+            "Justin Bieber / Celine Dion"
+          ],
+          "global_reach_score": 98
+        },
+        {
+          "medium": "Cinema & Television",
+          "examples": [
+            "Schitt's Creek",
+            "Ryan Reynolds / Jim Carrey / Keanu Reeves",
+            "Denis Villeneuve films (Dune)"
+          ],
+          "global_reach_score": 92
+        },
+        {
+          "medium": "Performing Arts & Circus",
+          "examples": [
+            "Cirque du Soleil",
+            "National Ballet of Canada"
+          ],
+          "global_reach_score": 85
+        },
+        {
+          "medium": "Sports Culture",
+          "examples": [
+            "Ice Hockey (NHL global reach)",
+            "Basketball (invention by James Naismith)"
+          ],
+          "global_reach_score": 80
+        }
+      ],
+      "spatial_landscape": {
+        "enclaves": [
+          "Richmond (Metro Vancouver - East Asian)",
+          "Little Italy / Chinatown (Toronto)",
+          "Francophone neighborhoods in Montreal"
+        ],
+        "architectural_footprint": "Châteauesque grand railway hotels, Indigenous longhouses, Victorian brick homes, and modern LEED-certified glass high-rises (Vancouverism).",
+        "description": "Canada's cultural landscape is shaped by the interplay of Indigenous heritage, British and French colonial foundations, and modern multicultural immigration. The urban spatial structure is highly marked by 'Vancouverism' (high-density residential glass towers surrounded by public green spaces) and distinct ethnic enclaves."
+      }
+    },
+    "hybridity_and_glocalization": [
+      {
+        "concept": "Glocalized Fast Food (Poutine adaptations)",
+        "description": "International fast-food chains adapting to the Canadian market by serving glocalized poutine options (fries, cheese curds, and gravy) and maple-flavored syrups.",
+        "glocalized_examples": [
+          "McDonald's Canada serving 'McPoutine' and maple-glazed pastries",
+          "Pizza Hut Canada introducing poutine-topped pizzas"
+        ],
+        "spatial_location": "Fast-food outlets and drive-thrus across all Canadian provinces."
+      },
+      {
+        "concept": "Indigenous-Contemporary Art Hybridity",
+        "description": "First Nations artists merging traditional storytelling, woodcarving, and formline design with contemporary Western mediums, prints, and galleries.",
+        "glocalized_examples": [
+          "Bill Reid's bronze sculpture 'The Spirit of Haida Gwaii' combining mythological formline with modern public art scaling",
+          "Indigenous fashion designers blending traditional hide-tanning with high-fashion runways"
+        ],
+        "spatial_location": "Museum of Anthropology in Vancouver, National Gallery of Canada in Ottawa, and international galleries."
+      },
+      {
+        "concept": "Quebec-Anglophone Musical Synthesis",
+        "description": "Artists blending traditional French-Canadian folk instrumentation (fiddles, accordion) with modern English pop, indie rock, and electronic structures.",
+        "glocalized_examples": [
+          "Arcade Fire's multilingual indie rock compositions featuring accordion and violin arrangements",
+          "Celine Dion recording dual-language albums tailored separately for French-European and global English-speaking audiences"
+        ],
+        "spatial_location": "Montreal's recording studios, Mile End venues, and international streaming services."
+      }
+    ]
+  }
+}

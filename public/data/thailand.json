@@ -1,0 +1,508 @@
+{
+  "country_metadata": {
+    "name": "Thailand",
+    "income_classification": "Upper-Middle Income",
+    "gni_per_capita_atlas": {
+      "value_usd": 7530,
+      "year": 2023
+    },
+    "hdi": {
+      "score": 0.803,
+      "rank": 66,
+      "year": 2022
+    },
+    "gni_per_capita_ppp": {
+      "value_usd": 20540,
+      "year": 2022
+    },
+    "gini_coefficient": {
+      "score": 35.1,
+      "year": 2021
+    }
+  },
+  "globalisation_tab": {
+    "kof_index": {
+      "economic": {
+        "de_facto": 71.2,
+        "de_jure": 73.5
+      },
+      "social": {
+        "interpersonal": {
+          "de_facto": 68.4,
+          "de_jure": 65.1
+        },
+        "informational": {
+          "de_facto": 74.2,
+          "de_jure": 72.8
+        },
+        "cultural": {
+          "de_facto": 58.3,
+          "de_jure": 60.1
+        }
+      },
+      "political": {
+        "de_facto": 78.5,
+        "de_jure": 81.2
+      }
+    },
+    "at_kearney_framework": {
+      "status": "Significantly Integrated",
+      "gci_score_or_tier": "Alpha/Beta"
+    },
+    "ey_index_historical": {
+      "score": 3.4,
+      "analysis": "Highly active integration in global automotive and electronics supply chains via intensive foreign direct investment (FDI)."
+    }
+  },
+  "economy_tab": {
+    "employment_structure": {
+      "primary": 31.2,
+      "secondary": 22.5,
+      "tertiary": 41.8,
+      "quaternary": 4.5
+    },
+    "trade_ledger": {
+      "main_exports": [
+        {
+          "commodity": "Office Machine Parts",
+          "pct_gdp": 12.5
+        },
+        {
+          "commodity": "Integrated Circuits",
+          "pct_gdp": 10.4
+        },
+        {
+          "commodity": "Cars & Motor Vehicles",
+          "pct_gdp": 9.1
+        },
+        {
+          "commodity": "Refined Petroleum",
+          "pct_gdp": 5.2
+        },
+        {
+          "commodity": "Rubber & Rice",
+          "pct_gdp": 4.8
+        }
+      ],
+      "main_imports": [
+        {
+          "commodity": "Crude Petroleum",
+          "pct_gdp": 14.2
+        },
+        {
+          "commodity": "Integrated Circuits",
+          "pct_gdp": 11.5
+        },
+        {
+          "commodity": "Gold",
+          "pct_gdp": 6.1
+        },
+        {
+          "commodity": "Office Machine Parts",
+          "pct_gdp": 4.8
+        },
+        {
+          "commodity": "Broadcasting Equipment",
+          "pct_gdp": 3.1
+        }
+      ],
+      "top_partners_outgoing": [
+        {
+          "partner": "United States",
+          "value_usd_billions": 48.2
+        },
+        {
+          "partner": "China",
+          "value_usd_billions": 34.5
+        },
+        {
+          "partner": "Japan",
+          "value_usd_billions": 25.1
+        },
+        {
+          "partner": "Vietnam",
+          "value_usd_billions": 13.8
+        },
+        {
+          "partner": "Malaysia",
+          "value_usd_billions": 12.5
+        }
+      ],
+      "top_partners_incoming": [
+        {
+          "partner": "China",
+          "value_usd_billions": 71.4
+        },
+        {
+          "partner": "Japan",
+          "value_usd_billions": 32.8
+        },
+        {
+          "partner": "United States",
+          "value_usd_billions": 18.2
+        },
+        {
+          "partner": "Taiwan",
+          "value_usd_billions": 14.5
+        },
+        {
+          "partner": "Malaysia",
+          "value_usd_billions": 13.1
+        }
+      ]
+    }
+  },
+  "human_geography_tab": {
+    "spatial_hubs": {
+      "epz_sez_zones": [
+        {
+          "name": "Eastern Economic Corridor (EEC)",
+          "location_lat_long": "13.01, 101.15",
+          "primary_focus": "Automotive robotics, smart electronics, biochem, and deep-water port logistics (Laem Chabang)."
+        }
+      ],
+      "tourism_enclaves": [
+        {
+          "name": "Phuket & Pattaya Beachfront Enclaves",
+          "spatial_impact": "Massively scaled, commercialized high-density international leisure zones."
+        }
+      ],
+      "core_periphery_zones": {
+        "core": "Bangkok Metropolitan Area & Central Plains",
+        "periphery": "Montane tribal villages of the far North and agricultural borders of Isan (Northeast)"
+      }
+    },
+    "political_economy": {
+      "informal_economy_pct_gdp": 46.2,
+      "eiu_governance_type": "Flawed Democracy",
+      "freedom_house_status": "Partly Free",
+      "corruption_perceptions_index": {
+        "score": 35,
+        "rank": 108
+      }
+    }
+  },
+  "prisoners_of_geography_map": {
+    "topographic_friction_points": [
+      {
+        "feature": "Thanon Thong Chai & Tenasserim Ranges",
+        "geopolitical_constraint": "Rugged mountains separating Thailand from Myanmar, historically channeling transport along the central lowlands."
+      }
+    ],
+    "hydrological_arteries": [
+      {
+        "feature": "Chao Phraya River & Delta",
+        "strategic_advantage": "Crucial agricultural basin and core transport spine supporting massive rice cultivation and the Bangkok manufacturing hub."
+      }
+    ],
+    "choke_points_vulnerabilities": [
+      {
+        "feature": "Malacca Strait Proximity / Kra Isthmus",
+        "impact": "All maritime trade routes must circumnavigate the Malay Peninsula, making the Kra Canal proposal a vital geopolitical flashpoint."
+      }
+    ],
+    "buffer_zones": [
+      {
+        "region": "Khorat Plateau",
+        "significance": "Mountain-ringed sandstone plateau in the northeast acting as a geographic transition zone bordering Laos and Cambodia."
+      }
+    ],
+    "map_center": {
+      "lat": 15.87,
+      "lng": 100.9925,
+      "zoom": 6
+    }
+  },
+  "population_dynamics_time_series": [
+    {
+      "year": 1970,
+      "pyramid_structure": {
+        "cohorts": [
+          {
+            "age": "0-4",
+            "male_pct": 7.8,
+            "female_pct": 7.5
+          },
+          {
+            "age": "5-14",
+            "male_pct": 13.8,
+            "female_pct": 13.4
+          },
+          {
+            "age": "15-64",
+            "male_pct": 26.2,
+            "female_pct": 25.4
+          },
+          {
+            "age": "65-79",
+            "male_pct": 1.7,
+            "female_pct": 1.9
+          },
+          {
+            "age": "80+",
+            "male_pct": 0.1,
+            "female_pct": 0.2
+          }
+        ]
+      },
+      "sub_national_density_choropleth": [
+        {
+          "admin_1_region_name": "Bangkok",
+          "density_per_km2": 2100
+        },
+        {
+          "admin_1_region_name": "Mae Hong Son",
+          "density_per_km2": 12
+        }
+      ],
+      "synoptic_analysis": "Expansive typical stage 2 structure displaying exceptionally fast family sizes matching rice agricultural dynamics."
+    },
+    {
+      "year": 2023,
+      "pyramid_structure": {
+        "cohorts": [
+          {
+            "age": "0-4",
+            "male_pct": 2.2,
+            "female_pct": 2
+          },
+          {
+            "age": "5-14",
+            "male_pct": 4.9,
+            "female_pct": 4.6
+          },
+          {
+            "age": "15-64",
+            "male_pct": 34.8,
+            "female_pct": 33.1
+          },
+          {
+            "age": "65-79",
+            "male_pct": 7.4,
+            "female_pct": 8.1
+          },
+          {
+            "age": "80+",
+            "male_pct": 1.3,
+            "female_pct": 1.6
+          }
+        ]
+      },
+      "sub_national_density_choropleth": [
+        {
+          "admin_1_region_name": "Bangkok",
+          "density_per_km2": 5300
+        },
+        {
+          "admin_1_region_name": "Mae Hong Son",
+          "density_per_km2": 24
+        }
+      ],
+      "synoptic_analysis": "Remarkably fast transition into low-birth-rate stage 4-5, resembling industrial powerhouse dynamics with accelerated aging."
+    },
+    {
+      "year": 2026,
+      "pyramid_structure": {
+        "cohorts": [
+          {
+            "age": "0-4",
+            "male_pct": 2,
+            "female_pct": 1.8
+          },
+          {
+            "age": "5-14",
+            "male_pct": 4.5,
+            "female_pct": 4.2
+          },
+          {
+            "age": "15-64",
+            "male_pct": 34.5,
+            "female_pct": 32.5
+          },
+          {
+            "age": "65-79",
+            "male_pct": 8,
+            "female_pct": 8.8
+          },
+          {
+            "age": "80+",
+            "male_pct": 1.6,
+            "female_pct": 2.1
+          }
+        ]
+      },
+      "sub_national_density_choropleth": [
+        {
+          "admin_1_region_name": "Bangkok",
+          "density_per_km2": 5410
+        },
+        {
+          "admin_1_region_name": "Mae Hong Son",
+          "density_per_km2": 25.1
+        }
+      ],
+      "synoptic_analysis": "Declining workforce pools prompting government policies to mechanize automotive industry floors and integrate migrant labor."
+    },
+    {
+      "year": 2040,
+      "pyramid_structure": {
+        "cohorts": [
+          {
+            "age": "0-4",
+            "male_pct": 1.5,
+            "female_pct": 1.3
+          },
+          {
+            "age": "5-14",
+            "male_pct": 3.4,
+            "female_pct": 3.1
+          },
+          {
+            "age": "15-64",
+            "male_pct": 30.1,
+            "female_pct": 28.2
+          },
+          {
+            "age": "65-79",
+            "male_pct": 11.8,
+            "female_pct": 13.2
+          },
+          {
+            "age": "80+",
+            "male_pct": 3.1,
+            "female_pct": 4.3
+          }
+        ]
+      },
+      "sub_national_density_choropleth": [
+        {
+          "admin_1_region_name": "Bangkok",
+          "density_per_km2": 5800
+        },
+        {
+          "admin_1_region_name": "Mae Hong Son",
+          "density_per_km2": 28
+        }
+      ],
+      "synoptic_analysis": "One of the world's most acutely aged developing societies, highlighting severe dependency risks and public pension stress."
+    }
+  ],
+  "culture_tab": {
+    "inglehart_welzel_coords": {
+      "x": -0.4,
+      "y": 0.5,
+      "cultural_zone": "Southeast Asian"
+    },
+    "largest_diasporas": [
+      {
+        "destination": "United States",
+        "population": "~300,000",
+        "cultural_reach_impact": "Significant presence of Thai restaurants, Buddhist temples, and cultural festivals, particularly in California and major cities, influencing local cuisine and spirituality."
+      },
+      {
+        "destination": "Malaysia",
+        "population": "~200,000",
+        "cultural_reach_impact": "Historical and ongoing cross-border migration, leading to shared cultural practices, cuisine, and religious ties in border regions."
+      },
+      {
+        "destination": "Australia",
+        "population": "~100,000",
+        "cultural_reach_impact": "Growing community with a strong impact on the culinary scene, presence of Thai community centers and cultural events, particularly in Sydney and Melbourne."
+      },
+      {
+        "destination": "Germany",
+        "population": "~90,000",
+        "cultural_reach_impact": "Smaller but notable diaspora, often through marriage, contributing to the spread of Thai cuisine and a more nuanced understanding of Thai culture in Europe."
+      }
+    ],
+    "cultural_exports_and_landscape": {
+      "soft_power_exports": [
+        {
+          "medium": "Cuisine",
+          "examples": [
+            "Pad Thai",
+            "Tom Yum Goong",
+            "Green Curry"
+          ],
+          "global_reach_score": 95
+        },
+        {
+          "medium": "Martial Arts",
+          "examples": [
+            "Muay Thai"
+          ],
+          "global_reach_score": 70
+        },
+        {
+          "medium": "Cinema & TV (Lakorn)",
+          "examples": [
+            "Ong-Bak",
+            "Bad Genius",
+            "Girl From Nowhere"
+          ],
+          "global_reach_score": 65
+        },
+        {
+          "medium": "Tourism & Spirituality",
+          "examples": [
+            "Buddhist Temples",
+            "Thai Massage",
+            "Islands & Beaches"
+          ],
+          "global_reach_score": 90
+        }
+      ],
+      "spatial_landscape": {
+        "enclaves": [
+          "Thai Town (Los Angeles, USA)",
+          "Phat Thai Alley (London, UK)",
+          "Thai Markets (Sydney, Australia)"
+        ],
+        "architectural_footprint": "Distinctive temple architecture (Wats) with tiered roofs and ornate decorations, often replicated in diaspora communities; influence of traditional wooden houses.",
+        "description": "Vibrant and aromatic spaces centered around food, traditional crafts, and spiritual practices, often featuring intricate Buddhist iconography and a strong sense of community."
+      }
+    },
+    "hybridity_and_glocalization": [
+      {
+        "concept": "Glocalized Thai Cuisine",
+        "description": "Adaptation of traditional Thai dishes to suit local palates and available ingredients in various international markets, often resulting in less spicy or sweeter versions.",
+        "glocalized_examples": [
+          "Pad Thai variations (e.g., vegetarian, with different proteins)",
+          "Thai curries adjusted for local spice tolerance",
+          "Fusion Thai dishes incorporating Western ingredients"
+        ],
+        "spatial_location": "Restaurants and food stalls worldwide, particularly in Western countries."
+      },
+      {
+        "concept": "T-Pop (Thai Pop Music)",
+        "description": "Thai popular music that integrates global pop trends (e.g., K-Pop, Western pop) with Thai language, cultural themes, and unique performance styles.",
+        "glocalized_examples": [
+          "Artists like BLACKPINK's Lisa (Thai member), F.HERO, Nont Tanont",
+          "Incorporation of traditional Thai instruments or melodic structures into pop songs",
+          "Music videos blending modern aesthetics with Thai cultural imagery"
+        ],
+        "spatial_location": "Online streaming platforms, regional music charts, fan communities globally."
+      },
+      {
+        "concept": "Urban Cultural Spaces",
+        "description": "Modern commercial and public spaces in Thailand that blend traditional Thai design elements with contemporary global architectural and retail concepts.",
+        "glocalized_examples": [
+          "Shopping malls with traditional Thai art installations or themed sections",
+          "Cafes and restaurants in Bangkok's trendy areas that fuse traditional decor with modern design",
+          "Contemporary art galleries showcasing Thai and international artists"
+        ],
+        "spatial_location": "Major cities like Bangkok, Chiang Mai, and tourist-heavy areas."
+      },
+      {
+        "concept": "International Buddhist Centers",
+        "description": "Thai Buddhist temples established in various countries, serving both the Thai diaspora and local non-Thai communities interested in Theravada Buddhism.",
+        "glocalized_examples": [
+          "Wat Thai Los Angeles (USA)",
+          "Wat Phra Dhammakaya London (UK)",
+          "Buddhist Vihara (Germany)"
+        ],
+        "spatial_location": "Major cities across North America, Europe, and Australia."
+      }
+    ]
+  }
+}

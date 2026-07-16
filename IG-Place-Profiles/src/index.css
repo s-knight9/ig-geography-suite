@@ -1,0 +1,184 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+}
+
+@layer utilities {
+  .hide-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .hide-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
+
+/* PDF export mode styles (replaces @media print for html-to-image) */
+body.pdf-export-mode {
+  -webkit-print-color-adjust: exact !important;
+  print-color-adjust: exact !important;
+  background: white !important;
+}
+
+body.pdf-export-mode .bg-white.rounded-2xl,
+body.pdf-export-mode .bg-white.rounded-xl,
+body.pdf-export-mode .print-avoid-break {
+  page-break-inside: avoid !important;
+  break-inside: avoid !important;
+}
+
+body.pdf-export-mode .overflow-y-auto {
+  overflow: visible !important;
+  max-height: none !important;
+}
+
+body.pdf-export-mode * {
+  color-adjust: exact !important;
+  -webkit-print-color-adjust: exact !important;
+}
+
+body.pdf-export-mode button,
+body.pdf-export-mode .print-hidden {
+  display: none !important;
+}
+
+body.pdf-export-mode main#comparison-dashboard-root {
+  padding: 32px !important;
+  margin: 0 auto !important;
+  background: white !important;
+  width: 1280px !important;
+  max-width: 1280px !important;
+}
+
+body.pdf-export-mode .xl\:grid-cols-2,
+body.pdf-export-mode .lg\:grid-cols-2,
+body.pdf-export-mode .md\:grid-cols-2 {
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+}
+
+body.pdf-export-mode .sm\:grid-cols-3,
+body.pdf-export-mode .md\:grid-cols-3,
+body.pdf-export-mode .lg\:grid-cols-3 {
+  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+}
+
+body.pdf-export-mode .md\:grid-cols-4,
+body.pdf-export-mode .lg\:grid-cols-4 {
+  grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+}
+
+body.pdf-export-mode .lg\:grid-cols-5 {
+  grid-template-columns: repeat(5, minmax(0, 1fr)) !important;
+}
+
+body.pdf-export-mode .xl\:grid-cols-6 {
+  grid-template-columns: repeat(6, minmax(0, 1fr)) !important;
+}
+
+body.pdf-export-mode .lg\:grid-cols-12 {
+  grid-template-columns: repeat(12, minmax(0, 1fr)) !important;
+}
+
+body.pdf-export-mode .sm\:flex-row,
+body.pdf-export-mode .md\:flex-row,
+body.pdf-export-mode .lg\:flex-row {
+  flex-direction: row !important;
+}
+
+body.pdf-export-mode .sm\:items-center,
+body.pdf-export-mode .md\:items-center {
+  align-items: center !important;
+}
+
+body.pdf-export-mode .sm\:justify-between {
+  justify-content: space-between !important;
+}
+
+body.pdf-export-mode .md\:block {
+  display: block !important;
+}
+
+body.pdf-export-mode .md\:hidden {
+  display: none !important;
+}
+
+body.pdf-export-mode .lg\:flex {
+  display: flex !important;
+}
+
+body.pdf-export-mode #flag-player-container, 
+body.pdf-export-mode #flag-player-container div {
+  transform-style: flat !important;
+  perspective: none !important;
+  backface-visibility: visible !important;
+  transform: none !important;
+}
+
+/* Global Dark Mode Overrides for Place Profiles App */
+.dark:not(.pdf-export-mode) .bg-white {
+  background-color: var(--color-slate-900) !important;
+}
+.dark:not(.pdf-export-mode) .bg-slate-50 {
+  background-color: var(--color-slate-950) !important;
+}
+.dark:not(.pdf-export-mode) .bg-slate-100 {
+  background-color: var(--color-slate-800) !important;
+}
+.dark:not(.pdf-export-mode) .border-slate-100,
+.dark:not(.pdf-export-mode) .border-slate-150,
+.dark:not(.pdf-export-mode) .border-slate-200 {
+  border-color: var(--color-slate-800) !important;
+}
+.dark:not(.pdf-export-mode) .text-slate-800,
+.dark:not(.pdf-export-mode) .text-slate-900 {
+  color: var(--color-slate-100) !important;
+}
+.dark:not(.pdf-export-mode) .text-slate-600,
+.dark:not(.pdf-export-mode) .text-slate-700 {
+  color: var(--color-slate-300) !important;
+}
+.dark:not(.pdf-export-mode) .text-slate-500 {
+  color: var(--color-slate-400) !important;
+}
+
+/* Specific SVG Overrides (like DTM) */
+.dark:not(.pdf-export-mode) rect[fill="#f0fdf4"] {
+  fill: #052e16 !important;
+  stroke: #10b981 !important;
+}
+.dark:not(.pdf-export-mode) line[stroke="#e2e8f0"] {
+  stroke: var(--color-slate-800) !important;
+}
+.dark:not(.pdf-export-mode) text.fill-slate-400,
+.dark:not(.pdf-export-mode) text.fill-slate-500 {
+  fill: var(--color-slate-400) !important;
+}
+
+/* Recharts Tooltip Overrides */
+.dark:not(.pdf-export-mode) .recharts-default-tooltip {
+  background-color: var(--color-slate-900) !important;
+  border-color: var(--color-slate-800) !important;
+}
+.dark:not(.pdf-export-mode) .recharts-tooltip-item-name,
+.dark:not(.pdf-export-mode) .recharts-tooltip-item-value {
+  color: var(--color-slate-200) !important;
+}
+.dark:not(.pdf-export-mode) .recharts-tooltip-label {
+  color: var(--color-slate-100) !important;
+}
+
+/* Leaflet Dark Map Tiles */
+.dark:not(.pdf-export-mode) .leaflet-container {
+  filter: invert(100%) hue-rotate(180deg) brightness(95%) contrast(90%);
+}
+.dark:not(.pdf-export-mode) .leaflet-control-zoom-in,
+.dark:not(.pdf-export-mode) .leaflet-control-zoom-out {
+  background-color: var(--color-slate-900) !important;
+  color: var(--color-slate-200) !important;
+  border-color: var(--color-slate-800) !important;
+}
+
+

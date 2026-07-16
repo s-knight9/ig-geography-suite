@@ -1,0 +1,507 @@
+{
+  "country_metadata": {
+    "name": "Singapore",
+    "income_classification": "High Income",
+    "gni_per_capita_atlas": {
+      "value_usd": 74310,
+      "year": 2023
+    },
+    "hdi": {
+      "score": 0.949,
+      "rank": 9,
+      "year": 2022
+    },
+    "gni_per_capita_ppp": {
+      "value_usd": 102450,
+      "year": 2022
+    },
+    "gini_coefficient": {
+      "score": 45.1,
+      "year": 2020
+    }
+  },
+  "globalisation_tab": {
+    "kof_index": {
+      "economic": {
+        "de_facto": 96.2,
+        "de_jure": 95.1
+      },
+      "social": {
+        "interpersonal": {
+          "de_facto": 90.5,
+          "de_jure": 88.2
+        },
+        "informational": {
+          "de_facto": 93.1,
+          "de_jure": 91.5
+        },
+        "cultural": {
+          "de_facto": 88.4,
+          "de_jure": 86.8
+        }
+      },
+      "political": {
+        "de_facto": 71.5,
+        "de_jure": 74.2
+      }
+    },
+    "at_kearney_framework": {
+      "status": "Vastly Integrated",
+      "gci_score_or_tier": "Alpha"
+    },
+    "ey_index_historical": {
+      "score": 4.8,
+      "analysis": "The world's premier globalisation benchmark. Extreme trade open-door ratios exceed double the national GDP volume seamlessly."
+    }
+  },
+  "economy_tab": {
+    "employment_structure": {
+      "primary": 0.1,
+      "secondary": 14.8,
+      "tertiary": 65.1,
+      "quaternary": 20
+    },
+    "trade_ledger": {
+      "main_exports": [
+        {
+          "commodity": "Integrated Circuits",
+          "pct_gdp": 38.5
+        },
+        {
+          "commodity": "Refined Petroleum",
+          "pct_gdp": 16.4
+        },
+        {
+          "commodity": "Gold",
+          "pct_gdp": 8.2
+        },
+        {
+          "commodity": "Gas Turbines",
+          "pct_gdp": 5.4
+        },
+        {
+          "commodity": "Packaged Medicaments",
+          "pct_gdp": 4.1
+        }
+      ],
+      "main_imports": [
+        {
+          "commodity": "Integrated Circuits",
+          "pct_gdp": 32.1
+        },
+        {
+          "commodity": "Refined Petroleum",
+          "pct_gdp": 15.2
+        },
+        {
+          "commodity": "Crude Petroleum",
+          "pct_gdp": 8.5
+        },
+        {
+          "commodity": "Gold",
+          "pct_gdp": 6.8
+        },
+        {
+          "commodity": "Gas Turbines",
+          "pct_gdp": 3.8
+        }
+      ],
+      "top_partners_outgoing": [
+        {
+          "partner": "China",
+          "value_usd_billions": 58.5
+        },
+        {
+          "partner": "Hong Kong",
+          "value_usd_billions": 49.2
+        },
+        {
+          "partner": "Malaysia",
+          "value_usd_billions": 42.1
+        },
+        {
+          "partner": "United States",
+          "value_usd_billions": 38.5
+        },
+        {
+          "partner": "Indonesia",
+          "value_usd_billions": 28.1
+        }
+      ],
+      "top_partners_incoming": [
+        {
+          "partner": "China",
+          "value_usd_billions": 68.4
+        },
+        {
+          "partner": "Malaysia",
+          "value_usd_billions": 54.1
+        },
+        {
+          "partner": "Taiwan",
+          "value_usd_billions": 48.2
+        },
+        {
+          "partner": "United States",
+          "value_usd_billions": 44.1
+        },
+        {
+          "partner": "Japan",
+          "value_usd_billions": 25.1
+        }
+      ]
+    }
+  },
+  "human_geography_tab": {
+    "spatial_hubs": {
+      "epz_sez_zones": [
+        {
+          "name": "Jurong Island Chemical Cluster",
+          "location_lat_long": "1.27, 103.72",
+          "primary_focus": "Automated artificial offshore landmass dedicated to mega refineries and chemical processing."
+        },
+        {
+          "name": "one-north R&D District",
+          "location_lat_long": "1.30, 103.79",
+          "primary_focus": "Tech incubation, artificial intelligence hubs, and biomedical laboratories (Biopolis)."
+        }
+      ],
+      "tourism_enclaves": [
+        {
+          "name": "Marina Bay Sands & Sentosa Island",
+          "spatial_impact": "Highly artificial, integrated resort enclaves hosting global corporate casinos and entertainment."
+        }
+      ],
+      "core_periphery_zones": {
+        "core": "Downtown Core & Central Business District (CBD)",
+        "periphery": "Suburban industrial estates of Jurong West and northern border estates of Woodlands"
+      }
+    },
+    "political_economy": {
+      "informal_economy_pct_gdp": 4.1,
+      "eiu_governance_type": "Flawed Democracy",
+      "freedom_house_status": "Partly Free",
+      "corruption_perceptions_index": {
+        "score": 83,
+        "rank": 5
+      }
+    }
+  },
+  "prisoners_of_geography_map": {
+    "topographic_friction_points": [
+      {
+        "feature": "Minimal Relief / Tiny Flat Island",
+        "geopolitical_constraint": "Extreme land area constraints, requiring colossal coastal space optimization and massive sea dredging projects."
+      }
+    ],
+    "hydrological_arteries": [
+      {
+        "feature": "Marina Reservoir & Tuas Desalination",
+        "strategic_advantage": "Short urban rivers transformed into comprehensive municipal catchments to guarantee sovereign water independence."
+      }
+    ],
+    "choke_points_vulnerabilities": [
+      {
+        "feature": "Straits of Singapore & Malacca",
+        "impact": "The world's premier maritime chokepoint, regulating over 25% of global oil shipments and container lines."
+      }
+    ],
+    "buffer_zones": [
+      {
+        "region": "Johor Strait Water Boundary",
+        "significance": "Sovereign water buffer separating Singapore from Malaysia, critical to transport, water pipes, and defense lines."
+      }
+    ],
+    "map_center": {
+      "lat": 1.3521,
+      "lng": 103.8198,
+      "zoom": 11
+    }
+  },
+  "population_dynamics_time_series": [
+    {
+      "year": 1970,
+      "pyramid_structure": {
+        "cohorts": [
+          {
+            "age": "0-4",
+            "male_pct": 5.4,
+            "female_pct": 5.1
+          },
+          {
+            "age": "5-14",
+            "male_pct": 11.8,
+            "female_pct": 11.2
+          },
+          {
+            "age": "15-64",
+            "male_pct": 31.4,
+            "female_pct": 30.1
+          },
+          {
+            "age": "65-79",
+            "male_pct": 2.2,
+            "female_pct": 2.5
+          },
+          {
+            "age": "80+",
+            "male_pct": 0.2,
+            "female_pct": 0.1
+          }
+        ]
+      },
+      "sub_national_density_choropleth": [
+        {
+          "admin_1_region_name": "Central Region",
+          "density_per_km2": 4500
+        },
+        {
+          "admin_1_region_name": "West Region",
+          "density_per_km2": 800
+        }
+      ],
+      "synoptic_analysis": "Expansive post-colonial youth bulge which was successfully absorbed into rapid export-oriented manufacturing."
+    },
+    {
+      "year": 2023,
+      "pyramid_structure": {
+        "cohorts": [
+          {
+            "age": "0-4",
+            "male_pct": 1.6,
+            "female_pct": 1.5
+          },
+          {
+            "age": "5-14",
+            "male_pct": 3.9,
+            "female_pct": 3.7
+          },
+          {
+            "age": "15-64",
+            "male_pct": 35.8,
+            "female_pct": 33.4
+          },
+          {
+            "age": "65-79",
+            "male_pct": 8,
+            "female_pct": 8.8
+          },
+          {
+            "age": "80+",
+            "male_pct": 2.1,
+            "female_pct": 2.7
+          }
+        ]
+      },
+      "sub_national_density_choropleth": [
+        {
+          "admin_1_region_name": "Central Region",
+          "density_per_km2": 11800
+        },
+        {
+          "admin_1_region_name": "West Region",
+          "density_per_km2": 3200
+        }
+      ],
+      "synoptic_analysis": "Extreme modern contractive stage 5 profile. Extremely low natural fertility offset only by foreign white-collar professionals."
+    },
+    {
+      "year": 2026,
+      "pyramid_structure": {
+        "cohorts": [
+          {
+            "age": "0-4",
+            "male_pct": 1.5,
+            "female_pct": 1.4
+          },
+          {
+            "age": "5-14",
+            "male_pct": 3.6,
+            "female_pct": 3.4
+          },
+          {
+            "age": "15-64",
+            "male_pct": 35.1,
+            "female_pct": 32.8
+          },
+          {
+            "age": "65-79",
+            "male_pct": 8.9,
+            "female_pct": 9.7
+          },
+          {
+            "age": "80+",
+            "male_pct": 2.3,
+            "female_pct": 3.1
+          }
+        ]
+      },
+      "sub_national_density_choropleth": [
+        {
+          "admin_1_region_name": "Central Region",
+          "density_per_km2": 12100
+        },
+        {
+          "admin_1_region_name": "West Region",
+          "density_per_km2": 3300
+        }
+      ],
+      "synoptic_analysis": "Workforce limits requiring intensive automated AI systems and strict foreign-worker quota balancing acts."
+    },
+    {
+      "year": 2040,
+      "pyramid_structure": {
+        "cohorts": [
+          {
+            "age": "0-4",
+            "male_pct": 1.1,
+            "female_pct": 1
+          },
+          {
+            "age": "5-14",
+            "male_pct": 2.6,
+            "female_pct": 2.4
+          },
+          {
+            "age": "15-64",
+            "male_pct": 28.5,
+            "female_pct": 26.8
+          },
+          {
+            "age": "65-79",
+            "male_pct": 14.2,
+            "female_pct": 15.6
+          },
+          {
+            "age": "80+",
+            "male_pct": 4.9,
+            "female_pct": 6.3
+          }
+        ]
+      },
+      "sub_national_density_choropleth": [
+        {
+          "admin_1_region_name": "Central Region",
+          "density_per_km2": 13500
+        },
+        {
+          "admin_1_region_name": "West Region",
+          "density_per_km2": 3800
+        }
+      ],
+      "synoptic_analysis": "Super-aged demographic state presenting profound structural care home reliance and pension-fund strains."
+    }
+  ],
+  "culture_tab": {
+    "inglehart_welzel_coords": {
+      "x": 1.5,
+      "y": 1,
+      "cultural_zone": "East Asian (with unique multicultural blend)"
+    },
+    "largest_diasporas": [
+      {
+        "destination": "Australia",
+        "population": "Approx. 50,000",
+        "cultural_reach_impact": "Subtle influence through professional networks, culinary presence, and contribution to multicultural urban centers."
+      },
+      {
+        "destination": "United Kingdom",
+        "population": "Approx. 30,000",
+        "cultural_reach_impact": "Primarily through academic and professional contributions; limited overt cultural impact but strengthens bilateral ties."
+      },
+      {
+        "destination": "United States",
+        "population": "Approx. 25,000",
+        "cultural_reach_impact": "Strong presence in tech and academic sectors; contributes to culinary diversity in major cities like New York and San Francisco."
+      },
+      {
+        "destination": "Malaysia",
+        "population": "Approx. 100,000 (including permanent residents/workers)",
+        "cultural_reach_impact": "Significant cross-border cultural exchange, particularly in Johor Bahru, influencing lifestyle and culinary trends."
+      }
+    ],
+    "cultural_exports_and_landscape": {
+      "soft_power_exports": [
+        {
+          "medium": "Cuisine",
+          "examples": [
+            "Hainanese Chicken Rice",
+            "Chilli Crab",
+            "Laksa",
+            "Hawker Culture"
+          ],
+          "global_reach_score": 90
+        },
+        {
+          "medium": "Urban Planning & Architecture",
+          "examples": [
+            "Gardens by the Bay",
+            "Marina Bay Sands",
+            "Jewel Changi Airport"
+          ],
+          "global_reach_score": 85
+        },
+        {
+          "medium": "Film & Television",
+          "examples": [
+            "Ilo Ilo",
+            "881",
+            "Crazy Rich Asians (setting)"
+          ],
+          "global_reach_score": 65
+        },
+        {
+          "medium": "Music",
+          "examples": [
+            "JJ Lin",
+            "Gentle Bones",
+            "Charlie Lim"
+          ],
+          "global_reach_score": 60
+        }
+      ],
+      "spatial_landscape": {
+        "enclaves": [
+          "Chinatown",
+          "Little India",
+          "Kampong Glam (Arab Street)"
+        ],
+        "architectural_footprint": "A striking blend of meticulously preserved colonial-era shophouses, modernist high-rises, and futuristic biophilic structures (e.g., Supertrees).",
+        "description": "Singapore's spatial landscape is a testament to its 'Garden City' vision, featuring lush urban greenery interwoven with a dense, highly efficient urban fabric. Distinct ethnic enclaves maintain historical character amidst a skyline dominated by innovative architectural landmarks."
+      }
+    },
+    "hybridity_and_glocalization": [
+      {
+        "concept": "Singlish",
+        "description": "A unique creole language that blends English with elements of Malay, Hokkien, Cantonese, Tamil, and other languages, reflecting Singapore's multicultural linguistic heritage.",
+        "glocalized_examples": [
+          "'Lah' for emphasis",
+          "'Kiasu' (fear of losing out)",
+          "'Shiok' (delicious/great feeling)"
+        ],
+        "spatial_location": "Ubiquitous in informal communication across all segments of Singaporean society, both public and private spaces."
+      },
+      {
+        "concept": "Hawker Culture",
+        "description": "A vibrant culinary ecosystem of open-air food complexes offering a vast array of affordable local and regional dishes, showcasing the fusion of Singapore's diverse ethnic cuisines.",
+        "glocalized_examples": [
+          "Hainanese Chicken Rice (Chinese diaspora adaptation)",
+          "Laksa (Peranakan/Malay-Chinese fusion)",
+          "Indian Rojak (localized Indian snack)"
+        ],
+        "spatial_location": "Found in hawker centers, coffee shops, and food courts throughout every neighborhood in Singapore."
+      },
+      {
+        "concept": "Peranakan Culture",
+        "description": "A distinctive culture born from the intermarriage of early Chinese immigrants with local Malays, known for its unique blend of customs, elaborate cuisine, intricate beadwork, and vibrant attire.",
+        "glocalized_examples": [
+          "Nyonya Laksa",
+          "Ayam Buah Keluak",
+          "Kebaya (traditional dress)",
+          "Peranakan shophouse architecture"
+        ],
+        "spatial_location": "Most prominent in the Joo Chiat/Katong district, Peranakan Museum, and select heritage establishments across the island."
+      }
+    ]
+  }
+}

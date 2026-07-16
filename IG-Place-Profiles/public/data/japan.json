@@ -1,0 +1,543 @@
+{
+  "country_metadata": {
+    "name": "Japan",
+    "income_classification": "High Income",
+    "gni_per_capita_atlas": {
+      "value_usd": 42200,
+      "year": 2023
+    },
+    "hdi": {
+      "score": 0.920,
+      "rank": 24,
+      "year": 2022
+    },
+    "gni_per_capita_ppp": {
+      "value_usd": 48500,
+      "year": 2022
+    },
+    "gini_coefficient": {
+      "score": 32.9,
+      "year": 2018
+    }
+  },
+  "globalisation_tab": {
+    "kof_index": {
+      "economic": {
+        "de_facto": 75.2,
+        "de_jure": 78.4
+      },
+      "social": {
+        "interpersonal": {
+          "de_facto": 68.2,
+          "de_jure": 72.4
+        },
+        "informational": {
+          "de_facto": 88.5,
+          "de_jure": 85.1
+        },
+        "cultural": {
+          "de_facto": 76.4,
+          "de_jure": 79.2
+        }
+      },
+      "political": {
+        "de_facto": 89.4,
+        "de_jure": 92.1
+      }
+    },
+    "at_kearney_framework": {
+      "status": "Vastly Integrated",
+      "gci_score_or_tier": "Tokyo (Alpha+), Osaka (Beta+)"
+    },
+    "ey_index_historical": {
+      "score": 4.1,
+      "analysis": "Strong political integration and high technology exports offset slightly by conservative migration controls and high domestic cultural homogeneity."
+    }
+  },
+  "economy_tab": {
+    "employment_structure": {
+      "primary": 3.1,
+      "secondary": 22.8,
+      "tertiary": 69.1,
+      "quaternary": 5.0
+    },
+    "trade_ledger": {
+      "main_exports": [
+        {
+          "commodity": "Cars",
+          "pct_gdp": 12.5
+        },
+        {
+          "commodity": "Integrated Circuits",
+          "pct_gdp": 4.5
+        },
+        {
+          "commodity": "Vehicle Parts",
+          "pct_gdp": 3.9
+        },
+        {
+          "commodity": "Machinery",
+          "pct_gdp": 3.4
+        },
+        {
+          "commodity": "Refined Petroleum",
+          "pct_gdp": 2.1
+        }
+      ],
+      "main_imports": [
+        {
+          "commodity": "Crude Petroleum",
+          "pct_gdp": 8.1
+        },
+        {
+          "commodity": "Coal",
+          "pct_gdp": 4.8
+        },
+        {
+          "commodity": "Liquefied Natural Gas",
+          "pct_gdp": 4.4
+        },
+        {
+          "commodity": "Integrated Circuits",
+          "pct_gdp": 3.2
+        },
+        {
+          "commodity": "Broadcasting Equipment",
+          "pct_gdp": 2.3
+        }
+      ],
+      "top_partners_outgoing": [
+        {
+          "partner": "China",
+          "value_usd_billions": 145.0
+        },
+        {
+          "partner": "United States",
+          "value_usd_billions": 135.0
+        },
+        {
+          "partner": "South Korea",
+          "value_usd_billions": 52.0
+        },
+        {
+          "partner": "Taiwan",
+          "value_usd_billions": 48.0
+        },
+        {
+          "partner": "Thailand",
+          "value_usd_billions": 28.0
+        }
+      ],
+      "top_partners_incoming": [
+        {
+          "partner": "China",
+          "value_usd_billions": 185.0
+        },
+        {
+          "partner": "United States",
+          "value_usd_billions": 82.0
+        },
+        {
+          "partner": "Australia",
+          "value_usd_billions": 62.0
+        },
+        {
+          "partner": "Saudi Arabia",
+          "value_usd_billions": 38.0
+        },
+        {
+          "partner": "United Arab Emirates",
+          "value_usd_billions": 35.0
+        }
+      ]
+    }
+  },
+  "human_geography_tab": {
+    "spatial_hubs": {
+      "epz_sez_zones": [
+        {
+          "name": "Keihin Industrial Zone (Tokyo-Yokohama)",
+          "location_lat_long": "35.44, 139.64",
+          "primary_focus": "High-technology machinery, steel, petrochemicals, and automotive manufacturing clusters."
+        },
+        {
+          "name": "Hanshin Industrial Zone (Osaka-Kobe)",
+          "location_lat_long": "34.69, 135.50",
+          "primary_focus": "Heavy industry, chemical plants, metal processing, and consumer electronics hub."
+        }
+      ],
+      "tourism_enclaves": [
+        {
+          "name": "Kyoto Historic District",
+          "spatial_impact": "Conserves ancient temples and cultural landscapes; faces intense urban tourism density issues."
+        },
+        {
+          "name": "Okinawa Resort Coastline",
+          "spatial_impact": "Subtropical coastal mass-tourism enclave with distinct spatial isolation from main industrial Honshu."
+        }
+      ],
+      "core_periphery_zones": {
+        "core": "Kanto Plain & Tokaido Megalopolis (Tokyo, Nagoya, Osaka belt)",
+        "periphery": "Hokkaido (Northern wilderness/agri) and Tohoku/Okinawa remote islands"
+      }
+    },
+    "political_economy": {
+      "informal_economy_pct_gdp": 8.2,
+      "eiu_governance_type": "Full Democracy",
+      "freedom_house_status": "Free",
+      "corruption_perceptions_index": {
+        "score": 73,
+        "rank": 16
+      }
+    }
+  },
+  "prisoners_of_geography_map": {
+    "topographic_friction_points": [
+      {
+        "feature": "Mountainous Interior & Japanese Alps",
+        "geopolitical_constraint": "Covers over 70% of the landmass, forcing extremely high-density urban agglomeration onto narrow, fragmented coastal plains."
+      },
+      {
+        "feature": "Archipelago Fragmentation",
+        "geopolitical_constraint": "Separation into Honshu, Hokkaido, Kyushu, and Shikoku requires capital-intensive transport infrastructures (Seikan Tunnel, Seto Ohashi bridges)."
+      }
+    ],
+    "hydrological_arteries": [
+      {
+        "feature": "Shinano River",
+        "strategic_advantage": "Archipelago's longest river; essential water resource for Honshu agricultural plains, hydro-power, and flood mitigation."
+      },
+      {
+        "feature": "Tone River",
+        "strategic_advantage": "Largest drainage basin; serves as the vital municipal water supply artery for the 38-million strong Tokyo Metropolitan Area."
+      }
+    ],
+    "choke_points_vulnerabilities": [
+      {
+        "feature": "Tsushima Strait (Korea Strait)",
+        "impact": "Crucial maritime gateway linking the East China Sea and Sea of Japan, surrounded by competitive regional powers."
+      },
+      {
+        "feature": "Tokyo Bay Approach",
+        "impact": "High traffic density choke point where the vast majority of Japan's energy imports and containerized trade pass."
+      }
+    ],
+    "buffer_zones": [
+      {
+        "region": "Kuril Islands (Northern Territories) Dispute",
+        "significance": "Sensitive military and maritime buffer zone claimed by Japan but occupied by Russia since the end of WWII."
+      },
+      {
+        "region": "Senkaku/Diaoyu Islands Margin",
+        "significance": "Highly contentious East China Sea maritime buffer zone serving as a flashpoint for patrols and resource claims with China."
+      }
+    ],
+    "map_center": {
+      "lat": 36.2048,
+      "lng": 138.2529,
+      "zoom": 5
+    }
+  },
+  "population_dynamics_time_series": [
+    {
+      "year": 1970,
+      "pyramid_structure": {
+        "cohorts": [
+          {
+            "age": "0-4",
+            "male_pct": 4.2,
+            "female_pct": 4.0
+          },
+          {
+            "age": "5-14",
+            "male_pct": 9.3,
+            "female_pct": 8.8
+          },
+          {
+            "age": "15-64",
+            "male_pct": 34.6,
+            "female_pct": 34.3
+          },
+          {
+            "age": "65-79",
+            "male_pct": 3.1,
+            "female_pct": 3.8
+          },
+          {
+            "age": "80+",
+            "male_pct": 0.3,
+            "female_pct": 0.5
+          }
+        ]
+      },
+      "sub_national_density_choropleth": [
+        {
+          "admin_1_region_name": "Tokyo Prefecture",
+          "density_per_km2": 5200
+        },
+        {
+          "admin_1_region_name": "Osaka Prefecture",
+          "density_per_km2": 3800
+        },
+        {
+          "admin_1_region_name": "Hokkaido Region",
+          "density_per_km2": 65
+        }
+      ],
+      "synoptic_analysis": "Expansive post-war population growth forming a stable, broad workforce base supporting the historic industrial 'economic miracle'."
+    },
+    {
+      "year": 2023,
+      "pyramid_structure": {
+        "cohorts": [
+          {
+            "age": "0-4",
+            "male_pct": 1.8,
+            "female_pct": 1.7
+          },
+          {
+            "age": "5-14",
+            "male_pct": 4.6,
+            "female_pct": 4.4
+          },
+          {
+            "age": "15-64",
+            "male_pct": 29.5,
+            "female_pct": 28.8
+          },
+          {
+            "age": "65-79",
+            "male_pct": 9.8,
+            "female_pct": 10.9
+          },
+          {
+            "age": "80+",
+            "male_pct": 3.8,
+            "female_pct": 6.2
+          }
+        ]
+      },
+      "sub_national_density_choropleth": [
+        {
+          "admin_1_region_name": "Tokyo Prefecture",
+          "density_per_km2": 6400
+        },
+        {
+          "admin_1_region_name": "Osaka Prefecture",
+          "density_per_km2": 4600
+        },
+        {
+          "admin_1_region_name": "Hokkaido Region",
+          "density_per_km2": 60
+        }
+      ],
+      "synoptic_analysis": "Highly advanced contractive stage 5 profile. Deep structural workforce decline and rapid expansion of the super-aged cohorts."
+    },
+    {
+      "year": 2026,
+      "pyramid_structure": {
+        "cohorts": [
+          {
+            "age": "0-4",
+            "male_pct": 1.7,
+            "female_pct": 1.6
+          },
+          {
+            "age": "5-14",
+            "male_pct": 4.4,
+            "female_pct": 4.2
+          },
+          {
+            "age": "15-64",
+            "male_pct": 28.8,
+            "female_pct": 28.1
+          },
+          {
+            "age": "65-79",
+            "male_pct": 9.6,
+            "female_pct": 10.7
+          },
+          {
+            "age": "80+",
+            "male_pct": 4.3,
+            "female_pct": 7.0
+          }
+        ]
+      },
+      "sub_national_density_choropleth": [
+        {
+          "admin_1_region_name": "Tokyo Prefecture",
+          "density_per_km2": 6450
+        },
+        {
+          "admin_1_region_name": "Osaka Prefecture",
+          "density_per_km2": 4580
+        },
+        {
+          "admin_1_region_name": "Hokkaido Region",
+          "density_per_km2": 58
+        }
+      ],
+      "synoptic_analysis": "Super-aged demographic crisis. Severe labor shortages driving national reliance on industrial automation, robotics, and eldercare technologies."
+    },
+    {
+      "year": 2040,
+      "pyramid_structure": {
+        "cohorts": [
+          {
+            "age": "0-4",
+            "male_pct": 1.3,
+            "female_pct": 1.2
+          },
+          {
+            "age": "5-14",
+            "male_pct": 3.4,
+            "female_pct": 3.2
+          },
+          {
+            "age": "15-64",
+            "male_pct": 25.8,
+            "female_pct": 24.9
+          },
+          {
+            "age": "65-79",
+            "male_pct": 10.4,
+            "female_pct": 11.2
+          },
+          {
+            "age": "80+",
+            "male_pct": 7.5,
+            "female_pct": 12.3
+          }
+        ]
+      },
+      "sub_national_density_choropleth": [
+        {
+          "admin_1_region_name": "Tokyo Prefecture",
+          "density_per_km2": 6600
+        },
+        {
+          "admin_1_region_name": "Osaka Prefecture",
+          "density_per_km2": 4400
+        },
+        {
+          "admin_1_region_name": "Hokkaido Region",
+          "density_per_km2": 52
+        }
+      ],
+      "synoptic_analysis": "Demographic nadir. Extremely high dependency ratios, massive pension and social security system strain, and regional rural depopulation."
+    }
+  ],
+  "culture_tab": {
+    "inglehart_welzel_coords": {
+      "x": 1.1,
+      "y": 1.9,
+      "cultural_zone": "Confucian"
+    },
+    "largest_diasporas": [
+      {
+        "destination": "Brazil",
+        "population": "Approx. 1.5 - 2 million",
+        "cultural_reach_impact": "Establishment of the largest Japanese community outside Japan (Nikkei) in Liberdade, São Paulo; deep fusion of Japanese agriculture and martial arts into Brazilian culture."
+      },
+      {
+        "destination": "United States",
+        "population": "Approx. 1.4 million",
+        "cultural_reach_impact": "Subsubstantial presence in Hawaii and California (Little Tokyos); introducing Zen Buddhism, sushi cuisine, martial arts (Judo, Karate), and popular culture (anime/manga) to the West."
+      },
+      {
+        "destination": "Philippines",
+        "population": "Approx. 200,000",
+        "cultural_reach_impact": "Fosters long-term historical community integrations, particularly in Davao City, influencing regional commerce, agriculture, and cultural exchange."
+      },
+      {
+        "destination": "Peru",
+        "population": "Approx. 100,000",
+        "cultural_reach_impact": "Strong political and culinary impact, resulting in the famous Nikkei cuisine (Japanese-Peruvian fusion such as Tiradito) and historical political figures."
+      },
+      {
+        "destination": "Canada",
+        "population": "Approx. 120,000",
+        "cultural_reach_impact": "Active community hubs in Vancouver and Toronto (JCCC), preserving heritage through traditional festivals (Obon) and introducing Japanese design aesthetics."
+      }
+    ],
+    "cultural_exports_and_landscape": {
+      "soft_power_exports": [
+        {
+          "medium": "Animation/Manga (Cool Japan)",
+          "examples": [
+            "Studio Ghibli films (Spirited Away)",
+            "Pokemon franchise",
+            "Demon Slayer / Dragon Ball"
+          ],
+          "global_reach_score": 98
+        },
+        {
+          "medium": "Cuisine (Washoku)",
+          "examples": [
+            "Sushi and Sashimi global adoption",
+            "Ramen shops globally",
+            "Matcha and Sake exports"
+          ],
+          "global_reach_score": 92
+        },
+        {
+          "medium": "Gaming & Electronics",
+          "examples": [
+            "Nintendo (Super Mario)",
+            "Sony PlayStation",
+            "Capcom / Square Enix franchises"
+          ],
+          "global_reach_score": 95
+        },
+        {
+          "medium": "Fashion & Design",
+          "examples": [
+            "UNIQLO global expansion",
+            "Muji minimalist aesthetics",
+            "Harajuku fashion movements"
+          ],
+          "global_reach_score": 85
+        }
+      ],
+      "spatial_landscape": {
+        "enclaves": [
+          "Liberdade (São Paulo, Brazil)",
+          "Little Tokyo (Los Angeles, USA)",
+          "Japantown (San Francisco, USA)"
+        ],
+        "architectural_footprint": "Minimalist wood framing, shoji screens, torii gates, zen gardens, and hyper-modern neon-lit skyscrapers (Shibuya crossing style).",
+        "description": "Japan's landscape displays a unique spatial dichotomy. Ancient wooden temples (Kinkaku-ji), shrines, and meticulously designed Zen rock gardens coexist with hyper-dense, futuristic, neon-saturated skyscrapers in Tokyo and Osaka, showcasing spatial efficiency and clean design aesthetics."
+      }
+    },
+    "hybridity_and_glocalization": [
+      {
+        "concept": "Glocalized Fast Food (Teriyaki & Rice Burgers)",
+        "description": "Global fast-food corporations adapting their menu items to incorporate traditional Japanese flavor profiles (Soy sauce, Teriyaki, Rice) to fit local consumer preferences.",
+        "glocalized_examples": [
+          "McDonald's Japan offering Teriyaki McBurger and seasonal Shogayaki burgers",
+          "MOS Burger replacing wheat buns with compressed grilled rice discs"
+        ],
+        "spatial_location": "Urban fast-food franchises in major metropolitan hubs across Japan."
+      },
+      {
+        "concept": "Nikkei Cuisine Fusion (Japanese-Peruvian)",
+        "description": "Japanese diaspora in Peru blending traditional Japanese raw fish preparation techniques with local Peruvian ingredients (aji amarillo chilies, limes, cilantro).",
+        "glocalized_examples": [
+          "Tiradito (raw fish cut sashimilike without onions, seasoned with spicy citrus emulsion)",
+          "Lomo Saltado prepared with Japanese soy sauce reduction techniques"
+        ],
+        "spatial_location": "Restaurants in Lima (Peru) and subsequent global expansion to luxury dining hubs in London, New York, and Tokyo."
+      },
+      {
+        "concept": "J-Pop and Idol Culture",
+        "description": "Combining Western pop music rhythms and synchronization with traditional Japanese group harmony and collective aesthetics, creating a highly organized idol industry.",
+        "glocalized_examples": [
+          "AKB48 group system featuring 'idols you can meet' theater events",
+          "Vocaloid (Hatsune Miku) synthesizers performing live virtual holographic concerts worldwide"
+        ],
+        "spatial_location": "Akihabara theater district (Tokyo), digital streaming platforms, and global arena tours."
+      }
+    ]
+  }
+}

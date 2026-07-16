@@ -1,0 +1,625 @@
+{
+  "country_metadata": {
+    "name": "Ukraine",
+    "income_classification": "Lower-Middle Income",
+    "gni_per_capita_atlas": {
+      "value_usd": 4270,
+      "year": 2023
+    },
+    "hdi": {
+      "score": 0.773,
+      "rank": 87,
+      "year": 2022
+    },
+    "gni_per_capita_ppp": {
+      "value_usd": 13450,
+      "year": 2022
+    },
+    "gini_coefficient": {
+      "score": 25.6,
+      "year": 2020
+    }
+  },
+  "globalisation_tab": {
+    "kof_index": {
+      "economic": {
+        "de_facto": 58.4,
+        "de_jure": 62.1
+      },
+      "social": {
+        "interpersonal": {
+          "de_facto": 51.2,
+          "de_jure": 56.4
+        },
+        "informational": {
+          "de_facto": 68.2,
+          "de_jure": 70.5
+        },
+        "cultural": {
+          "de_facto": 44.8,
+          "de_jure": 48.1
+        }
+      },
+      "political": {
+        "de_facto": 82.4,
+        "de_jure": 79.5
+      }
+    },
+    "at_kearney_framework": {
+      "status": "Regional Agri-Industrial Node",
+      "gci_score_or_tier": "Kyiv (Gamma Level Hub)"
+    },
+    "ey_index_historical": {
+      "score": 4.5,
+      "analysis": "A critical trans-continental infrastructural land corridor historically bridging Russian energy pipelines and Eurasian agrarian outputs to EU consumer markets."
+    }
+  },
+  "economy_tab": {
+    "employment_structure": {
+      "primary": 14.2,
+      "secondary": 25.8,
+      "tertiary": 54.5,
+      "quaternary": 5.5
+    },
+    "trade_ledger": {
+      "main_exports": [
+        {
+          "commodity": "Seed Oils & Sunflower Margarines",
+          "pct_gdp": 15.8
+        },
+        {
+          "commodity": "Corn & Coarse Maize Cereals",
+          "pct_gdp": 12.4
+        },
+        {
+          "commodity": "Semi-Finished Iron & Non-Alloy Steel",
+          "pct_gdp": 11.2
+        },
+        {
+          "commodity": "Wheat & Grain Staples",
+          "pct_gdp": 9.8
+        },
+        {
+          "commodity": "Copper Insulated Cables & harness wiring",
+          "pct_gdp": 5.2
+        }
+      ],
+      "main_imports": [
+        {
+          "commodity": "Refined Petroleum Fuels & Gases",
+          "pct_gdp": 14.5
+        },
+        {
+          "commodity": "Passenger Cars & Combat Transport",
+          "pct_gdp": 9.2
+        },
+        {
+          "commodity": "Packaged Medicaments & Surgical Kits",
+          "pct_gdp": 5.8
+        },
+        {
+          "commodity": "Coal & Coke Solid Fuels",
+          "pct_gdp": 4.5
+        },
+        {
+          "commodity": "Integrated Circuits & Telecom Transmitters",
+          "pct_gdp": 3.8
+        }
+      ],
+      "top_partners_outgoing": [
+        {
+          "partner": "Poland",
+          "value_usd_billions": 6.4
+        },
+        {
+          "partner": "Romania",
+          "value_usd_billions": 4.8
+        },
+        {
+          "partner": "China",
+          "value_usd_billions": 4.2
+        },
+        {
+          "partner": "Turkey",
+          "value_usd_billions": 3.9
+        },
+        {
+          "partner": "Germany",
+          "value_usd_billions": 3.2
+        }
+      ],
+      "top_partners_incoming": [
+        {
+          "partner": "China",
+          "value_usd_billions": 8.9
+        },
+        {
+          "partner": "Poland",
+          "value_usd_billions": 7.5
+        },
+        {
+          "partner": "Germany",
+          "value_usd_billions": 6.8
+        },
+        {
+          "partner": "Turkey",
+          "value_usd_billions": 4.1
+        },
+        {
+          "partner": "United States",
+          "value_usd_billions": 3.8
+        }
+      ]
+    }
+  },
+  "human_geography_tab": {
+    "spatial_hubs": {
+      "epz_sez_zones": [
+        {
+          "name": "Zakarpattia-Solotvyno Special Economic Zone",
+          "location_lat_long": "48.11, 23.87",
+          "primary_focus": "Automotive Harnesses, Wood Processing, and Light Electronics Assembly"
+        },
+        {
+          "name": "Kyiv-Hostomel Intermodal Logistics Cluster",
+          "location_lat_long": "50.57, 30.27",
+          "primary_focus": "Air-to-Land Cargo Distribution and Heavy Warehouse Logistics"
+        },
+        {
+          "name": "Odesa-Yuzhny Port Concession Belt",
+          "location_lat_long": "46.62, 31.02",
+          "primary_focus": "Agrarian Bulk Oil Terminals and Metallurgical Loading facilities"
+        }
+      ],
+      "tourism_enclaves": [
+        {
+          "name": "Carpathian Bukovel Ski Resort Complex",
+          "spatial_impact": "Protected inland highland enclave absorbing displaced domestic elites and upper-tier service sector flows under security frameworks."
+        },
+        {
+          "name": "Odesa Arcadia Coastal Strip",
+          "spatial_impact": "Black Sea resort strip highly isolated; subject to active marine mining alerts, drone warnings, and heavy coastal containment infrastructures."
+        }
+      ],
+      "core_periphery_zones": {
+        "core": "Kyiv Metropolitan Core, Lviv Trans-border Gateway, and Western Dniester logistical arteries.",
+        "periphery": "The eastern Dnipro industrial basin and war-impacted low-density Steppe zones."
+      }
+    },
+    "political_economy": {
+      "informal_economy_pct_gdp": 42.5,
+      "eiu_governance_type": "Hybrid Regime",
+      "freedom_house_status": "Partly Free",
+      "corruption_perceptions_index": {
+        "score": 36,
+        "rank": 104
+      }
+    }
+  },
+  "prisoners_of_geography_map": {
+    "map_center": {
+      "lat": 48.3,
+      "lng": 31.1,
+      "zoom": 5
+    },
+    "topographic_friction_points": [
+      {
+        "feature": "The Great European Flatland Plain",
+        "geopolitical_constraint": "Absence of major mountain ranges or water barriers in the north and east makes Ukraine highly prone to land incursions and cross-border security advances."
+      }
+    ],
+    "hydrological_arteries": [
+      {
+        "feature": "Dnipro River Basin Grid",
+        "strategic_advantage": "Bisects the country into western and eastern halves, serving as a critical water basin, reservoir cascade, and heavy transport line."
+      }
+    ],
+    "choke_points_vulnerabilities": [
+      {
+        "feature": "The Black Sea Ports System",
+        "impact": "Ukraine's sole window for oceanic wheat and metal exports; vulnerable to naval blocks at the Bosporus Strait and maritime exclusions during regional wars."
+      },
+      {
+        "feature": "Kakhovka Dam Rupture & Soil Desiccations",
+        "impact": "The destruction of critical water irrigation assets in the south causes decades of water supply dry-downs and agricultural loss for Kherson and Crimea."
+      }
+    ],
+    "buffer_zones": [
+      {
+        "region": "Carpathian Mountains Western Rim",
+        "significance": "Rugged highland spine acting as a natural geographic shield separating the western border regions from standard continental plains."
+      }
+    ]
+  },
+  "population_dynamics_time_series": [
+    {
+      "year": 1990,
+      "pyramid_structure": {
+        "cohorts": [
+          {
+            "age": "0-4",
+            "male_pct": 3.82,
+            "female_pct": 3.65
+          },
+          {
+            "age": "5-9",
+            "male_pct": 3.75,
+            "female_pct": 3.58
+          },
+          {
+            "age": "10-14",
+            "male_pct": 3.61,
+            "female_pct": 3.44
+          },
+          {
+            "age": "15-19",
+            "male_pct": 3.42,
+            "female_pct": 3.28
+          },
+          {
+            "age": "20-24",
+            "male_pct": 3.31,
+            "female_pct": 3.19
+          },
+          {
+            "age": "25-29",
+            "male_pct": 3.85,
+            "female_pct": 3.72
+          },
+          {
+            "age": "30-34",
+            "male_pct": 4.12,
+            "female_pct": 4.01
+          },
+          {
+            "age": "35-39",
+            "male_pct": 3.85,
+            "female_pct": 3.78
+          },
+          {
+            "age": "40-44",
+            "male_pct": 2.92,
+            "female_pct": 2.85
+          },
+          {
+            "age": "45-49",
+            "male_pct": 2.12,
+            "female_pct": 2.08
+          },
+          {
+            "age": "50-54",
+            "male_pct": 3.22,
+            "female_pct": 3.15
+          },
+          {
+            "age": "55-59",
+            "male_pct": 3.45,
+            "female_pct": 3.38
+          },
+          {
+            "age": "60-64",
+            "male_pct": 2.88,
+            "female_pct": 2.82
+          },
+          {
+            "age": "65-69",
+            "male_pct": 1.62,
+            "female_pct": 1.58
+          },
+          {
+            "age": "70-74",
+            "male_pct": 2.1,
+            "female_pct": 2.05
+          },
+          {
+            "age": "75-79",
+            "male_pct": 1.15,
+            "female_pct": 1.12
+          },
+          {
+            "age": "80-84",
+            "male_pct": 0.72,
+            "female_pct": 0.7
+          },
+          {
+            "age": "85-89",
+            "male_pct": 0.31,
+            "female_pct": 0.3
+          },
+          {
+            "age": "90-94",
+            "male_pct": 0.08,
+            "female_pct": 0.08
+          },
+          {
+            "age": "95-99",
+            "male_pct": 0.02,
+            "female_pct": 0.02
+          },
+          {
+            "age": "100+",
+            "male_pct": 0,
+            "female_pct": 0
+          }
+        ]
+      },
+      "sub_national_density_choropleth": [
+        {
+          "admin_1_region_name": "Kyiv Oblast",
+          "density_per_km2": 182
+        },
+        {
+          "admin_1_region_name": "Donetsk Oblast",
+          "density_per_km2": 165
+        },
+        {
+          "admin_1_region_name": "Kharkiv Oblast",
+          "density_per_km2": 115
+        },
+        {
+          "admin_1_region_name": "Lviv Oblast",
+          "density_per_km2": 118
+        },
+        {
+          "admin_1_region_name": "Kherson Oblast",
+          "density_per_km2": 38
+        },
+        {
+          "admin_1_region_name": "Zakarpattia Oblast",
+          "density_per_km2": 98
+        }
+      ],
+      "synoptic_analysis": "In 1990, Ukraine had a large, stable industrial population footprint at the twilight of the Soviet era. High urbanization in the eastern heavy metallurgical basin and rich agricultural plains. A classic stable Stage 4 age-sex structure, with some contractions reflecting post-WWII generations."
+    },
+    {
+      "year": 2026,
+      "pyramid_structure": {
+        "cohorts": [
+          {
+            "age": "0-4",
+            "male_pct": 1.62,
+            "female_pct": 1.51
+          },
+          {
+            "age": "5-9",
+            "male_pct": 1.95,
+            "female_pct": 1.82
+          },
+          {
+            "age": "10-14",
+            "male_pct": 2.22,
+            "female_pct": 2.08
+          },
+          {
+            "age": "15-19",
+            "male_pct": 2.38,
+            "female_pct": 2.21
+          },
+          {
+            "age": "20-24",
+            "male_pct": 1.85,
+            "female_pct": 1.72
+          },
+          {
+            "age": "25-29",
+            "male_pct": 2.41,
+            "female_pct": 2.25
+          },
+          {
+            "age": "30-34",
+            "male_pct": 3.42,
+            "female_pct": 3.18
+          },
+          {
+            "age": "35-39",
+            "male_pct": 4.15,
+            "female_pct": 3.88
+          },
+          {
+            "age": "40-44",
+            "male_pct": 3.88,
+            "female_pct": 3.65
+          },
+          {
+            "age": "45-49",
+            "male_pct": 3.52,
+            "female_pct": 3.32
+          },
+          {
+            "age": "50-54",
+            "male_pct": 3.12,
+            "female_pct": 2.94
+          },
+          {
+            "age": "55-59",
+            "male_pct": 2.82,
+            "female_pct": 2.68
+          },
+          {
+            "age": "60-64",
+            "male_pct": 2.85,
+            "female_pct": 2.73
+          },
+          {
+            "age": "65-69",
+            "male_pct": 2.72,
+            "female_pct": 2.62
+          },
+          {
+            "age": "70-74",
+            "male_pct": 2.15,
+            "female_pct": 2.11
+          },
+          {
+            "age": "75-79",
+            "male_pct": 1.62,
+            "female_pct": 1.58
+          },
+          {
+            "age": "80-84",
+            "male_pct": 0.98,
+            "female_pct": 0.96
+          },
+          {
+            "age": "85-89",
+            "male_pct": 0.42,
+            "female_pct": 0.41
+          },
+          {
+            "age": "90-94",
+            "male_pct": 0.12,
+            "female_pct": 0.12
+          },
+          {
+            "age": "95-99",
+            "male_pct": 0.03,
+            "female_pct": 0.03
+          },
+          {
+            "age": "100+",
+            "male_pct": 0,
+            "female_pct": 0.01
+          }
+        ]
+      },
+      "sub_national_density_choropleth": [
+        {
+          "admin_1_region_name": "Kyiv Oblast",
+          "density_per_km2": 165
+        },
+        {
+          "admin_1_region_name": "Donetsk Oblast",
+          "density_per_km2": 42
+        },
+        {
+          "admin_1_region_name": "Kharkiv Oblast",
+          "density_per_km2": 78
+        },
+        {
+          "admin_1_region_name": "Lviv Oblast",
+          "density_per_km2": 128
+        },
+        {
+          "admin_1_region_name": "Kherson Oblast",
+          "density_per_km2": 14
+        },
+        {
+          "admin_1_region_name": "Zakarpattia Oblast",
+          "density_per_km2": 105
+        }
+      ],
+      "synoptic_analysis": "By 2026, Ukraine faces an unprecedented demographic emergency, representing an hyper-contracted Stage 5 model. Driven by massive war-induced external migration (6 million+ refugees, predominantly females and children) and a historical dip in birth rates, the base of the pyramid is extremely narrow. Deeply depopulated eastern and southern Oblasts contrast with higher density western corridors (Lviv, Zakarpattia) serving as safe zones and trans-shipping centers."
+    }
+  ],
+  "culture_tab": {
+    "inglehart_welzel_coords": {
+      "x": -0.3,
+      "y": -0.7,
+      "cultural_zone": "Orthodox Europe"
+    },
+    "largest_diasporas": [
+      {
+        "destination": "Russia",
+        "population": "Approximately 2-3 million (estimated, including ethnic Ukrainians and those with Ukrainian heritage)",
+        "cultural_reach_impact": "Strong historical and familial ties, though relations are currently strained. Historically, mutual cultural influence through language, literature, and shared traditions."
+      },
+      {
+        "destination": "Canada",
+        "population": "Approximately 1.3 million (estimated, including those of full or partial Ukrainian descent)",
+        "cultural_reach_impact": "One of the oldest and most vibrant diasporas, playing a crucial role in preserving Ukrainian language, traditions (e.g., Pysanky, Holodomor remembrance), and advocating for Ukrainian interests. Significant contribution to Canadian multiculturalism."
+      },
+      {
+        "destination": "United States",
+        "population": "Approximately 1 million (estimated)",
+        "cultural_reach_impact": "Active community with numerous cultural centers, churches, and political advocacy groups. Instrumental in promoting Ukrainian heritage and supporting Ukraine's sovereignty."
+      },
+      {
+        "destination": "Poland",
+        "population": "Approximately 1-2 million (significant increase post-2022 full-scale invasion)",
+        "cultural_reach_impact": "Strong contemporary cultural exchange and integration due to recent migration waves. Ukrainian culture is increasingly visible in Polish urban centers, impacting education, labor, and social dynamics."
+      }
+    ],
+    "cultural_exports_and_landscape": {
+      "soft_power_exports": [
+        {
+          "medium": "Music",
+          "examples": [
+            "DakhaBrakha (Ethno-Chaos)",
+            "Kalush Orchestra (Eurovision)",
+            "Jamala",
+            "Traditional folk songs (e.g., 'Shchedryk'/Carol of the Bells)"
+          ],
+          "global_reach_score": 65
+        },
+        {
+          "medium": "Cuisine",
+          "examples": [
+            "Borscht",
+            "Varenyky (pierogi)",
+            "Salo",
+            "Paska (Easter bread)"
+          ],
+          "global_reach_score": 70
+        },
+        {
+          "medium": "Fashion & Traditional Crafts",
+          "examples": [
+            "Vyshyvanka (embroidered shirts) as high fashion",
+            "Pysanky (Easter eggs)",
+            "Contemporary Ukrainian designers"
+          ],
+          "global_reach_score": 60
+        },
+        {
+          "medium": "Cinema & Arts",
+          "examples": [
+            "'Shadows of Forgotten Ancestors' (Sergei Parajanov)",
+            "'The Tribe' (Myroslav Slaboshpytskyi)",
+            "Ukrainian Avant-Garde art"
+          ],
+          "global_reach_score": 50
+        }
+      ],
+      "spatial_landscape": {
+        "enclaves": [
+          "Ukrainian Village (Chicago, USA)",
+          "Bloor West Village (Toronto, Canada)",
+          "Greenpoint (Brooklyn, USA)",
+          "Various Ukrainian cultural centers and churches globally"
+        ],
+        "architectural_footprint": "Byzantine-Slavic domed churches, Cossack Baroque architecture, Art Nouveau buildings in Lviv, Soviet monumentalism, and traditional wooden churches of the Carpathians.",
+        "description": "Ukrainian spatial landscapes abroad often feature vibrant cultural centers, distinctive churches with onion domes, and monuments commemorating national heroes or historical tragedies. Domestically, the architectural footprint reflects centuries of diverse influences, blending ancient Kyivan Rus' foundations with European styles and modern developments, often emphasizing ornate detailing and colorful elements."
+      }
+    },
+    "hybridity_and_glocalization": [
+      {
+        "concept": "Ethno-Chaos Music",
+        "description": "A musical genre pioneered by Ukrainian artists, blending traditional Ukrainian folk melodies, instruments, and vocal styles with contemporary global influences such as jazz, blues, rock, and world music rhythms, creating a unique and experimental sound.",
+        "glocalized_examples": [
+          "DakhaBrakha's performances at major international music festivals (e.g., Glastonbury, Roskilde)",
+          "Collaborations between Ukrainian folk musicians and global artists."
+        ],
+        "spatial_location": "Originating in Kyiv's experimental theatre scene, performed globally."
+      },
+      {
+        "concept": "Vyshyvanka in Modern Fashion",
+        "description": "The traditional Ukrainian embroidered shirt (Vyshyvanka) has been reinterpreted and integrated into contemporary global fashion by Ukrainian designers, blending traditional patterns and techniques with modern cuts, fabrics, and styles, turning a cultural artifact into a high-fashion statement.",
+        "glocalized_examples": [
+          "Vita Kin's embroidered dresses featured in international fashion magazines and worn by celebrities",
+          "Ukrainian designers showcasing vyshyvanka-inspired collections at fashion weeks worldwide."
+        ],
+        "spatial_location": "Kyiv fashion scene, international boutiques and runways."
+      },
+      {
+        "concept": "Ukrainian Food Global Fusion",
+        "description": "While traditional Ukrainian cuisine maintains its core, it has increasingly seen fusion adaptations in diaspora communities and modern Ukrainian restaurants, blending traditional flavors with international cooking techniques and ingredients to appeal to a wider palate.",
+        "glocalized_examples": [
+          "Borscht variations with unconventional ingredients (e.g., vegan or gourmet additions)",
+          "Varenyky with diverse fillings and sauces beyond traditional potato or cherry",
+          "Ukrainian-inspired dishes in international culinary festivals."
+        ],
+        "spatial_location": "Restaurants in diaspora hubs (e.g., New York, Toronto), modern culinary establishments in Kyiv and Lviv."
+      }
+    ]
+  }
+}

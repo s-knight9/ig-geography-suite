@@ -1,0 +1,522 @@
+{
+  "country_metadata": {
+    "name": "Kenya",
+    "income_classification": "Lower-Middle Income",
+    "gni_per_capita_atlas": {
+      "value_usd": 2170,
+      "year": 2023
+    },
+    "hdi": {
+      "score": 0.601,
+      "rank": 146,
+      "year": 2022
+    },
+    "gni_per_capita_ppp": {
+      "value_usd": 5120,
+      "year": 2022
+    },
+    "gini_coefficient": {
+      "score": 38.9,
+      "year": 2015
+    }
+  },
+  "globalisation_tab": {
+    "kof_index": {
+      "economic": {
+        "de_facto": 48.5,
+        "de_jure": 54.1
+      },
+      "social": {
+        "interpersonal": {
+          "de_facto": 58.2,
+          "de_jure": 52
+        },
+        "informational": {
+          "de_facto": 62.1,
+          "de_jure": 59.8
+        },
+        "cultural": {
+          "de_facto": 44.2,
+          "de_jure": 41.5
+        }
+      },
+      "political": {
+        "de_facto": 82.5,
+        "de_jure": 80.1
+      }
+    },
+    "at_kearney_framework": {
+      "status": "Partly Integrated",
+      "gci_score_or_tier": "Beta/Emerging"
+    },
+    "ey_index_historical": {
+      "score": 2.4,
+      "analysis": "High mobile telecommunications integration (M-Pesa) triggers intensive local transaction-side financial globalisation."
+    }
+  },
+  "economy_tab": {
+    "employment_structure": {
+      "primary": 54.2,
+      "secondary": 12.1,
+      "tertiary": 30.5,
+      "quaternary": 3.2
+    },
+    "trade_ledger": {
+      "main_exports": [
+        {
+          "commodity": "Tea",
+          "pct_gdp": 21.4
+        },
+        {
+          "commodity": "Cut Flowers",
+          "pct_gdp": 14.8
+        },
+        {
+          "commodity": "Refined Petroleum",
+          "pct_gdp": 6.2
+        },
+        {
+          "commodity": "Coffee",
+          "pct_gdp": 5.4
+        },
+        {
+          "commodity": "Titanium Ore",
+          "pct_gdp": 2.8
+        }
+      ],
+      "main_imports": [
+        {
+          "commodity": "Refined Petroleum",
+          "pct_gdp": 18.5
+        },
+        {
+          "commodity": "Palm Oil",
+          "pct_gdp": 4.2
+        },
+        {
+          "commodity": "Wheat",
+          "pct_gdp": 3.8
+        },
+        {
+          "commodity": "Cars & Vehicles",
+          "pct_gdp": 3.1
+        },
+        {
+          "commodity": "Broadcasting Equipment",
+          "pct_gdp": 2.8
+        }
+      ],
+      "top_partners_outgoing": [
+        {
+          "partner": "Uganda",
+          "value_usd_billions": 0.84
+        },
+        {
+          "partner": "Pakistan",
+          "value_usd_billions": 0.65
+        },
+        {
+          "partner": "United States",
+          "value_usd_billions": 0.58
+        },
+        {
+          "partner": "Netherlands",
+          "value_usd_billions": 0.52
+        },
+        {
+          "partner": "United Kingdom",
+          "value_usd_billions": 0.45
+        }
+      ],
+      "top_partners_incoming": [
+        {
+          "partner": "China",
+          "value_usd_billions": 3.8
+        },
+        {
+          "partner": "India",
+          "value_usd_billions": 2.1
+        },
+        {
+          "partner": "United Arab Emirates",
+          "value_usd_billions": 1.7
+        },
+        {
+          "partner": "Saudi Arabia",
+          "value_usd_billions": 1.1
+        },
+        {
+          "partner": "Japan",
+          "value_usd_billions": 0.85
+        }
+      ]
+    }
+  },
+  "human_geography_tab": {
+    "spatial_hubs": {
+      "epz_sez_zones": [
+        {
+          "name": "Athiriver EPZ (Nairobi Peripheral Hub)",
+          "location_lat_long": "-1.45, 36.98",
+          "primary_focus": "Apparel manufacture, leather goods, and agro-processing."
+        },
+        {
+          "name": "Konza Technopolis (Silicon Savannah)",
+          "location_lat_long": "-1.68, 37.18",
+          "primary_focus": "Smart city development, technology infrastructure incubation, and BPO operations."
+        }
+      ],
+      "tourism_enclaves": [
+        {
+          "name": "Maasai Mara & Diani Beach",
+          "spatial_impact": "Charter flight safari parks and coastal resorts concentrating global leisure travel dollars."
+        }
+      ],
+      "core_periphery_zones": {
+        "core": "Nairobi Municipal and Mombasa Port corridor",
+        "periphery": "Arid and semi-arid lands (ASALs) of the Northern Frontier and Turkana Basin"
+      }
+    },
+    "political_economy": {
+      "informal_economy_pct_gdp": 34.3,
+      "eiu_governance_type": "Hybrid Regime",
+      "freedom_house_status": "Partly Free",
+      "corruption_perceptions_index": {
+        "score": 31,
+        "rank": 126
+      }
+    }
+  },
+  "prisoners_of_geography_map": {
+    "topographic_friction_points": [
+      {
+        "feature": "Great Rift Valley & Mount Kenya",
+        "geopolitical_constraint": "Massive tectonic depressions and volcanic massifs slicing the country, creating steep escarpments that disrupt transport."
+      }
+    ],
+    "hydrological_arteries": [
+      {
+        "feature": "Tana River Basin & Athi-Galana Rivers",
+        "strategic_advantage": "Essential river powering over 60% of national hydroelectricity and feeding massive irrigation schemes like Mwea."
+      }
+    ],
+    "choke_points_vulnerabilities": [
+      {
+        "feature": "Port of Mombasa",
+        "impact": "Dominant East African trade conduit, but highly vulnerable to congestion and modern geopolitical rail/road supply chain disruptions."
+      }
+    ],
+    "buffer_zones": [
+      {
+        "region": "Arid Northern Frontierlands",
+        "significance": "Expansive drylands and scrublands buffering the fertile highlands from regional instability in Somalia and South Sudan."
+      }
+    ],
+    "map_center": {
+      "lat": -0.0236,
+      "lng": 37.9062,
+      "zoom": 6
+    }
+  },
+  "population_dynamics_time_series": [
+    {
+      "year": 1970,
+      "pyramid_structure": {
+        "cohorts": [
+          {
+            "age": "0-4",
+            "male_pct": 9.8,
+            "female_pct": 9.6
+          },
+          {
+            "age": "5-14",
+            "male_pct": 15.2,
+            "female_pct": 14.8
+          },
+          {
+            "age": "15-64",
+            "male_pct": 23.5,
+            "female_pct": 22.8
+          },
+          {
+            "age": "65-79",
+            "male_pct": 1.9,
+            "female_pct": 2.1
+          },
+          {
+            "age": "80+",
+            "male_pct": 0.1,
+            "female_pct": 0.2
+          }
+        ]
+      },
+      "sub_national_density_choropleth": [
+        {
+          "admin_1_region_name": "Nairobi",
+          "density_per_km2": 1100
+        },
+        {
+          "admin_1_region_name": "Garissa",
+          "density_per_km2": 4.1
+        }
+      ],
+      "synoptic_analysis": "Expansive and heavy bottomed stage 2 pyramid showcasing extremely rapid post-colonial growth."
+    },
+    {
+      "year": 2023,
+      "pyramid_structure": {
+        "cohorts": [
+          {
+            "age": "0-4",
+            "male_pct": 5.9,
+            "female_pct": 5.7
+          },
+          {
+            "age": "5-14",
+            "male_pct": 10.8,
+            "female_pct": 10.4
+          },
+          {
+            "age": "15-64",
+            "male_pct": 32.1,
+            "female_pct": 29.8
+          },
+          {
+            "age": "65-79",
+            "male_pct": 2.3,
+            "female_pct": 2.6
+          },
+          {
+            "age": "80+",
+            "male_pct": 0.2,
+            "female_pct": 0.2
+          }
+        ]
+      },
+      "sub_national_density_choropleth": [
+        {
+          "admin_1_region_name": "Nairobi",
+          "density_per_km2": 6200
+        },
+        {
+          "admin_1_region_name": "Garissa",
+          "density_per_km2": 15.2
+        }
+      ],
+      "synoptic_analysis": "Transitioning steadily into Stage 3 with falling fertility rates but substantial youth density under urbanisation pressure."
+    },
+    {
+      "year": 2026,
+      "pyramid_structure": {
+        "cohorts": [
+          {
+            "age": "0-4",
+            "male_pct": 5.5,
+            "female_pct": 5.3
+          },
+          {
+            "age": "5-14",
+            "male_pct": 10.2,
+            "female_pct": 9.8
+          },
+          {
+            "age": "15-64",
+            "male_pct": 32.8,
+            "female_pct": 30.5
+          },
+          {
+            "age": "65-79",
+            "male_pct": 2.5,
+            "female_pct": 2.9
+          },
+          {
+            "age": "80+",
+            "male_pct": 0.2,
+            "female_pct": 0.3
+          }
+        ]
+      },
+      "sub_national_density_choropleth": [
+        {
+          "admin_1_region_name": "Nairobi",
+          "density_per_km2": 6650
+        },
+        {
+          "admin_1_region_name": "Garissa",
+          "density_per_km2": 16.5
+        }
+      ],
+      "synoptic_analysis": "Modern lower-middle-income stage 3 profile, reflecting extensive gains in girls' secondary school completion."
+    },
+    {
+      "year": 2040,
+      "pyramid_structure": {
+        "cohorts": [
+          {
+            "age": "0-4",
+            "male_pct": 4.1,
+            "female_pct": 3.9
+          },
+          {
+            "age": "5-14",
+            "male_pct": 8,
+            "female_pct": 7.7
+          },
+          {
+            "age": "15-64",
+            "male_pct": 34.8,
+            "female_pct": 32.4
+          },
+          {
+            "age": "65-79",
+            "male_pct": 4.1,
+            "female_pct": 4.5
+          },
+          {
+            "age": "80+",
+            "male_pct": 0.2,
+            "female_pct": 0.3
+          }
+        ]
+      },
+      "sub_national_density_choropleth": [
+        {
+          "admin_1_region_name": "Nairobi",
+          "density_per_km2": 8500
+        },
+        {
+          "admin_1_region_name": "Garissa",
+          "density_per_km2": 21
+        }
+      ],
+      "synoptic_analysis": "Maturing structural footprint showing reduced household dependence rates and strong young-adult workforce segments."
+    }
+  ],
+  "culture_tab": {
+    "inglehart_welzel_coords": {
+      "x": -0.5,
+      "y": -0.3,
+      "cultural_zone": "African-Islamic"
+    },
+    "largest_diasporas": [
+      {
+        "destination": "United Kingdom",
+        "population": "Approx. 200,000",
+        "cultural_reach_impact": "Strong influence on food, music, and community organizations, maintaining strong ties with home."
+      },
+      {
+        "destination": "United States",
+        "population": "Approx. 120,000",
+        "cultural_reach_impact": "Significant academic and professional contributions, forming cultural associations, and sharing Kenyan cuisine and art."
+      },
+      {
+        "destination": "Canada",
+        "population": "Approx. 40,000",
+        "cultural_reach_impact": "Growing presence, contributing to multicultural festivals and establishing community centers."
+      },
+      {
+        "destination": "South Africa",
+        "population": "Approx. 30,000",
+        "cultural_reach_impact": "Professional and economic migration, fostering East African cultural exchange within the continent."
+      },
+      {
+        "destination": "Germany",
+        "population": "Approx. 25,000",
+        "cultural_reach_impact": "Smaller but active communities, promoting Kenyan arts and culture through events."
+      }
+    ],
+    "cultural_exports_and_landscape": {
+      "soft_power_exports": [
+        {
+          "medium": "Music",
+          "examples": [
+            "Benga",
+            "Gengetone",
+            "Gospel Music",
+            "Sauti Sol"
+          ],
+          "global_reach_score": 65
+        },
+        {
+          "medium": "Cuisine",
+          "examples": [
+            "Ugali",
+            "Nyama Choma",
+            "Sukuma Wiki",
+            "Kenyan Tea"
+          ],
+          "global_reach_score": 70
+        },
+        {
+          "medium": "Literature",
+          "examples": [
+            "Ngugi wa Thiong'o",
+            "Binyavanga Wainaina",
+            "Yvonne Adhiambo Owuor"
+          ],
+          "global_reach_score": 50
+        },
+        {
+          "medium": "Crafts & Fashion",
+          "examples": [
+            "Maasai Beads",
+            "Kikoi",
+            "Kitenge fabrics"
+          ],
+          "global_reach_score": 60
+        }
+      ],
+      "spatial_landscape": {
+        "enclaves": [
+          "Eastleigh (Nairobi, Somali community)",
+          "Kibera (Nairobi, diverse urban informal settlement)",
+          "Makadara (Nairobi, vibrant Luo community area)"
+        ],
+        "architectural_footprint": "A mix of traditional mud and thatch houses, Swahili coastal architecture (coral stone), colonial-era buildings, and modern high-rise developments.",
+        "description": "Kenya's spatial landscape is characterized by its diverse ethnic communities, each leaving distinct marks on settlement patterns and architectural styles. Urban centers like Nairobi showcase a blend of modern high-rises and informal settlements, while coastal towns like Mombasa exhibit strong Arab and Swahili influences. The rural areas largely maintain traditional housing forms, adapting to local climates and available materials."
+      }
+    },
+    "hybridity_and_glocalization": [
+      {
+        "concept": "Sheng Language",
+        "description": "A dynamic creole language that blends Swahili, English, and various local Kenyan languages, predominantly spoken by urban youth.",
+        "glocalized_examples": [
+          "Used in popular music lyrics (e.g., Gengetone)",
+          "Street art and graffiti in urban areas",
+          "Marketing and advertising campaigns targeting youth"
+        ],
+        "spatial_location": "Primarily urban centers, especially Nairobi, Mombasa, and Kisumu"
+      },
+      {
+        "concept": "Afro-Fusion Cuisine",
+        "description": "The innovative blending of traditional Kenyan ingredients and cooking methods with international culinary techniques and flavors.",
+        "glocalized_examples": [
+          "Chapati wraps with international fillings",
+          "Modern takes on traditional stews and curries",
+          "Cafes offering local coffee with global pastry influences"
+        ],
+        "spatial_location": "Upscale restaurants and popular eateries in major cities, especially Nairobi"
+      },
+      {
+        "concept": "Contemporary African Fashion",
+        "description": "Designers integrating traditional Kenyan fabrics (e.g., Kitenge, Kikoi) and patterns into modern clothing styles for a global audience.",
+        "glocalized_examples": [
+          "Kitenge dresses with Western silhouettes",
+          "Maasai beadwork integrated into modern jewelry",
+          "Afro-print sportswear and accessories"
+        ],
+        "spatial_location": "Fashion boutiques in Nairobi, local markets, and international fashion shows"
+      },
+      {
+        "concept": "Gospel Music Transformation",
+        "description": "The evolution of Kenyan gospel music from traditional hymns to contemporary genres, often incorporating elements of R&B, pop, and dancehall.",
+        "glocalized_examples": [
+          "Gospel artists collaborating with secular producers",
+          "Music videos with high production value",
+          "Gospel concerts resembling secular pop events"
+        ],
+        "spatial_location": "Churches and entertainment venues across urban and semi-urban areas"
+      }
+    ]
+  }
+}

@@ -1,0 +1,971 @@
+{
+  "country_metadata": {
+    "name": "Vietnam",
+    "income_classification": "Lower-Middle Income",
+    "gni_per_capita_atlas": {
+      "value_usd": 4010,
+      "year": 2022
+    },
+    "hdi": {
+      "score": 0.726,
+      "rank": 107,
+      "year": 2022
+    },
+    "gni_per_capita_ppp": {
+      "value_usd": 13450,
+      "year": 2022
+    },
+    "gini_coefficient": {
+      "score": 35.7,
+      "year": 2018
+    }
+  },
+  "globalisation_tab": {
+    "kof_index": {
+      "economic": {
+        "de_facto": 72.1,
+        "de_jure": 68.4
+      },
+      "social": {
+        "interpersonal": {
+          "de_facto": 41.2,
+          "de_jure": 38.5
+        },
+        "informational": {
+          "de_facto": 62.1,
+          "de_jure": 45.2
+        },
+        "cultural": {
+          "de_facto": 50.1,
+          "de_jure": 48.9
+        }
+      },
+      "political": {
+        "de_facto": 65.2,
+        "de_jure": 70.4
+      }
+    },
+    "at_kearney_framework": {
+      "status": "Gamma",
+      "gci_score_or_tier": "Gamma (Ho Chi Minh City)"
+    },
+    "ey_index_historical": {
+      "score": "58.2",
+      "analysis": "High integration in global supply chains; key beneficiary of 'China +1' manufacturing shift."
+    }
+  },
+  "economy_tab": {
+    "employment_structure": {
+      "primary": 27.5,
+      "secondary": 33.2,
+      "tertiary": 34.1,
+      "quaternary": 5.2
+    },
+    "trade_ledger": {
+      "main_exports": [
+        {
+          "commodity": "Broadcasting Equip",
+          "pct_gdp": 16.2
+        },
+        {
+          "commodity": "Telephones",
+          "pct_gdp": 8.1
+        },
+        {
+          "commodity": "Integrated Circuits",
+          "pct_gdp": 6.8
+        },
+        {
+          "commodity": "Textiles & Footwear",
+          "pct_gdp": 5.2
+        },
+        {
+          "commodity": "Office Machine Parts",
+          "pct_gdp": 4.1
+        }
+      ],
+      "main_imports": [
+        {
+          "commodity": "Integrated Circuits",
+          "pct_gdp": 12.1
+        },
+        {
+          "commodity": "Telephones (parts)",
+          "pct_gdp": 6.2
+        },
+        {
+          "commodity": "Light Rubberized Knitted Fabric",
+          "pct_gdp": 2.8
+        },
+        {
+          "commodity": "Refined Petroleum",
+          "pct_gdp": 2.4
+        },
+        {
+          "commodity": "Coal",
+          "pct_gdp": 1.5
+        }
+      ],
+      "top_partners_outgoing": [
+        {
+          "partner": "United States",
+          "value_usd_billions": 112.5
+        },
+        {
+          "partner": "China",
+          "value_usd_billions": 58.4
+        },
+        {
+          "partner": "South Korea",
+          "value_usd_billions": 25.1
+        },
+        {
+          "partner": "Japan",
+          "value_usd_billions": 24.2
+        },
+        {
+          "partner": "Hong Kong",
+          "value_usd_billions": 11.5
+        }
+      ],
+      "top_partners_incoming": [
+        {
+          "partner": "China",
+          "value_usd_billions": 119.8
+        },
+        {
+          "partner": "South Korea",
+          "value_usd_billions": 62.5
+        },
+        {
+          "partner": "Japan",
+          "value_usd_billions": 23.4
+        },
+        {
+          "partner": "Taiwan",
+          "value_usd_billions": 22.8
+        },
+        {
+          "partner": "United States",
+          "value_usd_billions": 11.4
+        }
+      ]
+    }
+  },
+  "human_geography_tab": {
+    "spatial_hubs": {
+      "epz_sez_zones": [
+        {
+          "name": "Tan Thuan EPZ",
+          "location_lat_long": "10.76, 106.74",
+          "primary_focus": "Tech & Garments"
+        },
+        {
+          "name": "Yen Phong IP",
+          "location_lat_long": "21.20, 106.00",
+          "primary_focus": "Samsung Electronics Assembly Mega-Hub"
+        },
+        {
+          "name": "Dung Quat EZ",
+          "location_lat_long": "15.35, 108.79",
+          "primary_focus": "Oil refinery and heavy industries"
+        }
+      ],
+      "tourism_enclaves": [
+        {
+          "name": "Da Nang / Hoi An Area",
+          "spatial_impact": "Coastal resort agglomeration"
+        },
+        {
+          "name": "Ha Long Bay",
+          "spatial_impact": "Mass cruise and scenic enclave"
+        }
+      ],
+      "core_periphery_zones": {
+        "core": "Red River Delta (Hanoi) & Mekong Delta (Ho Chi Minh City)",
+        "periphery": "Northwestern Mountains & Central Highlands Borderland"
+      }
+    },
+    "political_economy": {
+      "informal_economy_pct_gdp": 28.5,
+      "eiu_governance_type": "Authoritarian",
+      "freedom_house_status": "Not Free",
+      "corruption_perceptions_index": {
+        "score": 42,
+        "rank": 77
+      }
+    }
+  },
+  "prisoners_of_geography_map": {
+    "topographic_friction_points": [
+      {
+        "feature": "Annamite Range",
+        "geopolitical_constraint": "Rugged western spine that historically protected against invasion but limits East-West land connectivity."
+      }
+    ],
+    "hydrological_arteries": [
+      {
+        "feature": "Mekong River",
+        "geopolitical_constraint": "Vital agricultural delta threatened by upstream Chinese and Laotian dams."
+      }
+    ],
+    "choke_points_vulnerabilities": [
+      {
+        "feature": "South China Sea Coastline",
+        "impact": "High vulnerability to Chinese maritime claims (Nine-Dash Line) overlapping Vietnamese EEZ."
+      }
+    ],
+    "buffer_zones": [
+      {
+        "region": "Laos & Cambodia",
+        "significance": "Historical strategic depth against Thailand, now areas of Sino-Vietnamese competitive influence."
+      }
+    ],
+    "map_center": {
+      "lat": 14.0583,
+      "lng": 108.2772,
+      "zoom": 5
+    }
+  },
+  "population_dynamics_time_series": [
+    {
+      "year": 1970,
+      "pyramid_structure": {
+        "cohorts": [
+          {
+            "age": "0-4",
+            "male_pct": -9.186959987368137,
+            "female_pct": 9.186959987368137
+          },
+          {
+            "age": "5-9",
+            "male_pct": -7.40364813854738,
+            "female_pct": 7.505568594307024
+          },
+          {
+            "age": "10-14",
+            "male_pct": -6.1885286319329635,
+            "female_pct": 6.158190313537844
+          },
+          {
+            "age": "15-19",
+            "male_pct": -5.05568483908516,
+            "female_pct": 5.001792763723352
+          },
+          {
+            "age": "20-24",
+            "male_pct": -4.191004438394596,
+            "female_pct": 4.117562978750697
+          },
+          {
+            "age": "25-29",
+            "male_pct": -3.465751637549421,
+            "female_pct": 3.390595111692196
+          },
+          {
+            "age": "30-34",
+            "male_pct": -2.842616911927383,
+            "female_pct": 2.754993057575281
+          },
+          {
+            "age": "35-39",
+            "male_pct": -2.302735516822743,
+            "female_pct": 2.2557367055027604
+          },
+          {
+            "age": "40-44",
+            "male_pct": -1.8551353588811108,
+            "female_pct": 1.8368681233445756
+          },
+          {
+            "age": "45-49",
+            "male_pct": -1.4974502851840183,
+            "female_pct": 1.4927535900568494
+          },
+          {
+            "age": "50-54",
+            "male_pct": -1.2317354455531224,
+            "female_pct": 1.2121824644897214
+          },
+          {
+            "age": "55-59",
+            "male_pct": -1.024656440777378,
+            "female_pct": 0.9931252554382092
+          },
+          {
+            "age": "60-64",
+            "male_pct": -0.8564883691763554,
+            "female_pct": 0.8169288944310227
+          },
+          {
+            "age": "65-69",
+            "male_pct": -0.7116743065359084,
+            "female_pct": 0.6741078481251723
+          },
+          {
+            "age": "70-74",
+            "male_pct": -0.5877667514375337,
+            "female_pct": 0.5577896452651996
+          },
+          {
+            "age": "75-79",
+            "male_pct": -0.4802609351242647,
+            "female_pct": 0.45988851919717816
+          },
+          {
+            "age": "80-84",
+            "male_pct": -0.39461152805517596,
+            "female_pct": 0.37525718149568255
+          },
+          {
+            "age": "85-89",
+            "male_pct": -0.328989158958967,
+            "female_pct": 0.3063679990056599
+          },
+          {
+            "age": "90-94",
+            "male_pct": -0.27499055902196795,
+            "female_pct": 0.25057134858494756
+          },
+          {
+            "age": "95-99",
+            "male_pct": -0.22171290540483038,
+            "female_pct": 0.20443874992119135
+          },
+          {
+            "age": "100+",
+            "male_pct": -0.17995385323929672,
+            "female_pct": 0.16596486920951756
+          }
+        ]
+      },
+      "sub_national_density_choropleth": [
+        {
+          "admin_1_region_name": "Core Financial Zone",
+          "density_per_km2": 1163
+        },
+        {
+          "admin_1_region_name": "Agricultural Heartland",
+          "density_per_km2": 134
+        },
+        {
+          "admin_1_region_name": "Resource Periphery",
+          "density_per_km2": 18
+        }
+      ],
+      "synoptic_analysis": "Post-war baby boom begins to take shape amidst high mortality."
+    },
+    {
+      "year": 1990,
+      "pyramid_structure": {
+        "cohorts": [
+          {
+            "age": "0-4",
+            "male_pct": -9.102441981089889,
+            "female_pct": 9.102441981089889
+          },
+          {
+            "age": "5-9",
+            "male_pct": -7.484914364207692,
+            "female_pct": 7.492728535070954
+          },
+          {
+            "age": "10-14",
+            "male_pct": -6.199661261902547,
+            "female_pct": 6.152816098032333
+          },
+          {
+            "age": "15-19",
+            "male_pct": -4.984980362012717,
+            "female_pct": 5.028695034158594
+          },
+          {
+            "age": "20-24",
+            "male_pct": -4.089588183463949,
+            "female_pct": 4.15888401163361
+          },
+          {
+            "age": "25-29",
+            "male_pct": -3.399169114970786,
+            "female_pct": 3.407202970859612
+          },
+          {
+            "age": "30-34",
+            "male_pct": -2.765536459603531,
+            "female_pct": 2.810598403865356
+          },
+          {
+            "age": "35-39",
+            "male_pct": -2.2662462380343857,
+            "female_pct": 2.3027986451693514
+          },
+          {
+            "age": "40-44",
+            "male_pct": -1.8682452700893184,
+            "female_pct": 1.879792800524322
+          },
+          {
+            "age": "45-49",
+            "male_pct": -1.5345791565046871,
+            "female_pct": 1.5321188098182776
+          },
+          {
+            "age": "50-54",
+            "male_pct": -1.2603810980893437,
+            "female_pct": 1.2591017985029973
+          },
+          {
+            "age": "55-59",
+            "male_pct": -1.034857879550864,
+            "female_pct": 1.0377447133538193
+          },
+          {
+            "age": "60-64",
+            "male_pct": -0.8643537445522977,
+            "female_pct": 0.8445976934184887
+          },
+          {
+            "age": "65-69",
+            "male_pct": -0.7070070090742071,
+            "female_pct": 0.6936471517045125
+          },
+          {
+            "age": "70-74",
+            "male_pct": -0.5764196073791323,
+            "female_pct": 0.5701862097275302
+          },
+          {
+            "age": "75-79",
+            "male_pct": -0.4724504834581955,
+            "female_pct": 0.46856074955225024
+          },
+          {
+            "age": "80-84",
+            "male_pct": -0.3803405499579281,
+            "female_pct": 0.3870377567228416
+          },
+          {
+            "age": "85-89",
+            "male_pct": -0.3064780169617478,
+            "female_pct": 0.3151005976146367
+          },
+          {
+            "age": "90-94",
+            "male_pct": -0.24669127995188783,
+            "female_pct": 0.258562445672838
+          },
+          {
+            "age": "95-99",
+            "male_pct": -0.20344353216665897,
+            "female_pct": 0.21259196447336026
+          },
+          {
+            "age": "100+",
+            "male_pct": -0.1641992511562135,
+            "female_pct": 0.17280678485643308
+          }
+        ]
+      },
+      "sub_national_density_choropleth": [
+        {
+          "admin_1_region_name": "Core Financial Zone",
+          "density_per_km2": 1199
+        },
+        {
+          "admin_1_region_name": "Agricultural Heartland",
+          "density_per_km2": 109
+        },
+        {
+          "admin_1_region_name": "Resource Periphery",
+          "density_per_km2": 29
+        }
+      ],
+      "synoptic_analysis": "Massive youth bulge entering working age, setting stage for industrial boom."
+    },
+    {
+      "year": 2010,
+      "pyramid_structure": {
+        "cohorts": [
+          {
+            "age": "0-4",
+            "male_pct": -5.030455013995731,
+            "female_pct": 5.030455013995731
+          },
+          {
+            "age": "5-9",
+            "male_pct": -4.626412596611045,
+            "female_pct": 4.707514062956326
+          },
+          {
+            "age": "10-14",
+            "male_pct": -4.286053686126878,
+            "female_pct": 4.401214653334522
+          },
+          {
+            "age": "15-19",
+            "male_pct": -4.013615134038848,
+            "female_pct": 4.109567081445687
+          },
+          {
+            "age": "20-24",
+            "male_pct": -3.780919167690717,
+            "female_pct": 3.8403730054525766
+          },
+          {
+            "age": "25-29",
+            "male_pct": -3.5719435295158246,
+            "female_pct": 3.5633569900583386
+          },
+          {
+            "age": "30-34",
+            "male_pct": -3.324249614099744,
+            "female_pct": 3.342453710004726
+          },
+          {
+            "age": "35-39",
+            "male_pct": -3.0617048181385775,
+            "female_pct": 3.080017164756532
+          },
+          {
+            "age": "40-44",
+            "male_pct": -2.8655506447962034,
+            "female_pct": 2.8760882684652844
+          },
+          {
+            "age": "45-49",
+            "male_pct": -2.6496265167909705,
+            "female_pct": 2.6527268295265096
+          },
+          {
+            "age": "50-54",
+            "male_pct": -2.458234872172758,
+            "female_pct": 2.4445290411055494
+          },
+          {
+            "age": "55-59",
+            "male_pct": -2.31709814552868,
+            "female_pct": 2.288747906692966
+          },
+          {
+            "age": "60-64",
+            "male_pct": -1.8346193733974563,
+            "female_pct": 1.8202570107351113
+          },
+          {
+            "age": "65-69",
+            "male_pct": -1.4777670486736854,
+            "female_pct": 1.4432137851660787
+          },
+          {
+            "age": "70-74",
+            "male_pct": -1.1607234810818752,
+            "female_pct": 1.1450294106132262
+          },
+          {
+            "age": "75-79",
+            "male_pct": -0.9158514526496905,
+            "female_pct": 0.908625648354938
+          },
+          {
+            "age": "80-84",
+            "male_pct": -0.7420763252444236,
+            "female_pct": 0.7285360100819693
+          },
+          {
+            "age": "85-89",
+            "male_pct": -0.6030633008215033,
+            "female_pct": 0.5800124930087661
+          },
+          {
+            "age": "90-94",
+            "male_pct": -0.47416824152974013,
+            "female_pct": 0.46858651463292483
+          },
+          {
+            "age": "95-99",
+            "male_pct": -0.38528424852476206,
+            "female_pct": 0.3770544914865023
+          },
+          {
+            "age": "100+",
+            "male_pct": -0.3119893801586555,
+            "female_pct": 0.3002343165379717
+          }
+        ]
+      },
+      "sub_national_density_choropleth": [
+        {
+          "admin_1_region_name": "Core Financial Zone",
+          "density_per_km2": 846
+        },
+        {
+          "admin_1_region_name": "Agricultural Heartland",
+          "density_per_km2": 139
+        },
+        {
+          "admin_1_region_name": "Resource Periphery",
+          "density_per_km2": 16
+        }
+      ],
+      "synoptic_analysis": "Deep demographic dividend. Birth rates drop sharply due to policy and development."
+    },
+    {
+      "year": 2026,
+      "pyramid_structure": {
+        "cohorts": [
+          {
+            "age": "0-4",
+            "male_pct": -3.067339629307079,
+            "female_pct": 3.067339629307079
+          },
+          {
+            "age": "5-9",
+            "male_pct": -2.9985601285557943,
+            "female_pct": 3.007699862337408
+          },
+          {
+            "age": "10-14",
+            "male_pct": -2.909983741132478,
+            "female_pct": 2.974242547484823
+          },
+          {
+            "age": "15-19",
+            "male_pct": -2.853046962745857,
+            "female_pct": 2.9245247895914033
+          },
+          {
+            "age": "20-24",
+            "male_pct": -2.8260684782654537,
+            "female_pct": 2.872693957818223
+          },
+          {
+            "age": "25-29",
+            "male_pct": -2.723174665197087,
+            "female_pct": 2.82662471953217
+          },
+          {
+            "age": "30-34",
+            "male_pct": -2.654464646377765,
+            "female_pct": 2.77144837831106
+          },
+          {
+            "age": "35-39",
+            "male_pct": -2.6280825347891392,
+            "female_pct": 2.733597909497421
+          },
+          {
+            "age": "40-44",
+            "male_pct": -2.530932650490527,
+            "female_pct": 2.703694449459762
+          },
+          {
+            "age": "45-49",
+            "male_pct": -2.526430195986041,
+            "female_pct": 2.6286448573920773
+          },
+          {
+            "age": "50-54",
+            "male_pct": -2.497215108253399,
+            "female_pct": 2.5671416350548006
+          },
+          {
+            "age": "55-59",
+            "male_pct": -2.4641196019679956,
+            "female_pct": 2.516750450836913
+          },
+          {
+            "age": "60-64",
+            "male_pct": -2.4374673338135717,
+            "female_pct": 2.442284893294552
+          },
+          {
+            "age": "65-69",
+            "male_pct": -2.4302222828111186,
+            "female_pct": 2.4031694839674347
+          },
+          {
+            "age": "70-74",
+            "male_pct": -2.36680751931347,
+            "female_pct": 2.336469571066319
+          },
+          {
+            "age": "75-79",
+            "male_pct": -2.2844966006387377,
+            "female_pct": 2.308176279392548
+          },
+          {
+            "age": "80-84",
+            "male_pct": -1.965587875784841,
+            "female_pct": 1.9652881274601393
+          },
+          {
+            "age": "85-89",
+            "male_pct": -1.6894702279991012,
+            "female_pct": 1.6803520440067372
+          },
+          {
+            "age": "90-94",
+            "male_pct": -1.45816411853162,
+            "female_pct": 1.4329262254569652
+          },
+          {
+            "age": "95-99",
+            "male_pct": -1.2353991565843816,
+            "female_pct": 1.2094931397509048
+          },
+          {
+            "age": "100+",
+            "male_pct": -1.0436688860815988,
+            "female_pct": 1.0367347043541968
+          }
+        ]
+      },
+      "sub_national_density_choropleth": [
+        {
+          "admin_1_region_name": "Core Financial Zone",
+          "density_per_km2": 1145
+        },
+        {
+          "admin_1_region_name": "Agricultural Heartland",
+          "density_per_km2": 117
+        },
+        {
+          "admin_1_region_name": "Resource Periphery",
+          "density_per_km2": 13
+        }
+      ],
+      "synoptic_analysis": "Transitioning to an aging society sooner than it becomes wealthy."
+    },
+    {
+      "year": 2040,
+      "pyramid_structure": {
+        "cohorts": [
+          {
+            "age": "0-4",
+            "male_pct": -1.8774134841533,
+            "female_pct": 1.8774134841533
+          },
+          {
+            "age": "5-9",
+            "male_pct": -1.9427082343036515,
+            "female_pct": 1.9702105652697202
+          },
+          {
+            "age": "10-14",
+            "male_pct": -2.0574084414244553,
+            "female_pct": 2.062093101527448
+          },
+          {
+            "age": "15-19",
+            "male_pct": -2.125171746012277,
+            "female_pct": 2.1707836490447834
+          },
+          {
+            "age": "20-24",
+            "male_pct": -2.240596539803306,
+            "female_pct": 2.286529629946281
+          },
+          {
+            "age": "25-29",
+            "male_pct": -2.3652108339932534,
+            "female_pct": 2.4063167736463678
+          },
+          {
+            "age": "30-34",
+            "male_pct": -2.4811982731970974,
+            "female_pct": 2.5321703949106564
+          },
+          {
+            "age": "35-39",
+            "male_pct": -2.6369146390391474,
+            "female_pct": 2.6613360249321576
+          },
+          {
+            "age": "40-44",
+            "male_pct": -2.724698477549196,
+            "female_pct": 2.821309738614769
+          },
+          {
+            "age": "45-49",
+            "male_pct": -2.844711675943015,
+            "female_pct": 2.9603535251647815
+          },
+          {
+            "age": "50-54",
+            "male_pct": -2.9644368295078523,
+            "female_pct": 3.1277486381802126
+          },
+          {
+            "age": "55-59",
+            "male_pct": -3.0951710399574957,
+            "female_pct": 3.2637289899552218
+          },
+          {
+            "age": "60-64",
+            "male_pct": -3.255510199949184,
+            "female_pct": 3.453071296608511
+          },
+          {
+            "age": "65-69",
+            "male_pct": -3.355980703119508,
+            "female_pct": 3.598690824560041
+          },
+          {
+            "age": "70-74",
+            "male_pct": -2.852170912058226,
+            "female_pct": 3.051855313139241
+          },
+          {
+            "age": "75-79",
+            "male_pct": -2.4243593742215275,
+            "female_pct": 2.6119897507797423
+          },
+          {
+            "age": "80-84",
+            "male_pct": -2.0481887443510587,
+            "female_pct": 2.231255885885667
+          },
+          {
+            "age": "85-89",
+            "male_pct": -1.7246270046743872,
+            "female_pct": 1.8931621204886784
+          },
+          {
+            "age": "90-94",
+            "male_pct": -1.4766581676213868,
+            "female_pct": 1.6224168082128594
+          },
+          {
+            "age": "95-99",
+            "male_pct": -1.2662705749938017,
+            "female_pct": 1.3811592037532943
+          },
+          {
+            "age": "100+",
+            "male_pct": -1.0841862561954334,
+            "female_pct": 1.1728121291577152
+          }
+        ]
+      },
+      "sub_national_density_choropleth": [
+        {
+          "admin_1_region_name": "Core Financial Zone",
+          "density_per_km2": 1107
+        },
+        {
+          "admin_1_region_name": "Agricultural Heartland",
+          "density_per_km2": 118
+        },
+        {
+          "admin_1_region_name": "Resource Periphery",
+          "density_per_km2": 25
+        }
+      ],
+      "synoptic_analysis": "Considerable silver economy needs as over-60 cohort expands dramatically."
+    }
+  ],
+  "culture_tab": {
+    "inglehart_welzel_coords": {
+      "x": -1.5,
+      "y": -0.8,
+      "cultural_zone": "Confucian and Southeast Asian"
+    },
+    "largest_diasporas": [
+      {
+        "destination": "United States",
+        "population": "~1.5-2 million",
+        "cultural_reach_impact": "Strong influence on American culinary scene (pho, banh mi), significant political advocacy, vibrant community cultural preservation (festivals, language schools)."
+      },
+      {
+        "destination": "France",
+        "population": "~300,000",
+        "cultural_reach_impact": "Historical ties have led to a lasting culinary presence, intellectual exchange, and a subtle but influential contribution to French arts and academia."
+      },
+      {
+        "destination": "Canada",
+        "population": "~250,000",
+        "cultural_reach_impact": "Growing vibrant communities, prominent food culture, active community organizations, and contributions across various professional sectors."
+      },
+      {
+        "destination": "Australia",
+        "population": "~200,000",
+        "cultural_reach_impact": "Established communities, particularly influential in the culinary landscape of major cities, active in festivals and local community engagement."
+      }
+    ],
+    "cultural_exports_and_landscape": {
+      "soft_power_exports": [
+        {
+          "medium": "Cuisine",
+          "examples": [
+            "Phở",
+            "Bánh Mì",
+            "Gỏi Cuốn (Spring Rolls)"
+          ],
+          "global_reach_score": 95
+        },
+        {
+          "medium": "Music",
+          "examples": [
+            "V-Pop (e.g., Sơn Tùng M-TP)",
+            "Traditional folk music (e.g., Quan Họ)"
+          ],
+          "global_reach_score": 60
+        },
+        {
+          "medium": "Cinema",
+          "examples": [
+            "The Scent of Green Papaya",
+            "Furie (Hai Phượng)"
+          ],
+          "global_reach_score": 45
+        },
+        {
+          "medium": "Traditional Arts & Fashion",
+          "examples": [
+            "Áo Dài",
+            "Múa rối nước (Water Puppetry)"
+          ],
+          "global_reach_score": 50
+        }
+      ],
+      "spatial_landscape": {
+        "enclaves": [
+          "Little Saigon (e.g., Orange County, California; Houston, Texas)",
+          "Belleville (Paris, France)"
+        ],
+        "architectural_footprint": "Vietnamese cultural presence abroad is often marked by distinctive temple architecture (Buddhist, Cao Dai), community centers, and adapted French colonial architectural styles in residential and commercial buildings.",
+        "description": "Vietnamese cultural enclaves globally are vibrant hubs, primarily recognized for their exceptional culinary offerings. These areas also serve as centers for cultural preservation, religious practices, and community gatherings, often featuring unique architectural adaptations and public art."
+      }
+    },
+    "hybridity_and_glocalization": [
+      {
+        "concept": "Vietnamese-French Fusion Cuisine",
+        "description": "A culinary tradition born from French colonial influence, blending French cooking techniques and ingredients with traditional Vietnamese flavors and dishes.",
+        "glocalized_examples": [
+          "Bánh Mì (Vietnamese baguette sandwich)",
+          "Cà Phê Sữa Đá (Vietnamese iced coffee with condensed milk)",
+          "Bò Kho (Vietnamese beef stew)"
+        ],
+        "spatial_location": "Urban centers globally, most prominently in Vietnam, France, and countries with large Vietnamese diasporas."
+      },
+      {
+        "concept": "Modern V-Pop Music",
+        "description": "Contemporary Vietnamese pop music that integrates elements of Western pop, R&B, and electronic music with Vietnamese lyrics, melodies, and cultural sensibilities.",
+        "glocalized_examples": [
+          "Songs by Sơn Tùng M-TP that blend K-Pop/Western pop styles with Vietnamese storytelling",
+          "Music videos incorporating traditional Vietnamese aesthetics with modern production values"
+        ],
+        "spatial_location": "Digital streaming platforms, urban youth culture in Vietnam, and Vietnamese diaspora communities worldwide."
+      },
+      {
+        "concept": "Áo Dài Adaptation",
+        "description": "The traditional Vietnamese long dress (Áo Dài) being reimagined by contemporary designers with modern fabrics, cuts, and styles, making it suitable for modern wear while retaining its cultural essence.",
+        "glocalized_examples": [
+          "Designer Áo Dài collections for fashion shows",
+          "Everyday wear Áo Dài with contemporary patterns and materials"
+        ],
+        "spatial_location": "Fashion runways, design studios in Vietnam, and worn in diaspora communities for both special occasions and modern daily life."
+      }
+    ]
+  }
+}

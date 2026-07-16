@@ -1,0 +1,970 @@
+{
+  "country_metadata": {
+    "name": "South Korea",
+    "income_classification": "High Income",
+    "gni_per_capita_atlas": {
+      "value_usd": 35990,
+      "year": 2022
+    },
+    "hdi": {
+      "score": 0.929,
+      "rank": 19,
+      "year": 2022
+    },
+    "gni_per_capita_ppp": {
+      "value_usd": 48510,
+      "year": 2022
+    },
+    "gini_coefficient": {
+      "score": 31.4,
+      "year": 2016
+    }
+  },
+  "globalisation_tab": {
+    "kof_index": {
+      "economic": {
+        "de_facto": 68.2,
+        "de_jure": 75.4
+      },
+      "social": {
+        "interpersonal": {
+          "de_facto": 55.4,
+          "de_jure": 60.1
+        },
+        "informational": {
+          "de_facto": 88.5,
+          "de_jure": 86.4
+        },
+        "cultural": {
+          "de_facto": 72.1,
+          "de_jure": 75.8
+        }
+      },
+      "political": {
+        "de_facto": 89.2,
+        "de_jure": 85.1
+      }
+    },
+    "at_kearney_framework": {
+      "status": "Alpha",
+      "gci_score_or_tier": "Alpha (Seoul)"
+    },
+    "ey_index_historical": {
+      "score": "70.1",
+      "analysis": "Highly integrated export-led economy. 'Hallyu' (Korean Wave) represents massive cultural globalization."
+    }
+  },
+  "economy_tab": {
+    "employment_structure": {
+      "primary": 4.8,
+      "secondary": 24.6,
+      "tertiary": 58.4,
+      "quaternary": 12.2
+    },
+    "trade_ledger": {
+      "main_exports": [
+        {
+          "commodity": "Integrated Circuits",
+          "pct_gdp": 16.5
+        },
+        {
+          "commodity": "Cars",
+          "pct_gdp": 6.2
+        },
+        {
+          "commodity": "Refined Petroleum",
+          "pct_gdp": 5.4
+        },
+        {
+          "commodity": "Vehicle Parts",
+          "pct_gdp": 2.8
+        },
+        {
+          "commodity": "Passenger Ships",
+          "pct_gdp": 2.5
+        }
+      ],
+      "main_imports": [
+        {
+          "commodity": "Crude Petroleum",
+          "pct_gdp": 9.4
+        },
+        {
+          "commodity": "Integrated Circuits",
+          "pct_gdp": 5.8
+        },
+        {
+          "commodity": "Petroleum Gas",
+          "pct_gdp": 4.2
+        },
+        {
+          "commodity": "Coal",
+          "pct_gdp": 2.1
+        },
+        {
+          "commodity": "Iron Ore",
+          "pct_gdp": 1.5
+        }
+      ],
+      "top_partners_outgoing": [
+        {
+          "partner": "China",
+          "value_usd_billions": 162.8
+        },
+        {
+          "partner": "United States",
+          "value_usd_billions": 95.4
+        },
+        {
+          "partner": "Vietnam",
+          "value_usd_billions": 58.2
+        },
+        {
+          "partner": "Japan",
+          "value_usd_billions": 30.1
+        },
+        {
+          "partner": "Hong Kong",
+          "value_usd_billions": 28.5
+        }
+      ],
+      "top_partners_incoming": [
+        {
+          "partner": "China",
+          "value_usd_billions": 138.4
+        },
+        {
+          "partner": "United States",
+          "value_usd_billions": 73.2
+        },
+        {
+          "partner": "Japan",
+          "value_usd_billions": 55.4
+        },
+        {
+          "partner": "Australia",
+          "value_usd_billions": 33.1
+        },
+        {
+          "partner": "Saudi Arabia",
+          "value_usd_billions": 28.5
+        }
+      ]
+    }
+  },
+  "human_geography_tab": {
+    "spatial_hubs": {
+      "epz_sez_zones": [
+        {
+          "name": "Incheon Free Economic Zone",
+          "location_lat_long": "37.45, 126.70",
+          "primary_focus": "Bio-health, IT, Logistics hub next to international airport"
+        },
+        {
+          "name": "Busan-Jinhae FEZ",
+          "location_lat_long": "35.10, 128.84",
+          "primary_focus": "Maritime Logistics, Shipbuilding & Manufacturing"
+        },
+        {
+          "name": "Ulsan Industrial Hub",
+          "location_lat_long": "35.53, 129.31",
+          "primary_focus": "Hyundai Motors complex & colossal shipyards"
+        }
+      ],
+      "tourism_enclaves": [
+        {
+          "name": "Jeju Island",
+          "spatial_impact": "Domestic & international mass tourism hub"
+        }
+      ],
+      "core_periphery_zones": {
+        "core": "Seoul Capital Area (Seoul, Incheon, Gyeonggi-do)",
+        "periphery": "Rural South Jeolla Province and older declining Taebaek mountain towns"
+      }
+    },
+    "political_economy": {
+      "informal_economy_pct_gdp": 19.8,
+      "eiu_governance_type": "Full Democracy",
+      "freedom_house_status": "Free",
+      "corruption_perceptions_index": {
+        "score": 63,
+        "rank": 31
+      }
+    }
+  },
+  "prisoners_of_geography_map": {
+    "topographic_friction_points": [
+      {
+        "feature": "Taebaek Mountains",
+        "geopolitical_constraint": "Limits eastern development; population highly concentrated in western and southern plains."
+      }
+    ],
+    "hydrological_arteries": [
+      {
+        "feature": "Han River",
+        "geopolitical_constraint": "Economic heartline; proximity to DMZ creates strategic vulnerability."
+      }
+    ],
+    "choke_points_vulnerabilities": [
+      {
+        "feature": "The DMZ",
+        "impact": "Makes South Korea de facto an island; all physical trade must flow via air or sea."
+      }
+    ],
+    "buffer_zones": [
+      {
+        "region": "North Korea",
+        "significance": "Acts as a volatile buffer between South Korea (US allied) and China."
+      }
+    ],
+    "map_center": {
+      "lat": 35.9078,
+      "lng": 127.7669,
+      "zoom": 6
+    }
+  },
+  "population_dynamics_time_series": [
+    {
+      "year": 1970,
+      "pyramid_structure": {
+        "cohorts": [
+          {
+            "age": "0-4",
+            "male_pct": -9.100907974298696,
+            "female_pct": 9.100907974298696
+          },
+          {
+            "age": "5-9",
+            "male_pct": -7.483849159740469,
+            "female_pct": 7.395214608583024
+          },
+          {
+            "age": "10-14",
+            "male_pct": -6.24832810289826,
+            "female_pct": 6.007009612939398
+          },
+          {
+            "age": "15-19",
+            "male_pct": -5.184582086533912,
+            "female_pct": 4.878393887790226
+          },
+          {
+            "age": "20-24",
+            "male_pct": -4.322019218043806,
+            "female_pct": 3.995872071686715
+          },
+          {
+            "age": "25-29",
+            "male_pct": -3.5609072749164645,
+            "female_pct": 3.276833230496622
+          },
+          {
+            "age": "30-34",
+            "male_pct": -2.888694282569367,
+            "female_pct": 2.6956714868955323
+          },
+          {
+            "age": "35-39",
+            "male_pct": -2.4086480746761865,
+            "female_pct": 2.1888333585175497
+          },
+          {
+            "age": "40-44",
+            "male_pct": -2.009439463691292,
+            "female_pct": 1.7873335344702175
+          },
+          {
+            "age": "45-49",
+            "male_pct": -1.6458221261273016,
+            "female_pct": 1.476910643806273
+          },
+          {
+            "age": "50-54",
+            "male_pct": -1.3281206456364605,
+            "female_pct": 1.202774082706219
+          },
+          {
+            "age": "55-59",
+            "male_pct": -1.0771279100844922,
+            "female_pct": 0.9854653448728139
+          },
+          {
+            "age": "60-64",
+            "male_pct": -0.894262609784832,
+            "female_pct": 0.8143272757573361
+          },
+          {
+            "age": "65-69",
+            "male_pct": -0.7224720700470477,
+            "female_pct": 0.6612797652130402
+          },
+          {
+            "age": "70-74",
+            "male_pct": -0.5926391400496481,
+            "female_pct": 0.5378951004340644
+          },
+          {
+            "age": "75-79",
+            "male_pct": -0.4819950936560316,
+            "female_pct": 0.43936675868608216
+          },
+          {
+            "age": "80-84",
+            "male_pct": -0.38969997044551696,
+            "female_pct": 0.3568424367484392
+          },
+          {
+            "age": "85-89",
+            "male_pct": -0.3186804350502871,
+            "female_pct": 0.29178893965998665
+          },
+          {
+            "age": "90-94",
+            "male_pct": -0.26297245750753734,
+            "female_pct": 0.2392374832794032
+          },
+          {
+            "age": "95-99",
+            "male_pct": -0.2116711298942233,
+            "female_pct": 0.19699385179598494
+          },
+          {
+            "age": "100+",
+            "male_pct": -0.17575818738145085,
+            "female_pct": 0.16245113832907696
+          }
+        ]
+      },
+      "sub_national_density_choropleth": [
+        {
+          "admin_1_region_name": "Core Financial Zone",
+          "density_per_km2": 1014
+        },
+        {
+          "admin_1_region_name": "Agricultural Heartland",
+          "density_per_km2": 128
+        },
+        {
+          "admin_1_region_name": "Resource Periphery",
+          "density_per_km2": 11
+        }
+      ],
+      "synoptic_analysis": "Wide base from post-war baby boom, but aggressive family planning starts."
+    },
+    {
+      "year": 1990,
+      "pyramid_structure": {
+        "cohorts": [
+          {
+            "age": "0-4",
+            "male_pct": -5.2126717840765675,
+            "female_pct": 5.2126717840765675
+          },
+          {
+            "age": "5-9",
+            "male_pct": -4.831558291856902,
+            "female_pct": 4.894580539314076
+          },
+          {
+            "age": "10-14",
+            "male_pct": -4.442838320731305,
+            "female_pct": 4.571952306605223
+          },
+          {
+            "age": "15-19",
+            "male_pct": -4.069321271424739,
+            "female_pct": 4.232114304298658
+          },
+          {
+            "age": "20-24",
+            "male_pct": -3.7143440552207383,
+            "female_pct": 3.9215663318786746
+          },
+          {
+            "age": "25-29",
+            "male_pct": -3.4047915169506417,
+            "female_pct": 3.6334034002032047
+          },
+          {
+            "age": "30-34",
+            "male_pct": -3.1689982712615103,
+            "female_pct": 3.369408419442401
+          },
+          {
+            "age": "35-39",
+            "male_pct": -2.9043777795299115,
+            "female_pct": 3.120577524417648
+          },
+          {
+            "age": "40-44",
+            "male_pct": -2.7072680077513143,
+            "female_pct": 2.8755406816843965
+          },
+          {
+            "age": "45-49",
+            "male_pct": -2.4822503892887373,
+            "female_pct": 2.6878767740374117
+          },
+          {
+            "age": "50-54",
+            "male_pct": -2.283455322529639,
+            "female_pct": 2.5063677470165824
+          },
+          {
+            "age": "55-59",
+            "male_pct": -2.0920673849713025,
+            "female_pct": 2.3161087000955027
+          },
+          {
+            "age": "60-64",
+            "male_pct": -1.693781044545999,
+            "female_pct": 1.8617895398868358
+          },
+          {
+            "age": "65-69",
+            "male_pct": -1.3600852501012242,
+            "female_pct": 1.4761125298372328
+          },
+          {
+            "age": "70-74",
+            "male_pct": -1.0781596880443114,
+            "female_pct": 1.192102284783959
+          },
+          {
+            "age": "75-79",
+            "male_pct": -0.8523262078308685,
+            "female_pct": 0.9611517284516908
+          },
+          {
+            "age": "80-84",
+            "male_pct": -0.6883173978430039,
+            "female_pct": 0.768913903376449
+          },
+          {
+            "age": "85-89",
+            "male_pct": -0.5457899131208072,
+            "female_pct": 0.609851480565503
+          },
+          {
+            "age": "90-94",
+            "male_pct": -0.43472226374267364,
+            "female_pct": 0.4896301185430965
+          },
+          {
+            "age": "95-99",
+            "male_pct": -0.3459450197683383,
+            "female_pct": 0.3909341948653388
+          },
+          {
+            "age": "100+",
+            "male_pct": -0.28119254963399826,
+            "female_pct": 0.313083976395014
+          }
+        ]
+      },
+      "sub_national_density_choropleth": [
+        {
+          "admin_1_region_name": "Core Financial Zone",
+          "density_per_km2": 1008
+        },
+        {
+          "admin_1_region_name": "Agricultural Heartland",
+          "density_per_km2": 119
+        },
+        {
+          "admin_1_region_name": "Resource Periphery",
+          "density_per_km2": 12
+        }
+      ],
+      "synoptic_analysis": "Classic demographic dividend column. Massive economic productivity."
+    },
+    {
+      "year": 2010,
+      "pyramid_structure": {
+        "cohorts": [
+          {
+            "age": "0-4",
+            "male_pct": -3.1703771974898376,
+            "female_pct": 3.1703771974898376
+          },
+          {
+            "age": "5-9",
+            "male_pct": -3.125208508101662,
+            "female_pct": 3.1083472601784994
+          },
+          {
+            "age": "10-14",
+            "male_pct": -3.0478076797336726,
+            "female_pct": 3.022720093329396
+          },
+          {
+            "age": "15-19",
+            "male_pct": -2.9444567807470317,
+            "female_pct": 2.9700958781948748
+          },
+          {
+            "age": "20-24",
+            "male_pct": -2.915216324191893,
+            "female_pct": 2.9000624131047976
+          },
+          {
+            "age": "25-29",
+            "male_pct": -2.8388851648698257,
+            "female_pct": 2.8484935258410395
+          },
+          {
+            "age": "30-34",
+            "male_pct": -2.7619815152671543,
+            "female_pct": 2.767580779653138
+          },
+          {
+            "age": "35-39",
+            "male_pct": -2.6899701441366433,
+            "female_pct": 2.685407260698741
+          },
+          {
+            "age": "40-44",
+            "male_pct": -2.6226392032447463,
+            "female_pct": 2.618454329662088
+          },
+          {
+            "age": "45-49",
+            "male_pct": -2.548893890432467,
+            "female_pct": 2.556369883584433
+          },
+          {
+            "age": "50-54",
+            "male_pct": -2.4622662611113686,
+            "female_pct": 2.504092708747302
+          },
+          {
+            "age": "55-59",
+            "male_pct": -2.457657973923579,
+            "female_pct": 2.4627804940441242
+          },
+          {
+            "age": "60-64",
+            "male_pct": -2.371635337236033,
+            "female_pct": 2.431008882032314
+          },
+          {
+            "age": "65-69",
+            "male_pct": -2.3017482101946847,
+            "female_pct": 2.3909372883282627
+          },
+          {
+            "age": "70-74",
+            "male_pct": -2.2158677912651403,
+            "female_pct": 2.3658652192219423
+          },
+          {
+            "age": "75-79",
+            "male_pct": -2.199961670256515,
+            "female_pct": 2.314554067562935
+          },
+          {
+            "age": "80-84",
+            "male_pct": -1.8854573857945138,
+            "female_pct": 1.9549300999665506
+          },
+          {
+            "age": "85-89",
+            "male_pct": -1.6010813421289019,
+            "female_pct": 1.6573072410399001
+          },
+          {
+            "age": "90-94",
+            "male_pct": -1.3618463134334469,
+            "female_pct": 1.4057625026970744
+          },
+          {
+            "age": "95-99",
+            "male_pct": -1.1422710005709775,
+            "female_pct": 1.1986679360779868
+          },
+          {
+            "age": "100+",
+            "male_pct": -0.9891224953935862,
+            "female_pct": 1.0118327490211072
+          }
+        ]
+      },
+      "sub_national_density_choropleth": [
+        {
+          "admin_1_region_name": "Core Financial Zone",
+          "density_per_km2": 964
+        },
+        {
+          "admin_1_region_name": "Agricultural Heartland",
+          "density_per_km2": 126
+        },
+        {
+          "admin_1_region_name": "Resource Periphery",
+          "density_per_km2": 17
+        }
+      ],
+      "synoptic_analysis": "Sharply constricting base. Ultra-low fertility trends become visible."
+    },
+    {
+      "year": 2026,
+      "pyramid_structure": {
+        "cohorts": [
+          {
+            "age": "0-4",
+            "male_pct": -1.8844998672185636,
+            "female_pct": 1.8844998672185636
+          },
+          {
+            "age": "5-9",
+            "male_pct": -2.000519280748211,
+            "female_pct": 1.986397360497641
+          },
+          {
+            "age": "10-14",
+            "male_pct": -2.0788814918074667,
+            "female_pct": 2.0873724987671927
+          },
+          {
+            "age": "15-19",
+            "male_pct": -2.179728819964406,
+            "female_pct": 2.2003314955189306
+          },
+          {
+            "age": "20-24",
+            "male_pct": -2.261418563352219,
+            "female_pct": 2.3025297990294846
+          },
+          {
+            "age": "25-29",
+            "male_pct": -2.333947863112435,
+            "female_pct": 2.434714140303162
+          },
+          {
+            "age": "30-34",
+            "male_pct": -2.4770131533129955,
+            "female_pct": 2.559473758163503
+          },
+          {
+            "age": "35-39",
+            "male_pct": -2.5558829222816257,
+            "female_pct": 2.6964269591864927
+          },
+          {
+            "age": "40-44",
+            "male_pct": -2.7093407979454907,
+            "female_pct": 2.8341719673723675
+          },
+          {
+            "age": "45-49",
+            "male_pct": -2.8188134346976463,
+            "female_pct": 2.9615939796368735
+          },
+          {
+            "age": "50-54",
+            "male_pct": -3.0034260555328065,
+            "female_pct": 3.0805137974958066
+          },
+          {
+            "age": "55-59",
+            "male_pct": -3.09990313881512,
+            "female_pct": 3.2150135323996905
+          },
+          {
+            "age": "60-64",
+            "male_pct": -3.243090052944511,
+            "female_pct": 3.405094115236243
+          },
+          {
+            "age": "65-69",
+            "male_pct": -3.4195950884913104,
+            "female_pct": 3.5558868162436
+          },
+          {
+            "age": "70-74",
+            "male_pct": -2.890058942089357,
+            "female_pct": 3.0523250146034218
+          },
+          {
+            "age": "75-79",
+            "male_pct": -2.4177901515707787,
+            "female_pct": 2.608699340166364
+          },
+          {
+            "age": "80-84",
+            "male_pct": -2.073531571362315,
+            "female_pct": 2.2114062434857056
+          },
+          {
+            "age": "85-89",
+            "male_pct": -1.749758078427671,
+            "female_pct": 1.8641079322398941
+          },
+          {
+            "age": "90-94",
+            "male_pct": -1.4695726520078545,
+            "female_pct": 1.5745033341710573
+          },
+          {
+            "age": "95-99",
+            "male_pct": -1.267990978718324,
+            "female_pct": 1.334957670282578
+          },
+          {
+            "age": "100+",
+            "male_pct": -1.07030604138612,
+            "female_pct": 1.1449114321942366
+          }
+        ]
+      },
+      "sub_national_density_choropleth": [
+        {
+          "admin_1_region_name": "Core Financial Zone",
+          "density_per_km2": 888
+        },
+        {
+          "admin_1_region_name": "Agricultural Heartland",
+          "density_per_km2": 141
+        },
+        {
+          "admin_1_region_name": "Resource Periphery",
+          "density_per_km2": 29
+        }
+      ],
+      "synoptic_analysis": "Extreme fertility crisis (lowest globally). Highly inverted pyramid."
+    },
+    {
+      "year": 2040,
+      "pyramid_structure": {
+        "cohorts": [
+          {
+            "age": "0-4",
+            "male_pct": -1.8328494425677646,
+            "female_pct": 1.8328494425677646
+          },
+          {
+            "age": "5-9",
+            "male_pct": -1.9623282060315166,
+            "female_pct": 1.9259668133991026
+          },
+          {
+            "age": "10-14",
+            "male_pct": -2.0197484934699435,
+            "female_pct": 2.0159300497672596
+          },
+          {
+            "age": "15-19",
+            "male_pct": -2.0956744527101447,
+            "female_pct": 2.1151546665763976
+          },
+          {
+            "age": "20-24",
+            "male_pct": -2.2146513811351793,
+            "female_pct": 2.2011330068088983
+          },
+          {
+            "age": "25-29",
+            "male_pct": -2.3168935077625084,
+            "female_pct": 2.2923743245791295
+          },
+          {
+            "age": "30-34",
+            "male_pct": -2.4740257361482803,
+            "female_pct": 2.4068095375180714
+          },
+          {
+            "age": "35-39",
+            "male_pct": -2.5965321171312272,
+            "female_pct": 2.5516669913553147
+          },
+          {
+            "age": "40-44",
+            "male_pct": -2.710522234114014,
+            "female_pct": 2.6871673160344316
+          },
+          {
+            "age": "45-49",
+            "male_pct": -2.900045722659444,
+            "female_pct": 2.845412657207765
+          },
+          {
+            "age": "50-54",
+            "male_pct": -3.068170018576544,
+            "female_pct": 2.9620080528193835
+          },
+          {
+            "age": "55-59",
+            "male_pct": -3.282234823335979,
+            "female_pct": 3.1385812819370615
+          },
+          {
+            "age": "60-64",
+            "male_pct": -3.474986598577446,
+            "female_pct": 3.3151824925695035
+          },
+          {
+            "age": "65-69",
+            "male_pct": -3.6877825372328874,
+            "female_pct": 3.449904682513531
+          },
+          {
+            "age": "70-74",
+            "male_pct": -3.1217032968751193,
+            "female_pct": 2.9433841372700105
+          },
+          {
+            "age": "75-79",
+            "male_pct": -2.612827091387789,
+            "female_pct": 2.523102847737144
+          },
+          {
+            "age": "80-84",
+            "male_pct": -2.222281893974267,
+            "female_pct": 2.148132281851813
+          },
+          {
+            "age": "85-89",
+            "male_pct": -1.9160313618427207,
+            "female_pct": 1.8372965420067497
+          },
+          {
+            "age": "90-94",
+            "male_pct": -1.6494805978280482,
+            "female_pct": 1.5611196088882269
+          },
+          {
+            "age": "95-99",
+            "male_pct": -1.4266326954595867,
+            "female_pct": 1.3199311299887448
+          },
+          {
+            "age": "100+",
+            "male_pct": -1.2147513649478587,
+            "female_pct": 1.1267385628354398
+          }
+        ]
+      },
+      "sub_national_density_choropleth": [
+        {
+          "admin_1_region_name": "Core Financial Zone",
+          "density_per_km2": 805
+        },
+        {
+          "admin_1_region_name": "Agricultural Heartland",
+          "density_per_km2": 100
+        },
+        {
+          "admin_1_region_name": "Resource Periphery",
+          "density_per_km2": 12
+        }
+      ],
+      "synoptic_analysis": "Hyper-aged society. Huge structural challenges to workforce and pensions."
+    }
+  ],
+  "culture_tab": {
+    "inglehart_welzel_coords": {
+      "x": 0.85,
+      "y": 0.7,
+      "cultural_zone": "East Asian"
+    },
+    "largest_diasporas": [
+      {
+        "destination": "United States",
+        "population": "Approx. 2.6 million",
+        "cultural_reach_impact": "Significant through Koreatowns, churches, cuisine, and media consumption, influencing local multicultural landscapes."
+      },
+      {
+        "destination": "China",
+        "population": "Approx. 2.5 million",
+        "cultural_reach_impact": "Strong historical and cultural ties, with significant Joseonjok population maintaining language and traditions, particularly in Northeast China."
+      },
+      {
+        "destination": "Japan",
+        "population": "Approx. 800,000",
+        "cultural_reach_impact": "A distinct Zainichi Korean identity, contributing to unique cultural expressions and often acting as a bridge for cultural exchange and sometimes tension."
+      },
+      {
+        "destination": "Canada",
+        "population": "Approx. 250,000",
+        "cultural_reach_impact": "Growing communities in major cities, fostering Korean cultural centers, language schools, and contributing to local food scenes and arts."
+      }
+    ],
+    "cultural_exports_and_landscape": {
+      "soft_power_exports": [
+        {
+          "medium": "Music",
+          "examples": [
+            "K-Pop (BTS, BLACKPINK)",
+            "K-Rock"
+          ],
+          "global_reach_score": 95
+        },
+        {
+          "medium": "Cinema/TV",
+          "examples": [
+            "K-Drama (Squid Game, Crash Landing on You)",
+            "Korean Films (Parasite, Oldboy)"
+          ],
+          "global_reach_score": 90
+        },
+        {
+          "medium": "Cuisine",
+          "examples": [
+            "Kimchi",
+            "Korean BBQ",
+            "Bibimbap",
+            "Buldak-bokkeum-myeon"
+          ],
+          "global_reach_score": 80
+        },
+        {
+          "medium": "Beauty",
+          "examples": [
+            "K-Beauty (skincare, cosmetics)",
+            "Korean fashion trends"
+          ],
+          "global_reach_score": 85
+        }
+      ],
+      "spatial_landscape": {
+        "enclaves": [
+          "Koreatowns in Los Angeles, New York, Toronto, London, Sydney, etc.",
+          "Korean food streets in various global cities"
+        ],
+        "architectural_footprint": "A dynamic blend of traditional Hanok villages, ancient palaces/temples, and ultra-modern skyscrapers; innovative public spaces and digital infrastructure.",
+        "description": "South Korea's spatial landscape reflects a deep respect for historical roots alongside an aggressive embrace of futuristic urban development and digital living. This juxtaposition is evident in its cities, which are hubs of technological advancement and design, while preserving cultural heritage."
+      }
+    },
+    "hybridity_and_glocalization": [
+      {
+        "concept": "K-Pop's Global Adaptation",
+        "description": "K-Pop blends diverse global music genres (hip-hop, R&B, EDM) with traditional Korean aesthetics, modern performance, and a unique idol training system, appealing to a global audience.",
+        "glocalized_examples": [
+          "BTS's collaborations with Western artists like Halsey and Nicki Minaj",
+          "BLACKPINK's global fashion influence and brand endorsements",
+          "K-Pop dance challenges and fan cover groups worldwide"
+        ],
+        "spatial_location": "Global charts, social media platforms, international concert venues, and local fan communities worldwide."
+      },
+      {
+        "concept": "Korean Cuisine Fusion",
+        "description": "Traditional Korean dishes are reinterpreted and combined with local ingredients and culinary techniques in various international settings, creating hybrid food experiences.",
+        "glocalized_examples": [
+          "Kimchi tacos (Mexican-Korean fusion)",
+          "Gochujang-infused burgers or pasta dishes",
+          "Vegan or customized bibimbap and bulgogi variations in international restaurants"
+        ],
+        "spatial_location": "International restaurant scenes, food trucks, pop-up events, and culinary schools across continents."
+      },
+      {
+        "concept": "K-Beauty Influence and Adaptation",
+        "description": "Korean skincare and cosmetic trends (e.g., 10-step routine, sheet masks) are adopted and adapted by global beauty brands and consumers, influencing product development and beauty standards.",
+        "glocalized_examples": [
+          "Western beauty brands launching sheet mask lines or 'essence' products",
+          "Global adoption of 'glass skin' and 'snail mucin' trends",
+          "Beauty vloggers from diverse backgrounds creating K-Beauty inspired content"
+        ],
+        "spatial_location": "International beauty retail chains, online beauty communities, cosmetic industry innovation hubs, and personal beauty routines worldwide."
+      }
+    ]
+  }
+}

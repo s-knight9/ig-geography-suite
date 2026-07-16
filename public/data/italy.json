@@ -1,0 +1,540 @@
+{
+  "country_metadata": {
+    "name": "Italy",
+    "income_classification": "High Income",
+    "gni_per_capita_atlas": {
+      "value_usd": 38200,
+      "year": 2023
+    },
+    "hdi": {
+      "score": 0.906,
+      "rank": 30,
+      "year": 2022
+    },
+    "gni_per_capita_ppp": {
+      "value_usd": 54200,
+      "year": 2022
+    },
+    "gini_coefficient": {
+      "score": 34.8,
+      "year": 2021
+    }
+  },
+  "globalisation_tab": {
+    "kof_index": {
+      "economic": {
+        "de_facto": 81.2,
+        "de_jure": 83.5
+      },
+      "social": {
+        "interpersonal": {
+          "de_facto": 82.5,
+          "de_jure": 85
+        },
+        "informational": {
+          "de_facto": 88.4,
+          "de_jure": 90.1
+        },
+        "cultural": {
+          "de_facto": 75.2,
+          "de_jure": 78.4
+        }
+      },
+      "political": {
+        "de_facto": 92.4,
+        "de_jure": 95.1
+      }
+    },
+    "at_kearney_framework": {
+      "status": "Vastly Integrated",
+      "gci_score_or_tier": "Alpha-"
+    },
+    "ey_index_historical": {
+      "score": 4.1,
+      "analysis": "High economic and socio-political integration within the European single market, balanced by southern development disparities."
+    }
+  },
+  "economy_tab": {
+    "employment_structure": {
+      "primary": 3.8,
+      "secondary": 25.2,
+      "tertiary": 68.3,
+      "quaternary": 2.7
+    },
+    "trade_ledger": {
+      "main_exports": [
+        {
+          "commodity": "Packaged Medicaments",
+          "pct_gdp": 7.2
+        },
+        {
+          "commodity": "Cars & Vehicles",
+          "pct_gdp": 4.8
+        },
+        {
+          "commodity": "Refined Petroleum",
+          "pct_gdp": 4.5
+        },
+        {
+          "commodity": "Valves & Pumps",
+          "pct_gdp": 3.8
+        },
+        {
+          "commodity": "Leather Footwear",
+          "pct_gdp": 2.8
+        }
+      ],
+      "main_imports": [
+        {
+          "commodity": "Crude Petroleum",
+          "pct_gdp": 10.5
+        },
+        {
+          "commodity": "Cars",
+          "pct_gdp": 8.2
+        },
+        {
+          "commodity": "Packaged Medicaments",
+          "pct_gdp": 5.1
+        },
+        {
+          "commodity": "Petroleum Gas",
+          "pct_gdp": 4.8
+        },
+        {
+          "commodity": "Scrap & Raw Metals",
+          "pct_gdp": 3.2
+        }
+      ],
+      "top_partners_outgoing": [
+        {
+          "partner": "Germany",
+          "value_usd_billions": 68.4
+        },
+        {
+          "partner": "France",
+          "value_usd_billions": 52.1
+        },
+        {
+          "partner": "United States",
+          "value_usd_billions": 45.2
+        },
+        {
+          "partner": "Spain",
+          "value_usd_billions": 25.5
+        },
+        {
+          "partner": "United Kingdom",
+          "value_usd_billions": 22.8
+        }
+      ],
+      "top_partners_incoming": [
+        {
+          "partner": "Germany",
+          "value_usd_billions": 78.5
+        },
+        {
+          "partner": "France",
+          "value_usd_billions": 44.1
+        },
+        {
+          "partner": "China",
+          "value_usd_billions": 38.2
+        },
+        {
+          "partner": "Netherlands",
+          "value_usd_billions": 30.8
+        },
+        {
+          "partner": "Spain",
+          "value_usd_billions": 22.5
+        }
+      ]
+    }
+  },
+  "human_geography_tab": {
+    "spatial_hubs": {
+      "epz_sez_zones": [
+        {
+          "name": "Sardinia Cagliari Special Economic Zone",
+          "location_lat_long": "39.22, 9.11",
+          "primary_focus": "Sovereign Mediterranean maritime hub geared to pull advanced electronics and tech manufacturing."
+        },
+        {
+          "name": "Gioia Tauro SEZ Area",
+          "location_lat_long": "38.43, 15.90",
+          "primary_focus": "Strategic dry dock container shipping terminal linking Suez Canal maritime traffic directly to northern rail networks."
+        }
+      ],
+      "tourism_enclaves": [
+        {
+          "name": "Venice Historic Lagoon",
+          "spatial_impact": "Conserved medieval urban museum enclave designed entirely for high-budget tourism, resulting in severe local citizen depopulation."
+        }
+      ],
+      "core_periphery_zones": {
+        "core": "Northern Industrial Triangle (Milan, Turin, Venice, Genoa metropolitan complexes)",
+        "periphery": "Mezzogiorno Southern Agrarian Regions (Calabria, Sicily, parts of Campania)"
+      }
+    },
+    "political_economy": {
+      "informal_economy_pct_gdp": 18.2,
+      "eiu_governance_type": "Full Democracy",
+      "freedom_house_status": "Free",
+      "corruption_perceptions_index": {
+        "score": 56,
+        "rank": 42
+      }
+    }
+  },
+  "prisoners_of_geography_map": {
+    "topographic_friction_points": [
+      {
+        "feature": "Alps Mountain Wall",
+        "geopolitical_constraint": "Tremendous natural mountain barrier in the north, dividing Italy from France and Switzerland and restricting land freight roads."
+      }
+    ],
+    "hydrological_arteries": [
+      {
+        "feature": "Po River Valley Basin",
+        "strategic_advantage": "Elegantly flat, fertile river basin hosting the primary share of Italy's agricultural output, population, and manufacturing belts."
+      }
+    ],
+    "choke_points_vulnerabilities": [
+      {
+        "feature": "Strait of Messina Channels",
+        "impact": "Crucial shipping channel dividing Sicily from the southern mainland; highly vulnerable to seismic hazards."
+      }
+    ],
+    "buffer_zones": [
+      {
+        "region": "Apennine Mountain Spine",
+        "significance": "Continuous mountain spine dividing the peninsula into distinct eastern (Adriatic) and western (Tyrrhenian) coastal drainage corridors."
+      }
+    ],
+    "map_center": {
+      "lat": 41.8719,
+      "lng": 12.5674,
+      "zoom": 6
+    }
+  },
+  "population_dynamics_time_series": [
+    {
+      "year": 1970,
+      "pyramid_structure": {
+        "cohorts": [
+          {
+            "age": "0-4",
+            "male_pct": 4.1,
+            "female_pct": 3.9
+          },
+          {
+            "age": "5-14",
+            "male_pct": 7.8,
+            "female_pct": 7.4
+          },
+          {
+            "age": "15-64",
+            "male_pct": 32.8,
+            "female_pct": 31.9
+          },
+          {
+            "age": "65-79",
+            "male_pct": 5.2,
+            "female_pct": 5.8
+          },
+          {
+            "age": "80+",
+            "male_pct": 0.5,
+            "female_pct": 0.6
+          }
+        ]
+      },
+      "sub_national_density_choropleth": [
+        {
+          "admin_1_region_name": "Lombardy",
+          "density_per_km2": 370
+        },
+        {
+          "admin_1_region_name": "Campania",
+          "density_per_km2": 390
+        },
+        {
+          "admin_1_region_name": "Sardinia",
+          "density_per_km2": 65
+        }
+      ],
+      "synoptic_analysis": "Stage 4 consolidation, characterized by post-war industrial urbanization and healthy labor birth numbers."
+    },
+    {
+      "year": 2023,
+      "pyramid_structure": {
+        "cohorts": [
+          {
+            "age": "0-4",
+            "male_pct": 1.9,
+            "female_pct": 1.8
+          },
+          {
+            "age": "5-14",
+            "male_pct": 4.3,
+            "female_pct": 4.1
+          },
+          {
+            "age": "15-64",
+            "male_pct": 31.2,
+            "female_pct": 30.2
+          },
+          {
+            "age": "65-79",
+            "male_pct": 9.5,
+            "female_pct": 10.4
+          },
+          {
+            "age": "80+",
+            "male_pct": 3.1,
+            "female_pct": 4.5
+          }
+        ]
+      },
+      "sub_national_density_choropleth": [
+        {
+          "admin_1_region_name": "Lombardy",
+          "density_per_km2": 420
+        },
+        {
+          "admin_1_region_name": "Campania",
+          "density_per_km2": 425
+        },
+        {
+          "admin_1_region_name": "Sardinia",
+          "density_per_km2": 68
+        }
+      ],
+      "synoptic_analysis": "Classic Stage 5 structural shrinkage with extremely low crude birth rates and a heavy aging retirement demographic profile."
+    },
+    {
+      "year": 2026,
+      "pyramid_structure": {
+        "cohorts": [
+          {
+            "age": "0-4",
+            "male_pct": 1.8,
+            "female_pct": 1.7
+          },
+          {
+            "age": "5-14",
+            "male_pct": 4.1,
+            "female_pct": 3.9
+          },
+          {
+            "age": "15-64",
+            "male_pct": 30.8,
+            "female_pct": 29.8
+          },
+          {
+            "age": "65-79",
+            "male_pct": 9.8,
+            "female_pct": 10.8
+          },
+          {
+            "age": "80+",
+            "male_pct": 3.3,
+            "female_pct": 4.9
+          }
+        ]
+      },
+      "sub_national_density_choropleth": [
+        {
+          "admin_1_region_name": "Lombardy",
+          "density_per_km2": 422
+        },
+        {
+          "admin_1_region_name": "Campania",
+          "density_per_km2": 422
+        },
+        {
+          "admin_1_region_name": "Sardinia",
+          "density_per_km2": 67
+        }
+      ],
+      "synoptic_analysis": "Critical sub-replacement fertility levels requiring immigration mitigation programs to stabilize the northern workforce markets."
+    },
+    {
+      "year": 2040,
+      "pyramid_structure": {
+        "cohorts": [
+          {
+            "age": "0-4",
+            "male_pct": 1.5,
+            "female_pct": 1.4
+          },
+          {
+            "age": "5-14",
+            "male_pct": 3.5,
+            "female_pct": 3.2
+          },
+          {
+            "age": "15-64",
+            "male_pct": 28.5,
+            "female_pct": 26.8
+          },
+          {
+            "age": "65-79",
+            "male_pct": 11.2,
+            "female_pct": 12.1
+          },
+          {
+            "age": "80+",
+            "male_pct": 5.2,
+            "female_pct": 7.6
+          }
+        ]
+      },
+      "sub_national_density_choropleth": [
+        {
+          "admin_1_region_name": "Lombardy",
+          "density_per_km2": 435
+        },
+        {
+          "admin_1_region_name": "Campania",
+          "density_per_km2": 415
+        },
+        {
+          "admin_1_region_name": "Sardinia",
+          "density_per_km2": 66
+        }
+      ],
+      "synoptic_analysis": "Deepened dependency load as the Baby Boomer generations enter advanced old age, taxing regional social budgets."
+    }
+  ],
+  "culture_tab": {
+    "inglehart_welzel_coords": {
+      "x": 0.5,
+      "y": 0.8,
+      "cultural_zone": "Western European / Catholic European"
+    },
+    "largest_diasporas": [
+      {
+        "destination": "Argentina",
+        "population": "~1.5 million (direct descendants, millions more with some Italian heritage)",
+        "cultural_reach_impact": "Significant influence on local dialect (Rioplatense Spanish), cuisine, and family names. Strong cultural retention through community organizations."
+      },
+      {
+        "destination": "Brazil",
+        "population": "~15-25 million (descendants)",
+        "cultural_reach_impact": "Profound impact on cuisine (especially in Southern Brazil), viticulture, and local dialects. Italian heritage is a strong component of Brazilian identity in some regions."
+      },
+      {
+        "destination": "United States",
+        "population": "~16-17 million (Italian-Americans)",
+        "cultural_reach_impact": "Developed a distinct Italian-American culture, influencing American cuisine, entertainment (e.g., Hollywood), and urban enclaves like 'Little Italy's."
+      },
+      {
+        "destination": "Canada",
+        "population": "~1.6 million (Italian-Canadians)",
+        "cultural_reach_impact": "Major influence on urban centers like Toronto and Montreal, particularly in food, community festivals, and a strong sense of cultural identity."
+      },
+      {
+        "destination": "Australia",
+        "population": "~1 million (Italian-Australians)",
+        "cultural_reach_impact": "Transformed Australian culinary landscape (coffee culture, pizza, pasta), contributed to viticulture, and fostered vibrant community life in major cities."
+      }
+    ],
+    "cultural_exports_and_landscape": {
+      "soft_power_exports": [
+        {
+          "medium": "Cuisine",
+          "examples": [
+            "Pasta",
+            "Pizza",
+            "Gelato",
+            "Espresso",
+            "Tiramisu"
+          ],
+          "global_reach_score": 98
+        },
+        {
+          "medium": "Fashion/Design",
+          "examples": [
+            "Gucci",
+            "Prada",
+            "Versace",
+            "Armani",
+            "Ferrari (automotive design)"
+          ],
+          "global_reach_score": 92
+        },
+        {
+          "medium": "Cinema",
+          "examples": [
+            "Neo-realism (e.g., 'Bicycle Thieves')",
+            "Spaghetti Westerns (e.g., 'The Good, the Bad and the Ugly')",
+            "Fellini films (e.g., 'La Dolce Vita')"
+          ],
+          "global_reach_score": 85
+        },
+        {
+          "medium": "Music",
+          "examples": [
+            "Opera (e.g., Verdi, Puccini)",
+            "Classical composers (e.g., Vivaldi)",
+            "Contemporary Pop (e.g., Eros Ramazzotti)"
+          ],
+          "global_reach_score": 75
+        },
+        {
+          "medium": "Art/Architecture",
+          "examples": [
+            "Renaissance (e.g., Da Vinci, Michelangelo)",
+            "Baroque (e.g., Bernini)",
+            "Ancient Roman structures (e.g., Colosseum)"
+          ],
+          "global_reach_score": 90
+        }
+      ],
+      "spatial_landscape": {
+        "enclaves": [
+          "Little Italy (New York City)",
+          "Corso Italia (Toronto)",
+          "Lygon Street (Melbourne)",
+          "North Beach (San Francisco)"
+        ],
+        "architectural_footprint": "From the grandeur of Roman ruins and Renaissance palaces to the theatricality of Baroque churches, Italian architecture has profoundly influenced global design, notably in Neoclassical and Revival styles worldwide.",
+        "description": "Italian cultural presence is visible globally through its architectural legacy, diverse enclaves maintaining traditions, and the pervasive adoption of its culinary, fashion, and artistic expressions, shaping urban and social landscapes."
+      }
+    },
+    "hybridity_and_glocalization": [
+      {
+        "concept": "Italian-American Cuisine",
+        "description": "A distinct culinary tradition that evolved from traditional Italian dishes adapted and often enriched with American ingredients, flavors, and portion sizes, often sweeter and bolder than their Italian counterparts.",
+        "glocalized_examples": [
+          "Spaghetti and Meatballs",
+          "Chicken Parmesan",
+          "Fettuccine Alfredo (as commonly prepared outside Italy)"
+        ],
+        "spatial_location": "United States, particularly Northeastern cities."
+      },
+      {
+        "concept": "Global Pizzeria Culture",
+        "description": "The Neapolitan dish of pizza has undergone countless local adaptations worldwide, incorporating diverse toppings, crust styles, and serving methods to suit regional tastes.",
+        "glocalized_examples": [
+          "Hawaiian Pizza (Canada)",
+          "Japanese Teriyaki Chicken Pizza",
+          "Indian Tandoori Chicken Pizza"
+        ],
+        "spatial_location": "Worldwide, especially in urban and suburban areas."
+      },
+      {
+        "concept": "Espresso Bar Culture",
+        "description": "The Italian tradition of espresso and coffee preparation has become a global phenomenon, leading to the establishment of coffee shops worldwide that often blend Italian vocabulary and preparation methods with local tastes and social habits.",
+        "glocalized_examples": [
+          "Starbucks (Americanized espresso drinks)",
+          "Australian Flat White",
+          "Various local cafe chains adopting 'latte' or 'cappuccino' terminology with unique regional twists"
+        ],
+        "spatial_location": "Major cities and towns globally."
+      }
+    ]
+  }
+}

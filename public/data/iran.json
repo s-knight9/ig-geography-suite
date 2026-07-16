@@ -1,0 +1,537 @@
+{
+  "country_metadata": {
+    "name": "Iran",
+    "income_classification": "Upper Middle Income",
+    "gni_per_capita_atlas": {
+      "value_usd": 3900,
+      "year": 2023
+    },
+    "hdi": {
+      "score": 0.78,
+      "rank": 78,
+      "year": 2022
+    },
+    "gni_per_capita_ppp": {
+      "value_usd": 15600,
+      "year": 2022
+    },
+    "gini_coefficient": {
+      "score": 40.9,
+      "year": 2022
+    }
+  },
+  "globalisation_tab": {
+    "kof_index": {
+      "economic": {
+        "de_facto": 35.5,
+        "de_jure": 31.2
+      },
+      "social": {
+        "interpersonal": {
+          "de_facto": 42.1,
+          "de_jure": 39.5
+        },
+        "informational": {
+          "de_facto": 54.2,
+          "de_jure": 51.5
+        },
+        "cultural": {
+          "de_facto": 32.1,
+          "de_jure": 35.8
+        }
+      },
+      "political": {
+        "de_facto": 62.5,
+        "de_jure": 64.8
+      }
+    },
+    "at_kearney_framework": {
+      "status": "Low Integration",
+      "gci_score_or_tier": "Gamma"
+    },
+    "ey_index_historical": {
+      "score": 1.8,
+      "analysis": "Chronically isolated by international banking sanctions, limiting physical and financial globalisation avenues to bilateral friendly channels."
+    }
+  },
+  "economy_tab": {
+    "employment_structure": {
+      "primary": 16,
+      "secondary": 33,
+      "tertiary": 51,
+      "quaternary": 0
+    },
+    "trade_ledger": {
+      "main_exports": [
+        {
+          "commodity": "Crude Petroleum",
+          "pct_gdp": 42.5
+        },
+        {
+          "commodity": "Polymers & Ethylene",
+          "pct_gdp": 11.2
+        },
+        {
+          "commodity": "Iron & Steel",
+          "pct_gdp": 8.2
+        },
+        {
+          "commodity": "Acyclic Alcohols",
+          "pct_gdp": 4.5
+        },
+        {
+          "commodity": "Pistachios",
+          "pct_gdp": 2.8
+        }
+      ],
+      "main_imports": [
+        {
+          "commodity": "Broadcasting Tech",
+          "pct_gdp": 9.2
+        },
+        {
+          "commodity": "Wheat",
+          "pct_gdp": 6.4
+        },
+        {
+          "commodity": "Soybeans",
+          "pct_gdp": 5.5
+        },
+        {
+          "commodity": "Corn",
+          "pct_gdp": 4.8
+        },
+        {
+          "commodity": "Auto Parts",
+          "pct_gdp": 3.5
+        }
+      ],
+      "top_partners_outgoing": [
+        {
+          "partner": "China",
+          "value_usd_billions": 12.4
+        },
+        {
+          "partner": "United Arab Emirates",
+          "value_usd_billions": 6.2
+        },
+        {
+          "partner": "Turkey",
+          "value_usd_billions": 3.5
+        },
+        {
+          "partner": "Iraq",
+          "value_usd_billions": 2.8
+        },
+        {
+          "partner": "India",
+          "value_usd_billions": 1.5
+        }
+      ],
+      "top_partners_incoming": [
+        {
+          "partner": "China",
+          "value_usd_billions": 15.5
+        },
+        {
+          "partner": "United Arab Emirates",
+          "value_usd_billions": 12.4
+        },
+        {
+          "partner": "Turkey",
+          "value_usd_billions": 5.8
+        },
+        {
+          "partner": "India",
+          "value_usd_billions": 2.4
+        },
+        {
+          "partner": "Germany",
+          "value_usd_billions": 1.8
+        }
+      ]
+    }
+  },
+  "human_geography_tab": {
+    "spatial_hubs": {
+      "epz_sez_zones": [
+        {
+          "name": "Chabahar Free Trade Zone",
+          "location_lat_long": "25.29, 60.61",
+          "primary_focus": "Oceanic deep-water port serving as India-backed trade corridor to Afghanistan and Central Asia bypassing land transit restrictions."
+        },
+        {
+          "name": "Kish Island Free Zone",
+          "location_lat_long": "26.54, 53.98",
+          "primary_focus": "Offshore financial hub and commercial enclave specializing in trade arbitrage and sanction mitigation channels."
+        }
+      ],
+      "tourism_enclaves": [
+        {
+          "name": "Historic Isfahan Central Area",
+          "spatial_impact": "State-conserved Islamic architectural heritage hub managed for regional tourists, isolated from Western leisure complexes."
+        }
+      ],
+      "core_periphery_zones": {
+        "core": "Tehran-Alborz Industrial Triangle (heavy manufacturing, state ministries, financial services)",
+        "periphery": "Sistan-Baluchestan (southeast) and Kordestan mountain borderlands (west)"
+      }
+    },
+    "political_economy": {
+      "informal_economy_pct_gdp": 38.2,
+      "eiu_governance_type": "Authoritarian Regime",
+      "freedom_house_status": "Not Free",
+      "corruption_perceptions_index": {
+        "score": 24,
+        "rank": 149
+      }
+    }
+  },
+  "prisoners_of_geography_map": {
+    "topographic_friction_points": [
+      {
+        "feature": "Zagros Mountains Spine",
+        "geopolitical_constraint": "Formidable mountain chain of the west, acting as a natural geographic shield but isolating the Iranian plateau from Mesopotamia."
+      }
+    ],
+    "hydrological_arteries": [
+      {
+        "feature": "Karun River Corridor",
+        "strategic_advantage": "Iran's only major navigable river, linking agricultural interior plains directly to the Persian Gulf."
+      }
+    ],
+    "choke_points_vulnerabilities": [
+      {
+        "feature": "Strait of Hormuz",
+        "impact": "Primary maritime exit for Middle East crude; vulnerable to naval blockades, putting Iran at the center of energy geopolitical leverage."
+      }
+    ],
+    "buffer_zones": [
+      {
+        "region": "Dasht-e Kavir & Dasht-e Lut Deserts",
+        "significance": "Vast hyper-arid central deserts separating demographic clusters of the north and west from eastern boundaries."
+      }
+    ],
+    "map_center": {
+      "lat": 32.4279,
+      "lng": 53.688,
+      "zoom": 5
+    }
+  },
+  "population_dynamics_time_series": [
+    {
+      "year": 1970,
+      "pyramid_structure": {
+        "cohorts": [
+          {
+            "age": "0-4",
+            "male_pct": 9.2,
+            "female_pct": 8.9
+          },
+          {
+            "age": "5-14",
+            "male_pct": 14.8,
+            "female_pct": 14.1
+          },
+          {
+            "age": "15-64",
+            "male_pct": 24.5,
+            "female_pct": 25.1
+          },
+          {
+            "age": "65-79",
+            "male_pct": 1.6,
+            "female_pct": 1.5
+          },
+          {
+            "age": "80+",
+            "male_pct": 0.1,
+            "female_pct": 0.2
+          }
+        ]
+      },
+      "sub_national_density_choropleth": [
+        {
+          "admin_1_region_name": "Tehran Province",
+          "density_per_km2": 850
+        },
+        {
+          "admin_1_region_name": "Isfahan Province",
+          "density_per_km2": 45
+        },
+        {
+          "admin_1_region_name": "Sistan and Baluchestan",
+          "density_per_km2": 11
+        }
+      ],
+      "synoptic_analysis": "Stage 2 rapid growth phase with historic high marital fertility and falling post-war infant mortality rates."
+    },
+    {
+      "year": 2023,
+      "pyramid_structure": {
+        "cohorts": [
+          {
+            "age": "0-4",
+            "male_pct": 3.4,
+            "female_pct": 3.2
+          },
+          {
+            "age": "5-14",
+            "male_pct": 7.1,
+            "female_pct": 6.8
+          },
+          {
+            "age": "15-64",
+            "male_pct": 36.2,
+            "female_pct": 35.1
+          },
+          {
+            "age": "65-79",
+            "male_pct": 3.7,
+            "female_pct": 4.1
+          },
+          {
+            "age": "80+",
+            "male_pct": 0.2,
+            "female_pct": 0.2
+          }
+        ]
+      },
+      "sub_national_density_choropleth": [
+        {
+          "admin_1_region_name": "Tehran Province",
+          "density_per_km2": 1050
+        },
+        {
+          "admin_1_region_name": "Isfahan Province",
+          "density_per_km2": 52
+        },
+        {
+          "admin_1_region_name": "Sistan and Baluchestan",
+          "density_per_km2": 15
+        }
+      ],
+      "synoptic_analysis": "Severe flat base following the historic end of the post-1980 state-sponsored family planning campaigns."
+    },
+    {
+      "year": 2026,
+      "pyramid_structure": {
+        "cohorts": [
+          {
+            "age": "0-4",
+            "male_pct": 3.2,
+            "female_pct": 3
+          },
+          {
+            "age": "5-14",
+            "male_pct": 6.8,
+            "female_pct": 6.5
+          },
+          {
+            "age": "15-64",
+            "male_pct": 36.4,
+            "female_pct": 35.3
+          },
+          {
+            "age": "65-79",
+            "male_pct": 4,
+            "female_pct": 4.4
+          },
+          {
+            "age": "80+",
+            "male_pct": 0.2,
+            "female_pct": 0.2
+          }
+        ]
+      },
+      "sub_national_density_choropleth": [
+        {
+          "admin_1_region_name": "Tehran Province",
+          "density_per_km2": 1080
+        },
+        {
+          "admin_1_region_name": "Isfahan Province",
+          "density_per_km2": 54
+        },
+        {
+          "admin_1_region_name": "Sistan and Baluchestan",
+          "density_per_km2": 16
+        }
+      ],
+      "synoptic_analysis": "Transitioning Stage 4 sub-replacement fertility, leading to an increasing dependency support ration dynamic."
+    },
+    {
+      "year": 2040,
+      "pyramid_structure": {
+        "cohorts": [
+          {
+            "age": "0-4",
+            "male_pct": 2.5,
+            "female_pct": 2.4
+          },
+          {
+            "age": "5-14",
+            "male_pct": 5.8,
+            "female_pct": 5.5
+          },
+          {
+            "age": "15-64",
+            "male_pct": 34.2,
+            "female_pct": 33.1
+          },
+          {
+            "age": "65-79",
+            "male_pct": 7.4,
+            "female_pct": 8.1
+          },
+          {
+            "age": "80+",
+            "male_pct": 0.5,
+            "female_pct": 0.5
+          }
+        ]
+      },
+      "sub_national_density_choropleth": [
+        {
+          "admin_1_region_name": "Tehran Province",
+          "density_per_km2": 1150
+        },
+        {
+          "admin_1_region_name": "Isfahan Province",
+          "density_per_km2": 58
+        },
+        {
+          "admin_1_region_name": "Sistan and Baluchestan",
+          "density_per_km2": 18
+        }
+      ],
+      "synoptic_analysis": "Accelerated graying of the population bulge requiring strategic pivots in public health allocations and pension buffers."
+    }
+  ],
+  "culture_tab": {
+    "inglehart_welzel_coords": {
+      "x": -0.5,
+      "y": 0.7,
+      "cultural_zone": "Islamic"
+    },
+    "largest_diasporas": [
+      {
+        "destination": "USA",
+        "population": "Approx. 1-1.5 million",
+        "cultural_reach_impact": "Significant influence on arts, academia, and business, maintaining strong cultural identity and heritage through community centers and media."
+      },
+      {
+        "destination": "Canada",
+        "population": "Approx. 200,000-300,000",
+        "cultural_reach_impact": "Active in cultural preservation, Farsi language schools, and contributing to professional sectors, especially in major cities like Toronto and Vancouver."
+      },
+      {
+        "destination": "Germany",
+        "population": "Approx. 100,000-150,000",
+        "cultural_reach_impact": "Cultural centers promote Persian arts, literature, and cuisine, fostering intercultural dialogue and maintaining strong ties to heritage."
+      },
+      {
+        "destination": "UK",
+        "population": "Approx. 80,000-100,000",
+        "cultural_reach_impact": "Notable presence in London, contributing to academia, arts, and medical fields, with vibrant cultural events and media outlets."
+      },
+      {
+        "destination": "Sweden",
+        "population": "Approx. 80,000-100,000",
+        "cultural_reach_impact": "Active in political discourse, cultural festivals, and integrating while preserving identity through community organizations."
+      }
+    ],
+    "cultural_exports_and_landscape": {
+      "soft_power_exports": [
+        {
+          "medium": "Cinema",
+          "examples": [
+            "A Separation",
+            "Children of Heaven",
+            "Taste of Cherry"
+          ],
+          "global_reach_score": 85
+        },
+        {
+          "medium": "Poetry & Literature",
+          "examples": [
+            "Rumi (Jalāl ad-Dīn Mohammad Rūmī)",
+            "Hafez",
+            "Ferdowsi's Shahnameh"
+          ],
+          "global_reach_score": 90
+        },
+        {
+          "medium": "Cuisine",
+          "examples": [
+            "Chelow Kebab",
+            "Ghormeh Sabzi",
+            "Fesenjan"
+          ],
+          "global_reach_score": 65
+        },
+        {
+          "medium": "Art & Architecture",
+          "examples": [
+            "Persian Miniatures",
+            "Isfahan's Naqsh-e Jahan Square",
+            "Persepolis"
+          ],
+          "global_reach_score": 75
+        },
+        {
+          "medium": "Music",
+          "examples": [
+            "Classical Persian Music (Radif)",
+            "Sufi Music",
+            "Traditional Folk"
+          ],
+          "global_reach_score": 50
+        }
+      ],
+      "spatial_landscape": {
+        "enclaves": [
+          "Tehrangeles (Los Angeles, USA)",
+          "Persian Square (Toronto, Canada)",
+          "Iranian neighborhoods in Cologne (Germany)",
+          "Parsian Market (Dubai, UAE)"
+        ],
+        "architectural_footprint": "Intricate tilework, grand domes, iwans, symmetrical gardens (Persian Gardens), pre-Islamic influences (Achaemenid and Sassanian), especially noted in mosques, palaces, and bazaars.",
+        "description": "The Iranian cultural landscape abroad is characterized by community centers, Farsi language schools, Persian restaurants, and cultural festivals that celebrate ancient traditions, poetry, and arts. 'Tehrangeles' in Los Angeles is a prominent example of a vibrant diaspora hub, rich with Persian businesses, media, and cultural institutions."
+      }
+    },
+    "hybridity_and_glocalization": [
+      {
+        "concept": "Persian-American Fusion Cuisine",
+        "description": "Traditional Persian dishes adapted with local ingredients and contemporary culinary techniques to appeal to broader palates.",
+        "glocalized_examples": [
+          "Kebab burgers with sumac aioli",
+          "Saffron infused cocktails",
+          "Fesenjan pizza",
+          "Persian tacos"
+        ],
+        "spatial_location": "Los Angeles (USA), Toronto (Canada), London (UK)"
+      },
+      {
+        "concept": "Modern Persian Art",
+        "description": "Contemporary Iranian artists blending traditional Persian motifs, calligraphy, and storytelling with modern artistic styles and global themes, often with social commentary.",
+        "glocalized_examples": [
+          "Calligraphy art installations in urban spaces",
+          "Abstract paintings incorporating ancient Persian symbols",
+          "Street art with political and social commentary reflecting Iranian heritage"
+        ],
+        "spatial_location": "Tehran (Iran), London (UK), New York (USA), Dubai (UAE)"
+      },
+      {
+        "concept": "Persian Hip-Hop/Pop Music",
+        "description": "Iranian and diaspora artists incorporating traditional Persian instruments, melodies (dastgah), and lyrical themes into modern hip-hop and pop genres, often reflecting bicultural experiences.",
+        "glocalized_examples": [
+          "Rap songs using traditional dastgah melodies and Persian poetry",
+          "Pop tracks featuring santour or tar elements alongside electronic beats",
+          "Songs blending Farsi and English lyrics exploring identity and longing"
+        ],
+        "spatial_location": "Los Angeles (USA), European cities (e.g., Berlin, London), Tehran (underground scene)"
+      }
+    ]
+  }
+}

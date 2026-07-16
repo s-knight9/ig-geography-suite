@@ -1,0 +1,510 @@
+{
+  "country_metadata": {
+    "name": "Iceland",
+    "income_classification": "High Income",
+    "gni_per_capita_atlas": {
+      "value_usd": 73670,
+      "year": 2023
+    },
+    "hdi": {
+      "score": 0.959,
+      "rank": 3,
+      "year": 2022
+    },
+    "gni_per_capita_ppp": {
+      "value_usd": 69180,
+      "year": 2022
+    },
+    "gini_coefficient": {
+      "score": 26.1,
+      "year": 2018
+    }
+  },
+  "globalisation_tab": {
+    "kof_index": {
+      "economic": {
+        "de_facto": 82.5,
+        "de_jure": 85
+      },
+      "social": {
+        "interpersonal": {
+          "de_facto": 90.1,
+          "de_jure": 88.4
+        },
+        "informational": {
+          "de_facto": 92.5,
+          "de_jure": 94
+        },
+        "cultural": {
+          "de_facto": 80.2,
+          "de_jure": 83.1
+        }
+      },
+      "political": {
+        "de_facto": 85.7,
+        "de_jure": 89.2
+      }
+    },
+    "at_kearney_framework": {
+      "status": "Highly Integrated",
+      "gci_score_or_tier": "Alpha"
+    },
+    "ey_index_historical": {
+      "score": 4.1,
+      "analysis": "Extremely high informational and social globalisation due to near-universal digital connectivity and active multilateral cooperation."
+    }
+  },
+  "economy_tab": {
+    "employment_structure": {
+      "primary": 4.5,
+      "secondary": 16.2,
+      "tertiary": 65.3,
+      "quaternary": 14
+    },
+    "trade_ledger": {
+      "main_exports": [
+        {
+          "commodity": "Aluminium",
+          "pct_gdp": 38.5
+        },
+        {
+          "commodity": "Fish Products",
+          "pct_gdp": 34.2
+        },
+        {
+          "commodity": "Ferrosilicon",
+          "pct_gdp": 5.4
+        },
+        {
+          "commodity": "Scientific Instruments",
+          "pct_gdp": 3.2
+        },
+        {
+          "commodity": "Animal Feed",
+          "pct_gdp": 2.1
+        }
+      ],
+      "main_imports": [
+        {
+          "commodity": "Refined Petroleum",
+          "pct_gdp": 12.4
+        },
+        {
+          "commodity": "Alumina (Raw)",
+          "pct_gdp": 10.8
+        },
+        {
+          "commodity": "Cars",
+          "pct_gdp": 8.5
+        },
+        {
+          "commodity": "Delivery Trucks",
+          "pct_gdp": 3.1
+        },
+        {
+          "commodity": "Packaged Medicaments",
+          "pct_gdp": 2.5
+        }
+      ],
+      "top_partners_outgoing": [
+        {
+          "partner": "Netherlands",
+          "value_usd_billions": 1.2
+        },
+        {
+          "partner": "Germany",
+          "value_usd_billions": 0.85
+        },
+        {
+          "partner": "United Kingdom",
+          "value_usd_billions": 0.54
+        },
+        {
+          "partner": "United States",
+          "value_usd_billions": 0.42
+        },
+        {
+          "partner": "Spain",
+          "value_usd_billions": 0.35
+        }
+      ],
+      "top_partners_incoming": [
+        {
+          "partner": "Norway",
+          "value_usd_billions": 0.95
+        },
+        {
+          "partner": "Germany",
+          "value_usd_billions": 0.81
+        },
+        {
+          "partner": "Netherlands",
+          "value_usd_billions": 0.72
+        },
+        {
+          "partner": "Denmark",
+          "value_usd_billions": 0.48
+        },
+        {
+          "partner": "China",
+          "value_usd_billions": 0.45
+        }
+      ]
+    }
+  },
+  "human_geography_tab": {
+    "spatial_hubs": {
+      "epz_sez_zones": [
+        {
+          "name": "Reykjanesbær Innovation Hub",
+          "location_lat_long": "63.99, -22.56",
+          "primary_focus": "Tech park specializing in geothermal datacenter scaling and carbon capture research."
+        },
+        {
+          "name": "Grundartangi Industrial Zone",
+          "location_lat_long": "64.36, -21.68",
+          "primary_focus": "Deep-water port and smelting center run entirely on hydro and geothermal energies."
+        }
+      ],
+      "tourism_enclaves": [
+        {
+          "name": "The Blue Lagoon & Golden Circle",
+          "spatial_impact": "High-density transit tourism enclaves concentrating massive eco-recreational global wealth."
+        }
+      ],
+      "core_periphery_zones": {
+        "core": "Greater Reykjavik Area (housing over 64% of the national population)",
+        "periphery": "Sparse Northwest Fjords and isolated highland sheep-farming valleys"
+      }
+    },
+    "political_economy": {
+      "informal_economy_pct_gdp": 6.8,
+      "eiu_governance_type": "Full Democracy",
+      "freedom_house_status": "Free",
+      "corruption_perceptions_index": {
+        "score": 74,
+        "rank": 14
+      }
+    }
+  },
+  "prisoners_of_geography_map": {
+    "topographic_friction_points": [
+      {
+        "feature": "Vatnajökull Ice Cap & Volcanic Highlands",
+        "geopolitical_constraint": "Extreme volcanic and glaciological ruggedness restricting inland infrastructure to the coastal Ring Road."
+      },
+      {
+        "feature": "Fjord Valley Isolates",
+        "geopolitical_constraint": "Deep coastal incisions causing severe localized winter transport barriers and maritime detour friction."
+      }
+    ],
+    "hydrological_arteries": [
+      {
+        "feature": "Jökulsá á Fjöllum & Glacier Meltwater Rivers",
+        "strategic_advantage": "Massive glacial output feeding roaring tectonic waterfalls, driving 100% renewable geothermal/hydroelectric grids."
+      }
+    ],
+    "choke_points_vulnerabilities": [
+      {
+        "feature": "Reykjavik Harbor Dependency",
+        "impact": "99% of import-export cargo funnels through Faxaflói Bay, leaving the island vulnerable to North Atlantic storm bottlenecks."
+      }
+    ],
+    "buffer_zones": [
+      {
+        "region": "Mid-Atlantic Isolation",
+        "significance": "Polar sea buffers shielding Iceland from physical continental geopolitical instability and direct military flashpoints."
+      }
+    ],
+    "map_center": {
+      "lat": 64.9631,
+      "lng": -19.0208,
+      "zoom": 6
+    }
+  },
+  "population_dynamics_time_series": [
+    {
+      "year": 1970,
+      "pyramid_structure": {
+        "cohorts": [
+          {
+            "age": "0-4",
+            "male_pct": 5.2,
+            "female_pct": 5
+          },
+          {
+            "age": "5-14",
+            "male_pct": 9.4,
+            "female_pct": 9.1
+          },
+          {
+            "age": "15-64",
+            "male_pct": 31.2,
+            "female_pct": 29.8
+          },
+          {
+            "age": "65-79",
+            "male_pct": 4.1,
+            "female_pct": 4.5
+          },
+          {
+            "age": "80+",
+            "male_pct": 0.8,
+            "female_pct": 0.9
+          }
+        ]
+      },
+      "sub_national_density_choropleth": [
+        {
+          "admin_1_region_name": "Höfuðborgarsvæðið",
+          "density_per_km2": 450
+        },
+        {
+          "admin_1_region_name": "Suðurland",
+          "density_per_km2": 1.2
+        }
+      ],
+      "synoptic_analysis": "Expansive post-war cohort growth with extremely youthful demographic profiles in coastal fisheries towns."
+    },
+    {
+      "year": 2023,
+      "pyramid_structure": {
+        "cohorts": [
+          {
+            "age": "0-4",
+            "male_pct": 3,
+            "female_pct": 2.8
+          },
+          {
+            "age": "5-14",
+            "male_pct": 5.8,
+            "female_pct": 5.5
+          },
+          {
+            "age": "15-64",
+            "male_pct": 33.5,
+            "female_pct": 30.9
+          },
+          {
+            "age": "65-79",
+            "male_pct": 6.8,
+            "female_pct": 7.2
+          },
+          {
+            "age": "80+",
+            "male_pct": 2.1,
+            "female_pct": 2.4
+          }
+        ]
+      },
+      "sub_national_density_choropleth": [
+        {
+          "admin_1_region_name": "Höfuðborgarsvæðið",
+          "density_per_km2": 1050
+        },
+        {
+          "admin_1_region_name": "Suðurland",
+          "density_per_km2": 1.5
+        }
+      ],
+      "synoptic_analysis": "Stabilized birth rates and significant immigrant labor inflow feeding aluminum and high-tech sectors."
+    },
+    {
+      "year": 2026,
+      "pyramid_structure": {
+        "cohorts": [
+          {
+            "age": "0-4",
+            "male_pct": 2.9,
+            "female_pct": 2.7
+          },
+          {
+            "age": "5-14",
+            "male_pct": 5.5,
+            "female_pct": 5.2
+          },
+          {
+            "age": "15-64",
+            "male_pct": 33.1,
+            "female_pct": 30.5
+          },
+          {
+            "age": "65-79",
+            "male_pct": 7.4,
+            "female_pct": 7.8
+          },
+          {
+            "age": "80+",
+            "male_pct": 2.3,
+            "female_pct": 2.6
+          }
+        ]
+      },
+      "sub_national_density_choropleth": [
+        {
+          "admin_1_region_name": "Höfuðborgarsvæðið",
+          "density_per_km2": 1080
+        },
+        {
+          "admin_1_region_name": "Suðurland",
+          "density_per_km2": 1.6
+        }
+      ],
+      "synoptic_analysis": "Reflecting modern advanced high-income stage 4-5 structures with low replacement and long life expectancies."
+    },
+    {
+      "year": 2040,
+      "pyramid_structure": {
+        "cohorts": [
+          {
+            "age": "0-4",
+            "male_pct": 2.6,
+            "female_pct": 2.4
+          },
+          {
+            "age": "5-14",
+            "male_pct": 4.9,
+            "female_pct": 4.6
+          },
+          {
+            "age": "15-64",
+            "male_pct": 31.4,
+            "female_pct": 29.2
+          },
+          {
+            "age": "65-79",
+            "male_pct": 9.2,
+            "female_pct": 9.5
+          },
+          {
+            "age": "80+",
+            "male_pct": 3,
+            "female_pct": 3.2
+          }
+        ]
+      },
+      "sub_national_density_choropleth": [
+        {
+          "admin_1_region_name": "Höfuðborgarsvæðið",
+          "density_per_km2": 1150
+        },
+        {
+          "admin_1_region_name": "Suðurland",
+          "density_per_km2": 1.8
+        }
+      ],
+      "synoptic_analysis": "Substantial grey demographic consolidation requiring smart-grid automated infrastructure and foreign health workers."
+    }
+  ],
+  "culture_tab": {
+    "inglehart_welzel_coords": {
+      "x": 1.5,
+      "y": 1.8,
+      "cultural_zone": "Protestant Europe/Nordic"
+    },
+    "largest_diasporas": [
+      {
+        "destination": "Canada",
+        "population": "approx. 100,000 (of Icelandic descent)",
+        "cultural_reach_impact": "Significant historical and cultural preservation, particularly in Manitoba (New Iceland)."
+      },
+      {
+        "destination": "United States",
+        "population": "approx. 50,000 (of Icelandic descent)",
+        "cultural_reach_impact": "Smaller but active communities, maintaining some cultural ties and heritage events."
+      },
+      {
+        "destination": "Denmark",
+        "population": "approx. 8,000-10,000 (Icelandic citizens/residents)",
+        "cultural_reach_impact": "Strong academic and professional exchange due to historical ties, student population."
+      }
+    ],
+    "cultural_exports_and_landscape": {
+      "soft_power_exports": [
+        {
+          "medium": "Music",
+          "examples": [
+            "Björk",
+            "Sigur Rós",
+            "Of Monsters and Men"
+          ],
+          "global_reach_score": 85
+        },
+        {
+          "medium": "Literature",
+          "examples": [
+            "Icelandic Sagas",
+            "Halldór Laxness",
+            "Yrsa Sigurðardóttir"
+          ],
+          "global_reach_score": 50
+        },
+        {
+          "medium": "Cinema/TV",
+          "examples": [
+            "Trapped",
+            "Rams",
+            "Black's Game"
+          ],
+          "global_reach_score": 60
+        },
+        {
+          "medium": "Cuisine",
+          "examples": [
+            "Skyr",
+            "Traditional seafood dishes",
+            "Brennivín"
+          ],
+          "global_reach_score": 40
+        },
+        {
+          "medium": "Tourism/Nature",
+          "examples": [
+            "Geothermal spas",
+            "Northern Lights",
+            "Volcanic landscapes"
+          ],
+          "global_reach_score": 95
+        }
+      ],
+      "spatial_landscape": {
+        "enclaves": [
+          "Gimli, Manitoba (Canada - historical 'New Iceland')",
+          "Copenhagen, Denmark (Icelandic student/ex-pat community)"
+        ],
+        "architectural_footprint": "Distinctive blend of modern Nordic design, often utilizing natural materials like concrete and timber, alongside traditional turf houses and unique ecclesiastical structures (e.g., Hallgrímskirkja).",
+        "description": "Iceland's built environment is intimately connected to its dramatic natural landscapes, characterized by low-rise structures, geothermal heating solutions, and an emphasis on functional yet aesthetically pleasing design that withstands harsh weather. Urban centers like Reykjavík showcase vibrant street art and colorful housing."
+      }
+    },
+    "hybridity_and_glocalization": [
+      {
+        "concept": "Language Preservation and Modernization",
+        "description": "Iceland maintains a strong policy of linguistic purism, coining new Icelandic words for foreign concepts rather than adopting loanwords, while simultaneously integrating global technological and cultural advancements.",
+        "glocalized_examples": [
+          "New Icelandic terms for 'computer' (tölva) and 'internet' (veraldarvefur)",
+          "Official language policies encouraging native terminology for modern concepts."
+        ],
+        "spatial_location": "National language council, educational institutions, everyday media."
+      },
+      {
+        "concept": "Music Blending & Global Soundscapes",
+        "description": "Icelandic musicians frequently blend traditional Nordic folk elements, nature-inspired sounds, and experimental approaches with global genres like indie rock, electronic, and pop, creating a unique and internationally recognized sound.",
+        "glocalized_examples": [
+          "Björk's fusion of electronic, experimental, and orchestral elements",
+          "Sigur Rós's ambient post-rock with 'Hopelandic' vocals",
+          "Of Monsters and Men's globally popular indie-folk sound."
+        ],
+        "spatial_location": "Music venues in Reykjavík (e.g., Harpa), international music festivals, recording studios."
+      },
+      {
+        "concept": "New Nordic Cuisine Adaptation",
+        "description": "While retaining traditional Icelandic ingredients and dishes, the culinary scene has embraced the 'New Nordic' philosophy, focusing on local, fresh, and seasonal produce with modern culinary techniques and global influences.",
+        "glocalized_examples": [
+          "Restaurants serving innovative dishes using local lamb, fish, and foraged ingredients with international fine-dining techniques",
+          "The popularity of artisan bakeries and cafes offering global coffee culture alongside traditional pastries."
+        ],
+        "spatial_location": "Reykjavík's burgeoning restaurant scene, local food markets, and food festivals."
+      }
+    ]
+  }
+}

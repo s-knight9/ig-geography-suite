@@ -1,0 +1,980 @@
+{
+  "country_metadata": {
+    "name": "Malaysia",
+    "income_classification": "Upper-Middle Income",
+    "gni_per_capita_atlas": {
+      "value_usd": 11780,
+      "year": 2022
+    },
+    "hdi": {
+      "score": 0.807,
+      "rank": 63,
+      "year": 2022
+    },
+    "gni_per_capita_ppp": {
+      "value_usd": 31270,
+      "year": 2022
+    },
+    "gini_coefficient": {
+      "score": 41.1,
+      "year": 2015
+    }
+  },
+  "globalisation_tab": {
+    "kof_index": {
+      "economic": {
+        "de_facto": 85.1,
+        "de_jure": 76.5
+      },
+      "social": {
+        "interpersonal": {
+          "de_facto": 70.2,
+          "de_jure": 64.1
+        },
+        "informational": {
+          "de_facto": 78.4,
+          "de_jure": 75.2
+        },
+        "cultural": {
+          "de_facto": 68.1,
+          "de_jure": 72.4
+        }
+      },
+      "political": {
+        "de_facto": 83.2,
+        "de_jure": 88.1
+      }
+    },
+    "at_kearney_framework": {
+      "status": "Alpha-",
+      "gci_score_or_tier": "Alpha- (Kuala Lumpur)"
+    },
+    "ey_index_historical": {
+      "score": "71.2",
+      "analysis": "High economic trade integration via robust E&E (electrical and electronics) supply chains."
+    }
+  },
+  "economy_tab": {
+    "employment_structure": {
+      "primary": 10.2,
+      "secondary": 26.8,
+      "tertiary": 52.4,
+      "quaternary": 10.6
+    },
+    "trade_ledger": {
+      "main_exports": [
+        {
+          "commodity": "Integrated Circuits",
+          "pct_gdp": 16.5
+        },
+        {
+          "commodity": "Refined Petroleum",
+          "pct_gdp": 5.2
+        },
+        {
+          "commodity": "Palm Oil",
+          "pct_gdp": 3.8
+        },
+        {
+          "commodity": "Petroleum Gas",
+          "pct_gdp": 3.4
+        },
+        {
+          "commodity": "Computers",
+          "pct_gdp": 2.1
+        }
+      ],
+      "main_imports": [
+        {
+          "commodity": "Integrated Circuits",
+          "pct_gdp": 12.1
+        },
+        {
+          "commodity": "Refined Petroleum",
+          "pct_gdp": 6.8
+        },
+        {
+          "commodity": "Crude Petroleum",
+          "pct_gdp": 2.5
+        },
+        {
+          "commodity": "Broadcasting Equip",
+          "pct_gdp": 1.5
+        },
+        {
+          "commodity": "Gold",
+          "pct_gdp": 1.1
+        }
+      ],
+      "top_partners_outgoing": [
+        {
+          "partner": "Singapore",
+          "value_usd_billions": 58.4
+        },
+        {
+          "partner": "China",
+          "value_usd_billions": 48.2
+        },
+        {
+          "partner": "United States",
+          "value_usd_billions": 38.5
+        },
+        {
+          "partner": "Japan",
+          "value_usd_billions": 20.4
+        },
+        {
+          "partner": "Hong Kong",
+          "value_usd_billions": 18.2
+        }
+      ],
+      "top_partners_incoming": [
+        {
+          "partner": "China",
+          "value_usd_billions": 65.2
+        },
+        {
+          "partner": "Singapore",
+          "value_usd_billions": 31.4
+        },
+        {
+          "partner": "Taiwan",
+          "value_usd_billions": 20.1
+        },
+        {
+          "partner": "United States",
+          "value_usd_billions": 18.5
+        },
+        {
+          "partner": "Japan",
+          "value_usd_billions": 17.2
+        }
+      ]
+    }
+  },
+  "human_geography_tab": {
+    "spatial_hubs": {
+      "epz_sez_zones": [
+        {
+          "name": "Bayan Lepas FIZ (Penang)",
+          "location_lat_long": "5.32, 100.28",
+          "primary_focus": "Semiconductors ('Silicon Valley of the East')"
+        },
+        {
+          "name": "Johor-Singapore SEZ",
+          "location_lat_long": "1.49, 103.74",
+          "primary_focus": "Spillover manufacturing, data centers & tech from Singapore"
+        },
+        {
+          "name": "Klang Port Free Zone",
+          "location_lat_long": "3.03, 101.36",
+          "primary_focus": "Global shipping & halal product manufacturing"
+        }
+      ],
+      "tourism_enclaves": [
+        {
+          "name": "Langkawi",
+          "spatial_impact": "Duty-free tourist island and resort enclave"
+        },
+        {
+          "name": "Genting Highlands",
+          "spatial_impact": "Isolated mountaintop casino/entertainment complex"
+        }
+      ],
+      "core_periphery_zones": {
+        "core": "Klang Valley (Kuala Lumpur & Selangor) & George Town (Penang)",
+        "periphery": "Sparsely populated Sabah and Sarawak regions"
+      }
+    },
+    "political_economy": {
+      "informal_economy_pct_gdp": 25.1,
+      "eiu_governance_type": "Flawed Democracy",
+      "freedom_house_status": "Partly Free",
+      "corruption_perceptions_index": {
+        "score": 47,
+        "rank": 61
+      }
+    }
+  },
+  "prisoners_of_geography_map": {
+    "topographic_friction_points": [
+      {
+        "feature": "Titiwangsa Mountains",
+        "geopolitical_constraint": "Bisects Peninsular Malaysia, historically concentrating development on the western coast."
+      }
+    ],
+    "hydrological_arteries": [
+      {
+        "feature": "Strait of Malacca",
+        "geopolitical_constraint": "Global maritime choke point carrying 25% of world traded goods; immense strategic asset."
+      }
+    ],
+    "choke_points_vulnerabilities": [
+      {
+        "feature": "South China Sea Disconnection",
+        "impact": "Physical spatial separation of Peninsular and East Malaysia by a contested body of water."
+      }
+    ],
+    "buffer_zones": [
+      {
+        "region": "Borneo Internal Jungles",
+        "significance": "Deep natural buffer protecting raw materials outposts."
+      }
+    ],
+    "map_center": {
+      "lat": 4.2105,
+      "lng": 101.9758,
+      "zoom": 5
+    }
+  },
+  "population_dynamics_time_series": [
+    {
+      "year": 1970,
+      "pyramid_structure": {
+        "cohorts": [
+          {
+            "age": "0-4",
+            "male_pct": -9.208245572659301,
+            "female_pct": 9.208245572659301
+          },
+          {
+            "age": "5-9",
+            "male_pct": -7.4305567807499875,
+            "female_pct": 7.608329510797735
+          },
+          {
+            "age": "10-14",
+            "male_pct": -5.975351249000924,
+            "female_pct": 6.24533085066428
+          },
+          {
+            "age": "15-19",
+            "male_pct": -4.9402781394812,
+            "female_pct": 5.134353763263487
+          },
+          {
+            "age": "20-24",
+            "male_pct": -4.019413421923501,
+            "female_pct": 4.218629700714263
+          },
+          {
+            "age": "25-29",
+            "male_pct": -3.2987515828654628,
+            "female_pct": 3.458563496583252
+          },
+          {
+            "age": "30-34",
+            "male_pct": -2.6741471793530476,
+            "female_pct": 2.8218778950618555
+          },
+          {
+            "age": "35-39",
+            "male_pct": -2.235889281869986,
+            "female_pct": 2.298898592633593
+          },
+          {
+            "age": "40-44",
+            "male_pct": -1.861165202777187,
+            "female_pct": 1.8785451333479048
+          },
+          {
+            "age": "45-49",
+            "male_pct": -1.5410113640970953,
+            "female_pct": 1.5491099247444717
+          },
+          {
+            "age": "50-54",
+            "male_pct": -1.2609483892555047,
+            "female_pct": 1.2695016192590909
+          },
+          {
+            "age": "55-59",
+            "male_pct": -1.0194417964167648,
+            "female_pct": 1.0438783603202875
+          },
+          {
+            "age": "60-64",
+            "male_pct": -0.8351573733293971,
+            "female_pct": 0.8504641951504749
+          },
+          {
+            "age": "65-69",
+            "male_pct": -0.675987928305767,
+            "female_pct": 0.695306875008977
+          },
+          {
+            "age": "70-74",
+            "male_pct": -0.563308454265366,
+            "female_pct": 0.5713209161293165
+          },
+          {
+            "age": "75-79",
+            "male_pct": -0.4664803871597424,
+            "female_pct": 0.4705480277160549
+          },
+          {
+            "age": "80-84",
+            "male_pct": -0.3823807741185319,
+            "female_pct": 0.38421373776754786
+          },
+          {
+            "age": "85-89",
+            "male_pct": -0.31025282491056344,
+            "female_pct": 0.314633941851401
+          },
+          {
+            "age": "90-94",
+            "male_pct": -0.25125375976490144,
+            "female_pct": 0.2599174314852093
+          },
+          {
+            "age": "95-99",
+            "male_pct": -0.2082770954269333,
+            "female_pct": 0.21506022681429104
+          },
+          {
+            "age": "100+",
+            "male_pct": -0.1674590269028122,
+            "female_pct": 0.17751264339328587
+          }
+        ]
+      },
+      "sub_national_density_choropleth": [
+        {
+          "admin_1_region_name": "Core Financial Zone",
+          "density_per_km2": 975
+        },
+        {
+          "admin_1_region_name": "Agricultural Heartland",
+          "density_per_km2": 113
+        },
+        {
+          "admin_1_region_name": "Resource Periphery",
+          "density_per_km2": 27
+        }
+      ],
+      "synoptic_analysis": "Poverty and rural lifestyles maintain high fertility rates."
+    },
+    {
+      "year": 1990,
+      "pyramid_structure": {
+        "cohorts": [
+          {
+            "age": "0-4",
+            "male_pct": -5.067155595520837,
+            "female_pct": 5.067155595520837
+          },
+          {
+            "age": "5-9",
+            "male_pct": -4.772085101276165,
+            "female_pct": 4.6984010053074545
+          },
+          {
+            "age": "10-14",
+            "male_pct": -4.486110127261333,
+            "female_pct": 4.3659995230923965
+          },
+          {
+            "age": "15-19",
+            "male_pct": -4.099794136946548,
+            "female_pct": 4.0425532471653725
+          },
+          {
+            "age": "20-24",
+            "male_pct": -3.797214712506009,
+            "female_pct": 3.780914079662805
+          },
+          {
+            "age": "25-29",
+            "male_pct": -3.59869613401373,
+            "female_pct": 3.54148023472748
+          },
+          {
+            "age": "30-34",
+            "male_pct": -3.2985644597396977,
+            "female_pct": 3.2633105520156933
+          },
+          {
+            "age": "35-39",
+            "male_pct": -3.024036874509173,
+            "female_pct": 3.049190077625761
+          },
+          {
+            "age": "40-44",
+            "male_pct": -2.769376715859269,
+            "female_pct": 2.8606550029053768
+          },
+          {
+            "age": "45-49",
+            "male_pct": -2.5763738216802587,
+            "female_pct": 2.6495178200056952
+          },
+          {
+            "age": "50-54",
+            "male_pct": -2.3492843575970483,
+            "female_pct": 2.4879577831302977
+          },
+          {
+            "age": "55-59",
+            "male_pct": -2.215124201704203,
+            "female_pct": 2.3297419456837147
+          },
+          {
+            "age": "60-64",
+            "male_pct": -1.7411963749621269,
+            "female_pct": 1.8619917966625383
+          },
+          {
+            "age": "65-69",
+            "male_pct": -1.4013105356222693,
+            "female_pct": 1.503356532193293
+          },
+          {
+            "age": "70-74",
+            "male_pct": -1.137774983029085,
+            "female_pct": 1.2010764864228782
+          },
+          {
+            "age": "75-79",
+            "male_pct": -0.9052615651166718,
+            "female_pct": 0.962964533847724
+          },
+          {
+            "age": "80-84",
+            "male_pct": -0.724928115912488,
+            "female_pct": 0.7748916520935302
+          },
+          {
+            "age": "85-89",
+            "male_pct": -0.5851760900996158,
+            "female_pct": 0.6256909717608787
+          },
+          {
+            "age": "90-94",
+            "male_pct": -0.4742579820100057,
+            "female_pct": 0.5008646307370342
+          },
+          {
+            "age": "95-99",
+            "male_pct": -0.3804855960156161,
+            "female_pct": 0.4005761070223709
+          },
+          {
+            "age": "100+",
+            "male_pct": -0.30423192415948896,
+            "female_pct": 0.3232710168752364
+          }
+        ]
+      },
+      "sub_national_density_choropleth": [
+        {
+          "admin_1_region_name": "Core Financial Zone",
+          "density_per_km2": 1131
+        },
+        {
+          "admin_1_region_name": "Agricultural Heartland",
+          "density_per_km2": 116
+        },
+        {
+          "admin_1_region_name": "Resource Periphery",
+          "density_per_km2": 11
+        }
+      ],
+      "synoptic_analysis": "Rapid urbanization and NEP policies push population into Middle-Class norms."
+    },
+    {
+      "year": 2010,
+      "pyramid_structure": {
+        "cohorts": [
+          {
+            "age": "0-4",
+            "male_pct": -5.04370565106883,
+            "female_pct": 5.04370565106883
+          },
+          {
+            "age": "5-9",
+            "male_pct": -4.723567306278,
+            "female_pct": 4.7367646878453495
+          },
+          {
+            "age": "10-14",
+            "male_pct": -4.375414536108933,
+            "female_pct": 4.425707319149366
+          },
+          {
+            "age": "15-19",
+            "male_pct": -4.134433041360484,
+            "female_pct": 4.0830181527031435
+          },
+          {
+            "age": "20-24",
+            "male_pct": -3.813856131333681,
+            "female_pct": 3.774085002262873
+          },
+          {
+            "age": "25-29",
+            "male_pct": -3.610984522579819,
+            "female_pct": 3.4916542554635717
+          },
+          {
+            "age": "30-34",
+            "male_pct": -3.3054400019673924,
+            "female_pct": 3.2360811266305713
+          },
+          {
+            "age": "35-39",
+            "male_pct": -3.117432800912246,
+            "female_pct": 2.992263114741809
+          },
+          {
+            "age": "40-44",
+            "male_pct": -2.9042370607787023,
+            "female_pct": 2.7896750399662413
+          },
+          {
+            "age": "45-49",
+            "male_pct": -2.735653069648993,
+            "female_pct": 2.585632736126916
+          },
+          {
+            "age": "50-54",
+            "male_pct": -2.5306726463558094,
+            "female_pct": 2.3908724357301674
+          },
+          {
+            "age": "55-59",
+            "male_pct": -2.3129970790462253,
+            "female_pct": 2.2400146829520478
+          },
+          {
+            "age": "60-64",
+            "male_pct": -1.8418473516313887,
+            "female_pct": 1.7801378313160832
+          },
+          {
+            "age": "65-69",
+            "male_pct": -1.4767819969577178,
+            "female_pct": 1.416906176743469
+          },
+          {
+            "age": "70-74",
+            "male_pct": -1.1941305312604489,
+            "female_pct": 1.124415209552457
+          },
+          {
+            "age": "75-79",
+            "male_pct": -0.9378717921158428,
+            "female_pct": 0.8957525712833431
+          },
+          {
+            "age": "80-84",
+            "male_pct": -0.7555577320140212,
+            "female_pct": 0.7153734666698716
+          },
+          {
+            "age": "85-89",
+            "male_pct": -0.5954595290133354,
+            "female_pct": 0.5775306509914974
+          },
+          {
+            "age": "90-94",
+            "male_pct": -0.4739460169409125,
+            "female_pct": 0.4650879173483417
+          },
+          {
+            "age": "95-99",
+            "male_pct": -0.37824045050891686,
+            "female_pct": 0.37024443649112365
+          },
+          {
+            "age": "100+",
+            "male_pct": -0.30703656583138456,
+            "female_pct": 0.29581172124984667
+          }
+        ]
+      },
+      "sub_national_density_choropleth": [
+        {
+          "admin_1_region_name": "Core Financial Zone",
+          "density_per_km2": 873
+        },
+        {
+          "admin_1_region_name": "Agricultural Heartland",
+          "density_per_km2": 127
+        },
+        {
+          "admin_1_region_name": "Resource Periphery",
+          "density_per_km2": 18
+        }
+      ],
+      "synoptic_analysis": "Strong expansion of working age driving manufacturing export boom."
+    },
+    {
+      "year": 2026,
+      "pyramid_structure": {
+        "cohorts": [
+          {
+            "age": "0-4",
+            "male_pct": -3.088384365289844,
+            "female_pct": 3.088384365289844
+          },
+          {
+            "age": "5-9",
+            "male_pct": -3.013702786801783,
+            "female_pct": 3.036698013276893
+          },
+          {
+            "age": "10-14",
+            "male_pct": -2.903338532705214,
+            "female_pct": 2.971284123372929
+          },
+          {
+            "age": "15-19",
+            "male_pct": -2.844631222394841,
+            "female_pct": 2.8850501530553094
+          },
+          {
+            "age": "20-24",
+            "male_pct": -2.8376073678741824,
+            "female_pct": 2.811373862689377
+          },
+          {
+            "age": "25-29",
+            "male_pct": -2.8253219453462437,
+            "female_pct": 2.7719389490338444
+          },
+          {
+            "age": "30-34",
+            "male_pct": -2.7500552626460415,
+            "female_pct": 2.717551115943017
+          },
+          {
+            "age": "35-39",
+            "male_pct": -2.7330804278713896,
+            "female_pct": 2.6567256100306724
+          },
+          {
+            "age": "40-44",
+            "male_pct": -2.7078376230855348,
+            "female_pct": 2.614312845400089
+          },
+          {
+            "age": "45-49",
+            "male_pct": -2.6514012498067956,
+            "female_pct": 2.5672020100819712
+          },
+          {
+            "age": "50-54",
+            "male_pct": -2.560242312270987,
+            "female_pct": 2.5328118386568836
+          },
+          {
+            "age": "55-59",
+            "male_pct": -2.554898217513498,
+            "female_pct": 2.460190631686094
+          },
+          {
+            "age": "60-64",
+            "male_pct": -2.522990464773066,
+            "female_pct": 2.407104577151473
+          },
+          {
+            "age": "65-69",
+            "male_pct": -2.4463111137012556,
+            "female_pct": 2.3409020856302774
+          },
+          {
+            "age": "70-74",
+            "male_pct": -2.389341994116135,
+            "female_pct": 2.2943981802485314
+          },
+          {
+            "age": "75-79",
+            "male_pct": -2.3011632405092812,
+            "female_pct": 2.25828284052006
+          },
+          {
+            "age": "80-84",
+            "male_pct": -1.968656123968285,
+            "female_pct": 1.90321931626393
+          },
+          {
+            "age": "85-89",
+            "male_pct": -1.6944013735984393,
+            "female_pct": 1.6267071277179408
+          },
+          {
+            "age": "90-94",
+            "male_pct": -1.4287966358383533,
+            "female_pct": 1.3837847123769125
+          },
+          {
+            "age": "95-99",
+            "male_pct": -1.2290671196555099,
+            "female_pct": 1.168656305128769
+          },
+          {
+            "age": "100+",
+            "male_pct": -1.0598741284475344,
+            "female_pct": 0.9923178282309674
+          }
+        ]
+      },
+      "sub_national_density_choropleth": [
+        {
+          "admin_1_region_name": "Core Financial Zone",
+          "density_per_km2": 839
+        },
+        {
+          "admin_1_region_name": "Agricultural Heartland",
+          "density_per_km2": 112
+        },
+        {
+          "admin_1_region_name": "Resource Periphery",
+          "density_per_km2": 11
+        }
+      ],
+      "synoptic_analysis": "Aging society characteristics emerge. Relying on foreign labor for lower tiers."
+    },
+    {
+      "year": 2040,
+      "pyramid_structure": {
+        "cohorts": [
+          {
+            "age": "0-4",
+            "male_pct": -3.069528394599214,
+            "female_pct": 3.069528394599214
+          },
+          {
+            "age": "5-9",
+            "male_pct": -3.041394402454178,
+            "female_pct": 3.012118301971642
+          },
+          {
+            "age": "10-14",
+            "male_pct": -2.9750531095084294,
+            "female_pct": 2.9426515681080523
+          },
+          {
+            "age": "15-19",
+            "male_pct": -2.9676267597155026,
+            "female_pct": 2.8877967514229947
+          },
+          {
+            "age": "20-24",
+            "male_pct": -2.9044764500949123,
+            "female_pct": 2.8330585279526823
+          },
+          {
+            "age": "25-29",
+            "male_pct": -2.90181720511504,
+            "female_pct": 2.7709080888020847
+          },
+          {
+            "age": "30-34",
+            "male_pct": -2.85057848384981,
+            "female_pct": 2.7280656984494462
+          },
+          {
+            "age": "35-39",
+            "male_pct": -2.743647429937897,
+            "female_pct": 2.6744083331543957
+          },
+          {
+            "age": "40-44",
+            "male_pct": -2.6847396887552493,
+            "female_pct": 2.604134719843859
+          },
+          {
+            "age": "45-49",
+            "male_pct": -2.655149477262988,
+            "female_pct": 2.5357301932796474
+          },
+          {
+            "age": "50-54",
+            "male_pct": -2.572162761866183,
+            "female_pct": 2.4829665684046187
+          },
+          {
+            "age": "55-59",
+            "male_pct": -2.544368271891506,
+            "female_pct": 2.4351920273034686
+          },
+          {
+            "age": "60-64",
+            "male_pct": -2.4889358028123487,
+            "female_pct": 2.365534296204382
+          },
+          {
+            "age": "65-69",
+            "male_pct": -2.456443081507744,
+            "female_pct": 2.2954337834519194
+          },
+          {
+            "age": "70-74",
+            "male_pct": -2.415123330534461,
+            "female_pct": 2.260951300401179
+          },
+          {
+            "age": "75-79",
+            "male_pct": -2.330782994070895,
+            "female_pct": 2.1962624169201157
+          },
+          {
+            "age": "80-84",
+            "male_pct": -1.9662995232911447,
+            "female_pct": 1.8812663378114376
+          },
+          {
+            "age": "85-89",
+            "male_pct": -1.695289458950109,
+            "female_pct": 1.6022908033674035
+          },
+          {
+            "age": "90-94",
+            "male_pct": -1.4491709176284797,
+            "female_pct": 1.3618290496904613
+          },
+          {
+            "age": "95-99",
+            "male_pct": -1.2091182850962834,
+            "female_pct": 1.151776460061866
+          },
+          {
+            "age": "100+",
+            "male_pct": -1.0159034981226553,
+            "female_pct": 0.9704870517340557
+          }
+        ]
+      },
+      "sub_national_density_choropleth": [
+        {
+          "admin_1_region_name": "Core Financial Zone",
+          "density_per_km2": 1186
+        },
+        {
+          "admin_1_region_name": "Agricultural Heartland",
+          "density_per_km2": 140
+        },
+        {
+          "admin_1_region_name": "Resource Periphery",
+          "density_per_km2": 28
+        }
+      ],
+      "synoptic_analysis": "Columnar pyramid typical of a high-income developed nation."
+    }
+  ],
+  "culture_tab": {
+    "inglehart_welzel_coords": {
+      "x": -0.4,
+      "y": -0.6,
+      "cultural_zone": "Southeast Asian"
+    },
+    "largest_diasporas": [
+      {
+        "destination": "Singapore",
+        "population": "Approx. 1 million",
+        "cultural_reach_impact": "Strong influence on local culture, food, and language due to close proximity and historical ties. Significant exchange of cultural elements and ideas."
+      },
+      {
+        "destination": "Australia",
+        "population": "Approx. 180,000",
+        "cultural_reach_impact": "Malaysian cuisine and festivals are popular, particularly in major cities. Contributes to multicultural fabric, often through educational and professional migration."
+      },
+      {
+        "destination": "United Kingdom",
+        "population": "Approx. 100,000",
+        "cultural_reach_impact": "Historical colonial ties foster a strong Malaysian presence, especially among students and professionals. Malaysian food is well-represented, contributing to London's diverse culinary scene."
+      },
+      {
+        "destination": "United States",
+        "population": "Approx. 35,000",
+        "cultural_reach_impact": "Smaller but vibrant communities often linked to higher education and tech sectors. Introduces Malaysian food and traditions to American audiences in specific urban centers."
+      }
+    ],
+    "cultural_exports_and_landscape": {
+      "soft_power_exports": [
+        {
+          "medium": "Cuisine",
+          "examples": [
+            "Nasi Lemak",
+            "Laksa",
+            "Satay",
+            "Roti Canai"
+          ],
+          "global_reach_score": 85
+        },
+        {
+          "medium": "Film & Animation",
+          "examples": [
+            "Upin & Ipin (animated series)",
+            "Yasmin Ahmad's films",
+            "P. Ramlee classics"
+          ],
+          "global_reach_score": 60
+        },
+        {
+          "medium": "Arts & Crafts",
+          "examples": [
+            "Batik",
+            "Songket",
+            "Pewterware",
+            "Traditional wood carvings"
+          ],
+          "global_reach_score": 70
+        },
+        {
+          "medium": "Tourism & Natural Heritage",
+          "examples": [
+            "Petronas Twin Towers",
+            "Mount Kinabalu",
+            "Perhentian Islands",
+            "Historical cities like Malacca & Penang"
+          ],
+          "global_reach_score": 90
+        }
+      ],
+      "spatial_landscape": {
+        "enclaves": [
+          "Chinatown (Petaling Street)",
+          "Little India (Brickfields)",
+          "Malay Kampung (villages within urban areas)"
+        ],
+        "architectural_footprint": "A diverse blend of traditional Malay, Chinese, and Indian shophouses, colonial-era British buildings, modern Islamic-inspired structures, and contemporary skyscrapers.",
+        "description": "Malaysia's landscape is a vibrant tapestry reflecting its multi-ethnic heritage. Urban centers showcase a dynamic mix of historical charm and modern development, while rural areas retain traditional village aesthetics. Religious buildings (mosques, temples, churches) are prominent landmarks."
+      }
+    },
+    "hybridity_and_glocalization": [
+      {
+        "concept": "Malaysian Food Fusion",
+        "description": "The unique blending of Malay, Chinese, Indian, Nyonya, and indigenous culinary traditions, creating a distinct gastronomic identity.",
+        "glocalized_examples": [
+          "Mamakan restaurants offering Indian-Muslim cuisine adapted to local tastes",
+          "Nyonya Laksa (peranakan fusion)",
+          "Milo Dinosaur (Malaysian-invented drink)"
+        ],
+        "spatial_location": "Ubiquitous in hawker centers, food courts, and restaurants across all states, particularly prominent in Penang and Malacca."
+      },
+      {
+        "concept": "Bahasa Rojak",
+        "description": "A colloquial linguistic phenomenon where Bahasa Malaysia is mixed liberally with English, Mandarin, Tamil, and other local dialects in everyday conversation.",
+        "glocalized_examples": [
+          "'Mana you pergi semalam?' (Where did you go yesterday?)",
+          "Advertising slogans combining multiple languages",
+          "Local media content using mixed languages"
+        ],
+        "spatial_location": "Prevalent in urban and suburban areas, especially among younger generations in Kuala Lumpur, Penang, and Johor Bahru."
+      },
+      {
+        "concept": "Architectural Adaptation",
+        "description": "The incorporation of local cultural motifs and climactic considerations into modern architectural designs, or the repurposing of historical structures.",
+        "glocalized_examples": [
+          "Modern mosques with traditional Malay geometric patterns and tropical architectural elements",
+          "Colonial-era shophouses in Penang and Malacca repurposed into boutique hotels and cafes",
+          "Kuala Lumpur's skyline with Islamic-inspired skyscrapers like the Petronas Towers"
+        ],
+        "spatial_location": "Visible across cities, ranging from religious edifices and public buildings to commercial and residential developments."
+      }
+    ]
+  }
+}

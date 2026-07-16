@@ -1,0 +1,361 @@
+{
+  "country_metadata": {
+    "name": "Venezuela",
+    "income_classification": "Upper-Middle Income",
+    "gni_per_capita_atlas": {
+      "value_usd": 3500,
+      "year": 2023
+    },
+    "hdi": {
+      "score": 0.691,
+      "rank": 119,
+      "year": 2022
+    },
+    "gni_per_capita_ppp": {
+      "value_usd": 6800,
+      "year": 2022
+    },
+    "gini_coefficient": {
+      "score": 44.8,
+      "year": 2006
+    }
+  },
+  "globalisation_tab": {
+    "kof_index": {
+      "economic": {
+        "de_facto": 32.5,
+        "de_jure": 35.8
+      },
+      "social": {
+        "interpersonal": {
+          "de_facto": 44.2,
+          "de_jure": 40.1
+        },
+        "informational": {
+          "de_facto": 41.5,
+          "de_jure": 38.6
+        },
+        "cultural": {
+          "de_facto": 26.8,
+          "de_jure": 25.1
+        }
+      },
+      "political": {
+        "de_facto": 52.8,
+        "de_jure": 54.1
+      }
+    },
+    "at_kearney_framework": {
+      "status": "Localized/Peripheral",
+      "gci_score_or_tier": "Tier 4"
+    },
+    "ey_index_historical": {
+      "score": 2.1,
+      "analysis": "High economic isolation due to sovereign defaults, hyperinflation, and extensive US/EU trade restrictions. Global connections are mostly restricted to oil trade partners like China and India."
+    }
+  },
+  "economy_tab": {
+    "employment_structure": {
+      "primary": 8,
+      "secondary": 22,
+      "tertiary": 68,
+      "quaternary": 2
+    },
+    "trade_ledger": {
+      "main_exports": [
+        {
+          "commodity": "Crude Petroleum",
+          "pct_gdp": 16.5
+        },
+        {
+          "commodity": "Refined Petroleum",
+          "pct_gdp": 2.4
+        },
+        {
+          "commodity": "Gold",
+          "pct_gdp": 1.8
+        }
+      ],
+      "main_imports": [
+        {
+          "commodity": "Refined Petroleum",
+          "pct_gdp": 4.5
+        },
+        {
+          "commodity": "Packaged Medicaments",
+          "pct_gdp": 2.1
+        },
+        {
+          "commodity": "Rice & Wheat",
+          "pct_gdp": 1.8
+        }
+      ],
+      "top_partners_outgoing": [
+        { "partner": "United States", "value_usd_billions": 1.2 },
+        { "partner": "India", "value_usd_billions": 0.8 },
+        { "partner": "China", "value_usd_billions": 0.7 }
+      ],
+      "top_partners_incoming": [
+        { "partner": "China", "value_usd_billions": 2.1 },
+        { "partner": "United States", "value_usd_billions": 1.5 },
+        { "partner": "Brazil", "value_usd_billions": 0.6 }
+      ]
+    }
+  },
+  "human_geography_tab": {
+    "population_size": 29390000,
+    "population_density": 33.5,
+    "urbanization_rate": 89.0,
+    "life_expectancy": 73.2,
+    "fertility_rate": 2.18,
+    "literacy_rate": 97.2,
+    "spatial_location_image": "https://www.geo-ref.net/m/venezuela.png",
+    "spatial_hubs": {
+      "epz_sez_zones": [
+        {
+          "name": "Paraguaná Free Trade Zone",
+          "location_lat_long": "11.72, -70.20",
+          "primary_focus": "Petrochemical processing, refinery hubs, wind farm integration, and duty-free electronics logistics."
+        },
+        {
+          "name": "Nueva Esparta Port Zone (Margarita)",
+          "location_lat_long": "10.99, -63.91",
+          "primary_focus": "Tourism hospitality services, duty-free retail, commercial fisheries, and containerized transport."
+        }
+      ],
+      "tourism_enclaves": [
+        {
+          "name": "Margarita Island Strip",
+          "location_lat_long": "10.99, -63.91",
+          "spatial_impact": "Rapid high-rise hotel development, coastal degradation, severe domestic water diversion at the expense of local communities, and enclave-led cruise terminals."
+        },
+        {
+          "name": "Los Roques Archipelago",
+          "location_lat_long": "11.85, -66.75",
+          "spatial_impact": "Strictly regulated luxury eco-tourism enclave catering to high-spending international yachts, keeping human footprint minimal on local reefs."
+        }
+      ],
+      "core_periphery_zones": {
+        "core": "Caracas-Valencia-Maracay Northern Coastal Belt (housing over 70% of the industrial base and population).",
+        "periphery": "Guayana region (mining focus) and the vast Southern Amazon states (largely isolated forest reserves)."
+      }
+    },
+    "political_economy": {
+      "informal_economy_pct_gdp": 60.5,
+      "eiu_governance_type": "Authoritarian Regime",
+      "freedom_house_status": "Not Free",
+      "corruption_perceptions_index": {
+        "score": 13,
+        "rank": 177
+      }
+    }
+  },
+  "prisoners_of_geography_map": {
+    "topographic_friction_points": [
+      {
+        "feature": "Andean Cordillera Ridge",
+        "geopolitical_constraint": "Rugged northern and western peaks dividing the coastal population corridors from the interior llanos, inflating national transport costs."
+      }
+    ],
+    "hydrological_arteries": [
+      {
+        "feature": "Orinoco River Basin System",
+        "strategic_advantage": "Venezuela's primary river system, providing heavy industrial navigation routes to transport steel, iron ore, and bauxite to Atlantic shipping lines."
+      }
+    ],
+    "choke_points_vulnerabilities": [
+      {
+        "feature": "Gulf of Venezuela & Tablazo Strait",
+        "impact": "The narrow coastal channel exiting Lake Maracaibo; extremely critical for all regional crude oil tanker transport and historically contested with Colombia."
+      }
+    ],
+    "buffer_zones": [
+      {
+        "region": "Guiana Highlands & Amazon Canopy",
+        "significance": "Dense southern rainforest shield that isolates the land border with Brazil, acting as a natural geographic barrier to massive border incursions."
+      }
+    ],
+    "map_center": {
+      "lat": 6.4238,
+      "lng": -66.5897,
+      "zoom": 5
+    }
+  },
+  "population_dynamics_time_series": [
+    {
+      "year": 1970,
+      "pyramid_structure": {
+        "cohorts": [
+          { "age": "0-4", "male_pct": 8.5, "female_pct": 8.1 },
+          { "age": "5-9", "male_pct": 7.8, "female_pct": 7.4 },
+          { "age": "10-14", "male_pct": 6.8, "female_pct": 6.5 },
+          { "age": "15-19", "male_pct": 5.8, "female_pct": 5.5 },
+          { "age": "20-24", "male_pct": 4.8, "female_pct": 4.6 },
+          { "age": "25-29", "male_pct": 4.1, "female_pct": 3.9 },
+          { "age": "30-34", "male_pct": 3.5, "female_pct": 3.3 },
+          { "age": "35-39", "male_pct": 3.0, "female_pct": 2.9 },
+          { "age": "40-44", "male_pct": 2.5, "female_pct": 2.4 },
+          { "age": "45-49", "male_pct": 2.0, "female_pct": 1.9 },
+          { "age": "50-54", "male_pct": 1.6, "female_pct": 1.5 },
+          { "age": "55-59", "male_pct": 1.2, "female_pct": 1.1 },
+          { "age": "60-64", "male_pct": 0.8, "female_pct": 0.8 },
+          { "age": "65-69", "male_pct": 0.5, "female_pct": 0.5 },
+          { "age": "70-74", "male_pct": 0.3, "female_pct": 0.3 },
+          { "age": "75-79", "male_pct": 0.1, "female_pct": 0.2 },
+          { "age": "80-84", "male_pct": 0.05, "female_pct": 0.08 },
+          { "age": "85+", "male_pct": 0.02, "female_pct": 0.04 }
+        ]
+      },
+      "sub_national_density_choropleth": [
+        { "admin_1_region_name": "Distrito Capital (Caracas)", "density_per_km2": 1120 },
+        { "admin_1_region_name": "Zulia (Maracaibo)", "density_per_km2": 45 },
+        { "admin_1_region_name": "Bolívar (Ciudad Guayana)", "density_per_km2": 4 }
+      ],
+      "synoptic_analysis": "Stage 2 transitional demographics. Rapid agricultural-to-urban population movement, high fertility, and falling mortality yield a broad base and high youth dependency."
+    },
+    {
+      "year": 2026,
+      "pyramid_structure": {
+        "cohorts": [
+          { "age": "0-4", "male_pct": 4.2, "female_pct": 4.0 },
+          { "age": "5-9", "male_pct": 4.4, "female_pct": 4.2 },
+          { "age": "10-14", "male_pct": 4.5, "female_pct": 4.3 },
+          { "age": "15-19", "male_pct": 4.4, "female_pct": 4.2 },
+          { "age": "20-24", "male_pct": 4.2, "female_pct": 4.0 },
+          { "age": "25-29", "male_pct": 4.0, "female_pct": 3.8 },
+          { "age": "30-34", "male_pct": 3.8, "female_pct": 3.6 },
+          { "age": "35-39", "male_pct": 3.5, "female_pct": 3.4 },
+          { "age": "40-44", "male_pct": 3.2, "female_pct": 3.1 },
+          { "age": "45-49", "male_pct": 2.9, "female_pct": 2.8 },
+          { "age": "50-54", "male_pct": 2.5, "female_pct": 2.5 },
+          { "age": "55-59", "male_pct": 2.1, "female_pct": 2.2 },
+          { "age": "60-64", "male_pct": 1.7, "female_pct": 1.8 },
+          { "age": "65-69", "male_pct": 1.2, "female_pct": 1.4 },
+          { "age": "70-74", "male_pct": 0.8, "female_pct": 1.0 },
+          { "age": "75-79", "male_pct": 0.5, "female_pct": 0.7 },
+          { "age": "80-84", "male_pct": 0.25, "female_pct": 0.4 },
+          { "age": "85+", "male_pct": 0.15, "female_pct": 0.3 }
+        ]
+      },
+      "sub_national_density_choropleth": [
+        { "admin_1_region_name": "Distrito Capital (Caracas)", "density_per_km2": 1420 },
+        { "admin_1_region_name": "Zulia (Maracaibo)", "density_per_km2": 72 },
+        { "admin_1_region_name": "Bolívar (Ciudad Guayana)", "density_per_km2": 7 }
+      ],
+      "synoptic_analysis": "Accelerated contraction caused by severe socio-economic crises. Massive youth/adult outward migration leads to skewed cohorts and rising support burdens."
+    },
+    {
+      "year": 2040,
+      "pyramid_structure": {
+        "cohorts": [
+          { "age": "0-4", "male_pct": 3.2, "female_pct": 3.0 },
+          { "age": "5-9", "male_pct": 3.4, "female_pct": 3.2 },
+          { "age": "10-14", "male_pct": 3.6, "female_pct": 3.4 },
+          { "age": "15-19", "male_pct": 3.8, "female_pct": 3.6 },
+          { "age": "20-24", "male_pct": 3.9, "female_pct": 3.7 },
+          { "age": "25-29", "male_pct": 4.0, "female_pct": 3.8 },
+          { "age": "30-34", "male_pct": 4.1, "female_pct": 3.9 },
+          { "age": "35-39", "male_pct": 4.0, "female_pct": 3.8 },
+          { "age": "40-44", "male_pct": 3.8, "female_pct": 3.6 },
+          { "age": "45-49", "male_pct": 3.5, "female_pct": 3.4 },
+          { "age": "50-54", "male_pct": 3.2, "female_pct": 3.2 },
+          { "age": "55-59", "male_pct": 2.9, "female_pct": 3.0 },
+          { "age": "60-64", "male_pct": 2.5, "female_pct": 2.7 },
+          { "age": "65-69", "male_pct": 2.1, "female_pct": 2.3 },
+          { "age": "70-74", "male_pct": 1.6, "female_pct": 1.9 },
+          { "age": "75-79", "male_pct": 1.1, "female_pct": 1.4 },
+          { "age": "80-84", "male_pct": 0.6, "female_pct": 0.9 },
+          { "age": "85+", "male_pct": 0.4, "female_pct": 0.7 }
+        ]
+      },
+      "sub_national_density_choropleth": [
+        { "admin_1_region_name": "Distrito Capital (Caracas)", "density_per_km2": 1350 },
+        { "admin_1_region_name": "Zulia (Maracaibo)", "density_per_km2": 68 },
+        { "admin_1_region_name": "Bolívar (Ciudad Guayana)", "density_per_km2": 8 }
+      ],
+      "synoptic_analysis": "Transitioning towards demographic maturity with structural aging. Labor force capacity constraints emerge as fertility rates remain near replacement levels."
+    }
+  ],
+  "culture_tab": {
+    "inglehart_welzel_coords": {
+      "x": 0.1,
+      "y": -0.9,
+      "cultural_zone": "Latin America"
+    },
+    "largest_diasporas": [
+      {
+        "destination": "Colombia",
+        "population": "~2.9 million",
+        "cultural_reach_impact": "Significant labor integration and cross-border cultural exchange, influencing local music, cuisine (arepas), and border region commerce."
+      },
+      {
+        "destination": "United States",
+        "population": "~750,000",
+        "cultural_reach_impact": "Heavy settlement in Florida (especially Doral/Miami), creating prominent business districts and influencing political discourse and food culture."
+      },
+      {
+        "destination": "Spain",
+        "population": "~450,000",
+        "cultural_reach_impact": "Significant intellectual and professional migration, establishing strong restaurant scenes and business ties, especially in Madrid."
+      }
+    ],
+    "cultural_exports_and_landscape": {
+      "soft_power_exports": [
+        {
+          "medium": "Music",
+          "examples": [
+            "Joropo Llanero",
+            "Salsa Venezolana",
+            "El Sistema Orchestral Model"
+          ],
+          "global_reach_score": 85
+        },
+        {
+          "medium": "Cuisine & Beverages",
+          "examples": [
+            "Arepa",
+            "Hallaca",
+            "Ron de Venezuela (Santa Teresa)"
+          ],
+          "global_reach_score": 78
+        },
+        {
+          "medium": "Sports",
+          "examples": [
+            "Baseball (MLB Stars)"
+          ],
+          "global_reach_score": 88
+        }
+      ],
+      "spatial_landscape": {
+        "enclaves": [
+          "Doral (Miami, USA)",
+          "Cedritos (Bogotá, Colombia)",
+          "Madrid Centro (Spain)"
+        ],
+        "architectural_footprint": "Spanish Colonial architecture, mid-century modernist designs (such as the Central University of Venezuela - UCV), and informal vertical developments (like the Torre de David).",
+        "description": "Venezuela's architectural landscape is shaped by historical colonialism, oil-boom modernism of the mid-20th century, and the rise of informal urban settlements. The diaspora has established active cultural neighborhoods globally, spreading traditional music and arepa culinary spots."
+      }
+    },
+    "hybridity_and_glocalization": [
+      {
+        "concept": "Arepa Glocalization",
+        "description": "Traditional pre-Hispanic cornmeal flatbread adapted in international cities with diverse global fillings (e.g., smoked salmon, pulled pork, plantain variations) to match global tastes.",
+        "glocalized_examples": [
+          "Glocalized areperas in London, New York, and Madrid selling specialty gourmet fillings.",
+          "Arepa-taco food truck fusions in the US Southwest."
+        ],
+        "spatial_location": "Originated in Venezuela/Colombia, now widely found across global metropolitan centers."
+      },
+      {
+        "concept": "El Sistema Orchestral Education",
+        "description": "A visionary musical and social development model providing free classical music instruction to children in low-income zones, exported globally to foster youth social integration.",
+        "glocalized_examples": [
+          "Over 60 countries replicating the El Sistema model to help vulnerable youth, such as 'Kidz Note' in the US.",
+          "Collaborative global youth orchestras performing at major world stages."
+        ],
+        "spatial_location": "Founded in Caracas, Venezuela, now operating in communities across Europe, North America, and Asia."
+      }
+    ]
+  }
+}

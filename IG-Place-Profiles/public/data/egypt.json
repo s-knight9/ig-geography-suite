@@ -1,0 +1,625 @@
+{
+  "country_metadata": {
+    "name": "Egypt",
+    "income_classification": "Lower-Middle Income",
+    "gni_per_capita_atlas": {
+      "value_usd": 4100,
+      "year": 2023
+    },
+    "hdi": {
+      "score": 0.728,
+      "rank": 105,
+      "year": 2022
+    },
+    "gni_per_capita_ppp": {
+      "value_usd": 12450,
+      "year": 2022
+    },
+    "gini_coefficient": {
+      "score": 31.5,
+      "year": 2018
+    }
+  },
+  "globalisation_tab": {
+    "kof_index": {
+      "economic": {
+        "de_facto": 52.5,
+        "de_jure": 54.8
+      },
+      "social": {
+        "interpersonal": {
+          "de_facto": 44.5,
+          "de_jure": 49.3
+        },
+        "informational": {
+          "de_facto": 52.4,
+          "de_jure": 58.1
+        },
+        "cultural": {
+          "de_facto": 38.6,
+          "de_jure": 42.1
+        }
+      },
+      "political": {
+        "de_facto": 85.6,
+        "de_jure": 82.3
+      }
+    },
+    "at_kearney_framework": {
+      "status": "Regional Node",
+      "gci_score_or_tier": "Cairo (Beta Level Hub)"
+    },
+    "ey_index_historical": {
+      "score": 4.1,
+      "analysis": "Strong regional hub connecting Europe, Africa, and Asia, heavily leveraging Suez Canal maritime transit."
+    }
+  },
+  "economy_tab": {
+    "employment_structure": {
+      "primary": 24.8,
+      "secondary": 26.2,
+      "tertiary": 44.5,
+      "quaternary": 4.5
+    },
+    "trade_ledger": {
+      "main_exports": [
+        {
+          "commodity": "Petroleums, Refined Oils & Gases",
+          "pct_gdp": 28.5
+        },
+        {
+          "commodity": "Nitrogenous Fertilizers",
+          "pct_gdp": 6.2
+        },
+        {
+          "commodity": "Gold & Precious Stones",
+          "pct_gdp": 5.4
+        },
+        {
+          "commodity": "Citrus Fruits & Grapes",
+          "pct_gdp": 4.8
+        },
+        {
+          "commodity": "Electric Cables & Insulation",
+          "pct_gdp": 3.2
+        }
+      ],
+      "main_imports": [
+        {
+          "commodity": "Wheat & Grains",
+          "pct_gdp": 15.5
+        },
+        {
+          "commodity": "Crude Petroleum & Liquids",
+          "pct_gdp": 10.4
+        },
+        {
+          "commodity": "Motor Cars & Vehicles",
+          "pct_gdp": 6.5
+        },
+        {
+          "commodity": "Packaged Medicaments",
+          "pct_gdp": 4.8
+        },
+        {
+          "commodity": "Slabs & Semi-Finished Iron",
+          "pct_gdp": 4.2
+        }
+      ],
+      "top_partners_outgoing": [
+        {
+          "partner": "Turkey",
+          "value_usd_billions": 3.8
+        },
+        {
+          "partner": "Italy",
+          "value_usd_billions": 3.4
+        },
+        {
+          "partner": "Saudi Arabia",
+          "value_usd_billions": 3.1
+        },
+        {
+          "partner": "Spain",
+          "value_usd_billions": 2.8
+        },
+        {
+          "partner": "United Arab Emirates",
+          "value_usd_billions": 2.5
+        }
+      ],
+      "top_partners_incoming": [
+        {
+          "partner": "China",
+          "value_usd_billions": 12.8
+        },
+        {
+          "partner": "Saudi Arabia",
+          "value_usd_billions": 7.9
+        },
+        {
+          "partner": "United States",
+          "value_usd_billions": 5.6
+        },
+        {
+          "partner": "Germany",
+          "value_usd_billions": 4.2
+        },
+        {
+          "partner": "Russia",
+          "value_usd_billions": 3.8
+        }
+      ]
+    }
+  },
+  "human_geography_tab": {
+    "spatial_hubs": {
+      "epz_sez_zones": [
+        {
+          "name": "Suez Canal Economic Zone (SCZone)",
+          "location_lat_long": "29.96, 32.55",
+          "primary_focus": "Global Logistics, Maritime Servicing, and Green Hydrogen"
+        },
+        {
+          "name": "Sixth of October City Industrial Zone",
+          "location_lat_long": "29.94, 30.91",
+          "primary_focus": "Automotive Assembly and Pharmaceutical Manufacturing"
+        },
+        {
+          "name": "Tenth of Ramadan City Hub",
+          "location_lat_long": "30.30, 31.75",
+          "primary_focus": "Heavy Textiles & Metallurgy Processing"
+        }
+      ],
+      "tourism_enclaves": [
+        {
+          "name": "Sharm El-Sheikh & Hurghada Resourcery Resorts",
+          "spatial_impact": "Coastal resort enclaves isolated from mainstream Egypt, experiencing high localized water stress and coral shelf ecological pressures."
+        },
+        {
+          "name": "Luxor-Aswan Cultural Heritage Belt",
+          "spatial_impact": "Archaelogical tourist strip lining the Nile, subject to heavy river transport exhaust emissions."
+        }
+      ],
+      "core_periphery_zones": {
+        "core": "Greater Cairo, Nile Delta, and Alexandria Metropolitan Axis.",
+        "periphery": "The hyper-arid Western Desert and rugged Sinai Peninsula security zones."
+      }
+    },
+    "political_economy": {
+      "informal_economy_pct_gdp": 38.5,
+      "eiu_governance_type": "Authoritarian Regime",
+      "freedom_house_status": "Not Free",
+      "corruption_perceptions_index": {
+        "score": 35,
+        "rank": 108
+      }
+    }
+  },
+  "prisoners_of_geography_map": {
+    "map_center": {
+      "lat": 26.8,
+      "lng": 30.8,
+      "zoom": 5
+    },
+    "topographic_friction_points": [
+      {
+        "feature": "Eastern & Western Hyper-Arid Deserts",
+        "geopolitical_constraint": "Over 95% of state territory is empty desert, squeezing 99% of populations onto just 5% of fertile lands, causing immense spatial-demographic friction."
+      }
+    ],
+    "hydrological_arteries": [
+      {
+        "feature": "Nile River Valley Lifeline",
+        "strategic_advantage": "Provides 98% of national freshwater resources, anchoring Egypt's domestic food supply and intensive regional irrigation."
+      }
+    ],
+    "choke_points_vulnerabilities": [
+      {
+        "feature": "Suez Canal Maritime Corridor",
+        "impact": "Critical oceanic choke-point connecting Europe to Asian trading networks, accounting for ~12% of total maritime flows and high sovereign toll revenue."
+      },
+      {
+        "feature": "Grand Ethiopian Renaissance Dam (GERD)",
+        "impact": "Upstream hydro-hegemony. Subjection to upstream filling schedules in Ethiopia poses an existential vulnerability to Egypt's downstream water security."
+      }
+    ],
+    "buffer_zones": [
+      {
+        "region": "Sinai Peninsula Peninsula Land Bridge",
+        "significance": "Rugged, low-density territorial barrier connecting Asia and Africa, vital for sovereign defense but difficult to fully police."
+      }
+    ]
+  },
+  "population_dynamics_time_series": [
+    {
+      "year": 1990,
+      "pyramid_structure": {
+        "cohorts": [
+          {
+            "age": "0-4",
+            "male_pct": 7.82,
+            "female_pct": 7.51
+          },
+          {
+            "age": "5-9",
+            "male_pct": 6.94,
+            "female_pct": 6.62
+          },
+          {
+            "age": "10-14",
+            "male_pct": 6.12,
+            "female_pct": 5.82
+          },
+          {
+            "age": "15-19",
+            "male_pct": 5.21,
+            "female_pct": 4.95
+          },
+          {
+            "age": "20-24",
+            "male_pct": 4.38,
+            "female_pct": 4.14
+          },
+          {
+            "age": "25-29",
+            "male_pct": 3.75,
+            "female_pct": 3.52
+          },
+          {
+            "age": "30-34",
+            "male_pct": 3.12,
+            "female_pct": 2.91
+          },
+          {
+            "age": "35-39",
+            "male_pct": 2.65,
+            "female_pct": 2.45
+          },
+          {
+            "age": "40-44",
+            "male_pct": 2.18,
+            "female_pct": 2.01
+          },
+          {
+            "age": "45-49",
+            "male_pct": 1.76,
+            "female_pct": 1.62
+          },
+          {
+            "age": "50-54",
+            "male_pct": 1.41,
+            "female_pct": 1.28
+          },
+          {
+            "age": "55-59",
+            "male_pct": 1.12,
+            "female_pct": 1.01
+          },
+          {
+            "age": "60-64",
+            "male_pct": 0.88,
+            "female_pct": 0.79
+          },
+          {
+            "age": "65-69",
+            "male_pct": 0.64,
+            "female_pct": 0.58
+          },
+          {
+            "age": "70-74",
+            "male_pct": 0.44,
+            "female_pct": 0.4
+          },
+          {
+            "age": "75-79",
+            "male_pct": 0.26,
+            "female_pct": 0.24
+          },
+          {
+            "age": "80-84",
+            "male_pct": 0.14,
+            "female_pct": 0.13
+          },
+          {
+            "age": "85-89",
+            "male_pct": 0.06,
+            "female_pct": 0.05
+          },
+          {
+            "age": "90-94",
+            "male_pct": 0.02,
+            "female_pct": 0.02
+          },
+          {
+            "age": "95-99",
+            "male_pct": 0.01,
+            "female_pct": 0.01
+          },
+          {
+            "age": "100+",
+            "male_pct": 0,
+            "female_pct": 0
+          }
+        ]
+      },
+      "sub_national_density_choropleth": [
+        {
+          "admin_1_region_name": "Cairo Governorate",
+          "density_per_km2": 12500
+        },
+        {
+          "admin_1_region_name": "Giza Governorate",
+          "density_per_km2": 7200
+        },
+        {
+          "admin_1_region_name": "Alexandria Governorate",
+          "density_per_km2": 3200
+        },
+        {
+          "admin_1_region_name": "Qalyubia (Delta)",
+          "density_per_km2": 1800
+        },
+        {
+          "admin_1_region_name": "Matrouh Desert Buffer",
+          "density_per_km2": 5
+        },
+        {
+          "admin_1_region_name": "South Sinai Region",
+          "density_per_km2": 3
+        }
+      ],
+      "synoptic_analysis": "Egypt in 1990 is in a classic early Stage 3 demographic transition. High historical birth rates create a heavy child dependent segment. Population density remains concentrated entirely along the Nile strip while major desert governorates are virtually unpopulated."
+    },
+    {
+      "year": 2026,
+      "pyramid_structure": {
+        "cohorts": [
+          {
+            "age": "0-4",
+            "male_pct": 6.32,
+            "female_pct": 5.92
+          },
+          {
+            "age": "5-9",
+            "male_pct": 6.02,
+            "female_pct": 5.61
+          },
+          {
+            "age": "10-14",
+            "male_pct": 5.72,
+            "female_pct": 5.34
+          },
+          {
+            "age": "15-19",
+            "male_pct": 5.08,
+            "female_pct": 4.72
+          },
+          {
+            "age": "20-24",
+            "male_pct": 4.62,
+            "female_pct": 4.31
+          },
+          {
+            "age": "25-29",
+            "male_pct": 4.18,
+            "female_pct": 3.9
+          },
+          {
+            "age": "30-34",
+            "male_pct": 3.75,
+            "female_pct": 3.51
+          },
+          {
+            "age": "35-39",
+            "male_pct": 3.32,
+            "female_pct": 3.12
+          },
+          {
+            "age": "40-44",
+            "male_pct": 2.88,
+            "female_pct": 2.71
+          },
+          {
+            "age": "45-49",
+            "male_pct": 2.45,
+            "female_pct": 2.3
+          },
+          {
+            "age": "50-54",
+            "male_pct": 2.05,
+            "female_pct": 1.94
+          },
+          {
+            "age": "55-59",
+            "male_pct": 1.68,
+            "female_pct": 1.61
+          },
+          {
+            "age": "60-64",
+            "male_pct": 1.32,
+            "female_pct": 1.28
+          },
+          {
+            "age": "65-69",
+            "male_pct": 0.98,
+            "female_pct": 0.96
+          },
+          {
+            "age": "70-74",
+            "male_pct": 0.68,
+            "female_pct": 0.68
+          },
+          {
+            "age": "75-79",
+            "male_pct": 0.42,
+            "female_pct": 0.44
+          },
+          {
+            "age": "80-84",
+            "male_pct": 0.22,
+            "female_pct": 0.25
+          },
+          {
+            "age": "85-89",
+            "male_pct": 0.09,
+            "female_pct": 0.11
+          },
+          {
+            "age": "90-94",
+            "male_pct": 0.03,
+            "female_pct": 0.04
+          },
+          {
+            "age": "95-99",
+            "male_pct": 0.01,
+            "female_pct": 0.01
+          },
+          {
+            "age": "100+",
+            "male_pct": 0,
+            "female_pct": 0
+          }
+        ]
+      },
+      "sub_national_density_choropleth": [
+        {
+          "admin_1_region_name": "Cairo Governorate",
+          "density_per_km2": 19500
+        },
+        {
+          "admin_1_region_name": "Giza Governorate",
+          "density_per_km2": 9800
+        },
+        {
+          "admin_1_region_name": "Alexandria Governorate",
+          "density_per_km2": 4500
+        },
+        {
+          "admin_1_region_name": "Qalyubia (Delta)",
+          "density_per_km2": 2700
+        },
+        {
+          "admin_1_region_name": "Matrouh Desert Buffer",
+          "density_per_km2": 12
+        },
+        {
+          "admin_1_region_name": "South Sinai Region",
+          "density_per_km2": 8
+        }
+      ],
+      "synoptic_analysis": "By 2026, Egypt is fully in Stage 3. Although birth rates are gradually declining, a powerful youth bulge dominates the demographics. This places incredible load on Cairo's services and the narrow strip of standard arable land, driving massive state expansions out into the desert periphery like the New Administrative Capital (NAC)."
+    }
+  ],
+  "culture_tab": {
+    "inglehart_welzel_coords": {
+      "x": -1.5,
+      "y": -1,
+      "cultural_zone": "Islamic"
+    },
+    "largest_diasporas": [
+      {
+        "destination": "Saudi Arabia",
+        "population": "Approx. 2.5-3 million",
+        "cultural_reach_impact": "Significant influence on Gulf culture, maintaining distinct Egyptian identity through cuisine, media, and social networks."
+      },
+      {
+        "destination": "United Arab Emirates",
+        "population": "Approx. 1 million",
+        "cultural_reach_impact": "Strong professional and cultural presence, contributing to modern Emirati society while fostering Egyptian cultural traditions."
+      },
+      {
+        "destination": "United States",
+        "population": "Approx. 500,000-1 million",
+        "cultural_reach_impact": "Establishment of Coptic churches, mosques, and community centers preserving language and heritage; subtle influence on broader Arab-American culture."
+      },
+      {
+        "destination": "Kuwait",
+        "population": "Approx. 600,000",
+        "cultural_reach_impact": "Historical and ongoing contribution to Kuwaiti education and professional sectors, with active Egyptian community life."
+      },
+      {
+        "destination": "Canada",
+        "population": "Approx. 200,000",
+        "cultural_reach_impact": "Growing diaspora with cultural associations and religious institutions maintaining Egyptian identity in a multicultural context."
+      }
+    ],
+    "cultural_exports_and_landscape": {
+      "soft_power_exports": [
+        {
+          "medium": "Cinema/TV",
+          "examples": [
+            "Youssef Chahine films",
+            "Ramadan TV series",
+            "The Yacoubian Building"
+          ],
+          "global_reach_score": 85
+        },
+        {
+          "medium": "Music",
+          "examples": [
+            "Umm Kulthum",
+            "Amr Diab",
+            "Mahraganat music"
+          ],
+          "global_reach_score": 80
+        },
+        {
+          "medium": "Cuisine",
+          "examples": [
+            "Koshary",
+            "Ful Medames",
+            "Ta'ameya (falafel)"
+          ],
+          "global_reach_score": 65
+        },
+        {
+          "medium": "Literature",
+          "examples": [
+            "Naguib Mahfouz (Nobel laureate)",
+            "Alaa Al Aswany"
+          ],
+          "global_reach_score": 60
+        }
+      ],
+      "spatial_landscape": {
+        "enclaves": [
+          "Little Egypt (Astoria, NYC)",
+          "Dearborn (Michigan, strong Arab-American presence)",
+          "certain areas in London and Paris"
+        ],
+        "architectural_footprint": "Pharaonic revival architecture, classical Islamic styles (Mamluk, Fatimid), Art Deco, and European colonial influences.",
+        "description": "Egypt's landscape is a rich blend of ancient Pharaonic monuments, majestic Islamic mosques and citadels, historic Coptic churches, and colonial-era architecture, particularly visible in Cairo's historic districts and Alexandria. This diverse architectural heritage reflects millennia of cultural layers."
+      }
+    },
+    "hybridity_and_glocalization": [
+      {
+        "concept": "Arab-Western Pop Music Fusion",
+        "description": "Egyptian musicians blending traditional Arabic melodies and instruments with Western pop, rock, or electronic music to create globally appealing sounds.",
+        "glocalized_examples": [
+          "Amr Diab's discography combining Western pop structures with Arabic lyrics and instrumentation",
+          "Mahraganat music's fusion of Egyptian folk with electronic beats and auto-tune"
+        ],
+        "spatial_location": "Cairo's music studios, concert venues across the Arab world, global streaming platforms."
+      },
+      {
+        "concept": "Glocalized Fast Food",
+        "description": "International fast-food chains adapting their menus to incorporate local Egyptian tastes and ingredients.",
+        "glocalized_examples": [
+          "McDonald's and KFC offering items like 'McFalafel' or locally-spiced chicken meals",
+          "Pizza Hut with oriental or 'kofta' toppings"
+        ],
+        "spatial_location": "Urban centers and shopping malls throughout Egypt."
+      },
+      {
+        "concept": "Modern Islamic Fashion",
+        "description": "Contemporary Egyptian designers creating modest fashion that integrates global trends with traditional Islamic clothing norms, appealing to a younger, fashion-conscious demographic.",
+        "glocalized_examples": [
+          "Fashion brands designing stylish hijabs and abayas with modern cuts and fabrics",
+          "Local designers creating modest streetwear that blends global trends with Egyptian aesthetics"
+        ],
+        "spatial_location": "Cairo's fashion boutiques, online retail, and fashion events."
+      }
+    ]
+  }
+}

@@ -1,0 +1,536 @@
+{
+  "country_metadata": {
+    "name": "Ireland",
+    "income_classification": "High Income",
+    "gni_per_capita_atlas": {
+      "value_usd": 80300,
+      "year": 2023
+    },
+    "hdi": {
+      "score": 0.941,
+      "rank": 8,
+      "year": 2022
+    },
+    "gni_per_capita_ppp": {
+      "value_usd": 91200,
+      "year": 2022
+    },
+    "gini_coefficient": {
+      "score": 29.2,
+      "year": 2021
+    }
+  },
+  "globalisation_tab": {
+    "kof_index": {
+      "economic": {
+        "de_facto": 82.5,
+        "de_jure": 85.1
+      },
+      "social": {
+        "interpersonal": {
+          "de_facto": 84.1,
+          "de_jure": 86.5
+        },
+        "informational": {
+          "de_facto": 90.2,
+          "de_jure": 89.0
+        },
+        "cultural": {
+          "de_facto": 88.5,
+          "de_jure": 87.2
+        }
+      },
+      "political": {
+        "de_facto": 94.2,
+        "de_jure": 95.8
+      }
+    },
+    "at_kearney_framework": {
+      "status": "Vastly Integrated",
+      "gci_score_or_tier": "Dublin (Beta+)"
+    },
+    "ey_index_historical": {
+      "score": 4.5,
+      "analysis": "Extremely high economic integration as a chief gateway for multinational FDI and European financial services, buffered by strong social and political globalization linkages."
+    }
+  },
+  "economy_tab": {
+    "employment_structure": {
+      "primary": 4.2,
+      "secondary": 18.5,
+      "tertiary": 72.3,
+      "quaternary": 5.0
+    },
+    "trade_ledger": {
+      "main_exports": [
+        {
+          "commodity": "Packaged Medicaments",
+          "pct_gdp": 18.2
+        },
+        {
+          "commodity": "Nitrogen Heterocyclic Compounds",
+          "pct_gdp": 15.5
+        },
+        {
+          "commodity": "Vaccines, Blood, Antisera",
+          "pct_gdp": 12.1
+        },
+        {
+          "commodity": "Integrated Circuits",
+          "pct_gdp": 6.2
+        },
+        {
+          "commodity": "Scent Mixtures",
+          "pct_gdp": 4.8
+        }
+      ],
+      "main_imports": [
+        {
+          "commodity": "Integrated Circuits",
+          "pct_gdp": 9.8
+        },
+        {
+          "commodity": "Packaged Medicaments",
+          "pct_gdp": 5.2
+        },
+        {
+          "commodity": "Cars",
+          "pct_gdp": 4.1
+        },
+        {
+          "commodity": "Refined Petroleum",
+          "pct_gdp": 3.5
+        },
+        {
+          "commodity": "Gas Turbines",
+          "pct_gdp": 2.8
+        }
+      ],
+      "top_partners_outgoing": [
+        {
+          "partner": "United States",
+          "value_usd_billions": 63.0
+        },
+        {
+          "partner": "Germany",
+          "value_usd_billions": 22.0
+        },
+        {
+          "partner": "United Kingdom",
+          "value_usd_billions": 18.0
+        },
+        {
+          "partner": "Belgium",
+          "value_usd_billions": 15.0
+        },
+        {
+          "partner": "Netherlands",
+          "value_usd_billions": 11.0
+        }
+      ],
+      "top_partners_incoming": [
+        {
+          "partner": "United Kingdom",
+          "value_usd_billions": 26.0
+        },
+        {
+          "partner": "United States",
+          "value_usd_billions": 21.0
+        },
+        {
+          "partner": "Germany",
+          "value_usd_billions": 12.0
+        },
+        {
+          "partner": "China",
+          "value_usd_billions": 10.0
+        },
+        {
+          "partner": "Netherlands",
+          "value_usd_billions": 8.0
+        }
+      ]
+    }
+  },
+  "human_geography_tab": {
+    "spatial_hubs": {
+      "epz_sez_zones": [
+        {
+          "name": "Shannon Free Zone",
+          "location_lat_long": "52.71, -8.92",
+          "primary_focus": "World's first modern SEZ (est. 1959). Specializes in aviation leasing, logistics, and high-tech manufacturing."
+        },
+        {
+          "name": "Dublin Docklands (Silicon Docks)",
+          "location_lat_long": "53.34, -6.23",
+          "primary_focus": "European headquarters for global technology companies (Google, Meta, LinkedIn) and financial institutions."
+        }
+      ],
+      "tourism_enclaves": [
+        {
+          "name": "Ring of Kerry & Wild Atlantic Way Corridor",
+          "spatial_impact": "Scenic coastal route driving high seasonal eco-tourism, but straining local infrastructure and housing."
+        },
+        {
+          "name": "Dublin Temple Bar District",
+          "spatial_impact": "High-density cultural tourism enclave, driving local service jobs and high commercial property rents."
+        }
+      ],
+      "core_periphery_zones": {
+        "core": "Dublin & Greater Dublin Area (East Coast, containing ~40% of national population and economic output)",
+        "periphery": "Western Seaboard (Connacht, Donegal, and parts of Munster, marked by lower density and agricultural reliance)"
+      }
+    },
+    "political_economy": {
+      "informal_economy_pct_gdp": 11.2,
+      "eiu_governance_type": "Full Democracy",
+      "freedom_house_status": "Free",
+      "corruption_perceptions_index": {
+        "score": 77,
+        "rank": 11
+      }
+    }
+  },
+  "prisoners_of_geography_map": {
+    "topographic_friction_points": [
+      {
+        "feature": "Upland Coastal Rim",
+        "geopolitical_constraint": "Ireland's mountainous periphery encircles a flat central lowland basin, forcing urban centers to develop as coastal port gateways."
+      },
+      {
+        "feature": "Peatlands and Bogs",
+        "geopolitical_constraint": "Covering roughly 15% of the landmass, these soggy terrains historically hindered interior transport and agricultural cultivation."
+      }
+    ],
+    "hydrological_arteries": [
+      {
+        "feature": "River Shannon",
+        "strategic_advantage": "Ireland's longest river system, serving as a major domestic drainage basin, historic defensive barrier, and modern tourism artery."
+      },
+      {
+        "feature": "River Barrow",
+        "strategic_advantage": "Vital south-eastern waterway connecting interior agricultural lands to the port of Waterford."
+      }
+    ],
+    "choke_points_vulnerabilities": [
+      {
+        "feature": "Irish Sea Transit Lanes",
+        "impact": "Crucial maritime trade corridors connecting Irish ports to Great Britain and continental Europe."
+      },
+      {
+        "feature": "Celtic Sea Corridors",
+        "impact": "Shared ocean channels vital for routing trans-atlantic container shipping and undersea fiber optic data cables."
+      }
+    ],
+    "buffer_zones": [
+      {
+        "region": "Atlantic Coastline",
+        "significance": "Natural protective ocean barrier shielding the island from European land conflicts, but exposing it to severe Atlantic weather systems."
+      },
+      {
+        "region": "Northern Ireland Border Margin",
+        "significance": "A historically contested border area requiring careful regulatory management to maintain peace and trade under the Windsor Framework."
+      }
+    ],
+    "map_center": {
+      "lat": 53.4129,
+      "lng": -8.2439,
+      "zoom": 7
+    }
+  },
+  "population_dynamics_time_series": [
+    {
+      "year": 1970,
+      "pyramid_structure": {
+        "cohorts": [
+          {
+            "age": "0-4",
+            "male_pct": 5.4,
+            "female_pct": 5.1
+          },
+          {
+            "age": "5-14",
+            "male_pct": 10.2,
+            "female_pct": 9.8
+          },
+          {
+            "age": "15-64",
+            "male_pct": 28.5,
+            "female_pct": 28.1
+          },
+          {
+            "age": "65-79",
+            "male_pct": 5.2,
+            "female_pct": 6.1
+          },
+          {
+            "age": "80+",
+            "male_pct": 0.7,
+            "female_pct": 0.9
+          }
+        ]
+      },
+      "sub_national_density_choropleth": [
+        {
+          "admin_1_region_name": "Leinster (Dublin Core)",
+          "density_per_km2": 72.5
+        },
+        {
+          "admin_1_region_name": "Munster (South)",
+          "density_per_km2": 32.4
+        },
+        {
+          "admin_1_region_name": "Connacht (West Periphery)",
+          "density_per_km2": 14.8
+        }
+      ],
+      "synoptic_analysis": "Stage 3 demographic expansion. Relatively high birth rates alongside post-war industrialization, with the beginning of a urban drift toward the Dublin metropolitan core."
+    },
+    {
+      "year": 2023,
+      "pyramid_structure": {
+        "cohorts": [
+          {
+            "age": "0-4",
+            "male_pct": 2.7,
+            "female_pct": 2.6
+          },
+          {
+            "age": "5-14",
+            "male_pct": 6.3,
+            "female_pct": 6.0
+          },
+          {
+            "age": "15-64",
+            "male_pct": 32.5,
+            "female_pct": 32.1
+          },
+          {
+            "age": "65-79",
+            "male_pct": 7.5,
+            "female_pct": 8.1
+          },
+          {
+            "age": "80+",
+            "male_pct": 2.1,
+            "female_pct": 2.1
+          }
+        ]
+      },
+      "sub_national_density_choropleth": [
+        {
+          "admin_1_region_name": "Leinster (Dublin Core)",
+          "density_per_km2": 138.2
+        },
+        {
+          "admin_1_region_name": "Munster (South)",
+          "density_per_km2": 52.4
+        },
+        {
+          "admin_1_region_name": "Connacht (West Periphery)",
+          "density_per_km2": 21.0
+        }
+      ],
+      "synoptic_analysis": "Stationary DTM Stage 4 profile. Natural birth rates are below replacement level, but overall population growth remains positive due to strong economic migration and return-migration."
+    },
+    {
+      "year": 2026,
+      "pyramid_structure": {
+        "cohorts": [
+          {
+            "age": "0-4",
+            "male_pct": 2.6,
+            "female_pct": 2.5
+          },
+          {
+            "age": "5-14",
+            "male_pct": 6.1,
+            "female_pct": 5.8
+          },
+          {
+            "age": "15-64",
+            "male_pct": 32.2,
+            "female_pct": 31.8
+          },
+          {
+            "age": "65-79",
+            "male_pct": 8.0,
+            "female_pct": 8.5
+          },
+          {
+            "age": "80+",
+            "male_pct": 2.3,
+            "female_pct": 2.2
+          }
+        ]
+      },
+      "sub_national_density_choropleth": [
+        {
+          "admin_1_region_name": "Leinster (Dublin Core)",
+          "density_per_km2": 142.5
+        },
+        {
+          "admin_1_region_name": "Munster (South)",
+          "density_per_km2": 54.1
+        },
+        {
+          "admin_1_region_name": "Connacht (West Periphery)",
+          "density_per_km2": 21.5
+        }
+      ],
+      "synoptic_analysis": "Stable Stage 4 demographics. High life expectancy and low child mortality, with population density heavily clustered in urban industrial centers like the Dublin-Belfast economic corridor."
+    },
+    {
+      "year": 2040,
+      "pyramid_structure": {
+        "cohorts": [
+          {
+            "age": "0-4",
+            "male_pct": 2.2,
+            "female_pct": 2.1
+          },
+          {
+            "age": "5-14",
+            "male_pct": 5.2,
+            "female_pct": 4.9
+          },
+          {
+            "age": "15-64",
+            "male_pct": 29.8,
+            "female_pct": 29.2
+          },
+          {
+            "age": "65-79",
+            "male_pct": 10.5,
+            "female_pct": 11.2
+          },
+          {
+            "age": "80+",
+            "male_pct": 4.1,
+            "female_pct": 4.8
+          }
+        ]
+      },
+      "sub_national_density_choropleth": [
+        {
+          "admin_1_region_name": "Leinster (Dublin Core)",
+          "density_per_km2": 158.4
+        },
+        {
+          "admin_1_region_name": "Munster (South)",
+          "density_per_km2": 59.8
+        },
+        {
+          "admin_1_region_name": "Connacht (West Periphery)",
+          "density_per_km2": 23.2
+        }
+      ],
+      "synoptic_analysis": "Demographic aging transition. Expanding elderly cohorts and a shrinking proportional working-age base drive high dependency ratios, raising structural demands on healthcare and pension grids."
+    }
+  ],
+  "culture_tab": {
+    "inglehart_welzel_coords": {
+      "x": 1.5,
+      "y": 0.6,
+      "cultural_zone": "English-Speaking"
+    },
+    "largest_diasporas": [
+      {
+        "destination": "United States",
+        "population": "Approx. 30 million (ancestry)",
+        "cultural_reach_impact": "Immense soft power influence, shape of Saint Patrick's Day parades, strong Irish-American lobbying caucus in Washington D.C."
+      },
+      {
+        "destination": "United Kingdom",
+        "population": "Approx. 500,000",
+        "cultural_reach_impact": "Deeply integrated communities, active in construction, healthcare, and finance, maintaining robust travel and cultural exchange across the Irish Sea."
+      },
+      {
+        "destination": "Australia",
+        "population": "Approx. 80,000 (2M+ heritage)",
+        "cultural_reach_impact": "Strong working holiday ties, widespread Irish cultural centers, and fusion of Celtic folklore into Australian country culture."
+      },
+      {
+        "destination": "Canada",
+        "population": "Approx. 4.5 million (ancestry)",
+        "cultural_reach_impact": "Significant historical settlement in Newfoundland and Ontario, preserving traditional music, storytelling, and local dialects."
+      }
+    ],
+    "cultural_exports_and_landscape": {
+      "soft_power_exports": [
+        {
+          "medium": "Music",
+          "examples": [
+            "U2",
+            "The Cranberries",
+            "Hozier / Enya"
+          ],
+          "global_reach_score": 95
+        },
+        {
+          "medium": "Literature & Theatre",
+          "examples": [
+            "James Joyce (Ulysses)",
+            "Oscar Wilde",
+            "Samuel Beckett (Waiting for Godot)"
+          ],
+          "global_reach_score": 90
+        },
+        {
+          "medium": "Performing Arts",
+          "examples": [
+            "Riverdance",
+            "Traditional Irish music sessions"
+          ],
+          "global_reach_score": 88
+        },
+        {
+          "medium": "Beverages",
+          "examples": [
+            "Guinness stout",
+            "Irish Whiskey (Jameson)"
+          ],
+          "global_reach_score": 85
+        }
+      ],
+      "spatial_landscape": {
+        "enclaves": [
+          "South Side Chicago (Irish-American hubs)",
+          "Irish districts in London (Kilburn)",
+          "Boston neighborhoods (South Boston)"
+        ],
+        "architectural_footprint": "Georgian brick townhouses with colored doors, medieval round towers, stone cottages in the rural west, and glass facades in Dublin's Silicon Docks.",
+        "description": "Ireland's cultural landscape is a mixture of prehistoric dolmens, early Christian stone ruins, medieval castles, classical Georgian terraces in Dublin, and modern high-tech corporate campus architecture, reflecting its rich, multi-layered history."
+      }
+    },
+    "hybridity_and_glocalization": [
+      {
+        "concept": "Global Irish Pub Glocalization",
+        "description": "Irish theme pubs established worldwide adapting their menus, drink selections, and musical atmospheres to local consumer tastes while maintaining the cozy 'craic' aesthetic.",
+        "glocalized_examples": [
+          "Irish pubs in Tokyo serving green tea cocktails or local sake alongside stout",
+          "Irish pubs in Germany offering Bratwurst alongside traditional colcannon"
+        ],
+        "spatial_location": "Entertainment districts in Tokyo, New York, Berlin, and globally."
+      },
+      {
+        "concept": "Celtic-Pop Musical Synthesis",
+        "description": "Merging traditional Irish instrumentation (tin whistle, uilleann pipes, fiddle) with global commercial pop and rock templates.",
+        "glocalized_examples": [
+          "The Corrs blending Celtic folk roots with radio-friendly pop hooks",
+          "Ed Sheeran collaborating with Irish folk bands to produce global chart-toppers like 'Galway Girl'"
+        ],
+        "spatial_location": "Dublin recording studios, international concert tours, and digital streaming."
+      },
+      {
+        "concept": "Glocalized St. Patrick's Day Celebrations",
+        "description": "Traditional Irish religious feast day transformed into a global, multicultural secular festival of Irish identity, adapted by host cities.",
+        "glocalized_examples": [
+          "Dyeing the Chicago River green in the United States",
+          "St. Patrick's Day parades in Munich (Germany) or Sydney (Australia) featuring local community parade floats"
+        ],
+        "spatial_location": "Municipal centers and rivers in Chicago, New York, Sydney, and Munich."
+      }
+    ]
+  }
+}

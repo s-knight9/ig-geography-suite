@@ -1,0 +1,984 @@
+{
+  "country_metadata": {
+    "name": "Russia",
+    "income_classification": "Upper-Middle Income",
+    "gni_per_capita_atlas": {
+      "value_usd": 12830,
+      "year": 2022
+    },
+    "hdi": {
+      "score": 0.821,
+      "rank": 56,
+      "year": 2022
+    },
+    "gni_per_capita_ppp": {
+      "value_usd": 36650,
+      "year": 2022
+    },
+    "gini_coefficient": {
+      "score": 36,
+      "year": 2020
+    }
+  },
+  "globalisation_tab": {
+    "kof_index": {
+      "economic": {
+        "de_facto": 55.4,
+        "de_jure": 45.2
+      },
+      "social": {
+        "interpersonal": {
+          "de_facto": 35.2,
+          "de_jure": 38.1
+        },
+        "informational": {
+          "de_facto": 45.1,
+          "de_jure": 30.2
+        },
+        "cultural": {
+          "de_facto": 40.5,
+          "de_jure": 35.8
+        }
+      },
+      "political": {
+        "de_facto": 70.2,
+        "de_jure": 60.1
+      }
+    },
+    "at_kearney_framework": {
+      "status": "Beta",
+      "gci_score_or_tier": "Beta (Moscow) - Declining"
+    },
+    "ey_index_historical": {
+      "score": "48.5",
+      "analysis": "Historically integrated mostly via core commodity exports, currently undergoing rapid deglobalization/sanctions decoupling."
+    }
+  },
+  "economy_tab": {
+    "employment_structure": {
+      "primary": 5.8,
+      "secondary": 27.2,
+      "tertiary": 58.1,
+      "quaternary": 8.9
+    },
+    "trade_ledger": {
+      "main_exports": [
+        {
+          "commodity": "Crude Petroleum",
+          "pct_gdp": 6.8
+        },
+        {
+          "commodity": "Refined Petroleum",
+          "pct_gdp": 4.2
+        },
+        {
+          "commodity": "Petroleum Gas",
+          "pct_gdp": 3.8
+        },
+        {
+          "commodity": "Coal",
+          "pct_gdp": 1.2
+        },
+        {
+          "commodity": "Gold",
+          "pct_gdp": 1.1
+        }
+      ],
+      "main_imports": [
+        {
+          "commodity": "Cars",
+          "pct_gdp": 1.5
+        },
+        {
+          "commodity": "Vehicle Parts",
+          "pct_gdp": 1.2
+        },
+        {
+          "commodity": "Broadcasting Equip",
+          "pct_gdp": 1
+        },
+        {
+          "commodity": "Computers",
+          "pct_gdp": 0.8
+        },
+        {
+          "commodity": "Packaged Medicaments",
+          "pct_gdp": 0.8
+        }
+      ],
+      "top_partners_outgoing": [
+        {
+          "partner": "China",
+          "value_usd_billions": 114.1
+        },
+        {
+          "partner": "India",
+          "value_usd_billions": 45.2
+        },
+        {
+          "partner": "Turkey",
+          "value_usd_billions": 30.1
+        },
+        {
+          "partner": "Netherlands (pre-2023)",
+          "value_usd_billions": 25.4
+        },
+        {
+          "partner": "Germany (pre-2023)",
+          "value_usd_billions": 20.1
+        }
+      ],
+      "top_partners_incoming": [
+        {
+          "partner": "China",
+          "value_usd_billions": 76.2
+        },
+        {
+          "partner": "Germany (pre-2023)",
+          "value_usd_billions": 18.5
+        },
+        {
+          "partner": "Turkey",
+          "value_usd_billions": 12.1
+        },
+        {
+          "partner": "Belarus",
+          "value_usd_billions": 9.2
+        },
+        {
+          "partner": "Kazakhstan",
+          "value_usd_billions": 5.8
+        }
+      ]
+    }
+  },
+  "human_geography_tab": {
+    "spatial_hubs": {
+      "epz_sez_zones": [
+        {
+          "name": "Alabuga SEZ (Tatarstan)",
+          "location_lat_long": "55.82, 52.05",
+          "primary_focus": "Manufacturing, automotive & now defense drone assembly"
+        },
+        {
+          "name": "Vladivostok Free Port",
+          "location_lat_long": "43.11, 131.88",
+          "primary_focus": "Pacific Trade Pivot targeting Asian markets"
+        },
+        {
+          "name": "Skolkovo Innovation Center",
+          "location_lat_long": "55.69, 37.36",
+          "primary_focus": "State-backed IT/Tech hub (often called Russia's Silicon Valley)"
+        }
+      ],
+      "tourism_enclaves": [
+        {
+          "name": "Sochi",
+          "spatial_impact": "Domestic coastal & ski enclave heavily fortified since Olympics"
+        }
+      ],
+      "core_periphery_zones": {
+        "core": "European Russia (Moscow, St Petersburg, Kazan)",
+        "periphery": "Siberian forest tracts, Kola Peninsula, and Arctic tundra"
+      }
+    },
+    "political_economy": {
+      "informal_economy_pct_gdp": 38.4,
+      "eiu_governance_type": "Authoritarian",
+      "freedom_house_status": "Not Free",
+      "corruption_perceptions_index": {
+        "score": 28,
+        "rank": 137
+      }
+    }
+  },
+  "prisoners_of_geography_map": {
+    "topographic_friction_points": [
+      {
+        "feature": "Ural Mountains",
+        "geopolitical_constraint": "Soft physical division between European core and massive, resource-rich Asian periphery."
+      },
+      {
+        "feature": "Northern European Plain",
+        "geopolitical_constraint": "No natural borders in the west; historical driver of defensive expansionism."
+      }
+    ],
+    "hydrological_arteries": [
+      {
+        "feature": "Volga River",
+        "geopolitical_constraint": "Core European spine, but flows into closed Caspian Sea."
+      },
+      {
+        "feature": "Siberian Rivers (Ob, Yenisei, Lena)",
+        "geopolitical_constraint": "Flow north into frozen Arctic, limiting their economic utility."
+      }
+    ],
+    "choke_points_vulnerabilities": [
+      {
+        "feature": "Bosporus & Dardanelles",
+        "impact": "Russian Black Sea fleet must pass through NATO/Turkish controlled straits to access world oceans."
+      }
+    ],
+    "buffer_zones": [
+      {
+        "region": "Eastern Europe & Caucasus",
+        "significance": "Traditional sphere of influence viewed as critical strategic depth against NATO."
+      }
+    ],
+    "map_center": {
+      "lat": 61.524,
+      "lng": 105.3188,
+      "zoom": 3
+    }
+  },
+  "population_dynamics_time_series": [
+    {
+      "year": 1970,
+      "pyramid_structure": {
+        "cohorts": [
+          {
+            "age": "0-4",
+            "male_pct": -5.026021553920815,
+            "female_pct": 5.026021553920815
+          },
+          {
+            "age": "5-9",
+            "male_pct": -4.739037709226264,
+            "female_pct": 4.690637790215177
+          },
+          {
+            "age": "10-14",
+            "male_pct": -4.347038172240178,
+            "female_pct": 4.402852379808436
+          },
+          {
+            "age": "15-19",
+            "male_pct": -4.0883057342378795,
+            "female_pct": 4.072245428075585
+          },
+          {
+            "age": "20-24",
+            "male_pct": -3.7771076901369205,
+            "female_pct": 3.8010536866488303
+          },
+          {
+            "age": "25-29",
+            "male_pct": -3.518404524718629,
+            "female_pct": 3.500067799098867
+          },
+          {
+            "age": "30-34",
+            "male_pct": -3.2980417260387025,
+            "female_pct": 3.274034259905849
+          },
+          {
+            "age": "35-39",
+            "male_pct": -3.119164179727249,
+            "female_pct": 3.0655864892504114
+          },
+          {
+            "age": "40-44",
+            "male_pct": -2.8560549245682108,
+            "female_pct": 2.83696937428766
+          },
+          {
+            "age": "45-49",
+            "male_pct": -2.6675564257554862,
+            "female_pct": 2.62893008206797
+          },
+          {
+            "age": "50-54",
+            "male_pct": -2.4928954582229617,
+            "female_pct": 2.4493348087775937
+          },
+          {
+            "age": "55-59",
+            "male_pct": -2.3585168233398925,
+            "female_pct": 2.2876985509237815
+          },
+          {
+            "age": "60-64",
+            "male_pct": -1.853398950797722,
+            "female_pct": 1.819489554814226
+          },
+          {
+            "age": "65-69",
+            "male_pct": -1.4677334704036145,
+            "female_pct": 1.4533799899747275
+          },
+          {
+            "age": "70-74",
+            "male_pct": -1.1553970303594119,
+            "female_pct": 1.1713257310877003
+          },
+          {
+            "age": "75-79",
+            "male_pct": -0.905867923510614,
+            "female_pct": 0.943859809402374
+          },
+          {
+            "age": "80-84",
+            "male_pct": -0.7172013208852761,
+            "female_pct": 0.7509142045443479
+          },
+          {
+            "age": "85-89",
+            "male_pct": -0.5664881820428223,
+            "female_pct": 0.6005073538050866
+          },
+          {
+            "age": "90-94",
+            "male_pct": -0.4551448153445643,
+            "female_pct": 0.4790856858429048
+          },
+          {
+            "age": "95-99",
+            "male_pct": -0.36231307754929876,
+            "female_pct": 0.380380099487087
+          },
+          {
+            "age": "100+",
+            "male_pct": -0.29153064063790896,
+            "female_pct": 0.30240503439613703
+          }
+        ]
+      },
+      "sub_national_density_choropleth": [
+        {
+          "admin_1_region_name": "Core Financial Zone",
+          "density_per_km2": 1004
+        },
+        {
+          "admin_1_region_name": "Agricultural Heartland",
+          "density_per_km2": 135
+        },
+        {
+          "admin_1_region_name": "Resource Periphery",
+          "density_per_km2": 26
+        }
+      ],
+      "synoptic_analysis": "Notches visible from WWII massive casualty events in older cohorts."
+    },
+    {
+      "year": 1990,
+      "pyramid_structure": {
+        "cohorts": [
+          {
+            "age": "0-4",
+            "male_pct": -3.109562277202873,
+            "female_pct": 3.109562277202873
+          },
+          {
+            "age": "5-9",
+            "male_pct": -3.038445353127666,
+            "female_pct": 3.0622755709747307
+          },
+          {
+            "age": "10-14",
+            "male_pct": -2.9416628015030155,
+            "female_pct": 2.9986037228422995
+          },
+          {
+            "age": "15-19",
+            "male_pct": -2.919937953243363,
+            "female_pct": 2.953845254215372
+          },
+          {
+            "age": "20-24",
+            "male_pct": -2.839416792687367,
+            "female_pct": 2.9011534737990776
+          },
+          {
+            "age": "25-29",
+            "male_pct": -2.8084361009100514,
+            "female_pct": 2.8368423713273274
+          },
+          {
+            "age": "30-34",
+            "male_pct": -2.717622885783901,
+            "female_pct": 2.775639676059684
+          },
+          {
+            "age": "35-39",
+            "male_pct": -2.610134354227008,
+            "female_pct": 2.7408667013490104
+          },
+          {
+            "age": "40-44",
+            "male_pct": -2.5384024678648194,
+            "female_pct": 2.6877300191251905
+          },
+          {
+            "age": "45-49",
+            "male_pct": -2.4458814849095694,
+            "female_pct": 2.646485117253951
+          },
+          {
+            "age": "50-54",
+            "male_pct": -2.384751026167339,
+            "female_pct": 2.6033699213882926
+          },
+          {
+            "age": "55-59",
+            "male_pct": -2.342043920024489,
+            "female_pct": 2.5287429741474012
+          },
+          {
+            "age": "60-64",
+            "male_pct": -2.305855920312735,
+            "female_pct": 2.4985694133404817
+          },
+          {
+            "age": "65-69",
+            "male_pct": -2.2682180691686025,
+            "female_pct": 2.4716053644288993
+          },
+          {
+            "age": "70-74",
+            "male_pct": -2.2326377524235843,
+            "female_pct": 2.4461955739706744
+          },
+          {
+            "age": "75-79",
+            "male_pct": -2.1979752262437295,
+            "female_pct": 2.407119887435393
+          },
+          {
+            "age": "80-84",
+            "male_pct": -1.8930250912455047,
+            "female_pct": 2.03757122491113
+          },
+          {
+            "age": "85-89",
+            "male_pct": -1.6022625947843903,
+            "female_pct": 1.7439374551407472
+          },
+          {
+            "age": "90-94",
+            "male_pct": -1.3683895543698132,
+            "female_pct": 1.4874745154785336
+          },
+          {
+            "age": "95-99",
+            "male_pct": -1.1613323324096718,
+            "female_pct": 1.2766571400982236
+          },
+          {
+            "age": "100+",
+            "male_pct": -0.9759545410503735,
+            "female_pct": 1.0838038458508334
+          }
+        ]
+      },
+      "sub_national_density_choropleth": [
+        {
+          "admin_1_region_name": "Core Financial Zone",
+          "density_per_km2": 987
+        },
+        {
+          "admin_1_region_name": "Agricultural Heartland",
+          "density_per_km2": 145
+        },
+        {
+          "admin_1_region_name": "Resource Periphery",
+          "density_per_km2": 23
+        }
+      ],
+      "synoptic_analysis": "Collapse of USSR causes unprecedented demographic shock and mortality spike."
+    },
+    {
+      "year": 2010,
+      "pyramid_structure": {
+        "cohorts": [
+          {
+            "age": "0-4",
+            "male_pct": -3.1201257164812106,
+            "female_pct": 3.1201257164812106
+          },
+          {
+            "age": "5-9",
+            "male_pct": -3.068680150808496,
+            "female_pct": 3.0469072969355326
+          },
+          {
+            "age": "10-14",
+            "male_pct": -3.0378014233120707,
+            "female_pct": 3.0101052204293746
+          },
+          {
+            "age": "15-19",
+            "male_pct": -2.989370998943156,
+            "female_pct": 2.9231233092187554
+          },
+          {
+            "age": "20-24",
+            "male_pct": -2.9514682486074224,
+            "female_pct": 2.8521089571902474
+          },
+          {
+            "age": "25-29",
+            "male_pct": -2.865437691714182,
+            "female_pct": 2.768611682621413
+          },
+          {
+            "age": "30-34",
+            "male_pct": -2.7550992549944113,
+            "female_pct": 2.704172324948591
+          },
+          {
+            "age": "35-39",
+            "male_pct": -2.72349159333992,
+            "female_pct": 2.6757108980553683
+          },
+          {
+            "age": "40-44",
+            "male_pct": -2.675637283694877,
+            "female_pct": 2.6155694124995637
+          },
+          {
+            "age": "45-49",
+            "male_pct": -2.5987372898424668,
+            "female_pct": 2.5545148329930747
+          },
+          {
+            "age": "50-54",
+            "male_pct": -2.5110407491006,
+            "female_pct": 2.502256469824755
+          },
+          {
+            "age": "55-59",
+            "male_pct": -2.466250404870101,
+            "female_pct": 2.4488496316057713
+          },
+          {
+            "age": "60-64",
+            "male_pct": -2.401255516971873,
+            "female_pct": 2.405025048634432
+          },
+          {
+            "age": "65-69",
+            "male_pct": -2.388246417824949,
+            "female_pct": 2.3395979482937177
+          },
+          {
+            "age": "70-74",
+            "male_pct": -2.34873257203669,
+            "female_pct": 2.312548391490291
+          },
+          {
+            "age": "75-79",
+            "male_pct": -2.2893002887939544,
+            "female_pct": 2.2485172837437615
+          },
+          {
+            "age": "80-84",
+            "male_pct": -1.9350171229537547,
+            "female_pct": 1.9283019637072711
+          },
+          {
+            "age": "85-89",
+            "male_pct": -1.6307571587058836,
+            "female_pct": 1.6242365649633925
+          },
+          {
+            "age": "90-94",
+            "male_pct": -1.4087607197495955,
+            "female_pct": 1.372779827113536
+          },
+          {
+            "age": "95-99",
+            "male_pct": -1.2087679737305128,
+            "female_pct": 1.1613670123755813
+          },
+          {
+            "age": "100+",
+            "male_pct": -1.023269538184323,
+            "female_pct": 0.9883220922139102
+          }
+        ]
+      },
+      "sub_national_density_choropleth": [
+        {
+          "admin_1_region_name": "Core Financial Zone",
+          "density_per_km2": 963
+        },
+        {
+          "admin_1_region_name": "Agricultural Heartland",
+          "density_per_km2": 107
+        },
+        {
+          "admin_1_region_name": "Resource Periphery",
+          "density_per_km2": 25
+        }
+      ],
+      "synoptic_analysis": "The 'Russian Cross' demographic crisis. Deep male life expectancy gap."
+    },
+    {
+      "year": 2026,
+      "pyramid_structure": {
+        "cohorts": [
+          {
+            "age": "0-4",
+            "male_pct": -1.893139899642904,
+            "female_pct": 1.893139899642904
+          },
+          {
+            "age": "5-9",
+            "male_pct": -1.9763033014249263,
+            "female_pct": 2.003837932847689
+          },
+          {
+            "age": "10-14",
+            "male_pct": -2.0807043673416645,
+            "female_pct": 2.0890000404715723
+          },
+          {
+            "age": "15-19",
+            "male_pct": -2.1573791235867503,
+            "female_pct": 2.201153596405102
+          },
+          {
+            "age": "20-24",
+            "male_pct": -2.2350716822379284,
+            "female_pct": 2.31218580498581
+          },
+          {
+            "age": "25-29",
+            "male_pct": -2.374204570635974,
+            "female_pct": 2.415981226562293
+          },
+          {
+            "age": "30-34",
+            "male_pct": -2.470245822920106,
+            "female_pct": 2.5362569740966303
+          },
+          {
+            "age": "35-39",
+            "male_pct": -2.5477686023146005,
+            "female_pct": 2.6530705377606036
+          },
+          {
+            "age": "40-44",
+            "male_pct": -2.633385504087361,
+            "female_pct": 2.785749846523264
+          },
+          {
+            "age": "45-49",
+            "male_pct": -2.7262480866636185,
+            "female_pct": 2.932437126196006
+          },
+          {
+            "age": "50-54",
+            "male_pct": -2.835809157566998,
+            "female_pct": 3.103683693468256
+          },
+          {
+            "age": "55-59",
+            "male_pct": -2.949912187987526,
+            "female_pct": 3.2796648668276527
+          },
+          {
+            "age": "60-64",
+            "male_pct": -3.142801859843378,
+            "female_pct": 3.4770733285003894
+          },
+          {
+            "age": "65-69",
+            "male_pct": -3.3234324621314384,
+            "female_pct": 3.662652253730797
+          },
+          {
+            "age": "70-74",
+            "male_pct": -2.851955735082932,
+            "female_pct": 3.1260369217343156
+          },
+          {
+            "age": "75-79",
+            "male_pct": -2.44774290697202,
+            "female_pct": 2.652990552604134
+          },
+          {
+            "age": "80-84",
+            "male_pct": -2.1007952748643914,
+            "female_pct": 2.234066259837144
+          },
+          {
+            "age": "85-89",
+            "male_pct": -1.7992498927122387,
+            "female_pct": 1.9087249347343156
+          },
+          {
+            "age": "90-94",
+            "male_pct": -1.5428132868471687,
+            "female_pct": 1.6364809802920939
+          },
+          {
+            "age": "95-99",
+            "male_pct": -1.2970875307045662,
+            "female_pct": 1.3963364467115236
+          },
+          {
+            "age": "100+",
+            "male_pct": -1.1221572524277212,
+            "female_pct": 1.1912682680713063
+          }
+        ]
+      },
+      "sub_national_density_choropleth": [
+        {
+          "admin_1_region_name": "Core Financial Zone",
+          "density_per_km2": 920
+        },
+        {
+          "admin_1_region_name": "Agricultural Heartland",
+          "density_per_km2": 145
+        },
+        {
+          "admin_1_region_name": "Resource Periphery",
+          "density_per_km2": 25
+        }
+      ],
+      "synoptic_analysis": "Structural population decline worsened by war mobilization and emigration."
+    },
+    {
+      "year": 2040,
+      "pyramid_structure": {
+        "cohorts": [
+          {
+            "age": "0-4",
+            "male_pct": -1.8944712436839386,
+            "female_pct": 1.8944712436839386
+          },
+          {
+            "age": "5-9",
+            "male_pct": -2.0245706153231273,
+            "female_pct": 2.0004643331467817
+          },
+          {
+            "age": "10-14",
+            "male_pct": -2.13917528786721,
+            "female_pct": 2.0868975505654532
+          },
+          {
+            "age": "15-19",
+            "male_pct": -2.2467818711090684,
+            "female_pct": 2.204602058268893
+          },
+          {
+            "age": "20-24",
+            "male_pct": -2.3548110245602603,
+            "female_pct": 2.306024759481875
+          },
+          {
+            "age": "25-29",
+            "male_pct": -2.47589932008593,
+            "female_pct": 2.4335083159868547
+          },
+          {
+            "age": "30-34",
+            "male_pct": -2.5544020349053684,
+            "female_pct": 2.5344424241500096
+          },
+          {
+            "age": "35-39",
+            "male_pct": -2.6327850257474243,
+            "female_pct": 2.634860536366071
+          },
+          {
+            "age": "40-44",
+            "male_pct": -2.7408885681626,
+            "female_pct": 2.7391829042603777
+          },
+          {
+            "age": "45-49",
+            "male_pct": -2.8316842233405297,
+            "female_pct": 2.8927809149373207
+          },
+          {
+            "age": "50-54",
+            "male_pct": -2.9985382983802507,
+            "female_pct": 3.0336871671467702
+          },
+          {
+            "age": "55-59",
+            "male_pct": -3.090486679864797,
+            "female_pct": 3.1832030784932046
+          },
+          {
+            "age": "60-64",
+            "male_pct": -3.2658346733763017,
+            "female_pct": 3.3238265489013847
+          },
+          {
+            "age": "65-69",
+            "male_pct": -3.4586144812220505,
+            "female_pct": 3.4572766799981243
+          },
+          {
+            "age": "70-74",
+            "male_pct": -2.892728418652678,
+            "female_pct": 2.9216856621858542
+          },
+          {
+            "age": "75-79",
+            "male_pct": -2.468894292583987,
+            "female_pct": 2.4971068226557924
+          },
+          {
+            "age": "80-84",
+            "male_pct": -2.0989893653384377,
+            "female_pct": 2.1374608790870724
+          },
+          {
+            "age": "85-89",
+            "male_pct": -1.8074939328590878,
+            "female_pct": 1.8273610128841378
+          },
+          {
+            "age": "90-94",
+            "male_pct": -1.507893684280694,
+            "female_pct": 1.5679307571640155
+          },
+          {
+            "age": "95-99",
+            "male_pct": -1.2643042120162227,
+            "female_pct": 1.3361079122569313
+          },
+          {
+            "age": "100+",
+            "male_pct": -1.0945371264163484,
+            "female_pct": 1.1433340586028253
+          }
+        ]
+      },
+      "sub_national_density_choropleth": [
+        {
+          "admin_1_region_name": "Core Financial Zone",
+          "density_per_km2": 1171
+        },
+        {
+          "admin_1_region_name": "Agricultural Heartland",
+          "density_per_km2": 102
+        },
+        {
+          "admin_1_region_name": "Resource Periphery",
+          "density_per_km2": 17
+        }
+      ],
+      "synoptic_analysis": "Deeply aged, shrinking population with vast gaps in young male cohorts."
+    }
+  ],
+  "culture_tab": {
+    "inglehart_welzel_coords": {
+      "x": 0.8,
+      "y": -1,
+      "cultural_zone": "Orthodox/Ex-Communist"
+    },
+    "largest_diasporas": [
+      {
+        "destination": "Ukraine",
+        "population": "~8 million",
+        "cultural_reach_impact": "Significant linguistic influence, shared cultural practices, historical ties."
+      },
+      {
+        "destination": "Kazakhstan",
+        "population": "~3.5 million",
+        "cultural_reach_impact": "Strong linguistic presence, shared educational and media landscape, historical migration."
+      },
+      {
+        "destination": "USA",
+        "population": "~3 million",
+        "cultural_reach_impact": "Cultural enclaves (e.g., Brighton Beach), Russian-language media, intellectual contributions."
+      },
+      {
+        "destination": "Germany",
+        "population": "~3 million",
+        "cultural_reach_impact": "Notable cultural centers, Russian-language services, integration of post-Soviet migrants."
+      },
+      {
+        "destination": "Israel",
+        "population": "~1 million",
+        "cultural_reach_impact": "Strong Russian-speaking community, Russian media and cultural events, significant political influence."
+      }
+    ],
+    "cultural_exports_and_landscape": {
+      "soft_power_exports": [
+        {
+          "medium": "Literature",
+          "examples": [
+            "Fyodor Dostoevsky (Crime and Punishment)",
+            "Leo Tolstoy (War and Peace)",
+            "Anton Chekhov (Plays)"
+          ],
+          "global_reach_score": 95
+        },
+        {
+          "medium": "Classical Music",
+          "examples": [
+            "Pyotr Ilyich Tchaikovsky (Swan Lake)",
+            "Sergei Rachmaninoff (Piano Concerto No. 2)",
+            "Igor Stravinsky (The Rite of Spring)"
+          ],
+          "global_reach_score": 90
+        },
+        {
+          "medium": "Ballet",
+          "examples": [
+            "Bolshoi Ballet",
+            "Mariinsky Ballet",
+            "The Nutcracker"
+          ],
+          "global_reach_score": 85
+        },
+        {
+          "medium": "Cinema",
+          "examples": [
+            "Andrei Tarkovsky (Stalker)",
+            "Sergei Eisenstein (Battleship Potemkin)",
+            "Cheburashka (Animation)"
+          ],
+          "global_reach_score": 65
+        },
+        {
+          "medium": "Cuisine",
+          "examples": [
+            "Borscht",
+            "Pelmeni",
+            "Blini"
+          ],
+          "global_reach_score": 70
+        }
+      ],
+      "spatial_landscape": {
+        "enclaves": [
+          "Brighton Beach (New York, USA)",
+          "Russian Quarter (Berlin, Germany)"
+        ],
+        "architectural_footprint": "Onion domes (Orthodox churches), Stalinist Empire style, Constructivism",
+        "description": "A diverse landscape featuring ornate Orthodox cathedrals with distinctive onion domes, monumental Soviet-era structures known for their grandeur and scale, and a mix of pre-revolutionary aristocratic mansions and functionalist modern architecture in urban centers."
+      }
+    },
+    "hybridity_and_glocalization": [
+      {
+        "concept": "Western Fast Food Adaptations",
+        "description": "Global fast-food chains adapt their menus to incorporate local Russian tastes and ingredients while maintaining their international brand identity.",
+        "glocalized_examples": [
+          "Blini on McDonald's breakfast menu",
+          "Kvass-flavored drinks in international beverage chains",
+          "Local promotions tied to Russian holidays"
+        ],
+        "spatial_location": "Major urban centers and shopping malls across Russia"
+      },
+      {
+        "concept": "Pop Culture & Media Blends",
+        "description": "The integration of global music, film, and internet trends with Russian linguistic and thematic elements, resulting in unique local interpretations and cultural expressions.",
+        "glocalized_examples": [
+          "Russian pop music adopting Western electronic beats and R&B styles",
+          "Localized versions of global TV formats (e.g., 'The Voice Russia')",
+          "Russian meme culture integrating global internet humor with local contexts"
+        ],
+        "spatial_location": "Digital platforms, TV networks, and youth culture hubs in cities"
+      }
+    ]
+  }
+}

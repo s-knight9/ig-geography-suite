@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 160" width="100%" height="100%">
+  <rect width="160" height="160" fill="#ffffff" />
+  <g fill="#31a24c">
+    <!-- Row 1 -->
+    <rect x="38" y="25" width="24" height="24" />
+    <rect x="68" y="25" width="24" height="24" />
+    <rect x="98" y="25" width="24" height="24" />
+    <!-- Row 2 -->
+    <rect x="38" y="55" width="24" height="24" />
+    <rect x="68" y="55" width="24" height="24" />
+    <rect x="98" y="55" width="24" height="24" />
+    <!-- Row 3 -->
+    <rect x="38" y="85" width="24" height="24" />
+    <rect x="68" y="85" width="24" height="24" />
+    <rect x="98" y="85" width="24" height="24" />
+  </g>
+  <text x="80" y="136" font-family="'Helvetica Neue', Arial, 'Arial Black', sans-serif" font-weight="950" font-style="italic" font-size="22" text-anchor="middle" fill="#e21a22" letter-spacing="1">SQUARE</text>
+</svg>

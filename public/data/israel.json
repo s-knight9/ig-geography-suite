@@ -1,0 +1,543 @@
+{
+  "country_metadata": {
+    "name": "Israel",
+    "income_classification": "High Income",
+    "gni_per_capita_atlas": {
+      "value_usd": 54600,
+      "year": 2023
+    },
+    "hdi": {
+      "score": 0.925,
+      "rank": 25,
+      "year": 2022
+    },
+    "gni_per_capita_ppp": {
+      "value_usd": 52600,
+      "year": 2022
+    },
+    "gini_coefficient": {
+      "score": 37.5,
+      "year": 2020
+    }
+  },
+  "globalisation_tab": {
+    "kof_index": {
+      "economic": {
+        "de_facto": 76.2,
+        "de_jure": 78.5
+      },
+      "social": {
+        "interpersonal": {
+          "de_facto": 75.1,
+          "de_jure": 72.8
+        },
+        "informational": {
+          "de_facto": 88.5,
+          "de_jure": 85.4
+        },
+        "cultural": {
+          "de_facto": 65.2,
+          "de_jure": 68.1
+        }
+      },
+      "political": {
+        "de_facto": 88.4,
+        "de_jure": 91.2
+      }
+    },
+    "at_kearney_framework": {
+      "status": "Highly Integrated",
+      "gci_score_or_tier": "Alpha-"
+    },
+    "ey_index_historical": {
+      "score": 3.8,
+      "analysis": "A strongly integrated knowledge-based economy linked globally through venture capital, diamond markets, and tech exports, but structurally bounded by local geopolitics."
+    }
+  },
+  "economy_tab": {
+    "employment_structure": {
+      "primary": 1,
+      "secondary": 17.5,
+      "tertiary": 76.5,
+      "quaternary": 5
+    },
+    "trade_ledger": {
+      "main_exports": [
+        {
+          "commodity": "Processed Diamonds",
+          "pct_gdp": 25.1
+        },
+        {
+          "commodity": "Integrated Circuits",
+          "pct_gdp": 14.2
+        },
+        {
+          "commodity": "Packaged Medicaments",
+          "pct_gdp": 8.8
+        },
+        {
+          "commodity": "Refined Petroleum",
+          "pct_gdp": 5.2
+        },
+        {
+          "commodity": "Military Equipment & Optronics",
+          "pct_gdp": 4.5
+        }
+      ],
+      "main_imports": [
+        {
+          "commodity": "Refined Petroleum",
+          "pct_gdp": 11.5
+        },
+        {
+          "commodity": "Cars",
+          "pct_gdp": 8.2
+        },
+        {
+          "commodity": "Broadcasting Tech",
+          "pct_gdp": 6.4
+        },
+        {
+          "commodity": "Unprocessed Diamonds",
+          "pct_gdp": 5.1
+        },
+        {
+          "commodity": "Packaged Medicaments",
+          "pct_gdp": 3.2
+        }
+      ],
+      "top_partners_outgoing": [
+        {
+          "partner": "United States",
+          "value_usd_billions": 18.4
+        },
+        {
+          "partner": "China",
+          "value_usd_billions": 4.8
+        },
+        {
+          "partner": "India",
+          "value_usd_billions": 2.8
+        },
+        {
+          "partner": "Ireland",
+          "value_usd_billions": 2.2
+        },
+        {
+          "partner": "United Kingdom",
+          "value_usd_billions": 1.8
+        }
+      ],
+      "top_partners_incoming": [
+        {
+          "partner": "China",
+          "value_usd_billions": 12.4
+        },
+        {
+          "partner": "United States",
+          "value_usd_billions": 9.5
+        },
+        {
+          "partner": "Germany",
+          "value_usd_billions": 6.8
+        },
+        {
+          "partner": "Switzerland",
+          "value_usd_billions": 5.1
+        },
+        {
+          "partner": "Turkey",
+          "value_usd_billions": 4.8
+        }
+      ]
+    }
+  },
+  "human_geography_tab": {
+    "spatial_hubs": {
+      "epz_sez_zones": [
+        {
+          "name": "Haifa Port Free Zone",
+          "location_lat_long": "32.81, 35.00",
+          "primary_focus": "Industrial manufacturing and commercial shipping hub leveraging high logistics access to Eastern Mediterranean channels."
+        },
+        {
+          "name": "Beer Sheva High-Tech Innovation SEZ",
+          "location_lat_long": "31.24, 34.79",
+          "primary_focus": "Specialized cyber and software R&D park integrated with Ben-Gurion University labs."
+        }
+      ],
+      "tourism_enclaves": [
+        {
+          "name": "Eilat Red Sea Leisure Strip",
+          "spatial_impact": "Highly specialized, isolated deep-south beachfront enclave engineered to capture high-end marine tourism away from central industrial rails."
+        }
+      ],
+      "core_periphery_zones": {
+        "core": "Gush Dan Tel Aviv Hub (metropolitan tech center, corporate HQs, startup accelerators)",
+        "periphery": "Upper Galilee mountain borderlands (north) and the Southern Negev Desert (south)"
+      }
+    },
+    "political_economy": {
+      "informal_economy_pct_gdp": 20.5,
+      "eiu_governance_type": "Flawed Democracy",
+      "freedom_house_status": "Free",
+      "corruption_perceptions_index": {
+        "score": 63,
+        "rank": 36
+      }
+    }
+  },
+  "prisoners_of_geography_map": {
+    "topographic_friction_points": [
+      {
+        "feature": "Judaean Mountain Ridge",
+        "geopolitical_constraint": "Formidable elevation divide separating the flat coastal plain from the deep depression of the Jordan Rift Valley."
+      }
+    ],
+    "hydrological_arteries": [
+      {
+        "feature": "Jordan River & Lake Kinneret System",
+        "strategic_advantage": "Critical fresh-water source fed from northern snow-melts, vital for agricultural and civil life."
+      }
+    ],
+    "choke_points_vulnerabilities": [
+      {
+        "feature": "Bab-el-Mandeb Transit",
+        "impact": "Primary maritime corridor on the southern route from Eilat to East Asia; susceptible to regional security blockades."
+      }
+    ],
+    "buffer_zones": [
+      {
+        "region": "Negev Desert Highlands",
+        "significance": "A vast arid southern barrier covering over fifty percent of the land area, providing strategic defense depth and training territory."
+      }
+    ],
+    "map_center": {
+      "lat": 31.0461,
+      "lng": 34.8516,
+      "zoom": 8
+    }
+  },
+  "population_dynamics_time_series": [
+    {
+      "year": 1970,
+      "pyramid_structure": {
+        "cohorts": [
+          {
+            "age": "0-4",
+            "male_pct": 5.8,
+            "female_pct": 5.5
+          },
+          {
+            "age": "5-14",
+            "male_pct": 11.2,
+            "female_pct": 10.8
+          },
+          {
+            "age": "15-64",
+            "male_pct": 30.5,
+            "female_pct": 29.8
+          },
+          {
+            "age": "65-79",
+            "male_pct": 2.8,
+            "female_pct": 3.1
+          },
+          {
+            "age": "80+",
+            "male_pct": 0.2,
+            "female_pct": 0.3
+          }
+        ]
+      },
+      "sub_national_density_choropleth": [
+        {
+          "admin_1_region_name": "Tel Aviv District",
+          "density_per_km2": 4500
+        },
+        {
+          "admin_1_region_name": "Central District",
+          "density_per_km2": 620
+        },
+        {
+          "admin_1_region_name": "Southern District",
+          "density_per_km2": 35
+        }
+      ],
+      "synoptic_analysis": "Transitioning Stage 3 layout, showing strong immigration waves (Aliyah) along with high historical family sizes."
+    },
+    {
+      "year": 2023,
+      "pyramid_structure": {
+        "cohorts": [
+          {
+            "age": "0-4",
+            "male_pct": 4.8,
+            "female_pct": 4.5
+          },
+          {
+            "age": "5-14",
+            "male_pct": 9.4,
+            "female_pct": 8.9
+          },
+          {
+            "age": "15-64",
+            "male_pct": 30.8,
+            "female_pct": 29.6
+          },
+          {
+            "age": "65-79",
+            "male_pct": 4.4,
+            "female_pct": 4.9
+          },
+          {
+            "age": "80+",
+            "male_pct": 1.1,
+            "female_pct": 1.6
+          }
+        ]
+      },
+      "sub_national_density_choropleth": [
+        {
+          "admin_1_region_name": "Tel Aviv District",
+          "density_per_km2": 8200
+        },
+        {
+          "admin_1_region_name": "Central District",
+          "density_per_km2": 1520
+        },
+        {
+          "admin_1_region_name": "Southern District",
+          "density_per_km2": 95
+        }
+      ],
+      "synoptic_analysis": "Unique high-fertility demographic anomaly for a highly developed High Income state, yielding a wide pyramid base."
+    },
+    {
+      "year": 2026,
+      "pyramid_structure": {
+        "cohorts": [
+          {
+            "age": "0-4",
+            "male_pct": 4.6,
+            "female_pct": 4.3
+          },
+          {
+            "age": "5-14",
+            "male_pct": 9.1,
+            "female_pct": 8.6
+          },
+          {
+            "age": "15-64",
+            "male_pct": 31.1,
+            "female_pct": 29.9
+          },
+          {
+            "age": "65-79",
+            "male_pct": 4.6,
+            "female_pct": 5.1
+          },
+          {
+            "age": "80+",
+            "male_pct": 1.2,
+            "female_pct": 1.5
+          }
+        ]
+      },
+      "sub_national_density_choropleth": [
+        {
+          "admin_1_region_name": "Tel Aviv District",
+          "density_per_km2": 8450
+        },
+        {
+          "admin_1_region_name": "Central District",
+          "density_per_km2": 1580
+        },
+        {
+          "admin_1_region_name": "Southern District",
+          "density_per_km2": 98
+        }
+      ],
+      "synoptic_analysis": "Stage 3-4 sustainable expansion trend sustained by cultural and orthodox high-birth norms alongside selective migration."
+    },
+    {
+      "year": 2040,
+      "pyramid_structure": {
+        "cohorts": [
+          {
+            "age": "0-4",
+            "male_pct": 3.9,
+            "female_pct": 3.7
+          },
+          {
+            "age": "5-14",
+            "male_pct": 8,
+            "female_pct": 7.6
+          },
+          {
+            "age": "15-64",
+            "male_pct": 30.5,
+            "female_pct": 29.5
+          },
+          {
+            "age": "65-79",
+            "male_pct": 6.8,
+            "female_pct": 7.2
+          },
+          {
+            "age": "80+",
+            "male_pct": 1.2,
+            "female_pct": 1.6
+          }
+        ]
+      },
+      "sub_national_density_choropleth": [
+        {
+          "admin_1_region_name": "Tel Aviv District",
+          "density_per_km2": 9500
+        },
+        {
+          "admin_1_region_name": "Central District",
+          "density_per_km2": 1820
+        },
+        {
+          "admin_1_region_name": "Southern District",
+          "density_per_km2": 115
+        }
+      ],
+      "synoptic_analysis": "Vigorous population density growth on the coastal plain requiring significant infrastructure scaling and land use balancing."
+    }
+  ],
+  "culture_tab": {
+    "inglehart_welzel_coords": {
+      "x": 0.6,
+      "y": 0.7,
+      "cultural_zone": "Westernized/Mediterranean"
+    },
+    "largest_diasporas": [
+      {
+        "destination": "United States",
+        "population": "approx. 6 million",
+        "cultural_reach_impact": "Significant influence on American Jewish life, strong cultural exchange, political lobbying, and cultural exports (e.g., cuisine, music, tech)."
+      },
+      {
+        "destination": "France",
+        "population": "approx. 450,000",
+        "cultural_reach_impact": "Strong ties to French Jewish community, cultural exchange, and migration patterns."
+      },
+      {
+        "destination": "Canada",
+        "population": "approx. 390,000",
+        "cultural_reach_impact": "Active Jewish community with cultural and religious ties to Israel, exchange programs, and support for Israeli culture."
+      },
+      {
+        "destination": "United Kingdom",
+        "population": "approx. 270,000",
+        "cultural_reach_impact": "Well-established Jewish community with deep historical and contemporary cultural links to Israel, including academic and arts exchange."
+      },
+      {
+        "destination": "Argentina",
+        "population": "approx. 180,000",
+        "cultural_reach_impact": "Largest Jewish community in Latin America, maintaining strong cultural and religious connections, with significant migration to and from Israel."
+      }
+    ],
+    "cultural_exports_and_landscape": {
+      "soft_power_exports": [
+        {
+          "medium": "Cuisine",
+          "examples": [
+            "Hummus",
+            "Falafel",
+            "Shakshuka",
+            "Israeli Salad",
+            "Sabich"
+          ],
+          "global_reach_score": 85
+        },
+        {
+          "medium": "Music",
+          "examples": [
+            "Idan Raichel Project",
+            "Netta Barzilai",
+            "Ofra Haza",
+            "Omer Adam",
+            "Static & Ben El Tavori"
+          ],
+          "global_reach_score": 75
+        },
+        {
+          "medium": "Cinema/TV",
+          "examples": [
+            "Fauda",
+            "Shtisel",
+            "Waltz with Bashir",
+            "The Band's Visit",
+            "Tehran"
+          ],
+          "global_reach_score": 80
+        },
+        {
+          "medium": "Literature",
+          "examples": [
+            "Amos Oz",
+            "David Grossman",
+            "Etgar Keret",
+            "Meir Shalev"
+          ],
+          "global_reach_score": 60
+        },
+        {
+          "medium": "Technology/Innovation (Startup Nation)",
+          "examples": [
+            "Waze",
+            "ICQ",
+            "Mobileye",
+            "Cybersecurity solutions"
+          ],
+          "global_reach_score": 90
+        }
+      ],
+      "spatial_landscape": {
+        "enclaves": [
+          "Jewish quarters in major global cities (e.g., New York, Paris, London)",
+          "Israeli cultural centers and synagogues worldwide",
+          "Kosher restaurants and delis globally"
+        ],
+        "architectural_footprint": "Globally, the architectural footprint includes modern synagogues that blend local styles with traditional Jewish motifs, Holocaust memorials, and Israeli cultural institutions. Tel Aviv's Bauhaus architecture has also gained international recognition and influence.",
+        "description": "Israel's spatial landscape reflects a unique blend of ancient historical sites, diverse religious architecture (synagogues, mosques, churches), and vibrant modern urban centers like Tel Aviv, known for its Bauhaus buildings. Its influence abroad is seen in Jewish cultural centers, memorials, and contemporary Israeli architectural projects often incorporating aspects of light and open space."
+      }
+    },
+    "hybridity_and_glocalization": [
+      {
+        "concept": "Israeli Street Food Culture",
+        "description": "The fusion of Middle Eastern, Mediterranean, and Eastern European culinary traditions into a distinct Israeli street food identity, now globally recognized.",
+        "glocalized_examples": [
+          "Tel Aviv-style falafel stands in New York City",
+          "Shakshuka featured on brunch menus in London and Berlin",
+          "Sabich becoming a popular street food option in various European cities"
+        ],
+        "spatial_location": "Global urban centers, food markets, and international culinary festivals."
+      },
+      {
+        "concept": "Hebrew Pop Music",
+        "description": "A blend of traditional Mizrahi, Yemenite, and Middle Eastern melodies with contemporary Western pop, rock, and electronic music genres, often incorporating English lyrics or collaborations.",
+        "glocalized_examples": [
+          "Israeli artists collaborating with international producers and musicians",
+          "Hebrew songs gaining popularity on global streaming platforms and social media",
+          "Israeli DJs performing in international clubs and festivals"
+        ],
+        "spatial_location": "International music scenes, online music platforms, and diaspora communities."
+      },
+      {
+        "concept": "Startup Nation Mentality",
+        "description": "The entrepreneurial and innovative spirit prevalent in Israel's tech sector, often fostering a culture of rapid development, risk-taking, and global collaboration.",
+        "glocalized_examples": [
+          "Israeli tech companies establishing R&D centers in Silicon Valley, Europe, and Asia",
+          "Israeli-developed technologies (e.g., Waze, Mobileye) becoming household names globally",
+          "International accelerators adopting Israeli innovation methodologies"
+        ],
+        "spatial_location": "Major global tech hubs, universities, and business incubators."
+      }
+    ]
+  }
+}

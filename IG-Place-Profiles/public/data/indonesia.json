@@ -1,0 +1,522 @@
+{
+  "country_metadata": {
+    "name": "Indonesia",
+    "income_classification": "Lower Middle Income",
+    "gni_per_capita_atlas": {
+      "value_usd": 4920,
+      "year": 2023
+    },
+    "hdi": {
+      "score": 0.713,
+      "rank": 112,
+      "year": 2022
+    },
+    "gni_per_capita_ppp": {
+      "value_usd": 13850,
+      "year": 2022
+    },
+    "gini_coefficient": {
+      "score": 37.9,
+      "year": 2022
+    }
+  },
+  "globalisation_tab": {
+    "kof_index": {
+      "economic": {
+        "de_facto": 61.2,
+        "de_jure": 58.5
+      },
+      "social": {
+        "interpersonal": {
+          "de_facto": 51.5,
+          "de_jure": 48
+        },
+        "informational": {
+          "de_facto": 68.2,
+          "de_jure": 65.1
+        },
+        "cultural": {
+          "de_facto": 45.4,
+          "de_jure": 48.2
+        }
+      },
+      "political": {
+        "de_facto": 84.1,
+        "de_jure": 86.2
+      }
+    },
+    "at_kearney_framework": {
+      "status": "Medium Integration",
+      "gci_score_or_tier": "Beta-"
+    },
+    "ey_index_historical": {
+      "score": 3.1,
+      "analysis": "Increasing integration through trade liberalization and digital infrastructure deployment across the archipelago, balanced by resource nationalism laws."
+    }
+  },
+  "economy_tab": {
+    "employment_structure": {
+      "primary": 29,
+      "secondary": 22,
+      "tertiary": 44,
+      "quaternary": 5
+    },
+    "trade_ledger": {
+      "main_exports": [
+        {
+          "commodity": "Coal Briquettes",
+          "pct_gdp": 15.2
+        },
+        {
+          "commodity": "Palm Oil",
+          "pct_gdp": 11.8
+        },
+        {
+          "commodity": "Nickel Ferralloys",
+          "pct_gdp": 8.5
+        },
+        {
+          "commodity": "Petroleum Gas",
+          "pct_gdp": 5.2
+        },
+        {
+          "commodity": "Cars & Vehicles",
+          "pct_gdp": 3.2
+        }
+      ],
+      "main_imports": [
+        {
+          "commodity": "Refined Petroleum",
+          "pct_gdp": 12.4
+        },
+        {
+          "commodity": "Crude Petroleum",
+          "pct_gdp": 6.2
+        },
+        {
+          "commodity": "Vehicle Parts",
+          "pct_gdp": 5.1
+        },
+        {
+          "commodity": "Telecommunications Equipment",
+          "pct_gdp": 4.8
+        },
+        {
+          "commodity": "Wheat & Grain",
+          "pct_gdp": 3.5
+        }
+      ],
+      "top_partners_outgoing": [
+        {
+          "partner": "China",
+          "value_usd_billions": 52.4
+        },
+        {
+          "partner": "United States",
+          "value_usd_billions": 21.2
+        },
+        {
+          "partner": "Japan",
+          "value_usd_billions": 18.1
+        },
+        {
+          "partner": "India",
+          "value_usd_billions": 15.5
+        },
+        {
+          "partner": "Singapore",
+          "value_usd_billions": 12.8
+        }
+      ],
+      "top_partners_incoming": [
+        {
+          "partner": "China",
+          "value_usd_billions": 62.5
+        },
+        {
+          "partner": "Singapore",
+          "value_usd_billions": 18.4
+        },
+        {
+          "partner": "Japan",
+          "value_usd_billions": 14.1
+        },
+        {
+          "partner": "South Korea",
+          "value_usd_billions": 11.2
+        },
+        {
+          "partner": "United States",
+          "value_usd_billions": 10.8
+        }
+      ]
+    }
+  },
+  "human_geography_tab": {
+    "spatial_hubs": {
+      "epz_sez_zones": [
+        {
+          "name": "Batam Free Trade Zone",
+          "location_lat_long": "1.08, 104.03",
+          "primary_focus": "Electronics and shipping export hub strategically located next to the Singapore Strait."
+        },
+        {
+          "name": "Mandalika Special Economic Zone",
+          "location_lat_long": "-8.89, 116.29",
+          "primary_focus": "Ecotourism development enclave and motorsport entertainment cluster on Lombok Island."
+        }
+      ],
+      "tourism_enclaves": [
+        {
+          "name": "Nusa Dua Resort Area",
+          "spatial_impact": "Highly planned, secure luxury beachfront tourist enclave that isolates tourist activities from rural Balinese communities."
+        }
+      ],
+      "core_periphery_zones": {
+        "core": "Java-Bali Corridors (Jakarta, Surabaya, Bandung metropolitan regions)",
+        "periphery": "Outer Islands (Maluku, Papua, East Nusa Tenggara, interior Kalimantan)"
+      }
+    },
+    "political_economy": {
+      "informal_economy_pct_gdp": 54.5,
+      "eiu_governance_type": "Flawed Democracy",
+      "freedom_house_status": "Partly Free",
+      "corruption_perceptions_index": {
+        "score": 34,
+        "rank": 115
+      }
+    }
+  },
+  "prisoners_of_geography_map": {
+    "topographic_friction_points": [
+      {
+        "feature": "Volcanic Spine of Java & Sumatra",
+        "geopolitical_constraint": "Formidable mountainous spine that divides coasts, presenting land transit barriers but enriching agricultural soils."
+      }
+    ],
+    "hydrological_arteries": [
+      {
+        "feature": "Kapuas & Mahakam River Networks",
+        "strategic_advantage": "Vast navigable rivers serving as inland commercial highways in Kalimantan to transport timber and coal."
+      }
+    ],
+    "choke_points_vulnerabilities": [
+      {
+        "feature": "Malacca, Sunda & Lombok Straits",
+        "impact": "Crucial maritime corridors for global shipping; vulnerable to piracy, congestion, and strategic geostrategic blockades."
+      }
+    ],
+    "buffer_zones": [
+      {
+        "region": "Makassar Strait & Deep-Water Trenches",
+        "significance": "A natural maritime barrier separating Western and Eastern Indonesian ecological zones and stabilizing internal defense lines."
+      }
+    ],
+    "map_center": {
+      "lat": -0.7893,
+      "lng": 113.9213,
+      "zoom": 5
+    }
+  },
+  "population_dynamics_time_series": [
+    {
+      "year": 1970,
+      "pyramid_structure": {
+        "cohorts": [
+          {
+            "age": "0-4",
+            "male_pct": 8.5,
+            "female_pct": 8.2
+          },
+          {
+            "age": "5-14",
+            "male_pct": 14.2,
+            "female_pct": 13.8
+          },
+          {
+            "age": "15-64",
+            "male_pct": 25.5,
+            "female_pct": 26.2
+          },
+          {
+            "age": "65-79",
+            "male_pct": 1.6,
+            "female_pct": 1.7
+          },
+          {
+            "age": "80+",
+            "male_pct": 0.1,
+            "female_pct": 0.2
+          }
+        ]
+      },
+      "sub_national_density_choropleth": [
+        {
+          "admin_1_region_name": "DKI Jakarta",
+          "density_per_km2": 11000
+        },
+        {
+          "admin_1_region_name": "East Java",
+          "density_per_km2": 620
+        },
+        {
+          "admin_1_region_name": "West Kalimantan",
+          "density_per_km2": 25
+        }
+      ],
+      "synoptic_analysis": "Stage 2 transitional structure high fertility rates paired with falling infant mortality rates."
+    },
+    {
+      "year": 2023,
+      "pyramid_structure": {
+        "cohorts": [
+          {
+            "age": "0-4",
+            "male_pct": 4.1,
+            "female_pct": 3.9
+          },
+          {
+            "age": "5-14",
+            "male_pct": 9.2,
+            "female_pct": 8.7
+          },
+          {
+            "age": "15-64",
+            "male_pct": 34.6,
+            "female_pct": 33.2
+          },
+          {
+            "age": "65-79",
+            "male_pct": 2.8,
+            "female_pct": 3.1
+          },
+          {
+            "age": "80+",
+            "male_pct": 0.2,
+            "female_pct": 0.2
+          }
+        ]
+      },
+      "sub_national_density_choropleth": [
+        {
+          "admin_1_region_name": "DKI Jakarta",
+          "density_per_km2": 15900
+        },
+        {
+          "admin_1_region_name": "East Java",
+          "density_per_km2": 850
+        },
+        {
+          "admin_1_region_name": "West Kalimantan",
+          "density_per_km2": 38
+        }
+      ],
+      "synoptic_analysis": "Maturing demographic structure with a prominent workforce bulge representing Indonesia's demographic dividend."
+    },
+    {
+      "year": 2026,
+      "pyramid_structure": {
+        "cohorts": [
+          {
+            "age": "0-4",
+            "male_pct": 3.9,
+            "female_pct": 3.7
+          },
+          {
+            "age": "5-14",
+            "male_pct": 8.8,
+            "female_pct": 8.3
+          },
+          {
+            "age": "15-64",
+            "male_pct": 34.8,
+            "female_pct": 33.5
+          },
+          {
+            "age": "65-79",
+            "male_pct": 3.1,
+            "female_pct": 3.5
+          },
+          {
+            "age": "80+",
+            "male_pct": 0.2,
+            "female_pct": 0.2
+          }
+        ]
+      },
+      "sub_national_density_choropleth": [
+        {
+          "admin_1_region_name": "DKI Jakarta",
+          "density_per_km2": 16200
+        },
+        {
+          "admin_1_region_name": "East Java",
+          "density_per_km2": 858
+        },
+        {
+          "admin_1_region_name": "West Kalimantan",
+          "density_per_km2": 40
+        }
+      ],
+      "synoptic_analysis": "Transition towards Stage 4 slow expansion, with family planning policies flattening the base of the pyramid."
+    },
+    {
+      "year": 2040,
+      "pyramid_structure": {
+        "cohorts": [
+          {
+            "age": "0-4",
+            "male_pct": 3.2,
+            "female_pct": 3
+          },
+          {
+            "age": "5-14",
+            "male_pct": 7.4,
+            "female_pct": 7.1
+          },
+          {
+            "age": "15-64",
+            "male_pct": 33.5,
+            "female_pct": 32.5
+          },
+          {
+            "age": "65-79",
+            "male_pct": 5.8,
+            "female_pct": 6.6
+          },
+          {
+            "age": "80+",
+            "male_pct": 0.4,
+            "female_pct": 0.5
+          }
+        ]
+      },
+      "sub_national_density_choropleth": [
+        {
+          "admin_1_region_name": "DKI Jakarta",
+          "density_per_km2": 17500
+        },
+        {
+          "admin_1_region_name": "East Java",
+          "density_per_km2": 890
+        },
+        {
+          "admin_1_region_name": "West Kalimantan",
+          "density_per_km2": 45
+        }
+      ],
+      "synoptic_analysis": "Increasing share of elderly cohorts requiring comprehensive national elderly care strategy and pension reform integrations."
+    }
+  ],
+  "culture_tab": {
+    "inglehart_welzel_coords": {
+      "x": -0.4,
+      "y": -1.2,
+      "cultural_zone": "South Asian / Islamic"
+    },
+    "largest_diasporas": [
+      {
+        "destination": "Malaysia",
+        "population": "Approx. 2-3 million",
+        "cultural_reach_impact": "Significant influence on Malay language, cuisine, and social dynamics, especially in border regions and urban centers."
+      },
+      {
+        "destination": "Saudi Arabia",
+        "population": "Approx. 1-1.5 million",
+        "cultural_reach_impact": "Primarily through migrant workers and Hajj/Umrah pilgrims, leading to cultural exchange, especially in religious practices and culinary traditions."
+      },
+      {
+        "destination": "Singapore",
+        "population": "Approx. 200,000-300,000",
+        "cultural_reach_impact": "Contributes to Singapore's diverse cultural mosaic, particularly visible in food, language (Malay shared roots), and domestic services."
+      },
+      {
+        "destination": "Netherlands",
+        "population": "Approx. 150,000-200,000 (including descendants)",
+        "cultural_reach_impact": "Historical colonial ties have led to a strong presence of Indonesian cuisine (rijsttafel) and cultural artifacts, profoundly influencing Dutch society."
+      }
+    ],
+    "cultural_exports_and_landscape": {
+      "soft_power_exports": [
+        {
+          "medium": "Cuisine",
+          "examples": [
+            "Rendang",
+            "Nasi Goreng",
+            "Sate",
+            "Gado-Gado"
+          ],
+          "global_reach_score": 85
+        },
+        {
+          "medium": "Music",
+          "examples": [
+            "Gamelan",
+            "Dangdut",
+            "Indonesian Pop (J-Pop influenced)"
+          ],
+          "global_reach_score": 60
+        },
+        {
+          "medium": "Traditional Arts & Crafts",
+          "examples": [
+            "Batik",
+            "Wayang Kulit",
+            "Pencak Silat",
+            "Balinese Dance"
+          ],
+          "global_reach_score": 75
+        },
+        {
+          "medium": "Cinema & Television",
+          "examples": [
+            "The Raid (film)",
+            "Pengabdi Setan (film)",
+            "Indonesian Soap Operas"
+          ],
+          "global_reach_score": 50
+        }
+      ],
+      "spatial_landscape": {
+        "enclaves": [
+          "Little Indonesia (e.g., in some US cities like Covina, CA)",
+          "Specific neighborhoods in Malaysia and Singapore with high Indonesian populations"
+        ],
+        "architectural_footprint": "Traditional Indonesian architecture (e.g., Rumah Gadang, Joglo, Balinese temples) inspires designs globally, particularly in resorts and cultural centers. Mosques built by Indonesian communities abroad often incorporate local Indonesian motifs.",
+        "description": "Indonesian cultural presence abroad is often marked by culinary establishments, traditional craft shops, and community centers. In former colonial powers like the Netherlands, Indonesian influences are deeply integrated into daily life, while in neighboring Southeast Asian countries, the impact is more direct through migrant communities."
+      }
+    },
+    "hybridity_and_glocalization": [
+      {
+        "concept": "Indonesian-Dutch 'Fusion' Culture",
+        "description": "The historical colonial relationship has resulted in a unique blend of Indonesian and Dutch cultures, particularly evident in cuisine, language, and family traditions within the Netherlands.",
+        "glocalized_examples": [
+          "Rijsttafel (Dutch-Indonesian multi-dish meal)",
+          "Indo (mixed heritage) identity",
+          "Use of Indonesian words in Dutch slang"
+        ],
+        "spatial_location": "Netherlands (especially cities like Amsterdam, The Hague)"
+      },
+      {
+        "concept": "Halal Tourism & Cuisine",
+        "description": "Indonesia's large Muslim population and position as a global halal hub lead to the glocalization of its tourism and food industries to cater to global Muslim consumers, while also integrating global halal standards.",
+        "glocalized_examples": [
+          "Muslim-friendly resorts in Bali and Lombok",
+          "Standardized halal certifications for Indonesian food products exported globally",
+          "Fusion of Middle Eastern and Indonesian dishes in local restaurants"
+        ],
+        "spatial_location": "Global (e.g., Middle East, Southeast Asia), and within Indonesia (e.g., Lombok, Aceh)"
+      },
+      {
+        "concept": "K-Pop/J-Pop influenced Dangdut (K-Dangdut/J-Dangdut)",
+        "description": "The traditional Indonesian music genre Dangdut often incorporates contemporary global pop elements, particularly from South Korean and Japanese pop, creating a modern, glocalized sound that appeals to younger audiences.",
+        "glocalized_examples": [
+          "Dangdut songs with K-Pop dance routines",
+          "Artists blending traditional Dangdut vocalizations with J-Pop synth sounds",
+          "Music videos adopting global pop aesthetics"
+        ],
+        "spatial_location": "Indonesia (urban music scenes), Indonesian diaspora communities"
+      }
+    ]
+  }
+}

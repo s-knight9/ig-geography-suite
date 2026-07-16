@@ -1,0 +1,528 @@
+{
+  "country_metadata": {
+    "name": "France",
+    "income_classification": "High Income",
+    "gni_per_capita_atlas": {
+      "value_usd": 45500,
+      "year": 2023
+    },
+    "hdi": {
+      "score": 0.903,
+      "rank": 28,
+      "year": 2022
+    },
+    "gni_per_capita_ppp": {
+      "value_usd": 55120,
+      "year": 2022
+    },
+    "gini_coefficient": {
+      "score": 29.2,
+      "year": 2020
+    }
+  },
+  "globalisation_tab": {
+    "kof_index": {
+      "economic": {
+        "de_facto": 78.4,
+        "de_jure": 82.5
+      },
+      "social": {
+        "interpersonal": {
+          "de_facto": 85.5,
+          "de_jure": 82.1
+        },
+        "informational": {
+          "de_facto": 88.4,
+          "de_jure": 89.1
+        },
+        "cultural": {
+          "de_facto": 84.8,
+          "de_jure": 83.4
+        }
+      },
+      "political": {
+        "de_facto": 96.2,
+        "de_jure": 98.1
+      }
+    },
+    "at_kearney_framework": {
+      "status": "Vastly Integrated",
+      "gci_score_or_tier": "Alpha"
+    },
+    "ey_index_historical": {
+      "score": 4.1,
+      "analysis": "Exceptional cultural and political indexing. Home to UNESCO and major global cultural hubs, anchoring extensive international travel lines."
+    }
+  },
+  "economy_tab": {
+    "employment_structure": {
+      "primary": 2.1,
+      "secondary": 19.4,
+      "tertiary": 65.5,
+      "quaternary": 13
+    },
+    "trade_ledger": {
+      "main_exports": [
+        {
+          "commodity": "Aircraft & Spacecraft",
+          "pct_gdp": 14.5
+        },
+        {
+          "commodity": "Packaged Medicaments",
+          "pct_gdp": 9.2
+        },
+        {
+          "commodity": "Cars",
+          "pct_gdp": 6.8
+        },
+        {
+          "commodity": "Wine & Spirits",
+          "pct_gdp": 5.4
+        },
+        {
+          "commodity": "Beauty Products",
+          "pct_gdp": 4.8
+        }
+      ],
+      "main_imports": [
+        {
+          "commodity": "Cars",
+          "pct_gdp": 10.4
+        },
+        {
+          "commodity": "Refined Petroleum",
+          "pct_gdp": 8.5
+        },
+        {
+          "commodity": "Crude Petroleum",
+          "pct_gdp": 6.2
+        },
+        {
+          "commodity": "Packaged Medicaments",
+          "pct_gdp": 4.5
+        },
+        {
+          "commodity": "Broadcasting Equipment",
+          "pct_gdp": 3.8
+        }
+      ],
+      "top_partners_outgoing": [
+        {
+          "partner": "Germany",
+          "value_usd_billions": 84.5
+        },
+        {
+          "partner": "Italy",
+          "value_usd_billions": 44.2
+        },
+        {
+          "partner": "United States",
+          "value_usd_billions": 42.1
+        },
+        {
+          "partner": "Belgium",
+          "value_usd_billions": 40.8
+        },
+        {
+          "partner": "Spain",
+          "value_usd_billions": 38.5
+        }
+      ],
+      "top_partners_incoming": [
+        {
+          "partner": "Germany",
+          "value_usd_billions": 110.2
+        },
+        {
+          "partner": "China",
+          "value_usd_billions": 62.5
+        },
+        {
+          "partner": "Italy",
+          "value_usd_billions": 58.4
+        },
+        {
+          "partner": "Belgium",
+          "value_usd_billions": 54.1
+        },
+        {
+          "partner": "Spain",
+          "value_usd_billions": 48.2
+        }
+      ]
+    }
+  },
+  "human_geography_tab": {
+    "spatial_hubs": {
+      "epz_sez_zones": [
+        {
+          "name": "Toulouse Aerospace Valley",
+          "location_lat_long": "43.60, 1.44",
+          "primary_focus": "Global hub for civil aviation (Airbus assembly), space engineering, and high-performance computing."
+        },
+        {
+          "name": "Sophia Antipolis Science Park",
+          "location_lat_long": "43.61, 7.04",
+          "primary_focus": "Southern France microelectronics, biotechnology, and artificial intelligence research institutes."
+        }
+      ],
+      "tourism_enclaves": [
+        {
+          "name": "Disneyland Paris & Côte d'Azur Resorts",
+          "spatial_impact": "Mega-hubs for global tourist concentration and luxury spatial isolation."
+        }
+      ],
+      "core_periphery_zones": {
+        "core": "Île-de-France (Parisian Basin core concentrating 31% of French GDP)",
+        "periphery": "The 'Empty Diagonal' (La Diagonale du Vide) stretching from the Ardennes to the Pyrenees"
+      }
+    },
+    "political_economy": {
+      "informal_economy_pct_gdp": 12.1,
+      "eiu_governance_type": "Full Democracy",
+      "freedom_house_status": "Free",
+      "corruption_perceptions_index": {
+        "score": 71,
+        "rank": 21
+      }
+    }
+  },
+  "prisoners_of_geography_map": {
+    "topographic_friction_points": [
+      {
+        "feature": "Massif Central & Alps Ranges",
+        "geopolitical_constraint": "Major highland barriers separating the western agricultural plains from the Mediterranean and central European corridors."
+      }
+    ],
+    "hydrological_arteries": [
+      {
+        "feature": "Seine, Rhine, & Rhône Rivers",
+        "strategic_advantage": "Critical regional industrial rivers connecting Paris, the eastern border, and Lyons directly to the Channel and the Mediterranean."
+      }
+    ],
+    "choke_points_vulnerabilities": [
+      {
+        "feature": "Pas de Calais (Dover Strait)",
+        "impact": "The world's most heavily travels shipping strait, a strategic shipping funnel bordering the UK."
+      }
+    ],
+    "buffer_zones": [
+      {
+        "region": "Natural Mountain & Sea Frontiers",
+        "significance": "The Pyrenees, Alps, and three maritime coasts framing the 'Hexagon', offering exceptional strategic defense-in-depth."
+      }
+    ],
+    "map_center": {
+      "lat": 46.2276,
+      "lng": 2.2137,
+      "zoom": 6
+    }
+  },
+  "population_dynamics_time_series": [
+    {
+      "year": 1970,
+      "pyramid_structure": {
+        "cohorts": [
+          {
+            "age": "0-4",
+            "male_pct": 4.1,
+            "female_pct": 3.9
+          },
+          {
+            "age": "5-14",
+            "male_pct": 7.9,
+            "female_pct": 7.6
+          },
+          {
+            "age": "15-64",
+            "male_pct": 31.8,
+            "female_pct": 30.5
+          },
+          {
+            "age": "65-79",
+            "male_pct": 5.8,
+            "female_pct": 6.5
+          },
+          {
+            "age": "80+",
+            "male_pct": 0.8,
+            "female_pct": 1.1
+          }
+        ]
+      },
+      "sub_national_density_choropleth": [
+        {
+          "admin_1_region_name": "Île-de-France",
+          "density_per_km2": 820
+        },
+        {
+          "admin_1_region_name": "Limousin",
+          "density_per_km2": 42
+        }
+      ],
+      "synoptic_analysis": "Strong expansive baby boom generation entering active employment markets."
+    },
+    {
+      "year": 2023,
+      "pyramid_structure": {
+        "cohorts": [
+          {
+            "age": "0-4",
+            "male_pct": 2.8,
+            "female_pct": 2.6
+          },
+          {
+            "age": "5-14",
+            "male_pct": 6.1,
+            "female_pct": 5.8
+          },
+          {
+            "age": "15-64",
+            "male_pct": 31.4,
+            "female_pct": 29.8
+          },
+          {
+            "age": "65-79",
+            "male_pct": 8.5,
+            "female_pct": 9.1
+          },
+          {
+            "age": "80+",
+            "male_pct": 2.8,
+            "female_pct": 4.1
+          }
+        ]
+      },
+      "sub_national_density_choropleth": [
+        {
+          "admin_1_region_name": "Île-de-France",
+          "density_per_km2": 1020
+        },
+        {
+          "admin_1_region_name": "Limousin",
+          "density_per_km2": 44
+        }
+      ],
+      "synoptic_analysis": "One of Europe's relative high-fertility performers, supported by generous state-provided family allowances."
+    },
+    {
+      "year": 2026,
+      "pyramid_structure": {
+        "cohorts": [
+          {
+            "age": "0-4",
+            "male_pct": 2.7,
+            "female_pct": 2.5
+          },
+          {
+            "age": "5-14",
+            "male_pct": 5.8,
+            "female_pct": 5.5
+          },
+          {
+            "age": "15-64",
+            "male_pct": 31.1,
+            "female_pct": 29.5
+          },
+          {
+            "age": "65-79",
+            "male_pct": 8.9,
+            "female_pct": 9.5
+          },
+          {
+            "age": "80+",
+            "male_pct": 3,
+            "female_pct": 4.5
+          }
+        ]
+      },
+      "sub_national_density_choropleth": [
+        {
+          "admin_1_region_name": "Île-de-France",
+          "density_per_km2": 1030
+        },
+        {
+          "admin_1_region_name": "Limousin",
+          "density_per_km2": 44.5
+        }
+      ],
+      "synoptic_analysis": "Balanced Stage 4 profile supported by sustainable family networks and positive international migration balance."
+    },
+    {
+      "year": 2040,
+      "pyramid_structure": {
+        "cohorts": [
+          {
+            "age": "0-4",
+            "male_pct": 2.3,
+            "female_pct": 2.1
+          },
+          {
+            "age": "5-14",
+            "male_pct": 5,
+            "female_pct": 4.7
+          },
+          {
+            "age": "15-64",
+            "male_pct": 29.2,
+            "female_pct": 27.5
+          },
+          {
+            "age": "65-79",
+            "male_pct": 11.2,
+            "female_pct": 11.8
+          },
+          {
+            "age": "80+",
+            "male_pct": 4.1,
+            "female_pct": 6.1
+          }
+        ]
+      },
+      "sub_national_density_choropleth": [
+        {
+          "admin_1_region_name": "Île-de-France",
+          "density_per_km2": 1080
+        },
+        {
+          "admin_1_region_name": "Limousin",
+          "density_per_km2": 45
+        }
+      ],
+      "synoptic_analysis": "Steepening elderly dependency ratios, but remaining more demo-resilient than major East Asian or South European states."
+    }
+  ],
+  "culture_tab": {
+    "inglehart_welzel_coords": {
+      "x": 1.5,
+      "y": 1,
+      "cultural_zone": "Western Europe"
+    },
+    "largest_diasporas": [
+      {
+        "destination": "Canada",
+        "population": "~400,000 to 500,000 (excluding Quebec Francophones)",
+        "cultural_reach_impact": "Significant linguistic and cultural preservation, strong academic and artistic ties, especially with Quebec."
+      },
+      {
+        "destination": "Belgium",
+        "population": "~200,000",
+        "cultural_reach_impact": "Deep linguistic and cultural exchange, shared historical and artistic heritage, cross-border professional mobility."
+      },
+      {
+        "destination": "Switzerland",
+        "population": "~190,000",
+        "cultural_reach_impact": "Strong linguistic (Romandy region) and cultural ties, cross-border workers, shared cultural institutions."
+      },
+      {
+        "destination": "United States",
+        "population": "~130,000 to 200,000 (French-born)",
+        "cultural_reach_impact": "Influence on culinary arts, fashion, language schools, historical communities (e.g., Louisiana Creole culture)."
+      },
+      {
+        "destination": "United Kingdom",
+        "population": "~100,000 to 150,000",
+        "cultural_reach_impact": "Cultural institutions (Institut Français), culinary scene, educational exchanges, strong economic ties."
+      }
+    ],
+    "cultural_exports_and_landscape": {
+      "soft_power_exports": [
+        {
+          "medium": "Cuisine",
+          "examples": [
+            "Haute Cuisine",
+            "Baguette",
+            "Wine",
+            "Cheese",
+            "Michelin Guide"
+          ],
+          "global_reach_score": 95
+        },
+        {
+          "medium": "Fashion",
+          "examples": [
+            "Paris Fashion Week",
+            "Chanel",
+            "Dior",
+            "Louis Vuitton",
+            "Hermès"
+          ],
+          "global_reach_score": 90
+        },
+        {
+          "medium": "Cinema",
+          "examples": [
+            "Nouvelle Vague",
+            "Cannes Film Festival",
+            "Amélie",
+            "The Artist",
+            "Les Intouchables"
+          ],
+          "global_reach_score": 75
+        },
+        {
+          "medium": "Literature",
+          "examples": [
+            "Victor Hugo",
+            "Albert Camus",
+            "Marcel Proust",
+            "Honoré de Balzac",
+            "Prix Goncourt"
+          ],
+          "global_reach_score": 80
+        },
+        {
+          "medium": "Art & Museums",
+          "examples": [
+            "Louvre Museum",
+            "Musée d'Orsay",
+            "Impressionism",
+            "Gothic Cathedrals"
+          ],
+          "global_reach_score": 88
+        }
+      ],
+      "spatial_landscape": {
+        "enclaves": [
+          "French Quarters (New Orleans)",
+          "Francophone communities in Quebec",
+          "French Cultural Institutes (Alliances Françaises) worldwide"
+        ],
+        "architectural_footprint": "Haussmannian boulevards, Gothic cathedrals (e.g., Notre Dame style), Art Deco elements in public buildings.",
+        "description": "French architecture, from grand Gothic cathedrals to rational Haussmannian urban planning, has influenced cityscapes globally. French cafes, boulangeries, and bistros are common cultural touchpoints in many cities, signifying a specific lifestyle."
+      }
+    },
+    "hybridity_and_glocalization": [
+      {
+        "concept": "French Cafe Culture",
+        "description": "The tradition of leisurely coffee, conversation, and light meals in a public setting, emphasizing social interaction and observation.",
+        "glocalized_examples": [
+          "Starbucks in Paris (adapting decor and menu to local tastes)",
+          "French-style bakeries in Japan offering unique fusion pastries",
+          "Bistros in New York with fusion menus combining French techniques with local ingredients"
+        ],
+        "spatial_location": "Urban centers worldwide, particularly in North America, Asia, and Europe."
+      },
+      {
+        "concept": "French Gastronomy",
+        "description": "The art of fine dining, specific cooking techniques, and emphasis on regional ingredients, wine pairings, and presentation.",
+        "glocalized_examples": [
+          "Vietnamese Banh Mi (French baguette combined with local fillings)",
+          "Japanese-French fusion cuisine (e.g., using Japanese ingredients with French techniques)",
+          "Cajun/Creole cuisine in Louisiana (a blend of French, African, and Native American culinary traditions)"
+        ],
+        "spatial_location": "Restaurants and culinary schools globally, former French colonies, and regions with significant French diaspora."
+      },
+      {
+        "concept": "French Language",
+        "description": "The official language of France, a Romance language known for its cultural prestige and historical influence.",
+        "glocalized_examples": [
+          "Quebec French (a distinct dialect with unique vocabulary and expressions)",
+          "Maghrebi French (integration of Arabic and Berber words and phrases in North Africa)",
+          "Creole languages in the Caribbean and Indian Ocean (languages derived from French with local linguistic influences)"
+        ],
+        "spatial_location": "Canada, North and West Africa, the Caribbean, parts of Southeast Asia, and international organizations."
+      }
+    ]
+  }
+}

@@ -1,0 +1,467 @@
+{
+  "country_metadata": {
+    "name": "Tuvalu",
+    "income_classification": "Lower-Middle Income",
+    "gni_per_capita_atlas": {
+      "value_usd": 6690,
+      "year": 2023
+    },
+    "hdi": {
+      "score": 0.641,
+      "rank": 130,
+      "year": 2022
+    },
+    "gni_per_capita_ppp": {
+      "value_usd": 5210,
+      "year": 2022
+    },
+    "gini_coefficient": {
+      "score": 39.1,
+      "year": 2010
+    }
+  },
+  "globalisation_tab": {
+    "kof_index": {
+      "economic": {
+        "de_facto": 38.5,
+        "de_jure": 42.1
+      },
+      "social": {
+        "interpersonal": {
+          "de_facto": 52.3,
+          "de_jure": 49
+        },
+        "informational": {
+          "de_facto": 48.1,
+          "de_jure": 45.3
+        },
+        "cultural": {
+          "de_facto": 34.2,
+          "de_jure": 32.8
+        }
+      },
+      "political": {
+        "de_facto": 41.5,
+        "de_jure": 44.8
+      }
+    },
+    "at_kearney_framework": {
+      "status": "Localized/Peripheral",
+      "gci_score_or_tier": "Peripheral"
+    },
+    "ey_index_historical": {
+      "score": 1.8,
+      "analysis": "Severe peripherality. Economic globalisation is largely restricted to license revenues (e.g., '.tv' TLD, fishing rights) and foreign aid imports."
+    }
+  },
+  "economy_tab": {
+    "employment_structure": {
+      "primary": 42,
+      "secondary": 8,
+      "tertiary": 48,
+      "quaternary": 2
+    },
+    "trade_ledger": {
+      "main_exports": [
+        {
+          "commodity": "Fish (Raw)",
+          "pct_gdp": 12.5
+        },
+        {
+          "commodity": "Transceiver Parts",
+          "pct_gdp": 4.1
+        },
+        {
+          "commodity": "Stamps/Numismatics",
+          "pct_gdp": 1.2
+        }
+      ],
+      "main_imports": [
+        {
+          "commodity": "Refined Petroleum",
+          "pct_gdp": 28.4
+        },
+        {
+          "commodity": "Passenger Ships & Boats",
+          "pct_gdp": 15.2
+        },
+        {
+          "commodity": "Poultry Meat",
+          "pct_gdp": 6.8
+        },
+        {
+          "commodity": "Rice & Wheat flour",
+          "pct_gdp": 5.4
+        },
+        {
+          "commodity": "Delivery Trucks",
+          "pct_gdp": 4.1
+        }
+      ],
+      "top_partners_outgoing": [
+        {
+          "partner": "Japan",
+          "value_usd_billions": 0.002
+        },
+        {
+          "partner": "Croatia",
+          "value_usd_billions": 0.001
+        },
+        {
+          "partner": "United States",
+          "value_usd_billions": 0.0005
+        }
+      ],
+      "top_partners_incoming": [
+        {
+          "partner": "Fiji",
+          "value_usd_billions": 0.015
+        },
+        {
+          "partner": "China",
+          "value_usd_billions": 0.012
+        },
+        {
+          "partner": "Japan",
+          "value_usd_billions": 0.008
+        },
+        {
+          "partner": "Australia",
+          "value_usd_billions": 0.006
+        },
+        {
+          "partner": "New Zealand",
+          "value_usd_billions": 0.004
+        }
+      ]
+    }
+  },
+  "human_geography_tab": {
+    "spatial_hubs": {
+      "epz_sez_zones": [
+        {
+          "name": "Funafuti Telecommunications Enclave",
+          "location_lat_long": "-8.52, 179.19",
+          "primary_focus": "IT domain management and virtual services gateway of Tuvalu National Internet."
+        }
+      ],
+      "tourism_enclaves": [
+        {
+          "name": "Funafuti Conservation Area",
+          "spatial_impact": "Low-volume marine ecotourism zone restricted by extreme physical access remoteness."
+        }
+      ],
+      "core_periphery_zones": {
+        "core": "Fongafale islet on Funafuti (housing over 60% of the entire population in tight urban layouts)",
+        "periphery": "Outer islands including Nanumea, Nui, and Niulakita with highly traditional subsistence activities"
+      }
+    },
+    "political_economy": {
+      "informal_economy_pct_gdp": 42.5,
+      "eiu_governance_type": "Flawed Democracy",
+      "freedom_house_status": "Free",
+      "corruption_perceptions_index": {
+        "score": 53,
+        "rank": 52
+      }
+    }
+  },
+  "prisoners_of_geography_map": {
+    "topographic_friction_points": [
+      {
+        "feature": "Low-lying Coral Atolls",
+        "geopolitical_constraint": "Extremely low relief, maximum altitude of 4.6m, creating acute spatial exposure to sea-level rise and storm surges."
+      },
+      {
+        "feature": "Extreme Siltation & Atoll Fragmentation",
+        "geopolitical_constraint": "Separated islets hindering overland road infrastructure, forcing total dependency on outer-reef boats."
+      }
+    ],
+    "hydrological_arteries": [
+      {
+        "feature": "Lack of Freshwater Aquifers / Rainwater Harvesters",
+        "strategic_advantage": "No major rivers; total reliance on household rainwater tanks and desalination systems, making water supply extremely fragile."
+      }
+    ],
+    "choke_points_vulnerabilities": [
+      {
+        "feature": "Funafuti Lagoon Entry",
+        "impact": "Extremely narrow reef channels restricting maritime trade access and supply deliverability."
+      }
+    ],
+    "buffer_zones": [
+      {
+        "region": "Pacific Isolation",
+        "significance": "Immense remote oceanic distance acting as a buffer but exacerbating economic peripherality."
+      }
+    ],
+    "map_center": {
+      "lat": -8.5139,
+      "lng": 179.1962,
+      "zoom": 11
+    }
+  },
+  "population_dynamics_time_series": [
+    {
+      "year": 1970,
+      "pyramid_structure": {
+        "cohorts": [
+          {
+            "age": "0-4",
+            "male_pct": 6.8,
+            "female_pct": 6.5
+          },
+          {
+            "age": "5-14",
+            "male_pct": 11.2,
+            "female_pct": 10.8
+          },
+          {
+            "age": "15-64",
+            "male_pct": 30.1,
+            "female_pct": 28.4
+          },
+          {
+            "age": "65-79",
+            "male_pct": 2.8,
+            "female_pct": 2.9
+          },
+          {
+            "age": "80+",
+            "male_pct": 0.4,
+            "female_pct": 0.5
+          }
+        ]
+      },
+      "sub_national_density_choropleth": [
+        {
+          "admin_1_region_name": "Funafuti",
+          "density_per_km2": 410
+        },
+        {
+          "admin_1_region_name": "Vaitupu",
+          "density_per_km2": 80
+        }
+      ],
+      "synoptic_analysis": "Expansive typical demographic profile matching developing Pacific island statuses prior to major out-migration patterns."
+    },
+    {
+      "year": 2023,
+      "pyramid_structure": {
+        "cohorts": [
+          {
+            "age": "0-4",
+            "male_pct": 4.9,
+            "female_pct": 4.6
+          },
+          {
+            "age": "5-14",
+            "male_pct": 8.8,
+            "female_pct": 8.3
+          },
+          {
+            "age": "15-64",
+            "male_pct": 32.4,
+            "female_pct": 29.5
+          },
+          {
+            "age": "65-79",
+            "male_pct": 4.8,
+            "female_pct": 5.1
+          },
+          {
+            "age": "80+",
+            "male_pct": 0.7,
+            "female_pct": 0.9
+          }
+        ]
+      },
+      "sub_national_density_choropleth": [
+        {
+          "admin_1_region_name": "Funafuti",
+          "density_per_km2": 2220
+        },
+        {
+          "admin_1_region_name": "Vaitupu",
+          "density_per_km2": 280
+        }
+      ],
+      "synoptic_analysis": "High population density on the capital islet Fongafale, accompanied by systematic climate relocation pressures to New Zealand."
+    },
+    {
+      "year": 2026,
+      "pyramid_structure": {
+        "cohorts": [
+          {
+            "age": "0-4",
+            "male_pct": 4.7,
+            "female_pct": 4.4
+          },
+          {
+            "age": "5-14",
+            "male_pct": 8.5,
+            "female_pct": 8.1
+          },
+          {
+            "age": "15-64",
+            "male_pct": 32.2,
+            "female_pct": 29.1
+          },
+          {
+            "age": "65-79",
+            "male_pct": 5,
+            "female_pct": 5.3
+          },
+          {
+            "age": "80+",
+            "male_pct": 0.8,
+            "female_pct": 1
+          }
+        ]
+      },
+      "sub_national_density_choropleth": [
+        {
+          "admin_1_region_name": "Funafuti",
+          "density_per_km2": 2250
+        },
+        {
+          "admin_1_region_name": "Vaitupu",
+          "density_per_km2": 284
+        }
+      ],
+      "synoptic_analysis": "Stage 3 structures with slow birth rate decreases, heavily impacted by bilateral migration partnership pathways."
+    },
+    {
+      "year": 2040,
+      "pyramid_structure": {
+        "cohorts": [
+          {
+            "age": "0-4",
+            "male_pct": 3.8,
+            "female_pct": 3.5
+          },
+          {
+            "age": "5-14",
+            "male_pct": 6.9,
+            "female_pct": 6.5
+          },
+          {
+            "age": "15-64",
+            "male_pct": 31.8,
+            "female_pct": 28.5
+          },
+          {
+            "age": "65-79",
+            "male_pct": 6.8,
+            "female_pct": 7.2
+          },
+          {
+            "age": "80+",
+            "male_pct": 1.8,
+            "female_pct": 2.2
+          }
+        ]
+      },
+      "sub_national_density_choropleth": [
+        {
+          "admin_1_region_name": "Funafuti",
+          "density_per_km2": 2400
+        },
+        {
+          "admin_1_region_name": "Vaitupu",
+          "density_per_km2": 310
+        }
+      ],
+      "synoptic_analysis": "Severe environmental pressures could lead to massive evacuation and sovereign retention of virtual territory."
+    }
+  ],
+  "culture_tab": {
+    "inglehart_welzel_coords": {
+      "x": -1,
+      "y": -1.5,
+      "cultural_zone": "Polynesian/Oceanic"
+    },
+    "largest_diasporas": [
+      {
+        "destination": "Fiji",
+        "population": "Few thousands",
+        "cultural_reach_impact": "Significant community presence, maintains cultural ties through church and family networks and educational exchanges."
+      },
+      {
+        "destination": "New Zealand",
+        "population": "Few thousands",
+        "cultural_reach_impact": "Strong cultural retention in diaspora communities, influence on Polynesian cultural festivals and traditional arts."
+      },
+      {
+        "destination": "Australia",
+        "population": "Hundreds",
+        "cultural_reach_impact": "Emerging cultural presence, focused on family gatherings, church events, and traditional ceremonies."
+      }
+    ],
+    "cultural_exports_and_landscape": {
+      "soft_power_exports": [
+        {
+          "medium": "Music",
+          "examples": [
+            "Fatele (traditional dance and song)",
+            "Contemporary Polynesian pop"
+          ],
+          "global_reach_score": 20
+        },
+        {
+          "medium": "Handicrafts",
+          "examples": [
+            "Fans (ili)",
+            "Mats (papa)",
+            "Necklaces (ula)"
+          ],
+          "global_reach_score": 15
+        },
+        {
+          "medium": "Traditional Storytelling",
+          "examples": [
+            "Myths and legends of origin",
+            "Fishing narratives and oral histories"
+          ],
+          "global_reach_score": 10
+        }
+      ],
+      "spatial_landscape": {
+        "enclaves": [
+          "No significant large-scale enclaves beyond family homes in diaspora nations, due to the small population."
+        ],
+        "architectural_footprint": "Traditional fale (open-sided houses) coexist with modern concrete structures, often elevated for sea-level rise resilience. Buildings are simple and functional.",
+        "description": "The spatial landscape is characterized by low-lying atolls and lagoons. Villages are clustered around the limited land, with a strong connection to the ocean and traditional communal spaces. Limited urban development prevails."
+      }
+    },
+    "hybridity_and_glocalization": [
+      {
+        "concept": "Modern Christianity with Traditional Beliefs",
+        "description": "Christianity (predominantly Protestant) is deeply integrated into daily life, often coexisting with reverence for ancestral spirits and traditional customs.",
+        "glocalized_examples": [
+          "Church services incorporating traditional Tuvaluan hymns and language",
+          "Community leadership roles often held by church elders who also respect traditional lineage."
+        ],
+        "spatial_location": "Across all islands, particularly within community halls and churches."
+      },
+      {
+        "concept": "Globalized Foodways and Local Resources",
+        "description": "Reliance on imported goods (e.g., rice, canned foods) alongside traditional staple foods like taro, breadfruit, and fresh seafood.",
+        "glocalized_examples": [
+          "Local preparation of instant noodles with fresh fish or taro",
+          "Feasts (kaiga) featuring both traditional and imported ingredients."
+        ],
+        "spatial_location": "Households, local markets, and community gatherings."
+      },
+      {
+        "concept": "Youth Culture and Digital Connectivity",
+        "description": "Younger generations engage with global popular culture (music, fashion, social media) while retaining strong ties to family and island traditions.",
+        "glocalized_examples": [
+          "Youth groups blending traditional dance with modern music styles and choreography",
+          "Use of social media to share traditional practices and connect with diaspora."
+        ],
+        "spatial_location": "Community centers, homes, and internet cafes."
+      }
+    ]
+  }
+}

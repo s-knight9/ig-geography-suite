@@ -1,0 +1,488 @@
+{
+  "country_metadata": {
+    "name": "Rwanda",
+    "income_classification": "Low Income",
+    "gni_per_capita_atlas": {
+      "value_usd": 930,
+      "year": 2023
+    },
+    "hdi": {
+      "score": 0.548,
+      "rank": 161,
+      "year": 2022
+    },
+    "gni_per_capita_ppp": {
+      "value_usd": 2840,
+      "year": 2022
+    },
+    "gini_coefficient": {
+      "score": 43.7,
+      "year": 2016
+    }
+  },
+  "globalisation_tab": {
+    "kof_index": {
+      "economic": {
+        "de_facto": 41.2,
+        "de_jure": 48.5
+      },
+      "social": {
+        "interpersonal": {
+          "de_facto": 50.1,
+          "de_jure": 46.8
+        },
+        "informational": {
+          "de_facto": 44.5,
+          "de_jure": 41.2
+        },
+        "cultural": {
+          "de_facto": 38.4,
+          "de_jure": 40.1
+        }
+      },
+      "political": {
+        "de_facto": 68.2,
+        "de_jure": 65.4
+      }
+    },
+    "at_kearney_framework": {
+      "status": "Localized/Developing",
+      "gci_score_or_tier": "Peripheral/Emerging"
+    },
+    "ey_index_historical": {
+      "score": 2.1,
+      "analysis": "Active political globalisation and pan-African integration compensate for structural limits of local landlocked logistics."
+    }
+  },
+  "economy_tab": {
+    "employment_structure": {
+      "primary": 62.4,
+      "secondary": 9.8,
+      "tertiary": 25.1,
+      "quaternary": 2.7
+    },
+    "trade_ledger": {
+      "main_exports": [
+        {
+          "commodity": "Gold (Processed/Raw)",
+          "pct_gdp": 32.5
+        },
+        {
+          "commodity": "Refined Petroleum",
+          "pct_gdp": 12.1
+        },
+        {
+          "commodity": "Coffee & Tea",
+          "pct_gdp": 10.4
+        },
+        {
+          "commodity": "Niobium & Tantalum",
+          "pct_gdp": 8.2
+        },
+        {
+          "commodity": "Tin Ore",
+          "pct_gdp": 4.1
+        }
+      ],
+      "main_imports": [
+        {
+          "commodity": "Gold",
+          "pct_gdp": 18.2
+        },
+        {
+          "commodity": "Refined Petroleum",
+          "pct_gdp": 12.4
+        },
+        {
+          "commodity": "Packaged Medicaments",
+          "pct_gdp": 4.8
+        },
+        {
+          "commodity": "Cement",
+          "pct_gdp": 3.1
+        },
+        {
+          "commodity": "Broadcasting Equipment",
+          "pct_gdp": 2.5
+        }
+      ],
+      "top_partners_outgoing": [
+        {
+          "partner": "United Arab Emirates",
+          "value_usd_billions": 0.61
+        },
+        {
+          "partner": "Democratic Republic of the Congo",
+          "value_usd_billions": 0.34
+        },
+        {
+          "partner": "Thailand",
+          "value_usd_billions": 0.12
+        },
+        {
+          "partner": "United States",
+          "value_usd_billions": 0.08
+        }
+      ],
+      "top_partners_incoming": [
+        {
+          "partner": "China",
+          "value_usd_billions": 0.45
+        },
+        {
+          "partner": "Tanzania",
+          "value_usd_billions": 0.38
+        },
+        {
+          "partner": "India",
+          "value_usd_billions": 0.28
+        },
+        {
+          "partner": "Kenya",
+          "value_usd_billions": 0.21
+        }
+      ]
+    }
+  },
+  "human_geography_tab": {
+    "spatial_hubs": {
+      "epz_sez_zones": [
+        {
+          "name": "Kigali Free Zone (KSEZ)",
+          "location_lat_long": "-1.97, 30.13",
+          "primary_focus": "Automated assembly, packaging, and regional high-value logistics and software development."
+        }
+      ],
+      "tourism_enclaves": [
+        {
+          "name": "Volcanoes National Park Gorilla Enclave",
+          "spatial_impact": "Highly sheltered ultra-premium wildlife conservation tourism enclave generating foreign reserves."
+        }
+      ],
+      "core_periphery_zones": {
+        "core": "Kigali Municipality and neighboring Gasabo transport axis",
+        "periphery": "Extreme density rural small-occupancy farming plots in Western and Southern provinces"
+      }
+    },
+    "political_economy": {
+      "informal_economy_pct_gdp": 38.5,
+      "eiu_governance_type": "Authoritarian",
+      "freedom_house_status": "Not Free",
+      "corruption_perceptions_index": {
+        "score": 53,
+        "rank": 49
+      }
+    }
+  },
+  "prisoners_of_geography_map": {
+    "topographic_friction_points": [
+      {
+        "feature": "Virunga Mountains & Thousand Hills",
+        "geopolitical_constraint": "Rugged terraced hills framing the rift valley, causing major overland transportation friction and soil erosion risks."
+      }
+    ],
+    "hydrological_arteries": [
+      {
+        "feature": "Kagera River System & Nyabarongo Basin",
+        "strategic_advantage": "Vital tributary of Lake Victoria, structuring eastern trade but prone to sediment load conflicts and transboundary environmental stress."
+      }
+    ],
+    "choke_points_vulnerabilities": [
+      {
+        "feature": "Landlocked East African Corridor Dependency",
+        "impact": "Wholly dependent on Northern Corridor to Mombasa or Central Corridor to Dar es Salaam, facing volatile transport costs."
+      }
+    ],
+    "buffer_zones": [
+      {
+        "region": "Lake Kivu Tectonic Border",
+        "significance": "Deep tectonic fissure and explosive limnic gas lake separating Burundi, Rwanda, and eastern DRC limits."
+      }
+    ],
+    "map_center": {
+      "lat": -1.9403,
+      "lng": 29.8739,
+      "zoom": 9
+    }
+  },
+  "population_dynamics_time_series": [
+    {
+      "year": 1970,
+      "pyramid_structure": {
+        "cohorts": [
+          {
+            "age": "0-4",
+            "male_pct": 9.4,
+            "female_pct": 9.2
+          },
+          {
+            "age": "5-14",
+            "male_pct": 14.8,
+            "female_pct": 14.4
+          },
+          {
+            "age": "15-64",
+            "male_pct": 24.8,
+            "female_pct": 23.9
+          },
+          {
+            "age": "65-79",
+            "male_pct": 1.6,
+            "female_pct": 1.7
+          },
+          {
+            "age": "80+",
+            "male_pct": 0.1,
+            "female_pct": 0.1
+          }
+        ]
+      },
+      "sub_national_density_choropleth": [
+        {
+          "admin_1_region_name": "Kigali",
+          "density_per_km2": 210
+        },
+        {
+          "admin_1_region_name": "Western",
+          "density_per_km2": 95
+        }
+      ],
+      "synoptic_analysis": "Highly expansive stage 2 agrarian pyramid with exceptionally high replacement speeds and rapid land divisions."
+    },
+    {
+      "year": 2023,
+      "pyramid_structure": {
+        "cohorts": [
+          {
+            "age": "0-4",
+            "male_pct": 6.2,
+            "female_pct": 6
+          },
+          {
+            "age": "5-14",
+            "male_pct": 11.4,
+            "female_pct": 11
+          },
+          {
+            "age": "15-64",
+            "male_pct": 31.8,
+            "female_pct": 29.8
+          },
+          {
+            "age": "65-79",
+            "male_pct": 1.7,
+            "female_pct": 1.9
+          },
+          {
+            "age": "80+",
+            "male_pct": 0.1,
+            "female_pct": 0.1
+          }
+        ]
+      },
+      "sub_national_density_choropleth": [
+        {
+          "admin_1_region_name": "Kigali",
+          "density_per_km2": 1650
+        },
+        {
+          "admin_1_region_name": "Western",
+          "density_per_km2": 480
+        }
+      ],
+      "synoptic_analysis": "Accelerating demographic transition with robust urban growth in Kigali under structural zoning policies."
+    },
+    {
+      "year": 2026,
+      "pyramid_structure": {
+        "cohorts": [
+          {
+            "age": "0-4",
+            "male_pct": 5.9,
+            "female_pct": 5.7
+          },
+          {
+            "age": "5-14",
+            "male_pct": 10.9,
+            "female_pct": 10.5
+          },
+          {
+            "age": "15-64",
+            "male_pct": 32.1,
+            "female_pct": 30.1
+          },
+          {
+            "age": "65-79",
+            "male_pct": 2.1,
+            "female_pct": 2.3
+          },
+          {
+            "age": "80+",
+            "male_pct": 0.1,
+            "female_pct": 0.3
+          }
+        ]
+      },
+      "sub_national_density_choropleth": [
+        {
+          "admin_1_region_name": "Kigali",
+          "density_per_km2": 1720
+        },
+        {
+          "admin_1_region_name": "Western",
+          "density_per_km2": 510
+        }
+      ],
+      "synoptic_analysis": "Entering active Stage 3 transition. Average fertility has steadily plummeted due to high family health access profiles."
+    },
+    {
+      "year": 2040,
+      "pyramid_structure": {
+        "cohorts": [
+          {
+            "age": "0-4",
+            "male_pct": 4.1,
+            "female_pct": 3.9
+          },
+          {
+            "age": "5-14",
+            "male_pct": 8,
+            "female_pct": 7.7
+          },
+          {
+            "age": "15-64",
+            "male_pct": 35.1,
+            "female_pct": 33.2
+          },
+          {
+            "age": "65-79",
+            "male_pct": 3.3,
+            "female_pct": 3.9
+          },
+          {
+            "age": "80+",
+            "male_pct": 0.3,
+            "female_pct": 0.5
+          }
+        ]
+      },
+      "sub_national_density_choropleth": [
+        {
+          "admin_1_region_name": "Kigali",
+          "density_per_km2": 2100
+        },
+        {
+          "admin_1_region_name": "Western",
+          "density_per_km2": 620
+        }
+      ],
+      "synoptic_analysis": "Clean, compressed family charts approaching sustainable replacement rates and increasing middle-income life spans."
+    }
+  ],
+  "culture_tab": {
+    "inglehart_welzel_coords": {
+      "x": -1.5,
+      "y": -2,
+      "cultural_zone": "Sub-Saharan Africa"
+    },
+    "largest_diasporas": [
+      {
+        "destination": "Uganda",
+        "population": "Hundreds of thousands",
+        "cultural_reach_impact": "Strong, especially in border regions, with shared cultural practices, music, and language elements. Significant historical and ongoing migration."
+      },
+      {
+        "destination": "Democratic Republic of Congo",
+        "population": "Tens of thousands to hundreds of thousands",
+        "cultural_reach_impact": "Significant, particularly in Eastern DRC, through shared Kinyarwanda speakers and historical movements, influencing local culture and vice versa."
+      },
+      {
+        "destination": "Belgium",
+        "population": "Tens of thousands",
+        "cultural_reach_impact": "Moderate, primarily influencing Rwandan-Belgian identity and cuisine in specific communities; limited broader Belgian impact but strong educational and professional ties."
+      },
+      {
+        "destination": "France",
+        "population": "Thousands",
+        "cultural_reach_impact": "Niche, primarily among intellectual and professional communities, influencing French perceptions of Rwanda and contributing to cultural exchange."
+      }
+    ],
+    "cultural_exports_and_landscape": {
+      "soft_power_exports": [
+        {
+          "medium": "Music",
+          "examples": [
+            "Traditional drumming (Ikinimba)",
+            "Contemporary Rwandan pop (Afrobeat, R&B)",
+            "Gospel music"
+          ],
+          "global_reach_score": 35
+        },
+        {
+          "medium": "Arts & Crafts",
+          "examples": [
+            "Imigongo art (traditional cow dung paintings)",
+            "Agaseke (traditional basketry)",
+            "Pottery"
+          ],
+          "global_reach_score": 25
+        },
+        {
+          "medium": "Cuisine",
+          "examples": [
+            "Brochettes (skewered meats)",
+            "Isombe (cassava leaves)",
+            "Ubugali (cassava/maize porridge)",
+            "Agatogo (stews)"
+          ],
+          "global_reach_score": 20
+        },
+        {
+          "medium": "Cinema/Storytelling",
+          "examples": [
+            "Kinyarwanda films focusing on history and resilience",
+            "Documentaries about Rwandan culture and development"
+          ],
+          "global_reach_score": 15
+        }
+      ],
+      "spatial_landscape": {
+        "enclaves": [
+          "Rwandan community centers in diaspora cities (e.g., Brussels, Paris, Kampala)",
+          "Specific neighborhoods with Rwandan businesses and cultural hubs in Kigali"
+        ],
+        "architectural_footprint": "Modern Rwandan architecture blending traditional motifs (e.g., Uruganda building styles) with contemporary designs, often incorporating sustainability; significant memorial architecture.",
+        "description": "Rwanda's landscape reflects a blend of traditional African settlement patterns, post-colonial urban planning, and modern development, with meticulously maintained public spaces and significant memorial sites commemorating the genocide. Urban areas like Kigali show rapid modernization."
+      }
+    },
+    "hybridity_and_glocalization": [
+      {
+        "concept": "Kinyarwanda Pop & Gospel Music",
+        "description": "The fusion of global music genres like Afrobeat, R&B, and Gospel with Kinyarwanda language, local rhythms, and cultural themes, creating a distinct Rwandan sound.",
+        "glocalized_examples": [
+          "Artists like Meddy, The Ben, and Israel Mbonyi gaining regional and diaspora popularity with their genre-blending tracks.",
+          "Music festivals featuring both traditional and contemporary Rwandan artists."
+        ],
+        "spatial_location": "Urban youth culture in Kigali, regional radio airwaves, online streaming platforms, diaspora events."
+      },
+      {
+        "concept": "Contemporary Rwandan Fashion",
+        "description": "A blend of traditional 'kitenge' fabrics, patterns, and Rwandan design aesthetics with modern Western fashion trends, creating unique and culturally resonant clothing.",
+        "glocalized_examples": [
+          "Rwandan designers showcasing collections at local and regional fashion weeks, incorporating traditional prints into contemporary clothing lines.",
+          "Boutiques in Kigali offering culturally inspired garments for diverse markets."
+        ],
+        "spatial_location": "Boutiques and fashion houses in Kigali, fashion events, online stores catering to both local and international clientele."
+      },
+      {
+        "concept": "Rwandan Specialty Coffee Culture",
+        "description": "The adoption of global specialty coffee shop aesthetics and preparation methods, with a strong emphasis on showcasing and exporting Rwanda's high-quality, locally grown coffee beans.",
+        "glocalized_examples": [
+          "Specialty coffee shops like Question Coffee or Bourbon Coffee in Kigali, serving espresso-based drinks made from single-origin Rwandan beans, attracting both locals and expatriates.",
+          "Rwanda's presence in international coffee expos."
+        ],
+        "spatial_location": "Upscale urban areas in Kigali, tourist hubs, international coffee markets."
+      }
+    ]
+  }
+}

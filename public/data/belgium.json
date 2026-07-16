@@ -1,0 +1,507 @@
+{
+  "country_metadata": {
+    "name": "Belgium",
+    "income_classification": "High Income",
+    "gni_per_capita_atlas": {
+      "value_usd": 53000,
+      "year": 2023
+    },
+    "hdi": {
+      "score": 0.942,
+      "rank": 16,
+      "year": 2022
+    },
+    "gni_per_capita_ppp": {
+      "value_usd": 63440,
+      "year": 2022
+    },
+    "gini_coefficient": {
+      "score": 25.6,
+      "year": 2020
+    }
+  },
+  "globalisation_tab": {
+    "kof_index": {
+      "economic": {
+        "de_facto": 90.1,
+        "de_jure": 88.5
+      },
+      "social": {
+        "interpersonal": {
+          "de_facto": 91.2,
+          "de_jure": 89.4
+        },
+        "informational": {
+          "de_facto": 93.8,
+          "de_jure": 91.2
+        },
+        "cultural": {
+          "de_facto": 85.5,
+          "de_jure": 87.2
+        }
+      },
+      "political": {
+        "de_facto": 94.8,
+        "de_jure": 96.2
+      }
+    },
+    "at_kearney_framework": {
+      "status": "Vastly Integrated",
+      "gci_score_or_tier": "Alpha"
+    },
+    "ey_index_historical": {
+      "score": 4.4,
+      "analysis": "Super-hub indexing due to hosting of central EU governing bodies and NATO, generating intense socio-political globalisation channels."
+    }
+  },
+  "economy_tab": {
+    "employment_structure": {
+      "primary": 1.2,
+      "secondary": 18.5,
+      "tertiary": 68.3,
+      "quaternary": 12
+    },
+    "trade_ledger": {
+      "main_exports": [
+        {
+          "commodity": "Refined Petroleum",
+          "pct_gdp": 12.1
+        },
+        {
+          "commodity": "Packaged Medicaments",
+          "pct_gdp": 10.4
+        },
+        {
+          "commodity": "Cars & Vehicles",
+          "pct_gdp": 8.2
+        },
+        {
+          "commodity": "Vaccines & Antisera",
+          "pct_gdp": 5.4
+        },
+        {
+          "commodity": "Diamonds",
+          "pct_gdp": 4.1
+        }
+      ],
+      "main_imports": [
+        {
+          "commodity": "Packaged Medicaments",
+          "pct_gdp": 11.2
+        },
+        {
+          "commodity": "Cars",
+          "pct_gdp": 9.5
+        },
+        {
+          "commodity": "Refined Petroleum",
+          "pct_gdp": 8.4
+        },
+        {
+          "commodity": "Crude Petroleum",
+          "pct_gdp": 6.8
+        },
+        {
+          "commodity": "Vaccines & Antisera",
+          "pct_gdp": 4.2
+        }
+      ],
+      "top_partners_outgoing": [
+        {
+          "partner": "Germany",
+          "value_usd_billions": 72.4
+        },
+        {
+          "partner": "France",
+          "value_usd_billions": 61.2
+        },
+        {
+          "partner": "Netherlands",
+          "value_usd_billions": 58.1
+        },
+        {
+          "partner": "United Kingdom",
+          "value_usd_billions": 30.5
+        },
+        {
+          "partner": "United States",
+          "value_usd_billions": 28.5
+        }
+      ],
+      "top_partners_incoming": [
+        {
+          "partner": "Netherlands",
+          "value_usd_billions": 82.5
+        },
+        {
+          "partner": "Germany",
+          "value_usd_billions": 58.4
+        },
+        {
+          "partner": "France",
+          "value_usd_billions": 44.1
+        },
+        {
+          "partner": "China",
+          "value_usd_billions": 31.2
+        },
+        {
+          "partner": "United States",
+          "value_usd_billions": 30.8
+        }
+      ]
+    }
+  },
+  "human_geography_tab": {
+    "spatial_hubs": {
+      "epz_sez_zones": [
+        {
+          "name": "Port of Antwerp Chemical Hub",
+          "location_lat_long": "51.24, 4.34",
+          "primary_focus": "Europe's largest petrochemical cluster, integrated directly with multinational refinery networks."
+        },
+        {
+          "name": "Flanders Biotech Valley",
+          "location_lat_long": "51.05, 3.72",
+          "primary_focus": "R&D cluster centering Ghent University, specialized in plant genetics and bio-manufacturing."
+        }
+      ],
+      "tourism_enclaves": [
+        {
+          "name": "Bruges Historic Core",
+          "spatial_impact": "Conserved medieval tourist enclave structured almost entirely for high-budget travel."
+        }
+      ],
+      "core_periphery_zones": {
+        "core": "Flemish Diamond (Brussels, Ghent, Antwerp, Leuven)",
+        "periphery": "Walloon southern valleys and post-industrial coal borderlands of Mons-Charleroi"
+      }
+    },
+    "political_economy": {
+      "informal_economy_pct_gdp": 14.2,
+      "eiu_governance_type": "Full Democracy",
+      "freedom_house_status": "Free",
+      "corruption_perceptions_index": {
+        "score": 73,
+        "rank": 16
+      }
+    }
+  },
+  "prisoners_of_geography_map": {
+    "topographic_friction_points": [
+      {
+        "feature": "Ardennes Forested Uplands",
+        "geopolitical_constraint": "Hilly and forested upland plateau in the south, presenting localized transport barriers but historically acting as a defensive corridor."
+      }
+    ],
+    "hydrological_arteries": [
+      {
+        "feature": "Scheldt & Meuse Rivers",
+        "strategic_advantage": "Highly developed commercial rivers linking industrial centers directly to global maritime systems like the Port of Antwerp."
+      }
+    ],
+    "choke_points_vulnerabilities": [
+      {
+        "feature": "Scheldt Estuary Navigation",
+        "impact": "Antwerp's access to the North Sea runs through Dutch territorial waters, introducing strategic and environmental coordination issues."
+      }
+    ],
+    "buffer_zones": [
+      {
+        "region": "Flanders Flatlands Plains",
+        "significance": "Extremely flat northern plain connecting Belgium to France and Germany, historically a battleground due to lack of physical barriers."
+      }
+    ],
+    "map_center": {
+      "lat": 50.5039,
+      "lng": 4.4699,
+      "zoom": 8
+    }
+  },
+  "population_dynamics_time_series": [
+    {
+      "year": 1970,
+      "pyramid_structure": {
+        "cohorts": [
+          {
+            "age": "0-4",
+            "male_pct": 3.8,
+            "female_pct": 3.6
+          },
+          {
+            "age": "5-14",
+            "male_pct": 7.4,
+            "female_pct": 7.1
+          },
+          {
+            "age": "15-64",
+            "male_pct": 32.5,
+            "female_pct": 30.9
+          },
+          {
+            "age": "65-79",
+            "male_pct": 6.1,
+            "female_pct": 6.8
+          },
+          {
+            "age": "80+",
+            "male_pct": 0.8,
+            "female_pct": 1
+          }
+        ]
+      },
+      "sub_national_density_choropleth": [
+        {
+          "admin_1_region_name": "Flanders",
+          "density_per_km2": 320
+        },
+        {
+          "admin_1_region_name": "Wallonia",
+          "density_per_km2": 180
+        }
+      ],
+      "synoptic_analysis": "Post-war baby boom cohort consolidation with high employment in heavy steel and regional textile sectors."
+    },
+    {
+      "year": 2023,
+      "pyramid_structure": {
+        "cohorts": [
+          {
+            "age": "0-4",
+            "male_pct": 2.7,
+            "female_pct": 2.5
+          },
+          {
+            "age": "5-14",
+            "male_pct": 5.8,
+            "female_pct": 5.5
+          },
+          {
+            "age": "15-64",
+            "male_pct": 32.4,
+            "female_pct": 31
+          },
+          {
+            "age": "65-79",
+            "male_pct": 7.8,
+            "female_pct": 8.4
+          },
+          {
+            "age": "80+",
+            "male_pct": 2.5,
+            "female_pct": 3.4
+          }
+        ]
+      },
+      "sub_national_density_choropleth": [
+        {
+          "admin_1_region_name": "Flanders",
+          "density_per_km2": 490
+        },
+        {
+          "admin_1_region_name": "Wallonia",
+          "density_per_km2": 215
+        }
+      ],
+      "synoptic_analysis": "Stage 4-5 structures characterized by slow growth, high urban concentrations in Brussels, and immigration support."
+    },
+    {
+      "year": 2026,
+      "pyramid_structure": {
+        "cohorts": [
+          {
+            "age": "0-4",
+            "male_pct": 2.6,
+            "female_pct": 2.4
+          },
+          {
+            "age": "5-14",
+            "male_pct": 5.5,
+            "female_pct": 5.2
+          },
+          {
+            "age": "15-64",
+            "male_pct": 32.1,
+            "female_pct": 30.4
+          },
+          {
+            "age": "65-79",
+            "male_pct": 8.4,
+            "female_pct": 9
+          },
+          {
+            "age": "80+",
+            "male_pct": 2.7,
+            "female_pct": 3.7
+          }
+        ]
+      },
+      "sub_national_density_choropleth": [
+        {
+          "admin_1_region_name": "Flanders",
+          "density_per_km2": 498
+        },
+        {
+          "admin_1_region_name": "Wallonia",
+          "density_per_km2": 218
+        }
+      ],
+      "synoptic_analysis": "Low fertility patterns balanced by positive net EU and global migration hubs in regional headquarters."
+    },
+    {
+      "year": 2040,
+      "pyramid_structure": {
+        "cohorts": [
+          {
+            "age": "0-4",
+            "male_pct": 2.2,
+            "female_pct": 2
+          },
+          {
+            "age": "5-14",
+            "male_pct": 4.8,
+            "female_pct": 4.5
+          },
+          {
+            "age": "15-64",
+            "male_pct": 30.1,
+            "female_pct": 28.5
+          },
+          {
+            "age": "65-79",
+            "male_pct": 10.2,
+            "female_pct": 11.1
+          },
+          {
+            "age": "80+",
+            "male_pct": 3.6,
+            "female_pct": 5
+          }
+        ]
+      },
+      "sub_national_density_choropleth": [
+        {
+          "admin_1_region_name": "Flanders",
+          "density_per_km2": 520
+        },
+        {
+          "admin_1_region_name": "Wallonia",
+          "density_per_km2": 225
+        }
+      ],
+      "synoptic_analysis": "Accelerated aging process requiring massive investments in geriatric health care services and fiscal policy adjustments."
+    }
+  ],
+  "culture_tab": {
+    "inglehart_welzel_coords": {
+      "x": 1.7,
+      "y": 1.9,
+      "cultural_zone": "Protestant Europe"
+    },
+    "largest_diasporas": [
+      {
+        "destination": "France",
+        "population": "Approx. 250,000 - 300,000",
+        "cultural_reach_impact": "Strong linguistic and historical ties, significant cultural exchange in border regions, notable presence in arts and culinary scenes."
+      },
+      {
+        "destination": "Netherlands",
+        "population": "Approx. 150,000 - 200,000",
+        "cultural_reach_impact": "Shared language (Dutch in Flanders) fosters close cultural ties, mutual influence in literature, art, and media, particularly in border areas."
+      },
+      {
+        "destination": "United States",
+        "population": "Approx. 50,000 - 100,000",
+        "cultural_reach_impact": "Historical migration waves have established communities that maintain heritage through associations, culinary traditions (waffles, fries), and cultural events."
+      },
+      {
+        "destination": "Canada",
+        "population": "Approx. 20,000 - 50,000",
+        "cultural_reach_impact": "Smaller but active communities, especially in Ontario and Quebec, preserving Belgian identity through cultural groups and culinary contributions."
+      }
+    ],
+    "cultural_exports_and_landscape": {
+      "soft_power_exports": [
+        {
+          "medium": "Cuisine",
+          "examples": [
+            "Belgian chocolate (Godiva, Neuhaus)",
+            "Belgian waffles",
+            "Frites (Belgian fries)",
+            "Belgian Beer (Trappist, Lambic, Abbey Ales)"
+          ],
+          "global_reach_score": 90
+        },
+        {
+          "medium": "Comics (Bande Dessinée)",
+          "examples": [
+            "Tintin",
+            "The Smurfs",
+            "Lucky Luke",
+            "Spirou & Fantasio"
+          ],
+          "global_reach_score": 85
+        },
+        {
+          "medium": "Art & Fashion",
+          "examples": [
+            "Surrealism (René Magritte)",
+            "Flemish Primitives (Jan van Eyck)",
+            "Antwerp Fashion Academy (Dries Van Noten)"
+          ],
+          "global_reach_score": 75
+        },
+        {
+          "medium": "Music",
+          "examples": [
+            "Stromae",
+            "Technotronic",
+            "Tomorrowland Festival"
+          ],
+          "global_reach_score": 60
+        }
+      ],
+      "spatial_landscape": {
+        "enclaves": [
+          "Belgian Quarters in certain French cities",
+          "Flemish communities in the Netherlands",
+          "Belgian clubs/associations in US/Canada"
+        ],
+        "architectural_footprint": "Art Nouveau (Victor Horta), Gothic cathedrals and guild halls, Flemish Renaissance architecture, industrial heritage sites.",
+        "description": "Belgium's urban environments are characterized by a rich blend of historical Northern European architectural styles, including stunning Gothic and Renaissance civic buildings, notably exemplified by the Grand Place in Brussels. The Art Nouveau movement left a unique, elegant imprint, especially in Brussels. Abroad, the architectural footprint is less about grand structures and more about the presence of distinctive culinary establishments and cultural centers."
+      }
+    },
+    "hybridity_and_glocalization": [
+      {
+        "concept": "Culinary Glocalization: Belgian Fries (Frites)",
+        "description": "While a global fast-food item, the Belgian 'frite' represents a deeply local culinary institution with specific preparation methods (double-frying), potato varieties, and a culture of consumption (frietkots, diverse sauces) that has been both imitated and adapted worldwide.",
+        "glocalized_examples": [
+          "Global fast-food chains serving 'French fries'",
+          "Specialty fry shops replicating authentic Belgian experience in major cities",
+          "Poutine in Canada (influenced by Belgian fries)"
+        ],
+        "spatial_location": "Frietkots throughout Belgium, fast-food restaurants globally, specialty fry establishments in urban centers."
+      },
+      {
+        "concept": "European Identity & Multilingual Hybridity",
+        "description": "As the de facto capital of the EU, Brussels embodies a unique form of glocalization where a multitude of European and global cultures coexist and intermingle, influencing language, cuisine, and social norms. Belgium's own trilingualism (Dutch, French, German) inherently fosters a culture of blending.",
+        "glocalized_examples": [
+          "'Eurolish' (a blend of English and other European languages) spoken in EU institutions",
+          "Fusion cuisine in Brussels' international districts",
+          "International schools and cultural centers promoting diverse identities"
+        ],
+        "spatial_location": "European Quarter in Brussels, international communities across Belgium."
+      },
+      {
+        "concept": "Comic Strip Adaptations & Global Reach",
+        "description": "Belgian comic strips like Tintin and The Smurfs have achieved immense global popularity, leading to various adaptations (animated series, films, merchandise) in different cultures, often with subtle glocalized interpretations to resonate with local audiences while retaining their core Belgian identity.",
+        "glocalized_examples": [
+          "The Smurfs animated series produced by Hanna-Barbera (US adaptation)",
+          "Tintin merchandise and themed attractions in various countries",
+          "Local language translations of comics introducing cultural nuances"
+        ],
+        "spatial_location": "Comic strip museums in Brussels, global media markets, bookstores and toy stores worldwide."
+      }
+    ]
+  }
+}
