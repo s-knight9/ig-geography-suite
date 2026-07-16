@@ -102,13 +102,25 @@ const CAL_SWATCHES = [
   { hex: "#06b6d4", name: "Teal"                    },
 ];
 
-function StudentCalendar() {
+function StudentCalendar({ userEmail }: { userEmail?: string }) {
   const today = new Date();
   const [viewYear,    setViewYear]    = useState(today.getFullYear());
   const [viewMonth,   setViewMonth]   = useState(today.getMonth());
+  
+  const storageKey = userEmail ? `student_calendar_events_${userEmail}` : "student_calendar_events";
+
   const [events,      setEvents]      = useState<CalendarEvent[]>(() => {
     try {
-      const saved = localStorage.getItem("student_calendar_events");
+      let saved = localStorage.getItem(storageKey);
+      
+      // Fallback/migration from old generic key if new one doesn't exist
+      if (!saved && userEmail) {
+        saved = localStorage.getItem("student_calendar_events");
+        if (saved) {
+          localStorage.setItem(storageKey, saved);
+        }
+      }
+
       if (saved) return JSON.parse(saved);
     } catch (e) {
       console.error("Failed to load events", e);
@@ -117,8 +129,8 @@ function StudentCalendar() {
   });
 
   React.useEffect(() => {
-    localStorage.setItem("student_calendar_events", JSON.stringify(events));
-  }, [events]);
+    localStorage.setItem(storageKey, JSON.stringify(events));
+  }, [events, storageKey]);
 
   const [addMode,     setAddMode]     = useState<"deadline" | "window" | null>(null);
   const [selDate,     setSelDate]     = useState<string | null>(null);
@@ -1227,7 +1239,7 @@ export default function App() {
         {/* ── Dashboard Widgets ── */}
         <section className="grid lg:grid-cols-3 gap-6 mb-8">
           <div className="glass-panel rounded-2xl p-6 border border-slate-200 dark:border-slate-800 shadow-sm bg-white dark:bg-slate-900/50">
-            <StudentCalendar />
+            <StudentCalendar userEmail={user?.email} />
           </div>
           <div className="glass-panel rounded-2xl p-6 border border-slate-200 dark:border-slate-800 shadow-sm bg-white dark:bg-slate-900/50">
             <ExamCountdowns />
