@@ -308,9 +308,11 @@ export default function App({
       // Register student in the lobby
       const uid = user?.id || user?.uid || "student_" + Math.random().toString(36).substr(2, 9);
       const studentName = user?.preferredName ? `${user.preferredName} ${user.surname || ''}` : user?.name || activeUserEmail || "Anonymous Student";
+      const studentEmail = user?.email || activeUserEmail || "no-email@example.com";
       
       set(ref(db, `quizzes/${code}/students/${uid}`), {
         name: studentName,
+        email: studentEmail,
         status: "waiting",
         timestamp: new Date().toISOString()
       }).catch(e => console.error("Failed to join lobby", e));
