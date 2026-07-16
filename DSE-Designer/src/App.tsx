@@ -100,11 +100,15 @@ export default function App({
 
   const handleSaveToVault = () => {
     if (!result) return;
+    
+    // Remove the map from the archived version
+    const contentWithoutMap = result.replace(/```json-map[\s\S]*?```/g, '').trim();
+
     saveVaultReport(selectedFolder, {
       id: crypto.randomUUID(),
       title: dseTitle || `DSE: ${selectedCode || 'Custom Profile'}`,
       tags: ['DSE', selectedCode || 'Custom'],
-      content: result,
+      content: contentWithoutMap,
       date: new Date().toISOString()
     });
     setHasSaved(true);
