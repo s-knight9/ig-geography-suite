@@ -528,11 +528,11 @@ export const RisksResilienceTab: React.FC<Props> = ({ data }) => {
           </div>
 
           {/* RIGHT COLUMN: RESILIENCE, PROJECTS, & EXOTIC SOLUTIONS */}
-          <div className="bg-white border border-emerald-100 rounded-2xl p-6 shadow-sm flex flex-col">
+          <div className="bg-white border border-blue-100 rounded-2xl p-6 shadow-sm flex flex-col">
             <div className="flex items-center justify-between mb-6 border-b border-slate-50 pb-4">
               <div className="flex items-center gap-2">
-                <div className="w-8 h-8 rounded-full bg-emerald-50 flex items-center justify-center shrink-0">
-                  <HeartHandshake className="w-4 h-4 text-emerald-600" />
+                <div className="w-8 h-8 rounded-full bg-blue-50 flex items-center justify-center shrink-0">
+                  <HeartHandshake className="w-4 h-4 text-blue-600" />
                 </div>
                 <div>
                   <h3 className="text-xs font-black text-slate-800 uppercase tracking-widest leading-none">Resilience Profile</h3>
@@ -544,7 +544,7 @@ export const RisksResilienceTab: React.FC<Props> = ({ data }) => {
               <div className="flex bg-slate-100 rounded-lg p-0.5 shadow-xs border border-slate-200/50 print-hidden">
                 <button 
                   onClick={() => setActiveResilienceView('current')}
-                  className={`px-3 py-1.5 text-[10px] font-black uppercase rounded-md transition-colors ${activeResilienceView === 'current' ? 'bg-white text-emerald-700 shadow-sm' : 'text-slate-500 hover:text-slate-705'}`}
+                  className={`px-3 py-1.5 text-[10px] font-black uppercase rounded-md transition-colors ${activeResilienceView === 'current' ? 'bg-white text-blue-700 shadow-sm' : 'text-slate-500 hover:text-slate-705'}`}
                 >
                   Active Adaptation
                 </button>
@@ -565,10 +565,10 @@ export const RisksResilienceTab: React.FC<Props> = ({ data }) => {
                   <div className="border-b border-slate-105 pb-4">
                     <div className="flex justify-between items-end mb-1.5">
                       <span className="text-[11px] font-black text-slate-500 uppercase tracking-wider">Institutional Enforcement Strength</span>
-                      <span className="font-black text-emerald-600 text-sm">{(profile.institutionalStrength ?? 0).toFixed(1)}/10</span>
+                      <span className="font-black text-blue-600 text-sm">{(profile.institutionalStrength ?? 0).toFixed(1)}/10</span>
                     </div>
                     <div className="w-full h-2 bg-slate-100 rounded-full overflow-hidden">
-                      <div className="h-full bg-gradient-to-r from-emerald-400 to-emerald-600 transition-all duration-550" style={{ width: `${((profile.institutionalStrength ?? 0) / 10) * 100}%` }} />
+                      <div className="h-full bg-gradient-to-r from-blue-400 to-blue-600 transition-all duration-550" style={{ width: `${((profile.institutionalStrength ?? 0) / 10) * 100}%` }} />
                     </div>
                     <p className="text-[9px] text-slate-400 font-semibold mt-1 leading-relaxed">
                       Efficacy of construction code inspection, seawall enforcement budgets, and regional early evacuation drills.
@@ -583,9 +583,9 @@ export const RisksResilienceTab: React.FC<Props> = ({ data }) => {
                     </h4>
                     <div className="space-y-3.5">
                       {(profile.adaptationProjects || []).map((proj, idx) => (
-                        <div key={idx} className="bg-emerald-50/20 p-3.5 rounded-xl border border-emerald-100/50 shadow-xs">
+                        <div key={idx} className="bg-blue-50/20 p-3.5 rounded-xl border border-blue-100/50 shadow-xs">
                           <div className="flex items-center gap-2 mb-1">
-                            <span className="w-2 h-2 rounded-full bg-emerald-500 shrink-0" />
+                            <span className="w-2 h-2 rounded-full bg-blue-500 shrink-0" />
                             <span className="font-black text-xs text-slate-800">{proj.title}</span>
                           </div>
                           <p className="text-[11px] text-slate-650 leading-relaxed font-semibold pl-4">

@@ -503,9 +503,9 @@ export function PhysicalLayerTab({
           <button 
             id="btn-topographical"
             onClick={() => setViewMode('topographical')}
-            className={`px-4 py-2 text-xs sm:text-xs md:text-sm font-semibold rounded-lg transition-colors flex items-center gap-2 ${viewMode === 'topographical' ? 'bg-white text-emerald-800 shadow-sm border border-slate-200' : 'text-slate-500 hover:text-slate-705'}`}
+            className={`px-4 py-2 text-xs sm:text-xs md:text-sm font-semibold rounded-lg transition-colors flex items-center gap-2 ${viewMode === 'topographical' ? 'bg-white text-blue-800 shadow-sm border border-slate-200' : 'text-slate-500 hover:text-slate-705'}`}
           >
-            <Mountain className="w-4 h-4 text-emerald-600" /> Topographical View
+            <Mountain className="w-4 h-4 text-blue-600" /> Topographical View
           </button>
           <button 
             id="btn-tectonic"
@@ -538,7 +538,7 @@ export function PhysicalLayerTab({
           {viewMode === 'topographical' && (
              <div className="h-[430px] w-full bg-slate-105 z-10 relative">
               <div className="absolute top-4 right-4 z-[400] bg-white/90 backdrop-blur-sm px-3 py-1.5 rounded-md border border-slate-200 shadow-sm flex items-center gap-2 font-bold text-sm text-slate-800">
-                <MapIcon className="w-4 h-4 text-emerald-600" />
+                <MapIcon className="w-4 h-4 text-blue-600" />
                 Topographical Map
               </div>
               {mapData ? (
@@ -793,7 +793,7 @@ export function PhysicalLayerTab({
                                {/* Aquifers & Alternative Sources Subsection */}
                                <div className="border-t border-slate-200/80 pt-3">
                                  <h4 className="text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-2 flex items-center gap-1.5">
-                                   <span className="text-emerald-500">■</span> Groundwater & Aquifer Reservoirs
+                                   <span className="text-blue-500">■</span> Groundwater & Aquifer Reservoirs
                                  </h4>
                                  <div className="space-y-2.5">
                                    {(() => {
@@ -1194,10 +1194,10 @@ export function PhysicalLayerTab({
             color="red"
           />
           <PhysicalQuadrant 
-            icon={<ShieldAlert className="w-5 h-5 text-emerald-700" />}
+            icon={<ShieldAlert className="w-5 h-5 text-blue-700" />}
             title="Geopolitical Buffer Zones"
             items={data.buffer_zones.map(i => ({ name: i.region, desc: i.significance }))}
-            color="emerald"
+            color="blue"
           />
         </div>
       )}
@@ -1318,7 +1318,7 @@ function PhysicalQuadrant({ icon, title, items, color }: { icon: React.ReactNode
     stone: "bg-stone-50 border-stone-200 text-stone-800",
     sky: "bg-sky-50 border-sky-200 text-sky-800",
     red: "bg-red-50 border-red-200 text-red-800",
-    emerald: "bg-emerald-50 border-emerald-200 text-emerald-800",
+    blue: "bg-blue-50 border-blue-200 text-blue-800",
   };
   
   const schemeClass = colorSchemes[color] || colorSchemes.stone;

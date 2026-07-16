@@ -335,7 +335,7 @@ export function PopulationTab({
       case 1: return { label: "Stage 1: High Fluctuating", desc: "High birth/death rates, stable population", color: "text-rose-600 bg-rose-50 border-rose-100" };
       case 2: return { label: "Stage 2: Early Expanding", desc: "Death rate drops rapidly, rapid growth", color: "text-amber-600 bg-amber-50 border-amber-100" };
       case 3: return { label: "Stage 3: Late Expanding", desc: "Birth rate drops rapidly, growth slowing", color: "text-yellow-600 bg-yellow-50 border-yellow-105" };
-      case 4: return { label: "Stage 4: Low Fluctuating", desc: "Low birth/death rates, high stability", color: "text-emerald-600 bg-emerald-50 border-emerald-110" };
+      case 4: return { label: "Stage 4: Low Fluctuating", desc: "Low birth/death rates, high stability", color: "text-blue-600 bg-blue-50 border-blue-110" };
       case 5: return { label: "Stage 5: Declining/Post-Ind.", desc: "Death rate exceeds birth, contraction", color: "text-indigo-600 bg-indigo-50 border-indigo-110" };
       default: return { label: `Stage ${stats.dtmStage}`, desc: "Transitional phase", color: "text-slate-600 bg-slate-50 border-slate-110" };
     }
@@ -348,10 +348,10 @@ export function PopulationTab({
       <div className="flex flex-col gap-3">
         <div className="flex justify-between items-center">
           <span className="text-[12px] font-black uppercase tracking-widest text-slate-400 flex items-center gap-1.5">
-            <Activity className="w-3.5 h-3.5 text-[#00ba70]" />
+            <Activity className="w-3.5 h-3.5 text-[#2563eb]" />
             Core Demographic Indicators & Key Rates ({currentYear})
           </span>
-          <span className="text-[12px] font-extrabold text-[#00ba70] bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-100">
+          <span className="text-[12px] font-extrabold text-[#2563eb] bg-blue-50 px-2 py-0.5 rounded-full border border-blue-100">
             Real-time Interpolated Estimates
           </span>
         </div>
@@ -360,10 +360,10 @@ export function PopulationTab({
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-3.5">
           
           {/* 1. Birth Rate */}
-          <div className="bg-white border border-slate-200 rounded-xl p-3 flex flex-col justify-between shadow-xs hover:border-[#00ba70] transition-colors relative group">
+          <div className="bg-white border border-slate-200 rounded-xl p-3 flex flex-col justify-between shadow-xs hover:border-[#2563eb] transition-colors relative group">
             <div className="flex items-start justify-between">
               <span className="text-[12px] font-bold text-slate-400 uppercase tracking-tight leading-none">Birth Rate</span>
-              <Baby className="w-4 h-4 text-emerald-500 shrink-0" />
+              <Baby className="w-4 h-4 text-blue-500 shrink-0" />
             </div>
             <div className="mt-3">
               <div className="text-xl font-black text-slate-800 tracking-tight flex items-baseline gap-0.5 flex-wrap">
@@ -452,18 +452,18 @@ export function PopulationTab({
           </div>
 
           {/* 6. Life Expectancy */}
-          <div className={`p-3 flex flex-col justify-between shadow-xs transition-all duration-300 relative group rounded-xl border ${highlightHdi ? 'bg-emerald-100/70 border-emerald-300 shadow-sm' : 'bg-white border-slate-200 hover:border-[#00ba70]'}`}>
+          <div className={`p-3 flex flex-col justify-between shadow-xs transition-all duration-300 relative group rounded-xl border ${highlightHdi ? 'bg-blue-100/70 border-blue-300 shadow-sm' : 'bg-white border-slate-200 hover:border-[#2563eb]'}`}>
             <div className="flex items-start justify-between">
-              <span className={`text-[12px] font-bold uppercase tracking-tight leading-none ${highlightHdi ? 'text-emerald-700' : 'text-slate-400'}`}>Life Expectancy</span>
-              <Activity className={`w-4 h-4 shrink-0 transition-colors ${highlightHdi ? 'text-emerald-600' : 'text-[#00ba70]'}`} />
+              <span className={`text-[12px] font-bold uppercase tracking-tight leading-none ${highlightHdi ? 'text-blue-700' : 'text-slate-400'}`}>Life Expectancy</span>
+              <Activity className={`w-4 h-4 shrink-0 transition-colors ${highlightHdi ? 'text-blue-600' : 'text-[#2563eb]'}`} />
             </div>
             <div className="mt-3">
-              <div className={`text-xl font-black tracking-tight flex items-baseline gap-0.5 flex-wrap ${highlightHdi ? 'text-emerald-950 font-black' : 'text-slate-800'}`}>
+              <div className={`text-xl font-black tracking-tight flex items-baseline gap-0.5 flex-wrap ${highlightHdi ? 'text-blue-950 font-black' : 'text-slate-800'}`}>
                 {stats.lifeExpectancy.toFixed(1)}
-                <span className={`text-xs font-semibold ${highlightHdi ? 'text-emerald-600' : 'text-slate-400'}`}>yrs</span>
+                <span className={`text-xs font-semibold ${highlightHdi ? 'text-blue-600' : 'text-slate-400'}`}>yrs</span>
                 {renderDelta(stats.lifeExpectancy, compareStats?.lifeExpectancy, ' yrs')}
               </div>
-              <p className={`text-[9px] mt-1 leading-normal font-semibold ${highlightHdi ? 'text-emerald-700/80 font-semibold' : 'text-slate-400 font-medium'}`}>
+              <p className={`text-[9px] mt-1 leading-normal font-semibold ${highlightHdi ? 'text-blue-700/80 font-semibold' : 'text-slate-400 font-medium'}`}>
                 Average years expected at birth.
               </p>
             </div>
@@ -488,21 +488,21 @@ export function PopulationTab({
           </div>
 
           {/* 8. Literacy & Education Profile */}
-          <div className={`p-3 flex flex-col justify-between shadow-xs transition-all duration-300 relative group col-span-1 rounded-xl border ${highlightHdi ? 'bg-emerald-100/70 border-emerald-300 shadow-sm' : 'bg-white border-slate-200 hover:border-violet-400'}`}>
+          <div className={`p-3 flex flex-col justify-between shadow-xs transition-all duration-300 relative group col-span-1 rounded-xl border ${highlightHdi ? 'bg-blue-100/70 border-blue-300 shadow-sm' : 'bg-white border-slate-200 hover:border-violet-400'}`}>
             <div className="flex items-start justify-between">
-              <span className={`text-[12px] font-bold uppercase tracking-tight leading-none ${highlightHdi ? 'text-emerald-700' : 'text-slate-400'}`}>Education Profile</span>
-              <GraduationCap className={`w-4 h-4 shrink-0 transition-colors ${highlightHdi ? 'text-emerald-600' : 'text-violet-500'}`} />
+              <span className={`text-[12px] font-bold uppercase tracking-tight leading-none ${highlightHdi ? 'text-blue-700' : 'text-slate-400'}`}>Education Profile</span>
+              <GraduationCap className={`w-4 h-4 shrink-0 transition-colors ${highlightHdi ? 'text-blue-600' : 'text-violet-500'}`} />
             </div>
             <div className="mt-3">
-              <div className={`text-xl font-black tracking-tight ${highlightHdi ? 'text-emerald-950 font-black' : 'text-slate-800'} flex items-baseline flex-wrap`}>
+              <div className={`text-xl font-black tracking-tight ${highlightHdi ? 'text-blue-950 font-black' : 'text-slate-800'} flex items-baseline flex-wrap`}>
                 {eduStats.literacyRate.toFixed(1)}%
-                <span className={`text-[10px] font-bold uppercase ml-1.5 font-sans ${highlightHdi ? 'text-emerald-600' : 'text-slate-400'}`}>Literacy</span>
+                <span className={`text-[10px] font-bold uppercase ml-1.5 font-sans ${highlightHdi ? 'text-blue-600' : 'text-slate-400'}`}>Literacy</span>
                 {renderDelta(eduStats.literacyRate, compareEduStats?.literacyRate, '%')}
               </div>
-              <div className={`flex flex-col gap-1 mt-1 border-t pt-1 ${highlightHdi ? 'border-emerald-200' : 'border-slate-100'}`}>
+              <div className={`flex flex-col gap-1 mt-1 border-t pt-1 ${highlightHdi ? 'border-blue-200' : 'border-slate-100'}`}>
                 <div className="flex items-center gap-1.5 flex-wrap">
-                  <span className={`text-[9px] font-bold uppercase tracking-tight leading-none ${highlightHdi ? 'text-emerald-700 font-bold' : 'text-slate-500'}`}>Expected Schooling:</span>
-                  <span className={`text-[10px] font-extrabold px-1.5 py-0.2 rounded-md border shrink-0 transition-colors ${highlightHdi ? 'text-emerald-800 bg-emerald-50 border-emerald-200' : 'text-violet-600 bg-violet-50 border-violet-100'}`}>{eduStats.expectedSchooling} yrs</span>
+                  <span className={`text-[9px] font-bold uppercase tracking-tight leading-none ${highlightHdi ? 'text-blue-700 font-bold' : 'text-slate-500'}`}>Expected Schooling:</span>
+                  <span className={`text-[10px] font-extrabold px-1.5 py-0.2 rounded-md border shrink-0 transition-colors ${highlightHdi ? 'text-blue-800 bg-blue-50 border-blue-200' : 'text-violet-600 bg-violet-50 border-violet-100'}`}>{eduStats.expectedSchooling} yrs</span>
                 </div>
                 {renderDelta(eduStats.expectedSchooling, compareEduStats?.expectedSchooling, ' yrs')}
               </div>
@@ -564,10 +564,10 @@ export function PopulationTab({
           </div>
 
           {/* 12. Net migration */}
-          <div className="bg-white border border-slate-200 rounded-xl p-3 flex flex-col justify-between shadow-xs hover:border-emerald-400 transition-colors relative group">
+          <div className="bg-white border border-slate-200 rounded-xl p-3 flex flex-col justify-between shadow-xs hover:border-blue-400 transition-colors relative group">
             <div className="flex items-start justify-between">
               <span className="text-[12px] font-bold text-slate-400 uppercase tracking-tight leading-none">Net Migration</span>
-              <Shuffle className="w-4 h-4 text-emerald-400 shrink-0" />
+              <Shuffle className="w-4 h-4 text-blue-400 shrink-0" />
             </div>
             <div className="mt-3">
               <div className="text-xl font-black text-slate-800 tracking-tight flex items-baseline gap-0.5 flex-wrap">
@@ -585,7 +585,7 @@ export function PopulationTab({
       </div>
       
       {/* Cultural Demographics Section (Side-by-Side) */}
-      <div className="p-4 bg-white border border-slate-200 rounded-xl flex flex-col justify-between shadow-xs hover:border-emerald-400 transition-colors">
+      <div className="p-4 bg-white border border-slate-200 rounded-xl flex flex-col justify-between shadow-xs hover:border-blue-400 transition-colors">
         <div>
           <div className="flex items-center gap-1.5 text-[12px] font-black text-slate-400 uppercase tracking-widest font-sans mb-4">
             <span className="text-xs">📊</span>
@@ -742,9 +742,9 @@ export function PopulationTab({
                 step="1"
                 value={currentYear}
                 onChange={(e) => setSliderYear(parseInt(e.target.value))}
-                className="flex-1 min-w-0 h-1.5 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-emerald-500"
+                className="flex-1 min-w-0 h-1.5 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-blue-500"
               />
-              <span className="text-sm font-mono font-bold text-emerald-600 w-10 text-right shrink-0">{currentYear}</span>
+              <span className="text-sm font-mono font-bold text-blue-600 w-10 text-right shrink-0">{currentYear}</span>
             </div>
           </div>
           
@@ -760,7 +760,7 @@ export function PopulationTab({
                     type="button"
                     onClick={() => setShowDependencyRatio(!showDependencyRatio)}
                     className={`relative inline-flex h-5 w-9 shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none ${
-                      showDependencyRatio ? 'bg-[#00ba70]' : 'bg-slate-200'
+                      showDependencyRatio ? 'bg-[#2563eb]' : 'bg-slate-200'
                     }`}
                   >
                     <span
@@ -779,7 +779,7 @@ export function PopulationTab({
                   }
                   target="_blank" 
                   rel="noreferrer" 
-                  className="text-[10px] font-bold tracking-wider px-2 py-1 bg-emerald-50 text-emerald-600 rounded hover:bg-emerald-100 transition-colors shrink-0"
+                  className="text-[10px] font-bold tracking-wider px-2 py-1 bg-blue-50 text-blue-600 rounded hover:bg-blue-100 transition-colors shrink-0"
                   title={`View ${countryName} on PopulationPyramid.net`}
                 >
                   View Base Data
@@ -787,7 +787,7 @@ export function PopulationTab({
               </div>
             </div>
             <div className="flex justify-between text-[10px] font-bold uppercase tracking-wider text-slate-500 pt-2 border-b border-slate-100 pb-2">
-              <span className="text-emerald-600">Male (%)</span>
+              <span className="text-blue-600">Male (%)</span>
               <span className="text-pink-600">Female (%)</span>
             </div>
           </CardHeader>
@@ -810,7 +810,7 @@ export function PopulationTab({
                 <div className="space-y-1.5 pt-3 border-t border-slate-100 text-left max-w-xl mx-auto w-full">
                   <div className="flex justify-between text-[10px] font-black uppercase tracking-wider">
                     <span className="text-rose-500">Young ({dependencyAnalysis.youngPct}%)</span>
-                    <span className="text-emerald-500">Working Active ({dependencyAnalysis.activePct}%)</span>
+                    <span className="text-blue-500">Working Active ({dependencyAnalysis.activePct}%)</span>
                     <span className="text-rose-550">Elderly ({dependencyAnalysis.elderlyPct}%)</span>
                   </div>
                   <div className="w-full h-3.5 bg-slate-100 rounded-lg flex overflow-hidden border border-slate-200">
@@ -823,7 +823,7 @@ export function PopulationTab({
                     </div>
                     <div 
                       style={{ width: `${dependencyAnalysis.activePct}%` }} 
-                      className="h-full bg-emerald-400/90 transition-all duration-300 flex items-center justify-center text-[10px] font-black text-white border-l border-r border-white/40"
+                      className="h-full bg-blue-400/90 transition-all duration-300 flex items-center justify-center text-[10px] font-black text-white border-l border-r border-white/40"
                       title={`Active: ${dependencyAnalysis.activePct}%`}
                     >
                       {dependencyAnalysis.activePct >= 10 && `${dependencyAnalysis.activePct}%`}
@@ -953,7 +953,7 @@ export function PopulationTab({
                         x={xCoord + 50}
                         y="18"
                         textAnchor="middle"
-                        className={`text-[8.5px] font-black tracking-widest ${isCurrent ? 'fill-emerald-600 font-extrabold' : 'fill-slate-400'}`}
+                        className={`text-[8.5px] font-black tracking-widest ${isCurrent ? 'fill-blue-600 font-extrabold' : 'fill-slate-400'}`}
                       >
                         STAGE {stageNumber}
                       </text>
@@ -1027,7 +1027,7 @@ export function PopulationTab({
                   return (
                     <g className="transition-all duration-500 ease-out">
                       {/* Outer pulse circle animation */}
-                      <circle cx={targetPin.x} cy={targetPin.y} r="10" fill="#00ba70" fillOpacity="0.32" className="animate-ping" />
+                      <circle cx={targetPin.x} cy={targetPin.y} r="10" fill="#2563eb" fillOpacity="0.32" className="animate-ping" />
                       
                       {/* Pin center point */}
                       <circle cx={targetPin.x} cy={targetPin.y} r="5" fill="#10b981" stroke="#ffffff" strokeWidth="1.5" />
@@ -1038,7 +1038,7 @@ export function PopulationTab({
                         <text x="65" y="11" textAnchor="middle" className="text-[8px] font-black fill-white truncate">
                           {countryName} ({currentYear})
                         </text>
-                        <text x="65" y="21" textAnchor="middle" className="text-[7.2px] font-extrabold fill-emerald-400 uppercase tracking-widest">
+                        <text x="65" y="21" textAnchor="middle" className="text-[7.2px] font-extrabold fill-blue-400 uppercase tracking-widest">
                           {dtmDetails.label}
                         </text>
                         <text x="65" y="29" textAnchor="middle" className="text-[6.5px] font-semibold fill-slate-400">
@@ -1055,8 +1055,8 @@ export function PopulationTab({
 
             {/* Key DTM descriptions panel */}
             <div className="mt-3 border-t border-slate-100 pt-2.5">
-              <div className="text-[10px] bg-emerald-50 border border-emerald-100/60 rounded-lg p-2 text-emerald-950 font-medium leading-relaxed">
-                <span className="font-black text-emerald-700 uppercase">Syllabus Overview:</span> {dtmDetails.desc}. Birth and death rate discrepancies represent corresponding stage-related expansions or contractions.
+              <div className="text-[10px] bg-blue-50 border border-blue-100/60 rounded-lg p-2 text-blue-950 font-medium leading-relaxed">
+                <span className="font-black text-blue-700 uppercase">Syllabus Overview:</span> {dtmDetails.desc}. Birth and death rate discrepancies represent corresponding stage-related expansions or contractions.
               </div>
             </div>
           </CardContent>

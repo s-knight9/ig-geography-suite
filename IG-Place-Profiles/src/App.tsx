@@ -455,7 +455,7 @@ export default function App({
   if (!data) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-slate-50 text-slate-800">
-        <Loader2 className="w-8 h-8 animate-spin text-emerald-600" />
+        <Loader2 className="w-8 h-8 animate-spin text-blue-600" />
       </div>
     );
   }
@@ -463,7 +463,7 @@ export default function App({
   const activeCountryName = availableCountries.find(c => c.id === selectedCountry)?.name || data.country_metadata.name;
 
   return (
-    <div className="min-h-screen bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 font-sans selection:bg-emerald-100 selection:text-emerald-900 transition-colors duration-300">
+    <div className="min-h-screen bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 font-sans selection:bg-blue-100 selection:text-blue-900 transition-colors duration-300">
       <header className="bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 shadow-sm flex-none transition-colors duration-300">
         <div className="max-w-full mx-auto px-6 py-4 flex items-center justify-between sticky top-0 z-50 transition-colors duration-300">
           <div className="flex items-center gap-3">
@@ -503,12 +503,12 @@ export default function App({
 
             {/* User Profile Info Badge */}
             <div className="hidden md:flex items-center gap-2.5 py-1.5 px-3 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl shadow-xs shrink-0">
-              <div className="bg-emerald-100 dark:bg-emerald-500/10 text-emerald-600 p-1 rounded-full">
+              <div className="bg-blue-100 dark:bg-blue-500/10 text-blue-600 p-1 rounded-full">
                 <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" /><circle cx="12" cy="7" r="4" /></svg>
               </div>
               <div className="flex flex-col text-left">
                 <span className="text-[10px] font-bold text-slate-805 dark:text-slate-200 leading-tight">{activeUserEmail || "sknight@nlcsjeju.kr"}</span>
-                <span className="text-[8px] font-bold text-emerald-600 uppercase tracking-tight leading-none mt-0.5">
+                <span className="text-[8px] font-bold text-blue-600 uppercase tracking-tight leading-none mt-0.5">
                   {role === "student" ? `Student: ${getStudentName(activeUserEmail || "")}` : `Teacher: ${activeTeacherCode || "SKN"}`}
                 </span>
               </div>
@@ -556,7 +556,7 @@ export default function App({
                 className={`
                   flex items-center px-4 py-3 text-xs font-bold uppercase tracking-widest border-b-[3px] transition-colors whitespace-nowrap cursor-pointer
                   ${activeTab === tab.id
-                    ? "border-emerald-500 text-emerald-600 dark:text-emerald-400 bg-emerald-50/50 dark:bg-emerald-950/20"
+                    ? "border-blue-500 text-blue-600 dark:text-blue-400 bg-blue-50/50 dark:bg-blue-950/20"
                     : "border-transparent text-slate-400 dark:text-slate-500 hover:text-slate-700 dark:hover:text-slate-350 hover:border-slate-300 dark:hover:border-slate-700"}
                 `}
               >
@@ -632,7 +632,7 @@ export default function App({
                   <select
                     value={selectedCountry}
                     onChange={(e) => handlePrimaryChange(e.target.value)}
-                    className="w-full bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 text-slate-800 dark:text-slate-100 text-sm font-semibold rounded-xl px-3.5 py-2.5 hover:bg-slate-100 dark:hover:bg-slate-900 focus:ring-2 focus:ring-[#00ba70] outline-none cursor-pointer transition-all"
+                    className="w-full bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 text-slate-800 dark:text-slate-100 text-sm font-semibold rounded-xl px-3.5 py-2.5 hover:bg-slate-100 dark:hover:bg-slate-900 focus:ring-2 focus:ring-[#2563eb] outline-none cursor-pointer transition-all"
                   >
                     {availableCountries.map(c => (
                       <option key={c.id} value={c.id}>{c.name}</option>
@@ -887,7 +887,7 @@ export default function App({
                 <select
                   value={selectedCountry}
                   onChange={(e) => handlePrimaryChange(e.target.value)}
-                  className="w-full bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 text-slate-800 dark:text-slate-100 text-sm font-semibold rounded-lg px-3.5 py-2.5 hover:bg-slate-100 dark:hover:bg-slate-900 focus:ring-2 focus:ring-[#00ba70] focus:border-[#00ba70] outline-none cursor-pointer transition-all"
+                  className="w-full bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 text-slate-800 dark:text-slate-100 text-sm font-semibold rounded-lg px-3.5 py-2.5 hover:bg-slate-100 dark:hover:bg-slate-900 focus:ring-2 focus:ring-[#2563eb] focus:border-[#2563eb] outline-none cursor-pointer transition-all"
                 >
                   {availableCountries.map(c => (
                     <option key={c.id} value={c.id}>{c.name}</option>
@@ -910,17 +910,17 @@ export default function App({
                     <span>Geographic Indices</span>
                   </div>
                   <div className="flex items-center gap-1">
-                    <span className={`text-[8px] font-black uppercase tracking-wider ${highlightHdi ? 'text-[#00ba70]' : 'text-slate-400'}`}>Highlight HDI 3D Dimensions</span>
+                    <span className={`text-[8px] font-black uppercase tracking-wider ${highlightHdi ? 'text-[#2563eb]' : 'text-slate-400'}`}>Highlight HDI 3D Dimensions</span>
                   </div>
                 </div>
 
-                <div className={`flex justify-between items-center px-3 py-2 rounded-lg border transition-all duration-300 ${highlightHdi ? 'bg-emerald-50 dark:bg-emerald-950/30 border-emerald-200 dark:border-emerald-800/80' : 'bg-slate-50 dark:bg-slate-950 border-slate-100 dark:border-slate-800'}`}>
+                <div className={`flex justify-between items-center px-3 py-2 rounded-lg border transition-all duration-300 ${highlightHdi ? 'bg-blue-50 dark:bg-blue-950/30 border-blue-200 dark:border-blue-800/80' : 'bg-slate-50 dark:bg-slate-950 border-slate-100 dark:border-slate-800'}`}>
                   <div className="flex items-center gap-2">
                     <span className="text-slate-400 font-medium">HDI Score:</span>
                     <button
                       type="button"
                       onClick={() => setHighlightHdi(!highlightHdi)}
-                      className={`relative inline-flex h-4 w-8 shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none ${highlightHdi ? 'bg-[#00ba70]' : 'bg-slate-200'}`}
+                      className={`relative inline-flex h-4 w-8 shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none ${highlightHdi ? 'bg-[#2563eb]' : 'bg-slate-200'}`}
                       aria-label="Toggle HDI parts highlight"
                     >
                       <span
@@ -938,9 +938,9 @@ export default function App({
                   <span className="text-slate-800 dark:text-slate-200 font-extrabold">#{data.country_metadata.hdi.rank}</span>
                 </div>
 
-                <div className={`flex justify-between items-center px-3 py-2 rounded-lg border transition-all duration-300 ${highlightHdi ? 'bg-emerald-100/70 dark:bg-emerald-950/40 border-emerald-300 dark:border-emerald-800 shadow-xs' : 'bg-slate-50 dark:bg-slate-950 border-slate-100 dark:border-slate-800'}`}>
-                  <span className={`${highlightHdi ? 'text-emerald-700 dark:text-emerald-450 font-bold' : 'text-slate-400'} font-medium`}>GNI per Capita:</span>
-                  <span className={`${highlightHdi ? 'text-emerald-900 dark:text-emerald-200 font-black' : 'text-slate-800 dark:text-slate-250'} font-extrabold`}>${data.country_metadata.gni_per_capita_atlas.value_usd.toLocaleString()}</span>
+                <div className={`flex justify-between items-center px-3 py-2 rounded-lg border transition-all duration-300 ${highlightHdi ? 'bg-blue-100/70 dark:bg-blue-950/40 border-blue-300 dark:border-blue-800 shadow-xs' : 'bg-slate-50 dark:bg-slate-950 border-slate-100 dark:border-slate-800'}`}>
+                  <span className={`${highlightHdi ? 'text-blue-700 dark:text-blue-450 font-bold' : 'text-slate-400'} font-medium`}>GNI per Capita:</span>
+                  <span className={`${highlightHdi ? 'text-blue-900 dark:text-blue-200 font-black' : 'text-slate-800 dark:text-slate-250'} font-extrabold`}>${data.country_metadata.gni_per_capita_atlas.value_usd.toLocaleString()}</span>
                 </div>
 
                 {data.country_metadata.gini_coefficient && (
@@ -1016,7 +1016,7 @@ export default function App({
             <div className="flex-1 min-w-0 w-full relative">
               {loading && (
                 <div className="absolute inset-0 bg-slate-50/80 z-10 flex items-start mt-20 justify-center">
-                  <div className="bg-white p-4 rounded-full shadow-lg border border-slate-200 text-emerald-600">
+                  <div className="bg-white p-4 rounded-full shadow-lg border border-slate-200 text-blue-600">
                     <Loader2 className="w-6 h-6 animate-spin" />
                   </div>
                 </div>
@@ -1055,7 +1055,7 @@ export default function App({
                 </div>
               </div>
               <p className="text-sm text-slate-600 dark:text-slate-355 leading-relaxed mb-6">
-                You have been challenged to a Best of <span className="font-extrabold text-emerald-500">{incomingChallenge.matchFormat}</span> rounds Top Trumps duel! Accept to enter the Play Room arena immediately.
+                You have been challenged to a Best of <span className="font-extrabold text-blue-500">{incomingChallenge.matchFormat}</span> rounds Top Trumps duel! Accept to enter the Play Room arena immediately.
               </p>
               <div className="flex items-center justify-end gap-3">
                 <button
@@ -1066,7 +1066,7 @@ export default function App({
                 </button>
                 <button
                   onClick={handleAcceptChallenge}
-                  className="px-5 py-2.5 bg-emerald-500 hover:bg-emerald-600 text-white text-xs font-black uppercase tracking-wider rounded-xl shadow-md shadow-emerald-500/15 transition-all cursor-pointer"
+                  className="px-5 py-2.5 bg-blue-500 hover:bg-blue-600 text-white text-xs font-black uppercase tracking-wider rounded-xl shadow-md shadow-blue-500/15 transition-all cursor-pointer"
                 >
                   Accept & Enter
                 </button>

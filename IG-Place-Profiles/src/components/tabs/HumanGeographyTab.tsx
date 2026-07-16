@@ -182,7 +182,7 @@ export function HumanGeographyTab({
         <div className="lg:col-span-12 flex flex-col gap-4">
           <div className="bg-white rounded-xl shadow-sm border border-slate-200 p-5 h-full flex flex-col">
             <div className="flex items-center gap-2 mb-4 pb-2 border-b border-slate-100">
-              <Layers className="text-emerald-600 w-5 h-5 flex-shrink-0" />
+              <Layers className="text-blue-600 w-5 h-5 flex-shrink-0" />
               <h2 className="text-sm font-bold uppercase tracking-wider text-slate-700" id="pop-density-header">
                 POPULATION DENSITY AND DISTRIBUTION SPATIAL PATTERN ANALYSIS
               </h2>
@@ -238,7 +238,7 @@ export function HumanGeographyTab({
               
               {/* EPZs Details */}
               <div className="bg-slate-50 border border-slate-100 rounded-xl p-4 flex flex-col">
-                <h4 className="text-xs font-black uppercase text-emerald-700 tracking-wider flex items-center gap-1.5 mb-3">
+                <h4 className="text-xs font-black uppercase text-blue-700 tracking-wider flex items-center gap-1.5 mb-3">
                   <Briefcase className="w-3.5 h-3.5" /> Industrial Zones & Free Ports
                 </h4>
                 {epzs.length > 0 ? (

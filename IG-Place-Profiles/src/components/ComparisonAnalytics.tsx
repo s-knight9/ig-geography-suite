@@ -68,7 +68,7 @@ export const ComparisonAnalytics: React.FC<Props> = ({ countryA, countryB, narra
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
         <div className="bg-white p-4 rounded-xl border border-indigo-100">
           <div className="text-xs font-bold text-slate-500 uppercase mb-1">GNI Per Capita Gap</div>
-          <div className={`text-2xl font-black ${devGapUsd > 0 ? "text-emerald-600" : "text-rose-600"}`}>
+          <div className={`text-2xl font-black ${devGapUsd > 0 ? "text-blue-600" : "text-rose-600"}`}>
             {devGapUsd > 0 ? "+" : ""}{devGapUsd.toLocaleString()} USD
           </div>
           <div className="text-xs text-slate-400 mt-1">Difference in current GNI</div>

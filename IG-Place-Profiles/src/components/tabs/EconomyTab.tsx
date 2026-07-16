@@ -74,7 +74,7 @@ const tncProfiles: Record<string, TncProfile[]> = {
       name: "Square Pharma",
       domain: "squarepharma.com.bd",
       logoText: "SQ",
-      logoBg: "bg-emerald-600 text-white",
+      logoBg: "bg-blue-600 text-white",
       sector: "Pharmaceuticals",
       regions: ["East Africa", "Southeast Asia", "South Asia"],
       partners: ["Kenya", "Myanmar", "Nepal", "Yemen"],
@@ -97,7 +97,7 @@ const tncProfiles: Record<string, TncProfile[]> = {
       name: "NVIDIA",
       domain: "nvidia.com",
       logoText: "NVDA",
-      logoBg: "bg-emerald-600 text-white",
+      logoBg: "bg-blue-600 text-white",
       sector: "Semiconductors & AI",
       regions: ["East Asia", "Western Europe", "North America"],
       partners: ["Taiwan", "South Korea", "Germany", "UK"],
@@ -229,7 +229,7 @@ const tncProfiles: Record<string, TncProfile[]> = {
       name: "Sime Darby",
       domain: "simedarby.com",
       logoText: "SDB",
-      logoBg: "bg-emerald-800 text-white",
+      logoBg: "bg-blue-800 text-white",
       sector: "Palm Oil & Heavy Equipment",
       regions: ["Asia-Pacific", "Western Europe"],
       partners: ["Australia", "China", "Singapore", "United Kingdom"],
@@ -273,7 +273,7 @@ const tncProfiles: Record<string, TncProfile[]> = {
       name: "KGHM",
       domain: "kghm.pl",
       logoText: "KGH",
-      logoBg: "bg-emerald-950 text-white",
+      logoBg: "bg-blue-950 text-white",
       sector: "Copper & Silver Metallurgy",
       regions: ["South America", "North America"],
       partners: ["Chile", "United States", "Canada"],
@@ -317,7 +317,7 @@ const tncProfiles: Record<string, TncProfile[]> = {
       name: "BP p.l.c.",
       domain: "bp.com",
       logoText: "BP",
-      logoBg: "bg-yellow-500 text-emerald-950",
+      logoBg: "bg-yellow-500 text-blue-950",
       sector: "Petroleum & Renewables",
       regions: ["North America", "Middle East", "South America"],
       partners: ["United States", "Azerbaijan", "Brazil", "Iraq"],
@@ -417,7 +417,7 @@ const tncProfiles: Record<string, TncProfile[]> = {
       name: "Heineken",
       domain: "heineken.com",
       logoText: "HEI",
-      logoBg: "bg-emerald-700 text-white",
+      logoBg: "bg-blue-700 text-white",
       sector: "Beverages & Brewing",
       regions: ["Global", "Europe", "North America", "Latin America", "Africa"],
       partners: ["United States", "Mexico", "Nigeria", "United Kingdom"],
@@ -471,7 +471,7 @@ const tncProfiles: Record<string, TncProfile[]> = {
       name: "Shopify",
       domain: "shopify.com",
       logoText: "SHOP",
-      logoBg: "bg-emerald-600 text-white",
+      logoBg: "bg-blue-600 text-white",
       sector: "E-Commerce & Cloud Tech",
       regions: ["Global", "North America", "Western Europe", "Asia-Pacific"],
       partners: ["United States", "United Kingdom", "Australia", "Germany"],
@@ -535,7 +535,7 @@ const tncProfiles: Record<string, TncProfile[]> = {
       name: "Gécamines",
       domain: "gecamines.cd",
       logoText: "GEC",
-      logoBg: "bg-emerald-900 text-yellow-300",
+      logoBg: "bg-blue-900 text-yellow-300",
       sector: "State Cobalt & Copper Mining",
       regions: ["East Asia", "Western Europe"],
       partners: ["China", "Switzerland"],
@@ -593,7 +593,7 @@ const tncProfiles: Record<string, TncProfile[]> = {
       name: "Saudi Aramco",
       domain: "aramco.com",
       logoText: "ARM",
-      logoBg: "bg-emerald-700 text-white",
+      logoBg: "bg-blue-700 text-white",
       sector: "Oil, Gas & Chemicals",
       regions: ["Global", "North America", "Europe", "East Asia", "Asia-Pacific"],
       partners: ["United States", "China", "Japan", "South Korea", "India"],
@@ -625,7 +625,7 @@ const tncProfiles: Record<string, TncProfile[]> = {
       name: "Sudapet",
       domain: "sudapet.sd",
       logoText: "SUD",
-      logoBg: "bg-emerald-800 text-white",
+      logoBg: "bg-blue-800 text-white",
       sector: "Oil Extraction & Pipeline Tech",
       regions: ["East Asia", "Middle East"],
       partners: ["China", "Malaysia"],
@@ -747,7 +747,7 @@ const tncProfiles: Record<string, TncProfile[]> = {
       name: "Kerry Group",
       domain: "kerrygroup.com",
       logoText: "KER",
-      logoBg: "bg-emerald-600 text-white",
+      logoBg: "bg-blue-600 text-white",
       sector: "Food Ingredients & Flavors",
       regions: ["Global", "North America", "Europe", "Asia-Pacific"],
       partners: ["United States", "United Kingdom", "China", "Brazil"],
@@ -909,7 +909,7 @@ const tncProfiles: Record<string, TncProfile[]> = {
       name: "Rwanda Mountain Tea",
       domain: "rwandamountaintea.com",
       logoText: "RMT",
-      logoBg: "bg-emerald-800 text-white",
+      logoBg: "bg-blue-800 text-white",
       sector: "Agriculture & Commodity Trade",
       regions: ["Global", "Europe", "Middle East", "South Asia"],
       partners: ["United Kingdom", "Pakistan", "Egypt", "United Arab Emirates"],
@@ -1022,13 +1022,13 @@ export function EconomyTab({ data, countryId, currentYear, informalEconomyPctGdp
   const chartData = groupServices
     ? [
         { name: "Primary", value: emp.primary, color: "#d97706" }, // Amber/Earth
-        { name: "Secondary", value: emp.secondary, color: "#34d399" }, // Light emerald
-        { name: "Tertiary/Quaternary", value: emp.tertiary + emp.quaternary, color: "#064e3b" }, // Deep emerald
+        { name: "Secondary", value: emp.secondary, color: "#34d399" }, // Light blue
+        { name: "Tertiary/Quaternary", value: emp.tertiary + emp.quaternary, color: "#064e3b" }, // Deep blue
       ]
     : [
         { name: "Primary", value: emp.primary, color: "#d97706" },
         { name: "Secondary", value: emp.secondary, color: "#34d399" },
-        { name: "Tertiary", value: emp.tertiary, color: "#10b981" }, // Medium emerald
+        { name: "Tertiary", value: emp.tertiary, color: "#10b981" }, // Medium blue
         { name: "Quaternary", value: emp.quaternary, color: "#064e3b" },
       ];
 
@@ -1045,10 +1045,10 @@ export function EconomyTab({ data, countryId, currentYear, informalEconomyPctGdp
                   type="checkbox" 
                   checked={groupServices} 
                   onChange={() => setGroupServices(!groupServices)}
-                  className="toggle-checkbox absolute block w-5 h-5 rounded-full bg-white border-4 appearance-none cursor-pointer border-slate-300 checked:right-0 checked:border-emerald-600 z-10 transition-transform duration-200 ease-in-out"
+                  className="toggle-checkbox absolute block w-5 h-5 rounded-full bg-white border-4 appearance-none cursor-pointer border-slate-300 checked:right-0 checked:border-blue-600 z-10 transition-transform duration-200 ease-in-out"
                   style={{ right: groupServices ? '0' : '1.25rem', top: '0.25rem' }}
                 />
-                <div className={`toggle-label block overflow-hidden h-5 rounded-full bg-slate-300 cursor-pointer ${groupServices ? 'bg-emerald-200' : ''}`}></div>
+                <div className={`toggle-label block overflow-hidden h-5 rounded-full bg-slate-300 cursor-pointer ${groupServices ? 'bg-blue-200' : ''}`}></div>
               </div>
             </label>
           </CardHeader>
@@ -1085,7 +1085,7 @@ export function EconomyTab({ data, countryId, currentYear, informalEconomyPctGdp
                 <Briefcase className="w-5 h-5 text-indigo-500" />
                 Labor Market Profile ({currentYear})
               </CardTitle>
-              <Badge variant="outline" className="text-[#00ba70] border-emerald-100 bg-emerald-50">
+              <Badge variant="outline" className="text-[#2563eb] border-blue-100 bg-blue-50">
                 Interpolated Estimate
               </Badge>
             </div>
@@ -1097,7 +1097,7 @@ export function EconomyTab({ data, countryId, currentYear, informalEconomyPctGdp
             <div className="grid grid-cols-2 gap-4">
               <div className="bg-slate-50 border border-slate-100 p-4 rounded-xl flex flex-col justify-between">
                 <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Employment Rate</span>
-                <div className="text-3xl font-black text-[#00ba70] mt-1.5">
+                <div className="text-3xl font-black text-[#2563eb] mt-1.5">
                   {employmentRate}%
                 </div>
                 <span className="text-[10px] text-slate-400 mt-2 font-medium">Of active labor force.</span>
@@ -1116,13 +1116,13 @@ export function EconomyTab({ data, countryId, currentYear, informalEconomyPctGdp
             <div className="bg-indigo-50/30 border border-indigo-100/50 rounded-xl p-4 space-y-2.5">
               <div className="flex justify-between items-center text-xs">
                 <span className="text-[10px] font-bold text-slate-500 uppercase tracking-wider font-sans">Informal Economy Scale</span>
-                <span className="font-extrabold text-[#00ba70] bg-emerald-50 px-2.5 py-0.5 rounded border border-emerald-100">
+                <span className="font-extrabold text-[#2563eb] bg-blue-50 px-2.5 py-0.5 rounded border border-blue-100">
                   {informalEconomyPctGdp}% GDP
                 </span>
               </div>
               <div className="w-full bg-slate-200/50 h-1.5 rounded-full overflow-hidden">
                 <div 
-                  className="h-full bg-emerald-500 rounded-full transition-all duration-500"
+                  className="h-full bg-blue-500 rounded-full transition-all duration-500"
                   style={{ width: `${informalEconomyPctGdp}%` }}
                 ></div>
               </div>
@@ -1196,11 +1196,11 @@ export function EconomyTab({ data, countryId, currentYear, informalEconomyPctGdp
         </Card>
 
         {/* Global TNC Profiles & Export Footprints */}
-        <Card className="hover:border-emerald-400/50 transition-all duration-300">
+        <Card className="hover:border-blue-400/50 transition-all duration-300">
           <CardHeader className="pb-3 border-b border-slate-100">
             <div className="flex items-center justify-between">
               <CardTitle className="text-sm font-black text-slate-800 tracking-tight flex items-center gap-2">
-                <Building2 className="w-4 h-4 text-emerald-600" />
+                <Building2 className="w-4 h-4 text-blue-600" />
                 Key Exporting TNCs & Global Footprints
               </CardTitle>
               <Badge variant="outline" className="text-xs bg-slate-50 font-bold border-slate-200">
@@ -1264,7 +1264,7 @@ export function EconomyTab({ data, countryId, currentYear, informalEconomyPctGdp
                           <div className="flex flex-wrap items-center gap-1">
                             <span className="text-[9px] font-black text-slate-400 uppercase tracking-tight mr-1">Hubs:</span>
                             {tnc.partners.map((pt, pIdx) => (
-                              <Badge key={pIdx} variant="outline" className="text-[9px] font-bold px-1.5 py-0 border-emerald-100 bg-emerald-50/70 text-emerald-700">
+                              <Badge key={pIdx} variant="outline" className="text-[9px] font-bold px-1.5 py-0 border-blue-100 bg-blue-50/70 text-blue-700">
                                 {pt}
                               </Badge>
                             ))}
@@ -1287,7 +1287,7 @@ export function EconomyTab({ data, countryId, currentYear, informalEconomyPctGdp
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
               <div>
                 <CardTitle className="text-lg font-black text-slate-800 tracking-tight flex items-center gap-2">
-                  <Scale className="w-5 h-5 text-emerald-600 animate-pulse" />
+                  <Scale className="w-5 h-5 text-blue-600 animate-pulse" />
                   Macroeconomic Indicators: Trade Alignments & Financial Dependencies
                 </CardTitle>
                 <p className="text-xs font-semibold text-slate-400 mt-0.5">
@@ -1344,13 +1344,13 @@ export function EconomyTab({ data, countryId, currentYear, informalEconomyPctGdp
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                   
                   {/* Section 1: Trade Alignment */}
-                  <div className="border border-slate-200/80 rounded-2xl p-5 bg-white shadow-xs hover:border-emerald-300 hover:shadow-md transition-all duration-300">
+                  <div className="border border-slate-200/80 rounded-2xl p-5 bg-white shadow-xs hover:border-blue-300 hover:shadow-md transition-all duration-300">
                     <div className="flex items-center gap-2 mb-4 border-b border-slate-100 pb-3">
-                      <div className="bg-emerald-50 text-emerald-600 p-2 rounded-xl border border-emerald-100 shrink-0">
+                      <div className="bg-blue-50 text-blue-600 p-2 rounded-xl border border-blue-100 shrink-0">
                         <CheckCircle2 className="w-5 h-5" />
                       </div>
                       <div>
-                        <h4 className="text-[12px] font-black uppercase text-emerald-500 tracking-widest leading-none">Alignment</h4>
+                        <h4 className="text-[12px] font-black uppercase text-blue-500 tracking-widest leading-none">Alignment</h4>
                         <h3 className="text-xs font-bold text-slate-800 mt-1">Trade Integration</h3>
                       </div>
                     </div>

@@ -328,7 +328,7 @@ export const CultureTab: React.FC<CultureTabProps> = ({ data }) => {
                    <div key={idx} className="bg-slate-800/50 rounded-lg p-4 border border-slate-700">
                       <div className="flex items-end justify-between mb-2 pb-2 border-b border-slate-700/50">
                         <span className="text-sm font-bold text-white">{diaspora.destination}</span>
-                        <span className="text-xs font-mono text-emerald-400 bg-slate-900 px-2 py-1 rounded">{diaspora.population}</span>
+                        <span className="text-xs font-mono text-blue-400 bg-slate-900 px-2 py-1 rounded">{diaspora.population}</span>
                       </div>
                       <p className="text-xs text-slate-300 leading-relaxed">
                         {diaspora.cultural_reach_impact}

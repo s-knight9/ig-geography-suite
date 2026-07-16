@@ -113,7 +113,7 @@ export function FlagFlipPlayer({ countryId, countryName, flagCode }: FlagFlipPla
             {/* Overlay Gradient & Interactive Hint */}
             <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end justify-center pb-3">
               <div className="bg-slate-950/90 text-white border border-slate-800 text-[10px] font-black uppercase tracking-wider px-3 py-1.5 rounded-full flex items-center gap-1.5 shadow-lg backdrop-blur-xs pointer-events-none">
-                <Video className="w-3 h-3 text-[#00ba70] animate-pulse" />
+                <Video className="w-3 h-3 text-[#2563eb] animate-pulse" />
                 Double-Click to Flip for Video
               </div>
             </div>
@@ -124,7 +124,7 @@ export function FlagFlipPlayer({ countryId, countryName, flagCode }: FlagFlipPla
                 e.stopPropagation();
                 setIsFlipped(true);
               }}
-              className="absolute right-3.5 bottom-3.5 self-end p-2 bg-slate-950/95 hover:bg-slate-900 text-[#00ba70] border border-slate-800 rounded-full shadow-lg h-9 w-9 flex items-center justify-center transition-all duration-300 hover:scale-105 active:scale-95 group/btn"
+              className="absolute right-3.5 bottom-3.5 self-end p-2 bg-slate-950/95 hover:bg-slate-900 text-[#2563eb] border border-slate-800 rounded-full shadow-lg h-9 w-9 flex items-center justify-center transition-all duration-300 hover:scale-105 active:scale-95 group/btn"
               title="Flip for Geography Now video"
               aria-label="Flip for video"
             >
@@ -168,7 +168,7 @@ export function FlagFlipPlayer({ countryId, countryName, flagCode }: FlagFlipPla
               className="absolute left-3 bottom-3 p-1.5 bg-slate-950/90 hover:bg-slate-900 text-white border border-slate-800 rounded-lg text-[9px] font-black uppercase tracking-wider flex items-center gap-1 shadow-lg backdrop-blur-xs cursor-pointer transition-all active:scale-95"
               aria-label="Flip back to flag"
             >
-              <RotateCcw className="w-3 h-3 text-[#00ba70]" />
+              <RotateCcw className="w-3 h-3 text-[#2563eb]" />
               Flip Flag
             </button>
           </div>
@@ -182,7 +182,7 @@ export function FlagFlipPlayer({ countryId, countryName, flagCode }: FlagFlipPla
         </h3>
         <button
           onClick={() => setIsFlipped(!isFlipped)}
-          className="text-[10px] font-black uppercase tracking-wider text-slate-400 hover:text-emerald-600 transition-colors flex items-center gap-1 cursor-pointer"
+          className="text-[10px] font-black uppercase tracking-wider text-slate-400 hover:text-blue-600 transition-colors flex items-center gap-1 cursor-pointer"
         >
           <RotateCcw className="w-2.5 h-2.5" />
           {isFlipped ? "Show Flag" : "Watch Video"}

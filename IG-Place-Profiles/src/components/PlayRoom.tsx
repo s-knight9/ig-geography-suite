@@ -779,7 +779,7 @@ export function PlayRoom({
           {/* Game Status Bar */}
           <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-4 shadow-sm flex flex-col sm:flex-row sm:items-center justify-between gap-4">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-xl bg-emerald-500/10 flex items-center justify-center text-emerald-600">
+              <div className="w-10 h-10 rounded-xl bg-blue-500/10 flex items-center justify-center text-blue-600">
                 <Gamepad2 className="w-5 h-5" />
               </div>
               <div>
@@ -790,7 +790,7 @@ export function PlayRoom({
                   }
                 </span>
                 <h2 className="text-sm font-black text-slate-800 dark:text-white flex items-center gap-2">
-                  Theme: <span className="text-emerald-500">{activeTheme?.name}</span>
+                  Theme: <span className="text-blue-500">{activeTheme?.name}</span>
                 </h2>
               </div>
               
@@ -824,7 +824,7 @@ export function PlayRoom({
               {statusInfo.status === "reveal" && (
                 <button
                   onClick={handleNextRound}
-                  className="px-4 py-2 bg-emerald-500 hover:bg-emerald-600 text-white text-xs font-black uppercase tracking-wider rounded-xl shadow-sm transition-all cursor-pointer flex items-center gap-2"
+                  className="px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white text-xs font-black uppercase tracking-wider rounded-xl shadow-sm transition-all cursor-pointer flex items-center gap-2"
                 >
                   <span>Continue</span>
                   <ArrowRight className="w-4 h-4" />
@@ -844,7 +844,7 @@ export function PlayRoom({
           <div className="text-center py-2 bg-slate-50 dark:bg-slate-950 rounded-xl border border-slate-100 dark:border-slate-800">
             {statusInfo.status === "active" ? (
               activeSession.turn_owner === myEmail ? (
-                <span className="text-xs font-black text-[#00ba70] uppercase tracking-wider animate-pulse flex items-center justify-center gap-1.5">
+                <span className="text-xs font-black text-[#2563eb] uppercase tracking-wider animate-pulse flex items-center justify-center gap-1.5">
                   <Zap className="w-3.5 h-3.5 text-amber-500" />
                   Your Turn! Select a statistical indicator from your card to compare.
                 </span>
@@ -873,7 +873,7 @@ export function PlayRoom({
                 <h3 className="text-xl font-black text-slate-800 dark:text-white">Match Completed!</h3>
                 <p className="text-sm text-slate-500 mt-2 font-bold uppercase tracking-wider">Final Score: {activeSession.host_score} - {activeSession.guest_score}</p>
               </div>
-              <div className="text-lg font-black text-emerald-500 uppercase tracking-widest">
+              <div className="text-lg font-black text-blue-500 uppercase tracking-widest">
                 {activeSession.host_score === activeSession.guest_score ? (
                   "It's a Draw!"
                 ) : (activeSession.host_score > activeSession.guest_score ? activeSession.host_name : activeSession.guest_name) === myName ? (
@@ -885,7 +885,7 @@ export function PlayRoom({
               <div className="flex flex-col sm:flex-row gap-3 w-full mt-2">
                 <button
                   onClick={handlePlayAgain}
-                  className="flex-1 py-3 bg-[#00ba70] hover:bg-[#00a362] text-white rounded-xl text-xs font-black uppercase tracking-wider transition-all cursor-pointer shadow-md flex items-center justify-center gap-1.5 active:scale-98"
+                  className="flex-1 py-3 bg-[#2563eb] hover:bg-[#1d4ed8] text-white rounded-xl text-xs font-black uppercase tracking-wider transition-all cursor-pointer shadow-md flex items-center justify-center gap-1.5 active:scale-98"
                 >
                   <RotateCcw className="w-4 h-4" />
                   <span>Play Again</span>
@@ -905,10 +905,10 @@ export function PlayRoom({
               {/* Player 1 Card (User Card) */}
               <div className="flex flex-col gap-3">
                 <span className="text-[10px] font-black text-slate-400 uppercase tracking-wider text-center">Your Active Profile</span>
-                <div className="bg-white dark:bg-slate-900 border-2 border-emerald-500 rounded-3xl p-5 shadow-xl hover:shadow-emerald-500/5 transition-all">
+                <div className="bg-white dark:bg-slate-900 border-2 border-blue-500 rounded-3xl p-5 shadow-xl hover:shadow-blue-500/5 transition-all">
                   {loadingCards || !hostStats ? (
                     <div className="aspect-[3/2] w-full flex flex-col items-center justify-center gap-3">
-                      <Compass className="w-8 h-8 animate-spin text-emerald-500" />
+                      <Compass className="w-8 h-8 animate-spin text-blue-500" />
                       <span className="text-xs font-semibold text-slate-400">Drawing country context...</span>
                     </div>
                   ) : (
@@ -945,10 +945,10 @@ export function PlayRoom({
                             } else {
                               const isWin = s.better === "higher" ? myVal > oppVal : myVal < oppVal;
                               outcomeClass = isWin 
-                                ? "border-emerald-500 bg-emerald-500/10 text-emerald-600 dark:text-emerald-400" 
+                                ? "border-blue-500 bg-blue-500/10 text-blue-600 dark:text-blue-400" 
                                 : "border-red-500 bg-red-500/10 text-red-600 dark:text-red-400";
                               badge = isWin 
-                                ? <span className="text-[8px] font-black uppercase bg-emerald-500 text-white px-1.5 py-0.5 rounded flex items-center gap-0.5"><Check size={8} /> WIN</span>
+                                ? <span className="text-[8px] font-black uppercase bg-blue-500 text-white px-1.5 py-0.5 rounded flex items-center gap-0.5"><Check size={8} /> WIN</span>
                                 : <span className="text-[8px] font-black uppercase bg-red-500 text-white px-1.5 py-0.5 rounded flex items-center gap-0.5"><X size={8} /> LOSS</span>;
                             }
                           }
@@ -961,7 +961,7 @@ export function PlayRoom({
                               onClick={() => clickable && handleStatSelect(s.id)}
                               className={`p-3 border rounded-xl flex items-center justify-between gap-4 transition-all duration-300 ${outcomeClass} ${
                                 clickable 
-                                  ? "cursor-pointer hover:border-[#00ba70] hover:bg-emerald-50/20 active:scale-98" 
+                                  ? "cursor-pointer hover:border-[#2563eb] hover:bg-blue-50/20 active:scale-98" 
                                   : ""
                               }`}
                             >
@@ -1060,10 +1060,10 @@ export function PlayRoom({
                                 } else {
                                   const isWin = s.better === "higher" ? oppVal > myVal : oppVal < myVal;
                                   outcomeClass = isWin 
-                                    ? "border-emerald-500 bg-emerald-500/10 text-emerald-600 dark:text-emerald-400" 
+                                    ? "border-blue-500 bg-blue-500/10 text-blue-600 dark:text-blue-400" 
                                     : "border-red-500 bg-red-500/10 text-red-600 dark:text-red-400";
                                   badge = isWin 
-                                    ? <span className="text-[8px] font-black uppercase bg-emerald-500 text-white px-1.5 py-0.5 rounded flex items-center gap-0.5"><Check size={8} /> WIN</span>
+                                    ? <span className="text-[8px] font-black uppercase bg-blue-500 text-white px-1.5 py-0.5 rounded flex items-center gap-0.5"><Check size={8} /> WIN</span>
                                     : <span className="text-[8px] font-black uppercase bg-red-500 text-white px-1.5 py-0.5 rounded flex items-center gap-0.5"><X size={8} /> LOSS</span>;
                                 }
                               }
@@ -1102,7 +1102,7 @@ export function PlayRoom({
               <div className="max-h-24 overflow-y-auto space-y-1.5 text-[11px] font-mono scrollbar-thin">
                 {localGameHistory.map((h, i) => (
                   <p key={i} className="text-slate-600 dark:text-slate-400 leading-normal flex items-start gap-1.5">
-                    <span className="text-[#00ba70] font-black">&gt;</span>
+                    <span className="text-[#2563eb] font-black">&gt;</span>
                     {h}
                   </p>
                 ))}
@@ -1119,7 +1119,7 @@ export function PlayRoom({
           <div className="lg:col-span-7 flex flex-col gap-6">
             <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 shadow-sm">
               <div className="flex items-center gap-3.5 mb-6 border-b border-slate-100 dark:border-slate-800 pb-4">
-                <div className="w-12 h-12 rounded-2xl bg-emerald-500/10 flex items-center justify-center text-emerald-600 shadow-sm shrink-0">
+                <div className="w-12 h-12 rounded-2xl bg-blue-500/10 flex items-center justify-center text-blue-600 shadow-sm shrink-0">
                   <Gamepad2 className="w-6 h-6" />
                 </div>
                 <div>
@@ -1139,7 +1139,7 @@ export function PlayRoom({
                       onClick={() => setGameMode("rounds")}
                       className={`flex-1 py-3 text-xs font-black uppercase tracking-wider rounded-xl transition-all cursor-pointer flex items-center justify-center gap-2 ${
                         gameMode === "rounds"
-                          ? "bg-white dark:bg-slate-900 text-emerald-500 shadow-sm border border-slate-100 dark:border-slate-800"
+                          ? "bg-white dark:bg-slate-900 text-blue-500 shadow-sm border border-slate-100 dark:border-slate-800"
                           : "text-slate-500 dark:text-slate-400 hover:text-slate-700"
                       }`}
                     >
@@ -1151,7 +1151,7 @@ export function PlayRoom({
                       onClick={() => setGameMode("timed")}
                       className={`flex-1 py-3 text-xs font-black uppercase tracking-wider rounded-xl transition-all cursor-pointer flex items-center justify-center gap-2 ${
                         gameMode === "timed"
-                          ? "bg-white dark:bg-slate-900 text-emerald-500 shadow-sm border border-slate-100 dark:border-slate-800"
+                          ? "bg-white dark:bg-slate-900 text-blue-500 shadow-sm border border-slate-100 dark:border-slate-800"
                           : "text-slate-500 dark:text-slate-400 hover:text-slate-700"
                       }`}
                     >
@@ -1181,7 +1181,7 @@ export function PlayRoom({
                             onClick={() => setMatchFormat(rounds)}
                             className={`py-3.5 border rounded-2xl text-xs font-black uppercase transition-all cursor-pointer flex flex-col items-center justify-center gap-1 ${
                               matchFormat === rounds 
-                                ? "border-emerald-500 bg-emerald-50 text-emerald-600 dark:bg-emerald-950/20" 
+                                ? "border-blue-500 bg-blue-50 text-blue-600 dark:bg-blue-950/20" 
                                 : "border-slate-200 dark:border-slate-800 hover:bg-slate-50 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-400"
                             }`}
                           >
@@ -1204,7 +1204,7 @@ export function PlayRoom({
                       <div>
                         <div className="flex justify-between items-center mb-1">
                           <label className="text-xs font-black text-slate-400 uppercase tracking-widest block">Match Duration</label>
-                          <span className="text-xs font-black text-emerald-500 font-mono tracking-wider">{timeLimit / 60}m 00s</span>
+                          <span className="text-xs font-black text-blue-500 font-mono tracking-wider">{timeLimit / 60}m 00s</span>
                         </div>
                         <div className="flex items-center gap-4 bg-slate-50 dark:bg-slate-950 p-4 rounded-2xl border border-slate-100 dark:border-slate-800 justify-center">
                           <button
@@ -1242,7 +1242,7 @@ export function PlayRoom({
                   <span className="text-xs font-black text-slate-400 uppercase tracking-widest block mb-4">Solo Training Mode</span>
                   <button
                     onClick={() => startLocalGame({ email: "computer_ai", name: "Dr. Earth AI", initials: "AI", role: "teacher" })}
-                    className="w-full bg-[#00ba70] hover:bg-[#00a362] text-white p-4 rounded-2xl font-black uppercase tracking-wider text-xs shadow-lg shadow-emerald-500/10 hover:shadow-emerald-500/20 transition-all flex items-center justify-center gap-2 cursor-pointer"
+                    className="w-full bg-[#2563eb] hover:bg-[#1d4ed8] text-white p-4 rounded-2xl font-black uppercase tracking-wider text-xs shadow-lg shadow-blue-500/10 hover:shadow-blue-500/20 transition-all flex items-center justify-center gap-2 cursor-pointer"
                   >
                     <Bot className="w-5 h-5" />
                     <span>Duel Against Dr. Earth AI (Solo Offline)</span>
@@ -1257,7 +1257,7 @@ export function PlayRoom({
               <ul className="space-y-2 text-xs text-slate-500 dark:text-slate-400 font-medium leading-relaxed list-disc list-inside">
                 <li>Choose stat category that your drawn country excels at.</li>
                 <li>Indicators depend on the current theme drawn randomly for the round: Demographic, Economic, or Risk.</li>
-                <li>Some stats score better <span className="font-extrabold text-[#00ba70]">HIGHER</span> (e.g. Life Expectancy), while others score better <span className="font-extrabold text-[#00ba70]">LOWER</span> (e.g. Dependency Ratio).</li>
+                <li>Some stats score better <span className="font-extrabold text-[#2563eb]">HIGHER</span> (e.g. Life Expectancy), while others score better <span className="font-extrabold text-[#2563eb]">LOWER</span> (e.g. Dependency Ratio).</li>
                 <li>The winner of the round scores a point and holds turn advantage to select the next stat.</li>
               </ul>
             </div>
@@ -1273,10 +1273,10 @@ export function PlayRoom({
                 </div>
                 <div className="flex items-center gap-1.5">
                   <span className="relative flex h-2 w-2">
-                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-                    <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
+                    <span className="relative inline-flex rounded-full h-2 w-2 bg-blue-500"></span>
                   </span>
-                  <span className="text-[10px] font-black text-emerald-600 uppercase">Live</span>
+                  <span className="text-[10px] font-black text-blue-600 uppercase">Live</span>
                 </div>
               </div>
 
@@ -1303,7 +1303,7 @@ export function PlayRoom({
                       <div key={player.email} className="bg-slate-50 dark:bg-slate-950 border border-slate-100 dark:border-slate-800 p-3 rounded-2xl flex items-center justify-between gap-4">
                         <div className="flex items-center gap-3">
                           <div className={`w-10 h-10 rounded-xl flex items-center justify-center font-black text-xs shadow-3xs ${
-                            isInGame ? "bg-slate-100 text-slate-550 dark:bg-slate-850 dark:text-slate-400" : "bg-emerald-50/50 text-emerald-600 dark:bg-emerald-950/20"
+                            isInGame ? "bg-slate-100 text-slate-550 dark:bg-slate-850 dark:text-slate-400" : "bg-blue-50/50 text-blue-600 dark:bg-blue-950/20"
                           }`}>
                             {player.initials}
                           </div>
@@ -1313,7 +1313,7 @@ export function PlayRoom({
                               <span className={`px-1.5 py-0.2 rounded text-[8px] font-black uppercase border ${
                                 isInGame 
                                   ? "bg-slate-105 text-slate-500 border-slate-205 dark:bg-slate-805 dark:text-slate-400 dark:border-slate-705" 
-                                  : "bg-emerald-50 text-emerald-600 border-emerald-100 dark:bg-emerald-950/30 dark:text-emerald-400 dark:border-emerald-800"
+                                  : "bg-blue-50 text-blue-600 border-blue-100 dark:bg-blue-950/30 dark:text-blue-400 dark:border-blue-800"
                               }`}>
                                 {isInGame ? "In Game" : "Available"}
                               </span>
@@ -1327,7 +1327,7 @@ export function PlayRoom({
                           className={`px-3.5 py-1.5 rounded-xl text-[10px] font-black uppercase tracking-wider shadow-sm transition-all flex items-center gap-1 cursor-pointer ${
                             isInGame 
                               ? "bg-slate-100 text-slate-400 border border-slate-200 cursor-not-allowed dark:bg-slate-800 dark:text-slate-650 dark:border-slate-750" 
-                              : "bg-[#00ba70] hover:bg-[#00a362] text-white"
+                              : "bg-[#2563eb] hover:bg-[#1d4ed8] text-white"
                           }`}
                         >
                           <Swords className="w-3 h-3" />

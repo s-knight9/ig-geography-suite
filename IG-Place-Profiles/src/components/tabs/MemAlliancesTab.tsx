@@ -101,14 +101,14 @@ export const MemAlliancesTab: React.FC<MemAlliancesTabProps> = ({ countryId, cou
       <div className="border border-slate-200/80 dark:border-slate-800/80 rounded-2xl bg-white dark:bg-slate-900 shadow-sm overflow-hidden p-5 flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
           <h3 className="text-lg font-black text-slate-800 dark:text-slate-100 tracking-tight flex items-center gap-2">
-            <Globe className="w-5 h-5 text-emerald-600 dark:text-emerald-500 animate-pulse" />
+            <Globe className="w-5 h-5 text-blue-600 dark:text-blue-500 animate-pulse" />
             Memberships & Strategic Alliances
           </h3>
           <p className="text-xs font-semibold text-slate-400 dark:text-slate-500 mt-0.5">
             Geopolitical positioning, sovereignty tradeoffs, and trade integration of {countryName} (Click memberships to inspect)
           </p>
         </div>
-        <div className="flex items-center gap-2 text-[10px] font-extrabold text-emerald-700 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950/30 border border-emerald-100 dark:border-emerald-900/40 px-3 py-1 rounded-full uppercase tracking-wider select-none shrink-0 self-start md:self-center">
+        <div className="flex items-center gap-2 text-[10px] font-extrabold text-blue-700 dark:text-blue-400 bg-blue-50 dark:bg-blue-950/30 border border-blue-100 dark:border-blue-900/40 px-3 py-1 rounded-full uppercase tracking-wider select-none shrink-0 self-start md:self-center">
           <Landmark className="w-3.5 h-3.5 mr-1" />
           Alliance Matrix
         </div>
@@ -156,16 +156,16 @@ export const MemAlliancesTab: React.FC<MemAlliancesTabProps> = ({ countryId, cou
         {/* Column 2: Strategic & Economic Benefits */}
         <div className="border border-slate-200/80 dark:border-slate-800/80 rounded-2xl bg-white dark:bg-slate-900 shadow-sm p-5 flex flex-col hover:border-slate-300 dark:hover:border-slate-700 transition-all duration-300">
           <h4 className="text-xs font-black text-slate-400 dark:text-slate-500 uppercase tracking-widest flex items-center gap-2 mb-4 pb-2 border-b border-slate-100 dark:border-slate-800">
-            <ShieldCheck className="w-4 h-4 text-emerald-600 dark:text-emerald-500" />
+            <ShieldCheck className="w-4 h-4 text-blue-600 dark:text-blue-500" />
             Strategic & Economic Benefits
           </h4>
           <div className="flex-1 space-y-4">
             {countryData.strategicBenefits.map((benefit, index) => (
               <div 
                 key={index} 
-                className="flex items-start gap-3 bg-emerald-50/20 dark:bg-emerald-950/10 border border-emerald-100/30 dark:border-emerald-900/20 p-3.5 rounded-xl"
+                className="flex items-start gap-3 bg-blue-50/20 dark:bg-blue-950/10 border border-blue-100/30 dark:border-blue-900/20 p-3.5 rounded-xl"
               >
-                <div className="bg-emerald-55 dark:bg-emerald-950/40 text-emerald-600 dark:text-emerald-400 p-1.5 rounded-lg border border-emerald-100/50 dark:border-emerald-900/40 shrink-0 mt-0.5">
+                <div className="bg-blue-55 dark:bg-blue-950/40 text-blue-600 dark:text-blue-400 p-1.5 rounded-lg border border-blue-100/50 dark:border-blue-900/40 shrink-0 mt-0.5">
                   <ShieldCheck className="w-3.5 h-3.5" />
                 </div>
                 <p className="text-xs font-medium text-slate-700 dark:text-slate-300 leading-relaxed">

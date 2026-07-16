@@ -47,7 +47,7 @@ function KOFDimensionCard({
         <div className="space-y-1.5 max-w-xl">
           <h4 className="text-sm font-black text-slate-800 uppercase tracking-wider flex items-center gap-2">
             <span>{title} Integration</span>
-            <span className="text-[10px] font-extrabold text-emerald-700 bg-emerald-50 border border-emerald-100/80 px-2.5 py-0.5 rounded-full">
+            <span className="text-[10px] font-extrabold text-blue-700 bg-blue-50 border border-blue-100/80 px-2.5 py-0.5 rounded-full">
               Avg Index: {average.toFixed(1)}
             </span>
           </h4>
@@ -80,13 +80,13 @@ function KOFDimensionCard({
         <div>
           <div className="flex justify-between text-[10px] text-slate-500 mb-1 font-extrabold uppercase tracking-wider">
             <span className="flex items-center gap-1.5">
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
+              <span className="w-1.5 h-1.5 rounded-full bg-blue-500" />
               De Facto (Observed Flows)
             </span>
             <span className="font-bold text-slate-700">{deFacto}%</span>
           </div>
           <div className="h-2 w-full bg-slate-100 rounded-full overflow-hidden">
-            <div className="h-full bg-emerald-600 rounded-full transition-all duration-500" style={{ width: `${deFacto}%` }} />
+            <div className="h-full bg-blue-600 rounded-full transition-all duration-500" style={{ width: `${deFacto}%` }} />
           </div>
         </div>
 
@@ -154,7 +154,7 @@ export function GlobalisationTab({ data }: { data: DPPlaceProfile["globalisation
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
             <div>
               <CardTitle className="text-lg font-black text-slate-800 tracking-tight flex items-center gap-2">
-                <Globe className="w-5 h-5 text-emerald-600 animate-pulse" />
+                <Globe className="w-5 h-5 text-blue-600 animate-pulse" />
                 Globalisation Indices & Frameworks
               </CardTitle>
               <p className="text-xs font-semibold text-slate-400 mt-0.5">
@@ -173,7 +173,7 @@ export function GlobalisationTab({ data }: { data: DPPlaceProfile["globalisation
                     : 'text-slate-400 hover:text-slate-600'
                 }`}
               >
-                <Compass className="w-3.5 h-3.5 text-emerald-500" />
+                <Compass className="w-3.5 h-3.5 text-blue-500" />
                 KOF Index
               </button>
               
@@ -221,7 +221,7 @@ export function GlobalisationTab({ data }: { data: DPPlaceProfile["globalisation
                 {/* Visual Intro Hint */}
                 <div className="text-xs text-slate-500 font-semibold bg-slate-50 border border-slate-100 p-3.5 rounded-xl flex items-center justify-between">
                   <span>Below are the three core pillars of the <strong>KOF Globalization Index</strong>. Click on any section to examine metrics and structural contributors.</span>
-                  <span className="hidden sm:inline-flex items-center gap-1 text-[11px] font-black text-emerald-800 bg-emerald-50 border border-emerald-100 px-2.5 py-0.5 rounded-full select-none">
+                  <span className="hidden sm:inline-flex items-center gap-1 text-[11px] font-black text-blue-800 bg-blue-50 border border-blue-100 px-2.5 py-0.5 rounded-full select-none">
                     KOF Interactive Model
                   </span>
                 </div>
@@ -282,14 +282,14 @@ export function GlobalisationTab({ data }: { data: DPPlaceProfile["globalisation
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       {/* Trade Globalisation de facto */}
                       <div className="border border-slate-200/60 bg-white shadow-xs rounded-xl p-4">
-                        <h5 className="text-[10px] font-black uppercase text-emerald-700 tracking-wider mb-2.5 flex items-center justify-between">
+                        <h5 className="text-[10px] font-black uppercase text-blue-700 tracking-wider mb-2.5 flex items-center justify-between">
                           <span>Trade Globalisation (de facto)</span>
-                          <span className="text-[9px] font-medium text-emerald-600 bg-emerald-50 px-1.5 rounded">Flow Metrics</span>
+                          <span className="text-[9px] font-medium text-blue-600 bg-blue-50 px-1.5 rounded">Flow Metrics</span>
                         </h5>
                         <ul className="space-y-1.5">
                           {["Trade in goods", "Trade in services", "Trade partner diversity"].map((item, idx) => (
                             <li key={idx} className="flex items-center gap-2 text-xs text-slate-600 font-semibold">
-                              <Check className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
+                              <Check className="w-3.5 h-3.5 text-blue-600 shrink-0" />
                               <span>{item}</span>
                             </li>
                           ))}
@@ -314,9 +314,9 @@ export function GlobalisationTab({ data }: { data: DPPlaceProfile["globalisation
 
                       {/* Financial Globalisation de facto */}
                       <div className="border border-slate-200/60 bg-white shadow-xs rounded-xl p-4">
-                        <h5 className="text-[10px] font-black uppercase text-emerald-700 tracking-wider mb-2.5 flex items-center justify-between">
+                        <h5 className="text-[10px] font-black uppercase text-blue-700 tracking-wider mb-2.5 flex items-center justify-between">
                           <span>Financial Globalisation (de facto)</span>
-                          <span className="text-[9px] font-medium text-emerald-600 bg-emerald-50 px-1.5 rounded">Asset Flows</span>
+                          <span className="text-[9px] font-medium text-blue-600 bg-blue-50 px-1.5 rounded">Asset Flows</span>
                         </h5>
                         <ul className="space-y-1.5">
                           {[
@@ -327,7 +327,7 @@ export function GlobalisationTab({ data }: { data: DPPlaceProfile["globalisation
                             "International income payments"
                           ].map((item, idx) => (
                             <li key={idx} className="flex items-center gap-2 text-xs text-slate-600 font-semibold">
-                              <Check className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
+                              <Check className="w-3.5 h-3.5 text-blue-600 shrink-0" />
                               <span>{item}</span>
                             </li>
                           ))}
@@ -560,14 +560,14 @@ export function GlobalisationTab({ data }: { data: DPPlaceProfile["globalisation
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       {/* Political Globalisation de facto */}
                       <div className="border border-slate-200/60 bg-white shadow-xs rounded-xl p-4">
-                        <h5 className="text-[10px] font-black uppercase text-emerald-700 tracking-wider mb-2.5 flex items-center justify-between">
+                        <h5 className="text-[10px] font-black uppercase text-blue-700 tracking-wider mb-2.5 flex items-center justify-between">
                           <span>Political Globalisation (de facto)</span>
-                          <span className="text-[9px] font-medium text-emerald-600 bg-emerald-50 px-1.5 rounded">Observational nodes</span>
+                          <span className="text-[9px] font-medium text-blue-600 bg-blue-50 px-1.5 rounded">Observational nodes</span>
                         </h5>
                         <ul className="space-y-1.5">
                           {["Embassies", "UN peace keeping missions", "International NGOs"].map((item, idx) => (
                             <li key={idx} className="flex items-center gap-2 text-xs text-slate-600 font-semibold">
-                              <Check className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
+                              <Check className="w-3.5 h-3.5 text-blue-600 shrink-0" />
                               <span>{item}</span>
                             </li>
                           ))}
@@ -593,10 +593,10 @@ export function GlobalisationTab({ data }: { data: DPPlaceProfile["globalisation
                   </KOFDimensionCard>
                 </div>
 
-                <div className="border border-emerald-100 bg-emerald-50/30 rounded-2xl p-4 flex gap-3 items-start">
-                  <BookOpen className="w-5 h-5 text-emerald-600 shrink-0 mt-0.5" />
+                <div className="border border-blue-100 bg-blue-50/30 rounded-2xl p-4 flex gap-3 items-start">
+                  <BookOpen className="w-5 h-5 text-blue-600 shrink-0 mt-0.5" />
                   <div className="space-y-1">
-                    <h5 className="text-xs font-black text-emerald-900 uppercase tracking-wider font-sans">Geography Syllabus Focus • KOF Index</h5>
+                    <h5 className="text-xs font-black text-blue-900 uppercase tracking-wider font-sans">Geography Syllabus Focus • KOF Index</h5>
                     <p className="text-xs text-slate-600 leading-relaxed font-semibold">
                       The KOF Globalization Index provides an empirical score from 1 to 100 capturing international flows and policy enablers. 
                       Economic globalization tracks trade/FDI; social tracks phone calls, tourism, internet access, and cultural products; 
@@ -638,7 +638,7 @@ export function GlobalisationTab({ data }: { data: DPPlaceProfile["globalisation
                 {/* Visual Card 2: Tier analysis */}
                 <div className="border border-slate-200 rounded-2xl p-5 bg-slate-50/30 shadow-xs hover:border-slate-300 transition-all select-none">
                   <div className="flex items-center gap-2 mb-4">
-                    <div className="bg-emerald-50 text-[#00ba70] p-2 rounded-xl border border-emerald-100">
+                    <div className="bg-blue-50 text-[#2563eb] p-2 rounded-xl border border-blue-100">
                       <Building2 className="w-5 h-5" />
                     </div>
                     <div>
@@ -679,22 +679,22 @@ export function GlobalisationTab({ data }: { data: DPPlaceProfile["globalisation
               >
                 <div className="bg-slate-900 border border-slate-800 rounded-2xl p-6 text-white shadow-lg overflow-hidden relative">
                   {/* Decorative background shape */}
-                  <div className="absolute top-0 right-0 w-32 h-32 bg-emerald-500/10 rounded-full blur-2xl pointer-events-none" />
+                  <div className="absolute top-0 right-0 w-32 h-32 bg-blue-500/10 rounded-full blur-2xl pointer-events-none" />
                   
                   <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-5 border-b border-slate-800 pb-5">
                     <div className="flex items-center gap-3">
-                      <div className="bg-emerald-950 text-emerald-400 p-2.5 rounded-xl border border-emerald-800/60">
+                      <div className="bg-blue-950 text-blue-400 p-2.5 rounded-xl border border-blue-800/60">
                         <TrendingUp className="w-5 h-5" />
                       </div>
                       <div>
-                        <h4 className="text-xs font-black uppercase text-emerald-500 tracking-wider">Ernst & Young</h4>
+                        <h4 className="text-xs font-black uppercase text-blue-500 tracking-wider">Ernst & Young</h4>
                         <h3 className="text-base font-black text-slate-100 tracking-tight">EY Index Analysis & Historical Track</h3>
                       </div>
                     </div>
                     
                     <div className="flex items-baseline gap-1.5 self-start sm:self-center">
                       <span className="text-[10px] font-black uppercase text-slate-400 tracking-widest font-sans">Globalisation Score</span>
-                      <div className="text-3xl font-mono font-black text-emerald-400 tracking-tight leading-none">
+                      <div className="text-3xl font-mono font-black text-blue-400 tracking-tight leading-none">
                         {data.ey_index_historical.score}
                       </div>
                     </div>
