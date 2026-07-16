@@ -820,6 +820,8 @@ export default function App() {
             toggleDark={toggleDark}
             role={role}
             activeTeacherCode={teacherCode}
+            activeUserEmail={user.email || ""}
+            user={user}
           />
         );
       case "textbook-viewer":

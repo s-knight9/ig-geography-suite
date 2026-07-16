@@ -178,6 +178,8 @@ export default function App({
   toggleDark?: () => void;
   role?: 'student' | 'teacher' | 'super_admin';
   activeTeacherCode?: string;
+  activeUserEmail?: string;
+  user?: any;
 }) {
   const [localTheme, setLocalTheme] = useState<'light' | 'dark'>('light');
   const theme = propIsDark !== undefined ? (propIsDark ? 'dark' : 'light') : localTheme;
@@ -219,6 +221,7 @@ export default function App({
   const [isLiveQuizActive, setIsLiveQuizActive] = useState(false);
   const [penaltyMode, setPenaltyMode] = useState(false);
   const [teacherQuizCode, setTeacherQuizCode] = useState<string | null>(null);
+  const [joinedStudents, setJoinedStudents] = useState<any[]>([]);
 
   useEffect(() => {
     setActiveRole(role);
@@ -235,7 +238,7 @@ export default function App({
         document.exitFullscreen().catch(e => console.error(e));
       }
       
-      const uid = "student_" + Math.random().toString(36).substr(2, 9);
+      const uid = user?.id || user?.uid || "student_" + Math.random().toString(36).substr(2, 9);
       if (liveQuizLobby) {
         set(ref(db, `quizzes/${liveQuizLobby}/students/${uid}`), {
           score: 0,
@@ -252,41 +255,80 @@ export default function App({
       document.removeEventListener("visibilitychange", handleCheat);
       window.removeEventListener("blur", handleCheat);
     };
-  }, [isLiveQuizActive, penaltyMode, liveQuizLobby]);
+  }, [isLiveQuizActive, penaltyMode, liveQuizLobby, user]);
 
-  // Listen to Firebase Lobby State
+  // Listen to Firebase Lobby State for Student
   useEffect(() => {
     if (!liveQuizLobby) return;
-    const lobbyRef = ref(db, `quizzes/${liveQuizLobby}/status`);
+    const lobbyRef = ref(db, `quizzes/${liveQuizLobby}`);
     const unsubscribe = onValue(lobbyRef, (snapshot) => {
       const val = snapshot.val();
-      if (val === 'started') {
+      if (!val) return;
+      
+      if (val.status === 'started') {
         setIsLiveQuizActive(true);
+        if (val.video) setSelectedVideo(val.video);
+        if (val.quiz_data) setQuizData(val.quiz_data);
         document.documentElement.requestFullscreen().catch(e => console.error("Fullscreen blocked", e));
-      } else if (val === 'ended') {
+      } else if (val.status === 'ended') {
         setIsLiveQuizActive(false);
         setLiveQuizLobby(null);
+        setSelectedVideo(null);
+        setQuizData(null);
         if (document.fullscreenElement) document.exitFullscreen().catch(e => {});
       }
     });
     return () => unsubscribe();
   }, [liveQuizLobby]);
 
+  // Listen to Students joined for Teacher
+  useEffect(() => {
+    if (!teacherQuizCode) return;
+    const studentsRef = ref(db, `quizzes/${teacherQuizCode}/students`);
+    const unsubscribe = onValue(studentsRef, (snapshot) => {
+      const val = snapshot.val();
+      if (val) {
+        const studentsList = Object.values(val);
+        setJoinedStudents(studentsList);
+      } else {
+        setJoinedStudents([]);
+      }
+    });
+    return () => unsubscribe();
+  }, [teacherQuizCode]);
+
   const handleJoinLobby = () => {
     if (joinQuizCode.trim().length > 0) {
-      setLiveQuizLobby(joinQuizCode.trim().toUpperCase());
+      const code = joinQuizCode.trim().toUpperCase();
+      setLiveQuizLobby(code);
+      
+      // Register student in the lobby
+      const uid = user?.id || user?.uid || "student_" + Math.random().toString(36).substr(2, 9);
+      const studentName = user?.preferredName ? `${user.preferredName} ${user.surname || ''}` : user?.name || activeUserEmail || "Anonymous Student";
+      
+      set(ref(db, `quizzes/${code}/students/${uid}`), {
+        name: studentName,
+        status: "waiting",
+        timestamp: new Date().toISOString()
+      }).catch(e => console.error("Failed to join lobby", e));
     }
   };
 
   const handleTeacherCreateQuiz = () => {
     const code = Math.random().toString(36).substring(2, 8).toUpperCase();
     setTeacherQuizCode(code);
+    setJoinedStudents([]);
     set(ref(db, `quizzes/${code}/status`), 'waiting');
   };
 
-  const handleTeacherPushQuiz = () => {
+  const handleTeacherPushQuiz = (quizDataParam: any) => {
     if (teacherQuizCode) {
       set(ref(db, `quizzes/${teacherQuizCode}/status`), 'started');
+      // Update selected video for the students who joined
+      if (selectedVideo && quizDataParam) {
+        set(ref(db, `quizzes/${teacherQuizCode}/quiz_data`), quizDataParam);
+        set(ref(db, `quizzes/${teacherQuizCode}/video`), selectedVideo);
+      }
     }
   };
 
@@ -988,7 +1030,7 @@ interface VideoDetailViewProps {
   activeRole: 'student' | 'teacher' | 'super_admin';
   teacherQuizCode: string | null;
   handleTeacherCreateQuiz: () => void;
-  handleTeacherPushQuiz: () => void;
+  handleTeacherPushQuiz: (quizData: any) => void;
 }
 
 function VideoDetailView({
@@ -1668,14 +1710,17 @@ function VideoDetailView({
                     </button>
                   ) : (
                     <div className="flex items-center gap-2">
-                      <span className="text-xs font-mono font-black text-slate-700 dark:text-slate-300 bg-slate-100 dark:bg-slate-800 px-3 py-1.5 rounded-lg border border-slate-200 dark:border-slate-700 tracking-widest">
+                      <span className="text-xs font-mono font-black text-slate-700 dark:text-slate-300 bg-slate-100 dark:bg-slate-800 px-3 py-1.5 rounded-lg border border-slate-200 dark:border-slate-700 tracking-widest flex items-center gap-2">
                         CODE: {teacherQuizCode}
+                        <span className="bg-[#2563eb] text-white px-1.5 py-0.5 rounded text-[10px]">
+                          {joinedStudents.length} Joined
+                        </span>
                       </span>
                       <button
-                        onClick={handleTeacherPushQuiz}
+                        onClick={() => handleTeacherPushQuiz(quizData)}
                         className="px-3 py-1.5 bg-red-500 hover:bg-red-600 text-white border border-red-500/20 text-[10px] font-black uppercase rounded-lg transition-all flex items-center gap-1.5 shadow-sm shadow-red-500/20"
                       >
-                        <Play className="w-3.5 h-3.5" /> Push Quiz
+                        <Play className="w-3.5 h-3.5" /> Begin Quiz
                       </button>
                     </div>
                   )}
