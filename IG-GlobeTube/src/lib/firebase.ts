@@ -11,5 +11,8 @@ const firebaseConfig = {
   appId: import.meta.env.VITE_FIREBASE_APP_ID || '1:1054495611313:web:a9a9258fdb53ad47168590'
 };
 
-export const app = !getApps().length ? initializeApp(firebaseConfig) : getApp();
+const APP_NAME = 'globetube';
+export const app = getApps().find(a => a.name === APP_NAME)
+  ? getApp(APP_NAME)
+  : initializeApp(firebaseConfig, APP_NAME);
 export const db = getDatabase(app);

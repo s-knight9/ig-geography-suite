@@ -44,3 +44,29 @@ export interface ComparativeEvaluationResult {
     ao3_conclusion: ComparativeCriterionResult;
   };
 }
+
+// Added StudentSubmission schema with Firebase Storage PDF tracking
+export interface StudentSubmission {
+  id?: string;
+  candidateName: string;
+  className: string;
+  assignmentName: string;
+  status: 'Draft' | 'Final';
+
+  // Draft Stage Data
+  draftEvaluation?: EvaluationResult;
+  draftTeacherScores?: Record<string, number>;
+  draftPdfUrl?: string;       // Persistent Firebase Storage Download URL
+  draftStoragePath?: string;  // Storage ref path (for deleting/replacing)
+
+  // Final Stage Data
+  finalEvaluation?: EvaluationResult;
+  finalTeacherScores?: Record<string, number>;
+  finalPdfUrl?: string;       // Persistent Firebase Storage Download URL
+  finalStoragePath?: string;  // Storage ref path (for deleting/replacing)
+
+  // Draft vs Final Comparison Data
+  comparativeEvaluation?: ComparativeEvaluationResult;
+
+  updatedAt?: string;
+}

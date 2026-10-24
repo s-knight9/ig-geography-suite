@@ -16,8 +16,8 @@ export interface VaultFolderDef {
 export const VAULT_FOLDERS: VaultFolderDef[] = [
   { id: 'PH1', name: 'PH1: Changing River Environments', paper: 1, color: 'bg-[#facc15] text-[#422006] border-[#eab308]' },
   { id: 'PH2', name: 'PH2: Changing Coastal Environments', paper: 1, color: 'bg-[#1d4ed8] text-white border-[#1e40af]' },
-  { id: 'PH3', name: 'PH3: Hazardous Environments', paper: 1, color: 'bg-[#a855f7] text-white border-[#9333ea]' },
-  { id: 'PH4', name: 'PH4: Changing Ecosystems', paper: 1, color: 'bg-[#dc2626] text-white border-[#b91c1c]' },
+  { id: 'PH3', name: 'PH3: Changing Ecosystems', paper: 1, color: 'bg-[#a855f7] text-white border-[#9333ea]' },
+  { id: 'PH4', name: 'PH4: Tectonic Hazards', paper: 1, color: 'bg-[#dc2626] text-white border-[#b91c1c]' },
   { id: 'PH5', name: 'PH5: Climate Change', paper: 1, color: 'bg-[#06b6d4] text-[#083344] border-[#0891b2]' },
   { id: 'HU6', name: 'HU6: Changing Population', paper: 2, color: 'bg-[#db2777] text-white border-[#be185d]' },
   { id: 'HU7', name: 'HU7: Changing Towns & Cities', paper: 2, color: 'bg-[#7f1d1d] text-white border-[#450a0a]' },

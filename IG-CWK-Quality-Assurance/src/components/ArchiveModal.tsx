@@ -1,26 +1,39 @@
 import React, { useState, useEffect } from 'react';
-import { X, Plus } from 'lucide-react';
+import { X, Plus, Loader2 } from 'lucide-react';
 import { loadStructure, createClass, createAssignment } from '../db';
 
 interface ArchiveModalProps {
   isOpen: boolean;
   onClose: () => void;
   initialCandidateName: string;
-  onSave: (data: any) => void;
+  onSave: (data: any) => Promise<void> | void;
   hideCandidateName?: boolean;
+  initialSubmissionType?: 'Draft' | 'Final';
+  initialClass?: string;
+  initialAssignment?: string;
 }
 
-export default function ArchiveModal({ isOpen, onClose, initialCandidateName, onSave, hideCandidateName }: ArchiveModalProps) {
+export default function ArchiveModal({ 
+  isOpen, 
+  onClose, 
+  initialCandidateName, 
+  onSave, 
+  hideCandidateName,
+  initialSubmissionType = 'Draft',
+  initialClass = '',
+  initialAssignment = ''
+}: ArchiveModalProps) {
   const [step, setStep] = useState(1);
   const cleanInitialName = initialCandidateName.replace(/\s*-\s*(DRAFT|FINAL|Draft|Final)$/i, '');
   const [candidateName, setCandidateName] = useState(cleanInitialName);
-  const [submissionType, setSubmissionType] = useState<'Draft' | 'Final'>('Draft');
+  const [submissionType, setSubmissionType] = useState<'Draft' | 'Final'>(initialSubmissionType);
+  const [isSaving, setIsSaving] = useState(false);
   
   const [classes, setClasses] = useState<string[]>([]);
   const [assignments, setAssignments] = useState<Record<string, string[]>>({});
 
-  const [selectedClass, setSelectedClass] = useState('');
-  const [selectedAssignment, setSelectedAssignment] = useState('');
+  const [selectedClass, setSelectedClass] = useState(initialClass);
+  const [selectedAssignment, setSelectedAssignment] = useState(initialAssignment);
 
   const [isAddingClass, setIsAddingClass] = useState(false);
   const [newClassName, setNewClassName] = useState('');
@@ -32,12 +45,13 @@ export default function ArchiveModal({ isOpen, onClose, initialCandidateName, on
     const init = async () => {
       if (isOpen) {
         setStep(1);
-        setCandidateName(initialCandidateName);
-        setSubmissionType('Draft');
-        setSelectedClass('');
-        setSelectedAssignment('');
+        setCandidateName(cleanInitialName);
+        setSubmissionType(initialSubmissionType);
+        setSelectedClass(initialClass);
+        setSelectedAssignment(initialAssignment);
         setIsAddingClass(false);
         setIsAddingAssignment(false);
+        setIsSaving(false);
 
         const struct = await loadStructure();
         setClasses(struct.classes);
@@ -45,7 +59,7 @@ export default function ArchiveModal({ isOpen, onClose, initialCandidateName, on
       }
     };
     init();
-  }, [isOpen, initialCandidateName]);
+  }, [isOpen, initialCandidateName, initialSubmissionType, initialClass, initialAssignment]);
 
   if (!isOpen) return null;
 
@@ -82,14 +96,23 @@ export default function ArchiveModal({ isOpen, onClose, initialCandidateName, on
   };
 
 
-  const handleCommit = () => {
-    onSave({
-      candidateName,
-      submissionType,
-      classFolder: selectedClass,
-      assignmentName: selectedAssignment
-    });
-    onClose();
+  const handleCommit = async () => {
+    setIsSaving(true);
+    try {
+      await onSave({
+        candidateName,
+        submissionType,
+        className: selectedClass,
+        classFolder: selectedClass,
+        assignmentName: selectedAssignment
+      });
+      onClose();
+    } catch (err) {
+      console.error("Error during archive save:", err);
+      alert("An error occurred while saving: " + ((err as any)?.message || String(err)));
+    } finally {
+      setIsSaving(false);
+    }
   };
 
   const isStep2Valid = selectedClass && (assignments[selectedClass]?.length === 0 ? true : selectedAssignment);
@@ -297,7 +320,7 @@ export default function ArchiveModal({ isOpen, onClose, initialCandidateName, on
           {step < 3 ? (
              <button 
                 onClick={handleNext} 
-                disabled={step === 1 ? (!hideCandidateName && !candidateName.trim()) : !isStep2Valid}
+                disabled={isSaving || (step === 1 ? (!hideCandidateName && !candidateName.trim()) : !isStep2Valid)}
                 className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg text-sm font-bold uppercase tracking-wider shadow-sm transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
              >
                Continue
@@ -305,9 +328,11 @@ export default function ArchiveModal({ isOpen, onClose, initialCandidateName, on
           ) : (
              <button 
                 onClick={handleCommit} 
-                className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg text-sm font-bold uppercase tracking-wider shadow-sm transition-colors"
+                disabled={isSaving}
+                className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg text-sm font-bold uppercase tracking-wider shadow-sm transition-colors flex items-center gap-2 disabled:opacity-60 disabled:cursor-wait"
              >
-               Commit Save
+               {isSaving && <Loader2 className="w-4 h-4 animate-spin" />}
+               {isSaving ? "Saving & Uploading..." : "Commit Save"}
              </button>
           )}
         </div>

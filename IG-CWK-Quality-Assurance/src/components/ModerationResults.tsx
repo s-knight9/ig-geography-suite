@@ -15,11 +15,13 @@ interface ModerationResultsProps {
   onExit: () => void;
   onOpenDirectory: () => void;
   prefilledStudent?: StudentSubmission | null;
+  uploadedFile?: File | null;
+  uploadedStage?: 'Draft' | 'Final';
   isBatchMode?: boolean;
   renderBatchActions?: (teacherMarks: Record<string, number>) => React.ReactNode;
 }
 
-export default function ModerationResults({ evaluation, candidateName, isDarkMode, toggleDarkMode, onExit, onOpenDirectory, prefilledStudent, isBatchMode, renderBatchActions }: ModerationResultsProps) {
+export default function ModerationResults({ evaluation, candidateName, isDarkMode, toggleDarkMode, onExit, onOpenDirectory, prefilledStudent, uploadedFile, uploadedStage, isBatchMode, renderBatchActions }: ModerationResultsProps) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { formattedName } = parseCandidateName(candidateName);
   
@@ -264,21 +266,19 @@ export default function ModerationResults({ evaluation, candidateName, isDarkMod
                  <button 
                    onClick={async () => {
                      if (prefilledStudent) {
-                       import('../db').then(({ addOrUpdateSubmission }) => {
-                         addOrUpdateSubmission({
-                           candidateName: prefilledStudent.candidateName,
-                           className: prefilledStudent.className,
-                           assignmentName: prefilledStudent.assignmentName,
-                           status: 'Final',
-                           draftEvaluation: prefilledStudent.draftEvaluation,
-                           draftTeacherScores: prefilledStudent.draftTeacherScores,
-                           finalEvaluation: editableEvaluation,
-                           finalTeacherScores: teacherMarks
-                         });
-                         alert('Final Coursework Successfully Archived!');
-                         onExit();
-                       });
-                     } else {
+                        const { saveGradedSubmissionWithPdf } = await import('../db');
+                        await saveGradedSubmissionWithPdf({
+                          file: uploadedFile,
+                          candidateName: prefilledStudent.candidateName,
+                          className: prefilledStudent.className,
+                          assignmentName: prefilledStudent.assignmentName,
+                          stage: 'Final',
+                          evaluation: editableEvaluation,
+                          teacherScores: teacherMarks
+                        });
+                        alert('Final Coursework Successfully Archived to Firebase!');
+                        onExit();
+                      } else {
                        setIsModalOpen(true);
                      }
                    }}
@@ -298,18 +298,52 @@ export default function ModerationResults({ evaluation, candidateName, isDarkMod
         isOpen={isModalOpen} 
         onClose={() => setIsModalOpen(false)} 
         initialCandidateName={candidateName}
+        initialSubmissionType={uploadedStage || (prefilledStudent ? 'Final' : 'Draft')}
+        initialClass={prefilledStudent?.className || ''}
+        initialAssignment={prefilledStudent?.assignmentName || ''}
         onSave={async (data) => {
-          const { addOrUpdateSubmission } = await import('../db');
-          await addOrUpdateSubmission({
-            candidateName: data.candidateName,
-            className: data.classFolder,
-            assignmentName: data.assignmentName,
-            status: data.submissionType,
-            ...(data.submissionType === 'Draft' 
-                ? { draftEvaluation: editableEvaluation, draftTeacherScores: teacherMarks } 
-                : { finalEvaluation: editableEvaluation, finalTeacherScores: teacherMarks })
-          });
-          alert('Save successful!');
+          const { uploadSubmissionPdf, addOrUpdateSubmission, findExistingSubmission } = await import('../db');
+          const targetCandidate = data.candidateName;
+          const targetClass = data.className || data.classFolder || 'General';
+          const targetAssignment = data.assignmentName || 'Coursework';
+          const stage: 'Draft' | 'Final' = data.submissionType || 'Draft';
+
+          const existing = await findExistingSubmission(targetCandidate, targetClass, targetAssignment);
+          let submission: any = {
+            ...(existing || {}),
+            candidateName: targetCandidate,
+            className: targetClass,
+            assignmentName: targetAssignment,
+            status: stage,
+            updatedAt: new Date().toISOString()
+          };
+
+          if (uploadedFile) {
+            try {
+              const { pdfUrl, storagePath } = await uploadSubmissionPdf(uploadedFile, submission, stage);
+              if (stage === 'Final') {
+                submission.finalPdfUrl = pdfUrl;
+                submission.finalStoragePath = storagePath;
+              } else {
+                submission.draftPdfUrl = pdfUrl;
+                submission.draftStoragePath = storagePath;
+              }
+            } catch (err: any) {
+              console.error("Storage upload error in ModerationResults:", err);
+              alert(`PDF upload failed: ${err.message}`);
+            }
+          }
+
+          if (stage === 'Final') {
+            submission.finalEvaluation = editableEvaluation;
+            submission.finalTeacherScores = teacherMarks;
+          } else {
+            submission.draftEvaluation = editableEvaluation;
+            submission.draftTeacherScores = teacherMarks;
+          }
+
+          await addOrUpdateSubmission(submission);
+          alert('Save successful and PDF stored in Firebase!');
           onExit();
         }}
       />

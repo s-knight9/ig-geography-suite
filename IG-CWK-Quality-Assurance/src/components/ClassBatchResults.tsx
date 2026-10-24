@@ -115,24 +115,68 @@ export default function ClassBatchResults({ results, isDarkMode, toggleDarkMode,
         initialCandidateName={""}
         hideCandidateName={true}
         onSave={async (data) => {
-          // Bulk save
-          const { addOrUpdateSubmission } = await import('../db');
-          for (const student of validResults) {
-             const finalMarks = teacherMarksMap[student.id] || {};
-             // Use extracted evaluation
-             const evalPayload = student.evaluation;
-             const rawName = `${student.surname}, ${student.forename}${student.preferredName ? ` (${student.preferredName})` : ''}`;
+          const { uploadSubmissionPdf, addOrUpdateSubmission, findExistingSubmission } = await import('../db');
+          const stage: 'Draft' | 'Final' = data.submissionType || 'Draft';
+          const targetClass = data.className || data.classFolder || 'General';
+          const targetAssignment = data.assignmentName || 'Coursework';
 
-             await addOrUpdateSubmission({
-                 candidateName: rawName,
-                 className: data.classFolder,
-                 assignmentName: data.assignmentName,
-                 status: 'Draft',
-                 draftEvaluation: evalPayload,
-                 draftTeacherScores: finalMarks
-             });
+          for (const student of validResults) {
+            const finalMarks = teacherMarksMap[student.id] || {};
+            const evalPayload = student.evaluation;
+            const rawName = `${student.surname}, ${student.forename}${student.preferredName ? ` (${student.preferredName})` : ''}`;
+
+            // 1. Look up existing record
+            const existing = await findExistingSubmission(rawName, targetClass, targetAssignment);
+
+            // 2. Build base submission
+            let submission: any = {
+              ...(existing || {}),
+              candidateName: rawName,
+              className: targetClass,
+              assignmentName: targetAssignment,
+              status: stage,
+              updatedAt: new Date().toISOString()
+            };
+
+            // 3. Explicitly await uploadSubmissionPdf
+            if (student.file) {
+              try {
+                const { pdfUrl, storagePath } = await uploadSubmissionPdf(student.file, submission, stage);
+                if (stage === 'Final') {
+                  submission.finalPdfUrl = pdfUrl;
+                  submission.finalStoragePath = storagePath;
+                } else {
+                  submission.draftPdfUrl = pdfUrl;
+                  submission.draftStoragePath = storagePath;
+                }
+              } catch (uploadErr: any) {
+                console.error(`Storage upload error for ${rawName}:`, uploadErr);
+                alert(`PDF upload failed for ${rawName}: ${uploadErr.message}`);
+              }
+            }
+
+            // 4. Merge evaluations & marks
+            const defaultScores = {
+              ao1_knowledge: evalPayload?.scores?.ao1_knowledge?.score || 0,
+              ao2_observation: evalPayload?.scores?.ao2_observation?.score || 0,
+              ao2_organisation: evalPayload?.scores?.ao2_organisation?.score || 0,
+              ao2_analysis: evalPayload?.scores?.ao2_analysis?.score || 0,
+              ao3_conclusion: evalPayload?.scores?.ao3_conclusion?.score || 0,
+            };
+
+            if (stage === 'Final') {
+              submission.finalEvaluation = evalPayload;
+              submission.finalTeacherScores = finalMarks && Object.keys(finalMarks).length > 0 ? finalMarks : (existing?.finalTeacherScores || defaultScores);
+            } else {
+              submission.draftEvaluation = evalPayload;
+              submission.draftTeacherScores = finalMarks && Object.keys(finalMarks).length > 0 ? finalMarks : (existing?.draftTeacherScores || defaultScores);
+            }
+
+            // 5. Save to database
+            await addOrUpdateSubmission(submission);
           }
-          alert('Batch save successful!');
+
+          alert(`Batch save successful! ${validResults.length} coursework reports and PDFs saved to Firebase.`);
           onExit();
         }}
       />

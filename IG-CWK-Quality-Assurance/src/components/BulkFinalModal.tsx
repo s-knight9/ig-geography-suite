@@ -3,7 +3,7 @@ import { Upload, X, CheckCircle2, Loader2, PlayCircle, Folder, AlertCircle } fro
 import * as pdfjsLib from 'pdfjs-dist';
 // @ts-ignore
 import pdfWorker from 'pdfjs-dist/build/pdf.worker.min.mjs?url';
-import { StudentSubmission } from '../db';
+import { StudentSubmission, saveGradedSubmissionWithPdf } from '../db';
 import { parseCandidateName } from '../nameParser';
 pdfjsLib.GlobalWorkerOptions.workerSrc = pdfWorker;
 
@@ -141,7 +141,33 @@ export default function BulkFinalModal({ isOpen, onClose, students, currentClass
                        }
                     };
 
-                    newMembersList[studentIndex] = { ...newMembersList[studentIndex], status: 'DONE', newFinalEvaluation: finalEval };
+                    // Call upload pipeline right after Gemini AI generates the grading report:
+                    // Uploads raw file to Firebase Storage, checks database for existing Draft submission,
+                    // merges Final data without duplicate, and saves pdfUrl & storagePath via addOrUpdateSubmission()
+                    let savedPdfUrl = student.finalPdfUrl;
+                    let savedStoragePath = student.finalStoragePath;
+                    try {
+                        const savedSubmission = await saveGradedSubmissionWithPdf({
+                            file: student.file,
+                            candidateName: student.candidateName,
+                            className: currentClass,
+                            assignmentName: currentAssignment,
+                            stage: 'Final',
+                            evaluation: finalEval
+                        });
+                        savedPdfUrl = savedSubmission.finalPdfUrl;
+                        savedStoragePath = savedSubmission.finalStoragePath;
+                    } catch (uploadErr) {
+                        console.error("Storage upload error during bulk process:", uploadErr);
+                    }
+
+                    newMembersList[studentIndex] = { 
+                        ...newMembersList[studentIndex], 
+                        status: 'DONE', 
+                        newFinalEvaluation: finalEval,
+                        finalPdfUrl: savedPdfUrl,
+                        finalStoragePath: savedStoragePath
+                    };
                 } else {
                     newMembersList[studentIndex] = { ...newMembersList[studentIndex], status: 'ERROR', error: data.error };
                 }
@@ -176,7 +202,11 @@ export default function BulkFinalModal({ isOpen, onClose, students, currentClass
           status: 'Final',
           draftEvaluation: m.draftEvaluation,
           draftTeacherScores: m.draftTeacherScores,
+          draftPdfUrl: m.draftPdfUrl,
+          draftStoragePath: m.draftStoragePath,
           finalEvaluation: m.newFinalEvaluation,
+          finalPdfUrl: m.finalPdfUrl,
+          finalStoragePath: m.finalStoragePath,
           finalTeacherScores: {
              ao1_knowledge: aiScores.ao1_knowledge?.score || 0,
              ao2_observation: aiScores.ao2_observation?.score || 0,

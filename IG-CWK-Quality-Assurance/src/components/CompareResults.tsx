@@ -1,19 +1,49 @@
 import React, { useState } from 'react';
-import { ArrowLeft, CheckCircle2, ChevronRight, XCircle, AlertTriangle, Download, RefreshCcw, Award, Moon, Sun, FileText } from 'lucide-react';
+import { ArrowLeft, CheckCircle2, ChevronRight, XCircle, AlertTriangle, Download, RefreshCcw, Award, Moon, Sun, FileText, Folder, Check } from 'lucide-react';
 import { ComparativeEvaluationResult } from '../types';
+import ArchiveModal from './ArchiveModal';
+import { saveComparativeSubmissionWithPdf } from '../db';
 
 interface CompareResultsProps {
   evaluation: ComparativeEvaluationResult;
   cwk1Name: string;
   cwk2Name: string;
+  file1?: File | null;
+  file2?: File | null;
   isDarkMode: boolean;
   toggleDarkMode: () => void;
   onExit: () => void;
+  onOpenDirectory?: () => void;
 }
 
 import { downloadComparativeFeedbackPDF } from '../pdfReport';
 
-export default function CompareResults({ evaluation, cwk1Name, cwk2Name, isDarkMode, toggleDarkMode, onExit }: CompareResultsProps) {
+export default function CompareResults({ 
+  evaluation, 
+  cwk1Name, 
+  cwk2Name, 
+  file1,
+  file2,
+  isDarkMode, 
+  toggleDarkMode, 
+  onExit,
+  onOpenDirectory 
+}: CompareResultsProps) {
+  const [isArchiveOpen, setIsArchiveOpen] = useState(false);
+  const [isArchived, setIsArchived] = useState(false);
+
+  const handleArchive = async (data: { candidateName: string; className: string; assignmentName: string; submissionType: 'Draft' | 'Final' }) => {
+    await saveComparativeSubmissionWithPdf({
+      file1: file1 || undefined,
+      file2: file2 || undefined,
+      candidateName: data.candidateName || `${cwk1Name} vs ${cwk2Name}`,
+      className: data.className,
+      assignmentName: data.assignmentName,
+      comparativeEvaluation: evaluation,
+      stage: data.submissionType || 'Draft'
+    });
+    setIsArchived(true);
+  };
   const criteriaLabels: Record<keyof ComparativeEvaluationResult['criteria'], string> = {
     ao1_knowledge: "Criterion 1 (AO1): Knowledge and understanding",
     ao2_observation: "Criterion 2 (AO2): Observation and collection of data",
@@ -62,6 +92,18 @@ export default function CompareResults({ evaluation, cwk1Name, cwk2Name, isDarkM
             >
               <RefreshCcw className="w-4 h-4" />
               New Moderation
+            </button>
+            <button
+              onClick={() => setIsArchiveOpen(true)}
+              disabled={isArchived}
+              className={`flex items-center gap-2 px-4 py-2 text-sm font-medium rounded-lg transition-colors shadow-sm ${
+                isArchived 
+                  ? 'bg-emerald-600 text-white cursor-default' 
+                  : 'bg-emerald-600 hover:bg-emerald-700 text-white'
+              }`}
+            >
+              {isArchived ? <Check className="w-4 h-4" /> : <Folder className="w-4 h-4" />}
+              {isArchived ? 'Archived to Directory' : 'Save to Directory'}
             </button>
             <button
               onClick={() => downloadComparativeFeedbackPDF(evaluation, cwk1Name, cwk2Name)}
@@ -231,6 +273,13 @@ export default function CompareResults({ evaluation, cwk1Name, cwk2Name, isDarkM
         </div>
 
       </main>
+
+      <ArchiveModal
+        isOpen={isArchiveOpen}
+        onClose={() => setIsArchiveOpen(false)}
+        initialCandidateName={`${cwk1Name} vs ${cwk2Name}`}
+        onSave={handleArchive}
+      />
     </div>
   );
 }

@@ -1,16 +1,30 @@
 import React, { useState, useEffect } from 'react';
-import { FolderOpen, Moon, LogOut, FileText, Upload, Trash2, Sun, ChevronRight, Loader2, ChevronDown } from 'lucide-react';
+import { FolderOpen, Moon, LogOut, FileText, Upload, Trash2, Sun, ChevronRight, Loader2, ChevronDown, Plus } from 'lucide-react';
 import * as pdfjsLib from 'pdfjs-dist';
 // @ts-ignore
 import pdfWorker from 'pdfjs-dist/build/pdf.worker.min.mjs?url';
-import { StudentSubmission, loadDirectoryData } from '../db';
+import { StudentSubmission, loadDirectoryData, loadStructure, createClass, createAssignment } from '../db';
 import ClassBatchTab from './ClassBatchTab';
 
 pdfjsLib.GlobalWorkerOptions.workerSrc = pdfWorker;
 
 interface UploadViewProps {
-  onUploadComplete: (text: string, title: string) => void;
-  onCompareComplete: (cwk1: any, cwk2: any, title: string, cwk1Name: string, cwk2Name: string) => void;
+  onUploadComplete: (
+    text: string, 
+    title: string, 
+    file?: File | null, 
+    stage?: 'Draft' | 'Final',
+    classInfo?: { className: string; assignmentName: string }
+  ) => void;
+  onCompareComplete: (
+    cwk1: any, 
+    cwk2: any, 
+    title: string, 
+    cwk1Name: string, 
+    cwk2Name: string,
+    file1?: File | null,
+    file2?: File | null
+  ) => void;
   onClassBatchComplete?: (batchResults: any[]) => void;
   onLogout: () => void;
   isDarkMode: boolean;
@@ -31,15 +45,62 @@ export default function UploadView({ onUploadComplete, onCompareComplete, onClas
   const [fileContent, setFileContent] = useState<string>('');
   const [isCompressing, setIsCompressing] = useState(false);
 
-  // Directory Data
+  // Directory & Class Structure Data
   const [directoryData, setDirectoryData] = useState<StudentSubmission[]>([]);
+  const [classes, setClasses] = useState<string[]>([]);
+  const [assignments, setAssignments] = useState<Record<string, string[]>>({});
+  const [selectedClass, setSelectedClass] = useState<string>('');
+  const [selectedAssignment, setSelectedAssignment] = useState<string>('');
+  const [isAddingClass, setIsAddingClass] = useState(false);
+  const [newClassName, setNewClassName] = useState('');
+  const [isAddingAssignment, setIsAddingAssignment] = useState(false);
+  const [newAssignmentName, setNewAssignmentName] = useState('');
+
   useEffect(() => {
     const init = async () => {
-      const data = await loadDirectoryData();
+      const [data, struct] = await Promise.all([loadDirectoryData(), loadStructure()]);
       setDirectoryData(data);
+      const loadedClasses = struct.classes || [];
+      const loadedAssignments = struct.assignments || {};
+      setClasses(loadedClasses);
+      setAssignments(loadedAssignments);
+
+      if (loadedClasses.length > 0) {
+        setSelectedClass(prev => prev || loadedClasses[0]);
+        const firstAsns = loadedAssignments[loadedClasses[0]] || [];
+        if (firstAsns.length > 0) {
+          setSelectedAssignment(prev => prev || firstAsns[0]);
+        }
+      }
     };
     init();
   }, []);
+
+  const handleAddClass = async () => {
+    const trimmed = newClassName.trim();
+    if (trimmed && !classes.includes(trimmed)) {
+      await createClass(trimmed);
+      setClasses(prev => [...prev, trimmed]);
+      setSelectedClass(trimmed);
+      setAssignments(prev => ({ ...prev, [trimmed]: [] }));
+    }
+    setIsAddingClass(false);
+    setNewClassName('');
+  };
+
+  const handleAddAssignment = async () => {
+    const trimmed = newAssignmentName.trim();
+    if (trimmed && selectedClass) {
+      const cur = assignments[selectedClass] || [];
+      if (!cur.includes(trimmed)) {
+        await createAssignment(selectedClass, trimmed);
+        setAssignments(prev => ({ ...prev, [selectedClass]: [...cur, trimmed] }));
+        setSelectedAssignment(trimmed);
+      }
+    }
+    setIsAddingAssignment(false);
+    setNewAssignmentName('');
+  };
 
   // CWK 1 State
   const [cwk1Method, setCwk1Method] = useState<'UPLOAD' | 'DIRECTORY'>('UPLOAD');
@@ -128,7 +189,13 @@ export default function UploadView({ onUploadComplete, onCompareComplete, onClas
         const textToAnalyze = fileContent || "This is a simulated extraction of the uploaded coursework document...";
         const rawName = prefilledStudent ? prefilledStudent.candidateName : `${surname.trim()}, ${forename.trim()}${preferredName.trim() ? `, (${preferredName.trim()})` : ''}`;
         const docTitle = rawName.replace(/\s*-\s*(DRAFT|FINAL|Draft|Final)$/i, '');
-        onUploadComplete(textToAnalyze, docTitle);
+        const stage: 'Draft' | 'Final' = prefilledStudent ? 'Final' : (submissionType === 'FINAL' ? 'Final' : 'Draft');
+        const fallbackClass = classes.length > 0 ? classes[0] : 'General';
+        const fallbackAsn = (assignments[fallbackClass] && assignments[fallbackClass].length > 0) ? assignments[fallbackClass][0] : 'Coursework';
+        const resolvedClass = prefilledStudent?.className || selectedClass || fallbackClass;
+        const resolvedAssignment = prefilledStudent?.assignmentName || selectedAssignment || fallbackAsn;
+        const classInfo = { className: resolvedClass, assignmentName: resolvedAssignment };
+        onUploadComplete(textToAnalyze, docTitle, selectedFile, stage, classInfo);
       }
     } else {
       // COMPARE mode
@@ -151,7 +218,7 @@ export default function UploadView({ onUploadComplete, onCompareComplete, onClas
         }
 
         const compTitle = `Comparing: ${n1Info} vs ${n2Info}`;
-        onCompareComplete(payload1, payload2, compTitle, n1Info, n2Info);
+        onCompareComplete(payload1, payload2, compTitle, n1Info, n2Info, cwk1File, cwk2File);
       }
     }
   };
@@ -287,7 +354,7 @@ export default function UploadView({ onUploadComplete, onCompareComplete, onClas
                       </div>
 
                       {/* Form Row 2 */}
-                      <div className="mb-10">
+                      <div className="mb-8">
                         <label className="text-[11px] font-bold text-slate-500 dark:text-slate-400 tracking-wider block mb-2">
                           SUBMISSION TYPE
                         </label>
@@ -304,6 +371,93 @@ export default function UploadView({ onUploadComplete, onCompareComplete, onClas
                           >
                             FINAL
                           </button>
+                        </div>
+                      </div>
+
+                      {/* Target Class & Assignment Selection (Auto-archiving pipeline) */}
+                      <div className="mb-8 bg-slate-50 dark:bg-slate-800/60 p-5 rounded-2xl border border-slate-200 dark:border-slate-700">
+                        <div className="flex items-center justify-between mb-3">
+                          <label className="text-[11px] font-bold text-slate-700 dark:text-slate-300 tracking-wider flex items-center gap-2 uppercase">
+                            <FolderOpen className="w-4 h-4 text-blue-500" /> Target Directory Folder (Auto-Archiving)
+                          </label>
+                          <span className="text-[10px] text-slate-400 font-semibold uppercase tracking-wider">
+                            {selectedClass && selectedAssignment ? "PDF & Evaluation will auto-save on grading" : "Optional (Can also save from Results)"}
+                          </span>
+                        </div>
+                        <div className="grid grid-cols-2 gap-4">
+                          <div>
+                            <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider block mb-1.5">Class Folder</span>
+                            {!isAddingClass ? (
+                              <div className="flex gap-2">
+                                <select 
+                                  value={selectedClass}
+                                  onChange={(e) => { setSelectedClass(e.target.value); setSelectedAssignment(''); }}
+                                  className="flex-1 bg-white dark:bg-slate-700 border border-slate-200 dark:border-slate-600 rounded-lg px-3 py-2 text-xs font-bold text-slate-700 dark:text-slate-200 outline-none focus:border-blue-400"
+                                >
+                                  <option value="">-- Choose Class Folder --</option>
+                                  {classes.map(c => <option key={c} value={c}>{c}</option>)}
+                                </select>
+                                <button
+                                  type="button"
+                                  onClick={() => setIsAddingClass(true)}
+                                  className="px-2.5 py-1.5 bg-blue-50 dark:bg-blue-900/40 text-blue-600 dark:text-blue-400 rounded-lg text-xs font-bold hover:bg-blue-100 dark:hover:bg-blue-900/60 transition-colors flex items-center gap-1 shrink-0"
+                                  title="Add new class folder"
+                                >
+                                  <Plus className="w-3.5 h-3.5" /> New
+                                </button>
+                              </div>
+                            ) : (
+                              <div className="flex gap-2">
+                                <input 
+                                  type="text" 
+                                  placeholder="New class name..." 
+                                  value={newClassName} 
+                                  onChange={(e) => setNewClassName(e.target.value)} 
+                                  className="flex-1 bg-white dark:bg-slate-700 border border-blue-400 rounded-lg px-3 py-2 text-xs font-bold text-slate-700 dark:text-slate-200 outline-none"
+                                />
+                                <button type="button" onClick={handleAddClass} className="px-3 py-1.5 bg-blue-600 text-white rounded-lg text-xs font-bold hover:bg-blue-700">Add</button>
+                                <button type="button" onClick={() => setIsAddingClass(false)} className="px-2 py-1.5 bg-slate-200 dark:bg-slate-600 text-slate-600 dark:text-slate-300 rounded-lg text-xs font-bold">Cancel</button>
+                              </div>
+                            )}
+                          </div>
+
+                          <div>
+                            <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider block mb-1.5">Assignment Folder</span>
+                            {!isAddingAssignment ? (
+                              <div className="flex gap-2">
+                                <select 
+                                  disabled={!selectedClass}
+                                  value={selectedAssignment}
+                                  onChange={(e) => setSelectedAssignment(e.target.value)}
+                                  className="flex-1 bg-white dark:bg-slate-700 border border-slate-200 dark:border-slate-600 rounded-lg px-3 py-2 text-xs font-bold text-slate-700 dark:text-slate-200 outline-none focus:border-blue-400 disabled:opacity-50"
+                                >
+                                  <option value="">{selectedClass ? "-- Choose Assignment --" : "-- Choose Class First --"}</option>
+                                  {(assignments[selectedClass] || []).map(a => <option key={a} value={a}>{a}</option>)}
+                                </select>
+                                <button
+                                  type="button"
+                                  disabled={!selectedClass}
+                                  onClick={() => setIsAddingAssignment(true)}
+                                  className="px-2.5 py-1.5 bg-blue-50 dark:bg-blue-900/40 text-blue-600 dark:text-blue-400 rounded-lg text-xs font-bold hover:bg-blue-100 dark:hover:bg-blue-900/60 transition-colors flex items-center gap-1 shrink-0 disabled:opacity-50"
+                                  title="Add new assignment folder"
+                                >
+                                  <Plus className="w-3.5 h-3.5" /> New
+                                </button>
+                              </div>
+                            ) : (
+                              <div className="flex gap-2">
+                                <input 
+                                  type="text" 
+                                  placeholder="New assignment name..." 
+                                  value={newAssignmentName} 
+                                  onChange={(e) => setNewAssignmentName(e.target.value)} 
+                                  className="flex-1 bg-white dark:bg-slate-700 border border-blue-400 rounded-lg px-3 py-2 text-xs font-bold text-slate-700 dark:text-slate-200 outline-none"
+                                />
+                                <button type="button" onClick={handleAddAssignment} className="px-3 py-1.5 bg-blue-600 text-white rounded-lg text-xs font-bold hover:bg-blue-700">Add</button>
+                                <button type="button" onClick={() => setIsAddingAssignment(false)} className="px-2 py-1.5 bg-slate-200 dark:bg-slate-600 text-slate-600 dark:text-slate-300 rounded-lg text-xs font-bold">Cancel</button>
+                              </div>
+                            )}
+                          </div>
                         </div>
                       </div>
                     </>
