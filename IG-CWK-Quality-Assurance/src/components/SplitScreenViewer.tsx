@@ -14,13 +14,21 @@ import {
   FileQuestion, 
   CheckCircle2, 
   X,
-  Sparkles
+  Sparkles,
+  BookOpen
 } from 'lucide-react';
 import { StudentSubmission, uploadSubmissionPdf, addOrUpdateSubmission } from '../db';
 import { EvaluationResult } from '../types';
 import { parseCandidateName } from '../nameParser';
 import { EditableFeedbackList } from './EditableFeedbackList';
+import { CriterionRubricDrawer } from './CriterionRubricDrawer';
+import InteractiveCourseworkPdfViewer, {
+  MarginBadgeItem,
+  PdfJumpRequest,
+} from './InteractiveCourseworkPdfViewer';
 import { downloadFeedbackPDF } from '../pdfReport';
+import { CwkFeedbackItem, normalizeEvaluationResult } from '../utils/ragStyles';
+import type { ResolvedPdfLocation } from '../utils/pdfCoordinateResolver';
 
 interface SplitScreenViewerProps {
   student?: StudentSubmission;
@@ -45,10 +53,14 @@ export default function SplitScreenViewer({
 }: SplitScreenViewerProps) {
   const initialStudent = (initialCandidateProp || initialStudentProp)!;
   const [student, setStudent] = useState<StudentSubmission>(initialStudent);
+  const studentRef = useRef<StudentSubmission>(initialStudent);
+  studentRef.current = student;
 
   React.useEffect(() => {
     if (initialCandidateProp || initialStudentProp) {
-      setStudent((initialCandidateProp || initialStudentProp)!);
+      const next = (initialCandidateProp || initialStudentProp)!;
+      setStudent(next);
+      studentRef.current = next;
     }
   }, [initialCandidateProp, initialStudentProp]);
 
@@ -63,7 +75,35 @@ export default function SplitScreenViewer({
   const [viewMode, setViewMode] = useState<'split' | 'report' | 'pdf'>('split');
   const [isUploading, setIsUploading] = useState(false);
   const [replaceSuccess, setReplaceSuccess] = useState(false);
+  const [jumpRequest, setJumpRequest] = useState<PdfJumpRequest | null>(null);
+  const [expandedRubrics, setExpandedRubrics] = useState<Record<number, boolean>>({
+    1: false,
+    2: false,
+    3: false,
+    4: false,
+    5: false,
+  });
   const fileInputRef = useRef<HTMLInputElement>(null);
+
+  const allRubricsExpanded = [1, 2, 3, 4, 5].every((id) => !!expandedRubrics[id]);
+
+  const toggleCriterionRubric = (criterionNumber: number) => {
+    setExpandedRubrics((prev) => ({
+      ...prev,
+      [criterionNumber]: !prev[criterionNumber],
+    }));
+  };
+
+  const toggleAllRubrics = () => {
+    const nextState = !allRubricsExpanded;
+    setExpandedRubrics({
+      1: nextState,
+      2: nextState,
+      3: nextState,
+      4: nextState,
+      5: nextState,
+    });
+  };
 
   const { formattedName } = parseCandidateName(student.candidateName);
 
@@ -73,8 +113,13 @@ export default function SplitScreenViewer({
 
   const activePdfUrl = activeStage === 'Final' ? student.finalPdfUrl : student.draftPdfUrl;
   const activeStoragePath = activeStage === 'Final' ? student.finalStoragePath : student.draftStoragePath;
-  const activeEvaluation: EvaluationResult | undefined = activeStage === 'Final' ? student.finalEvaluation : student.draftEvaluation;
+  const rawActiveEvaluation: EvaluationResult | undefined = activeStage === 'Final' ? student.finalEvaluation : student.draftEvaluation;
   const activeTeacherScores: Record<string, number> = (activeStage === 'Final' ? student.finalTeacherScores : student.draftTeacherScores) || {};
+
+  const activeEvaluation = React.useMemo(
+    () => (rawActiveEvaluation ? normalizeEvaluationResult(rawActiveEvaluation, activeTeacherScores) : undefined),
+    [rawActiveEvaluation, activeTeacherScores]
+  );
 
   const criteriaData = [
     { id: '1', name: 'Knowledge & Understanding (AO1)', scoreKey: 'ao1_knowledge' },
@@ -83,6 +128,40 @@ export default function SplitScreenViewer({
     { id: '4', name: 'Analysis and interpretation (AO2)', scoreKey: 'ao2_analysis' },
     { id: '5', name: 'Conclusion and Evaluation (AO3)', scoreKey: 'ao3_conclusion' }
   ];
+
+  const marginBadgeItems: MarginBadgeItem[] = React.useMemo(() => {
+    if (!activeEvaluation?.scores) return [];
+    const list: MarginBadgeItem[] = [];
+    criteriaData.forEach((crit) => {
+      const critObj = (activeEvaluation.scores as any)[crit.scoreKey];
+      if (!critObj) return;
+      const critNum = Number(crit.id);
+      (['www', 'ebi'] as const).forEach((key) => {
+        const items = critObj[key];
+        if (!Array.isArray(items)) return;
+        items.forEach((item: CwkFeedbackItem) => {
+          list.push({
+            ...item,
+            criterionNumber: critNum,
+            criterionTitle: crit.name,
+          });
+        });
+      });
+    });
+    return list;
+  }, [activeEvaluation]);
+
+  const handleJumpToItem = (item: CwkFeedbackItem) => {
+    if (viewMode === 'report') {
+      setViewMode('split');
+    }
+    setJumpRequest({
+      itemId: item.id,
+      page: item.pdfLocation.page,
+      yPercent: item.pdfLocation.yPercent,
+      timestamp: Date.now(),
+    });
+  };
 
   const totalPossible = 60;
 
@@ -116,24 +195,95 @@ export default function SplitScreenViewer({
     await addOrUpdateSubmission(updatedStudent);
   };
 
+  const persistActiveEvaluation = React.useCallback(
+    async (mutator: (evalCopy: EvaluationResult) => boolean) => {
+      const curStudent = studentRef.current;
+      const isFinalStage = activeStage === 'Final';
+      const rawEval = isFinalStage ? curStudent.finalEvaluation : curStudent.draftEvaluation;
+      if (!rawEval) return;
+
+      const teacherScores = isFinalStage ? curStudent.finalTeacherScores : curStudent.draftTeacherScores;
+      const evalCopy = normalizeEvaluationResult(rawEval, teacherScores);
+      if (!evalCopy?.scores) return;
+
+      const changed = mutator(evalCopy);
+      if (!changed) return;
+
+      const updatedStudent: StudentSubmission = {
+        ...curStudent,
+        ...(isFinalStage ? { finalEvaluation: evalCopy } : { draftEvaluation: evalCopy }),
+        updatedAt: new Date().toISOString(),
+      };
+
+      studentRef.current = updatedStudent;
+      setStudent(updatedStudent);
+      if (onUpdateStudent) onUpdateStudent(updatedStudent);
+      await addOrUpdateSubmission(updatedStudent);
+    },
+    [activeStage, onUpdateStudent]
+  );
+
   // Handle WWW/EBI feedback editing
-  const handleFeedbackChange = async (ao: string, type: 'www' | 'ebi', newArray: string[]) => {
-    const isFinalStage = activeStage === 'Final';
-    const evalCopy = JSON.parse(JSON.stringify(isFinalStage ? student.finalEvaluation : student.draftEvaluation));
-    if (evalCopy && evalCopy.scores && evalCopy.scores[ao]) {
-      evalCopy.scores[ao][type] = newArray;
-    }
-
-    const updatedStudent: StudentSubmission = {
-      ...student,
-      ...(isFinalStage ? { finalEvaluation: evalCopy } : { draftEvaluation: evalCopy }),
-      updatedAt: new Date().toISOString()
-    };
-
-    setStudent(updatedStudent);
-    if (onUpdateStudent) onUpdateStudent(updatedStudent);
-    await addOrUpdateSubmission(updatedStudent);
+  const handleFeedbackChange = async (ao: string, type: 'www' | 'ebi', newArray: CwkFeedbackItem[]) => {
+    await persistActiveEvaluation((evalCopy) => {
+      if (evalCopy.scores && (evalCopy.scores as any)[ao]) {
+        (evalCopy.scores as any)[ao][type] = newArray;
+        return true;
+      }
+      return false;
+    });
   };
+
+  // Handle persisting PDF margin badge drag-and-drop coordinates
+  const handleUpdateItemLocation = React.useCallback(
+    async (itemId: string, newLocation: CwkFeedbackItem['pdfLocation']) => {
+      await persistActiveEvaluation((evalCopy) => {
+        for (const crit of criteriaData) {
+          const critScores = (evalCopy.scores as any)[crit.scoreKey];
+          if (!critScores) continue;
+          for (const listKey of ['www', 'ebi'] as const) {
+            const arr = critScores[listKey];
+            if (!Array.isArray(arr)) continue;
+            const idx = arr.findIndex((it: CwkFeedbackItem) => it?.id === itemId);
+            if (idx !== -1) {
+              arr[idx] = { ...arr[idx], pdfLocation: newLocation };
+              return true;
+            }
+          }
+        }
+        return false;
+      });
+    },
+    [persistActiveEvaluation]
+  );
+
+  // Handle close-reading PDF coordinate resolution updates for unresolved/AI-estimated badges
+  const handleResolvedLocations = React.useCallback(
+    async (resolvedMap: Record<string, ResolvedPdfLocation>) => {
+      await persistActiveEvaluation((evalCopy) => {
+        let updatedAny = false;
+        for (const crit of criteriaData) {
+          const critScores = (evalCopy.scores as any)[crit.scoreKey];
+          if (!critScores) continue;
+          for (const listKey of ['www', 'ebi'] as const) {
+            const arr = critScores[listKey];
+            if (!Array.isArray(arr)) continue;
+            for (let i = 0; i < arr.length; i++) {
+              const item = arr[i] as CwkFeedbackItem;
+              if (!item || item.pdfLocation?.isTeacherAdjusted) continue;
+              const resolved = resolvedMap[item.id];
+              if (resolved) {
+                arr[i] = { ...item, pdfLocation: resolved };
+                updatedAny = true;
+              }
+            }
+          }
+        }
+        return updatedAny;
+      });
+    },
+    [persistActiveEvaluation]
+  );
 
   // Handle attaching / uploading the PDF in Firebase Storage
   const handleAttachFile = async (file: File) => {
@@ -413,10 +563,13 @@ export default function SplitScreenViewer({
             {/* Left Pane PDF Frame / Empty State */}
             <div className="flex-1 rounded-xl overflow-hidden bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 shadow-sm relative">
               {activePdfUrl ? (
-                <iframe
-                  src={activePdfUrl}
-                  title={`${formattedName} - ${activeStage} PDF`}
-                  className="w-full h-full border-none"
+                <InteractiveCourseworkPdfViewer
+                  pdfUrl={activePdfUrl}
+                  title={`${formattedName} - ${activeStage} CWK`}
+                  items={marginBadgeItems}
+                  jumpRequest={jumpRequest}
+                  onUpdateItemLocation={handleUpdateItemLocation}
+                  onResolvedLocations={handleResolvedLocations}
                 />
               ) : (
                 <div className="w-full h-full flex flex-col items-center justify-center p-8 text-center bg-slate-50 dark:bg-slate-800/40">
@@ -552,17 +705,28 @@ export default function SplitScreenViewer({
 
                 {/* Detailed Criterion Rubric */}
                 <div className="space-y-4">
-                  <div className="flex items-center justify-between pb-1 border-b border-slate-200 dark:border-slate-700">
+                  <div className="flex flex-wrap items-center justify-between gap-2 pb-1.5 border-b border-slate-200 dark:border-slate-700">
                     <h3 className="font-bold text-slate-800 dark:text-slate-200 uppercase tracking-widest text-xs flex items-center gap-2">
                       <FileText className="w-4 h-4 text-blue-500" /> Detailed Criterion Rubric
                     </h3>
-                    <span className="text-[11px] text-slate-400 font-medium">5 Criteria • 12 Marks Each</span>
+                    <div className="flex items-center gap-3">
+                      <span className="text-[11px] text-slate-400 font-medium">5 Criteria • 12 Marks Each</span>
+                      <button
+                        type="button"
+                        onClick={toggleAllRubrics}
+                        className="print:hidden inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg border border-slate-200 dark:border-slate-700 bg-slate-50 hover:bg-slate-100 dark:bg-slate-900/60 dark:hover:bg-slate-800 text-[11px] font-bold text-slate-600 dark:text-slate-300 transition-colors cursor-pointer"
+                      >
+                        <BookOpen className="w-3 h-3 text-blue-500" />
+                        <span>{allRubricsExpanded ? 'Collapse All Rubrics' : 'Expand All Rubrics'}</span>
+                      </button>
+                    </div>
                   </div>
 
                   {criteriaData.map((crit) => {
                     const res = (activeEvaluation?.scores as any)?.[crit.scoreKey];
                     if (!res) return null;
                     const ts = activeTeacherScores[crit.scoreKey] ?? res.score;
+                    const criterionNumber = Number(crit.id);
 
                     return (
                       <div 
@@ -614,15 +778,23 @@ export default function SplitScreenViewer({
                           </div>
                         </div>
 
+                        <CriterionRubricDrawer
+                          criterionNumber={criterionNumber}
+                          isOpen={!!expandedRubrics[criterionNumber]}
+                          onToggle={() => toggleCriterionRubric(criterionNumber)}
+                        />
+
                         {/* WWW & EBI Feedback Points */}
                         <div className="mt-4 space-y-3">
                           {res.www && (
                             <EditableFeedbackList
                               items={res.www}
                               criterionId={crit.id}
+                              criterionScore={ts}
                               type="WWW"
                               isEditable={true}
                               onChange={(newVal) => handleFeedbackChange(crit.scoreKey, 'www', newVal)}
+                              onJumpToItem={handleJumpToItem}
                             />
                           )}
 
@@ -630,9 +802,11 @@ export default function SplitScreenViewer({
                             <EditableFeedbackList
                               items={res.ebi}
                               criterionId={crit.id}
+                              criterionScore={ts}
                               type="EBI"
                               isEditable={true}
                               onChange={(newVal) => handleFeedbackChange(crit.scoreKey, 'ebi', newVal)}
+                              onJumpToItem={handleJumpToItem}
                             />
                           )}
                         </div>

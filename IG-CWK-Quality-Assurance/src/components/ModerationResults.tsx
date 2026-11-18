@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { EvaluationResult } from '../types';
-import { Folder, Moon, Sun, Edit2, Trophy, CheckCircle2, AlertCircle } from 'lucide-react';
+import { Folder, Moon, Sun, Edit2, Trophy, CheckCircle2, AlertCircle, BookOpen } from 'lucide-react';
 import { StudentSubmission } from '../db';
 import ArchiveModal from './ArchiveModal';
 import { parseCandidateName } from '../nameParser';
 import { EditableFeedbackList } from './EditableFeedbackList';
+import { CriterionRubricDrawer } from './CriterionRubricDrawer';
+import { CwkFeedbackItem, normalizeEvaluationResult } from '../utils/ragStyles';
 
 interface ModerationResultsProps {
   key?: string;
@@ -25,10 +27,10 @@ export default function ModerationResults({ evaluation, candidateName, isDarkMod
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { formattedName } = parseCandidateName(candidateName);
   
-  // Clone evaluation to make feedback points stateful and editable before saving!
-  const [editableEvaluation, setEditableEvaluation] = useState<EvaluationResult>(() => JSON.parse(JSON.stringify(evaluation)));
+  // Clone and normalize evaluation so feedback items use structured CwkFeedbackItem objects
+  const [editableEvaluation, setEditableEvaluation] = useState<EvaluationResult>(() => normalizeEvaluationResult(evaluation));
   
-  const handleFeedbackChange = (ao: string, type: 'www' | 'ebi', newArray: string[]) => {
+  const handleFeedbackChange = (ao: string, type: 'www' | 'ebi', newArray: CwkFeedbackItem[]) => {
      setEditableEvaluation(prev => {
         const copy = JSON.parse(JSON.stringify(prev));
         if (copy.scores[ao]) {
@@ -63,6 +65,34 @@ export default function ModerationResults({ evaluation, candidateName, isDarkMod
   const totalTeacherMark = (Object.values(teacherMarks) as number[]).reduce((sum, mark) => sum + mark, 0);
 
   const totalPossible = 60;
+
+  const [expandedRubrics, setExpandedRubrics] = useState<Record<number, boolean>>({
+    1: false,
+    2: false,
+    3: false,
+    4: false,
+    5: false,
+  });
+
+  const allRubricsExpanded = [1, 2, 3, 4, 5].every((id) => !!expandedRubrics[id]);
+
+  const toggleCriterionRubric = (criterionNumber: number) => {
+    setExpandedRubrics((prev) => ({
+      ...prev,
+      [criterionNumber]: !prev[criterionNumber],
+    }));
+  };
+
+  const toggleAllRubrics = () => {
+    const nextState = !allRubricsExpanded;
+    setExpandedRubrics({
+      1: nextState,
+      2: nextState,
+      3: nextState,
+      4: nextState,
+      5: nextState,
+    });
+  };
   
   return (
     <div className={`flex flex-col min-h-screen bg-slate-50 dark:bg-slate-900 font-sans text-slate-900 dark:text-slate-100 ${isDarkMode ? 'dark' : ''}`}>
@@ -148,23 +178,35 @@ export default function ModerationResults({ evaluation, candidateName, isDarkMod
 
         {/* Detailed Criterion Rubric */}
         <section className="bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm overflow-hidden">
-          <div className="px-8 py-5 border-b border-slate-100 dark:border-slate-700 bg-slate-50/50 dark:bg-slate-800/80">
+          <div className="px-8 py-5 border-b border-slate-100 dark:border-slate-700 bg-slate-50/50 dark:bg-slate-800/80 flex flex-wrap items-center justify-between gap-2">
             <h3 className="font-bold text-slate-700 dark:text-slate-300 uppercase tracking-widest text-xs flex items-center gap-2">
               <span className="text-slate-400 border border-slate-300 dark:border-slate-600 rounded p-1">
                 <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
               </span>
               Detailed Criterion Rubric
             </h3>
+            <div className="flex items-center gap-3">
+              <span className="text-[11px] text-slate-400 font-medium">5 Criteria • 12 Marks Each</span>
+              <button
+                type="button"
+                onClick={toggleAllRubrics}
+                className="print:hidden inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg border border-slate-200 dark:border-slate-700 bg-white hover:bg-slate-100 dark:bg-slate-900/60 dark:hover:bg-slate-800 text-[11px] font-bold text-slate-600 dark:text-slate-300 transition-colors cursor-pointer"
+              >
+                <BookOpen className="w-3 h-3 text-blue-500" />
+                <span>{allRubricsExpanded ? 'Collapse All Rubrics' : 'Expand All Rubrics'}</span>
+              </button>
+            </div>
           </div>
           
           <div className="p-8 divide-y divide-slate-100 dark:divide-slate-700">
             {criteriaData.map((crit) => {
-              const res = (evaluation?.scores as any)?.[crit.scoreKey];
+              const res = (editableEvaluation?.scores as any)?.[crit.scoreKey];
               if (!res) return null;
+              const criterionNumber = Number(crit.id);
               
               return (
                 <div key={crit.id} className="py-8 first:pt-0 last:pb-0">
-                  <div className="flex items-center justify-between mb-6">
+                  <div className="flex items-center justify-between mb-4">
                      <div className="flex items-center gap-6">
                         <h4 className="text-xl font-bold text-slate-800 dark:text-slate-100">Criterion {crit.id}: {crit.name}</h4>
                      </div>
@@ -201,12 +243,21 @@ export default function ModerationResults({ evaluation, candidateName, isDarkMod
                      </div>
                   </div>
                   
+                  <div className="mb-4 max-w-5xl ml-18">
+                    <CriterionRubricDrawer
+                      criterionNumber={criterionNumber}
+                      isOpen={!!expandedRubrics[criterionNumber]}
+                      onToggle={() => toggleCriterionRubric(criterionNumber)}
+                    />
+                  </div>
+
                   <div className="space-y-4 max-w-5xl ml-18">
                     {/* WWW Section */}
                     {(res.www?.length > 0 || !isBatchMode) && (
                       <EditableFeedbackList
                         items={res.www || []}
                         criterionId={crit.id}
+                        criterionScore={teacherMarks[crit.scoreKey] ?? res.score}
                         type="WWW"
                         isEditable={true}
                         onChange={(newVal) => handleFeedbackChange(crit.scoreKey, 'www', newVal)}
@@ -218,6 +269,7 @@ export default function ModerationResults({ evaluation, candidateName, isDarkMod
                       <EditableFeedbackList
                         items={res.ebi || []}
                         criterionId={crit.id}
+                        criterionScore={teacherMarks[crit.scoreKey] ?? res.score}
                         type="EBI"
                         isEditable={true}
                         onChange={(newVal) => handleFeedbackChange(crit.scoreKey, 'ebi', newVal)}

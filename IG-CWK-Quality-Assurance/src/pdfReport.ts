@@ -2,6 +2,12 @@ import { jsPDF } from 'jspdf';
 import { StudentSubmission } from './db';
 import { parseCandidateName } from './nameParser';
 import { ComparativeEvaluationResult } from './types';
+import {
+  CwkFeedbackItem,
+  RAG_STYLES,
+  getFeedbackItemText,
+  normalizeFeedbackItems,
+} from './utils/ragStyles';
 
 export function downloadComparativeFeedbackPDF(evaluation: ComparativeEvaluationResult, cwk1Name: string, cwk2Name: string) {
   const doc = new jsPDF();
@@ -129,7 +135,7 @@ export function downloadComparativeFeedbackPDF(evaluation: ComparativeEvaluation
     y += 16;
     let baselineY = y; // to track max height in parallel columns
 
-    const drawCol = (xPos: number, score: number, www: string[], ebi: string[], colColor: number[]) => {
+    const drawCol = (xPos: number, score: number, www: (string | CwkFeedbackItem)[], ebi: (string | CwkFeedbackItem)[], colColor: number[]) => {
       let localY = y;
       
       const width = 80;
@@ -150,8 +156,8 @@ export function downloadComparativeFeedbackPDF(evaluation: ComparativeEvaluation
       doc.setFont('helvetica', 'normal');
       doc.setTextColor(colors.primary[0], colors.primary[1], colors.primary[2]);
       if (www && www.length > 0) {
-        www.forEach((item: string, i: number) => {
-          const lines = doc.splitTextToSize(`${critNum}.${i + 1}A) ${item}`, width);
+        www.forEach((item: string | CwkFeedbackItem, i: number) => {
+          const lines = doc.splitTextToSize(`${critNum}.${i + 1}A) ${getFeedbackItemText(item)}`, width);
           doc.text(lines, xPos, localY);
           localY += lines.length * 5;
         });
@@ -169,8 +175,8 @@ export function downloadComparativeFeedbackPDF(evaluation: ComparativeEvaluation
       doc.setFont('helvetica', 'normal');
       doc.setTextColor(colors.primary[0], colors.primary[1], colors.primary[2]);
       if (ebi && ebi.length > 0) {
-        ebi.forEach((item: string, i: number) => {
-          const lines = doc.splitTextToSize(`${critNum}.${i + 1}B) ${item}`, width);
+        ebi.forEach((item: string | CwkFeedbackItem, i: number) => {
+          const lines = doc.splitTextToSize(`${critNum}.${i + 1}B) ${getFeedbackItemText(item)}`, width);
           doc.text(lines, xPos, localY);
           localY += lines.length * 5;
         });
@@ -329,53 +335,87 @@ export function downloadFeedbackPDF(student: StudentSubmission, type: 'draft' | 
     doc.setFont('helvetica', 'bold');
     doc.text(`Criterion ${critNum}: ${teacherScore}/12`, 24, y + 3);
 
-    y += 16;
+    y += 14;
 
-    // WWW
-    doc.setFontSize(10);
-    doc.setTextColor(colors.secondary[0], colors.secondary[1], colors.secondary[2]);
-    doc.setFont('helvetica', 'bold');
-    doc.text('A) What Went Well (WWW)', 24, y);
-    y += 6;
-    doc.setFont('helvetica', 'normal');
-    doc.setTextColor(colors.primary[0], colors.primary[1], colors.primary[2]);
-    
-    if (res.www && res.www.length > 0) {
-      res.www.forEach((item: string, i: number) => {
-        const lines = doc.splitTextToSize(`${critNum}.${i + 1}A) ${item}`, 162);
-        doc.text(lines, 24, y);
-        y += lines.length * 5;
-        if (y > 270) { doc.addPage(); y = 20; }
-      });
-    } else {
-      doc.text(`None`, 24, y);
-      y += 5;
-    }
-    
-    y += 3;
-    
-    // EBI
-    doc.setFontSize(10);
-    doc.setTextColor(colors.secondary[0], colors.secondary[1], colors.secondary[2]);
-    doc.setFont('helvetica', 'bold');
-    doc.text('B) Even Better If (EBI)', 24, y);
-    y += 6;
-    doc.setFont('helvetica', 'normal');
-    doc.setTextColor(colors.primary[0], colors.primary[1], colors.primary[2]);
+    const activeWww = normalizeFeedbackItems(res.www, critNum, 'WWW', teacherScore).filter(
+      (item) => item.isChecked
+    );
+    const activeEbi = normalizeFeedbackItems(res.ebi, critNum, 'EBI', teacherScore).filter(
+      (item) => item.isChecked
+    );
 
-    if (res.ebi && res.ebi.length > 0) {
-      res.ebi.forEach((item: string, i: number) => {
-        const lines = doc.splitTextToSize(`${critNum}.${i + 1}B) ${item}`, 162);
-        doc.text(lines, 24, y);
-        y += lines.length * 5;
-        if (y > 270) { doc.addPage(); y = 20; }
-      });
-    } else {
-      doc.text(`None`, 24, y);
+    const drawRagFeedbackSection = (heading: string, headingRgb: [number, number, number], items: CwkFeedbackItem[]) => {
+      if (y > 265) {
+        doc.addPage();
+        y = 20;
+      }
+      doc.setFontSize(10);
+      doc.setTextColor(headingRgb[0], headingRgb[1], headingRgb[2]);
+      doc.setFont('helvetica', 'bold');
+      doc.text(heading, 24, y);
       y += 5;
-    }
-    
-    y += 10;
+
+      if (items.length === 0) {
+        doc.setFontSize(9.5);
+        doc.setFont('helvetica', 'normal');
+        doc.setTextColor(colors.secondary[0], colors.secondary[1], colors.secondary[2]);
+        doc.text('None selected', 24, y + 2);
+        y += 8;
+        return;
+      }
+
+      items.forEach((item) => {
+        const style = RAG_STYLES[item.ragColor] || RAG_STYLES.amber;
+        doc.setFontSize(9.5);
+        doc.setFont('helvetica', 'normal');
+        const textLines = doc.splitTextToSize(item.text, 130);
+        const cardHeight = Math.max(10.5, textLines.length * 4.4 + 4.8);
+
+        if (y + cardHeight > 278) {
+          doc.addPage();
+          y = 20;
+        }
+
+        // Card tint + border
+        doc.setFillColor(style.cardBgRgb[0], style.cardBgRgb[1], style.cardBgRgb[2]);
+        doc.setDrawColor(style.cardBorderRgb[0], style.cardBorderRgb[1], style.cardBorderRgb[2]);
+        doc.setLineWidth(0.3);
+        doc.roundedRect(22, y, 166, cardHeight, 1.5, 1.5, 'FD');
+
+        // Left RAG accent bar
+        doc.setFillColor(style.borderRgb[0], style.borderRgb[1], style.borderRgb[2]);
+        doc.rect(22, y, 1.4, cardHeight, 'F');
+
+        // RAG pill badge
+        doc.setFillColor(style.badgeRgb[0], style.badgeRgb[1], style.badgeRgb[2]);
+        doc.setDrawColor(style.borderRgb[0], style.borderRgb[1], style.borderRgb[2]);
+        doc.setLineWidth(0.35);
+        doc.roundedRect(26, y + 2.2, 13.5, 5.2, 1, 1, 'FD');
+
+        doc.setTextColor(style.textRgb[0], style.textRgb[1], style.textRgb[2]);
+        doc.setFontSize(8);
+        doc.setFont('helvetica', 'bold');
+        doc.text(item.code, 32.75, y + 5.7, { align: 'center' });
+
+        // Body text
+        doc.setTextColor(colors.primary[0], colors.primary[1], colors.primary[2]);
+        doc.setFontSize(9.5);
+        doc.setFont('helvetica', 'normal');
+        doc.text(textLines, 42, y + 5.5);
+
+        // Active page reference
+        doc.setFontSize(7.5);
+        doc.setTextColor(colors.secondary[0], colors.secondary[1], colors.secondary[2]);
+        doc.text(`p.${item.pdfLocation.page}`, 185, y + 5.5, { align: 'right' });
+
+        y += cardHeight + 2.5;
+      });
+    };
+
+    drawRagFeedbackSection('A) What Went Well (WWW)', [20, 83, 45], activeWww);
+    y += 2.5;
+    drawRagFeedbackSection('B) Even Better If (EBI)', [127, 29, 29], activeEbi);
+    y += 7;
   });
 
   doc.save(`${formattedName}_${type}_feedback.pdf`);

@@ -1,12 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { FolderOpen, Moon, LogOut, FileText, Upload, Trash2, Sun, ChevronRight, Loader2, ChevronDown, Plus } from 'lucide-react';
-import * as pdfjsLib from 'pdfjs-dist';
-// @ts-ignore
-import pdfWorker from 'pdfjs-dist/build/pdf.worker.min.mjs?url';
 import { StudentSubmission, loadDirectoryData, loadStructure, createClass, createAssignment } from '../db';
 import ClassBatchTab from './ClassBatchTab';
-
-pdfjsLib.GlobalWorkerOptions.workerSrc = pdfWorker;
+import { extractPageSegmentedTextFromPdf } from '../utils/pdfTextExtractor';
 
 interface UploadViewProps {
   onUploadComplete: (
@@ -122,19 +118,6 @@ export default function UploadView({ onUploadComplete, onCompareComplete, onClas
   const [cwk2IsCompressing, setCwk2IsCompressing] = useState(false);
   const [cwk2SelectedDirectoryStudent, setCwk2SelectedDirectoryStudent] = useState('');
 
-  const extractTextFromPDF = async (file: File): Promise<string> => {
-    const arrayBuffer = await file.arrayBuffer();
-    const pdf = await pdfjsLib.getDocument({ data: arrayBuffer }).promise;
-    let text = '';
-    for (let i = 1; i <= pdf.numPages; i++) {
-        const page = await pdf.getPage(i);
-        const content = await page.getTextContent();
-        const strings = content.items.map((item: any) => item.str);
-        text += strings.join(' ') + '\n';
-    }
-    return text;
-  };
-
   const handleFileUpload = async (
     e: React.ChangeEvent<HTMLInputElement>, 
     setFile: React.Dispatch<React.SetStateAction<File | null>>,
@@ -144,24 +127,23 @@ export default function UploadView({ onUploadComplete, onCompareComplete, onClas
     const file = e.target.files?.[0];
     if (file) {
       setFile(file);
-      if (file.size > 5 * 1024 * 1024) {
-        setCompressing(true);
-        try {
-          const text = await extractTextFromPDF(file);
+      setCompressing(true);
+      try {
+        const text = await extractPageSegmentedTextFromPdf(file);
+        if (text && text.trim().length > 0) {
           setContent(text);
-        } catch (err) {
-          console.error("Failed to parse large PDF locally.", err);
-          alert("Failed to read large PDF document. Proceeding with standard upload.");
+        } else {
           const reader = new FileReader();
           reader.onload = (ev) => { setContent(ev.target?.result as string); };
           reader.readAsDataURL(file);
-        } finally {
-          setCompressing(false);
         }
-      } else {
-         const reader = new FileReader();
-         reader.onload = (ev) => { setContent(ev.target?.result as string); };
-         reader.readAsDataURL(file);
+      } catch (err) {
+        console.error("Failed to parse PDF locally, falling back to data URL.", err);
+        const reader = new FileReader();
+        reader.onload = (ev) => { setContent(ev.target?.result as string); };
+        reader.readAsDataURL(file);
+      } finally {
+        setCompressing(false);
       }
     }
   };

@@ -9,6 +9,7 @@ import DirectoryView from './components/DirectoryView';
 import ClassBatchResults from './components/ClassBatchResults';
 import CandidateSplitViewer from './components/CandidateSplitViewer'; // NEW: Import the split viewer
 import { StudentSubmission } from './db';
+import { normalizeEvaluationResult } from './utils/ragStyles';
 
 export default function App({
   onBackToPortal,
@@ -68,12 +69,13 @@ export default function App({
         body: JSON.stringify({ text })
       });
       if (response.ok) {
-        const data = await response.json();
-        if (data && data.error) {
-          alert(`Evaluation failed: ${data.error}`);
+        const rawData = await response.json();
+        if (rawData && rawData.error) {
+          alert(`Evaluation failed: ${rawData.error}`);
           setAppState('upload');
           return;
         }
+        const data = normalizeEvaluationResult(rawData);
         setEvaluation(data);
 
         // UPLOAD PIPELINE:

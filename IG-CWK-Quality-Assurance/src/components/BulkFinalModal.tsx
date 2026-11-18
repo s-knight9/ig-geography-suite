@@ -1,11 +1,9 @@
 import React, { useState, useRef, useMemo } from 'react';
 import { Upload, X, CheckCircle2, Loader2, PlayCircle, Folder, AlertCircle } from 'lucide-react';
-import * as pdfjsLib from 'pdfjs-dist';
-// @ts-ignore
-import pdfWorker from 'pdfjs-dist/build/pdf.worker.min.mjs?url';
 import { StudentSubmission, saveGradedSubmissionWithPdf } from '../db';
 import { parseCandidateName } from '../nameParser';
-pdfjsLib.GlobalWorkerOptions.workerSrc = pdfWorker;
+import { normalizeEvaluationResult } from '../utils/ragStyles';
+import { extractPageSegmentedTextFromPdf } from '../utils/pdfTextExtractor';
 
 interface BulkFinalModalProps {
   isOpen: boolean;
@@ -24,19 +22,6 @@ interface BulkMember extends Omit<StudentSubmission, 'status'> {
   error?: string;
   newFinalEvaluation?: any;
 }
-
-const extractTextFromPDF = async (file: File): Promise<string> => {
-    const arrayBuffer = await file.arrayBuffer();
-    const pdf = await pdfjsLib.getDocument({ data: arrayBuffer }).promise;
-    let text = '';
-    for (let i = 1; i <= pdf.numPages; i++) {
-        const page = await pdf.getPage(i);
-        const content = await page.getTextContent();
-        const strings = content.items.map((item: any) => item.str);
-        text += strings.join(' ') + '\n';
-    }
-    return text;
-};
 
 export default function BulkFinalModal({ isOpen, onClose, students, currentClass, currentAssignment, onCommit }: BulkFinalModalProps) {
   const [members, setMembers] = useState<BulkMember[]>([]);
@@ -60,7 +45,7 @@ export default function BulkFinalModal({ isOpen, onClose, students, currentClass
     if (!file) return;
 
     try {
-      const text = await extractTextFromPDF(file);
+      const text = await extractPageSegmentedTextFromPdf(file);
       setMembers(prev => prev.map(m => {
         if (m.id === id) {
           return { ...m, file, fileContent: text, status: 'READY' };
@@ -108,7 +93,7 @@ export default function BulkFinalModal({ isOpen, onClose, students, currentClass
                     // But we want to store it as a Final piece and have its criteria scores.
                     // Wait, the compare prompt returns `cwk2_total_score` and `cwk1_total_score` and `criteria` array.
                     // We can map this to a regular evaluation for Final.
-                    const finalEval = {
+                    const finalEval = normalizeEvaluationResult({
                        total_score: data.cwk2_total_score || 0,
                        moderator_executive_summary: "Comparative Analysis: " + (data.moderator_executive_summary || ""),
                        word_counts: { evaluated_payload: 0, excluded_ancillaries: 0, raw_file_extract: 0 },
@@ -139,7 +124,7 @@ export default function BulkFinalModal({ isOpen, onClose, students, currentClass
                             ebi: data.criteria?.ao3_conclusion?.cwk2_ebi || []
                          }
                        }
-                    };
+                    });
 
                     // Call upload pipeline right after Gemini AI generates the grading report:
                     // Uploads raw file to Firebase Storage, checks database for existing Draft submission,

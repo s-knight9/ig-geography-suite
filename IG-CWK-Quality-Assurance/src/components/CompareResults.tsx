@@ -3,6 +3,7 @@ import { ArrowLeft, CheckCircle2, ChevronRight, XCircle, AlertTriangle, Download
 import { ComparativeEvaluationResult } from '../types';
 import ArchiveModal from './ArchiveModal';
 import { saveComparativeSubmissionWithPdf } from '../db';
+import { getFeedbackItemText } from '../utils/ragStyles';
 
 interface CompareResultsProps {
   evaluation: ComparativeEvaluationResult;
@@ -200,7 +201,7 @@ export default function CompareResults({
                          {criterion.cwk1_www.map((item, idx) => (
                            <li key={idx} className="text-sm text-slate-700 dark:text-slate-300 flex items-start gap-2">
                              <span className="text-[10px] font-black tracking-widest bg-emerald-100 dark:bg-emerald-900/50 text-emerald-700 dark:text-emerald-400 px-1.5 py-0.5 rounded flex-shrink-0 mt-0.5">{index+1}.{idx+1}A</span>
-                             {item}
+                             {getFeedbackItemText(item)}
                            </li>
                          ))}
                        </ul>
@@ -211,7 +212,7 @@ export default function CompareResults({
                          {criterion.cwk1_ebi.map((item, idx) => (
                            <li key={idx} className="text-sm text-slate-700 dark:text-slate-300 flex items-start gap-2">
                              <span className="text-[10px] font-black tracking-widest bg-orange-100 dark:bg-orange-900/50 text-orange-700 dark:text-orange-400 px-1.5 py-0.5 rounded flex-shrink-0 mt-0.5">{index+1}.{idx+1}B</span>
-                             {item}
+                             {getFeedbackItemText(item)}
                            </li>
                          ))}
                        </ul>
@@ -231,7 +232,7 @@ export default function CompareResults({
                          {criterion.cwk2_www.map((item, idx) => (
                            <li key={idx} className="text-sm text-slate-700 dark:text-slate-300 flex items-start gap-2">
                              <span className="text-[10px] font-black tracking-widest bg-blue-100 dark:bg-blue-900/50 text-blue-700 dark:text-blue-400 px-1.5 py-0.5 rounded flex-shrink-0 mt-0.5">{index+1}.{idx+1}A</span>
-                             {item}
+                             {getFeedbackItemText(item)}
                            </li>
                          ))}
                        </ul>
@@ -242,7 +243,7 @@ export default function CompareResults({
                          {criterion.cwk2_ebi.map((item, idx) => (
                            <li key={idx} className="text-sm text-slate-700 dark:text-slate-300 flex items-start gap-2">
                              <span className="text-[10px] font-black tracking-widest bg-purple-100 dark:bg-purple-900/50 text-purple-700 dark:text-purple-400 px-1.5 py-0.5 rounded flex-shrink-0 mt-0.5">{index+1}.{idx+1}B</span>
-                             {item}
+                             {getFeedbackItemText(item)}
                            </li>
                          ))}
                        </ul>

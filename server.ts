@@ -24,6 +24,7 @@ import Parser from "rss-parser";
 import crypto from "crypto";
 import { getTodayPolls, castVote, hasPollsForToday, savePolls, getPollDateKST, tagText, getManualHeadlineTags, saveManualHeadlineTags, learnKeywordsFromHeadline, getManualPollTags, saveManualPollTags, getPollQuestion } from "./IG Correspondent/src/server/db.ts";
 import { getGlobeTubeDB } from "./globetubeDb";
+import { normalizeEvaluationResult } from "./src/utils/ragStyles";
 
 dotenv.config();
 
@@ -534,6 +535,29 @@ ${JSON.stringify(lowestCriteriaMap, null, 2)}
     }
   });
 
+  // Proxy for PDFs to avoid Firebase Storage CORS blocks in pdfjs-dist
+  app.get("/api/proxy-pdf", async (req, res) => {
+    try {
+      const pdfUrl = req.query.url as string;
+      if (!pdfUrl) {
+        return res.status(400).json({ error: "Missing url parameter" });
+      }
+
+      const pdfRes = await fetch(pdfUrl);
+      if (!pdfRes.ok) {
+        return res.status(pdfRes.status).json({ error: "Failed to fetch PDF" });
+      }
+
+      const buffer = Buffer.from(await pdfRes.arrayBuffer());
+      res.setHeader("Content-Type", pdfRes.headers.get("content-type") || "application/pdf");
+      res.setHeader("Cache-Control", "private, max-age=300");
+      res.send(buffer);
+    } catch (error: any) {
+      console.error("Proxy PDF error:", error);
+      res.status(500).json({ error: "Failed to proxy PDF: " + error.message });
+    }
+  });
+
   // IA Moderation Endpoint (Multipart) - Fallback
   app.post("/api/analyze-ia", upload.single("iaFile"), async (req, res) => {
     try {
@@ -907,16 +931,38 @@ Provide analysis across the five assessment criteria (A01, AO2, AO2, AO2, AO3), 
 - Criterion 4 (AO2): Analysis and interpretation. (Trends, anomalies, explanation based on theory)
 - Criterion 5 (AO3): Conclusion and Evaluation. (Link to hypotheses, evidence, critique/improvements)
 
-Provide specific "What Went Well" (WWW) and "Even Better If" (EBI) bullet points for each.
+Provide specific "What Went Well" (WWW) and "Even Better If" (EBI) feedback items for each criterion.
+CLOSE-READING & GROUNDING REQUIREMENTS (CRITICAL):
+- The coursework is segmented with explicit page markers ('=== PAGE 1 ===', '=== PAGE 2 ===', ..., '=== PAGE N ===').
+- Perform a genuine close read of every page. NEVER assign pages sequentially by criterion number (e.g. do NOT put Criterion 1 on page 1, Criterion 2 on page 2, Criterion 3 on page 3, etc.).
+- Instead, locate the ACTUAL page (1 to N) and vertical position where each piece of evidence (for WWW) or omission/gap (for EBI) physically appears (ignoring the Table of Contents page when locating actual body sections, tables, graphs, maps, analysis, and conclusions).
+- For an EBI citing a missing feature in a section (e.g., missing justification in Hypotheses, missing complex technique in Data Presentation, or missing evaluation of sampling in Conclusion), anchor it to the exact heading or concluding paragraph of that relevant section in the coursework.
+
+For EVERY WWW and EBI item, output a structured object with:
+- "id": unique string (e.g. "c1-www-1", "c1-ebi-1")
+- "code": reference code ("1.1A", "1.2A" for Criterion 1 WWW; "1.1B", "1.2B" for Criterion 1 EBI; "2.1A" / "2.1B" for Criterion 2, etc.)
+- "type": "WWW" or "EBI"
+- "text": concise, specific moderation feedback string
+- "ragColor":
+  - For "WWW" items: "green" when associated with Level 3 top-band achievement (9-12 marks or strong criterion mastery), or "amber" when associated with Level 1-2 middle/lower-band achievement (1-8 marks).
+  - For "EBI" items: ALWAYS "light_red".
+- "isChecked": true
+- "pdfLocation": {
+    "page": number (exact 1-based page number from the '=== PAGE N ===' markers where the evidence or gap occurs),
+    "xPercent": 2.5,
+    "yPercent": number (estimated 5 to 95 vertical percentage down that page where the relevant paragraph, figure, or heading sits),
+    "anchorQuote": "string (verbatim 4 to 12 word quote copied directly from the target paragraph, heading, figure caption, or table on that page)",
+    "anchorRationale": "string (1-sentence explanation of why this badge sits beside this specific quote/section)"
+  }
 
 Respond in the following JSON format ONLY:
 {
   "scores": {
-    "ao1_knowledge": { "score": number, "www": ["string"], "ebi": ["string"] },
-    "ao2_observation": { "score": number, "www": ["string"], "ebi": ["string"] },
-    "ao2_organisation": { "score": number, "www": ["string"], "ebi": ["string"] },
-    "ao2_analysis": { "score": number, "www": ["string"], "ebi": ["string"] },
-    "ao3_conclusion": { "score": number, "www": ["string"], "ebi": ["string"] }
+    "ao1_knowledge": { "score": number, "www": [{ "id": "string", "code": "1.1A", "type": "WWW", "text": "string", "ragColor": "green" | "amber", "isChecked": true, "pdfLocation": { "page": number, "xPercent": 2.5, "yPercent": number, "anchorQuote": "string", "anchorRationale": "string" } }], "ebi": [{ "id": "string", "code": "1.1B", "type": "EBI", "text": "string", "ragColor": "light_red", "isChecked": true, "pdfLocation": { "page": number, "xPercent": 2.5, "yPercent": number, "anchorQuote": "string", "anchorRationale": "string" } }] },
+    "ao2_observation": { "score": number, "www": [CwkFeedbackItem], "ebi": [CwkFeedbackItem] },
+    "ao2_organisation": { "score": number, "www": [CwkFeedbackItem], "ebi": [CwkFeedbackItem] },
+    "ao2_analysis": { "score": number, "www": [CwkFeedbackItem], "ebi": [CwkFeedbackItem] },
+    "ao3_conclusion": { "score": number, "www": [CwkFeedbackItem], "ebi": [CwkFeedbackItem] }
   },
   "total_score": number,
   "word_counts": {
@@ -933,6 +979,24 @@ Respond in the following JSON format ONLY:
         if (matches) {
           const mimeType = matches[1];
           const base64Data = matches[2];
+          let segmentedPageText = "";
+          if (mimeType === "application/pdf") {
+            try {
+              const parser = new PDFParse({ data: Buffer.from(base64Data, "base64") });
+              try {
+                const parsed = await parser.getText();
+                if (Array.isArray(parsed.pages) && parsed.pages.length > 0) {
+                  segmentedPageText = parsed.pages
+                    .map((p: any) => `=== PAGE ${p.num} ===\n${p.text || ""}`)
+                    .join("\n\n");
+                }
+              } finally {
+                await parser.destroy();
+              }
+            } catch (pdfErr) {
+              console.warn("Could not extract segmented pages from base64 PDF:", pdfErr);
+            }
+          }
           contentsPayload = [
             {
               inlineData: {
@@ -940,6 +1004,7 @@ Respond in the following JSON format ONLY:
                 mimeType: mimeType
               }
             },
+            ...(segmentedPageText ? [segmentedPageText] : []),
             systemPrompt
           ];
         } else {
@@ -967,7 +1032,7 @@ Respond in the following JSON format ONLY:
         rawText = rawText.replace(/^```\n/, '').replace(/\n```$/, '');
       }
       
-      let result = JSON.parse(rawText);
+      let result = normalizeEvaluationResult(JSON.parse(rawText));
       
       clearInterval(keepAliveInterval);
       res.write(JSON.stringify(result));

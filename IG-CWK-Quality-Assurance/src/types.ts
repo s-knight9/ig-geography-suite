@@ -1,7 +1,10 @@
+import type { CwkFeedbackItem, RagBadgeColor } from './utils/ragStyles';
+export type { CwkFeedbackItem, RagBadgeColor };
+
 export interface CriterionResult {
   score: number;
-  www: string[];
-  ebi: string[];
+  www: (CwkFeedbackItem | string)[];
+  ebi: (CwkFeedbackItem | string)[];
 }
 
 export interface EvaluationResult {

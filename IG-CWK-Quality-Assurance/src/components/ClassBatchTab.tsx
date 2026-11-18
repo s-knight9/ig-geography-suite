@@ -1,11 +1,8 @@
 import React, { useState, useRef, useMemo } from 'react';
 import { Upload, Trash2, FileText, CheckCircle2, AlertCircle, Loader2, UserPlus, PlayCircle } from 'lucide-react';
 import * as xlsx from 'xlsx';
-import * as pdfjsLib from 'pdfjs-dist';
-// @ts-ignore
-import pdfWorker from 'pdfjs-dist/build/pdf.worker.min.mjs?url';
-
-pdfjsLib.GlobalWorkerOptions.workerSrc = pdfWorker;
+import { normalizeEvaluationResult } from '../utils/ragStyles';
+import { extractPageSegmentedTextFromPdf } from '../utils/pdfTextExtractor';
 
 export interface ClassMember {
   id: string;
@@ -28,19 +25,6 @@ export default function ClassBatchTab({ onComplete }: { onComplete: (results: Cl
   const [newPreferredName, setNewPreferredName] = useState('');
 
   const fileInputRef = useRef<HTMLInputElement>(null);
-
-  const extractTextFromPDF = async (file: File): Promise<string> => {
-    const arrayBuffer = await file.arrayBuffer();
-    const pdf = await pdfjsLib.getDocument({ data: arrayBuffer }).promise;
-    let text = '';
-    for (let i = 1; i <= pdf.numPages; i++) {
-        const page = await pdf.getPage(i);
-        const content = await page.getTextContent();
-        const strings = content.items.map((item: any) => item.str);
-        text += strings.join(' ') + '\n';
-    }
-    return text;
-  };
 
   const handleExcelUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -101,7 +85,7 @@ export default function ClassBatchTab({ onComplete }: { onComplete: (results: Cl
 
     // Set temporarily to uploading locally if needed, but here we just read it quickly.
     try {
-      const text = await extractTextFromPDF(file);
+      const text = await extractPageSegmentedTextFromPdf(file);
       setMembers(prev => prev.map(m => {
         if (m.id === id) {
           return { ...m, file, fileContent: text, status: 'READY' };
@@ -149,7 +133,7 @@ export default function ClassBatchTab({ onComplete }: { onComplete: (results: Cl
             if (response.ok) {
                 const data = await response.json();
                 if (data && !data.error) {
-                    newMembersList[studentIndex] = { ...newMembersList[studentIndex], status: 'DONE', evaluation: data };
+                    newMembersList[studentIndex] = { ...newMembersList[studentIndex], status: 'DONE', evaluation: normalizeEvaluationResult(data) };
                 } else {
                     newMembersList[studentIndex] = { ...newMembersList[studentIndex], status: 'ERROR', error: data.error };
                 }
