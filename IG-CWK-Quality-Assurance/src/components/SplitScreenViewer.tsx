@@ -65,6 +65,14 @@ export default function SplitScreenViewer({
   React.useEffect(() => {
     if (initialCandidateProp || initialStudentProp) {
       const next = (initialCandidateProp || initialStudentProp)!;
+      const cur = studentRef.current;
+      const isSameStudent =
+        next.candidateName === cur?.candidateName &&
+        next.className === cur?.className &&
+        next.assignmentName === cur?.assignmentName;
+      if (hasPendingSummarySaveRef.current && isSameStudent) {
+        return;
+      }
       setStudent(next);
       studentRef.current = next;
     }
@@ -85,6 +93,12 @@ export default function SplitScreenViewer({
   const [includeMarginTagsOnPrint, setIncludeMarginTagsOnPrint] = useState<boolean>(
     readIncludeMarginTagsPreference
   );
+  const [summarySaveState, setSummarySaveState] = useState<'idle' | 'saving' | 'saved'>('idle');
+  const summaryTextareaRef = useRef<HTMLTextAreaElement | null>(null);
+  const compareSummaryTextareaRef = useRef<HTMLTextAreaElement | null>(null);
+  const summarySaveTimerRef = useRef<number | null>(null);
+  const summarySavedBadgeTimerRef = useRef<number | null>(null);
+  const hasPendingSummarySaveRef = useRef(false);
 
   const handleToggleIncludeMarginTagsOnPrint = React.useCallback((checked: boolean) => {
     setIncludeMarginTagsOnPrint(checked);
@@ -250,6 +264,109 @@ export default function SplitScreenViewer({
       }
       return false;
     });
+  };
+
+  const autoResizeSummaryTextarea = (el: HTMLTextAreaElement | null) => {
+    if (!el) return;
+    el.style.height = 'auto';
+    el.style.height = `${Math.max(88, el.scrollHeight)}px`;
+  };
+
+  const flushPendingExecutiveSummarySave = React.useCallback(async () => {
+    if (summarySaveTimerRef.current !== null) {
+      window.clearTimeout(summarySaveTimerRef.current);
+      summarySaveTimerRef.current = null;
+    }
+    if (!hasPendingSummarySaveRef.current) return;
+    hasPendingSummarySaveRef.current = false;
+
+    const toSave = studentRef.current;
+    setSummarySaveState('saving');
+    try {
+      if (onUpdateStudent) onUpdateStudent(toSave);
+      await addOrUpdateSubmission(toSave);
+      setSummarySaveState('saved');
+      if (summarySavedBadgeTimerRef.current !== null) {
+        window.clearTimeout(summarySavedBadgeTimerRef.current);
+      }
+      summarySavedBadgeTimerRef.current = window.setTimeout(() => {
+        setSummarySaveState('idle');
+      }, 2000);
+    } catch (err) {
+      console.error('Failed to persist Moderator Executive Summary:', err);
+      setSummarySaveState('idle');
+    }
+  }, [onUpdateStudent]);
+
+  React.useEffect(() => {
+    autoResizeSummaryTextarea(summaryTextareaRef.current);
+    autoResizeSummaryTextarea(compareSummaryTextareaRef.current);
+  }, [
+    rawActiveEvaluation?.moderator_executive_summary,
+    student.comparativeEvaluation?.moderator_executive_summary,
+    activeStage,
+    viewMode,
+  ]);
+
+  React.useEffect(() => {
+    return () => {
+      if (summarySavedBadgeTimerRef.current !== null) {
+        window.clearTimeout(summarySavedBadgeTimerRef.current);
+      }
+      if (hasPendingSummarySaveRef.current) {
+        void flushPendingExecutiveSummarySave();
+      }
+    };
+  }, [flushPendingExecutiveSummarySave]);
+
+  const queueExecutiveSummaryPersist = (updatedStudent: StudentSubmission) => {
+    studentRef.current = updatedStudent;
+    setStudent(updatedStudent);
+    hasPendingSummarySaveRef.current = true;
+    setSummarySaveState('saving');
+
+    if (summarySaveTimerRef.current !== null) {
+      window.clearTimeout(summarySaveTimerRef.current);
+    }
+    summarySaveTimerRef.current = window.setTimeout(() => {
+      void flushPendingExecutiveSummarySave();
+    }, 600);
+  };
+
+  const handleExecutiveSummaryChange = (newValue: string) => {
+    const curStudent = studentRef.current;
+    const isFinalStage = activeStage === 'Final';
+    const rawEval = isFinalStage ? curStudent.finalEvaluation : curStudent.draftEvaluation;
+    if (!rawEval) return;
+
+    const updatedEval: EvaluationResult = {
+      ...rawEval,
+      moderator_executive_summary: newValue,
+    };
+
+    const updatedStudent: StudentSubmission = {
+      ...curStudent,
+      ...(isFinalStage ? { finalEvaluation: updatedEval } : { draftEvaluation: updatedEval }),
+      updatedAt: new Date().toISOString(),
+    };
+
+    queueExecutiveSummaryPersist(updatedStudent);
+  };
+
+  const handleComparativeSummaryChange = (newValue: string) => {
+    const curStudent = studentRef.current;
+    if (!curStudent.comparativeEvaluation) return;
+
+    const updatedStudent: StudentSubmission = {
+      ...curStudent,
+      comparativeEvaluation: {
+        ...curStudent.comparativeEvaluation,
+        moderator_executive_summary: newValue,
+      },
+      updatedAt: new Date().toISOString(),
+    };
+
+    queueExecutiveSummaryPersist(updatedStudent);
   };
 
   // Handle persisting PDF margin badge drag-and-drop coordinates
@@ -639,9 +756,19 @@ export default function SplitScreenViewer({
               /* Comparative Evaluation View */
               <div className="space-y-6 pb-20">
                 <div className="bg-purple-50 dark:bg-purple-950/40 border border-purple-200 dark:border-purple-800/60 rounded-2xl p-6 shadow-sm">
-                  <h3 className="text-purple-700 dark:text-purple-300 font-bold uppercase tracking-widest text-xs flex items-center gap-2 mb-3">
-                    <Sparkles className="w-4 h-4" /> Comparative Moderation Analysis
-                  </h3>
+                  <div className="flex items-center justify-between gap-2 mb-3">
+                    <h3 className="text-purple-700 dark:text-purple-300 font-bold uppercase tracking-widest text-xs flex items-center gap-2">
+                      <Sparkles className="w-4 h-4" /> Comparative Moderation Analysis
+                    </h3>
+                    <span className="print:hidden inline-flex items-center gap-1 text-[10px] font-bold uppercase tracking-wider text-purple-500/80 dark:text-purple-300/80">
+                      <Edit2 className="w-3 h-3" />
+                      {summarySaveState === 'saving'
+                        ? 'Saving...'
+                        : summarySaveState === 'saved'
+                          ? 'Saved'
+                          : 'Editable'}
+                    </span>
+                  </div>
                   <div className="grid grid-cols-2 gap-4 my-4">
                     <div className="bg-white dark:bg-slate-800 p-4 rounded-xl border border-purple-100 dark:border-purple-900/40">
                       <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider block mb-1">Draft Score</span>
@@ -656,8 +783,23 @@ export default function SplitScreenViewer({
                       </span>
                     </div>
                   </div>
-                  <p className="text-slate-700 dark:text-slate-300 text-sm leading-relaxed font-medium">
-                    {student.comparativeEvaluation.moderator_executive_summary}
+                  <textarea
+                    ref={compareSummaryTextareaRef}
+                    value={student.comparativeEvaluation.moderator_executive_summary ?? ''}
+                    onChange={(e) => {
+                      handleComparativeSummaryChange(e.target.value);
+                      autoResizeSummaryTextarea(e.target);
+                    }}
+                    onBlur={() => {
+                      void flushPendingExecutiveSummarySave();
+                    }}
+                    placeholder="Enter comparative moderator executive summary..."
+                    aria-label="Comparative Moderator Executive Summary"
+                    className="print:hidden w-full bg-white/80 dark:bg-slate-900/60 border border-purple-200 dark:border-purple-800/60 rounded-md px-3 py-2 text-slate-700 dark:text-slate-200 text-sm leading-relaxed font-medium focus:outline-none focus:ring-2 focus:ring-purple-500/40 focus:border-purple-500 resize-none transition-colors"
+                    rows={4}
+                  />
+                  <p className="hidden print:block text-slate-700 text-sm leading-relaxed font-medium whitespace-pre-wrap">
+                    {student.comparativeEvaluation.moderator_executive_summary || ''}
                   </p>
                 </div>
 
@@ -789,19 +931,42 @@ export default function SplitScreenViewer({
                 </div>
 
                 {/* Moderator Executive Summary */}
-                {activeEvaluation.moderator_executive_summary && (
-                  <div
-                    data-testid="moderator-executive-summary"
-                    className="igqa-exec-summary bg-[#F8FAFC] dark:bg-slate-800/80 rounded-lg p-5 border border-[#CBD5E1] dark:border-slate-700 border-l-4 border-l-[#2563EB] shadow-2xs break-inside-avoid"
-                  >
-                    <h3 className="text-[#1D4ED8] dark:text-blue-400 font-bold uppercase tracking-widest text-xs flex items-center gap-2 pb-2.5 mb-2.5 border-b border-[#E2E8F0] dark:border-slate-700">
+                <div
+                  data-testid="moderator-executive-summary"
+                  className="igqa-exec-summary bg-[#F8FAFC] dark:bg-slate-800/80 rounded-lg p-5 border border-[#CBD5E1] dark:border-slate-700 border-l-4 border-l-[#2563EB] shadow-2xs break-inside-avoid"
+                >
+                  <div className="flex items-center justify-between gap-2 pb-2.5 mb-2.5 border-b border-[#E2E8F0] dark:border-slate-700">
+                    <h3 className="text-[#1D4ED8] dark:text-blue-400 font-bold uppercase tracking-widest text-xs flex items-center gap-2">
                       <Trophy className="w-4 h-4 text-[#2563EB] dark:text-blue-400" /> Moderator Executive Summary ({activeStage.toUpperCase()} CWK)
                     </h3>
-                    <p className="text-[#1E293B] dark:text-slate-200 leading-[1.55] text-[12.5px] font-medium">
-                      {activeEvaluation.moderator_executive_summary}
-                    </p>
+                    <span className="print:hidden inline-flex items-center gap-1 text-[10px] font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500">
+                      <Edit2 className="w-3 h-3" />
+                      {summarySaveState === 'saving'
+                        ? 'Saving...'
+                        : summarySaveState === 'saved'
+                          ? 'Saved'
+                          : 'Editable'}
+                    </span>
                   </div>
-                )}
+                  <textarea
+                    ref={summaryTextareaRef}
+                    value={activeEvaluation.moderator_executive_summary ?? ''}
+                    onChange={(e) => {
+                      handleExecutiveSummaryChange(e.target.value);
+                      autoResizeSummaryTextarea(e.target);
+                    }}
+                    onBlur={() => {
+                      void flushPendingExecutiveSummarySave();
+                    }}
+                    placeholder="Enter moderator executive summary..."
+                    aria-label="Moderator Executive Summary"
+                    className="print:hidden w-full bg-white/80 dark:bg-slate-900/60 border border-slate-200 dark:border-slate-700 rounded-md px-3 py-2 text-[#1E293B] dark:text-slate-200 leading-[1.55] text-[12.5px] font-medium focus:outline-none focus:ring-2 focus:ring-blue-500/40 focus:border-blue-500 resize-none transition-colors"
+                    rows={4}
+                  />
+                  <p className="hidden print:block text-[#1E293B] leading-[1.55] text-[12.5px] font-medium whitespace-pre-wrap">
+                    {activeEvaluation.moderator_executive_summary || ''}
+                  </p>
+                </div>
 
                 {/* Detailed Criterion Rubric */}
                 <div className="space-y-4 print:space-y-0">

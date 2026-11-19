@@ -30,6 +30,21 @@ export default function ModerationResults({ evaluation, candidateName, isDarkMod
   
   // Clone and normalize evaluation so feedback items use structured CwkFeedbackItem objects
   const [editableEvaluation, setEditableEvaluation] = useState<EvaluationResult>(() => normalizeEvaluationResult(evaluation));
+  const summaryTextareaRef = React.useRef<HTMLTextAreaElement | null>(null);
+
+  React.useEffect(() => {
+    const el = summaryTextareaRef.current;
+    if (!el) return;
+    el.style.height = 'auto';
+    el.style.height = `${Math.max(88, el.scrollHeight)}px`;
+  }, [editableEvaluation.moderator_executive_summary]);
+
+  const handleExecutiveSummaryChange = (newSummary: string) => {
+    setEditableEvaluation(prev => ({
+      ...prev,
+      moderator_executive_summary: newSummary,
+    }));
+  };
   
   const handleFeedbackChange = (ao: string, type: 'www' | 'ebi', newArray: CwkFeedbackItem[]) => {
      setEditableEvaluation(prev => {
@@ -239,11 +254,25 @@ export default function ModerationResults({ evaluation, candidateName, isDarkMod
           data-testid="moderator-executive-summary"
           className="igqa-exec-summary bg-[#F8FAFC] dark:bg-slate-800/80 rounded-lg p-6 border border-[#CBD5E1] dark:border-slate-700 border-l-4 border-l-[#2563EB] shadow-xs break-inside-avoid"
         >
-          <h3 className="text-[#1D4ED8] dark:text-blue-400 font-bold uppercase tracking-widest pb-3 mb-3 border-b border-[#E2E8F0] dark:border-slate-700 flex items-center gap-2 text-xs">
-            <Trophy className="w-4 h-4 text-[#2563EB] dark:text-blue-400" /> Moderator Executive Summary ({activeStageLabel})
-          </h3>
-          <p className="text-[#1E293B] dark:text-slate-200 leading-[1.55] text-[12.5px] font-medium">
-            {evaluation.moderator_executive_summary}
+          <div className="flex items-center justify-between gap-2 pb-3 mb-3 border-b border-[#E2E8F0] dark:border-slate-700">
+            <h3 className="text-[#1D4ED8] dark:text-blue-400 font-bold uppercase tracking-widest flex items-center gap-2 text-xs">
+              <Trophy className="w-4 h-4 text-[#2563EB] dark:text-blue-400" /> Moderator Executive Summary ({activeStageLabel})
+            </h3>
+            <span className="print:hidden inline-flex items-center gap-1 text-[10px] font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500">
+              <Edit2 className="w-3 h-3" /> Editable
+            </span>
+          </div>
+          <textarea
+            ref={summaryTextareaRef}
+            value={editableEvaluation.moderator_executive_summary ?? ''}
+            onChange={(e) => handleExecutiveSummaryChange(e.target.value)}
+            placeholder="Enter moderator executive summary..."
+            aria-label="Moderator Executive Summary"
+            className="print:hidden w-full bg-white/80 dark:bg-slate-900/60 border border-slate-200 dark:border-slate-700 rounded-md px-3 py-2 text-[#1E293B] dark:text-slate-200 leading-[1.55] text-[12.5px] font-medium focus:outline-none focus:ring-2 focus:ring-blue-500/40 focus:border-blue-500 resize-none transition-colors"
+            rows={4}
+          />
+          <p className="hidden print:block text-[#1E293B] leading-[1.55] text-[12.5px] font-medium whitespace-pre-wrap">
+            {editableEvaluation.moderator_executive_summary || ''}
           </p>
         </section>
 
