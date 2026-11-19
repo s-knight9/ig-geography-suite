@@ -10,6 +10,7 @@ import {
   RotateCcw,
   Download,
   Printer,
+  Tag,
   Loader2,
   AlertCircle,
   ExternalLink,
@@ -24,6 +25,13 @@ import {
   resolveEvaluationCoordinatesWithPdf,
   ResolvedPdfLocation,
 } from '../utils/pdfCoordinateResolver';
+import {
+  fetchCourseworkPdfBytes,
+  downloadCourseworkPdf,
+  printCourseworkPdf,
+  readIncludeMarginTagsPreference,
+  writeIncludeMarginTagsPreference,
+} from '../utils/annotatedPdfExporter';
 
 pdfjsLib.GlobalWorkerOptions.workerSrc = pdfWorker;
 
@@ -42,8 +50,11 @@ export interface PdfJumpRequest {
 interface InteractiveCourseworkPdfViewerProps {
   pdfUrl: string;
   title?: string;
+  studentName?: string;
   items: MarginBadgeItem[];
   jumpRequest: PdfJumpRequest | null;
+  includeMarginTagsOnPrint?: boolean;
+  onToggleIncludeMarginTagsOnPrint?: (checked: boolean) => void;
   onUpdateItemLocation: (
     itemId: string,
     newLocation: CwkFeedbackItem['pdfLocation']
@@ -57,6 +68,7 @@ interface PdfPageRendererProps {
   pageNumber: number;
   targetWidth: number;
   pageBadges: MarginBadgeItem[];
+  includeMarginTagsOnPrint: boolean;
   draggingBadge: {
     id: string;
     page: number;
@@ -77,6 +89,7 @@ function PdfPageRenderer({
   pageNumber,
   targetWidth,
   pageBadges,
+  includeMarginTagsOnPrint,
   draggingBadge,
   highlightedItemId,
   hoveredItemId,
@@ -175,11 +188,15 @@ function PdfPageRenderer({
       />
 
       {/* Coordinate Overlay Layer */}
-      <div className="absolute inset-0 pointer-events-none z-20">
+      <div
+        className="absolute inset-0 pointer-events-none z-20"
+        data-print-margin-tags={includeMarginTagsOnPrint ? 'true' : 'false'}
+      >
         {/* Dashed horizontal alignment guide line while dragging */}
         {draggingBadge && draggingBadge.page === pageNumber && activeDraggedItemOnPage && (
           <div
             aria-hidden="true"
+            className="print:hidden"
             style={{
               position: 'absolute',
               left: 0,
@@ -205,6 +222,7 @@ function PdfPageRenderer({
               key={item.id}
               data-margin-badge={item.code}
               data-rag-color={item.ragColor}
+              className={includeMarginTagsOnPrint ? 'print:block' : 'print:hidden'}
               style={{
                 position: 'absolute',
                 left: `${xPercent}%`,
@@ -212,6 +230,8 @@ function PdfPageRenderer({
                 transform: 'translateY(-50%)',
                 pointerEvents: 'auto',
                 zIndex: isDragging ? 50 : isHighlighted ? 40 : isHovered ? 35 : 25,
+                WebkitPrintColorAdjust: 'exact',
+                printColorAdjust: 'exact',
               }}
             >
               <button
@@ -227,6 +247,8 @@ function PdfPageRenderer({
                   backgroundColor: style.badgeBg,
                   border: `1.5px solid ${style.badgeBorder}`,
                   color: style.badgeText,
+                  WebkitPrintColorAdjust: 'exact',
+                  printColorAdjust: 'exact',
                 }}
                 className={`px-1.5 py-0.5 rounded-md text-[11px] font-black leading-none shadow-sm select-none touch-none transition-transform ${
                   isDragging
@@ -244,7 +266,7 @@ function PdfPageRenderer({
               {isHovered && (
                 <div
                   role="tooltip"
-                  className="absolute left-full ml-2 top-1/2 -translate-y-1/2 w-64 bg-slate-900 text-white rounded-lg p-2.5 shadow-xl border border-slate-700 pointer-events-none z-50 text-left"
+                  className="print:hidden absolute left-full ml-2 top-1/2 -translate-y-1/2 w-64 bg-slate-900 text-white rounded-lg p-2.5 shadow-xl border border-slate-700 pointer-events-none z-50 text-left"
                 >
                   <div className="flex items-center justify-between gap-2 mb-1 pb-1 border-b border-slate-700/80">
                     <span className="text-[10px] font-bold uppercase tracking-wider text-slate-300 truncate">
@@ -284,54 +306,14 @@ function PdfPageRenderer({
   );
 }
 
-async function fetchPdfBytes(pdfUrl: string): Promise<ArrayBuffer> {
-  if (pdfUrl.startsWith('blob:') || pdfUrl.startsWith('data:')) {
-    const res = await fetch(pdfUrl);
-    if (!res.ok) throw new Error(`HTTP ${res.status}`);
-    return res.arrayBuffer();
-  }
-
-  // 1. Prefer dedicated /api/proxy-pdf endpoint
-  try {
-    const proxyRes = await fetch(`/api/proxy-pdf?url=${encodeURIComponent(pdfUrl)}`);
-    const contentType = proxyRes.headers.get('content-type') || '';
-    if (proxyRes.ok && (contentType.includes('pdf') || contentType.includes('octet-stream'))) {
-      return await proxyRes.arrayBuffer();
-    }
-  } catch {
-    // Fallback below
-  }
-
-  // 2. Fallback to existing /api/proxy-image endpoint (returns base64 dataUri)
-  try {
-    const imgProxyRes = await fetch(`/api/proxy-image?url=${encodeURIComponent(pdfUrl)}`);
-    if (imgProxyRes.ok) {
-      const json = await imgProxyRes.json();
-      if (json?.dataUri && typeof json.dataUri === 'string') {
-        const base64 = json.dataUri.includes(',') ? json.dataUri.split(',')[1] : json.dataUri;
-        const binaryString = atob(base64);
-        const bytes = new Uint8Array(binaryString.length);
-        for (let i = 0; i < binaryString.length; i++) {
-          bytes[i] = binaryString.charCodeAt(i);
-        }
-        return bytes.buffer;
-      }
-    }
-  } catch {
-    // Fallback below
-  }
-
-  // 3. Direct fetch fallback
-  const directRes = await fetch(pdfUrl);
-  if (!directRes.ok) throw new Error(`Failed to fetch PDF (HTTP ${directRes.status})`);
-  return directRes.arrayBuffer();
-}
-
 export default function InteractiveCourseworkPdfViewer({
   pdfUrl,
   title = 'Coursework PDF',
+  studentName,
   items,
   jumpRequest,
+  includeMarginTagsOnPrint,
+  onToggleIncludeMarginTagsOnPrint,
   onUpdateItemLocation,
   onResolvedLocations,
   onSelectBadge,
@@ -340,6 +322,7 @@ export default function InteractiveCourseworkPdfViewer({
   const pageRefs = useRef<Record<number, HTMLDivElement | null>>({});
   const highlightTimeoutRef = useRef<number | null>(null);
   const resolvedRunKeyRef = useRef<string | null>(null);
+  const loadedPdfBytesRef = useRef<Uint8Array | null>(null);
 
   const [pdfDoc, setPdfDoc] = useState<pdfjsLib.PDFDocumentProxy | null>(null);
   const [numPages, setNumPages] = useState<number>(0);
@@ -348,6 +331,26 @@ export default function InteractiveCourseworkPdfViewer({
   const [containerWidth, setContainerWidth] = useState<number>(640);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
+  const [isDownloadingPdf, setIsDownloadingPdf] = useState<boolean>(false);
+  const [isPrintingPdf, setIsPrintingPdf] = useState<boolean>(false);
+  const [internalIncludeMarginTags, setInternalIncludeMarginTags] = useState<boolean>(
+    readIncludeMarginTagsPreference
+  );
+
+  const isMarginTagsEnabled =
+    includeMarginTagsOnPrint !== undefined ? includeMarginTagsOnPrint : internalIncludeMarginTags;
+
+  const handleToggleMarginTags = useCallback(
+    (checked: boolean) => {
+      if (onToggleIncludeMarginTagsOnPrint) {
+        onToggleIncludeMarginTagsOnPrint(checked);
+      } else {
+        setInternalIncludeMarginTags(checked);
+        writeIncludeMarginTagsPreference(checked);
+      }
+    },
+    [onToggleIncludeMarginTagsOnPrint]
+  );
 
   const [highlightedItemId, setHighlightedItemId] = useState<string | null>(null);
   const [hoveredItemId, setHoveredItemId] = useState<string | null>(null);
@@ -389,6 +392,7 @@ export default function InteractiveCourseworkPdfViewer({
   useEffect(() => {
     let active = true;
     let loadedDoc: pdfjsLib.PDFDocumentProxy | null = null;
+    loadedPdfBytesRef.current = null;
 
     const load = async () => {
       setLoading(true);
@@ -398,8 +402,11 @@ export default function InteractiveCourseworkPdfViewer({
       setCurrentPage(1);
 
       try {
-        const buffer = await fetchPdfBytes(pdfUrl);
+        const buffer = await fetchCourseworkPdfBytes(pdfUrl);
         if (!active) return;
+
+        // Clone before pdfjs transfers the buffer to its worker thread
+        loadedPdfBytesRef.current = new Uint8Array(buffer.slice(0));
 
         const loadingTask = pdfjsLib.getDocument({ data: new Uint8Array(buffer) });
         const doc = await loadingTask.promise;
@@ -721,42 +728,44 @@ export default function InteractiveCourseworkPdfViewer({
   };
 
   const handleDownloadPdf = async () => {
+    if (isDownloadingPdf) return;
+    setIsDownloadingPdf(true);
     try {
-      const buffer = await fetchPdfBytes(pdfUrl);
-      const blob = new Blob([buffer], { type: 'application/pdf' });
-      const blobUrl = URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = blobUrl;
-      a.download = `${title.replace(/[^a-z0-9_\- ]/gi, '_')}.pdf`;
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
-      setTimeout(() => URL.revokeObjectURL(blobUrl), 2000);
-    } catch {
+      await downloadCourseworkPdf({
+        pdfSource: loadedPdfBytesRef.current ?? pdfUrl,
+        items,
+        studentName: studentName || title,
+        includeMarginTags: isMarginTagsEnabled,
+      });
+    } catch (err) {
+      console.error('Failed to download coursework PDF:', err);
       window.open(pdfUrl, '_blank', 'noopener,noreferrer');
+    } finally {
+      setIsDownloadingPdf(false);
     }
   };
 
   const handlePrintPdf = async () => {
+    if (isPrintingPdf) return;
+    setIsPrintingPdf(true);
     try {
-      const buffer = await fetchPdfBytes(pdfUrl);
-      const blob = new Blob([buffer], { type: 'application/pdf' });
-      const blobUrl = URL.createObjectURL(blob);
-      const win = window.open(blobUrl, '_blank');
-      if (win) {
-        win.addEventListener('load', () => {
-          win.print();
-        });
-      }
-    } catch {
+      await printCourseworkPdf({
+        pdfSource: loadedPdfBytesRef.current ?? pdfUrl,
+        items,
+        includeMarginTags: isMarginTagsEnabled,
+      });
+    } catch (err) {
+      console.error('Failed to print coursework PDF:', err);
       window.print();
+    } finally {
+      setIsPrintingPdf(false);
     }
   };
 
   return (
     <div className="flex flex-col w-full h-full bg-slate-100 dark:bg-slate-900">
       {/* Top Toolbar */}
-      <div className="h-11 px-3 bg-white dark:bg-slate-800 border-b border-slate-200 dark:border-slate-700 flex items-center justify-between gap-2 shrink-0 select-none">
+      <div className="h-11 px-3 bg-white dark:bg-slate-800 border-b border-slate-200 dark:border-slate-700 flex items-center justify-between gap-2 shrink-0 select-none print:hidden">
         {/* Page Navigation */}
         <div className="flex items-center gap-1.5">
           <button
@@ -818,23 +827,74 @@ export default function InteractiveCourseworkPdfViewer({
           </button>
         </div>
 
-        {/* Download & Print */}
+        {/* Download, Print & Margin Tags Print Toggle */}
         <div className="flex items-center gap-1.5">
           <button
             type="button"
             onClick={handleDownloadPdf}
-            className="p-1.5 rounded-md border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700 cursor-pointer"
-            title="Download PDF"
+            disabled={isDownloadingPdf}
+            className="w-8 h-8 rounded-md border flex items-center justify-center transition-colors bg-white dark:bg-slate-800 border-slate-200 dark:border-slate-700 text-slate-500 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700 hover:text-slate-700 dark:hover:text-slate-100 cursor-pointer disabled:opacity-50"
+            title={
+              isMarginTagsEnabled
+                ? 'Download Annotated CWK PDF (with Margin Tags)'
+                : 'Download Clean CWK PDF'
+            }
+            aria-label={
+              isMarginTagsEnabled
+                ? 'Download Annotated CWK PDF (with Margin Tags)'
+                : 'Download Clean CWK PDF'
+            }
           >
-            <Download className="w-3.5 h-3.5" />
+            {isDownloadingPdf ? (
+              <Loader2 className="w-3.5 h-3.5 animate-spin" />
+            ) : (
+              <Download className="w-3.5 h-3.5" />
+            )}
           </button>
           <button
             type="button"
             onClick={handlePrintPdf}
-            className="p-1.5 rounded-md border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700 cursor-pointer"
-            title="Print PDF"
+            disabled={isPrintingPdf}
+            className="w-8 h-8 rounded-md border flex items-center justify-center transition-colors bg-white dark:bg-slate-800 border-slate-200 dark:border-slate-700 text-slate-500 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700 hover:text-slate-700 dark:hover:text-slate-100 cursor-pointer disabled:opacity-50"
+            title={
+              isMarginTagsEnabled
+                ? 'Print Annotated CWK PDF (with Margin Tags)'
+                : 'Print Clean CWK PDF'
+            }
+            aria-label={
+              isMarginTagsEnabled
+                ? 'Print Annotated CWK PDF (with Margin Tags)'
+                : 'Print Clean CWK PDF'
+            }
           >
-            <Printer className="w-3.5 h-3.5" />
+            {isPrintingPdf ? (
+              <Loader2 className="w-3.5 h-3.5 animate-spin" />
+            ) : (
+              <Printer className="w-3.5 h-3.5" />
+            )}
+          </button>
+          <button
+            type="button"
+            onClick={() => handleToggleMarginTags(!isMarginTagsEnabled)}
+            aria-pressed={isMarginTagsEnabled}
+            data-testid="toggle-margin-tags-print-pdf"
+            title={
+              isMarginTagsEnabled
+                ? 'Include WWW/EBI Margin Tags on Print PDF (ON)'
+                : 'Include WWW/EBI Margin Tags on Print PDF (OFF)'
+            }
+            aria-label={
+              isMarginTagsEnabled
+                ? 'Include WWW/EBI Margin Tags on Print PDF (ON)'
+                : 'Include WWW/EBI Margin Tags on Print PDF (OFF)'
+            }
+            className={`w-8 h-8 rounded-md border flex items-center justify-center transition-colors cursor-pointer ${
+              isMarginTagsEnabled
+                ? 'bg-emerald-50 dark:bg-emerald-900/30 border-emerald-600 dark:border-emerald-500 text-emerald-700 dark:text-emerald-300 ring-1 ring-emerald-600/20'
+                : 'bg-white dark:bg-slate-800 border-slate-200 dark:border-slate-700 text-slate-500 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-700 hover:text-slate-700 dark:hover:text-slate-200'
+            }`}
+          >
+            <Tag className="w-3.5 h-3.5" />
           </button>
         </div>
       </div>
@@ -883,6 +943,7 @@ export default function InteractiveCourseworkPdfViewer({
               pageNumber={pageNum}
               targetWidth={basePageWidth}
               pageBadges={badgesByPage[pageNum] || []}
+              includeMarginTagsOnPrint={isMarginTagsEnabled}
               draggingBadge={draggingBadge}
               highlightedItemId={highlightedItemId}
               hoveredItemId={hoveredItemId}

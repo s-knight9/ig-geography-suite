@@ -5,6 +5,47 @@ export interface CriterionResult {
   score: number;
   www: (CwkFeedbackItem | string)[];
   ebi: (CwkFeedbackItem | string)[];
+  isIncomplete?: boolean;
+  incompleteNote?: string;
+}
+
+export interface StageCompletenessEntry {
+  status: 'complete' | 'incomplete';
+  reason: string;
+}
+
+export interface SectionCompletenessMap {
+  introduction_and_hypotheses: StageCompletenessEntry;
+  methodology: StageCompletenessEntry;
+  data_presentation: StageCompletenessEntry;
+  data_analysis_and_interpretation: StageCompletenessEntry;
+  conclusion_and_evaluation: StageCompletenessEntry;
+}
+
+export type JustificationStatus = 'missing' | 'partial' | 'present';
+export type HypothesisJustificationStatus = JustificationStatus;
+export type MethodJustificationStatus = JustificationStatus;
+
+export interface HypothesisAudit {
+  hasHypotheses: boolean;
+  hasExpectedOutcomes: boolean;
+  hasSubstantiveGeographicalJustification: boolean;
+  justificationStatus?: HypothesisJustificationStatus;
+  justificationSummary: string;
+  hypothesesAnchorQuote?: string;
+  hypothesesPage?: number;
+  hypothesesYPercent?: number;
+}
+
+export interface MethodologyAudit {
+  hasMethods: boolean;
+  hasSamplingStrategy: boolean;
+  hasSubstantiveMethodJustification: boolean;
+  justificationStatus?: MethodJustificationStatus;
+  justificationSummary: string;
+  methodsAnchorQuote?: string;
+  methodsPage?: number;
+  methodsYPercent?: number;
 }
 
 export interface EvaluationResult {
@@ -22,6 +63,9 @@ export interface EvaluationResult {
     raw_file_extract: number;
   };
   moderator_executive_summary: string;
+  section_completeness?: SectionCompletenessMap;
+  hypothesis_audit?: HypothesisAudit;
+  methodology_audit?: MethodologyAudit;
 }
 
 export interface ComparativeCriterionResult {

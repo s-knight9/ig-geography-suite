@@ -146,8 +146,10 @@ export function EditableFeedbackList({
                 border: `1px solid ${style.cardBorder}`,
                 borderLeft: `4px solid ${style.cardAccentBorder}`,
                 opacity: item.isChecked ? 1 : 0.65,
+                WebkitPrintColorAdjust: 'exact',
+                printColorAdjust: 'exact',
               }}
-              className={`rounded-lg p-2.5 transition-all ${
+              className={`igqa-feedback-card rounded-lg p-2.5 transition-all ${
                 item.isChecked
                   ? 'cursor-pointer hover:shadow-sm'
                   : 'print:hidden'
@@ -185,6 +187,8 @@ export function EditableFeedbackList({
                     backgroundColor: style.badgeBg,
                     border: `1.5px solid ${style.badgeBorder}`,
                     color: style.badgeText,
+                    WebkitPrintColorAdjust: 'exact',
+                    printColorAdjust: 'exact',
                   }}
                   className="text-[11px] font-black tracking-wide px-2 py-0.5 rounded-md shrink-0 mt-0.5 cursor-pointer hover:brightness-95 transition-all select-none"
                 >
@@ -203,9 +207,12 @@ export function EditableFeedbackList({
                         }
                       }}
                       onChange={(e) => handleEditText(i, e.target.value)}
-                      className="flex-1 w-full bg-white/85 dark:bg-slate-800/90 border border-slate-200/80 dark:border-slate-700 rounded-md px-2.5 py-1.5 text-sm text-slate-800 dark:text-slate-100 focus:outline-none focus:ring-1 focus:ring-blue-500 resize-none min-h-[38px]"
+                      className="print:hidden flex-1 w-full bg-white/85 dark:bg-slate-800/90 border border-slate-200/80 dark:border-slate-700 rounded-md px-2.5 py-1.5 text-sm text-slate-800 dark:text-slate-100 focus:outline-none focus:ring-1 focus:ring-blue-500 resize-none min-h-[38px]"
                       rows={Math.max(1, Math.ceil(item.text.length / 72))}
                     />
+                    <span className="hidden print:block flex-1 text-[12px] leading-snug font-medium text-slate-900 whitespace-pre-wrap">
+                      {item.text}
+                    </span>
 
                     {item.isChecked && (
                       <button
@@ -224,6 +231,11 @@ export function EditableFeedbackList({
                         <MapPin className="w-2.5 h-2.5" />
                         <span>p.{item.pdfLocation.page}</span>
                       </button>
+                    )}
+                    {item.isChecked && (
+                      <span className="hidden print:inline-block text-[10px] font-semibold text-slate-400 shrink-0 ml-2">
+                        p.{item.pdfLocation.page}
+                      </span>
                     )}
 
                     <button

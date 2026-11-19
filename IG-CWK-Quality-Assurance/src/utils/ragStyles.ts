@@ -86,6 +86,65 @@ export function clampNumber(value: number, min: number, max: number): number {
   return Math.min(max, Math.max(min, value));
 }
 
+export type DraftGradeBand = 'High' | 'Med' | 'Low';
+export type DraftLetterGrade = 'A' | 'B' | 'C' | 'D' | 'E' | 'F' | 'G' | 'U';
+
+export interface DraftGradeResult {
+  grade: DraftLetterGrade;
+  band: DraftGradeBand;
+  label: string;
+}
+
+const DRAFT_GRADE_BAND_RANGES: ReadonlyArray<
+  readonly [number, number, DraftLetterGrade, DraftGradeBand]
+> = [
+  [57, 60, 'A', 'High'],
+  [53, 56, 'A', 'Med'],
+  [50, 52, 'A', 'Low'],
+  [47, 49, 'B', 'High'],
+  [44, 46, 'B', 'Med'],
+  [42, 43, 'B', 'Low'],
+  [39, 41, 'C', 'High'],
+  [37, 38, 'C', 'Med'],
+  [35, 36, 'C', 'Low'],
+  [32, 34, 'D', 'High'],
+  [30, 31, 'D', 'Med'],
+  [28, 29, 'D', 'Low'],
+  [26, 27, 'E', 'High'],
+  [24, 25, 'E', 'Med'],
+  [22, 23, 'E', 'Low'],
+  [20, 21, 'F', 'High'],
+  [18, 19, 'F', 'Med'],
+  [17, 17, 'F', 'Low'],
+  [15, 16, 'G', 'High'],
+  [13, 14, 'G', 'Med'],
+  [12, 12, 'G', 'Low'],
+  [0, 11, 'U', 'Low'],
+];
+
+/**
+ * Maps a moderated total mark (0-60) to the Cambridge IGCSE Geography (0460)
+ * Component 03 letter grade and sub-band tier (e.g. 'D (High)') without exposing raw marks.
+ */
+export function getDraftGradeAndBand(teacherTotalOutOf60: number): DraftGradeResult {
+  const score = clampNumber(Math.round(Number(teacherTotalOutOf60) || 0), 0, 60);
+  const match = DRAFT_GRADE_BAND_RANGES.find(([min, max]) => score >= min && score <= max);
+  const grade: DraftLetterGrade = match ? match[2] : 'U';
+  const band: DraftGradeBand = match ? match[3] : 'Low';
+  return {
+    grade,
+    band,
+    label: `${grade} (${band})`,
+  };
+}
+
+/**
+ * Returns only the sub-band tier ('High', 'Med', or 'Low') derived from getDraftGradeAndBand.
+ */
+export function getDraftGradeBand(teacherTotalOutOf60: number): DraftGradeBand {
+  return getDraftGradeAndBand(teacherTotalOutOf60).band;
+}
+
 export function getFeedbackItemText(item: CwkFeedbackItem | string | null | undefined): string {
   if (!item) return '';
   if (typeof item === 'string') return item;
@@ -161,12 +220,23 @@ export function needsCoordinateResolution(item: CwkFeedbackItem): boolean {
   return true;
 }
 
+export const DEFAULT_INCOMPLETE_EBI_NOTICE =
+  'Section incomplete in current draft, EBI feedback omitted until drafted';
+
 const CRITERION_KEY_TO_NUMBER: Record<string, number> = {
   ao1_knowledge: 1,
   ao2_observation: 2,
   ao2_organisation: 3,
   ao2_analysis: 4,
   ao3_conclusion: 5,
+};
+
+const CRITERION_KEY_TO_STAGE_KEY: Record<string, string> = {
+  ao1_knowledge: 'introduction_and_hypotheses',
+  ao2_observation: 'methodology',
+  ao2_organisation: 'data_presentation',
+  ao2_analysis: 'data_analysis_and_interpretation',
+  ao3_conclusion: 'conclusion_and_evaluation',
 };
 
 export function normalizeEvaluationResult<T extends Record<string, any>>(
@@ -181,8 +251,27 @@ export function normalizeEvaluationResult<T extends Record<string, any>>(
     const crit = copy.scores[scoreKey];
     if (!crit || typeof crit !== 'object') continue;
     const score = Number(teacherScores?.[scoreKey] ?? crit.score ?? 0);
+    const stageKey = CRITERION_KEY_TO_STAGE_KEY[scoreKey];
+    const stageEntry = stageKey ? copy.section_completeness?.[stageKey] : undefined;
+    const isIncomplete = crit.isIncomplete === true || stageEntry?.status === 'incomplete';
+
     crit.www = normalizeFeedbackItems(crit.www, critNumber, 'WWW', score);
-    crit.ebi = normalizeFeedbackItems(crit.ebi, critNumber, 'EBI', score);
+
+    if (isIncomplete) {
+      crit.isIncomplete = true;
+      const noteCandidate =
+        typeof crit.incompleteNote === 'string' && crit.incompleteNote.trim()
+          ? crit.incompleteNote.trim()
+          : typeof stageEntry?.reason === 'string' && stageEntry.reason.trim()
+            ? stageEntry.reason.trim()
+            : DEFAULT_INCOMPLETE_EBI_NOTICE;
+      crit.incompleteNote = noteCandidate;
+      crit.ebi = [];
+    } else {
+      crit.isIncomplete = false;
+      delete crit.incompleteNote;
+      crit.ebi = normalizeFeedbackItems(crit.ebi, critNumber, 'EBI', score);
+    }
   }
 
   return copy;

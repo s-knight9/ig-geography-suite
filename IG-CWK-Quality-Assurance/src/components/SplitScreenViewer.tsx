@@ -15,20 +15,26 @@ import {
   CheckCircle2, 
   X,
   Sparkles,
-  BookOpen
+  BookOpen,
+  Info
 } from 'lucide-react';
 import { StudentSubmission, uploadSubmissionPdf, addOrUpdateSubmission } from '../db';
 import { EvaluationResult } from '../types';
 import { parseCandidateName } from '../nameParser';
 import { EditableFeedbackList } from './EditableFeedbackList';
-import { CriterionRubricDrawer } from './CriterionRubricDrawer';
+import { CriterionRubricDrawer, CriterionRubricTable } from './CriterionRubricDrawer';
 import InteractiveCourseworkPdfViewer, {
   MarginBadgeItem,
   PdfJumpRequest,
 } from './InteractiveCourseworkPdfViewer';
 import { downloadFeedbackPDF } from '../pdfReport';
-import { CwkFeedbackItem, normalizeEvaluationResult } from '../utils/ragStyles';
+import { CwkFeedbackItem, getDraftGradeAndBand, normalizeEvaluationResult } from '../utils/ragStyles';
+import { DEFAULT_INCOMPLETE_EBI_NOTICE } from '../utils/cwkGradingRules';
 import type { ResolvedPdfLocation } from '../utils/pdfCoordinateResolver';
+import {
+  readIncludeMarginTagsPreference,
+  writeIncludeMarginTagsPreference,
+} from '../utils/annotatedPdfExporter';
 
 interface SplitScreenViewerProps {
   student?: StudentSubmission;
@@ -76,6 +82,14 @@ export default function SplitScreenViewer({
   const [isUploading, setIsUploading] = useState(false);
   const [replaceSuccess, setReplaceSuccess] = useState(false);
   const [jumpRequest, setJumpRequest] = useState<PdfJumpRequest | null>(null);
+  const [includeMarginTagsOnPrint, setIncludeMarginTagsOnPrint] = useState<boolean>(
+    readIncludeMarginTagsPreference
+  );
+
+  const handleToggleIncludeMarginTagsOnPrint = React.useCallback((checked: boolean) => {
+    setIncludeMarginTagsOnPrint(checked);
+    writeIncludeMarginTagsPreference(checked);
+  }, []);
   const [expandedRubrics, setExpandedRubrics] = useState<Record<number, boolean>>({
     1: false,
     2: false,
@@ -137,6 +151,7 @@ export default function SplitScreenViewer({
       if (!critObj) return;
       const critNum = Number(crit.id);
       (['www', 'ebi'] as const).forEach((key) => {
+        if (key === 'ebi' && critObj.isIncomplete === true) return;
         const items = critObj[key];
         if (!Array.isArray(items)) return;
         items.forEach((item: CwkFeedbackItem) => {
@@ -172,6 +187,9 @@ export default function SplitScreenViewer({
       teacherTotal += activeTeacherScores[c.scoreKey] ?? (activeEvaluation?.scores as any)?.[c.scoreKey]?.score ?? 0;
     });
   }
+
+  const isDraftStage = activeStage === 'Draft';
+  const draftGrade = getDraftGradeAndBand(teacherTotal);
 
   // Handle teacher score adjustments (+ / -)
   const handleScoreChange = async (scoreKey: string, newScore: number) => {
@@ -325,9 +343,9 @@ export default function SplitScreenViewer({
   };
 
   return (
-    <div className={`fixed inset-0 z-50 flex flex-col bg-[#f8f9fc] dark:bg-slate-900 font-sans transition-colors ${isDarkMode ? 'dark' : ''}`}>
+    <div className={`fixed inset-0 z-50 flex flex-col bg-[#f8f9fc] dark:bg-slate-900 font-sans transition-colors print:static print:inset-auto print:h-auto print:overflow-visible print:block print:bg-white ${isDarkMode ? 'dark' : ''}`}>
       {/* Top Header */}
-      <header className="h-18 px-6 bg-white dark:bg-slate-800 border-b border-slate-200 dark:border-slate-700 flex items-center justify-between shrink-0 shadow-xs z-20">
+      <header className="print:hidden h-18 px-6 bg-white dark:bg-slate-800 border-b border-slate-200 dark:border-slate-700 flex items-center justify-between shrink-0 shadow-xs z-20">
         {/* Left: Back & Candidate Details */}
         <div className="flex items-center gap-4">
           <button 
@@ -486,16 +504,18 @@ export default function SplitScreenViewer({
       </header>
 
       {/* Main Split-Screen Container */}
-      <div className="flex-1 flex overflow-hidden">
+      <div className="flex-1 flex overflow-hidden print:block print:overflow-visible">
         {/* LEFT PANE: PDF Viewer (Visible in 'split' or 'pdf' mode) */}
         {(viewMode === 'split' || viewMode === 'pdf') && (
           <div 
             className={`flex flex-col border-r border-slate-200 dark:border-slate-700 bg-slate-100/70 dark:bg-slate-900/50 p-4 transition-all duration-300 ${
-              viewMode === 'split' ? 'w-1/2' : 'w-full'
+              viewMode === 'split'
+                ? 'w-1/2 print:hidden'
+                : 'w-full print:border-0 print:p-0 print:bg-white'
             }`}
           >
             {/* Left Pane Sub-Header */}
-            <div className="flex items-center justify-between pb-3 px-1">
+            <div className="print:hidden flex items-center justify-between pb-3 px-1">
               <div className="flex items-center gap-3">
                 {/* Firebase Storage Badge */}
                 <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-bold bg-blue-50 dark:bg-blue-900/40 text-blue-700 dark:text-blue-300 border border-blue-200 dark:border-blue-800 shadow-xs">
@@ -566,8 +586,11 @@ export default function SplitScreenViewer({
                 <InteractiveCourseworkPdfViewer
                   pdfUrl={activePdfUrl}
                   title={`${formattedName} - ${activeStage} CWK`}
+                  studentName={formattedName}
                   items={marginBadgeItems}
                   jumpRequest={jumpRequest}
+                  includeMarginTagsOnPrint={includeMarginTagsOnPrint}
+                  onToggleIncludeMarginTagsOnPrint={handleToggleIncludeMarginTagsOnPrint}
                   onUpdateItemLocation={handleUpdateItemLocation}
                   onResolvedLocations={handleResolvedLocations}
                 />
@@ -608,7 +631,7 @@ export default function SplitScreenViewer({
         {/* RIGHT PANE: Report & Evaluation (Visible in 'split' or 'report' mode) */}
         {(viewMode === 'split' || viewMode === 'report') && (
           <div 
-            className={`flex flex-col bg-white dark:bg-slate-800 overflow-y-auto p-6 lg:p-8 transition-all duration-300 ${
+            className={`igqa-printable-report flex flex-col bg-white dark:bg-slate-800 overflow-y-auto p-6 lg:p-8 transition-all duration-300 print:w-full print:max-w-none print:overflow-visible print:p-0 print:bg-white print:text-slate-900 ${
               viewMode === 'split' ? 'w-1/2' : 'w-full max-w-5xl mx-auto'
             }`}
           >
@@ -651,30 +674,104 @@ export default function SplitScreenViewer({
               </div>
             ) : activeEvaluation ? (
               /* Active Stage Evaluation Rubric */
-              <div className="space-y-6 pb-20">
-                {/* Score Summary Cards */}
-                <div className="grid grid-cols-3 gap-4">
-                  <div className="bg-slate-50 dark:bg-slate-700/40 rounded-xl p-4 border border-slate-200 dark:border-slate-700">
-                    <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider block mb-1">
-                      IGQA Score
+              <div className="space-y-5 pb-20 print:pb-0 print:space-y-3">
+                {/* Print-Only Page 1 Top Header Bar */}
+                <div
+                  data-testid="print-report-cover-header"
+                  className="hidden print:flex items-start justify-between gap-6 pb-3 mb-3 border-b border-slate-200 break-inside-avoid"
+                >
+                  <div>
+                    <h1 className="text-2xl font-black text-slate-900 tracking-tight leading-tight">
+                      {formattedName}
+                    </h1>
+                    <span className="inline-block mt-1.5 px-2.5 py-0.5 rounded-md border border-blue-300 bg-blue-50 text-blue-600 text-[10px] font-bold uppercase tracking-wider">
+                      {activeStage.toUpperCase()} CWK
                     </span>
-                    <div className="flex items-baseline gap-1">
-                      <span className="text-3xl font-black text-slate-800 dark:text-slate-100">
-                        {activeEvaluation.total_score}
+                    <p className="text-xs font-medium text-slate-500 mt-1.5">
+                      Class: {student.className} &nbsp;|&nbsp; Assessment: {student.assignmentName}
+                    </p>
+                  </div>
+
+                  <div className="flex items-start gap-7 shrink-0 pt-0.5">
+                    {isDraftStage ? (
+                      <div>
+                        <span className="text-[10px] font-bold uppercase tracking-wider text-blue-600 block mb-1">
+                          Grade &amp; Band
+                        </span>
+                        <span
+                          data-testid="print-draft-grade-band"
+                          className="text-3xl font-black text-blue-600 tracking-tight leading-none block"
+                        >
+                          {draftGrade.label}
+                        </span>
+                      </div>
+                    ) : (
+                      <div>
+                        <span className="text-[10px] font-bold uppercase tracking-wider text-blue-600 block mb-1">
+                          Teacher Moderated
+                        </span>
+                        <div className="flex items-baseline gap-1">
+                          <span className="text-3xl font-black text-blue-600 leading-none">
+                            {teacherTotal}
+                          </span>
+                          <span className="text-xs font-bold text-slate-400">/{totalPossible}</span>
+                        </div>
+                      </div>
+                    )}
+
+                    <div>
+                      <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400 block mb-1">
+                        Word Count
                       </span>
-                      <span className="text-sm font-bold text-slate-400">/{totalPossible}</span>
+                      <div className="flex items-baseline gap-1.5">
+                        <span className="text-2xl font-black text-slate-900 leading-none">
+                          {activeEvaluation.word_counts?.evaluated_payload || 0}
+                        </span>
+                        <span className="text-[10px] font-bold text-slate-400 uppercase">Words</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* On-Screen Score / Band Summary Cards (hidden on print report) */}
+                <div className="print:hidden grid grid-cols-2 xl:grid-cols-4 gap-3 break-inside-avoid">
+                  <div className="bg-blue-50/70 dark:bg-blue-900/20 rounded-xl p-4 border border-blue-200/80 dark:border-blue-900/40">
+                    <span className="text-[10px] font-bold text-blue-600 dark:text-blue-400 uppercase tracking-wider block mb-1">
+                      Grade &amp; Band
+                    </span>
+                    <div className="flex items-baseline gap-2">
+                      <span className="text-2xl lg:text-3xl font-black text-blue-600 dark:text-blue-400 tracking-tight">
+                        {draftGrade.label}
+                      </span>
                     </div>
                   </div>
 
-                  <div className="bg-blue-50/60 dark:bg-blue-900/20 rounded-xl p-4 border border-blue-100 dark:border-blue-900/40">
-                    <span className="text-[10px] font-bold text-blue-600 dark:text-blue-400 uppercase tracking-wider block mb-1">
-                      Teacher Moderated
+                  <div className="bg-slate-50 dark:bg-slate-700/40 rounded-xl p-4 border border-slate-200 dark:border-slate-700">
+                    <span className="text-[10px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider block mb-1">
+                      IGQA Mark
                     </span>
                     <div className="flex items-baseline gap-1">
-                      <span className="text-3xl font-black text-blue-600 dark:text-blue-400">
+                      <span className="text-2xl lg:text-3xl font-black text-slate-800 dark:text-slate-100">
+                        {activeEvaluation.total_score ??
+                          criteriaData.reduce(
+                            (sum, c) =>
+                              sum + Number((activeEvaluation?.scores as any)?.[c.scoreKey]?.score ?? 0),
+                            0
+                          )}
+                      </span>
+                      <span className="text-xs font-bold text-slate-400">/{totalPossible}</span>
+                    </div>
+                  </div>
+
+                  <div className="bg-blue-50/40 dark:bg-blue-900/15 rounded-xl p-4 border border-blue-100 dark:border-blue-900/40">
+                    <span className="text-[10px] font-bold text-blue-600 dark:text-blue-400 uppercase tracking-wider block mb-1">
+                      Teacher Mark
+                    </span>
+                    <div className="flex items-baseline gap-1">
+                      <span className="text-2xl lg:text-3xl font-black text-blue-700 dark:text-blue-300">
                         {teacherTotal}
                       </span>
-                      <span className="text-sm font-bold text-blue-400/70">/{totalPossible}</span>
+                      <span className="text-xs font-bold text-blue-400/80">/{totalPossible}</span>
                     </div>
                   </div>
 
@@ -693,19 +790,22 @@ export default function SplitScreenViewer({
 
                 {/* Moderator Executive Summary */}
                 {activeEvaluation.moderator_executive_summary && (
-                  <div className="bg-slate-900 dark:bg-slate-950 rounded-2xl p-6 text-white shadow-md border border-slate-800">
-                    <h3 className="text-blue-400 font-bold uppercase tracking-widest text-xs flex items-center gap-2 mb-3">
-                      <Trophy className="w-4 h-4 text-blue-400" /> Moderator Executive Summary ({activeStage})
+                  <div
+                    data-testid="moderator-executive-summary"
+                    className="igqa-exec-summary bg-[#F8FAFC] dark:bg-slate-800/80 rounded-lg p-5 border border-[#CBD5E1] dark:border-slate-700 border-l-4 border-l-[#2563EB] shadow-2xs break-inside-avoid"
+                  >
+                    <h3 className="text-[#1D4ED8] dark:text-blue-400 font-bold uppercase tracking-widest text-xs flex items-center gap-2 pb-2.5 mb-2.5 border-b border-[#E2E8F0] dark:border-slate-700">
+                      <Trophy className="w-4 h-4 text-[#2563EB] dark:text-blue-400" /> Moderator Executive Summary ({activeStage.toUpperCase()} CWK)
                     </h3>
-                    <p className="text-slate-300 leading-relaxed text-[13px] font-medium">
+                    <p className="text-[#1E293B] dark:text-slate-200 leading-[1.55] text-[12.5px] font-medium">
                       {activeEvaluation.moderator_executive_summary}
                     </p>
                   </div>
                 )}
 
                 {/* Detailed Criterion Rubric */}
-                <div className="space-y-4">
-                  <div className="flex flex-wrap items-center justify-between gap-2 pb-1.5 border-b border-slate-200 dark:border-slate-700">
+                <div className="space-y-4 print:space-y-0">
+                  <div className="print:hidden flex flex-wrap items-center justify-between gap-2 pb-1.5 border-b border-slate-200 dark:border-slate-700">
                     <h3 className="font-bold text-slate-800 dark:text-slate-200 uppercase tracking-widest text-xs flex items-center gap-2">
                       <FileText className="w-4 h-4 text-blue-500" /> Detailed Criterion Rubric
                     </h3>
@@ -730,34 +830,35 @@ export default function SplitScreenViewer({
 
                     return (
                       <div 
-                        key={crit.id} 
-                        className="border border-slate-200 dark:border-slate-700 rounded-xl p-4 bg-white dark:bg-slate-800/90 shadow-2xs"
+                        key={crit.id}
+                        data-criterion-page={crit.id}
+                        className={`igqa-criterion-block ${criterionNumber > 1 ? 'igqa-criterion-page-break' : ''} border border-slate-200 dark:border-slate-700 rounded-xl p-4 bg-white dark:bg-slate-800/90 shadow-2xs print:border-0 print:p-0 print:bg-white print:shadow-none`}
                       >
-                        <div className="flex items-center justify-between mb-3">
-                          <h4 className="font-bold text-sm text-slate-800 dark:text-slate-100 flex items-center gap-2">
+                        {/* Print-Only Top-of-Section Expanded RAG Rubric Table */}
+                        <div className="hidden print:block mb-2.5">
+                          <CriterionRubricTable criterionNumber={criterionNumber} />
+                        </div>
+
+                        <div className="flex items-center justify-between mb-3 print:mb-2">
+                          <h4 className="font-bold text-sm text-slate-800 dark:text-slate-100 flex items-center gap-2 print:text-slate-900">
                             <span className="w-6 h-6 rounded-lg bg-blue-100 dark:bg-blue-900/50 text-blue-700 dark:text-blue-300 flex items-center justify-center text-xs font-black">
                               {crit.id}
                             </span>
                             {crit.name}
                           </h4>
 
-                          {/* Score Pill / Stepper */}
+                          {/* Teacher Moderated Score Pill / Stepper (hidden in Draft print/PDF; no IGQA QA pill anywhere) */}
                           <div className="flex items-center gap-3">
-                            <div className="flex items-center gap-1.5 bg-slate-100 dark:bg-slate-700/60 px-2.5 py-1 rounded-lg">
-                              <span className="text-[10px] font-bold text-slate-400 uppercase">QA:</span>
-                              <span className="font-black text-slate-700 dark:text-slate-200 text-xs">
-                                {res.score}/12
-                              </span>
-                            </div>
-
-                            <div className="flex items-center gap-1.5 bg-blue-50 dark:bg-blue-900/30 border border-blue-200 dark:border-blue-800/60 px-2 py-0.5 rounded-lg">
+                            <div
+                              className={`${isDraftStage ? 'print:hidden ' : ''}flex items-center gap-1.5 bg-blue-50 dark:bg-blue-900/30 border border-blue-200 dark:border-blue-800/60 px-2 py-0.5 rounded-lg`}
+                            >
                               <span className="text-[10px] font-bold text-blue-600 dark:text-blue-400 uppercase flex items-center gap-1">
                                 Teacher:
                               </span>
                               <div className="flex items-center">
                                 <button
                                   onClick={() => handleScoreChange(crit.scoreKey, ts - 1)}
-                                  className="w-5 h-5 rounded hover:bg-blue-200 dark:hover:bg-blue-800 flex items-center justify-center text-blue-700 dark:text-blue-300 font-bold text-xs"
+                                  className="print:hidden w-5 h-5 rounded hover:bg-blue-200 dark:hover:bg-blue-800 flex items-center justify-center text-blue-700 dark:text-blue-300 font-bold text-xs"
                                   title="Decrease mark"
                                 >
                                   -
@@ -767,7 +868,7 @@ export default function SplitScreenViewer({
                                 </span>
                                 <button
                                   onClick={() => handleScoreChange(crit.scoreKey, ts + 1)}
-                                  className="w-5 h-5 rounded hover:bg-blue-200 dark:hover:bg-blue-800 flex items-center justify-center text-blue-700 dark:text-blue-300 font-bold text-xs"
+                                  className="print:hidden w-5 h-5 rounded hover:bg-blue-200 dark:hover:bg-blue-800 flex items-center justify-center text-blue-700 dark:text-blue-300 font-bold text-xs"
                                   title="Increase mark"
                                 >
                                   +
@@ -782,10 +883,11 @@ export default function SplitScreenViewer({
                           criterionNumber={criterionNumber}
                           isOpen={!!expandedRubrics[criterionNumber]}
                           onToggle={() => toggleCriterionRubric(criterionNumber)}
+                          hideInPrint={true}
                         />
 
                         {/* WWW & EBI Feedback Points */}
-                        <div className="mt-4 space-y-3">
+                        <div className="mt-4 space-y-3 print:mt-2 print:space-y-2">
                           {res.www && (
                             <EditableFeedbackList
                               items={res.www}
@@ -798,16 +900,35 @@ export default function SplitScreenViewer({
                             />
                           )}
 
-                          {res.ebi && (
-                            <EditableFeedbackList
-                              items={res.ebi}
-                              criterionId={crit.id}
-                              criterionScore={ts}
-                              type="EBI"
-                              isEditable={true}
-                              onChange={(newVal) => handleFeedbackChange(crit.scoreKey, 'ebi', newVal)}
-                              onJumpToItem={handleJumpToItem}
-                            />
+                          {res.isIncomplete ? (
+                            <div
+                              data-testid={`incomplete-ebi-notice-${crit.id}`}
+                              className="flex items-start gap-2.5 rounded-xl px-4 py-3 bg-slate-100/80 dark:bg-slate-900/50 border border-slate-200 dark:border-slate-700/80 text-slate-600 dark:text-slate-300"
+                            >
+                              <Info className="w-4 h-4 text-slate-400 dark:text-slate-500 shrink-0 mt-0.5" />
+                              <div className="min-w-0">
+                                <p className="text-xs font-semibold text-slate-600 dark:text-slate-300">
+                                  {DEFAULT_INCOMPLETE_EBI_NOTICE}
+                                </p>
+                                {res.incompleteNote && res.incompleteNote !== DEFAULT_INCOMPLETE_EBI_NOTICE && (
+                                  <p className="text-[11px] text-slate-500 dark:text-slate-400 mt-0.5">
+                                    {res.incompleteNote}
+                                  </p>
+                                )}
+                              </div>
+                            </div>
+                          ) : (
+                            res.ebi && (
+                              <EditableFeedbackList
+                                items={res.ebi}
+                                criterionId={crit.id}
+                                criterionScore={ts}
+                                type="EBI"
+                                isEditable={true}
+                                onChange={(newVal) => handleFeedbackChange(crit.scoreKey, 'ebi', newVal)}
+                                onJumpToItem={handleJumpToItem}
+                              />
+                            )
                           )}
                         </div>
                       </div>

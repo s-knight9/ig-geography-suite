@@ -3,7 +3,12 @@ import path from "path";
 import { createServer as createViteServer } from "vite";
 import { GoogleGenAI } from "@google/genai";
 import { PDFParse } from "pdf-parse";
-import { normalizeEvaluationResult } from "./src/utils/ragStyles";
+import {
+  analyzeCourseworkCompleteness,
+  formatCompletenessPreScanForPrompt,
+  buildCwkEvaluationSystemPrompt,
+  postProcessEvaluationResult,
+} from "./src/utils/cwkGradingRules";
 
 
 const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
@@ -59,60 +64,7 @@ async function startServer() {
     try {
       let text = req.body.text; // Might be text or data URL
 
-      
-      const systemPrompt = `You are an expert Cambridge IGCSE Geography (0460) Coursework Moderator.
-First, carefully read the text or document to identify the main focus/topic (e.g., Tourism Sustainability, Sand Dunes/Psammosere, Microclimate, etc.) of the coursework. Ensure that your evaluation and comments are strictly relevant to the identified topic, rather than incorrectly assuming it is about a different topic (like rivers or coasts if it's about tourism).
-Evaluate the following student coursework draft based on the "Route to Geographical Enquiry" framework. 
-Provide analysis across the five assessment criteria (A01, AO2, AO2, AO2, AO3), each out of 12 (Total 60).
-
-- Criterion 1 (A01): Knowledge and understanding. (Terminology, aims, secondary sources)
-- Criterion 2 (AO2): Observation and collection of data. (Primary logic, sampling strategies)
-- Criterion 3 (AO2): Organisation and presentation of data. (Two complex techniques, tables)
-- Criterion 4 (AO2): Analysis and interpretation. (Trends, anomalies, explanation based on theory)
-- Criterion 5 (AO3): Conclusion and Evaluation. (Link to hypotheses, evidence, critique/improvements)
-
-Provide specific "What Went Well" (WWW) and "Even Better If" (EBI) feedback items for each criterion.
-CLOSE-READING & GROUNDING REQUIREMENTS (CRITICAL):
-- The coursework is segmented with explicit page markers ('=== PAGE 1 ===', '=== PAGE 2 ===', ..., '=== PAGE N ===').
-- Perform a genuine close read of every page. NEVER assign pages sequentially by criterion number (e.g. do NOT put Criterion 1 on page 1, Criterion 2 on page 2, Criterion 3 on page 3, etc.).
-- Instead, locate the ACTUAL page (1 to N) and vertical position where each piece of evidence (for WWW) or omission/gap (for EBI) physically appears (ignoring the Table of Contents page when locating actual body sections, tables, graphs, maps, analysis, and conclusions).
-- For an EBI citing a missing feature in a section (e.g., missing justification in Hypotheses, missing complex technique in Data Presentation, or missing evaluation of sampling in Conclusion), anchor it to the exact heading or concluding paragraph of that relevant section in the coursework.
-
-For EVERY WWW and EBI item, output a structured object with:
-- "id": unique string (e.g. "c1-www-1", "c1-ebi-1")
-- "code": reference code ("1.1A", "1.2A" for Criterion 1 WWW; "1.1B", "1.2B" for Criterion 1 EBI; "2.1A" / "2.1B" for Criterion 2, etc.)
-- "type": "WWW" or "EBI"
-- "text": concise, specific moderation feedback string
-- "ragColor":
-  - For "WWW" items: "green" when associated with Level 3 top-band achievement (9-12 marks or strong criterion mastery), or "amber" when associated with Level 1-2 middle/lower-band achievement (1-8 marks).
-  - For "EBI" items: ALWAYS "light_red".
-- "isChecked": true
-- "pdfLocation": {
-    "page": number (exact 1-based page number from the '=== PAGE N ===' markers where the evidence or gap occurs),
-    "xPercent": 2.5,
-    "yPercent": number (estimated 5 to 95 vertical percentage down that page where the relevant paragraph, figure, or heading sits),
-    "anchorQuote": "string (verbatim 4 to 12 word quote copied directly from the target paragraph, heading, figure caption, or table on that page)",
-    "anchorRationale": "string (1-sentence explanation of why this badge sits beside this specific quote/section)"
-  }
-
-Respond in the following JSON format ONLY:
-{
-  "scores": {
-    "ao1_knowledge": { "score": number, "www": [{ "id": "string", "code": "1.1A", "type": "WWW", "text": "string", "ragColor": "green" | "amber", "isChecked": true, "pdfLocation": { "page": number, "xPercent": 2.5, "yPercent": number, "anchorQuote": "string", "anchorRationale": "string" } }], "ebi": [{ "id": "string", "code": "1.1B", "type": "EBI", "text": "string", "ragColor": "light_red", "isChecked": true, "pdfLocation": { "page": number, "xPercent": 2.5, "yPercent": number, "anchorQuote": "string", "anchorRationale": "string" } }] },
-    "ao2_observation": { "score": number, "www": [CwkFeedbackItem], "ebi": [CwkFeedbackItem] },
-    "ao2_organisation": { "score": number, "www": [CwkFeedbackItem], "ebi": [CwkFeedbackItem] },
-    "ao2_analysis": { "score": number, "www": [CwkFeedbackItem], "ebi": [CwkFeedbackItem] },
-    "ao3_conclusion": { "score": number, "www": [CwkFeedbackItem], "ebi": [CwkFeedbackItem] }
-  },
-  "total_score": number,
-  "word_counts": {
-    "evaluated_payload": number (approx word count excluding tables),
-    "excluded_ancillaries": number (approx word count of tables/biblio),
-    "raw_file_extract": number (total words)
-  },
-  "moderator_executive_summary": "string (a detailed paragraph summarizing the evaluation)"
-}`;
-
+      let preScanSummary = "";
       let contentsPayload: any[] = [];
       if (text && text.startsWith("data:")) {
         const matches = text.match(/^data:(.+?);base64,(.+)$/);
@@ -138,6 +90,12 @@ Respond in the following JSON format ONLY:
               console.warn("Could not extract segmented pages from base64 PDF:", pdfErr);
             }
           }
+          if (segmentedPageText) {
+            preScanSummary = formatCompletenessPreScanForPrompt(
+              analyzeCourseworkCompleteness(segmentedPageText)
+            );
+          }
+          const systemPrompt = buildCwkEvaluationSystemPrompt(preScanSummary);
           contentsPayload = [
             {
               inlineData: {
@@ -149,6 +107,7 @@ Respond in the following JSON format ONLY:
             systemPrompt
           ];
         } else {
+          const systemPrompt = buildCwkEvaluationSystemPrompt();
           contentsPayload = [text, systemPrompt];
         }
       } else {
@@ -157,6 +116,12 @@ Respond in the following JSON format ONLY:
           console.warn("Input text extremely large, truncating to 500k characters.");
           text = text.substring(0, 500000);
         }
+        if (text && typeof text === "string" && text.trim()) {
+          preScanSummary = formatCompletenessPreScanForPrompt(
+            analyzeCourseworkCompleteness(text)
+          );
+        }
+        const systemPrompt = buildCwkEvaluationSystemPrompt(preScanSummary);
         contentsPayload = [text, systemPrompt];
       }
 
@@ -183,7 +148,7 @@ Respond in the following JSON format ONLY:
       
       let result;
       try {
-        result = normalizeEvaluationResult(JSON.parse(rawText));
+        result = postProcessEvaluationResult(JSON.parse(rawText));
       } catch (e) {
         console.error("Failed to parse JSON:", rawText);
         throw new Error("Model returned invalid JSON");

@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { EvaluationResult } from '../types';
-import { Folder, Moon, Sun, Edit2, Trophy, CheckCircle2, AlertCircle, BookOpen } from 'lucide-react';
+import { Folder, Moon, Sun, Edit2, Trophy, CheckCircle2, AlertCircle, BookOpen, Info } from 'lucide-react';
 import { StudentSubmission } from '../db';
 import ArchiveModal from './ArchiveModal';
 import { parseCandidateName } from '../nameParser';
 import { EditableFeedbackList } from './EditableFeedbackList';
-import { CriterionRubricDrawer } from './CriterionRubricDrawer';
-import { CwkFeedbackItem, normalizeEvaluationResult } from '../utils/ragStyles';
+import { CriterionRubricDrawer, CriterionRubricTable } from './CriterionRubricDrawer';
+import { CwkFeedbackItem, getDraftGradeAndBand, normalizeEvaluationResult } from '../utils/ragStyles';
+import { DEFAULT_INCOMPLETE_EBI_NOTICE } from '../utils/cwkGradingRules';
 
 interface ModerationResultsProps {
   key?: string;
@@ -65,6 +66,9 @@ export default function ModerationResults({ evaluation, candidateName, isDarkMod
   const totalTeacherMark = (Object.values(teacherMarks) as number[]).reduce((sum, mark) => sum + mark, 0);
 
   const totalPossible = 60;
+  const isDraftStage = uploadedStage !== 'Final';
+  const activeStageLabel = uploadedStage === 'Final' ? 'FINAL CWK' : 'DRAFT CWK';
+  const draftGrade = getDraftGradeAndBand(totalTeacherMark);
 
   const [expandedRubrics, setExpandedRubrics] = useState<Record<number, boolean>>({
     1: false,
@@ -95,9 +99,9 @@ export default function ModerationResults({ evaluation, candidateName, isDarkMod
   };
   
   return (
-    <div className={`flex flex-col min-h-screen bg-slate-50 dark:bg-slate-900 font-sans text-slate-900 dark:text-slate-100 ${isDarkMode ? 'dark' : ''}`}>
+    <div className={`igqa-printable-report flex flex-col min-h-screen bg-slate-50 dark:bg-slate-900 font-sans text-slate-900 dark:text-slate-100 print:bg-white print:text-slate-900 ${isDarkMode ? 'dark' : ''}`}>
       {/* Header */}
-      <header className="flex items-center justify-between h-20 px-8 bg-white dark:bg-slate-800 border-b border-slate-200 dark:border-slate-700 shrink-0 sticky top-0 z-10 transition-colors">
+      <header className="print:hidden flex items-center justify-between h-20 px-8 bg-white dark:bg-slate-800 border-b border-slate-200 dark:border-slate-700 shrink-0 sticky top-0 z-10 transition-colors">
         <div className="flex items-center gap-4">
           <div className="w-12 h-12 bg-blue-600 dark:bg-blue-600 rounded-lg flex items-center justify-center text-white font-extrabold text-xl shadow-sm">IG</div>
           <div>
@@ -122,63 +126,130 @@ export default function ModerationResults({ evaluation, candidateName, isDarkMod
         </div>
       </header>
 
-      <main className="max-w-7xl mx-auto w-full px-8 py-8 space-y-6">
-        
-        {/* Candidate Profile Widget */}
-        <section className="bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 p-6 shadow-sm">
-          <p className="text-xs font-bold text-slate-400 tracking-widest uppercase mb-1">Candidate Profile</p>
-          <h2 className="text-2xl font-black text-slate-800 dark:text-slate-100">{formattedName}</h2>
+      <main className="max-w-7xl mx-auto w-full px-8 py-8 space-y-6 print:px-0 print:py-0 print:space-y-3">
+        {/* Print-Only Page 1 Top Header Bar */}
+        <section
+          data-testid="print-report-cover-header"
+          className="hidden print:flex items-start justify-between gap-6 pb-3 mb-3 border-b border-slate-200 break-inside-avoid"
+        >
+          <div>
+            <h1 className="text-2xl font-black text-slate-900 tracking-tight leading-tight">
+              {formattedName}
+            </h1>
+            <span className="inline-block mt-1.5 px-2.5 py-0.5 rounded-md border border-blue-300 bg-blue-50 text-blue-600 text-[10px] font-bold uppercase tracking-wider">
+              {activeStageLabel}
+            </span>
+            {(prefilledStudent?.className || prefilledStudent?.assignmentName) && (
+              <p className="text-xs font-medium text-slate-500 mt-1.5">
+                {prefilledStudent?.className ? `Class: ${prefilledStudent.className}` : ''}
+                {prefilledStudent?.className && prefilledStudent?.assignmentName ? '  |  ' : ''}
+                {prefilledStudent?.assignmentName ? `Assessment: ${prefilledStudent.assignmentName}` : ''}
+              </p>
+            )}
+          </div>
+
+          <div className="flex items-start gap-7 shrink-0 pt-0.5">
+            {isDraftStage ? (
+              <div>
+                <span className="text-[10px] font-bold uppercase tracking-wider text-blue-600 block mb-1">
+                  Grade &amp; Band
+                </span>
+                <span
+                  data-testid="print-draft-grade-band"
+                  className="text-3xl font-black text-blue-600 tracking-tight leading-none block"
+                >
+                  {draftGrade.label}
+                </span>
+              </div>
+            ) : (
+              <div>
+                <span className="text-[10px] font-bold uppercase tracking-wider text-blue-600 block mb-1">
+                  Teacher Moderated
+                </span>
+                <div className="flex items-baseline gap-1">
+                  <span className="text-3xl font-black text-blue-600 leading-none">
+                    {totalTeacherMark}
+                  </span>
+                  <span className="text-xs font-bold text-slate-400">/{totalPossible}</span>
+                </div>
+              </div>
+            )}
+
+            <div>
+              <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400 block mb-1">
+                Word Count
+              </span>
+              <div className="flex items-baseline gap-1.5">
+                <span className="text-2xl font-black text-slate-900 leading-none">
+                  {evaluation.word_counts.evaluated_payload}
+                </span>
+                <span className="text-[10px] font-bold text-slate-400 uppercase">Words</span>
+              </div>
+            </div>
+          </div>
         </section>
 
-        {/* Global Summary Grid */}
-        <section className="grid grid-cols-1 md:grid-cols-4 gap-6">
-          <div className="bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 p-8 shadow-sm flex flex-col items-center justify-center">
-            <p className="text-xs font-bold text-slate-400 tracking-widest uppercase mb-4">IGQA Score</p>
-            <div className="flex items-baseline gap-2">
-              <span className="text-5xl font-black text-blue-600 dark:text-blue-500">{evaluation.total_score}</span>
-              <span className="text-2xl font-black text-slate-300 dark:text-slate-600">/{totalPossible}</span>
+        {/* Candidate Profile Widget */}
+        <section className="print:hidden bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 p-6 shadow-sm">
+          <p className="text-xs font-bold text-slate-400 tracking-widest uppercase mb-1">Candidate Profile</p>
+          <div className="flex items-center gap-3">
+            <h2 className="text-2xl font-black text-slate-800 dark:text-slate-100">{formattedName}</h2>
+            <span className="px-2.5 py-0.5 rounded-md border border-blue-300 bg-blue-50 text-blue-600 text-[10px] font-bold uppercase tracking-wider">
+              {activeStageLabel}
+            </span>
+          </div>
+        </section>
+
+        {/* Global Summary Grid (hidden on print report) */}
+        <section className="print:hidden grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+          <div className="bg-blue-50/70 dark:bg-blue-900/20 rounded-2xl border border-blue-200/80 dark:border-blue-900/40 p-6 shadow-sm flex flex-col items-center justify-center">
+            <p className="text-xs font-bold text-blue-600 dark:text-blue-400 tracking-widest uppercase mb-2">Grade &amp; Band</p>
+            <span className="text-4xl font-black text-blue-600 dark:text-blue-400 tracking-tight">
+              {draftGrade.label}
+            </span>
+          </div>
+
+          <div className="bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 p-6 shadow-sm flex flex-col items-center justify-center">
+            <p className="text-xs font-bold text-slate-500 dark:text-slate-400 tracking-widest uppercase mb-2">IGQA Mark</p>
+            <div className="flex items-baseline gap-1.5">
+              <span className="text-4xl font-black text-slate-800 dark:text-slate-100">{evaluation.total_score}</span>
+              <span className="text-xl font-black text-slate-300 dark:text-slate-600">/{totalPossible}</span>
             </div>
           </div>
-          
-          <div className="bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 p-8 shadow-sm flex flex-col items-center justify-center">
-            <p className="text-xs font-bold text-slate-400 tracking-widest uppercase mb-4">Teacher Moderated</p>
-            <div className="flex items-baseline gap-2">
-              <span className="text-5xl font-black text-slate-800 dark:text-slate-200">{totalTeacherMark}</span>
-              <span className="text-2xl font-black text-slate-300 dark:text-slate-600">/{totalPossible}</span>
+
+          <div className="bg-blue-50/40 dark:bg-blue-900/15 rounded-2xl border border-blue-100 dark:border-blue-900/40 p-6 shadow-sm flex flex-col items-center justify-center">
+            <p className="text-xs font-bold text-blue-600 dark:text-blue-400 tracking-widest uppercase mb-2">Teacher Mark</p>
+            <div className="flex items-baseline gap-1.5">
+              <span className="text-4xl font-black text-blue-700 dark:text-blue-300">{totalTeacherMark}</span>
+              <span className="text-xl font-black text-blue-400/70">/{totalPossible}</span>
             </div>
           </div>
-          
-          <div className="bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 p-8 shadow-sm flex flex-col items-center justify-center">
-            <p className="text-xs font-bold text-slate-400 tracking-widest uppercase mb-4">Word Count Checked</p>
+
+          <div className="bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 p-6 shadow-sm flex flex-col items-center justify-center">
+            <p className="text-xs font-bold text-slate-400 tracking-widest uppercase mb-2">Word Count</p>
             <div className="flex items-baseline gap-2">
-              <span className="text-5xl font-black text-slate-800 dark:text-slate-200">{evaluation.word_counts.evaluated_payload}</span>
-              <span className="text-xl font-bold text-slate-400 uppercase tracking-widest">Words</span>
+              <span className="text-4xl font-black text-slate-800 dark:text-slate-200">{evaluation.word_counts.evaluated_payload}</span>
+              <span className="text-lg font-bold text-slate-400 uppercase tracking-widest">Words</span>
             </div>
-          </div>
-          
-          <div className="bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 p-6 shadow-sm flex flex-col justify-center">
-             <p className="text-xs font-bold text-slate-400 tracking-widest uppercase mb-4 text-center">Compliance Status</p>
-             <div className="bg-blue-50 dark:bg-blue-900/20 rounded-xl p-4 border border-blue-100 dark:border-blue-900/30">
-               <p className="text-xs font-bold text-blue-700 dark:text-blue-400 uppercase leading-relaxed text-center">
-                 Compliant (The stated {evaluation.word_counts.raw_file_extract} total clearly includes excluded elements. The core readable text is {evaluation.word_counts.evaluated_payload}, well within the limit).
-               </p>
-             </div>
           </div>
         </section>
 
         {/* Moderator Executive Summary */}
-        <section className="bg-slate-900 dark:bg-slate-950 rounded-2xl p-8 shadow-xl text-white">
-          <h3 className="text-blue-600 dark:text-blue-500 font-bold uppercase tracking-widest mb-4 flex items-center gap-2 text-sm">
-            <Trophy className="w-5 h-5" /> Moderator Executive Summary
+        <section
+          data-testid="moderator-executive-summary"
+          className="igqa-exec-summary bg-[#F8FAFC] dark:bg-slate-800/80 rounded-lg p-6 border border-[#CBD5E1] dark:border-slate-700 border-l-4 border-l-[#2563EB] shadow-xs break-inside-avoid"
+        >
+          <h3 className="text-[#1D4ED8] dark:text-blue-400 font-bold uppercase tracking-widest pb-3 mb-3 border-b border-[#E2E8F0] dark:border-slate-700 flex items-center gap-2 text-xs">
+            <Trophy className="w-4 h-4 text-[#2563EB] dark:text-blue-400" /> Moderator Executive Summary ({activeStageLabel})
           </h3>
-          <p className="text-slate-300 leading-relaxed text-[15px] font-medium">
+          <p className="text-[#1E293B] dark:text-slate-200 leading-[1.55] text-[12.5px] font-medium">
             {evaluation.moderator_executive_summary}
           </p>
         </section>
 
         {/* Detailed Criterion Rubric */}
-        <section className="bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm overflow-hidden">
-          <div className="px-8 py-5 border-b border-slate-100 dark:border-slate-700 bg-slate-50/50 dark:bg-slate-800/80 flex flex-wrap items-center justify-between gap-2">
+        <section className="bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm overflow-hidden print:border-0 print:shadow-none print:overflow-visible">
+          <div className="print:hidden px-8 py-5 border-b border-slate-100 dark:border-slate-700 bg-slate-50/50 dark:bg-slate-800/80 flex flex-wrap items-center justify-between gap-2">
             <h3 className="font-bold text-slate-700 dark:text-slate-300 uppercase tracking-widest text-xs flex items-center gap-2">
               <span className="text-slate-400 border border-slate-300 dark:border-slate-600 rounded p-1">
                 <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
@@ -198,60 +269,61 @@ export default function ModerationResults({ evaluation, candidateName, isDarkMod
             </div>
           </div>
           
-          <div className="p-8 divide-y divide-slate-100 dark:divide-slate-700">
+          <div className="p-8 divide-y divide-slate-100 dark:divide-slate-700 print:p-0 print:divide-y-0">
             {criteriaData.map((crit) => {
               const res = (editableEvaluation?.scores as any)?.[crit.scoreKey];
               if (!res) return null;
               const criterionNumber = Number(crit.id);
               
               return (
-                <div key={crit.id} className="py-8 first:pt-0 last:pb-0">
-                  <div className="flex items-center justify-between mb-4">
+                <div
+                  key={crit.id}
+                  data-criterion-page={crit.id}
+                  className={`igqa-criterion-block ${criterionNumber > 1 ? 'igqa-criterion-page-break' : ''} py-8 first:pt-0 last:pb-0 print:py-0`}
+                >
+                  <div className="hidden print:block mb-2.5">
+                    <CriterionRubricTable criterionNumber={criterionNumber} />
+                  </div>
+
+                  <div className="flex items-center justify-between mb-4 print:mb-2">
                      <div className="flex items-center gap-6">
-                        <h4 className="text-xl font-bold text-slate-800 dark:text-slate-100">Criterion {crit.id}: {crit.name}</h4>
+                        <h4 className="text-xl font-bold text-slate-800 dark:text-slate-100 print:text-base print:text-slate-900">Criterion {crit.id}: {crit.name}</h4>
                      </div>
-                     <div className="flex items-center gap-8">
-                       <div className="flex items-center gap-2">
-                         <span className="text-xs font-bold text-slate-400 uppercase tracking-widest">IGQA Mark:</span>
-                         <span className="text-xl font-black text-slate-800 dark:text-slate-200">{res.score}</span>
-                         <span className="text-sm font-bold text-slate-400">/ 12</span>
-                       </div>
-                       <div className="w-px h-8 bg-slate-200 dark:bg-slate-700"></div>
-                       <div className="flex items-center gap-2">
-                         <span className="text-xs font-bold text-blue-600 dark:text-blue-500 uppercase tracking-widest flex items-center gap-1">
-                           Teacher Mark <Edit2 className="w-3 h-3" />
-                         </span>
-                         <div className="flex flex-col items-center border border-slate-200 dark:border-slate-700 rounded-lg overflow-hidden bg-slate-50 dark:bg-slate-900">
-                           <button 
-                             onClick={() => handleTeacherMarkChange(crit.scoreKey, teacherMarks[crit.scoreKey] + 1)}
-                             className="w-8 flex justify-center text-slate-400 hover:text-blue-500 hover:bg-slate-200 dark:hover:bg-slate-700 h-4 border-b border-slate-200 dark:border-slate-700 items-center transition-colors"
-                           >
-                             <svg width="10" height="6" viewBox="0 0 10 6" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M5 0L10 6H0L5 0Z" /></svg>
-                           </button>
-                           <div className="w-16 h-8 flex items-center justify-center font-black text-xl text-slate-800 dark:text-slate-200">
-                             {teacherMarks[crit.scoreKey]}
-                           </div>
-                           <button 
-                             onClick={() => handleTeacherMarkChange(crit.scoreKey, teacherMarks[crit.scoreKey] - 1)}
-                             className="w-8 flex justify-center text-slate-400 hover:text-blue-500 hover:bg-slate-200 dark:hover:bg-slate-700 h-4 border-t border-slate-200 dark:border-slate-700 items-center transition-colors"
-                           >
-                              <svg width="10" height="6" viewBox="0 0 10 6" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M5 6L0 0H10L5 6Z" /></svg>
-                           </button>
+                     <div className={`${isDraftStage ? 'print:hidden ' : ''}flex items-center gap-2`}>
+                       <span className="text-xs font-bold text-blue-600 dark:text-blue-500 uppercase tracking-widest flex items-center gap-1">
+                         Teacher Mark <Edit2 className="w-3 h-3 print:hidden" />
+                       </span>
+                       <div className="flex flex-col items-center border border-slate-200 dark:border-slate-700 rounded-lg overflow-hidden bg-slate-50 dark:bg-slate-900 print:border-0 print:bg-transparent">
+                         <button 
+                           onClick={() => handleTeacherMarkChange(crit.scoreKey, teacherMarks[crit.scoreKey] + 1)}
+                           className="print:hidden w-8 flex justify-center text-slate-400 hover:text-blue-500 hover:bg-slate-200 dark:hover:bg-slate-700 h-4 border-b border-slate-200 dark:border-slate-700 items-center transition-colors"
+                         >
+                           <svg width="10" height="6" viewBox="0 0 10 6" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M5 0L10 6H0L5 0Z" /></svg>
+                         </button>
+                         <div className="w-16 h-8 flex items-center justify-center font-black text-xl text-slate-800 dark:text-slate-200 print:w-auto print:h-auto print:text-base">
+                           {teacherMarks[crit.scoreKey]}
                          </div>
-                         <span className="text-sm font-bold text-slate-400">/ 12</span>
+                         <button 
+                           onClick={() => handleTeacherMarkChange(crit.scoreKey, teacherMarks[crit.scoreKey] - 1)}
+                           className="print:hidden w-8 flex justify-center text-slate-400 hover:text-blue-500 hover:bg-slate-200 dark:hover:bg-slate-700 h-4 border-t border-slate-200 dark:border-slate-700 items-center transition-colors"
+                         >
+                            <svg width="10" height="6" viewBox="0 0 10 6" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M5 6L0 0H10L5 6Z" /></svg>
+                         </button>
                        </div>
+                       <span className="text-sm font-bold text-slate-400">/ 12</span>
                      </div>
                   </div>
                   
-                  <div className="mb-4 max-w-5xl ml-18">
+                  <div className="mb-4 max-w-5xl ml-18 print:hidden">
                     <CriterionRubricDrawer
                       criterionNumber={criterionNumber}
                       isOpen={!!expandedRubrics[criterionNumber]}
                       onToggle={() => toggleCriterionRubric(criterionNumber)}
+                      hideInPrint={true}
                     />
                   </div>
 
-                  <div className="space-y-4 max-w-5xl ml-18">
+                  <div className="space-y-4 max-w-5xl ml-18 print:ml-0 print:max-w-none print:space-y-2.5">
                     {/* WWW Section */}
                     {(res.www?.length > 0 || !isBatchMode) && (
                       <EditableFeedbackList
@@ -265,15 +337,34 @@ export default function ModerationResults({ evaluation, candidateName, isDarkMod
                     )}
                     
                     {/* EBI Section */}
-                    {(res.ebi?.length > 0 || !isBatchMode) && (
-                      <EditableFeedbackList
-                        items={res.ebi || []}
-                        criterionId={crit.id}
-                        criterionScore={teacherMarks[crit.scoreKey] ?? res.score}
-                        type="EBI"
-                        isEditable={true}
-                        onChange={(newVal) => handleFeedbackChange(crit.scoreKey, 'ebi', newVal)}
-                      />
+                    {res.isIncomplete ? (
+                      <div
+                        data-testid={`incomplete-ebi-notice-${crit.id}`}
+                        className="flex items-start gap-2.5 rounded-xl px-4 py-3 bg-slate-100/80 dark:bg-slate-900/50 border border-slate-200 dark:border-slate-700/80 text-slate-600 dark:text-slate-300"
+                      >
+                        <Info className="w-4 h-4 text-slate-400 dark:text-slate-500 shrink-0 mt-0.5" />
+                        <div className="min-w-0">
+                          <p className="text-xs font-semibold text-slate-600 dark:text-slate-300">
+                            {DEFAULT_INCOMPLETE_EBI_NOTICE}
+                          </p>
+                          {res.incompleteNote && res.incompleteNote !== DEFAULT_INCOMPLETE_EBI_NOTICE && (
+                            <p className="text-[11px] text-slate-500 dark:text-slate-400 mt-0.5">
+                              {res.incompleteNote}
+                            </p>
+                          )}
+                        </div>
+                      </div>
+                    ) : (
+                      (res.ebi?.length > 0 || !isBatchMode) && (
+                        <EditableFeedbackList
+                          items={res.ebi || []}
+                          criterionId={crit.id}
+                          criterionScore={teacherMarks[crit.scoreKey] ?? res.score}
+                          type="EBI"
+                          isEditable={true}
+                          onChange={(newVal) => handleFeedbackChange(crit.scoreKey, 'ebi', newVal)}
+                        />
+                      )
                     )}
                   </div>
                 </div>
