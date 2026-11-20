@@ -344,13 +344,15 @@ export async function saveGradedSubmissionWithPdf({
 }): Promise<StudentSubmission> {
   // Check the database for an existing "Draft" submission for that candidate in the same class/assignment
   const existing = await findExistingSubmission(candidateName, className, assignmentName);
+  const computedStatus: "Draft" | "Final" =
+    stage === "Final" || Boolean(existing?.finalEvaluation) ? "Final" : "Draft";
 
   const baseSubmission: StudentSubmission = {
     ...(existing || {}),
     candidateName,
     className,
     assignmentName,
-    status: stage === "Final" ? "Final" : (existing?.status || "Draft")
+    status: computedStatus
   };
 
   let pdfUrl = stage === "Draft" ? existing?.draftPdfUrl : existing?.finalPdfUrl;
@@ -379,7 +381,7 @@ export async function saveGradedSubmissionWithPdf({
   // Merge the Final data into existing record or set Draft data
   const mergedSubmission: StudentSubmission = {
     ...baseSubmission,
-    status: stage === "Final" ? "Final" : (existing?.status || "Draft"),
+    status: computedStatus,
     updatedAt: new Date().toISOString(),
     ...(stage === "Final" ? {
       draftEvaluation: existing?.draftEvaluation,

@@ -1,6 +1,7 @@
 import React, { useState, useRef, useMemo } from 'react';
 import { Upload, X, CheckCircle2, Loader2, PlayCircle, Folder, AlertCircle } from 'lucide-react';
-import { StudentSubmission, saveGradedSubmissionWithPdf } from '../db';
+import { StudentSubmission, uploadSubmissionPdf } from '../db';
+import { EvaluationResult, ComparativeEvaluationResult } from '../types';
 import { parseCandidateName } from '../nameParser';
 import { normalizeEvaluationResult } from '../utils/ragStyles';
 import { extractPageSegmentedTextFromPdf } from '../utils/pdfTextExtractor';
@@ -11,7 +12,7 @@ interface BulkFinalModalProps {
   students: StudentSubmission[];
   currentClass: string;
   currentAssignment: string;
-  onCommit: (updatedStudents: StudentSubmission[]) => void;
+  onCommit: (updatedStudents: StudentSubmission[]) => Promise<void> | void;
 }
 
 interface BulkMember extends Omit<StudentSubmission, 'status'> {
@@ -20,23 +21,26 @@ interface BulkMember extends Omit<StudentSubmission, 'status'> {
   file?: File;
   fileContent?: string;
   error?: string;
-  newFinalEvaluation?: any;
+  newFinalEvaluation?: EvaluationResult;
+  newComparativeEvaluation?: ComparativeEvaluationResult;
 }
 
 export default function BulkFinalModal({ isOpen, onClose, students, currentClass, currentAssignment, onCommit }: BulkFinalModalProps) {
   const [members, setMembers] = useState<BulkMember[]>([]);
   const [isGrading, setIsGrading] = useState(false);
+  const [isCommitting, setIsCommitting] = useState(false);
   const [gradingProgress, setGradingProgress] = useState({ current: 0, total: 0 });
   const [showSummary, setShowSummary] = useState(false);
   
   React.useEffect(() => {
     if (isOpen) {
-      const drafts = students.filter(s => s.status === 'Draft' || !s.finalEvaluation);
+      const drafts = students.filter(s => !s.finalEvaluation);
       const withParsed = drafts.map(d => ({ ...d, parsed: parseCandidateName(d.candidateName) }));
       withParsed.sort((a, b) => a.parsed.surname.localeCompare(b.parsed.surname) || a.parsed.forename.localeCompare(b.parsed.forename));
       
       setMembers(withParsed.map(d => ({ ...d, id: Math.random().toString(), status: 'DRAFT' })));
       setShowSummary(false);
+      setIsCommitting(false);
     }
   }, [isOpen, students]);
 
@@ -126,32 +130,11 @@ export default function BulkFinalModal({ isOpen, onClose, students, currentClass
                        }
                     });
 
-                    // Call upload pipeline right after Gemini AI generates the grading report:
-                    // Uploads raw file to Firebase Storage, checks database for existing Draft submission,
-                    // merges Final data without duplicate, and saves pdfUrl & storagePath via addOrUpdateSubmission()
-                    let savedPdfUrl = student.finalPdfUrl;
-                    let savedStoragePath = student.finalStoragePath;
-                    try {
-                        const savedSubmission = await saveGradedSubmissionWithPdf({
-                            file: student.file,
-                            candidateName: student.candidateName,
-                            className: currentClass,
-                            assignmentName: currentAssignment,
-                            stage: 'Final',
-                            evaluation: finalEval
-                        });
-                        savedPdfUrl = savedSubmission.finalPdfUrl;
-                        savedStoragePath = savedSubmission.finalStoragePath;
-                    } catch (uploadErr) {
-                        console.error("Storage upload error during bulk process:", uploadErr);
-                    }
-
                     newMembersList[studentIndex] = { 
                         ...newMembersList[studentIndex], 
                         status: 'DONE', 
                         newFinalEvaluation: finalEval,
-                        finalPdfUrl: savedPdfUrl,
-                        finalStoragePath: savedStoragePath
+                        newComparativeEvaluation: data
                     };
                 } else {
                     newMembersList[studentIndex] = { ...newMembersList[studentIndex], status: 'ERROR', error: data.error };
@@ -176,32 +159,73 @@ export default function BulkFinalModal({ isOpen, onClose, students, currentClass
     return s.draftEvaluation?.total_score || 0;
   };
 
-  const handleCommitAll = () => {
-     const successful = members.filter(m => m.status === 'DONE');
-     const convertToSubmissions: StudentSubmission[] = successful.map(m => {
-        const aiScores = m.newFinalEvaluation?.scores || {};
-        return {
-          candidateName: m.candidateName,
-          className: m.className,
-          assignmentName: m.assignmentName,
-          status: 'Final',
-          draftEvaluation: m.draftEvaluation,
-          draftTeacherScores: m.draftTeacherScores,
-          draftPdfUrl: m.draftPdfUrl,
-          draftStoragePath: m.draftStoragePath,
-          finalEvaluation: m.newFinalEvaluation,
-          finalPdfUrl: m.finalPdfUrl,
-          finalStoragePath: m.finalStoragePath,
-          finalTeacherScores: {
-             ao1_knowledge: aiScores.ao1_knowledge?.score || 0,
-             ao2_observation: aiScores.ao2_observation?.score || 0,
-             ao2_organisation: aiScores.ao2_organisation?.score || 0,
-             ao2_analysis: aiScores.ao2_analysis?.score || 0,
-             ao3_conclusion: aiScores.ao3_conclusion?.score || 0,
-          }
-        };
-     });
-     onCommit(convertToSubmissions);
+  const handleCommitAll = async () => {
+     if (isCommitting) return;
+     const successful = members.filter(m => m.status === 'DONE' && m.newFinalEvaluation);
+     if (successful.length === 0) return;
+
+     setIsCommitting(true);
+     try {
+       const convertToSubmissions: StudentSubmission[] = [];
+       for (const m of successful) {
+         const aiScores = m.newFinalEvaluation?.scores;
+         const finalTeacherScores = {
+           ao1_knowledge: aiScores?.ao1_knowledge?.score || 0,
+           ao2_observation: aiScores?.ao2_observation?.score || 0,
+           ao2_organisation: aiScores?.ao2_organisation?.score || 0,
+           ao2_analysis: aiScores?.ao2_analysis?.score || 0,
+           ao3_conclusion: aiScores?.ao3_conclusion?.score || 0,
+         };
+
+         let finalPdfUrl = m.finalPdfUrl;
+         let finalStoragePath = m.finalStoragePath;
+
+         if (m.file) {
+           try {
+             const uploadRes = await uploadSubmissionPdf(
+               m.file,
+               {
+                 candidateName: m.candidateName,
+                 className: m.className,
+                 assignmentName: m.assignmentName,
+                 status: 'Final',
+                 finalStoragePath: m.finalStoragePath,
+               },
+               'Final'
+             );
+             finalPdfUrl = uploadRes.pdfUrl;
+             finalStoragePath = uploadRes.storagePath;
+           } catch (uploadErr: any) {
+             console.error(`Storage upload error during bulk final commit for ${m.candidateName}:`, uploadErr);
+             alert(`Final PDF upload failed for ${m.candidateName}: ${uploadErr?.message || uploadErr}`);
+           }
+         }
+
+         convertToSubmissions.push({
+           candidateName: m.candidateName,
+           className: m.className,
+           assignmentName: m.assignmentName,
+           status: 'Final',
+           draftEvaluation: m.draftEvaluation,
+           draftTeacherScores: m.draftTeacherScores,
+           draftPdfUrl: m.draftPdfUrl,
+           draftStoragePath: m.draftStoragePath,
+           finalEvaluation: m.newFinalEvaluation,
+           finalTeacherScores,
+           finalPdfUrl,
+           finalStoragePath,
+           comparativeEvaluation: m.newComparativeEvaluation || m.comparativeEvaluation,
+           updatedAt: new Date().toISOString(),
+         });
+       }
+
+       await onCommit(convertToSubmissions);
+     } catch (err: any) {
+       console.error('Bulk final commit failed:', err);
+       alert(`Failed to commit final submissions: ${err?.message || err}`);
+     } finally {
+       setIsCommitting(false);
+     }
   };
 
   if (!isOpen) return null;
@@ -219,7 +243,7 @@ export default function BulkFinalModal({ isOpen, onClose, students, currentClass
                 </h2>
                 <p className="text-xs font-bold text-slate-500 uppercase tracking-wider">{currentClass} — {currentAssignment}</p>
              </div>
-             <button onClick={onClose} disabled={isGrading} className="p-2 text-slate-400 hover:text-slate-600 dark:hover:text-slate-300 rounded-full hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors disabled:opacity-50">
+             <button onClick={onClose} disabled={isGrading || isCommitting} className="p-2 text-slate-400 hover:text-slate-600 dark:hover:text-slate-300 rounded-full hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors disabled:opacity-50">
                  <X className="w-5 h-5" />
              </button>
           </div>
@@ -249,6 +273,7 @@ export default function BulkFinalModal({ isOpen, onClose, students, currentClass
                                             <td className="px-4 py-3">
                                                 <div className="text-sm font-bold text-slate-800 dark:text-slate-200">{parsed.surname}</div>
                                                 <div className="text-xs font-medium text-slate-500 dark:text-slate-400">{parsed.forename} {parsed.preferredName && `(${parsed.preferredName})`}</div>
+                                                <div className="text-[10px] font-semibold text-slate-400 dark:text-slate-500 uppercase tracking-wider mt-0.5">{m.className} • {m.assignmentName}</div>
                                             </td>
                                             <td className="px-4 py-3 text-sm font-bold text-slate-700 dark:text-slate-300">{draftAiScore}/60</td>
                                             <td className="px-4 py-3 text-sm font-bold text-blue-600 dark:text-blue-400">{draftTeacherScore as React.ReactNode}{draftTeacherScore !== '-' && '/60'}</td>
@@ -342,9 +367,10 @@ export default function BulkFinalModal({ isOpen, onClose, students, currentClass
                  ) : (
                      <button 
                          onClick={handleCommitAll}
-                         className="flex items-center gap-2 px-8 py-2.5 rounded-lg font-bold text-sm tracking-wide transition-colors uppercase shadow-sm bg-blue-600 hover:bg-blue-700 text-white border border-blue-600 disabled:opacity-50"
+                         disabled={isCommitting}
+                         className="flex items-center gap-2 px-8 py-2.5 rounded-lg font-bold text-sm tracking-wide transition-colors uppercase shadow-sm bg-blue-600 hover:bg-blue-700 text-white border border-blue-600 disabled:opacity-50 disabled:cursor-wait"
                      >
-                         <Folder className="w-4 h-4" /> Commit All to Directory
+                         {isCommitting ? <Loader2 className="w-4 h-4 animate-spin" /> : <Folder className="w-4 h-4" />} {isCommitting ? 'Committing...' : 'Commit All to Directory'}
                      </button>
                  )}
              </div>

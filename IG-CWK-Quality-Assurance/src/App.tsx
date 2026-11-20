@@ -40,6 +40,7 @@ export default function App({
   const [evaluation, setEvaluation] = useState<EvaluationResult | null>(null);
   const [candidateName, setCandidateName] = useState("");
   const [prefilledStudent, setPrefilledStudent] = useState<StudentSubmission | null>(null);
+  const [savedSubmission, setSavedSubmission] = useState<StudentSubmission | null>(null);
   const [activeStudent, setActiveStudent] = useState<StudentSubmission | null>(null); // NEW: Tracks student for split viewer
   const [activeViewerStage, setActiveViewerStage] = useState<'Draft' | 'Final' | 'Compare'>('Draft');
   const [uploadedFile, setUploadedFile] = useState<File | null>(null);
@@ -61,6 +62,7 @@ export default function App({
     setCompareFiles(null);
     setUploadedFile(file || null);
     setUploadedStage(stage);
+    setSavedSubmission(null);
 
     try {
       const response = await fetch('/api/evaluate', {
@@ -88,13 +90,14 @@ export default function App({
           try {
             const { uploadSubmissionPdf, addOrUpdateSubmission, findExistingSubmission } = await import('./db');
             const existing = await findExistingSubmission(title, targetClass, targetAssignment);
+            const computedStatus: 'Draft' | 'Final' = stage === 'Final' || Boolean(existing?.finalEvaluation) ? 'Final' : 'Draft';
 
             const baseSubmission: any = {
               ...(existing || {}),
               candidateName: title,
               className: targetClass,
               assignmentName: targetAssignment,
-              status: stage,
+              status: computedStatus,
               updatedAt: new Date().toISOString()
             };
 
@@ -111,7 +114,7 @@ export default function App({
 
             const mergedSubmission: any = {
               ...baseSubmission,
-              status: stage,
+              status: computedStatus,
               updatedAt: new Date().toISOString(),
               ...(stage === 'Final' ? {
                 draftEvaluation: existing?.draftEvaluation,
@@ -135,13 +138,14 @@ export default function App({
             };
 
             await addOrUpdateSubmission(mergedSubmission);
-            setPrefilledStudent(mergedSubmission);
+            setSavedSubmission(mergedSubmission);
           } catch (storageErr: any) {
             console.error("Storage pipeline upload error:", storageErr);
             alert(`PDF upload/save failed: ${storageErr?.message || storageErr}`);
           }
         }
 
+        setPrefilledStudent(null);
         setAppState('results');
       } else {
         const err = await response.json().catch(() => ({ error: 'Unknown server error.' }));
@@ -200,7 +204,10 @@ export default function App({
     setEvaluation(null);
     setCandidateName("");
     setPrefilledStudent(null);
+    setSavedSubmission(null);
     setActiveStudent(null);
+    setUploadedFile(null);
+    setUploadedStage('Draft');
     setAppState('upload');
   };
 
@@ -219,7 +226,7 @@ export default function App({
             onLogout={onBackToPortal || (() => setIsLoggedIn(false))}
             isDarkMode={isDarkMode}
             toggleDarkMode={toggleDarkMode}
-            onOpenDirectory={() => setAppState('directory')}
+            onOpenDirectory={() => { setPrefilledStudent(null); setSavedSubmission(null); setAppState('directory'); }}
             prefilledStudent={prefilledStudent}
             onCancelPrefilled={() => setPrefilledStudent(null)}
           />
@@ -234,18 +241,19 @@ export default function App({
       results={batchResults}
       isDarkMode={isDarkMode}
       toggleDarkMode={toggleDarkMode}
-      onExit={() => setAppState('upload')}
-      onOpenDirectory={() => setAppState('directory')}
+      onExit={() => { setPrefilledStudent(null); setSavedSubmission(null); setBatchResults([]); setAppState('upload'); }}
+      onOpenDirectory={() => { setPrefilledStudent(null); setSavedSubmission(null); setAppState('directory'); }}
     />;
   }
 
   if (appState === 'directory') {
     return <DirectoryView
-      onBack={() => setAppState('upload')}
+      onBack={() => { setPrefilledStudent(null); setSavedSubmission(null); setAppState('upload'); }}
       isDarkMode={isDarkMode}
       toggleDarkMode={toggleDarkMode}
       onUploadFinal={(student: StudentSubmission) => {
         setPrefilledStudent(student);
+        setSavedSubmission(null);
         setAppState('upload');
       }}
       onOpenSplitViewer={(student: StudentSubmission, stage?: 'Draft' | 'Final' | 'Compare') => {
@@ -270,6 +278,7 @@ export default function App({
       }}
       onUploadFinal={(student: StudentSubmission) => {
         setPrefilledStudent(student);
+        setSavedSubmission(null);
         setActiveStudent(null);
         setAppState('upload');
       }}
@@ -289,7 +298,7 @@ export default function App({
         isDarkMode={isDarkMode}
         toggleDarkMode={toggleDarkMode}
         onExit={handleNewModeration}
-        onOpenDirectory={() => setAppState('directory')}
+        onOpenDirectory={() => { setPrefilledStudent(null); setSavedSubmission(null); setAppState('directory'); }}
       />;
     }
     return <ModerationResults
@@ -300,8 +309,9 @@ export default function App({
       isDarkMode={isDarkMode}
       toggleDarkMode={toggleDarkMode}
       onExit={handleNewModeration}
-      onOpenDirectory={() => setAppState('directory')}
+      onOpenDirectory={() => { setPrefilledStudent(null); setSavedSubmission(null); setAppState('directory'); }}
       prefilledStudent={prefilledStudent}
+      savedSubmission={savedSubmission}
     />;
   }
 

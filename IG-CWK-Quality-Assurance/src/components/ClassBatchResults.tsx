@@ -100,6 +100,7 @@ export default function ClassBatchResults({ results, isDarkMode, toggleDarkMode,
         key={currentStudent.id}
         evaluation={currentStudent.evaluation}
         candidateName={candidateName}
+        uploadedStage="Draft"
         isDarkMode={isDarkMode}
         toggleDarkMode={toggleDarkMode}
         onExit={onExit}
@@ -113,6 +114,7 @@ export default function ClassBatchResults({ results, isDarkMode, toggleDarkMode,
         isOpen={isModalOpen} 
         onClose={() => setIsModalOpen(false)} 
         initialCandidateName={""}
+        initialSubmissionType="Draft"
         hideCandidateName={true}
         onSave={async (data) => {
           const { uploadSubmissionPdf, addOrUpdateSubmission, findExistingSubmission } = await import('../db');
@@ -134,7 +136,7 @@ export default function ClassBatchResults({ results, isDarkMode, toggleDarkMode,
               candidateName: rawName,
               className: targetClass,
               assignmentName: targetAssignment,
-              status: stage,
+              status: stage === 'Final' || Boolean(existing?.finalEvaluation) ? 'Final' : 'Draft',
               updatedAt: new Date().toISOString()
             };
 
@@ -176,7 +178,7 @@ export default function ClassBatchResults({ results, isDarkMode, toggleDarkMode,
             await addOrUpdateSubmission(submission);
           }
 
-          alert(`Batch save successful! ${validResults.length} coursework reports and PDFs saved to Firebase.`);
+          alert(`Batch save successful! ${validResults.length} ${stage} coursework reports and PDFs saved to Firebase.`);
           onExit();
         }}
       />

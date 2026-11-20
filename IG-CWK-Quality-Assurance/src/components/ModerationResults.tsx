@@ -18,15 +18,19 @@ interface ModerationResultsProps {
   onExit: () => void;
   onOpenDirectory: () => void;
   prefilledStudent?: StudentSubmission | null;
+  savedSubmission?: StudentSubmission | null;
   uploadedFile?: File | null;
   uploadedStage?: 'Draft' | 'Final';
   isBatchMode?: boolean;
   renderBatchActions?: (teacherMarks: Record<string, number>) => React.ReactNode;
 }
 
-export default function ModerationResults({ evaluation, candidateName, isDarkMode, toggleDarkMode, onExit, onOpenDirectory, prefilledStudent, uploadedFile, uploadedStage, isBatchMode, renderBatchActions }: ModerationResultsProps) {
+export default function ModerationResults({ evaluation, candidateName, isDarkMode, toggleDarkMode, onExit, onOpenDirectory, prefilledStudent, savedSubmission, uploadedFile, uploadedStage, isBatchMode, renderBatchActions }: ModerationResultsProps) {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isSavingToDirectory, setIsSavingToDirectory] = useState(false);
   const { formattedName } = parseCandidateName(candidateName);
+  const activeSubmissionMeta = savedSubmission || prefilledStudent || null;
+  const resolvedStage: 'Draft' | 'Final' = uploadedStage || (prefilledStudent ? 'Final' : 'Draft');
   
   // Clone and normalize evaluation so feedback items use structured CwkFeedbackItem objects
   const [editableEvaluation, setEditableEvaluation] = useState<EvaluationResult>(() => normalizeEvaluationResult(evaluation));
@@ -81,8 +85,8 @@ export default function ModerationResults({ evaluation, candidateName, isDarkMod
   const totalTeacherMark = (Object.values(teacherMarks) as number[]).reduce((sum, mark) => sum + mark, 0);
 
   const totalPossible = 60;
-  const isDraftStage = uploadedStage !== 'Final';
-  const activeStageLabel = uploadedStage === 'Final' ? 'FINAL CWK' : 'DRAFT CWK';
+  const isDraftStage = resolvedStage !== 'Final';
+  const activeStageLabel = resolvedStage === 'Final' ? 'FINAL CWK' : 'DRAFT CWK';
   const draftGrade = getDraftGradeAndBand(totalTeacherMark);
 
   const [expandedRubrics, setExpandedRubrics] = useState<Record<number, boolean>>({
@@ -154,11 +158,11 @@ export default function ModerationResults({ evaluation, candidateName, isDarkMod
             <span className="inline-block mt-1.5 px-2.5 py-0.5 rounded-md border border-blue-300 bg-blue-50 text-blue-600 text-[10px] font-bold uppercase tracking-wider">
               {activeStageLabel}
             </span>
-            {(prefilledStudent?.className || prefilledStudent?.assignmentName) && (
+            {(activeSubmissionMeta?.className || activeSubmissionMeta?.assignmentName) && (
               <p className="text-xs font-medium text-slate-500 mt-1.5">
-                {prefilledStudent?.className ? `Class: ${prefilledStudent.className}` : ''}
-                {prefilledStudent?.className && prefilledStudent?.assignmentName ? '  |  ' : ''}
-                {prefilledStudent?.assignmentName ? `Assessment: ${prefilledStudent.assignmentName}` : ''}
+                {activeSubmissionMeta?.className ? `Class: ${activeSubmissionMeta.className}` : ''}
+                {activeSubmissionMeta?.className && activeSubmissionMeta?.assignmentName ? '  |  ' : ''}
+                {activeSubmissionMeta?.assignmentName ? `Assessment: ${activeSubmissionMeta.assignmentName}` : ''}
               </p>
             )}
           </div>
@@ -436,27 +440,39 @@ export default function ModerationResults({ evaluation, candidateName, isDarkMod
                    Reset Moderator
                  </button>
                  <button 
+                   disabled={isSavingToDirectory}
                    onClick={async () => {
-                     if (prefilledStudent) {
-                        const { saveGradedSubmissionWithPdf } = await import('../db');
-                        await saveGradedSubmissionWithPdf({
-                          file: uploadedFile,
-                          candidateName: prefilledStudent.candidateName,
-                          className: prefilledStudent.className,
-                          assignmentName: prefilledStudent.assignmentName,
-                          stage: 'Final',
-                          evaluation: editableEvaluation,
-                          teacherScores: teacherMarks
-                        });
-                        alert('Final Coursework Successfully Archived to Firebase!');
-                        onExit();
-                      } else {
+                     if (activeSubmissionMeta) {
+                       setIsSavingToDirectory(true);
+                       try {
+                         const { saveGradedSubmissionWithPdf } = await import('../db');
+                         const hasStagePdf = resolvedStage === 'Final'
+                           ? Boolean(activeSubmissionMeta.finalPdfUrl)
+                           : Boolean(activeSubmissionMeta.draftPdfUrl);
+                         await saveGradedSubmissionWithPdf({
+                           file: hasStagePdf ? undefined : uploadedFile,
+                           candidateName: activeSubmissionMeta.candidateName,
+                           className: activeSubmissionMeta.className,
+                           assignmentName: activeSubmissionMeta.assignmentName,
+                           stage: resolvedStage,
+                           evaluation: editableEvaluation,
+                           teacherScores: teacherMarks
+                         });
+                         alert(`${resolvedStage} Coursework Successfully Archived to Firebase!`);
+                         onExit();
+                       } catch (err: any) {
+                         console.error('Save to directory failed:', err);
+                         alert(`Failed to save coursework: ${err?.message || err}`);
+                       } finally {
+                         setIsSavingToDirectory(false);
+                       }
+                     } else {
                        setIsModalOpen(true);
                      }
                    }}
-                   className="flex items-center gap-2 bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-500 px-6 py-3 rounded-lg font-bold uppercase tracking-widest text-xs hover:bg-green-100 dark:hover:bg-green-900/50 transition-colors border border-blue-100 dark:border-blue-800 shadow-sm"
+                   className="flex items-center gap-2 bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-500 px-6 py-3 rounded-lg font-bold uppercase tracking-widest text-xs hover:bg-green-100 dark:hover:bg-green-900/50 transition-colors border border-blue-100 dark:border-blue-800 shadow-sm disabled:opacity-60 disabled:cursor-wait"
                  >
-                   <Folder className="w-4 h-4" /> Save To Directory
+                   <Folder className="w-4 h-4" /> {isSavingToDirectory ? 'Saving...' : 'Save To Directory'}
                  </button>
                </>
              )}
@@ -470,15 +486,15 @@ export default function ModerationResults({ evaluation, candidateName, isDarkMod
         isOpen={isModalOpen} 
         onClose={() => setIsModalOpen(false)} 
         initialCandidateName={candidateName}
-        initialSubmissionType={uploadedStage || (prefilledStudent ? 'Final' : 'Draft')}
-        initialClass={prefilledStudent?.className || ''}
-        initialAssignment={prefilledStudent?.assignmentName || ''}
+        initialSubmissionType={resolvedStage}
+        initialClass={activeSubmissionMeta?.className || ''}
+        initialAssignment={activeSubmissionMeta?.assignmentName || ''}
         onSave={async (data) => {
           const { uploadSubmissionPdf, addOrUpdateSubmission, findExistingSubmission } = await import('../db');
           const targetCandidate = data.candidateName;
           const targetClass = data.className || data.classFolder || 'General';
           const targetAssignment = data.assignmentName || 'Coursework';
-          const stage: 'Draft' | 'Final' = data.submissionType || 'Draft';
+          const stage: 'Draft' | 'Final' = data.submissionType || resolvedStage;
 
           const existing = await findExistingSubmission(targetCandidate, targetClass, targetAssignment);
           let submission: any = {
@@ -486,7 +502,7 @@ export default function ModerationResults({ evaluation, candidateName, isDarkMod
             candidateName: targetCandidate,
             className: targetClass,
             assignmentName: targetAssignment,
-            status: stage,
+            status: stage === 'Final' || Boolean(existing?.finalEvaluation) ? 'Final' : 'Draft',
             updatedAt: new Date().toISOString()
           };
 
